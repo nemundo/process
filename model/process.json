@@ -1,0 +1,169 @@
+{
+    "app": "Process",
+    "name": "process",
+    "namespace": "Nemundo\\Process",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "eaffe4a2-108c-4e0e-91a3-96a744cf6706",
+            "label": "Process",
+            "class_name": "Process",
+            "table_name": "process_process",
+            "namespace": "Nemundo\\Process\\Data\\Process",
+            "row_class_name": "",
+            "primary_index": "text_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Process",
+                    "field_name": "process",
+                    "variable_name": "process",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "4b566756-7db2-4fd8-ade5-5df5a8877d8f",
+            "label": "Status",
+            "class_name": "Status",
+            "table_name": "process_status",
+            "namespace": "Nemundo\\Process\\Data\\Status",
+            "row_class_name": "",
+            "primary_index": "unique_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Status Label",
+                    "field_name": "status_label",
+                    "variable_name": "statusLabel",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Status Class",
+                    "field_name": "status_class",
+                    "variable_name": "statusClass",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "d9483884-4d0f-4f64-9e98-c558e0159cfe",
+            "label": "Workflow",
+            "class_name": "Workflow",
+            "table_name": "process_workflow",
+            "namespace": "Nemundo\\Process\\Data\\Workflow",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "number",
+                    "label": "Number",
+                    "field_name": "number",
+                    "variable_name": "number",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "text",
+                    "label": "Workflow Number",
+                    "field_name": "workflow_number",
+                    "variable_name": "workflowNumber",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "50"
+                },
+                {
+                    "type": "text",
+                    "label": "Subject",
+                    "field_name": "subject",
+                    "variable_name": "subject",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "external",
+                    "label": "Process",
+                    "field_name": "process",
+                    "variable_name": "process",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "eaffe4a2-108c-4e0e-91a3-96a744cf6706"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Workflow Closed",
+                    "field_name": "workflow_closed",
+                    "variable_name": "workflowClosed",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "610dd4d9-7fcc-4617-9e06-34e23278271f",
+            "label": "Workflow Log",
+            "class_name": "WorkflowLog",
+            "table_name": "process_workflow_log",
+            "namespace": "Nemundo\\Process\\Data\\WorkflowLog",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Status",
+                    "field_name": "status",
+                    "variable_name": "status",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "4b566756-7db2-4fd8-ade5-5df5a8877d8f"
+                },
+                {
+                    "type": "text",
+                    "label": "Data Id",
+                    "field_name": "data_id",
+                    "variable_name": "dataId",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "36"
+                },
+                {
+                    "type": "external",
+                    "label": "Workflow",
+                    "field_name": "workflow",
+                    "variable_name": "workflow",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "d9483884-4d0f-4f64-9e98-c558e0159cfe"
+                },
+                {
+                    "type": "date_time",
+                    "label": "Date Time",
+                    "field_name": "date_time",
+                    "variable_name": "dateTime",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        }
+    ]
+}
