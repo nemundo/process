@@ -27,6 +27,11 @@ public $workflowId;
 */
 public $dateTime;
 
+/**
+* @var string
+*/
+public $userId;
+
 public function __construct() {
 parent::__construct();
 $this->model = new WorkflowLogModel();
@@ -38,6 +43,7 @@ $this->typeValueList->setModelValue($this->model->dataId, $this->dataId);
 $this->typeValueList->setModelValue($this->model->workflowId, $this->workflowId);
 $property = new \Nemundo\Model\Data\Property\DateTime\DateTimeDataProperty($this->model->dateTime, $this->typeValueList);
 $property->setValue($this->dateTime);
+$this->typeValueList->setModelValue($this->model->userId, $this->userId);
 parent::update();
 }
 }

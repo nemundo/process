@@ -1,28 +1,23 @@
 <?php
 
 
-namespace Nemundo\Process\Builder;
+namespace Nemundo\Process\Item;
 
 
 use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Core\Date\DateTimeDifference;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Db\Sql\Order\SortOrder;
+use Nemundo\Process\Data\Workflow\WorkflowReader;
+use Nemundo\Process\Data\Workflow\WorkflowUpdate;
+use Nemundo\Process\Data\WorkflowLog\WorkflowLogCount;
+use Nemundo\Process\Data\WorkflowLog\WorkflowLogReader;
 use Nemundo\User\Type\UserSessionType;
-use Schleuniger\App\ChangeRequest\Data\Eco\EcoId;
-use Schleuniger\App\ChangeRequest\Data\Eco\EcoReader;
-use Schleuniger\App\ChangeRequest\Data\Ecr\EcrId;
-use Schleuniger\App\ChangeRequest\Data\Ecr\EcrReader;
-use Schleuniger\App\ChangeRequest\Data\Workflow\WorkflowReader;
-use Schleuniger\App\ChangeRequest\Data\Workflow\WorkflowUpdate;
-use Schleuniger\App\ChangeRequest\Data\WorkflowLog\WorkflowLog;
-use Schleuniger\App\ChangeRequest\Data\WorkflowLog\WorkflowLogCount;
-use Schleuniger\App\ChangeRequest\Data\WorkflowLog\WorkflowLogReader;
 use Nemundo\Process\Status\AbstractStatus;
 
 
 // WorkflowItem
-class WorkflowBuilder extends AbstractBase
+class WorkflowItem extends AbstractBase
 {
 
     private $workflowId;
@@ -41,68 +36,14 @@ class WorkflowBuilder extends AbstractBase
 
         // Assignment reset
 
-
         $update = new WorkflowUpdate();
-        $update->abgeschlossen = true;
-        $update->verantwortlicher->clearIdentification();
+        $update->workflowClosed = true;
+        //$update->verantwortlicher->clearIdentification();
         $update->updateById($this->workflowId);
 
 
     }
 
-
-    public function getEcrRow()
-    {
-
-
-        $ecrReader = new EcrReader();
-        $ecrReader->model->loadAnlage();
-        $ecrReader->model->loadWorkflow();
-        $ecrReader->filter->andEqual($ecrReader->model->workflowId, $this->workflowId);
-        $ecrRow = $ecrReader->getRow();
-
-        return $ecrRow;
-
-
-    }
-
-
-    public function getEcoRow()
-    {
-
-        $ecoReader = new EcoReader();
-        $ecoReader->model->loadWorkflow();
-        $ecoReader->filter->andEqual($ecoReader->model->workflowId, $this->workflowId);
-        $ecrRow = $ecoReader->getRow();
-
-        return $ecrRow;
-
-    }
-
-
-    public function getEcrId()
-    {
-
-        $id = new EcrId();
-        $id->filter->andEqual($id->model->workflowId, $this->workflowId);
-        $ecrId = $id->getId();
-
-        return $ecrId;
-
-    }
-
-
-    public function getEcoId()
-    {
-
-
-        $id = new EcoId();
-        $id->filter->andEqual($id->model->workflowId, $this->workflowId);
-        $ecoId = $id->getId();
-
-        return $ecoId;
-
-    }
 
 
     public function getWorkflowRow()
@@ -110,7 +51,6 @@ class WorkflowBuilder extends AbstractBase
 
         $workflowRow = (new WorkflowReader())->getRowById($this->workflowId);
         return $workflowRow;
-
 
     }
 
@@ -134,11 +74,8 @@ class WorkflowBuilder extends AbstractBase
             $dateTime = $this->getDateTime(SortOrder::DESCENDING);
 
         } else {
-            $dateTime = (new DateTime())->setNow();  //->resetTime();
-
-
+            $dateTime = (new DateTime())->setNow();
         }
-
 
         return $dateTime;
 
@@ -182,10 +119,10 @@ class WorkflowBuilder extends AbstractBase
 
         return $count->getCount();
 
-
     }
 
 
+    /*
     public function saveLog(AbstractStatus $status, $dataId = null)
     {
 
@@ -214,6 +151,6 @@ class WorkflowBuilder extends AbstractBase
 
         return $workflowLogId;
 
-    }
+    }*/
 
 }

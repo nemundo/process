@@ -37,7 +37,7 @@ public $subject;
 public $processId;
 
 /**
-* @var \Nemundo\Process\Data\Process\ProcessRow
+* @var \Nemundo\Process\Row\ProcessCustomRow
 */
 public $process;
 
@@ -45,6 +45,16 @@ public $process;
 * @var bool
 */
 public $workflowClosed;
+
+/**
+* @var string
+*/
+public $statusId;
+
+/**
+* @var \Nemundo\Process\Row\StatusCustomRow
+*/
+public $status;
 
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
@@ -58,8 +68,15 @@ if ($model->process !== null) {
 $this->loadNemundoProcessDataProcessProcessprocessRow($model->process);
 }
 $this->workflowClosed = boolval($this->getModelValue($model->workflowClosed));
+$this->statusId = $this->getModelValue($model->statusId);
+if ($model->status !== null) {
+$this->loadNemundoProcessDataStatusStatusstatusRow($model->status);
+}
 }
 private function loadNemundoProcessDataProcessProcessprocessRow($model) {
-$this->process = new \Nemundo\Process\Data\Process\ProcessRow($this->row, $model);
+$this->process = new \Nemundo\Process\Row\ProcessCustomRow($this->row, $model);
+}
+private function loadNemundoProcessDataStatusStatusstatusRow($model) {
+$this->status = new \Nemundo\Process\Row\StatusCustomRow($this->row, $model);
 }
 }

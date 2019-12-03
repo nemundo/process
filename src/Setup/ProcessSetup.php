@@ -19,6 +19,7 @@ class ProcessSetup extends AbstractBase
         $data->updateOnDuplicate = true;
         $data->id = $process->id;
         $data->process = $process->process;
+        $data->processClass=$process->getClassName();
         $data->save();
 
 

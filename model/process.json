@@ -11,7 +11,7 @@
             "class_name": "Process",
             "table_name": "process_process",
             "namespace": "Nemundo\\Process\\Data\\Process",
-            "row_class_name": "",
+            "row_class_name": "Nemundo\\Process\\Row\\ProcessCustomRow",
             "primary_index": "text_id",
             "is_deleted": false,
             "type": [
@@ -20,6 +20,15 @@
                     "label": "Process",
                     "field_name": "process",
                     "variable_name": "process",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Process Class",
+                    "field_name": "process_class",
+                    "variable_name": "processClass",
                     "allow_null": false,
                     "is_deleted": false,
                     "length": "255"
@@ -34,8 +43,8 @@
             "class_name": "Status",
             "table_name": "process_status",
             "namespace": "Nemundo\\Process\\Data\\Status",
-            "row_class_name": "",
-            "primary_index": "unique_id",
+            "row_class_name": "Nemundo\\Process\\Row\\StatusCustomRow",
+            "primary_index": "text_id",
             "is_deleted": false,
             "type": [
                 {
@@ -66,7 +75,7 @@
             "class_name": "Workflow",
             "table_name": "process_workflow",
             "namespace": "Nemundo\\Process\\Data\\Workflow",
-            "row_class_name": "",
+            "row_class_name": "Nemundo\\Process\\Row\\WorkflowCustomRow",
             "primary_index": "auto_increment",
             "is_deleted": false,
             "type": [
@@ -112,6 +121,15 @@
                     "variable_name": "workflowClosed",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "Status",
+                    "field_name": "status",
+                    "variable_name": "status",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "4b566756-7db2-4fd8-ade5-5df5a8877d8f"
                 }
             ],
             "index": []
@@ -159,6 +177,14 @@
                     "label": "Date Time",
                     "field_name": "date_time",
                     "variable_name": "dateTime",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "user",
+                    "label": "User",
+                    "field_name": "user",
+                    "variable_name": "user",
                     "allow_null": false,
                     "is_deleted": false
                 }

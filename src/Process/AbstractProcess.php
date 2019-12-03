@@ -5,10 +5,11 @@ namespace Nemundo\Process\Process;
 
 
 use Nemundo\Core\Base\AbstractBase;
+use Nemundo\Core\Base\AbstractBaseClass;
 use Nemundo\Web\View\ViewSiteTrait;
 use Nemundo\Process\Status\AbstractStatus;
 
-abstract class AbstractProcess extends AbstractBase
+abstract class AbstractProcess extends AbstractBaseClass
 {
 
     use ViewSiteTrait;
@@ -28,6 +29,11 @@ abstract class AbstractProcess extends AbstractBase
     public $prefixNumber;
 
     public $startNumber;
+
+    /**
+     * @var string
+     */
+    public $baseViewClass;
 
     /**
      * @var AbstractStatus

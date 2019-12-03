@@ -6,11 +6,9 @@ namespace Nemundo\Process\Form;
 
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Type\DateTime\DateTime;
+use Nemundo\Process\Builder\WorkflowLogBuilder;
 use Nemundo\User\Type\UserSessionType;
-use Schleuniger\App\ChangeRequest\Data\Workflow\WorkflowUpdate;
-use Schleuniger\App\ChangeRequest\Data\WorkflowLog\WorkflowLog;
-use Schleuniger\App\ChangeRequest\Data\WorkflowLog\WorkflowLogUpdate;
-use Nemundo\Process\Builder\WorkflowBuilder;
+
 use Nemundo\Process\Status\AbstractStatus;
 
 trait StatusFormTrait
@@ -40,12 +38,17 @@ trait StatusFormTrait
     protected function saveWorkflowLog()
     {
 
-        $workflowBuilder = new WorkflowBuilder($this->workflowId);
-        $workflowLogId=  $workflowBuilder->saveLog($this->status, $this->dataId);
+        $workflowBuilder =new WorkflowLogBuilder();  // new WorkflowBuilder\ new WorkflowBuilder($this->workflowId);
+        $workflowBuilder->status = $this->status;
+        $workflowBuilder->workflowId=$this->workflowId;
+        $workflowBuilder->dataId=$this->dataId;
+          $workflowBuilder->saveLog();
 
-        $this->workflowLogId = $workflowLogId;
+        //saveLog($this->status, $this->dataId);
 
-        return $workflowLogId;
+        //$this->workflowLogId = $workflowLogId;
+
+        //return $workflowLogId;
 
     }
 

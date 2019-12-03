@@ -6,10 +6,11 @@ use Nemundo\Admin\Com\Form\AbstractAdminEditForm;
 use Nemundo\Admin\Com\Form\AbstractAdminForm;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\Form\BootstrapForm;
-use Schleuniger\App\ChangeRequest\Parameter\StatusParameter;
+
 use Nemundo\Process\Status\AbstractStatus;
 
-abstract class AbstractChangeRequestForm extends AbstractAdminForm
+// AbstractProcessStatusForm
+abstract class AbstractStatusForm extends AbstractAdminForm
 {
 
     use StatusFormTrait;

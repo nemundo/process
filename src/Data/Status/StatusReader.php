@@ -11,7 +11,7 @@ parent::__construct();
 $this->model = new StatusModel();
 }
 /**
-* @return StatusRow[]
+* @return \Nemundo\Process\Row\StatusCustomRow[]
 */
 public function getData() {
 $this->addFieldByModel($this->model);
@@ -24,7 +24,7 @@ $list[] = $row;
 return $list;
 }
 /**
-* @return StatusRow
+* @return \Nemundo\Process\Row\StatusCustomRow
 */
 public function getRow() {
 $this->addFieldByModel($this->model);
@@ -34,13 +34,13 @@ $row = $this->getModelRow($dataRow);
 return $row;
 }
 /**
-* @return StatusRow
+* @return \Nemundo\Process\Row\StatusCustomRow
 */
 public function getRowById($id) {
 return parent::getRowById($id);
 }
 private function getModelRow($dataRow) {
-$row = new StatusRow($dataRow, $this->model);
+$row = new \Nemundo\Process\Row\StatusCustomRow($dataRow, $this->model);
 $row->model = $this->model;
 return $row;
 }

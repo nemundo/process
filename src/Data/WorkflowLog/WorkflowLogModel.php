@@ -36,6 +36,16 @@ public $workflow;
 */
 public $dateTime;
 
+/**
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+*/
+public $userId;
+
+/**
+* @var \Nemundo\User\Data\User\UserExternalType
+*/
+public $user;
+
 protected function loadModel() {
 $this->tableName = "process_workflow_log";
 $this->aliasTableName = "process_workflow_log";
@@ -83,6 +93,13 @@ $this->dateTime->aliasFieldName = "process_workflow_log_date_time";
 $this->dateTime->label = "Date Time";
 $this->dateTime->allowNullValue = false;
 
+$this->userId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->userId->tableName = "process_workflow_log";
+$this->userId->fieldName = "user";
+$this->userId->aliasFieldName = "process_workflow_log_user";
+$this->userId->label = "User";
+$this->userId->allowNullValue = false;
+
 }
 public function loadStatus() {
 if ($this->status == null) {
@@ -101,6 +118,16 @@ $this->workflow->tableName = "process_workflow_log";
 $this->workflow->fieldName = "workflow";
 $this->workflow->aliasFieldName = "process_workflow_log_workflow";
 $this->workflow->label = "Workflow";
+}
+return $this;
+}
+public function loadUser() {
+if ($this->user == null) {
+$this->user = new \Nemundo\User\Data\User\UserExternalType($this, "process_workflow_log_user");
+$this->user->tableName = "process_workflow_log";
+$this->user->fieldName = "user";
+$this->user->aliasFieldName = "process_workflow_log_user";
+$this->user->label = "User";
 }
 return $this;
 }

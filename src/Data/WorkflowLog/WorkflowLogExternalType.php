@@ -36,6 +36,16 @@ public $workflow;
 */
 public $dateTime;
 
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $userId;
+
+/**
+* @var \Nemundo\User\Data\User\UserExternalType
+*/
+public $user;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = WorkflowLogModel::class;
@@ -76,6 +86,13 @@ $this->dateTime->aliasFieldName = $this->dateTime->tableName . "_" . $this->date
 $this->dateTime->label = "Date Time";
 $this->addType($this->dateTime);
 
+$this->userId = new \Nemundo\Model\Type\Id\IdType();
+$this->userId->fieldName = "user";
+$this->userId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->userId->aliasFieldName = $this->userId->tableName ."_".$this->userId->fieldName;
+$this->userId->label = "User";
+$this->addType($this->userId);
+
 }
 public function loadStatus() {
 if ($this->status == null) {
@@ -96,6 +113,17 @@ $this->workflow->tableName = $this->parentFieldName . "_" . $this->externalTable
 $this->workflow->aliasFieldName = $this->workflow->tableName ."_".$this->workflow->fieldName;
 $this->workflow->label = "Workflow";
 $this->addType($this->workflow);
+}
+return $this;
+}
+public function loadUser() {
+if ($this->user == null) {
+$this->user = new \Nemundo\User\Data\User\UserExternalType(null, $this->parentFieldName . "_user");
+$this->user->fieldName = "user";
+$this->user->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->user->aliasFieldName = $this->user->tableName ."_".$this->user->fieldName;
+$this->user->label = "User";
+$this->addType($this->user);
 }
 return $this;
 }

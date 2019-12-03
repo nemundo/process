@@ -21,7 +21,7 @@ $this->tableName = "process_status";
 $this->aliasTableName = "process_status";
 $this->label = "Status";
 
-$this->primaryIndex = new \Nemundo\Db\Index\UniqueIdPrimaryIndex();
+$this->primaryIndex = new \Nemundo\Db\Index\TextIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
 $this->id->tableName = "process_status";

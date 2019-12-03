@@ -11,6 +11,11 @@ public $id;
 */
 public $process;
 
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $processClass;
+
 protected function loadModel() {
 $this->tableName = "process_process";
 $this->aliasTableName = "process_process";
@@ -36,6 +41,14 @@ $this->process->aliasFieldName = "process_process_process";
 $this->process->label = "Process";
 $this->process->allowNullValue = false;
 $this->process->length = 255;
+
+$this->processClass = new \Nemundo\Model\Type\Text\TextType($this);
+$this->processClass->tableName = "process_process";
+$this->processClass->fieldName = "process_class";
+$this->processClass->aliasFieldName = "process_process_process_class";
+$this->processClass->label = "Process Class";
+$this->processClass->allowNullValue = false;
+$this->processClass->length = 255;
 
 }
 }

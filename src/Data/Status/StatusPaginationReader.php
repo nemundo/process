@@ -11,12 +11,12 @@ parent::__construct();
 $this->model = new StatusModel();
 }
 /**
-* @return StatusRow[]
+* @return \Nemundo\Process\Row\StatusCustomRow[]
 */
 public function getData() {
 $list = [];
 foreach (parent::getData() as $dataRow) {
-$row = new StatusRow($dataRow, $this->model);
+$row = new \Nemundo\Process\Row\StatusCustomRow($dataRow, $this->model);
 $list[] = $row;
 }
 return $list;

@@ -5,11 +5,14 @@ namespace Nemundo\Process\Builder;
 
 
 use Nemundo\Core\Type\DateTime\DateTime;
+use Nemundo\Process\Data\Workflow\WorkflowUpdate;
+use Nemundo\Process\Data\WorkflowLog\WorkflowLog;
 use Nemundo\User\Type\UserSessionType;
-use Schleuniger\App\ChangeRequest\Data\Workflow\WorkflowUpdate;
-use Schleuniger\App\ChangeRequest\Data\WorkflowLog\WorkflowLog;
+
 use Nemundo\Process\Status\AbstractStatus;
 
+
+// StatusLogBuilder
 class WorkflowLogBuilder
 {
 
@@ -31,7 +34,8 @@ class WorkflowLogBuilder
         $data->statusId = $this->status->id;
         $data->workflowId = $this->workflowId;
         $data->dataId = $this->dataId;
-        $data->mitarbeiterId = (new UserSessionType())->userId;
+        $data->userId = (new UserSessionType())->userId;
+        //$data->mitarbeiterId = (new UserSessionType())->userId;
         $data->dateTime = (new DateTime())->setNow();
         $workflowLogId = $data->save();
 
@@ -40,10 +44,18 @@ class WorkflowLogBuilder
             $update = new WorkflowUpdate();
             $update->statusId = $this->status->id;
             $update->updateById($this->workflowId);
-
         }
 
-        return $workflowLogId;
+
+        if ($this->status->closeWorkflow) {
+
+            $update = new WorkflowUpdate();
+            $update->workflowClosed =true;
+            $update->updateById($this->workflowId);
+        }
+
+
+        //return $workflowLogId;
 
 
     }

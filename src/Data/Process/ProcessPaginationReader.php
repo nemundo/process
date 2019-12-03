@@ -11,12 +11,12 @@ parent::__construct();
 $this->model = new ProcessModel();
 }
 /**
-* @return ProcessRow[]
+* @return \Nemundo\Process\Row\ProcessCustomRow[]
 */
 public function getData() {
 $list = [];
 foreach (parent::getData() as $dataRow) {
-$row = new ProcessRow($dataRow, $this->model);
+$row = new \Nemundo\Process\Row\ProcessCustomRow($dataRow, $this->model);
 $list[] = $row;
 }
 return $list;

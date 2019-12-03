@@ -36,6 +36,16 @@ public $process;
 */
 public $workflowClosed;
 
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $statusId;
+
+/**
+* @var \Nemundo\Process\Data\Status\StatusExternalType
+*/
+public $status;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = WorkflowModel::class;
@@ -83,6 +93,13 @@ $this->workflowClosed->aliasFieldName = $this->workflowClosed->tableName . "_" .
 $this->workflowClosed->label = "Workflow Closed";
 $this->addType($this->workflowClosed);
 
+$this->statusId = new \Nemundo\Model\Type\Id\IdType();
+$this->statusId->fieldName = "status";
+$this->statusId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->statusId->aliasFieldName = $this->statusId->tableName ."_".$this->statusId->fieldName;
+$this->statusId->label = "Status";
+$this->addType($this->statusId);
+
 }
 public function loadProcess() {
 if ($this->process == null) {
@@ -92,6 +109,17 @@ $this->process->tableName = $this->parentFieldName . "_" . $this->externalTableN
 $this->process->aliasFieldName = $this->process->tableName ."_".$this->process->fieldName;
 $this->process->label = "Process";
 $this->addType($this->process);
+}
+return $this;
+}
+public function loadStatus() {
+if ($this->status == null) {
+$this->status = new \Nemundo\Process\Data\Status\StatusExternalType(null, $this->parentFieldName . "_status");
+$this->status->fieldName = "status";
+$this->status->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->status->aliasFieldName = $this->status->tableName ."_".$this->status->fieldName;
+$this->status->label = "Status";
+$this->addType($this->status);
 }
 return $this;
 }

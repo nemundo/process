@@ -8,7 +8,7 @@ use Nemundo\Admin\Com\Widget\AbstractAdminWidget;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Process\Status\AbstractStatus;
 
-abstract class AbstractChangeRequestView extends AbstractAdminWidget  // AbstractHtmlContainer
+abstract class AbstractStatusView extends AbstractHtmlContainer  // AbstractAdminWidget  // AbstractHtmlContainer
 {
 
     /**
@@ -21,9 +21,14 @@ abstract class AbstractChangeRequestView extends AbstractAdminWidget  // Abstrac
      */
     protected $status;
 
-    abstract protected function loadView();
+    public $dataId;
 
 
+
+    //abstract protected function loadView();
+
+
+    /*
     protected function loadWidget()
     {
         // TODO: Implement loadWidget() method.
@@ -33,6 +38,6 @@ abstract class AbstractChangeRequestView extends AbstractAdminWidget  // Abstrac
         $this->widgetTitle = $this->status->label;
 
 
-    }
+    }*/
 
 }

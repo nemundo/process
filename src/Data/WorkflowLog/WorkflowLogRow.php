@@ -22,7 +22,7 @@ public $id;
 public $statusId;
 
 /**
-* @var \Nemundo\Process\Data\Status\StatusRow
+* @var \Nemundo\Process\Row\StatusCustomRow
 */
 public $status;
 
@@ -37,7 +37,7 @@ public $dataId;
 public $workflowId;
 
 /**
-* @var \Nemundo\Process\Data\Workflow\WorkflowRow
+* @var \Nemundo\Process\Row\WorkflowCustomRow
 */
 public $workflow;
 
@@ -45,6 +45,16 @@ public $workflow;
 * @var \Nemundo\Core\Type\DateTime\DateTime
 */
 public $dateTime;
+
+/**
+* @var string
+*/
+public $userId;
+
+/**
+* @var \Nemundo\User\Data\User\UserRow
+*/
+public $user;
 
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
@@ -60,11 +70,18 @@ if ($model->workflow !== null) {
 $this->loadNemundoProcessDataWorkflowWorkflowworkflowRow($model->workflow);
 }
 $this->dateTime = new \Nemundo\Core\Type\DateTime\DateTime($this->getModelValue($model->dateTime));
+$this->userId = $this->getModelValue($model->userId);
+if ($model->user !== null) {
+$this->loadNemundoUserDataUserUseruserRow($model->user);
+}
 }
 private function loadNemundoProcessDataStatusStatusstatusRow($model) {
-$this->status = new \Nemundo\Process\Data\Status\StatusRow($this->row, $model);
+$this->status = new \Nemundo\Process\Row\StatusCustomRow($this->row, $model);
 }
 private function loadNemundoProcessDataWorkflowWorkflowworkflowRow($model) {
-$this->workflow = new \Nemundo\Process\Data\Workflow\WorkflowRow($this->row, $model);
+$this->workflow = new \Nemundo\Process\Row\WorkflowCustomRow($this->row, $model);
+}
+private function loadNemundoUserDataUserUseruserRow($model) {
+$this->user = new \Nemundo\User\Data\User\UserRow($this->row, $model);
 }
 }

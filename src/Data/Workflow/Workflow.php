@@ -31,6 +31,11 @@ public $processId;
 */
 public $workflowClosed;
 
+/**
+* @var string
+*/
+public $statusId;
+
 public function __construct() {
 parent::__construct();
 $this->model = new WorkflowModel();
@@ -41,6 +46,7 @@ $this->typeValueList->setModelValue($this->model->workflowNumber, $this->workflo
 $this->typeValueList->setModelValue($this->model->subject, $this->subject);
 $this->typeValueList->setModelValue($this->model->processId, $this->processId);
 $this->typeValueList->setModelValue($this->model->workflowClosed, $this->workflowClosed);
+$this->typeValueList->setModelValue($this->model->statusId, $this->statusId);
 $id = parent::save();
 return $id;
 }

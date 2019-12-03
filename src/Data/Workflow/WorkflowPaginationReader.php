@@ -11,12 +11,12 @@ parent::__construct();
 $this->model = new WorkflowModel();
 }
 /**
-* @return WorkflowRow[]
+* @return \Nemundo\Process\Row\WorkflowCustomRow[]
 */
 public function getData() {
 $list = [];
 foreach (parent::getData() as $dataRow) {
-$row = new WorkflowRow($dataRow, $this->model);
+$row = new \Nemundo\Process\Row\WorkflowCustomRow($dataRow, $this->model);
 $list[] = $row;
 }
 return $list;

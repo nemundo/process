@@ -11,6 +11,11 @@ public $id;
 */
 public $process;
 
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $processClass;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = ProcessModel::class;
@@ -29,6 +34,13 @@ $this->process->tableName = $this->parentFieldName . "_" . $this->externalTableN
 $this->process->aliasFieldName = $this->process->tableName . "_" . $this->process->fieldName;
 $this->process->label = "Process";
 $this->addType($this->process);
+
+$this->processClass = new \Nemundo\Model\Type\Text\TextType();
+$this->processClass->fieldName = "process_class";
+$this->processClass->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->processClass->aliasFieldName = $this->processClass->tableName . "_" . $this->processClass->fieldName;
+$this->processClass->label = "Process Class";
+$this->addType($this->processClass);
 
 }
 }

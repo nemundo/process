@@ -11,7 +11,7 @@ parent::__construct();
 $this->model = new ProcessModel();
 }
 /**
-* @return ProcessRow[]
+* @return \Nemundo\Process\Row\ProcessCustomRow[]
 */
 public function getData() {
 $this->addFieldByModel($this->model);
@@ -24,7 +24,7 @@ $list[] = $row;
 return $list;
 }
 /**
-* @return ProcessRow
+* @return \Nemundo\Process\Row\ProcessCustomRow
 */
 public function getRow() {
 $this->addFieldByModel($this->model);
@@ -34,13 +34,13 @@ $row = $this->getModelRow($dataRow);
 return $row;
 }
 /**
-* @return ProcessRow
+* @return \Nemundo\Process\Row\ProcessCustomRow
 */
 public function getRowById($id) {
 return parent::getRowById($id);
 }
 private function getModelRow($dataRow) {
-$row = new ProcessRow($dataRow, $this->model);
+$row = new \Nemundo\Process\Row\ProcessCustomRow($dataRow, $this->model);
 $row->model = $this->model;
 return $row;
 }

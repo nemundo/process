@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Process\Install;
+namespace Nemundo\Process\Install;
 
 
 use Nemundo\Model\Setup\ModelCollectionSetup;

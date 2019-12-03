@@ -6,10 +6,13 @@ namespace Nemundo\Process\Status;
 
 use Nemundo\Core\Base\AbstractBaseClass;
 use Nemundo\Html\Container\AbstractHtmlContainer;
+use Nemundo\Process\Form\StatusForm;
+use Nemundo\Process\View\AbstractStatusView;
 use Nemundo\User\Access\UserRestrictionTrait;
-use Nemundo\Process\Form\AbstractChangeRequestForm;
-use Nemundo\Process\Status\Zuweisung\ZuweisungStatus;
+use Nemundo\Process\Form\AbstractStatusForm;
 
+
+// AbstractProcessStatus
 abstract class AbstractStatus extends AbstractBaseClass
 {
 
@@ -19,6 +22,7 @@ abstract class AbstractStatus extends AbstractBaseClass
      * @var string
      */
     public $label;
+    // status
 
     /**
      * @var string
@@ -41,6 +45,10 @@ abstract class AbstractStatus extends AbstractBaseClass
     public $showMenu=true;
 
     public $showLog=true;
+
+    public $closeWorkflow=false;
+
+    public $editable=false;
 
     /**
      * @var bool
@@ -75,6 +83,7 @@ abstract class AbstractStatus extends AbstractBaseClass
     public function __construct()
     {
 
+        $this->formClass = StatusForm::class;
         $this->loadStatus();
     }
 
@@ -83,13 +92,41 @@ abstract class AbstractStatus extends AbstractBaseClass
     {
 
 
-        /** @var AbstractChangeRequestForm $form */
+        /** @var AbstractStatusForm $form */
         $form = new $this->formClass($parent);
         $form->status = $this;
 
         return $form;
 
     }
+
+
+
+    public function hasView()
+    {
+
+        $value = false;
+        if ($this->viewClass !== null) {
+            $value = true;
+        }
+
+        return $value;
+
+    }
+
+    public function getView(AbstractHtmlContainer $parent)
+    {
+
+
+        /** @var AbstractStatusView $view */
+        $view = new $this->viewClass($parent);
+
+        //$view->status = $this;
+
+        return $view;
+
+    }
+
 
 
     public function getLogText($dataId)
@@ -124,16 +161,6 @@ abstract class AbstractStatus extends AbstractBaseClass
     }
 
 
-    protected function loadDefaultMenu() {
-
-
-        $this->addMenuStatus(new KommentarStatus());
-        $this->addMenuStatus(new DokumentStatus());
-        $this->addMenuStatus(new ZuweisungStatus());
-        $this->addMenuStatus(new AbbruchStatus());
-
-
-    }
 
 
 
