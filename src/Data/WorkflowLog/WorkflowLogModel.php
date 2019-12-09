@@ -22,7 +22,7 @@ public $status;
 public $dataId;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
 */
 public $workflowId;
 
@@ -79,7 +79,7 @@ $this->dataId->label = "Data Id";
 $this->dataId->allowNullValue = false;
 $this->dataId->length = 36;
 
-$this->workflowId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
+$this->workflowId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
 $this->workflowId->tableName = "process_workflow_log";
 $this->workflowId->fieldName = "workflow";
 $this->workflowId->aliasFieldName = "process_workflow_log_workflow";

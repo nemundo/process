@@ -4,10 +4,12 @@
 namespace Nemundo\Process\Site;
 
 
+use Nemundo\Admin\Com\Navigation\AdminNavigation;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Process\Data\Process\ProcessReader;
 use Nemundo\Process\Parameter\ProcessParameter;
+use Nemundo\Process\View\ProcessView;
 use Nemundo\Web\Site\AbstractSite;
 
 class WorkflowNewSite extends AbstractSite
@@ -36,6 +38,9 @@ class WorkflowNewSite extends AbstractSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
+        $nav = new AdminNavigation($page);
+        $nav->site = ProcessSite::$site;
+
 
         $processParameter = new ProcessParameter();
 
@@ -47,9 +52,9 @@ class WorkflowNewSite extends AbstractSite
         $title = new AdminTitle($page);
         $title->content =$process->process;
 
-   $form=     $process->startStatus->getForm($page);
-$form->redirectSite=WorkflowSite::$site;
-
+        $view = new ProcessView($page);
+        $view->process = $process;
+        $view->redirectSite=WorkflowItemSite::$site;
 
         $page->render();
 

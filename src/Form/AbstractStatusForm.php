@@ -10,7 +10,7 @@ use Nemundo\Package\Bootstrap\Form\BootstrapForm;
 use Nemundo\Process\Status\AbstractStatus;
 
 // AbstractProcessStatusForm
-abstract class AbstractStatusForm extends AbstractAdminForm
+abstract class AbstractStatusForm extends AbstractAdminEditForm
 {
 
     use StatusFormTrait;
@@ -34,6 +34,7 @@ abstract class AbstractStatusForm extends AbstractAdminForm
 
     protected function onSave()
     {
+        $this->saveWorkflowLog();
     }
 
 

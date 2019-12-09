@@ -1,0 +1,35 @@
+<?php
+
+
+namespace Nemundo\Process\Template\Status;
+
+
+use Nemundo\Process\Status\AbstractStatus;
+use Nemundo\Process\Template\Form\CommentForm;
+use Nemundo\Process\Template\View\CommentView;
+
+
+// AbstractLargeTextStatus
+class CommentStatus extends AbstractStatus
+{
+
+    public function __construct()
+    {
+        $this->label = 'Comment';
+        $this->id = '63fa85d4-4c49-42cc-bd0d-af00a7d96458';
+        $this->changeStatus = false;
+        $this->formClass = CommentForm::class;
+
+        parent::__construct();
+    }
+
+    protected function loadStatus()
+    {
+
+        $this->formClass = CommentForm::class;
+        $this->viewClass = CommentView::class;
+
+
+    }
+
+}

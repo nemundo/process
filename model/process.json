@@ -76,7 +76,7 @@
             "table_name": "process_workflow",
             "namespace": "Nemundo\\Process\\Data\\Workflow",
             "row_class_name": "Nemundo\\Process\\Row\\WorkflowCustomRow",
-            "primary_index": "auto_increment",
+            "primary_index": "unique_id",
             "is_deleted": false,
             "type": [
                 {
@@ -130,9 +130,49 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "external_model_id": "4b566756-7db2-4fd8-ade5-5df5a8877d8f"
+                },
+                {
+                    "type": null,
+                    "label": "Assignment",
+                    "field_name": "assignment",
+                    "variable_name": "assignment",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "date",
+                    "label": "Deadline",
+                    "field_name": "deadline",
+                    "variable_name": "deadline",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "date_time",
+                    "label": "Date Time",
+                    "field_name": "date_time",
+                    "variable_name": "dateTime",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "user",
+                    "label": "User",
+                    "field_name": "user",
+                    "variable_name": "user",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
-            "index": []
+            "index": [
+                {
+                    "index_name": "date_time",
+                    "index_type": "index",
+                    "field_name": [
+                        "date_time"
+                    ]
+                }
+            ]
         },
         {
             "template": "default",

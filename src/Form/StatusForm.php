@@ -9,7 +9,7 @@ use Nemundo\Process\Parameter\WorkflowParameter;
 class StatusForm extends AbstractStatusForm
 {
 
-    protected function onSubmit()
+    protected function onSave()
     {
 
         $this->saveWorkflowLog();

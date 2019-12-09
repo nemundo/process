@@ -5,9 +5,9 @@ namespace Nemundo\Process\Com\Table;
 
 
 use Nemundo\Admin\Com\Table\AdminTable;
+use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
-use Nemundo\Package\Bootstrap\Table\BootstrapTable;
-use Nemundo\Process\Data\WorkflowLog\WorkflowLogReader;
+use Nemundo\Process\Item\WorkflowItem;
 
 
 class WorkflowLogTable extends AdminTable
@@ -22,34 +22,23 @@ class WorkflowLogTable extends AdminTable
     public function getContent()
     {
 
-        $reader = new WorkflowLogReader();
-        $reader->model->loadStatus();
-        $reader->model->loadUser();// loadMitarbeiter();
-        $reader->filter->andEqual($reader->model->workflowId, $this->workflowId);
-        foreach ($reader->getData() as $logRow) {
+        $header = new TableHeader($this);
+        $header->addText('Log');
+        $header->addText('Ersteller');
+
+        foreach ((new WorkflowItem($this->workflowId))->getWorkflowLog() as $logRow) {
+
 
             $row = new TableRow($this);
-            //$row->addText($logRow->status->statusLabel);
 
             $status = $logRow->status->getStatus();
             $row->addText($status->getLogText($logRow->dataId));
-
-
-//            $row->addText($logRow->mitarbeiter->login.' '.$logRow->dateTime->getShortDateLeadingZeroFormat());
-            $row->addText($logRow->user->login.' '.$logRow->dateTime->getShortDateLeadingZeroFormat());
-
-
-            //$row->addText($logRow->mitarbeiter->getDisplayName());
-            //$row->addText($logRow->dateTime->getShortDateTimeLeadingZeroFormat());
-            //$row->addText($logRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
+            $row->addText($logRow->user->displayName . ' ' . $logRow->dateTime->getShortDateLeadingZeroFormat());
 
         }
-
-
 
         return parent::getContent();
 
     }
-
 
 }

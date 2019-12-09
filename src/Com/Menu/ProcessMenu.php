@@ -61,29 +61,6 @@ class ProcessMenu extends AbstractHtmlContainer
     public function getContent()
     {
 
-
-        /*
-        $p = new Paragraph($this);
-        $p->content = 'Workflwo Status: '.$this->workflowStatus->label;
-
-        $p = new Paragraph($this);
-if ($this->workflowStatus->nextStatus !== null) {
-        $p->content = 'Next Status: '.$this->workflowStatus->nextStatus->label;
-} else {
-    $p->content ='No Next Status';
-}
-
-$ul = new UnorderedList($this);
-foreach ($this->process->getProcessStatusList() as $status) {
-    $ul->addText($status->label);
-    //(new Debug())->write($status);
-
-}*/
-
-
-        // $nextStatus = $this->workflowStatus->getNextStatus()
-
-
         $workflowClosed = false;
 
         if ($this->workflowId !== null) {
@@ -101,7 +78,6 @@ foreach ($this->process->getProcessStatusList() as $status) {
 
 
         foreach ($this->process->getProcessStatusList() as $status) {
-            //foreach ($this->process->getStatusList() as $status) {
 
             if ($status->showMenu) {
 
@@ -112,11 +88,18 @@ foreach ($this->process->getProcessStatusList() as $status) {
 
                 if ($formStatusId === $status->id) {
                     $menuItem->active = true;
+                } else {
+
+                    if (!$this->currentWorkflowStatusFound && !$status->editable) {
+                        $menuItem->linked = false;
+                    }
+
                 }
 
                 if ($this->currentWorkflowStatusFound) {
                     $menuItem->linked = false;
                 }
+
 
                 if ($workflowClosed && !$status->activeAfterWorkflowClosed) {
                     $menuItem->active = false;
@@ -131,37 +114,37 @@ foreach ($this->process->getProcessStatusList() as $status) {
                     $menuItem->linked = false;
                 }
 
+
+
                 //User Check
                 $menu->addMenuItem($menuItem);
 
             }
 
-            // Next Status
+            $nextStatus = $this->workflowStatus->getNextStatus();
 
-            //if ($menuItem->active) {
+            //if ($this->workflowStatus->nextStatusClass !== null) {
+            if ($nextStatus !== null) {
 
-            if ($this->workflowStatus->nextStatus !== null) {
-
-                if ($this->workflowStatus->nextStatus->id == $status->id) {
+//                if ($this->workflowStatus->nextStatusClass->id == $status->id) {
+                    if ($nextStatus->id == $status->id) {
 
                     if ($this->workflowId !== null) {
 
-                        foreach ($this->workflowStatus->getMenuStatus() as $nextStatus) {
+                        foreach ($this->workflowStatus->getMenuStatus() as $menuStatus) {
 
                             $nextMenuItem = new MenuItem();
-                            // $nextMenuItem->subMenu=true;
-                            //$nextMenuItem->label = HtmlCharacter::NON_BREAKING_SPACE . HtmlCharacter::NON_BREAKING_SPACE . HtmlCharacter::NON_BREAKING_SPACE . $nextStatus->label;
 
                             $span = new Span();
                             $span->addCssClass('ml-3');
-                            $span->content = $nextStatus->label;
+                            $span->content = $menuStatus->label;
 
                             $nextMenuItem->label = $span->getContent();
 
                             $nextMenuItem->site = clone($this->site);
-                            $nextMenuItem->site->addParameter(new StatusParameter($nextStatus->id));
+                            $nextMenuItem->site->addParameter(new StatusParameter($menuStatus->id));
 
-                            if ($formStatusId === $nextStatus->id) {
+                            if ($formStatusId === $menuStatus->id) {
                                 $nextMenuItem->active = true;
                             }
 
@@ -179,49 +162,15 @@ foreach ($this->process->getProcessStatusList() as $status) {
             }
 
 
-            if ($this->workflowStatus->nextStatus !== null) {
-                if ($this->workflowStatus->nextStatus->id == $status->id) {
+            //if ($this->workflowStatus->nextStatusClass !== null) {
+            //    if ($this->workflowStatus->nextStatusClass->id == $status->id) {
+            if ($nextStatus !==null) {
+                if ($nextStatus->id == $status->id) {
                     $this->currentWorkflowStatusFound = true;
                 }
             }
 
         }
-
-
-        //if ($this->formStatus->showSubMenu) {
-
-        /*$menu->addEmptyMenu();
-
-        if ($this->workflowId !== null) {
-
-
-            foreach ($this->process->getSubStatusList() as $status) {
-
-                $menuItem = new MenuItem();
-                $menuItem->label = $status->label;
-                $menuItem->site = clone($this->site);
-                $menuItem->site->addParameter(new StatusParameter($status->id));
-
-
-                if ($formStatusId === $status->id) {
-                    $menuItem->active = true;
-                }
-
-
-                if ($this->workflowId == null) {
-                    $menuItem->linked = false;
-                }
-
-                if ($workflowClosed && !$status->activeAfterWorkflowClosed) {
-                    $menuItem->active = false;
-                    $menuItem->linked = false;
-                }
-
-                $menu->addMenuItem($menuItem);
-
-            }
-
-        }*/
 
         return parent::getContent();
 

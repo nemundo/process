@@ -1,0 +1,83 @@
+{
+    "app": "Template",
+    "name": "template",
+    "namespace": "Nemundo\\Process\\Template",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "e9bca558-8620-4e91-aa0a-934b50da05d3",
+            "label": "Deadline Change",
+            "class_name": "DeadlineChange",
+            "table_name": "template_deadline_change",
+            "namespace": "Nemundo\\Process\\Template\\Data\\DeadlineChange",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "date",
+                    "label": "Deadline",
+                    "field_name": "deadline",
+                    "variable_name": "deadline",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "active_model",
+            "model_id": "33ed7f02-cf5e-444c-830e-0f0ed4df6a0c",
+            "label": "Document",
+            "class_name": "Document",
+            "table_name": "process_template_document",
+            "namespace": "Nemundo\\Process\\Template\\Data\\Document",
+            "row_class_name": "",
+            "primary_index": "unique_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "redirect_filename",
+                    "label": "Document",
+                    "field_name": "document",
+                    "variable_name": "document",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "text",
+                    "label": "Workflow Id",
+                    "field_name": "workflow_id",
+                    "variable_name": "workflowId",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "36"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "eab3bc8e-1377-4454-bdf2-53bdf1057b24",
+            "label": "Large Text",
+            "class_name": "LargeText",
+            "table_name": "process_template_large_text",
+            "namespace": "Nemundo\\Process\\Template\\Data\\LargeText",
+            "row_class_name": "",
+            "primary_index": "unique_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "large_text",
+                    "label": "Large Text",
+                    "field_name": "large_text",
+                    "variable_name": "largeText",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        }
+    ]
+}

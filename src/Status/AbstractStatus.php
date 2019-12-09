@@ -48,6 +48,9 @@ abstract class AbstractStatus extends AbstractBaseClass
 
     public $closeWorkflow=false;
 
+    /**
+     * @var bool
+     */
     public $editable=false;
 
     /**
@@ -67,15 +70,15 @@ abstract class AbstractStatus extends AbstractBaseClass
 
 
     /**
-     * @var AbstractStatus
+     * @var string
      */
-    public $nextStatus;
+    protected $nextStatusClass;
 
 
     /**
-     * @var AbstractStatus[]
+     * @var string[]
      */
-    private $menuStatusList=[];
+    private $menuStatusClassList=[];
 
     abstract protected function loadStatus();
 
@@ -129,6 +132,7 @@ abstract class AbstractStatus extends AbstractBaseClass
 
 
 
+    // nach StatusItem
     public function getLogText($dataId)
     {
 
@@ -145,23 +149,53 @@ abstract class AbstractStatus extends AbstractBaseClass
     }
 
 
+    public function getNextStatus() {
+
+
+        /** @var AbstractStatus $nextStatus */
+        $nextStatus=null;
+
+        if ($this->nextStatusClass !==null) {
+            $className = $this->nextStatusClass;
+            $nextStatus = new $className();
+        }
+
+        return $nextStatus;
+
+    }
+
 
 
     public function getMenuStatus() {
-        return $this->menuStatusList;
+
+
+        /** @var AbstractStatus[] $statusList */
+        $statusList=[];
+        foreach ($this->menuStatusClassList as $className) {
+          $statusList[]=new $className();
+        }
+        return $statusList;
+
+        //return $this->menuStatusClassList;
+
     }
 
 
     // SubStatus
-    protected function addMenuStatus(AbstractStatus $status) {
+    /*protected function addMenuStatus(AbstractStatus $status) {
 
         $this->menuStatusList[]=$status;
         return $this;
 
+    }*/
+
+
+    protected function addMenuStatusClass($statusClass) {
+
+        $this->menuStatusClassList[]=$statusClass;
+        return $this;
+
     }
-
-
-
 
 
 

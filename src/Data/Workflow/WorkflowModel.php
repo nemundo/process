@@ -46,12 +46,37 @@ public $statusId;
 */
 public $status;
 
+/**
+* @var \Nemundo\Workflow\App\Identification\Model\IdentificationModelType
+*/
+public $assignment;
+
+/**
+* @var \Nemundo\Model\Type\DateTime\DateType
+*/
+public $deadline;
+
+/**
+* @var \Nemundo\Model\Type\DateTime\DateTimeType
+*/
+public $dateTime;
+
+/**
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+*/
+public $userId;
+
+/**
+* @var \Nemundo\User\Data\User\UserExternalType
+*/
+public $user;
+
 protected function loadModel() {
 $this->tableName = "process_workflow";
 $this->aliasTableName = "process_workflow";
 $this->label = "Workflow";
 
-$this->primaryIndex = new \Nemundo\Db\Index\AutoIncrementIdPrimaryIndex();
+$this->primaryIndex = new \Nemundo\Db\Index\UniqueIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
 $this->id->tableName = "process_workflow";
@@ -108,6 +133,38 @@ $this->statusId->aliasFieldName = "process_workflow_status";
 $this->statusId->label = "Status";
 $this->statusId->allowNullValue = false;
 
+$this->assignment = new \Nemundo\Workflow\App\Identification\Model\IdentificationModelType($this);
+$this->assignment->tableName = "process_workflow";
+$this->assignment->fieldName = "assignment";
+$this->assignment->aliasFieldName = "process_workflow_assignment";
+$this->assignment->label = "Assignment";
+$this->assignment->allowNullValue = false;
+
+$this->deadline = new \Nemundo\Model\Type\DateTime\DateType($this);
+$this->deadline->tableName = "process_workflow";
+$this->deadline->fieldName = "deadline";
+$this->deadline->aliasFieldName = "process_workflow_deadline";
+$this->deadline->label = "Deadline";
+$this->deadline->allowNullValue = false;
+
+$this->dateTime = new \Nemundo\Model\Type\DateTime\DateTimeType($this);
+$this->dateTime->tableName = "process_workflow";
+$this->dateTime->fieldName = "date_time";
+$this->dateTime->aliasFieldName = "process_workflow_date_time";
+$this->dateTime->label = "Date Time";
+$this->dateTime->allowNullValue = false;
+
+$this->userId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->userId->tableName = "process_workflow";
+$this->userId->fieldName = "user";
+$this->userId->aliasFieldName = "process_workflow_user";
+$this->userId->label = "User";
+$this->userId->allowNullValue = false;
+
+$index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
+$index->indexName = "date_time";
+$index->addType($this->dateTime);
+
 }
 public function loadProcess() {
 if ($this->process == null) {
@@ -126,6 +183,16 @@ $this->status->tableName = "process_workflow";
 $this->status->fieldName = "status";
 $this->status->aliasFieldName = "process_workflow_status";
 $this->status->label = "Status";
+}
+return $this;
+}
+public function loadUser() {
+if ($this->user == null) {
+$this->user = new \Nemundo\User\Data\User\UserExternalType($this, "process_workflow_user");
+$this->user->tableName = "process_workflow";
+$this->user->fieldName = "user";
+$this->user->aliasFieldName = "process_workflow_user";
+$this->user->label = "User";
 }
 return $this;
 }

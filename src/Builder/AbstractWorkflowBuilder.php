@@ -5,9 +5,12 @@ namespace Nemundo\Process\Builder;
 
 
 use Nemundo\Core\Base\AbstractBase;
+use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Process\Data\Workflow\Workflow;
 use Nemundo\Process\Data\Workflow\WorkflowValue;
 use Nemundo\Process\Process\AbstractProcess;
+use Nemundo\User\Type\UserSessionType;
+use Nemundo\Workflow\App\Identification\Model\Identification;
 
 abstract class AbstractWorkflowBuilder extends AbstractBase
 {
@@ -17,7 +20,35 @@ abstract class AbstractWorkflowBuilder extends AbstractBase
      */
     protected $process;
 
-    protected $workflowId;
+    public $workflowId;
+
+    protected $subject = '[no subject]';
+
+    /**
+     * @var Identification
+     */
+    protected $assignment;
+
+    /**
+     * @var int
+     */
+    protected $number;
+
+    /**
+     * @var string
+     */
+    protected $workflowNumber;
+
+
+    /**
+     * @var DateTime
+     */
+    protected $dateTime;
+
+    /**
+     * @var string
+     */
+    protected $userId;
 
     abstract protected function loadWorkflow();
 
@@ -25,36 +56,58 @@ abstract class AbstractWorkflowBuilder extends AbstractBase
 
     public function __construct()
     {
+
+        $this->assignment = new Identification();
+        $this->dateTime = (new DateTime())->setNow();
+        $this->userId = (new UserSessionType())->userId;
+
+
         $this->loadWorkflow();
+
     }
 
-    protected function saveWorkflow($subject='[no subject]') {
+    protected function saveWorkflow()
+    {
 
-        $value = new WorkflowValue();
-        $value->field = $value->model->number;
-        $value->filter->andEqual($value->model->processId,$this->process->id );
-        $nr = $value->getMaxValue();
-        if ($nr == "") {
-            $nr =$this->process->startNumber;
+        if ($this->number == null) {
+            $value = new WorkflowValue();
+            $value->field = $value->model->number;
+            $value->filter->andEqual($value->model->processId, $this->process->id);
+            $this->number = $value->getMaxValue();
+            if ($this->number == "") {
+                $this->number = $this->process->startNumber;
+            }
+            $this->number = $this->number + 1;
+
+            $this->workflowNumber = $this->process->prefixNumber . $this->number;
         }
-        $nr = $nr + 1;
+
 
         $data = new Workflow();
         $data->processId = $this->process->id;
-        $data->number = $nr;
-        $data->workflowNumber =$this->process->prefixNumber . $nr;
+        $data->number = $this->number;
+        $data->workflowNumber = $this->workflowNumber;
         $data->statusId = $this->process->startStatus->id;
-        $data->subject = $subject;  // '[no subject]';  // $this->betreff;
-           //$data->verantwortlicher = $verantwortlicher;
+        $data->subject = $this->subject;
+        $data->assignment = $this->assignment;
+        $data->dateTime = $this->dateTime;  // ->setNow();
+        $data->userId = $this->userId;  // (new UserSessionType())->userId;
         $this->workflowId = $data->save();
 
 
+        /*$builder = new WorkflowLogBuilder();
+        $builder->workflowId = $this->workflowId;
+        $builder->status = $this->process->startStatus;
+        $builder->dateTime=$this->dateTime;
+        $builder->userId = $this->userId;
+        $builder->saveLog();*/
 
-        $workflowBuilder = new WorkflowLogBuilder();
-        $workflowBuilder->workflowId=$this->workflowId;
-        $workflowBuilder->status= $this->process->startStatus;
-         $workflowBuilder->saveLog();
-
+        $builder = new StatusLogBuilder($this->workflowId);  // WorkflowLogBuilder();
+        //$builder->workflowId = $this->workflowId;
+        $builder->status = $this->process->startStatus;
+        $builder->dateTime=$this->dateTime;
+        $builder->userId = $this->userId;
+        $builder->saveStatus();
 
 
     }

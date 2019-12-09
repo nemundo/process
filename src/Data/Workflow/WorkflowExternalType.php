@@ -46,6 +46,31 @@ public $statusId;
 */
 public $status;
 
+/**
+* @var \Nemundo\Workflow\App\Identification\Model\IdentificationModelType
+*/
+public $assignment;
+
+/**
+* @var \Nemundo\Model\Type\DateTime\DateType
+*/
+public $deadline;
+
+/**
+* @var \Nemundo\Model\Type\DateTime\DateTimeType
+*/
+public $dateTime;
+
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $userId;
+
+/**
+* @var \Nemundo\User\Data\User\UserExternalType
+*/
+public $user;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = WorkflowModel::class;
@@ -100,6 +125,35 @@ $this->statusId->aliasFieldName = $this->statusId->tableName ."_".$this->statusI
 $this->statusId->label = "Status";
 $this->addType($this->statusId);
 
+$this->assignment = new \Nemundo\Workflow\App\Identification\Model\IdentificationModelType();
+$this->assignment->fieldName = "assignment";
+$this->assignment->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->assignment->aliasFieldName = $this->assignment->tableName . "_" . $this->assignment->fieldName;
+$this->assignment->label = "Assignment";
+$this->assignment->createObject();
+$this->addType($this->assignment);
+
+$this->deadline = new \Nemundo\Model\Type\DateTime\DateType();
+$this->deadline->fieldName = "deadline";
+$this->deadline->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->deadline->aliasFieldName = $this->deadline->tableName . "_" . $this->deadline->fieldName;
+$this->deadline->label = "Deadline";
+$this->addType($this->deadline);
+
+$this->dateTime = new \Nemundo\Model\Type\DateTime\DateTimeType();
+$this->dateTime->fieldName = "date_time";
+$this->dateTime->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->dateTime->aliasFieldName = $this->dateTime->tableName . "_" . $this->dateTime->fieldName;
+$this->dateTime->label = "Date Time";
+$this->addType($this->dateTime);
+
+$this->userId = new \Nemundo\Model\Type\Id\IdType();
+$this->userId->fieldName = "user";
+$this->userId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->userId->aliasFieldName = $this->userId->tableName ."_".$this->userId->fieldName;
+$this->userId->label = "User";
+$this->addType($this->userId);
+
 }
 public function loadProcess() {
 if ($this->process == null) {
@@ -120,6 +174,17 @@ $this->status->tableName = $this->parentFieldName . "_" . $this->externalTableNa
 $this->status->aliasFieldName = $this->status->tableName ."_".$this->status->fieldName;
 $this->status->label = "Status";
 $this->addType($this->status);
+}
+return $this;
+}
+public function loadUser() {
+if ($this->user == null) {
+$this->user = new \Nemundo\User\Data\User\UserExternalType(null, $this->parentFieldName . "_user");
+$this->user->fieldName = "user";
+$this->user->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->user->aliasFieldName = $this->user->tableName ."_".$this->user->fieldName;
+$this->user->label = "User";
+$this->addType($this->user);
 }
 return $this;
 }

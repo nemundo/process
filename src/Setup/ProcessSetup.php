@@ -42,13 +42,17 @@ class ProcessSetup extends AbstractBase
     private function addStatus(AbstractStatus $status)
     {
 
+        $setup=new StatusSetup();
+        $setup->addStatus($status);
 
+
+/*
         $data = new Status();
         $data->updateOnDuplicate = true;
         $data->id = $status->id;
         $data->statusLabel = $status->label;
         $data->statusClass = $status->getClassName();
-        $data->save();
+        $data->save();*/
 
 
 
