@@ -33,7 +33,7 @@ class WorkflowLogTable extends AdminTable
 
             $status = $logRow->status->getStatus();
             $row->addText($status->getLogText($logRow->dataId));
-            $row->addText($logRow->user->displayName . ' ' . $logRow->dateTime->getShortDateLeadingZeroFormat());
+            $row->addText($logRow->user->displayName . ' ' . $logRow->dateTime->getShortDateTimeLeadingZeroFormat());
 
         }
 

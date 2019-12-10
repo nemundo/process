@@ -7,6 +7,9 @@ namespace Nemundo\Process\Status;
 use Nemundo\Core\Base\AbstractBaseClass;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Process\Form\StatusForm;
+use Nemundo\Process\Template\Status\CancelStatus;
+use Nemundo\Process\Template\Status\CommentStatus;
+use Nemundo\Process\Template\Status\DocumentStatus;
 use Nemundo\Process\View\AbstractStatusView;
 use Nemundo\User\Access\UserRestrictionTrait;
 use Nemundo\Process\Form\AbstractStatusForm;
@@ -23,6 +26,11 @@ abstract class AbstractStatus extends AbstractBaseClass
      */
     public $label;
     // status
+
+    /**
+     * @var string
+     */
+    public $logText;
 
     /**
      * @var string
@@ -136,8 +144,12 @@ abstract class AbstractStatus extends AbstractBaseClass
     public function getLogText($dataId)
     {
 
-        $text = $this->label;  // '[no log text]';
-        return $text;
+        $logText = $this->logText;
+        if ($logText == null) {
+            $logText = $this->label;  // '[no log text]';
+        }
+
+        return $logText;
 
     }
 
@@ -196,6 +208,9 @@ abstract class AbstractStatus extends AbstractBaseClass
         return $this;
 
     }
+
+
+
 
 
 

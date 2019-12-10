@@ -130,7 +130,7 @@ class WorkflowItem extends AbstractBase
 
 
         $dateTime = null;
-        if ($this->getWorkflowRow()->abgeschlossen) {
+        if ($this->getWorkflowRow()->workflowClosed) {
 
             $dateTime = $this->getDateTime(SortOrder::DESCENDING);
 

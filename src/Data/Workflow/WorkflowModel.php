@@ -108,7 +108,7 @@ $this->subject = new \Nemundo\Model\Type\Text\TextType($this);
 $this->subject->tableName = "process_workflow";
 $this->subject->fieldName = "subject";
 $this->subject->aliasFieldName = "process_workflow_subject";
-$this->subject->label = "Subject";
+$this->subject->label = "Betreff";
 $this->subject->allowNullValue = false;
 $this->subject->length = 255;
 

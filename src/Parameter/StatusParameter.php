@@ -12,8 +12,7 @@ class StatusParameter extends AbstractUrlParameter
 
     protected function loadParameter()
     {
-        $this->parameterName='status';
-        // TODO: Implement loadParameter() method.
+        $this->parameterName = 'status1';
     }
 
 

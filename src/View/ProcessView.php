@@ -4,15 +4,12 @@
 namespace Nemundo\Process\View;
 
 
-use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Admin\Com\Widget\AdminWidget;
 use Nemundo\Com\FormBuilder\RedirectTrait;
 use Nemundo\Html\Container\AbstractHtmlContainer;
-use Nemundo\Process\Com\Button\NextStatusButton;
 use Nemundo\Process\Com\Container\StatusFormContainer;
 use Nemundo\Process\Com\Container\WorkflowStreamContainer;
-use Nemundo\Process\Com\Dropdown\MenuStatusDropdown;
 use Nemundo\Process\Com\Layout\WorkflowLayout;
 use Nemundo\Process\Com\Menu\ProcessMenu;
 use Nemundo\Process\Com\Table\WorkflowLogTable;
@@ -20,7 +17,6 @@ use Nemundo\Process\Data\Workflow\WorkflowReader;
 use Nemundo\Process\Parameter\StatusParameter;
 use Nemundo\Process\Parameter\WorkflowParameter;
 use Nemundo\Process\Process\AbstractProcess;
-use Nemundo\Process\Site\WorkflowItemSite;
 
 class ProcessView extends AbstractHtmlContainer
 {
@@ -39,6 +35,17 @@ class ProcessView extends AbstractHtmlContainer
 
     public function getContent()
     {
+
+        //$this->checkProperty('process');
+
+        /*
+        if ($this->process == null) {
+            (new LogMessage())->writeError('No Process');
+        }*/
+
+        /*if ($this->redirectSite == null) {
+            $this->redirectSite=new Site();
+        }*/
 
         $workflowStatus = null;
         $formStatus = null;
@@ -86,13 +93,13 @@ class ProcessView extends AbstractHtmlContainer
         }
 
 
-        $btn = new NextStatusButton($layout->col1);
-        $btn->site = $this->redirectSite;
+        /*$btn = new NextStatusButton($layout->col1);
+        $btn->site = clone($this->redirectSite);
         $btn->status = $workflowStatus->getNextStatus();
 
-$dropdown = new MenuStatusDropdown($layout->col1);
-$dropdown->status = $workflowStatus;
-$dropdown->redirectSite =  $this->redirectSite;
+        $dropdown = new MenuStatusDropdown($layout->col1);
+        $dropdown->status = $workflowStatus;
+        $dropdown->redirectSite = clone($this->redirectSite);*/
 
 
         $menu = new ProcessMenu($layout->col1);
@@ -100,7 +107,7 @@ $dropdown->redirectSite =  $this->redirectSite;
         $menu->workflowId = $this->workflowId;
         $menu->formStatus = $formStatus;
         $menu->workflowStatus = $workflowStatus;
-        $menu->site =$this->redirectSite;
+        $menu->site = clone($this->redirectSite);
         $menu->site->addParameter(new WorkflowParameter($this->workflowId));
 
         if ($formStatus !== null) {
@@ -110,25 +117,12 @@ $dropdown->redirectSite =  $this->redirectSite;
             $form = new StatusFormContainer($widget);
             $form->formStatus = $formStatus;
             $form->workflowStatus = $workflowStatus;
-            $form->site = $this->redirectSite;
+            $form->site = clone($this->redirectSite);
             $form->workflowId = $this->workflowId;
         }
 
         $view = new WorkflowStreamContainer($layout->col2);
         $view->workflowId = $this->workflowId;
-
-
-        /*
-        $subtitle = new AdminSubtitle($layout->col3);
-        $subtitle->content = 'Document';
-
-        $view = new WorkflowDocumentView($layout->col3);
-        $view->workflowId=$this->workflowId;*/
-
-
-
-        //$subtitle = new AdminSubtitle($layout->col3);
-        //$subtitle->content = 'Log';
 
         $table = new WorkflowLogTable($layout->col3);
         $table->workflowId = $this->workflowId;

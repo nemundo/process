@@ -6,6 +6,7 @@ namespace Nemundo\Process\Com\Table;
 
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Process\Data\Workflow\WorkflowReader;
+use Nemundo\Process\Item\WorkflowItem;
 
 class BaseWorkflowTable extends AdminLabelValueTable
 {
@@ -30,6 +31,14 @@ class BaseWorkflowTable extends AdminLabelValueTable
         $table->addLabelValue($model->dateTime->label, $workflowRow->dateTime->getShortDateTimeFormat());
         $table->addLabelValue($model->user->label, $workflowRow->user->displayName);
         $table->addLabelYesNoValue($model->workflowClosed->label, $workflowRow->user->displayName);
+
+        $workflowItem = new WorkflowItem($this->workflowId);
+
+        $table->addLabelValue('Start', $workflowItem->getStart()->getShortDateTimeFormat());
+        $table->addLabelValue('End', $workflowItem->getEnd()->getShortDateTimeFormat());
+        $table->addLabelValue('Durchlaufzeit', $workflowItem->getDurchlaufzeit().' Tage');
+
+
 
         return parent::getContent();
 

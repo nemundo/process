@@ -98,7 +98,7 @@
                 },
                 {
                     "type": "text",
-                    "label": "Subject",
+                    "label": "Betreff",
                     "field_name": "subject",
                     "variable_name": "subject",
                     "allow_null": false,

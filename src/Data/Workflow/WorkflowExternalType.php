@@ -101,7 +101,7 @@ $this->subject = new \Nemundo\Model\Type\Text\TextType();
 $this->subject->fieldName = "subject";
 $this->subject->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->subject->aliasFieldName = $this->subject->tableName . "_" . $this->subject->fieldName;
-$this->subject->label = "Subject";
+$this->subject->label = "Betreff";
 $this->addType($this->subject);
 
 $this->processId = new \Nemundo\Model\Type\Id\IdType();

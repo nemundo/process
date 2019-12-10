@@ -50,7 +50,9 @@ abstract class AbstractWorkflowBuilder extends AbstractBase
      */
     protected $userId;
 
-    abstract protected function loadWorkflow();
+    protected function loadWorkflow() {
+
+    }
 
     abstract public function createWorkflow();
 
