@@ -7,6 +7,8 @@ namespace Nemundo\Process\Template\Form;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
 use Nemundo\Process\Form\AbstractStatusForm;
 use Nemundo\Process\Item\WorkflowItem;
+use Nemundo\Process\Template\Data\AssignmentLog\AssignmentLog;
+use Nemundo\Process\Template\Data\UserAssignmentLog\UserAssignmentLog;
 use Nemundo\User\Data\User\UserReader;
 use Nemundo\Workflow\App\Identification\Model\Identification;
 
@@ -39,11 +41,19 @@ class UserAssignmentForm extends AbstractStatusForm
     protected function onSave()
     {
 
+        $userId = $this->user->getValue();
+
         $assignment = new Identification();
-        $assignment->setUserIdentification($this->user->getValue());
+        $assignment->setUserIdentification($userId);
 
         $item = new WorkflowItem($this->workflowId);
         $item->changeAssignment($assignment);
+
+        $data = new UserAssignmentLog();
+        $data->userId = $userId;
+        $this->dataId= $data->save();
+
+        $this->saveWorkflowLog();
 
     }
 
