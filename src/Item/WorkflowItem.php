@@ -98,6 +98,7 @@ class WorkflowItem extends AbstractBase
     }
 
 
+    // getWorkflowHistory
    public function getWorkflowLog()
     {
 
@@ -108,10 +109,7 @@ class WorkflowItem extends AbstractBase
 
         $reader->filter->andEqual($reader->model->workflowId, $this->workflowId);
         $reader->addOrder($reader->model->id);
-
-        //$dateTime = $reader->getRow()->dateTime;
-
-        return $reader->getData();  // $dateTime;
+        return $reader->getData();
 
     }
 
@@ -156,6 +154,7 @@ class WorkflowItem extends AbstractBase
     }
 
 
+    // getLeapTime
     public function getDurchlaufzeit()
     {
 
@@ -183,35 +182,5 @@ class WorkflowItem extends AbstractBase
     }
 
 
-    /*
-    public function saveLog(AbstractStatus $status, $dataId = null)
-    {
-
-        $status->saveStatus();
-
-        $data = new WorkflowLog();
-        $data->statusId = $status->id;
-        $data->workflowId = $this->workflowId;
-        $data->dataId = $dataId;
-        $data->mitarbeiterId = (new UserSessionType())->userId;
-        $data->dateTime = (new DateTime())->setNow();
-        $workflowLogId = $data->save();
-
-        $workflowRow = (new WorkflowBuilder($this->workflowId))->getWorkflowRow();
-
-        if (!$workflowRow->abgeschlossen) {
-
-            if ($status->changeStatus) {
-
-                $update = new WorkflowUpdate();
-                $update->statusId = $status->id;
-                $update->updateById($this->workflowId);
-
-            }
-        }
-
-        return $workflowLogId;
-
-    }*/
 
 }

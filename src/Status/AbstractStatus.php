@@ -128,11 +128,8 @@ abstract class AbstractStatus extends AbstractBaseClass
     public function getView(AbstractHtmlContainer $parent)
     {
 
-
         /** @var AbstractStatusView $view */
         $view = new $this->viewClass($parent);
-
-        //$view->status = $this;
 
         return $view;
 

@@ -22,19 +22,18 @@ class WorkflowNewSite extends AbstractSite
 
     public function loadSite()
     {
-        // TODO: Implement loadSite() method.
-        $this->title='New';
-        $this->url = 'new';
-        $this->menuActive=false;
 
-        WorkflowNewSite::$site=$this;
+        $this->title = 'New';
+        $this->url = 'new';
+        $this->menuActive = false;
+
+        WorkflowNewSite::$site = $this;
 
     }
 
 
     public function loadContent()
     {
-        // TODO: Implement loadContent() method.
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
@@ -50,11 +49,11 @@ class WorkflowNewSite extends AbstractSite
         $process = $processRow->getProcess();
 
         $title = new AdminTitle($page);
-        $title->content =$process->process;
+        $title->content = $process->process;
 
         $view = new ProcessView($page);
         $view->process = $process;
-        $view->redirectSite=WorkflowItemSite::$site;
+        $view->redirectSite = WorkflowItemSite::$site;
 
         $page->render();
 

@@ -18,9 +18,9 @@ class StatusLogBuilder extends AbstractStatusLogBuilder
     /**
      * @var DateTime
      */
-    public $dateTime;
+    //protected $dateTime;
 
-    public $userId;
+    //protected $userId;
 
 
 

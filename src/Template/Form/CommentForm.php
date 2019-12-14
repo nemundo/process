@@ -6,6 +6,7 @@ namespace Nemundo\Process\Template\Form;
 
 use Nemundo\Package\Bootstrap\FormElement\BootstrapLargeTextBox;
 use Nemundo\Process\Form\AbstractStatusForm;
+use Nemundo\Process\Template\Builder\CommentStatusBuilder;
 use Nemundo\Process\Template\Data\LargeText\LargeText;
 
 class CommentForm extends AbstractStatusForm
@@ -30,12 +31,18 @@ class CommentForm extends AbstractStatusForm
     {
 
 
+        $builder = new CommentStatusBuilder($this->workflowId);
+        $builder->comment = $this->comment->getValue();
+        $builder->saveStatus();
+
+        /*
+
         $data = new LargeText();
         $data->largeText=$this->comment->getValue();
       $this->dataId=  $data->save();
 
 
-      $this->saveWorkflowLog();
+      $this->saveWorkflowLog();*/
 
 
     }

@@ -4,11 +4,10 @@
 namespace Nemundo\Process\View;
 
 
-use Nemundo\Admin\Com\Widget\AbstractAdminWidget;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Process\Status\AbstractStatus;
 
-abstract class AbstractStatusView extends AbstractHtmlContainer  // AbstractAdminWidget  // AbstractHtmlContainer
+abstract class AbstractStatusView extends AbstractHtmlContainer
 {
 
     /**
@@ -21,23 +20,9 @@ abstract class AbstractStatusView extends AbstractHtmlContainer  // AbstractAdmi
      */
     protected $status;
 
+    /**
+     * @var string
+     */
     public $dataId;
-
-
-
-    //abstract protected function loadView();
-
-
-    /*
-    protected function loadWidget()
-    {
-        // TODO: Implement loadWidget() method.
-
-        $this->loadView();
-
-        $this->widgetTitle = $this->status->label;
-
-
-    }*/
 
 }

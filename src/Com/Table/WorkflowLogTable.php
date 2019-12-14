@@ -23,17 +23,19 @@ class WorkflowLogTable extends AdminTable
     {
 
         $header = new TableHeader($this);
-        $header->addText('Log');
+//        $header->addText('Log');
+        $header->addText('History');
         $header->addText('Ersteller');
 
         foreach ((new WorkflowItem($this->workflowId))->getWorkflowLog() as $logRow) {
 
-
-            $row = new TableRow($this);
-
             $status = $logRow->status->getStatus();
-            $row->addText($status->getLogText($logRow->dataId));
-            $row->addText($logRow->user->displayName . ' ' . $logRow->dateTime->getShortDateTimeLeadingZeroFormat());
+
+            if ($status->showLog) {
+                $row = new TableRow($this);
+                $row->addText($status->getLogText($logRow->dataId));
+                $row->addText($logRow->user->displayName . ' ' . $logRow->dateTime->getShortDateTimeLeadingZeroFormat());
+            }
 
         }
 

@@ -39,9 +39,6 @@ class ProcessSite extends AbstractSite
         new WorkflowNewSite($this);
         new WorkflowItemSite($this);
 
-        new DocumentDocumentRedirectSite($this);
-        new DocumentDeleteSite($this);
-
         ProcessSite::$site = $this;
 
     }

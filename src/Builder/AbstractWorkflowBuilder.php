@@ -12,6 +12,8 @@ use Nemundo\Process\Process\AbstractProcess;
 use Nemundo\User\Type\UserSessionType;
 use Nemundo\Workflow\App\Identification\Model\Identification;
 
+
+// ProcessBuilder
 abstract class AbstractWorkflowBuilder extends AbstractBase
 {
 
@@ -20,6 +22,9 @@ abstract class AbstractWorkflowBuilder extends AbstractBase
      */
     protected $process;
 
+    /**
+     * @var string
+     */
     public $workflowId;
 
     protected $subject = '[no subject]';
@@ -38,7 +43,6 @@ abstract class AbstractWorkflowBuilder extends AbstractBase
      * @var string
      */
     protected $workflowNumber;
-
 
     /**
      * @var DateTime
@@ -92,20 +96,12 @@ abstract class AbstractWorkflowBuilder extends AbstractBase
         $data->statusId = $this->process->startStatus->id;
         $data->subject = $this->subject;
         $data->assignment = $this->assignment;
-        $data->dateTime = $this->dateTime;  // ->setNow();
-        $data->userId = $this->userId;  // (new UserSessionType())->userId;
+        $data->dateTime = $this->dateTime;
+        $data->userId = $this->userId;
         $this->workflowId = $data->save();
 
 
-        /*$builder = new WorkflowLogBuilder();
-        $builder->workflowId = $this->workflowId;
-        $builder->status = $this->process->startStatus;
-        $builder->dateTime=$this->dateTime;
-        $builder->userId = $this->userId;
-        $builder->saveLog();*/
-
-        $builder = new StatusLogBuilder($this->workflowId);  // WorkflowLogBuilder();
-        //$builder->workflowId = $this->workflowId;
+        $builder =new DateTimeUserIdStatusLogBuilder($this->workflowId);
         $builder->status = $this->process->startStatus;
         $builder->dateTime=$this->dateTime;
         $builder->userId = $this->userId;

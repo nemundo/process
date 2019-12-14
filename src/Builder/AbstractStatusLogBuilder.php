@@ -24,9 +24,6 @@ abstract class AbstractStatusLogBuilder extends AbstractBase
      */
     public $workflowId;
 
-    /*
-    protected $workflowId;
-
     /**
      * @var AbstractStatus
      */
@@ -39,12 +36,11 @@ abstract class AbstractStatusLogBuilder extends AbstractBase
     /**
      * @var DateTime
      */
-    public $dateTime;
+    protected $dateTime;
 
-    public $userId;
+    protected $userId;
 
 
-    //abstract function createStatusItem();
 
     abstract function saveStatus();
 
@@ -62,38 +58,25 @@ abstract class AbstractStatusLogBuilder extends AbstractBase
     protected function saveWorkflowLog()
     {
 
-        /*$workflowBuilder = new WorkflowLogBuilder();
-        $workflowBuilder->status = $this->status;
-        $workflowBuilder->workflowId = $this->workflowId;
-        $workflowBuilder->dataId = $this->dataId;
-        $workflowBuilder->saveLog();*/
-
         $data = new WorkflowLog();
         $data->statusId = $this->status->id;
         $data->workflowId = $this->workflowId;
         $data->dataId = $this->dataId;
-        $data->userId =$this->userId;  // (new UserSessionType())->userId;
-        //$data->mitarbeiterId = (new UserSessionType())->userId;
-        $data->dateTime = $this->dateTime;  // (new DateTime())->setNow();
+        $data->userId =$this->userId;
+        $data->dateTime = $this->dateTime;
          $data->save();
 
         if ($this->status->changeStatus) {
-
             $update = new WorkflowUpdate();
             $update->statusId = $this->status->id;
             $update->updateById($this->workflowId);
         }
 
-
         if ($this->status->closeWorkflow) {
-
             $update = new WorkflowUpdate();
             $update->workflowClosed =true;
             $update->updateById($this->workflowId);
         }
-
-
-
 
     }
 

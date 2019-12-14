@@ -11,7 +11,9 @@ use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Process\Com\Container\StatusFormContainer;
 use Nemundo\Process\Com\Container\WorkflowStreamContainer;
 use Nemundo\Process\Com\Layout\WorkflowLayout;
+use Nemundo\Process\Com\Menu\HistoryProcessMenu;
 use Nemundo\Process\Com\Menu\ProcessMenu;
+use Nemundo\Process\Com\Menu\ProcessMenuOld;
 use Nemundo\Process\Com\Table\WorkflowLogTable;
 use Nemundo\Process\Data\Workflow\WorkflowReader;
 use Nemundo\Process\Parameter\StatusParameter;
@@ -35,17 +37,6 @@ class ProcessView extends AbstractHtmlContainer
 
     public function getContent()
     {
-
-        //$this->checkProperty('process');
-
-        /*
-        if ($this->process == null) {
-            (new LogMessage())->writeError('No Process');
-        }*/
-
-        /*if ($this->redirectSite == null) {
-            $this->redirectSite=new Site();
-        }*/
 
         $workflowStatus = null;
         $formStatus = null;
@@ -102,7 +93,29 @@ class ProcessView extends AbstractHtmlContainer
         $dropdown->redirectSite = clone($this->redirectSite);*/
 
 
-        $menu = new ProcessMenu($layout->col1);
+        /*$menu =  new HistoryProcessMenu($layout->col1);
+        $menu->process = $this->process;
+        $menu->workflowId = $this->workflowId;
+        $menu->formStatus = $formStatus;
+        $menu->workflowStatus = $workflowStatus;
+        $menu->site = clone($this->redirectSite);
+        $menu->site->addParameter(new WorkflowParameter($this->workflowId));
+
+
+        $menu = new ProcessMenu($layout->col1);  // new HistoryProcessMenu($layout->col1);
+        $menu->process = $this->process;
+        $menu->workflowId = $this->workflowId;
+        $menu->formStatus = $formStatus;
+        $menu->workflowStatus = $workflowStatus;
+        $menu->site = clone($this->redirectSite);
+        $menu->site->addParameter(new WorkflowParameter($this->workflowId));*/
+
+
+
+
+
+
+        $menu = new ProcessMenuOld($layout->col1);
         $menu->process = $this->process;
         $menu->workflowId = $this->workflowId;
         $menu->formStatus = $formStatus;

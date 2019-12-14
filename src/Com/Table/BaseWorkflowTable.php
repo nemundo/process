@@ -30,7 +30,7 @@ class BaseWorkflowTable extends AdminLabelValueTable
         $table->addLabelValue($model->status->label, $workflowRow->status->statusLabel);
         $table->addLabelValue($model->dateTime->label, $workflowRow->dateTime->getShortDateTimeFormat());
         $table->addLabelValue($model->user->label, $workflowRow->user->displayName);
-        $table->addLabelYesNoValue($model->workflowClosed->label, $workflowRow->user->displayName);
+        $table->addLabelYesNoValue($model->workflowClosed->label, $workflowRow->workflowClosed);
 
         $workflowItem = new WorkflowItem($this->workflowId);
 
