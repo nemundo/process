@@ -15,10 +15,10 @@ class ProcessCustomRow extends ProcessRow
 
     public function getProcess() {
 
-        $className = $this->processClass;
+        //$className = $this->contentType->getContentType();processClass;
 
         /** @var AbstractProcess $process */
-        $process = new $className();
+        $process =$this->contentType->getContentType();   //new $className();
 
         return $process;
 

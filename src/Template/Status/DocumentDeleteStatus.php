@@ -6,12 +6,12 @@ namespace Nemundo\Process\Template\Status;
 
 use Nemundo\Process\Status\AbstractStatus;
 use Nemundo\Process\Template\Data\Document\DocumentReader;
-use Nemundo\Process\Template\Form\DocumentForm;
+use Nemundo\Process\Template\Form\DocumentContentForm;
 
 class DocumentDeleteStatus extends AbstractStatus
 {
 
-    protected function loadStatus()
+    protected function loadContentType()
     {
 
         $this->label='Document Delete';

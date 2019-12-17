@@ -13,10 +13,12 @@ class StatusCustomRow extends StatusRow
 
     public function getStatus() {
 
-        $className = $this->statusClass;
+        //$className = $this->statusClass;
 
         /** @var AbstractStatus $status */
-        $status = new $className();
+        //$status = new $className();
+
+        $status = $this->contentType->getContentType();
 
         return $status;
 

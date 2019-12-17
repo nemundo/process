@@ -12,9 +12,14 @@ public $id;
 public $statusLabel;
 
 /**
-* @var \Nemundo\Model\Type\Text\TextType
+* @var \Nemundo\Model\Type\Id\IdType
 */
-public $statusClass;
+public $contentTypeId;
+
+/**
+* @var \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType
+*/
+public $contentType;
 
 protected function loadExternalType() {
 parent::loadExternalType();
@@ -35,12 +40,23 @@ $this->statusLabel->aliasFieldName = $this->statusLabel->tableName . "_" . $this
 $this->statusLabel->label = "Status Label";
 $this->addType($this->statusLabel);
 
-$this->statusClass = new \Nemundo\Model\Type\Text\TextType();
-$this->statusClass->fieldName = "status_class";
-$this->statusClass->tableName = $this->parentFieldName . "_" . $this->externalTableName;
-$this->statusClass->aliasFieldName = $this->statusClass->tableName . "_" . $this->statusClass->fieldName;
-$this->statusClass->label = "Status Class";
-$this->addType($this->statusClass);
+$this->contentTypeId = new \Nemundo\Model\Type\Id\IdType();
+$this->contentTypeId->fieldName = "content_type";
+$this->contentTypeId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->contentTypeId->aliasFieldName = $this->contentTypeId->tableName ."_".$this->contentTypeId->fieldName;
+$this->contentTypeId->label = "Content Type";
+$this->addType($this->contentTypeId);
 
+}
+public function loadContentType() {
+if ($this->contentType == null) {
+$this->contentType = new \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType(null, $this->parentFieldName . "_content_type");
+$this->contentType->fieldName = "content_type";
+$this->contentType->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->contentType->aliasFieldName = $this->contentType->tableName ."_".$this->contentType->fieldName;
+$this->contentType->label = "Content Type";
+$this->addType($this->contentType);
+}
+return $this;
 }
 }

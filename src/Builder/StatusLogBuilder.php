@@ -13,7 +13,7 @@ class StatusLogBuilder extends AbstractStatusLogBuilder
     /**
      * @var AbstractStatus
      */
-    public $status;
+    public $contentType;
 
     /**
      * @var DateTime
@@ -27,7 +27,7 @@ class StatusLogBuilder extends AbstractStatusLogBuilder
     public $dataId;
 
 
-    public function saveStatus()
+    public function saveItem()
     {
         // TODO: Implement saveStatus() method.
 

@@ -35,8 +35,8 @@ trait StatusFormTrait
     {
 
         $workflowBuilder = new StatusLogBuilder($this->workflowId);
-        $workflowBuilder->status = $this->status;
-        $workflowBuilder->workflowId = $this->workflowId;
+        $workflowBuilder->contentType = $this->status;
+        $workflowBuilder->parentId = $this->workflowId;
         $workflowBuilder->dataId = $this->dataId;
         $workflowBuilder->saveStatus();
 

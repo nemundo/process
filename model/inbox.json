@@ -1,0 +1,56 @@
+{
+    "app": "Inbox",
+    "name": "inbox",
+    "namespace": "Nemundo\\Process\\App\\Inbox",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "cdc347ca-6e5b-42b4-a764-cfd46e983d17",
+            "label": "Inbox",
+            "class_name": "Inbox",
+            "table_name": "inbox_inbox",
+            "namespace": "Nemundo\\Process\\App\\Inbox\\Data\\Inbox",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "user",
+                    "label": "User",
+                    "field_name": "user",
+                    "variable_name": "user",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "Content Type",
+                    "field_name": "content_type",
+                    "variable_name": "contentType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                },
+                {
+                    "type": "text",
+                    "label": "Data Id",
+                    "field_name": "data_id",
+                    "variable_name": "dataId",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "36"
+                },
+                {
+                    "type": "created_date_time",
+                    "label": "Date Time",
+                    "field_name": "date_time",
+                    "variable_name": "dateTime",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        }
+    ]
+}

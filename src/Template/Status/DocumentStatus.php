@@ -6,18 +6,20 @@ namespace Nemundo\Process\Template\Status;
 
 use Nemundo\Process\Status\AbstractStatus;
 use Nemundo\Process\Template\Data\Document\DocumentReader;
-use Nemundo\Process\Template\Form\DocumentForm;
+use Nemundo\Process\Template\Form\DocumentContentForm;
+use Nemundo\Process\Template\View\DocumentContentView;
 
 class DocumentStatus extends AbstractStatus
 {
 
-    protected function loadStatus()
+    protected function loadContentType()
     {
 
         $this->label='Document';
         $this->id ='bdd5f6d4-baf5-4950-a3aa-051dae4a4df5';
         $this->changeStatus=false;
-        $this->formClass=DocumentForm::class;
+        $this->formClass=DocumentContentForm::class;
+        $this->viewClass=DocumentContentView::class;
 
     }
 

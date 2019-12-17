@@ -1,0 +1,31 @@
+{
+    "app": "Wiki",
+    "name": "wiki",
+    "namespace": "Nemundo\\Process\\App\\Wiki",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "46154325-fc13-4a65-bc72-abacaf64cea7",
+            "label": "Wiki",
+            "class_name": "Wiki",
+            "table_name": "wiki_wiki",
+            "namespace": "Nemundo\\Process\\App\\Wiki\\Data\\Wiki",
+            "row_class_name": "",
+            "primary_index": "text_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Title",
+                    "field_name": "title",
+                    "variable_name": "title",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": []
+        }
+    ]
+}

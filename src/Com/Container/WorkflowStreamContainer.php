@@ -7,6 +7,7 @@ namespace Nemundo\Process\Com\Container;
 use Nemundo\Admin\Com\Widget\AdminWidget;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Process\Item\WorkflowItem;
+use Nemundo\Process\Status\AbstractStatus;
 
 class WorkflowStreamContainer extends AbstractWorkflowContainer
 {
@@ -16,21 +17,25 @@ class WorkflowStreamContainer extends AbstractWorkflowContainer
 
         foreach ((new WorkflowItem($this->workflowId))->getWorkflowLog() as $logRow) {
 
-            $status = $logRow->status->getStatus();
+            //$status = $logRow->status->getStatus();
+
+            /** @var AbstractStatus $status */
+            $status = $logRow->contentType->getContentType();
 
             if ($status->showLog) {
 
                 $widget = new AdminWidget($this);
 //            $widget->widgetTitle = $status->getLogText($logRow->dataId) . ' ' . $logRow->user->displayName . ' ' . $logRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat();
-                $widget->widgetTitle = $logRow->user->displayName . ' ' . $logRow->dateTime->getShortDateTimeLeadingZeroFormat();
+                $widget->widgetTitle = $logRow->userCreated->displayName . ' ' . $logRow->dateTimeCreated->getShortDateTimeLeadingZeroFormat();
 
                 $p = new Paragraph($widget);
-                $p->content = $status->getLogText($logRow->dataId);
+                $p->content = $status->getSubject($logRow->dataId);
 
                 if ($status->hasView()) {
                     $view = $status->getView($widget);
                     $view->dataId = $logRow->dataId;
-                    $view->workflowId= $this->workflowId;
+
+                    //$view->workflowId= $this->workflowId;
                 }
 
             }

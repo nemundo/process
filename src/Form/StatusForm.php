@@ -6,16 +6,15 @@ namespace Nemundo\Process\Form;
 
 use Nemundo\Process\Parameter\WorkflowParameter;
 
+// ProcessStatusForm
 class StatusForm extends AbstractStatusForm
 {
 
-    protected function onSave()
+    protected function onSubmit()
     {
 
         $this->saveWorkflowLog();
-
-
-        $this->redirectSite->addParameter(new WorkflowParameter($this->workflowId));
+        $this->redirectSite->addParameter(new WorkflowParameter($this->parentId));
 
 
         // TODO: Implement onSubmit() method.

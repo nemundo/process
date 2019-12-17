@@ -23,7 +23,7 @@ class CommentStatus extends AbstractStatus
         parent::__construct();
     }
 
-    protected function loadStatus()
+    protected function loadContentType()
     {
 
         $this->formClass = CommentForm::class;

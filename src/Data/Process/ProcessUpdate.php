@@ -15,7 +15,7 @@ public $process;
 /**
 * @var string
 */
-public $processClass;
+public $contentTypeId;
 
 public function __construct() {
 parent::__construct();
@@ -23,7 +23,7 @@ $this->model = new ProcessModel();
 }
 public function update() {
 $this->typeValueList->setModelValue($this->model->process, $this->process);
-$this->typeValueList->setModelValue($this->model->processClass, $this->processClass);
+$this->typeValueList->setModelValue($this->model->contentTypeId, $this->contentTypeId);
 parent::update();
 }
 }

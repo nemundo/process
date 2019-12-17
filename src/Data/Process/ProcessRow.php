@@ -24,13 +24,24 @@ public $process;
 /**
 * @var string
 */
-public $processClass;
+public $contentTypeId;
+
+/**
+* @var \Nemundo\Process\Row\ContentTypeCustomRow
+*/
+public $contentType;
 
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
 $this->process = $this->getModelValue($model->process);
-$this->processClass = $this->getModelValue($model->processClass);
+$this->contentTypeId = $this->getModelValue($model->contentTypeId);
+if ($model->contentType !== null) {
+$this->loadNemundoProcessContentDataContentTypeContentTypecontentTypeRow($model->contentType);
+}
+}
+private function loadNemundoProcessContentDataContentTypeContentTypecontentTypeRow($model) {
+$this->contentType = new \Nemundo\Process\Row\ContentTypeCustomRow($this->row, $model);
 }
 }

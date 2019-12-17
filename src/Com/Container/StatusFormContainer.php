@@ -48,8 +48,10 @@ class StatusFormContainer extends AbstractHtmlContainer
             if ($this->formStatus->checkUserVisibility()) {
 
                 $form = $this->formStatus->getForm($this);
-                $form->workflowId = $this->workflowId;
-                $form->status = $this->formStatus;
+                $form->contentType= $this->formStatus;
+                $form->parentId = $this->workflowId;
+                //$form->workflowId = $this->workflowId;
+                //$form->status = $this->formStatus;
                 $form->redirectSite =$this->site;
 
             } else {

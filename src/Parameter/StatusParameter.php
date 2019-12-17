@@ -21,7 +21,12 @@ class StatusParameter extends AbstractUrlParameter
 
         $status = null;
         if ($this->existsParameter()) {
-            $statusRow = (new StatusReader())->getRowById($this->getValue());
+
+            $statusReader = new StatusReader();
+            $statusReader->model->loadContentType();
+            $statusReader->filter->andEqual($statusReader->model->contentTypeId, $this->getValue());
+            //$statusRow = $statusReader->getRowById($this->getValue());
+            $statusRow=$statusReader->getRow();
             $status = $statusRow->getStatus();
         }
 

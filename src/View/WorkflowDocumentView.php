@@ -10,6 +10,7 @@ use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Html\Formatting\Strike;
 use Nemundo\Model\Join\ModelJoin;
+use Nemundo\Process\Content\Data\Content\ContentModel;
 use Nemundo\Process\Data\WorkflowLog\WorkflowLogModel;
 use Nemundo\Process\Parameter\WorkflowParameter;
 use Nemundo\Process\Template\Data\Document\DocumentReader;
@@ -46,8 +47,8 @@ class WorkflowDocumentView extends AbstractStatusView
 
         $documentReader = new DocumentReader();
 
-        $externalModel = new WorkflowLogModel();
-        $externalModel->loadUser();  // loadMitarbeiter();
+        $externalModel = new ContentModel();  // new WorkflowLogModel();
+        $externalModel->loadUserCreated();  // loadMitarbeiter();
 
         $join = new ModelJoin($documentReader);
         $join->type = $documentReader->model->id;
@@ -58,8 +59,12 @@ class WorkflowDocumentView extends AbstractStatusView
         //$dokumentReader->model->workflowLog->loadMitarbeiter();
         //$dokumentReader->filter->andEqual($dokumentReader->model->workflowLog->workflowId, $this->workflowId);
 
-        $documentReader->filter->andEqual($externalModel->workflowId, $this->workflowId);
-        $documentReader->filter->andEqual($externalModel->statusId, (new DocumentStatus())->id);
+  //      $documentReader->filter->andEqual($externalModel->workflowId, $this->workflowId);
+//        $documentReader->filter->andEqual($externalModel->statusId, (new DocumentStatus())->id);
+
+        $documentReader->filter->andEqual($externalModel->dataId, $this->workflowId);
+        $documentReader->filter->andEqual($externalModel->contentTypeId, (new DocumentStatus())->id);
+
 
 
         //$dokumentReader->addFieldByModel($externalModel);
@@ -77,8 +82,8 @@ class WorkflowDocumentView extends AbstractStatusView
                 $link->filename = $dokumentRow->document->getFilename();
                 $link->url = $dokumentRow->document->getUrl();
 
-                $row->addText(    $dokumentRow->getModelValue($externalModel->dateTime));
-                $row->addText(    $dokumentRow->getModelValue($externalModel->user->displayName));
+                $row->addText(    $dokumentRow->getModelValue($externalModel->dateTimeCreated));
+                $row->addText(    $dokumentRow->getModelValue($externalModel->userCreated->displayName));
 
 
              //   $row->addText($dokumentRow->workflowLog->mitarbeiter->login . ' ' . $dokumentRow->workflowLog->dateTime->getShortDateTimeFormat());

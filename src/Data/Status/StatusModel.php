@@ -12,16 +12,21 @@ public $id;
 public $statusLabel;
 
 /**
-* @var \Nemundo\Model\Type\Text\TextType
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
 */
-public $statusClass;
+public $contentTypeId;
+
+/**
+* @var \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType
+*/
+public $contentType;
 
 protected function loadModel() {
 $this->tableName = "process_status";
 $this->aliasTableName = "process_status";
 $this->label = "Status";
 
-$this->primaryIndex = new \Nemundo\Db\Index\TextIdPrimaryIndex();
+$this->primaryIndex = new \Nemundo\Db\Index\AutoIncrementIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
 $this->id->tableName = "process_status";
@@ -42,13 +47,22 @@ $this->statusLabel->label = "Status Label";
 $this->statusLabel->allowNullValue = false;
 $this->statusLabel->length = 255;
 
-$this->statusClass = new \Nemundo\Model\Type\Text\TextType($this);
-$this->statusClass->tableName = "process_status";
-$this->statusClass->fieldName = "status_class";
-$this->statusClass->aliasFieldName = "process_status_status_class";
-$this->statusClass->label = "Status Class";
-$this->statusClass->allowNullValue = false;
-$this->statusClass->length = 255;
+$this->contentTypeId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->contentTypeId->tableName = "process_status";
+$this->contentTypeId->fieldName = "content_type";
+$this->contentTypeId->aliasFieldName = "process_status_content_type";
+$this->contentTypeId->label = "Content Type";
+$this->contentTypeId->allowNullValue = false;
 
+}
+public function loadContentType() {
+if ($this->contentType == null) {
+$this->contentType = new \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType($this, "process_status_content_type");
+$this->contentType->tableName = "process_status";
+$this->contentType->fieldName = "content_type";
+$this->contentType->aliasFieldName = "process_status_content_type";
+$this->contentType->label = "Content Type";
+}
+return $this;
 }
 }

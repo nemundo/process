@@ -5,6 +5,8 @@ namespace Nemundo\Process\Setup;
 
 
 use Nemundo\Core\Base\AbstractBase;
+use Nemundo\Process\Content\AbstractContentType;
+use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Data\Process\Process;
 use Nemundo\Process\Data\Status\Status;
 use Nemundo\Process\Process\AbstractProcess;
@@ -15,11 +17,17 @@ class ProcessSetup extends AbstractBase
 
     public function addProcess(AbstractProcess $process) {
 
+
+        $setup = new ContentTypeSetup();
+        $setup->addContentType($process);
+
+
         $data = new Process();
         $data->updateOnDuplicate = true;
-        $data->id = $process->id;
+        //$data->id = $process->id;
         $data->process = $process->process;
-        $data->processClass=$process->getClassName();
+        $data->contentTypeId=$process->id;
+        //$data->processClass=$process->getClassName();
         $data->save();
 
 
@@ -39,7 +47,7 @@ class ProcessSetup extends AbstractBase
 
     }
 
-    private function addStatus(AbstractStatus $status)
+    private function addStatus(AbstractContentType $status)
     {
 
         $setup=new StatusSetup();

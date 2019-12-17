@@ -10,6 +10,7 @@ use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Process\Builder\AbstractStatusLogBuilder;
+use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Data\Workflow\WorkflowReader;
 use Nemundo\Process\Data\Workflow\WorkflowUpdate;
 use Nemundo\Process\Data\WorkflowLog\WorkflowLogCount;
@@ -103,13 +104,24 @@ class WorkflowItem extends AbstractBase
     {
 
 
-        $reader = new WorkflowLogReader();
-        $reader->model->loadStatus();
-        $reader->model->loadUser();
+        $reader = new ContentReader();
+        $reader->model->loadContentType();
+        $reader->model->loadUserCreated();
+        $reader->filter->andEqual($reader->model->parentId, $this->workflowId);
+        $reader->addOrder($reader->model->itemOrder);
 
-        $reader->filter->andEqual($reader->model->workflowId, $this->workflowId);
-        $reader->addOrder($reader->model->id);
         return $reader->getData();
+
+        /*
+                $reader = new WorkflowLogReader();
+                $reader->model->loadStatus();
+                $reader->model->loadUser();
+
+                $reader->filter->andEqual($reader->model->workflowId, $this->workflowId);
+                $reader->addOrder($reader->model->id);
+                return $reader->getData();*/
+
+
 
     }
 
@@ -144,10 +156,15 @@ class WorkflowItem extends AbstractBase
     private function getDateTime($sortOrder)
     {
 
-        $reader = new WorkflowLogReader();
+/*        $reader = new WorkflowLogReader();
         $reader->filter->andEqual($reader->model->workflowId, $this->workflowId);
         $reader->addOrder($reader->model->id, $sortOrder);
-        $dateTime = $reader->getRow()->dateTime;
+        $dateTime = $reader->getRow()->dateTime;*/
+
+        $reader = new ContentReader();
+        $reader->filter->andEqual($reader->model->parentId, $this->workflowId);
+        $reader->addOrder($reader->model->id, $sortOrder);
+        $dateTime = $reader->getRow()->dateTimeCreated;
 
         return $dateTime;
 

@@ -12,16 +12,21 @@ public $id;
 public $process;
 
 /**
-* @var \Nemundo\Model\Type\Text\TextType
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
 */
-public $processClass;
+public $contentTypeId;
+
+/**
+* @var \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType
+*/
+public $contentType;
 
 protected function loadModel() {
 $this->tableName = "process_process";
 $this->aliasTableName = "process_process";
 $this->label = "Process";
 
-$this->primaryIndex = new \Nemundo\Db\Index\TextIdPrimaryIndex();
+$this->primaryIndex = new \Nemundo\Db\Index\AutoIncrementIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
 $this->id->tableName = "process_process";
@@ -42,13 +47,26 @@ $this->process->label = "Process";
 $this->process->allowNullValue = false;
 $this->process->length = 255;
 
-$this->processClass = new \Nemundo\Model\Type\Text\TextType($this);
-$this->processClass->tableName = "process_process";
-$this->processClass->fieldName = "process_class";
-$this->processClass->aliasFieldName = "process_process_process_class";
-$this->processClass->label = "Process Class";
-$this->processClass->allowNullValue = false;
-$this->processClass->length = 255;
+$this->contentTypeId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->contentTypeId->tableName = "process_process";
+$this->contentTypeId->fieldName = "content_type";
+$this->contentTypeId->aliasFieldName = "process_process_content_type";
+$this->contentTypeId->label = "Content Type";
+$this->contentTypeId->allowNullValue = false;
 
+$index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
+$index->indexName = "content_type";
+$index->addType($this->contentTypeId);
+
+}
+public function loadContentType() {
+if ($this->contentType == null) {
+$this->contentType = new \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType($this, "process_process_content_type");
+$this->contentType->tableName = "process_process";
+$this->contentType->fieldName = "content_type";
+$this->contentType->aliasFieldName = "process_process_content_type";
+$this->contentType->label = "Content Type";
+}
+return $this;
 }
 }

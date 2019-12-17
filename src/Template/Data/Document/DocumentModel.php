@@ -21,7 +21,7 @@ $this->tableName = "process_template_document";
 $this->aliasTableName = "process_template_document";
 $this->label = "Document";
 
-$this->primaryIndex = new \Nemundo\Db\Index\UniqueIdPrimaryIndex();
+$this->primaryIndex = new \Nemundo\Db\Index\TextIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
 $this->id->tableName = "process_template_document";

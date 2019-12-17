@@ -5,8 +5,9 @@ namespace Nemundo\Process\Builder;
 
 
 use Nemundo\Core\Type\DateTime\DateTime;
+use Nemundo\Process\Item\AbstractWorkflowItem;
 
-abstract class AbstractMigrationWorkflowBuilder extends AbstractWorkflowBuilder
+abstract class AbstractMigrationWorkflowBuilder extends AbstractWorkflowItem
 {
 
     /**

@@ -15,7 +15,7 @@ public $statusLabel;
 /**
 * @var string
 */
-public $statusClass;
+public $contentTypeId;
 
 public function __construct() {
 parent::__construct();
@@ -23,7 +23,7 @@ $this->model = new StatusModel();
 }
 public function update() {
 $this->typeValueList->setModelValue($this->model->statusLabel, $this->statusLabel);
-$this->typeValueList->setModelValue($this->model->statusClass, $this->statusClass);
+$this->typeValueList->setModelValue($this->model->contentTypeId, $this->contentTypeId);
 parent::update();
 }
 }

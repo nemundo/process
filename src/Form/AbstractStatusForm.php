@@ -7,13 +7,14 @@ use Nemundo\Admin\Com\Form\AbstractAdminForm;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\Form\BootstrapForm;
 
+use Nemundo\Process\Builder\StatusLogBuilder;
 use Nemundo\Process\Status\AbstractStatus;
 
 // AbstractProcessStatusForm
-abstract class AbstractStatusForm extends AbstractAdminEditForm
+abstract class AbstractStatusForm extends AbstractContentForm  // ContenForAbstractAdminEditForm
 {
 
-    use StatusFormTrait;
+    //use StatusFormTrait;
 
     protected function loadContainer()
     {
@@ -28,6 +29,22 @@ abstract class AbstractStatusForm extends AbstractAdminEditForm
     {
     }
 
+
+    protected function saveWorkflowLog()
+    {
+
+        $workflowBuilder = new StatusLogBuilder($this->parentId);
+        $workflowBuilder->contentType = $this->contentType;
+        $workflowBuilder->parentId = $this->parentId;
+        $workflowBuilder->dataId = $this->dataId;
+
+        $workflowBuilder->saveItem();
+
+    }
+
+
+
+    /*
     protected function onUpdate()
     {
     }
@@ -35,7 +52,7 @@ abstract class AbstractStatusForm extends AbstractAdminEditForm
     protected function onSave()
     {
         $this->saveWorkflowLog();
-    }
+    }*/
 
 
 }

@@ -22,7 +22,7 @@ public $workflowNumber;
 public $subject;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalIdType
 */
 public $processId;
 
@@ -37,7 +37,7 @@ public $process;
 public $workflowClosed;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalIdType
 */
 public $statusId;
 
@@ -112,7 +112,7 @@ $this->subject->label = "Betreff";
 $this->subject->allowNullValue = false;
 $this->subject->length = 255;
 
-$this->processId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->processId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->processId->tableName = "process_workflow";
 $this->processId->fieldName = "process";
 $this->processId->aliasFieldName = "process_workflow_process";
@@ -126,7 +126,7 @@ $this->workflowClosed->aliasFieldName = "process_workflow_workflow_closed";
 $this->workflowClosed->label = "Workflow Closed";
 $this->workflowClosed->allowNullValue = false;
 
-$this->statusId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->statusId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->statusId->tableName = "process_workflow";
 $this->statusId->fieldName = "status";
 $this->statusId->aliasFieldName = "process_workflow_status";

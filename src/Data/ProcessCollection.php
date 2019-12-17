@@ -6,6 +6,5 @@ protected function loadCollection() {
 $this->addModel(new \Nemundo\Process\Data\Process\ProcessModel());
 $this->addModel(new \Nemundo\Process\Data\Status\StatusModel());
 $this->addModel(new \Nemundo\Process\Data\Workflow\WorkflowModel());
-$this->addModel(new \Nemundo\Process\Data\WorkflowLog\WorkflowLogModel());
 }
 }

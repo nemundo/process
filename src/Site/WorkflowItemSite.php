@@ -37,8 +37,11 @@ class WorkflowItemSite extends AbstractSite
         $nav = new AdminNavigation($page);
         $nav->site = ProcessSite::$site;
 
+
+        //
+
         $view = new ProcessView($page);
-        $view->workflowId = (new WorkflowParameter())->getValue();
+        $view->dataId = (new WorkflowParameter())->getValue();
         $view->redirectSite = WorkflowItemSite::$site;
         $view->redirectSite->addParameter(new WorkflowParameter());
 

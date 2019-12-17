@@ -12,7 +12,7 @@
             "table_name": "process_process",
             "namespace": "Nemundo\\Process\\Data\\Process",
             "row_class_name": "Nemundo\\Process\\Row\\ProcessCustomRow",
-            "primary_index": "text_id",
+            "primary_index": "auto_increment",
             "is_deleted": false,
             "type": [
                 {
@@ -30,11 +30,28 @@
                     "field_name": "process_class",
                     "variable_name": "processClass",
                     "allow_null": false,
-                    "is_deleted": false,
+                    "is_deleted": true,
                     "length": "255"
+                },
+                {
+                    "type": "external",
+                    "label": "Content Type",
+                    "field_name": "content_type",
+                    "variable_name": "contentType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
                 }
             ],
-            "index": []
+            "index": [
+                {
+                    "index_name": "content_type",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "content_type"
+                    ]
+                }
+            ]
         },
         {
             "template": "default",
@@ -44,7 +61,7 @@
             "table_name": "process_status",
             "namespace": "Nemundo\\Process\\Data\\Status",
             "row_class_name": "Nemundo\\Process\\Row\\StatusCustomRow",
-            "primary_index": "text_id",
+            "primary_index": "auto_increment",
             "is_deleted": false,
             "type": [
                 {
@@ -62,8 +79,17 @@
                     "field_name": "status_class",
                     "variable_name": "statusClass",
                     "allow_null": false,
-                    "is_deleted": false,
+                    "is_deleted": true,
                     "length": "255"
+                },
+                {
+                    "type": "external",
+                    "label": "Content Type",
+                    "field_name": "content_type",
+                    "variable_name": "contentType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
                 }
             ],
             "index": []
@@ -183,7 +209,7 @@
             "namespace": "Nemundo\\Process\\Data\\WorkflowLog",
             "row_class_name": "",
             "primary_index": "auto_increment",
-            "is_deleted": false,
+            "is_deleted": true,
             "type": [
                 {
                     "type": "external",

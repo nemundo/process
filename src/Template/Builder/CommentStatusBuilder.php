@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Template\Builder;
 
 
+use App\App\IssueTracker\Workflow\Status\AnalyseStatus;
 use Nemundo\Process\Builder\AbstractStatusLogBuilder;
 use Nemundo\Process\Template\Data\LargeText\LargeText;
 use Nemundo\Process\Template\Status\CommentStatus;
@@ -13,14 +14,15 @@ class CommentStatusBuilder extends AbstractStatusLogBuilder
 
     public $comment;
 
-    public function saveStatus()
+    public function saveItem()
     {
 
-        $this->status = new CommentStatus();
+        //$this->contentType =new AnalyseStatus();  // new CommentStatus();
 
         $data = new LargeText();
+        $data->id=$this->dataId;
         $data->largeText = $this->comment;
-        $this->dataId = $data->save();
+        $data->save();
 
         $this->saveWorkflowLog();
 

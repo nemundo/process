@@ -6,35 +6,13 @@
     "model": [
         {
             "template": "default",
-            "model_id": "ff3de67d-0ea0-460d-b7d0-f4bad9ccc83b",
-            "label": "User Assignment Log",
-            "class_name": "UserAssignmentLog",
-            "table_name": "template_user_assignment_log",
-            "namespace": "Nemundo\\Process\\Template\\Data\\UserAssignmentLog",
-            "row_class_name": "",
-            "primary_index": "auto_increment",
-            "is_deleted": false,
-            "type": [
-                {
-                    "type": "user",
-                    "label": "User",
-                    "field_name": "user",
-                    "variable_name": "user",
-                    "allow_null": false,
-                    "is_deleted": false
-                }
-            ],
-            "index": []
-        },
-        {
-            "template": "default",
             "model_id": "e9bca558-8620-4e91-aa0a-934b50da05d3",
             "label": "Deadline Change",
             "class_name": "DeadlineChange",
             "table_name": "template_deadline_change",
             "namespace": "Nemundo\\Process\\Template\\Data\\DeadlineChange",
             "row_class_name": "",
-            "primary_index": "auto_increment",
+            "primary_index": "text_id",
             "is_deleted": false,
             "type": [
                 {
@@ -56,7 +34,7 @@
             "table_name": "process_template_document",
             "namespace": "Nemundo\\Process\\Template\\Data\\Document",
             "row_class_name": "",
-            "primary_index": "unique_id",
+            "primary_index": "text_id",
             "is_deleted": false,
             "type": [
                 {
@@ -87,7 +65,7 @@
             "table_name": "process_template_large_text",
             "namespace": "Nemundo\\Process\\Template\\Data\\LargeText",
             "row_class_name": "",
-            "primary_index": "unique_id",
+            "primary_index": "text_id",
             "is_deleted": false,
             "type": [
                 {
@@ -95,6 +73,28 @@
                     "label": "Large Text",
                     "field_name": "large_text",
                     "variable_name": "largeText",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "ff3de67d-0ea0-460d-b7d0-f4bad9ccc83b",
+            "label": "User Assignment Log",
+            "class_name": "UserAssignmentLog",
+            "table_name": "template_user_assignment_log",
+            "namespace": "Nemundo\\Process\\Template\\Data\\UserAssignmentLog",
+            "row_class_name": "",
+            "primary_index": "text_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "user",
+                    "label": "User",
+                    "field_name": "user",
+                    "variable_name": "user",
                     "allow_null": false,
                     "is_deleted": false
                 }

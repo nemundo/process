@@ -12,9 +12,14 @@ public $id;
 public $process;
 
 /**
-* @var \Nemundo\Model\Type\Text\TextType
+* @var \Nemundo\Model\Type\Id\IdType
 */
-public $processClass;
+public $contentTypeId;
+
+/**
+* @var \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType
+*/
+public $contentType;
 
 protected function loadExternalType() {
 parent::loadExternalType();
@@ -35,12 +40,23 @@ $this->process->aliasFieldName = $this->process->tableName . "_" . $this->proces
 $this->process->label = "Process";
 $this->addType($this->process);
 
-$this->processClass = new \Nemundo\Model\Type\Text\TextType();
-$this->processClass->fieldName = "process_class";
-$this->processClass->tableName = $this->parentFieldName . "_" . $this->externalTableName;
-$this->processClass->aliasFieldName = $this->processClass->tableName . "_" . $this->processClass->fieldName;
-$this->processClass->label = "Process Class";
-$this->addType($this->processClass);
+$this->contentTypeId = new \Nemundo\Model\Type\Id\IdType();
+$this->contentTypeId->fieldName = "content_type";
+$this->contentTypeId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->contentTypeId->aliasFieldName = $this->contentTypeId->tableName ."_".$this->contentTypeId->fieldName;
+$this->contentTypeId->label = "Content Type";
+$this->addType($this->contentTypeId);
 
+}
+public function loadContentType() {
+if ($this->contentType == null) {
+$this->contentType = new \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType(null, $this->parentFieldName . "_content_type");
+$this->contentType->fieldName = "content_type";
+$this->contentType->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->contentType->aliasFieldName = $this->contentType->tableName ."_".$this->contentType->fieldName;
+$this->contentType->label = "Content Type";
+$this->addType($this->contentType);
+}
+return $this;
 }
 }

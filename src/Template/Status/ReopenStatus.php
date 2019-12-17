@@ -9,7 +9,7 @@ use Nemundo\Process\Status\AbstractStatus;
 class ReopenStatus extends AbstractStatus
 {
 
-    protected function loadStatus()
+    protected function loadContentType()
     {
 
         //$this->changeStatus=true;

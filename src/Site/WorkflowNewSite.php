@@ -45,7 +45,9 @@ class WorkflowNewSite extends AbstractSite
 
         $processId = $processParameter->getValue();
 
-        $processRow = (new ProcessReader())->getRowById($processId);
+        $processReader = new ProcessReader();
+        $processReader->model->loadContentType();
+        $processRow = $processReader->getRowById($processId);
         $process = $processRow->getProcess();
 
         $title = new AdminTitle($page);

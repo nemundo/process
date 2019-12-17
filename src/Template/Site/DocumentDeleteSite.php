@@ -43,7 +43,7 @@ class DocumentDeleteSite extends AbstractDeleteIconSite
 
 
         $builder = new StatusLogBuilder($workflowId);
-        $builder->status = new DocumentDeleteStatus();
+        $builder->contentType = new DocumentDeleteStatus();
         $builder->dataId = $documentId;
         $builder->saveStatus();
 

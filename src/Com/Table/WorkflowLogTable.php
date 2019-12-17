@@ -29,12 +29,13 @@ class WorkflowLogTable extends AdminTable
 
         foreach ((new WorkflowItem($this->workflowId))->getWorkflowLog() as $logRow) {
 
-            $status = $logRow->status->getStatus();
+//            $status = $logRow->status->getStatus();
+            $status = $logRow->contentType->getContentType();
 
             if ($status->showLog) {
                 $row = new TableRow($this);
-                $row->addText($status->getLogText($logRow->dataId));
-                $row->addText($logRow->user->displayName . ' ' . $logRow->dateTime->getShortDateTimeLeadingZeroFormat());
+                $row->addText($status->getSubject($logRow->dataId));
+                $row->addText($logRow->userCreated->displayName . ' ' . $logRow->dateTimeCreated->getShortDateTimeLeadingZeroFormat());
             }
 
         }

@@ -1,0 +1,39 @@
+{
+    "app": "News",
+    "name": "news",
+    "namespace": "Nemundo\\Process\\App\\News",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "3e62cb8f-30ec-46fb-8de8-d43ea25f845e",
+            "label": "News",
+            "class_name": "News",
+            "table_name": "news_news",
+            "namespace": "Nemundo\\Process\\App\\News\\Data\\News",
+            "row_class_name": "",
+            "primary_index": "text_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Title",
+                    "field_name": "title",
+                    "variable_name": "title",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "large_text",
+                    "label": "Teaser",
+                    "field_name": "teaser",
+                    "variable_name": "teaser",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        }
+    ]
+}

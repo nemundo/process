@@ -20,12 +20,12 @@ class DocumentStatusBuilder extends AbstractStatusLogBuilder
     public function saveStatus()
     {
 
-        $this->status=new DocumentStatus();
+        $this->contentType=new DocumentStatus();
 
         $data = new Document();
         $data->active=true;
         $data->document->fromFileRequest($this->fileRequest);
-        $data->workflowId = $this->workflowId;
+        $data->workflowId = $this->parentId;
         $this->dataId=  $data->save();
 
         $this->saveWorkflowLog();
