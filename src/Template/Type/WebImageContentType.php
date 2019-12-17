@@ -4,7 +4,7 @@
 namespace Nemundo\Process\Template\Type;
 
 
-use Nemundo\Process\Content\AbstractContentType;
+use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Form\ContentForm;
 use Nemundo\Process\Template\View\WebImageContentView;
 

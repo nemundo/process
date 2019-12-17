@@ -5,7 +5,7 @@ namespace Nemundo\Process\Content\Setup;
 
 
 use Nemundo\Core\Base\AbstractBase;
-use Nemundo\Process\Content\AbstractContentType;
+use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Content\Data\ContentType\ContentType;
 
 class ContentTypeSetup extends AbstractBase

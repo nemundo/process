@@ -1,7 +1,7 @@
 {
-    "app": "Process",
+    "app": "Workflow",
     "name": "process",
-    "namespace": "Nemundo\\Process",
+    "namespace": "Nemundo\\Process\\Workflow",
     "is_deleted": false,
     "model": [
         {
@@ -10,8 +10,8 @@
             "label": "Process",
             "class_name": "Process",
             "table_name": "process_process",
-            "namespace": "Nemundo\\Process\\Data\\Process",
-            "row_class_name": "Nemundo\\Process\\Row\\ProcessCustomRow",
+            "namespace": "Nemundo\\Process\\Workflow\\Data\\Process",
+            "row_class_name": "Nemundo\\Process\\Workflow\\Row\\ProcessCustomRow",
             "primary_index": "auto_increment",
             "is_deleted": false,
             "type": [
@@ -59,8 +59,8 @@
             "label": "Status",
             "class_name": "Status",
             "table_name": "process_status",
-            "namespace": "Nemundo\\Process\\Data\\Status",
-            "row_class_name": "Nemundo\\Process\\Row\\StatusCustomRow",
+            "namespace": "Nemundo\\Process\\Workflow\\Data\\Status",
+            "row_class_name": "Nemundo\\Process\\Workflow\\Row\\StatusCustomRow",
             "primary_index": "auto_increment",
             "is_deleted": false,
             "type": [
@@ -100,8 +100,8 @@
             "label": "Workflow",
             "class_name": "Workflow",
             "table_name": "process_workflow",
-            "namespace": "Nemundo\\Process\\Data\\Workflow",
-            "row_class_name": "Nemundo\\Process\\Row\\WorkflowCustomRow",
+            "namespace": "Nemundo\\Process\\Workflow\\Data\\Workflow",
+            "row_class_name": "Nemundo\\Process\\Workflow\\Row\\WorkflowCustomRow",
             "primary_index": "unique_id",
             "is_deleted": false,
             "type": [

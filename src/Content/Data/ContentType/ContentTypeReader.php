@@ -11,7 +11,7 @@ parent::__construct();
 $this->model = new ContentTypeModel();
 }
 /**
-* @return \Nemundo\Process\Row\ContentTypeCustomRow[]
+* @return \Nemundo\Process\Content\Row\ContentTypeCustomRow[]
 */
 public function getData() {
 $this->addFieldByModel($this->model);
@@ -24,7 +24,7 @@ $list[] = $row;
 return $list;
 }
 /**
-* @return \Nemundo\Process\Row\ContentTypeCustomRow
+* @return \Nemundo\Process\Content\Row\ContentTypeCustomRow
 */
 public function getRow() {
 $this->addFieldByModel($this->model);
@@ -34,13 +34,13 @@ $row = $this->getModelRow($dataRow);
 return $row;
 }
 /**
-* @return \Nemundo\Process\Row\ContentTypeCustomRow
+* @return \Nemundo\Process\Content\Row\ContentTypeCustomRow
 */
 public function getRowById($id) {
 return parent::getRowById($id);
 }
 private function getModelRow($dataRow) {
-$row = new \Nemundo\Process\Row\ContentTypeCustomRow($dataRow, $this->model);
+$row = new \Nemundo\Process\Content\Row\ContentTypeCustomRow($dataRow, $this->model);
 $row->model = $this->model;
 return $row;
 }

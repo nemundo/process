@@ -4,7 +4,7 @@
 namespace Nemundo\Process\Template\Status;
 
 
-use Nemundo\Process\Status\AbstractStatus;
+use Nemundo\Process\Workflow\Content\Status\AbstractStatus;
 
 class UsergroupAssignmentStatus extends AbstractStatus
 {

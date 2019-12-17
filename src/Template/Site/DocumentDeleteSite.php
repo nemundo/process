@@ -5,7 +5,7 @@ namespace Nemundo\Process\Template\Site;
 
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\Builder\StatusLogBuilder;
-use Nemundo\Process\Parameter\WorkflowParameter;
+use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
 use Nemundo\Process\Template\Data\Document\DocumentUpdate;
 use Nemundo\Process\Template\Parameter\DocumentParameter;
 use Nemundo\Process\Template\Status\DocumentDeleteStatus;

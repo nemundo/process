@@ -3,15 +3,15 @@
 namespace Nemundo\Process\App\Inbox\Site;
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
+use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Block\Div;
 use Nemundo\Html\Block\Hr;
-use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Inbox\Data\Inbox\InboxReader;
-use Nemundo\Process\Content\Data\Content\ContentReader;
+use Nemundo\User\Com\ListBox\UserListBox;
 use Nemundo\Web\Site\AbstractSite;
 
 class InboxSite extends AbstractSite
@@ -26,6 +26,13 @@ class InboxSite extends AbstractSite
     {
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
+
+
+        $form = new SearchForm($page);
+
+        $userListbox = new UserListBox($form);
+        $userListbox->searchItem = true;
+        $userListbox->submitOnChange = true;
 
         $layout = new BootstrapTwoColumnLayout($page);
 
@@ -43,11 +50,11 @@ class InboxSite extends AbstractSite
         $header->addText('Message');
         $header->addText('Date/Time');
 
-
         $reader = new InboxReader();
         $reader->model->loadContentType();
         $reader->model->loadUser();
-        // $reader->filter->andEqual($reader->model->userId,(new UserItemType())->userId);
+        $reader->filter->andEqual($reader->model->userId, $userListbox->getValue());
+
         foreach ($reader->getData() as $inboxRow) {
 
             $contentType = $inboxRow->contentType->getContentType();
@@ -85,10 +92,9 @@ class InboxSite extends AbstractSite
             }
 
 
-
             if ($contentType->hasView()) {
                 $view = $contentType->getView($stream);
-                $view->dataId= $inboxRow->dataId;
+                $view->dataId = $inboxRow->dataId;
 
                 //$p = new Paragraph($stream);
                 //$p->content = $contentTypeSubject->getClassName();

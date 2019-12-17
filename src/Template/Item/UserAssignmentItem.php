@@ -5,16 +5,19 @@ namespace Nemundo\Process\Template\Item;
 
 
 use Nemundo\Core\Random\UniqueId;
-use Nemundo\Process\Data\Workflow\WorkflowUpdate;
-use Nemundo\Process\Item\AbstractContentItem;
-use Nemundo\Process\Item\AbstractStatusItem;
+
+use Nemundo\Process\Content\Item\AbstractContentItem;
 use Nemundo\Process\Template\Data\UserAssignmentLog\UserAssignmentLog;
 use Nemundo\Process\Template\Status\UserAssignmentStatus;
+use Nemundo\Process\Workflow\Data\Workflow\WorkflowUpdate;
 use Nemundo\Workflow\App\Identification\Model\Identification;
 
 class UserAssignmentItem extends AbstractContentItem
 {
 
+    /**
+     * @var string
+     */
     public $userId;
 
     public function saveItem()

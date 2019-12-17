@@ -4,7 +4,7 @@
 namespace Nemundo\Process\Template\Type;
 
 
-use Nemundo\Process\Content\AbstractContentType;
+use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Template\Form\DocumentContentForm;
 use Nemundo\Process\Template\View\DocumentContentView;
 
@@ -19,7 +19,6 @@ class DocumentContentType extends AbstractContentType
         $this->formClass = DocumentContentForm::class;
         $this->viewClass = DocumentContentView::class;
 
-        // TODO: Implement loadContentType() method.
     }
 
 }

@@ -91,16 +91,16 @@ class WikiSite extends AbstractSite
             $dropdown->redirectSite = WikiSite::$site;
             $dropdown->redirectSite->addParameter(new WikiParameter());
             $dropdown->addContentType(new LargeTextContentType());
-            $dropdown->addContentType(new ToDoProcess());
+            /*$dropdown->addContentType(new ToDoProcess());
             $dropdown->addContentType(new IssueTrackerProcess());
-            $dropdown->addContentType(new PhotoContentType());
+            $dropdown->addContentType(new PhotoContentType());*/
             $dropdown->addContentType(new WebImageContentType());
 
             $dropdown = new ContentDropdown($layout->col2);
             $dropdown->redirectSite = WikiAddSite::$site;
             $dropdown->redirectSite->addParameter(new WikiParameter());
             //$dropdown->addContentTypeFilter(new ToDoProcess());
-            $dropdown->addContentTypeFilter(new IssueTrackerProcess());
+            //$dropdown->addContentTypeFilter(new IssueTrackerProcess());
 
 
             $contentTypeParameter = new ContentTypeParameter();

@@ -4,7 +4,7 @@
 namespace Nemundo\Process\Template\Status;
 
 
-use Nemundo\Process\Status\AbstractStatus;
+use Nemundo\Process\Workflow\Content\Status\AbstractStatus;
 use Nemundo\Process\Template\Data\Document\DocumentReader;
 use Nemundo\Process\Template\Form\DocumentContentForm;
 use Nemundo\Process\Template\View\DocumentContentView;

@@ -4,7 +4,7 @@
 namespace Nemundo\Process\Form;
 
 
-use Nemundo\Process\Parameter\WorkflowParameter;
+use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
 
 // ProcessStatusForm
 class StatusForm extends AbstractStatusForm

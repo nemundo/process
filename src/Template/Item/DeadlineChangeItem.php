@@ -4,9 +4,10 @@
 namespace Nemundo\Process\Template\Item;
 
 
-use Nemundo\Process\Item\AbstractStatusItem;
 
-class DeadlineChangeItem extends AbstractStatusItem
+use Nemundo\Process\Content\Item\AbstractContentItem;
+
+class DeadlineChangeItem extends AbstractContentItem
 {
 
     public function createStatusItem()

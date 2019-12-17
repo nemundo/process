@@ -11,9 +11,9 @@ use Nemundo\Process\App\Wiki\Data\WikiCollection;
 use Nemundo\Process\Content\Data\ContentCollection;
 use Nemundo\Process\Data\ProcessCollection;
 use Nemundo\Process\Template\Data\TemplateCollection;
-use Nemundo\Project\Install\AbstractUninnstall;
+use Nemundo\Project\Install\AbstractUninstall;
 
-class ProcessUninstall extends AbstractUninnstall
+class ProcessUninstall extends AbstractUninstall
 {
 
     public function uninstall()

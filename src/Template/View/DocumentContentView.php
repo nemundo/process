@@ -5,9 +5,8 @@ namespace Nemundo\Process\Template\View;
 
 
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
+use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Template\Data\Document\DocumentReader;
-use Nemundo\Process\View\AbstractContentView;
-use Nemundo\Process\View\AbstractStatusView;
 
 class DocumentContentView extends AbstractContentView
 {

@@ -5,7 +5,8 @@ namespace Nemundo\Process\Site;
 
 
 use Nemundo\Process\App\Inbox\Site\InboxSite;
-use Nemundo\Process\App\Wiki\Site\WikiSite;
+use Nemundo\Process\Content\Site\ContentSite;
+use Nemundo\Process\Workflow\Site\WorkflowSite;
 use Nemundo\Web\Site\AbstractSite;
 
 
@@ -23,14 +24,15 @@ class ProcessSite extends AbstractSite
         $this->title = 'Process';
         $this->url = 'process';
 
-
         ProcessSite::$site = $this;
 
-
-        new WorkflowSite($this);
         new ContentSite($this);
+        new WorkflowSite($this);
         new InboxSite($this);
-        new WikiSite($this);
+
+
+        /* new InboxSite($this);
+         new WikiSite($this);*/
 
 
     }

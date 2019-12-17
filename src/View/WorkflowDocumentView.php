@@ -12,7 +12,7 @@ use Nemundo\Html\Formatting\Strike;
 use Nemundo\Model\Join\ModelJoin;
 use Nemundo\Process\Content\Data\Content\ContentModel;
 use Nemundo\Process\Data\WorkflowLog\WorkflowLogModel;
-use Nemundo\Process\Parameter\WorkflowParameter;
+use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
 use Nemundo\Process\Template\Data\Document\DocumentReader;
 use Nemundo\Process\Template\Parameter\DocumentParameter;
 use Nemundo\Process\Template\Site\DocumentDeleteSite;
