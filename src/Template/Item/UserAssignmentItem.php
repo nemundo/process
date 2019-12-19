@@ -10,7 +10,9 @@ use Nemundo\Process\Content\Item\AbstractContentItem;
 use Nemundo\Process\Template\Data\UserAssignmentLog\UserAssignmentLog;
 use Nemundo\Process\Template\Status\UserAssignmentProcessStatus;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowUpdate;
+use Nemundo\Workflow\App\Assignment\Builder\AssignmentBuilder;
 use Nemundo\Workflow\App\Identification\Model\Identification;
+use Schleuniger\App\Org\Identification\MitarbeiterIdentificationType;
 
 
 // UserAssignmentProcessItem
@@ -21,6 +23,9 @@ class UserAssignmentItem extends AbstractContentItem
      * @var string
      */
     public $userId;
+
+
+
 
     public function saveItem()
     {
@@ -42,6 +47,19 @@ class UserAssignmentItem extends AbstractContentItem
         $update->updateById($this->parentId);
 
         $this->sendToInbox($this->userId);
+
+
+        //
+
+        /*
+        $builder = new AssignmentBuilder($this->parentContentType);
+        $builder->archiveAssignment();
+        $builder->assignment->identificationType = new MitarbeiterIdentificationType();
+        $builder->assignment->identificationId = $this->userId;
+        $builder->message = 'ECR Zuweisung';
+        $builder->createAssignment();*/
+
+
 
     }
 
