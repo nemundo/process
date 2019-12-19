@@ -7,7 +7,7 @@ namespace Nemundo\Process\App\Wiki\Content;
 use Nemundo\Process\App\Wiki\Data\Wiki\WikiReader;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\App\Wiki\Site\WikiSite;
-use Nemundo\Process\Content\AbstractContentType;
+use Nemundo\Process\Content\Type\AbstractContentType;
 
 class WikiPageContentType extends AbstractContentType
 {
@@ -26,7 +26,7 @@ class WikiPageContentType extends AbstractContentType
     {
 
         $wikiRow = (new WikiReader())->getRowById($dataId);
-        $subject = $wikiRow->title;
+        $subject = 'Wiki: '. $wikiRow->title;
 
         return $subject;
 

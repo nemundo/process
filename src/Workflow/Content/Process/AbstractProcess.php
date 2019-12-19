@@ -7,8 +7,8 @@ namespace Nemundo\Process\Workflow\Content\Process;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
-use Nemundo\Process\View\BaseView;
-use Nemundo\Process\Workflow\Content\Status\AbstractStatus;
+use Nemundo\Process\Workflow\Com\Container\BaseWorkflowContainer;
+use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Content\View\ProcessView;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowReader;
 use Nemundo\Process\Workflow\Site\WorkflowItemSite;
@@ -48,12 +48,12 @@ abstract class AbstractProcess extends AbstractContentType
 
 
     /**
-     * @var AbstractStatus
+     * @var AbstractProcessStatus
      */
     public $startStatus;
 
     /**
-     * @var AbstractStatus[]
+     * @var AbstractProcessStatus[]
      */
     private $statusList = [];
 
@@ -67,7 +67,7 @@ abstract class AbstractProcess extends AbstractContentType
         parent::__construct();
 
         $this->viewClass = ProcessView::class;
-        $this->baseViewClass = BaseView::class;
+        $this->baseViewClass = BaseWorkflowContainer::class;
         $this->viewSite = WorkflowItemSite::$site;
         $this->parameterClass = WorkflowParameter::class;
 
@@ -101,7 +101,7 @@ abstract class AbstractProcess extends AbstractContentType
 
 
     /**
-     * @return AbstractStatus[]
+     * @return AbstractProcessStatus[]
      */
     public function getProcessStatusList()
     {
@@ -112,7 +112,7 @@ abstract class AbstractProcess extends AbstractContentType
     }
 
 
-    private function getProcessNextStatus(AbstractStatus $status, $statusList)
+    private function getProcessNextStatus(AbstractProcessStatus $status, $statusList)
     {
 
         $statusList[] = $status;

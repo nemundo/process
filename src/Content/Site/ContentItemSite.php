@@ -5,8 +5,10 @@ namespace Nemundo\Process\Content\Site;
 
 
 use Nemundo\Admin\Com\Button\AdminIconSiteButton;
+use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Admin\Com\Title\AdminTitle;
+use Nemundo\Core\Type\Number\YesNo;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Block\Div;
 use Nemundo\Package\Bootstrap\Dropdown\BootstrapSiteDropdown;
@@ -58,13 +60,41 @@ class ContentItemSite extends AbstractSite
         $view = $contentType->getView($page);
         $view->dataId = $dataId;
 
+        $contentItem = $contentType->getItem($dataId);
+        $table = new AdminLabelValueTable($page);
+
+        $table->addLabelYesNoValue('Has Parent', $contentItem->hasParent());
+
+        if ($contentItem->hasParent()) {
+
+            $parentContentType = $contentItem->getParentContentType();
+            //$parentContentItem = $contentItem->getParentContentItem();
+            $table->addLabelValue('Parent Content Type', $parentContentType->getClassName());
+            $table->addLabelValue('Parent Subject', $parentContentType->getSubject($contentRow->parentId));
+            $table->addLabelSite('Parent Subject', $parentContentType->getViewSite($contentRow->parentId));
+
+
+        }
+
+
+
+
+
+
+
+
+
         $btn = new AdminIconSiteButton($page);
         $btn->site=ContentEditSite::$site;
         $btn->site->addParameter(new DataIdParameter());
 
+        $btn = new AdminIconSiteButton($page);
+        $btn->site=ContentDeleteSite::$site;
+        $btn->site->addParameter(new DataIdParameter());
+
+
 
         $dropdown = new BootstrapSiteDropdown($page);
-
 
         $reader = new ContentTypeReader();
         foreach ($reader->getData() as $contentTypeRow) {
@@ -99,7 +129,6 @@ class ContentItemSite extends AbstractSite
         $reader->addOrder($reader->model->itemOrder);
         foreach ($reader->getData() as $contentRow) {
 
-
             $subtitle = new AdminSubtitle($page);
             $subtitle->content = $contentRow->dateTimeCreated->getShortDateTimeFormat();
 
@@ -110,9 +139,7 @@ class ContentItemSite extends AbstractSite
             $view = $contentRow->contentType->getContentType()->getView($div);
             $view->dataId = $contentRow->dataId;
 
-
         }
-
 
         $page->render();
 

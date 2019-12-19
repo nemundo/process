@@ -8,10 +8,12 @@ use Nemundo\Core\Random\UniqueId;
 
 use Nemundo\Process\Content\Item\AbstractContentItem;
 use Nemundo\Process\Template\Data\UserAssignmentLog\UserAssignmentLog;
-use Nemundo\Process\Template\Status\UserAssignmentStatus;
+use Nemundo\Process\Template\Status\UserAssignmentProcessStatus;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowUpdate;
 use Nemundo\Workflow\App\Identification\Model\Identification;
 
+
+// UserAssignmentProcessItem
 class UserAssignmentItem extends AbstractContentItem
 {
 
@@ -23,7 +25,7 @@ class UserAssignmentItem extends AbstractContentItem
     public function saveItem()
     {
 
-        $this->contentType=new UserAssignmentStatus();
+        $this->contentType=new UserAssignmentProcessStatus();
 
         $assignment = new Identification();
         $assignment->setUserIdentification($this->userId);

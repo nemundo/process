@@ -5,8 +5,8 @@ namespace Nemundo\Process\Content\Script;
 
 
 use Nemundo\App\Script\Type\AbstractConsoleScript;
-use Nemundo\Process\Install\ProcessInstall;
-use Nemundo\Process\Install\ProcessUninstall;
+use Nemundo\Process\Content\Install\ContentInstall;
+use Nemundo\Process\Content\Install\ContentUninstall;
 
 class ContentCleanScript extends AbstractConsoleScript
 {
@@ -20,8 +20,9 @@ class ContentCleanScript extends AbstractConsoleScript
     public function run()
     {
 
-        (new ProcessUninstall())->uninstall();
-        (new ProcessInstall())->install();
+        (new ContentUninstall())->uninstall();
+        (new ContentInstall())->install();
+
     }
 
 }

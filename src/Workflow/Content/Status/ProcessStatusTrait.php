@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Workflow\Content\Status;
 
 
+use Nemundo\Core\Language\Translation;
 use Nemundo\User\Access\UserRestrictionTrait;
 
 
@@ -13,9 +14,10 @@ trait ProcessStatusTrait
     use UserRestrictionTrait;
 
     /**
-     * @var string
+     * @var string|string[]
      */
     public $label;
+    // statusLabel
 
     /**
      * @var string
@@ -68,7 +70,7 @@ trait ProcessStatusTrait
 
         $logText = $this->logText;
         if ($logText == null) {
-            $logText = $this->label;
+            $logText = (new Translation())->getText( $this->label);
         }
 
         return $logText;
@@ -79,7 +81,7 @@ trait ProcessStatusTrait
     public function getNextStatus()
     {
 
-        /** @var AbstractStatus $nextStatus */
+        /** @var AbstractProcessStatus $nextStatus */
         $nextStatus = null;
 
         if ($this->nextStatusClass !== null) {
@@ -95,7 +97,7 @@ trait ProcessStatusTrait
     public function getMenuStatus()
     {
 
-        /** @var AbstractStatus[] $statusList */
+        /** @var AbstractProcessStatus[] $statusList */
         $statusList = [];
         foreach ($this->menuStatusClassList as $className) {
             $statusList[] = new $className();

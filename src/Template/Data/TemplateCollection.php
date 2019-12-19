@@ -7,5 +7,6 @@ $this->addModel(new \Nemundo\Process\Template\Data\DeadlineChange\DeadlineChange
 $this->addModel(new \Nemundo\Process\Template\Data\Document\DocumentModel());
 $this->addModel(new \Nemundo\Process\Template\Data\LargeText\LargeTextModel());
 $this->addModel(new \Nemundo\Process\Template\Data\UserAssignmentLog\UserAssignmentLogModel());
+$this->addModel(new \Nemundo\Process\Template\Data\Youtube\YoutubeModel());
 }
 }

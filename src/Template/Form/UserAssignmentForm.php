@@ -5,7 +5,7 @@ namespace Nemundo\Process\Template\Form;
 
 
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
-use Nemundo\Process\Form\AbstractStatusForm;
+use Nemundo\Process\Workflow\Content\Form\AbstractStatusForm;
 use Nemundo\Process\Template\Item\UserAssignmentItem;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowReader;
 use Nemundo\User\Data\User\UserReader;

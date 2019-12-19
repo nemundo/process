@@ -7,10 +7,12 @@ namespace Nemundo\Process\Content\Type;
 use Nemundo\Core\Base\AbstractBaseClass;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Html\Container\AbstractHtmlContainer;
+use Nemundo\Process\Content\Item\AbstractContentItem;
+use Nemundo\Process\Content\Item\ContentItem;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Content\View\ContentView;
-use Nemundo\Process\Form\AbstractContentForm;
-use Nemundo\Process\Form\ContentForm;
+use Nemundo\Process\Content\Form\AbstractContentForm;
+use Nemundo\Process\Content\Form\ContentForm;
 use Nemundo\Web\View\ViewSiteTrait;
 
 
@@ -18,7 +20,6 @@ abstract class AbstractContentType extends AbstractBaseClass
 {
 
     use ViewSiteTrait;
-
 
     /**
      * @var string
@@ -35,6 +36,11 @@ abstract class AbstractContentType extends AbstractBaseClass
      */
     protected $viewClass;
 
+    /**
+     * @var string
+     */
+    protected $itemClass;
+
 
     abstract protected function loadContentType();
 
@@ -44,11 +50,13 @@ abstract class AbstractContentType extends AbstractBaseClass
 
         $this->formClass = ContentForm::class;
         $this->viewClass = ContentView::class;
+        $this->itemClass=ContentItem::class;
 
         $this->loadContentType();
     }
 
 
+    // move to Item
     public function getSubject($dataId)
     {
 
@@ -57,6 +65,15 @@ abstract class AbstractContentType extends AbstractBaseClass
 
     }
 
+
+    public function getItem($dataId) {
+
+        /** @var AbstractContentItem $item */
+        $item = new $this->itemClass($dataId);
+
+        return $item;
+
+    }
 
     public function getForm(AbstractHtmlContainer $parent)
     {

@@ -15,11 +15,13 @@ use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Workflow\Com\Form\WorkflowSearchForm;
 use Nemundo\Process\Workflow\Data\Process\ProcessReader;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowPaginationReader;
-use Nemundo\Process\Parameter\ProcessParameter;
+use Nemundo\Process\Workflow\Parameter\ProcessParameter;
 use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
 use Nemundo\Process\Template\Data\Document\Redirect\DocumentDocumentRedirectSite;
 use Nemundo\Process\Template\Site\DocumentDeleteSite;
 use Nemundo\Web\Site\AbstractSite;
+use Nemundo\Workflow\Com\TrafficLight\DateTrafficLight;
+use Nemundo\Workflow\Com\TrafficLight\TrafficLight;
 
 
 class WorkflowSite extends AbstractSite
@@ -62,7 +64,7 @@ class WorkflowSite extends AbstractSite
         $processReader->addOrder($processReader->model->process);
         foreach ($processReader->getData() as $processRow) {
             $site = clone(WorkflowNewSite::$site);
-            $site->title = $processRow->getProcess()->process;  // process;
+            $site->title = $processRow->getProcess()->process;
             $site->addParameter(new ProcessParameter($processRow->id));
 
             $dropdown->addSite($site);
@@ -71,9 +73,15 @@ class WorkflowSite extends AbstractSite
         $table = new AdminClickableTable($page);
 
         $header = new TableHeader($table);
+        $header->addEmpty();
         $header->addText('Closed');
         $header->addText('Process');
         $header->addText('Workflow');
+
+        $header->addText('Deadline');
+        $header->addText('Assign to');
+
+
         $header->addText('Status');
         $header->addText('User');
         $header->addText('Date/Time');
@@ -91,9 +99,23 @@ class WorkflowSite extends AbstractSite
         foreach ($workflowReader->getData() as $workflowRow) {
 
             $row = new BootstrapClickableTableRow($table);
+
+            $trafficLight = new DateTrafficLight($row);
+            $trafficLight->date = $workflowRow->deadline;
+
             $row->addYesNo($workflowRow->workflowClosed);
             $row->addText($workflowRow->process->process);
             $row->addText($workflowRow->getSubject());
+
+
+            if ($workflowRow->deadline!==null) {
+            $row->addText($workflowRow->deadline->getShortDateLeadingZeroFormat());
+            } else {
+                $row->addEmpty();
+            }
+
+            $row->addText($workflowRow->assignment->getValue());
+
             $row->addText($workflowRow->status->statusLabel);
             $row->addText($workflowRow->user->displayName);
             $row->addText($workflowRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());

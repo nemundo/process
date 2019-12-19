@@ -5,8 +5,11 @@ namespace Nemundo\Process\Site;
 
 
 use Nemundo\Process\App\Inbox\Site\InboxSite;
+use Nemundo\Process\App\Wiki\Site\WikiSite;
 use Nemundo\Process\Content\Site\ContentSite;
+use Nemundo\Process\Template\Site\ProcessTemplateSite;
 use Nemundo\Process\Workflow\Site\WorkflowSite;
+use Nemundo\ToDo\Site\ToDoSite;
 use Nemundo\Web\Site\AbstractSite;
 
 
@@ -29,10 +32,10 @@ class ProcessSite extends AbstractSite
         new ContentSite($this);
         new WorkflowSite($this);
         new InboxSite($this);
+        new WikiSite($this);
+        new ProcessTemplateSite($this);
 
-
-        /* new InboxSite($this);
-         new WikiSite($this);*/
+        new ToDoSite($this);
 
 
     }

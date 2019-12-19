@@ -7,6 +7,7 @@ namespace Nemundo\Process\Script;
 use Nemundo\App\Script\Type\AbstractConsoleScript;
 use Nemundo\Process\Install\ProcessInstall;
 use Nemundo\Process\Install\ProcessUninstall;
+use Schleuniger\Setup\SchleunigerSetup;
 
 class ProcessCleanScript extends AbstractConsoleScript
 {
@@ -22,6 +23,9 @@ class ProcessCleanScript extends AbstractConsoleScript
 
         (new ProcessUninstall())->uninstall();
         (new ProcessInstall())->install();
+
+        (new SchleunigerSetup())->run();
+
     }
 
 }

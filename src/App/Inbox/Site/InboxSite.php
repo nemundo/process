@@ -5,6 +5,7 @@ namespace Nemundo\Process\App\Inbox\Site;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Block\Div;
 use Nemundo\Html\Block\Hr;
@@ -54,6 +55,7 @@ class InboxSite extends AbstractSite
         $reader->model->loadContentType();
         $reader->model->loadUser();
         $reader->filter->andEqual($reader->model->userId, $userListbox->getValue());
+        $reader->addOrder($reader->model->id, SortOrder::DESCENDING);
 
         foreach ($reader->getData() as $inboxRow) {
 

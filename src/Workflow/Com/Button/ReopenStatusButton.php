@@ -7,7 +7,7 @@ namespace Nemundo\Process\Com\Button;
 use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Process\Workflow\Parameter\StatusParameter;
 use Nemundo\Process\Status\AbstractStatus;
-use Nemundo\Process\Template\Status\ReopenStatus;
+use Nemundo\Process\Template\Status\ReopenProcessStatus;
 use Nemundo\Web\Site\Site;
 
 class ReopenStatusButton extends AdminSiteButton
@@ -21,7 +21,7 @@ class ReopenStatusButton extends AdminSiteButton
     public function getContent()
     {
 
-        $this->status = new ReopenStatus();
+        $this->status = new ReopenProcessStatus();
 
         //if ($this->status !== null) {
         $this->content = $this->status->label;

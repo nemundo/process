@@ -4,8 +4,7 @@ namespace Nemundo\Process\App\Wiki\Site;
 
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\Content\Data\Content\ContentDelete;
-use Nemundo\Process\Parameter\ContentParameter;
-use Nemundo\Web\Site\AbstractSite;
+use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Web\Url\UrlReferer;
 
 class ContentDeleteSite extends AbstractDeleteIconSite
@@ -20,7 +19,7 @@ class ContentDeleteSite extends AbstractDeleteIconSite
     {
         $this->title = 'ContentDelete';
         $this->url = 'contentdelete';
-        ContentDeleteSite::$site=$this;
+        ContentDeleteSite::$site = $this;
     }
 
     public function loadContent()

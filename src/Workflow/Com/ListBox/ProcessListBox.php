@@ -6,7 +6,7 @@ namespace Nemundo\Process\Workflow\Com\ListBox;
 
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
 use Nemundo\Process\Workflow\Data\Process\ProcessReader;
-use Nemundo\Process\Parameter\ProcessParameter;
+use Nemundo\Process\Workflow\Parameter\ProcessParameter;
 
 class ProcessListBox extends BootstrapListBox
 {

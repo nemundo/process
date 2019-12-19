@@ -5,7 +5,7 @@ namespace Nemundo\Process\App\Wiki\Content;
 
 
 use Nemundo\Process\App\Wiki\Data\Wiki\Wiki;
-use Nemundo\Process\Item\AbstractContentItem;
+use Nemundo\Process\Content\Item\AbstractContentItem;
 
 class WikiPageContentItem extends AbstractContentItem
 {

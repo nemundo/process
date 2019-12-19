@@ -5,7 +5,7 @@ namespace Nemundo\Process\Template\Form;
 
 
 use Nemundo\Package\Bootstrap\FormElement\BootstrapLargeTextBox;
-use Nemundo\Process\Form\AbstractContentForm;
+use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Template\Data\LargeText\LargeTextReader;
 use Nemundo\Process\Template\Item\LargeTextContentItem;
 

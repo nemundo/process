@@ -7,8 +7,8 @@ namespace Nemundo\Process\Workflow\Com\Table;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
-use Nemundo\Process\Workflow\Content\Item\Process\ProcessItem;
-use Nemundo\Process\Workflow\Content\Item\WorkflowItem;
+use Nemundo\Process\Workflow\Content\Item\Process\WorkflowItem;
+
 
 
 class WorkflowLogTable extends AdminTable
@@ -28,7 +28,7 @@ class WorkflowLogTable extends AdminTable
         $header->addText('History');
         $header->addText('Ersteller');
 
-        foreach ((new ProcessItem($this->workflowId))->getChildContent() as $contentRow) {
+        foreach ((new WorkflowItem($this->workflowId))->getChild() as $contentRow) {
 
             $status = $contentRow->contentType->getContentType();
 

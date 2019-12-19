@@ -7,7 +7,7 @@ namespace Nemundo\Process\Workflow\Content\Item\Status;
 use Nemundo\Core\Type\DateTime\DateTime;
 
 
-class DateTimeUserIdStatusItem extends AbstractStatusItem  // StatusLogBuilder
+class DateTimeUserIdStatusItem extends AbstractStatusItem
 {
 
     /**
@@ -16,15 +16,14 @@ class DateTimeUserIdStatusItem extends AbstractStatusItem  // StatusLogBuilder
     public $dateTime;
 
 
-   public $userId;
+    public $userId;
 
 
-   public function saveItem()
-   {
+    public function saveItem()
+    {
 
-       $this->saveWorkflowLog();
+        $this->saveWorkflowLog();
 
-       // TODO: Implement saveItem() method.
-   }
+    }
 
 }

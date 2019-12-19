@@ -3,12 +3,11 @@
 namespace Nemundo\Process\Template\Form;
 
 
-use Nemundo\App\Content\Form\AbstractContentTreeForm;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapDatePicker;
-use Nemundo\Process\Form\AbstractStatusForm;
-use Nemundo\Process\Item\WorkflowItem;
-use Schleuniger\App\Task\Content\Type\Status\TerminVerschiebenStatus;
+use Nemundo\Process\Template\Item\DeadlineChangeItem;
+use Nemundo\Process\Workflow\Content\Form\AbstractStatusForm;
+use Nemundo\Process\Workflow\Content\Item\Process\WorkflowItem;
 
 class DeadlineChangeForm extends AbstractStatusForm
 {
@@ -25,6 +24,13 @@ class DeadlineChangeForm extends AbstractStatusForm
         $this->datum->label = 'Datum';
         $this->datum->validation = true;
 
+
+        $workflowItem = new WorkflowItem($this->parentId);
+        if ($workflowItem->hasDeadline()) {
+            $this->datum->value = $workflowItem->getDeadline()->getShortDateLeadingZeroFormat();
+        }
+
+
         //$taskRow = (new TaskReader())->getRowById($this->parentContentType->dataId);
         //$this->datum->value = $taskRow->deadline->getShortDateLeadingZeroFormat();
 
@@ -39,30 +45,17 @@ class DeadlineChangeForm extends AbstractStatusForm
     }
 
 
-
-    protected function onSave()
-    {
-
-        $date = (new Date())->fromGermanFormat($this->datum->getValue());
-
-
-
-
-        $item = new WorkflowItem($this->workflowId);
-        $item->changeDeadline($date);
-
-    }
-
-
-    /*
     protected function onSubmit()
     {
 
-        $status = new TerminVerschiebenStatus();
-        $status->parentContentType = $this->parentContentType;
-        $status->datum->fromGermanFormat($this->datum->getValue());
-        $status->saveType();
 
-    }*/
+        $item = new DeadlineChangeItem();
+        $item->parentId = $this->parentId;
+        $item->deadline = (new Date())->fromGermanFormat($this->datum->getValue());
+        $item->saveItem();
+
+
+    }
+
 
 }

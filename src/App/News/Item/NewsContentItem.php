@@ -6,7 +6,7 @@ namespace Nemundo\Process\App\News\Item;
 
 use Nemundo\Process\App\News\Data\News\News;
 use Nemundo\Process\App\News\Type\NewsContentType;
-use Nemundo\Process\Item\AbstractContentItem;
+use Nemundo\Process\Content\Item\AbstractContentItem;
 
 class NewsContentItem extends AbstractContentItem
 {
@@ -17,7 +17,6 @@ class NewsContentItem extends AbstractContentItem
 
     public function saveItem()
     {
-        // TODO: Implement saveItem() method.
 
         $this->contentType=new NewsContentType();
 

@@ -6,7 +6,7 @@ namespace Nemundo\Process\App\Wiki\Content;
 
 use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
-use Nemundo\Process\Form\AbstractContentForm;
+use Nemundo\Process\Content\Form\AbstractContentForm;
 
 class WikiPageContentForm extends AbstractContentForm
 {

@@ -7,6 +7,7 @@ namespace Nemundo\Process\Content\Site;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Core\Log\LogMessage;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
@@ -16,7 +17,6 @@ use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Parameter\DataIdParameter;
-use Nemundo\Process\Template\Site\ProcessTemplateSite;
 use Nemundo\Web\Site\AbstractSite;
 
 class ContentSite extends AbstractSite
@@ -28,9 +28,7 @@ class ContentSite extends AbstractSite
         $this->url = 'content';
 
         new ContentItemSite($this);
-
-        new ProcessTemplateSite($this);
-
+        new ContentDeleteSite($this);
 
     }
 
@@ -56,7 +54,6 @@ class ContentSite extends AbstractSite
         }
 
 
-
         $table = new AdminClickableTable($page);
 
         $header = new TableHeader($table);
@@ -64,6 +61,8 @@ class ContentSite extends AbstractSite
         $header->addText('Id');
         $header->addText('Parent Id');
         $header->addText('Data Id');
+        $header->addText('Subject');
+        $header->addText('Date/Time');
 
 
         $reader = new ContentReader();
@@ -77,20 +76,26 @@ class ContentSite extends AbstractSite
 
         foreach ($reader->getData() as $contentRow) {
 
+            if (class_exists($contentRow->contentType->phpClass)) {
 
-            $contentType = $contentRow->contentType->getContentType();
+                $contentType = $contentRow->contentType->getContentType();
 
-            $row = new BootstrapClickableTableRow($table);
-            $row->addText($contentRow->contentType->phpClass);
-            $row->addText($contentRow->id);
-            $row->addText($contentRow->parentId);
-            $row->addText($contentRow->dataId);
-            $row->addText($contentType->getSubject($contentRow->dataId));
-            $row->addText($contentRow->dateTimeCreated->getShortDateTimeFormat());
 
-            $site = clone(ContentItemSite::$site);
-            $site->addParameter(new DataIdParameter($contentRow->dataId));
-            $row->addClickableSite($site);
+                $row = new BootstrapClickableTableRow($table);
+                $row->addText($contentRow->contentType->phpClass);
+                $row->addText($contentRow->id);
+                $row->addText($contentRow->parentId);
+                $row->addText($contentRow->dataId);
+                $row->addText($contentType->getSubject($contentRow->dataId));
+                $row->addText($contentRow->dateTimeCreated->getShortDateTimeFormat());
+
+                $site = clone(ContentItemSite::$site);
+                $site->addParameter(new DataIdParameter($contentRow->dataId));
+                $row->addClickableSite($site);
+
+            } else {
+                (new LogMessage())->writeError('class does not exsits.Class:' . $contentRow->contentType->phpClass);
+            }
 
         }
 

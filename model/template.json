@@ -100,6 +100,38 @@
                 }
             ],
             "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "7c4e6acf-3283-4494-bcdd-93096d6c0e50",
+            "label": "Youtube",
+            "class_name": "Youtube",
+            "table_name": "template_youtube",
+            "namespace": "Nemundo\\Process\\Template\\Data\\Youtube",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Url",
+                    "field_name": "url",
+                    "variable_name": "url",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Youtube Id",
+                    "field_name": "youtube_id",
+                    "variable_name": "youtubeId",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": []
         }
     ]
 }

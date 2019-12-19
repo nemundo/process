@@ -11,7 +11,8 @@ use Nemundo\Package\Bootstrap\FormElement\BootstrapLargeTextBox;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
 use Nemundo\Process\App\News\Data\News\NewsReader;
 use Nemundo\Process\App\News\Item\NewsContentItem;
-use Nemundo\Process\Form\AbstractContentForm;
+use Nemundo\Process\App\News\Parameter\NewsParameter;
+use Nemundo\Process\Content\Form\AbstractContentForm;
 
 class NewsContentForm extends AbstractContentForm
 {
@@ -32,7 +33,6 @@ class NewsContentForm extends AbstractContentForm
 
         $p = new Paragraph($this);
         $p->content = 'dataid:'.$this->dataId;
-
 
         $this->newsTitle=new BootstrapTextBox($this);
 
@@ -72,6 +72,7 @@ class NewsContentForm extends AbstractContentForm
         $item->teaser = $this->teaser->getValue();
         $item->saveItem();
 
+        $this->redirectSite->addParameter(new NewsParameter($item->dataId));
 
     }
 

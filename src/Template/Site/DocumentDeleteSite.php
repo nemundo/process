@@ -5,10 +5,11 @@ namespace Nemundo\Process\Template\Site;
 
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\Builder\StatusLogBuilder;
+use Nemundo\Process\Workflow\Content\Item\Status\StatusItem;
 use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
 use Nemundo\Process\Template\Data\Document\DocumentUpdate;
 use Nemundo\Process\Template\Parameter\DocumentParameter;
-use Nemundo\Process\Template\Status\DocumentDeleteStatus;
+use Nemundo\Process\Template\Status\DocumentDeleteProcessStatus;
 use Nemundo\Web\Url\UrlReferer;
 
 
@@ -42,10 +43,11 @@ class DocumentDeleteSite extends AbstractDeleteIconSite
         $update->updateById($documentId);
 
 
-        $builder = new StatusLogBuilder($workflowId);
-        $builder->contentType = new DocumentDeleteStatus();
+        $builder = new StatusItem();
+        $builder->contentType = new DocumentDeleteProcessStatus();
         $builder->dataId = $documentId;
-        $builder->saveStatus();
+        $builder->parentId = $workflowId;
+        $builder->saveItem();
 
         //$workflowBuilder->workflowId = $workflowId;
         //$workflowBuilder->dataId = $this->dataId;

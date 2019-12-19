@@ -7,11 +7,15 @@ namespace Nemundo\Process\Workflow\Content\View;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Admin\Com\Widget\AdminWidget;
 use Nemundo\Com\FormBuilder\RedirectTrait;
+use Nemundo\Html\Block\Hr;
 use Nemundo\Process\Workflow\Com\Container\AbstractWorkflowContainer;
 use Nemundo\Process\Workflow\Com\Container\StatusFormContainer;
 use Nemundo\Process\Workflow\Com\Container\WorkflowStreamContainer;
 use Nemundo\Process\Workflow\Com\Layout\WorkflowLayout;
+use Nemundo\Process\Workflow\Com\Menu\HistoryProcessMenu;
+use Nemundo\Process\Workflow\Com\Menu\ProcessMenu;
 use Nemundo\Process\Workflow\Com\Menu\ProcessMenuOld;
+use Nemundo\Process\Workflow\Com\Table\SourceTable;
 use Nemundo\Process\Workflow\Com\Table\WorkflowLogTable;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowReader;
@@ -19,6 +23,7 @@ use Nemundo\Process\Workflow\Parameter\StatusParameter;
 use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
 
 use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
+use Nemundo\ToDo\Com\ToDoParentContainer;
 use Nemundo\Web\Site\Site;
 
 class ProcessView extends AbstractContentView
@@ -31,6 +36,8 @@ class ProcessView extends AbstractContentView
      */
     public $contentType;
 
+
+    public $appendWorkflowParameter = false;
 
     public $showDocument = true;
 
@@ -120,7 +127,11 @@ class ProcessView extends AbstractContentView
 
 
 
-        $menu = new ProcessMenuOld($layout->col1);
+
+
+        //(new Hr($layout->col1));
+
+        $menu =new ProcessMenu($layout->col1);
         $menu->process = $this->contentType;
         $menu->workflowId = $this->dataId;
         $menu->formStatus = $formStatus;
@@ -129,7 +140,17 @@ class ProcessView extends AbstractContentView
         $menu->site->addParameter(new WorkflowParameter($this->dataId));
 
 
+        /*
+        (new Hr($layout->col1));
 
+        $menu =new HistoryProcessMenu($layout->col1);
+        $menu->process = $this->contentType;
+        $menu->workflowId = $this->dataId;
+        $menu->formStatus = $formStatus;
+        $menu->workflowStatus = $workflowStatus;
+        $menu->site = clone($this->redirectSite);
+        $menu->site->addParameter(new WorkflowParameter($this->dataId));
+*/
 
         if ($formStatus !== null) {
             $widget = new AdminWidget($layout->col2);
@@ -140,12 +161,20 @@ class ProcessView extends AbstractContentView
             $form->workflowStatus = $workflowStatus;
             $form->site = clone($this->redirectSite);
             $form->workflowId = $this->dataId;
+            $form->appendWorkflowParameter=$this->appendWorkflowParameter;
         }
 
 
 
         $view = new WorkflowStreamContainer($layout->col2);
         $view->workflowId = $this->dataId;
+
+        $table = new SourceTable($layout->col3);
+        $table->workflowId =  $this->dataId;
+
+        $table = new ToDoParentContainer($layout->col3);
+        $table->parentId = $this->dataId;
+
 
         $table = new WorkflowLogTable($layout->col3);
         $table->workflowId = $this->dataId;

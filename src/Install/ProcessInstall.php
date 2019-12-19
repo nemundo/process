@@ -3,11 +3,18 @@
 
 namespace Nemundo\Process\Install;
 
-//use Nemundo\Process\Content\Install\ContentInstall;
+use Nemundo\App\Script\Setup\ScriptSetup;
+use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\App\Inbox\Install\InboxInstall;
+use Nemundo\Process\App\Wiki\Install\WikiInstall;
 use Nemundo\Process\Content\Install\ContentInstall;
+use Nemundo\Process\Script\ProcessCleanScript;
+use Nemundo\Process\Template\Data\TemplateCollection;
+use Nemundo\Process\Template\Install\TemplateInstall;
 use Nemundo\Process\Workflow\Install\WorkflowInstall;
 use Nemundo\Project\Install\AbstractInstall;
+use Schleuniger\App\ChangeRequest\Install\ChangeRequestInstall;
+use Schleuniger\App\ChangeRequest\Test\TestData;
 
 class ProcessInstall extends AbstractInstall
 {
@@ -19,19 +26,21 @@ class ProcessInstall extends AbstractInstall
         (new ContentInstall())->install();
         (new WorkflowInstall())->install();
         (new InboxInstall())->install();
+        (new WikiInstall())->install();
+        (new TemplateInstall())->install();
+
+        (new ChangeRequestInstall())->install();
+        (new TestData())->createTestData();
+
+
+        $setup = new ScriptSetup();
+        $setup->addScript(new ProcessCleanScript());
+
 
 
 
 
         /*
-        $setup = new ModelCollectionSetup();
-        $setup->addCollection(new ProcessCollection());
-        $setup->addCollection(new TemplateCollection());
-        $setup->addCollection(new ContentCollection());
-        $setup->addCollection(new NewsCollection());
-        $setup->addCollection(new InboxCollection());
-        $setup->addCollection(new WikiCollection());
-
         $setup = new StatusSetup();
         $setup->addStatus(new DocumentDeleteStatus());
         $setup->addStatus(new ReopenStatus());
