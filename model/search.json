@@ -1,0 +1,43 @@
+{
+    "app": "Search",
+    "name": "search",
+    "namespace": "Nemundo\\Process\\Search",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "ba49b180-2274-4e8d-a545-6fbf8d382fee",
+            "label": "Search Index",
+            "class_name": "SearchIndex",
+            "table_name": "search_search_index",
+            "namespace": "Nemundo\\Process\\Search\\Data\\SearchIndex",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "78d1e336-761f-48bd-be52-9794409699e3",
+            "label": "Word",
+            "class_name": "Word",
+            "table_name": "search_word",
+            "namespace": "Nemundo\\Process\\Search\\Data\\Word",
+            "row_class_name": "",
+            "primary_index": "text_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Word",
+                    "field_name": "word",
+                    "variable_name": "word",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "50"
+                }
+            ],
+            "index": []
+        }
+    ]
+}

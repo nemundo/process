@@ -21,6 +21,21 @@ public $subject;
 */
 public $text;
 
+/**
+* @var \Nemundo\Model\Type\DateTime\DateTimeType
+*/
+public $dateTime;
+
+/**
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+*/
+public $userId;
+
+/**
+* @var \Nemundo\User\Data\User\UserExternalType
+*/
+public $user;
+
 protected function loadModel() {
 $this->tableName = "content_document";
 $this->aliasTableName = "content_document";
@@ -62,5 +77,29 @@ $this->text->aliasFieldName = "content_document_text";
 $this->text->label = "Text";
 $this->text->allowNullValue = false;
 
+$this->dateTime = new \Nemundo\Model\Type\DateTime\DateTimeType($this);
+$this->dateTime->tableName = "content_document";
+$this->dateTime->fieldName = "date_time";
+$this->dateTime->aliasFieldName = "content_document_date_time";
+$this->dateTime->label = "Date Time";
+$this->dateTime->allowNullValue = false;
+
+$this->userId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->userId->tableName = "content_document";
+$this->userId->fieldName = "user";
+$this->userId->aliasFieldName = "content_document_user";
+$this->userId->label = "User";
+$this->userId->allowNullValue = false;
+
+}
+public function loadUser() {
+if ($this->user == null) {
+$this->user = new \Nemundo\User\Data\User\UserExternalType($this, "content_document_user");
+$this->user->tableName = "content_document";
+$this->user->fieldName = "user";
+$this->user->aliasFieldName = "content_document_user";
+$this->user->label = "User";
+}
+return $this;
 }
 }

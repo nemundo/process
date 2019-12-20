@@ -6,6 +6,37 @@
     "model": [
         {
             "template": "default",
+            "model_id": "27859495-af25-4e13-bf8c-120d9a6ede7e",
+            "label": "Access",
+            "class_name": "Access",
+            "table_name": "content_access",
+            "namespace": "Nemundo\\Process\\Content\\Data\\Access",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Document",
+                    "field_name": "document",
+                    "variable_name": "document",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": null,
+                    "label": "Identification",
+                    "field_name": "identification",
+                    "variable_name": "identification",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "e7460973-aefe-494b-9c8f-9d1ee0858695",
             "label": "Content",
             "class_name": "Content",
@@ -136,6 +167,54 @@
                     "variable_name": "text",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "date_time",
+                    "label": "Date Time",
+                    "field_name": "date_time",
+                    "variable_name": "dateTime",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "user",
+                    "label": "User",
+                    "field_name": "user",
+                    "variable_name": "user",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "54567a95-6c69-414b-9147-849af9e23eb0",
+            "label": "Tree",
+            "class_name": "Tree",
+            "table_name": "content_tree",
+            "namespace": "Nemundo\\Process\\Content\\Data\\Tree",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Child",
+                    "field_name": "child",
+                    "variable_name": "child",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": "external",
+                    "label": "Parent",
+                    "field_name": "parent",
+                    "variable_name": "parent",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
                 }
             ],
             "index": []
