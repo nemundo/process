@@ -119,7 +119,7 @@ abstract class AbstractWorkflowItem extends AbstractContentItem
         $data->subject = $this->subject;
         $data->assignment = $this->assignment;
         $data->dateTime = $this->dateTime;
-        $data->userId = $this->userId;
+        $data->userId = $this->mitarbeiterId;
         $this->dataId = $data->save();
 
         $this->saveContent();
@@ -128,7 +128,7 @@ abstract class AbstractWorkflowItem extends AbstractContentItem
         $builder->parentId = $this->dataId;
         $builder->contentType = $this->contentType->startStatus;
         $builder->dateTime = $this->dateTime;
-        $builder->userId = $this->userId;
+        $builder->mitarbeiterId = $this->mitarbeiterId;
         $builder->saveItem();
 
 

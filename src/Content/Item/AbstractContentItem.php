@@ -39,7 +39,7 @@ abstract class AbstractContentItem extends AbstractBaseClass
     /**
      * @var string
      */
-    public $userId;
+    public $mitarbeiterId;
 
     /**
      * @var string
@@ -67,7 +67,7 @@ abstract class AbstractContentItem extends AbstractBaseClass
 
 
         $this->dateTime = (new DateTime())->setNow();
-        $this->userId = (new UserSessionType())->userId;
+        $this->mitarbeiterId = (new UserSessionType())->userId;
 
 
         $this->loadItem();
@@ -100,7 +100,7 @@ abstract class AbstractContentItem extends AbstractBaseClass
         $data->parentId = $this->parentId;
         $data->dataId = $this->dataId;
         $data->dateTimeCreated = $this->dateTime;  // date (new DateTime())->setNow();
-        $data->userCreatedId = $this->userId;
+        $data->userCreatedId = $this->mitarbeiterId;
         $data->itemOrder = $itemOrder+1;
         $data->save();
 

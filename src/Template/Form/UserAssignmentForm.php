@@ -22,7 +22,7 @@ class UserAssignmentForm extends AbstractStatusForm
     {
 
         $this->user = new BootstrapListBox($this);
-        $this->user->label = 'Mitarbeiter';
+        $this->user->label = 'User';
         $this->user->validation = true;
 
         $reader = new UserReader();
@@ -44,7 +44,7 @@ class UserAssignmentForm extends AbstractStatusForm
 
         $item = new UserAssignmentItem();
         $item->parentId = $this->parentId;
-        $item->userId = $this->user->getValue();
+        $item->mitarbeiterId = $this->user->getValue();
         $item->saveItem();
 
     }

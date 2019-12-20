@@ -22,7 +22,7 @@ class UserAssignmentItem extends AbstractContentItem
     /**
      * @var string
      */
-    public $userId;
+    public $mitarbeiterId;
 
 
 
@@ -33,11 +33,11 @@ class UserAssignmentItem extends AbstractContentItem
         $this->contentType=new UserAssignmentProcessStatus();
 
         $assignment = new Identification();
-        $assignment->setUserIdentification($this->userId);
+        $assignment->setUserIdentification($this->mitarbeiterId);
 
         $data = new UserAssignmentLog();
         $data->id=$this->dataId;
-        $data->userId = $this->userId;
+        $data->userId = $this->mitarbeiterId;
         $data->save();
 
         $this->saveContent();
@@ -46,7 +46,7 @@ class UserAssignmentItem extends AbstractContentItem
         $update->assignment = $assignment;
         $update->updateById($this->parentId);
 
-        $this->sendToInbox($this->userId);
+        $this->sendToInbox($this->mitarbeiterId);
 
 
         //

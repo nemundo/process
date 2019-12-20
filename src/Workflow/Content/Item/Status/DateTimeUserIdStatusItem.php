@@ -16,7 +16,7 @@ class DateTimeUserIdStatusItem extends AbstractStatusItem
     public $dateTime;
 
 
-    public $userId;
+    public $mitarbeiterId;
 
 
     public function saveItem()

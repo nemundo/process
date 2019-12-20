@@ -16,7 +16,7 @@ class UserAssignmentProcessStatus extends AbstractProcessStatus
     {
 
         $this->label[LanguageCode::EN] = 'Assignment (User)';
-        $this->label[LanguageCode::DE] = 'Zuweisung';
+        $this->label[LanguageCode::DE] = 'Zuweisung an';
         $this->id = '3ca6ccea-7eb0-4a5c-945c-9c0da28e0cc1';
         $this->formClass = UserAssignmentForm::class;
         $this->changeStatus = false;
