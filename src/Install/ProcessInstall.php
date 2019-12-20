@@ -29,8 +29,8 @@ class ProcessInstall extends AbstractInstall
         (new WikiInstall())->install();
         (new TemplateInstall())->install();
 
-        (new ChangeRequestInstall())->install();
-        (new TestData())->createTestData();
+        //(new ChangeRequestInstall())->install();
+        //(new TestData())->createTestData();
 
 
         $setup = new ScriptSetup();
