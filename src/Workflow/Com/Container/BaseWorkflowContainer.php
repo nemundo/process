@@ -20,8 +20,8 @@ class BaseWorkflowContainer extends AbstractWorkflowContainer
         /*$table = new SourceTable($this);
         $table->workflowId = $this->workflowId;*/
 
-        $view =new DocumentParentContainer($this);
-        $view->parentId = $this->workflowId;
+        //$view =new DocumentParentContainer($this);
+        //$view->parentId = $this->workflowId;
 
         // todo container
 

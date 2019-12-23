@@ -23,7 +23,7 @@ class StatusSetup extends AbstractBase
 
         $data = new Status();
         $data->updateOnDuplicate = true;
-        $data->statusLabel = (new Translation())->getText( $status->label);
+        $data->statusLabel = (new Translation())->getText( $status->type);
         $data->contentTypeId = $status->id;
         $data->save();
 

@@ -24,7 +24,7 @@ class ProcessCleanScript extends AbstractConsoleScript
         (new ProcessUninstall())->uninstall();
         (new ProcessInstall())->install();
 
-        (new SchleunigerSetup())->run();
+        //(new SchleunigerSetup())->run();
 
     }
 

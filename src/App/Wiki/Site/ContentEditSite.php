@@ -42,10 +42,10 @@ class ContentEditSite extends AbstractEditIconSite
         $contentType = $contentRow->contentType->getContentType();
 
         $form = $contentType->getForm($page);
-        $form->dataId=$contentRow->dataId;
+        $form->dataId=$contentRow->id;
 
         $form->redirectSite= WikiSite::$site;
-        $form->redirectSite->addParameter(new WikiParameter($contentRow->parentId));
+        //$form->redirectSite->addParameter(new WikiParameter($contentRow->parentId));
 
         $page->render();
 

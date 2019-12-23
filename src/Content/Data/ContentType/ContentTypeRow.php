@@ -21,10 +21,16 @@ public $id;
 */
 public $phpClass;
 
+/**
+* @var string
+*/
+public $contentType;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
 $this->phpClass = $this->getModelValue($model->phpClass);
+$this->contentType = $this->getModelValue($model->contentType);
 }
 }

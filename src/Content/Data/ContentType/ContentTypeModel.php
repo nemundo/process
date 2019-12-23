@@ -11,6 +11,11 @@ public $id;
 */
 public $phpClass;
 
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $contentType;
+
 protected function loadModel() {
 $this->tableName = "content2_content_type";
 $this->aliasTableName = "content2_content_type";
@@ -36,6 +41,14 @@ $this->phpClass->aliasFieldName = "content2_content_type_php_class";
 $this->phpClass->label = "Php Class";
 $this->phpClass->allowNullValue = false;
 $this->phpClass->length = 255;
+
+$this->contentType = new \Nemundo\Model\Type\Text\TextType($this);
+$this->contentType->tableName = "content2_content_type";
+$this->contentType->fieldName = "content_type";
+$this->contentType->aliasFieldName = "content2_content_type_content_type";
+$this->contentType->label = "Content Type";
+$this->contentType->allowNullValue = false;
+$this->contentType->length = 255;
 
 }
 }

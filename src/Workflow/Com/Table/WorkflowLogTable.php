@@ -10,7 +10,6 @@ use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Process\Workflow\Content\Item\Process\WorkflowItem;
 
 
-
 class WorkflowLogTable extends AdminTable
 {
 
@@ -34,8 +33,10 @@ class WorkflowLogTable extends AdminTable
 
             if ($status->showLog) {
                 $row = new TableRow($this);
-                $row->addText($status->getSubject($contentRow->dataId));
-                $row->addText($contentRow->userCreated->displayName . ' ' . $contentRow->dateTimeCreated->getShortDateTimeLeadingZeroFormat());
+                $row->addText($status->getSubject($contentRow->id));
+                $row->addText($contentRow->user->displayName . ' ' . $contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
+                // $row->addText($contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
+
             }
 
         }

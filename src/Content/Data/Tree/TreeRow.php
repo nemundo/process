@@ -22,7 +22,7 @@ public $id;
 public $childId;
 
 /**
-* @var \Nemundo\Process\Content\Data\Document\DocumentRow
+* @var \Nemundo\Process\Content\Data\Content\ContentRow
 */
 public $child;
 
@@ -32,9 +32,14 @@ public $child;
 public $parentId;
 
 /**
-* @var \Nemundo\Process\Content\Data\Document\DocumentRow
+* @var \Nemundo\Process\Content\Data\Content\ContentRow
 */
 public $parent;
+
+/**
+* @var int
+*/
+public $itemOrder;
 
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
@@ -42,17 +47,18 @@ $this->row = $row;
 $this->id = $this->getModelValue($model->id);
 $this->childId = $this->getModelValue($model->childId);
 if ($model->child !== null) {
-$this->loadNemundoProcessContentDataDocumentDocumentchildRow($model->child);
+$this->loadNemundoProcessContentDataContentContentchildRow($model->child);
 }
 $this->parentId = $this->getModelValue($model->parentId);
 if ($model->parent !== null) {
-$this->loadNemundoProcessContentDataDocumentDocumentparentRow($model->parent);
+$this->loadNemundoProcessContentDataContentContentparentRow($model->parent);
 }
+$this->itemOrder = intval($this->getModelValue($model->itemOrder));
 }
-private function loadNemundoProcessContentDataDocumentDocumentchildRow($model) {
-$this->child = new \Nemundo\Process\Content\Data\Document\DocumentRow($this->row, $model);
+private function loadNemundoProcessContentDataContentContentchildRow($model) {
+$this->child = new \Nemundo\Process\Content\Data\Content\ContentRow($this->row, $model);
 }
-private function loadNemundoProcessContentDataDocumentDocumentparentRow($model) {
-$this->parent = new \Nemundo\Process\Content\Data\Document\DocumentRow($this->row, $model);
+private function loadNemundoProcessContentDataContentContentparentRow($model) {
+$this->parent = new \Nemundo\Process\Content\Data\Content\ContentRow($this->row, $model);
 }
 }

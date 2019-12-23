@@ -64,7 +64,7 @@ class WorkflowSite extends AbstractSite
         $processReader->addOrder($processReader->model->process);
         foreach ($processReader->getData() as $processRow) {
             $site = clone(WorkflowNewSite::$site);
-            $site->title = $processRow->getProcess()->process;
+            $site->title = $processRow->getProcess()->type;
             $site->addParameter(new ProcessParameter($processRow->id));
 
             $dropdown->addSite($site);

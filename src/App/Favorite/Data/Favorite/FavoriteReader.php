@@ -1,17 +1,17 @@
 <?php
-namespace Nemundo\Process\Content\Data\Document;
-class DocumentReader extends \Nemundo\Model\Reader\ModelDataReader {
+namespace Nemundo\Process\App\Favorite\Data\Favorite;
+class FavoriteReader extends \Nemundo\Model\Reader\ModelDataReader {
 /**
-* @var DocumentModel
+* @var FavoriteModel
 */
 public $model;
 
 public function __construct() {
 parent::__construct();
-$this->model = new DocumentModel();
+$this->model = new FavoriteModel();
 }
 /**
-* @return DocumentRow[]
+* @return FavoriteRow[]
 */
 public function getData() {
 $this->addFieldByModel($this->model);
@@ -24,7 +24,7 @@ $list[] = $row;
 return $list;
 }
 /**
-* @return DocumentRow
+* @return FavoriteRow
 */
 public function getRow() {
 $this->addFieldByModel($this->model);
@@ -34,13 +34,13 @@ $row = $this->getModelRow($dataRow);
 return $row;
 }
 /**
-* @return DocumentRow
+* @return FavoriteRow
 */
 public function getRowById($id) {
 return parent::getRowById($id);
 }
 private function getModelRow($dataRow) {
-$row = new DocumentRow($dataRow, $this->model);
+$row = new FavoriteRow($dataRow, $this->model);
 $row->model = $this->model;
 return $row;
 }

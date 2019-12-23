@@ -12,6 +12,7 @@ use Nemundo\Html\Formatting\Strike;
 use Nemundo\Model\Join\ModelJoin;
 use Nemundo\Process\Content\Com\Container\AbstractParentContainer;
 use Nemundo\Process\Content\Data\Content\ContentModel;
+use Nemundo\Process\Content\Data\Tree\TreeModel;
 use Nemundo\Process\Template\Data\Document\DocumentReader;
 use Nemundo\Process\Template\Parameter\DocumentParameter;
 use Nemundo\Process\Template\Site\DocumentDeleteSite;
@@ -37,8 +38,8 @@ class DocumentParentContainer extends AbstractParentContainer
 
         $documentReader = new DocumentReader();
 
-        $externalModel = new ContentModel();
-        $externalModel->loadUserCreated();
+        $externalModel = new TreeModel();  // new ContentModel();
+        $externalModel->loadUser();
 
         $join = new ModelJoin($documentReader);
         $join->type = $documentReader->model->id;

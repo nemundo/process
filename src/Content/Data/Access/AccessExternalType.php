@@ -12,7 +12,7 @@ public $id;
 public $documentId;
 
 /**
-* @var \Nemundo\Process\Content\Data\Document\DocumentExternalType
+* @var \Nemundo\Process\Content\Data\Content\ContentExternalType
 */
 public $document;
 
@@ -51,7 +51,7 @@ $this->addType($this->identification);
 }
 public function loadDocument() {
 if ($this->document == null) {
-$this->document = new \Nemundo\Process\Content\Data\Document\DocumentExternalType(null, $this->parentFieldName . "_document");
+$this->document = new \Nemundo\Process\Content\Data\Content\ContentExternalType(null, $this->parentFieldName . "_document");
 $this->document->fieldName = "document";
 $this->document->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->document->aliasFieldName = $this->document->tableName ."_".$this->document->fieldName;

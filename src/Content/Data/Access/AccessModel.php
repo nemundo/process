@@ -7,12 +7,12 @@ class AccessModel extends \Nemundo\Model\Definition\Model\AbstractModel {
 public $id;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
 */
 public $documentId;
 
 /**
-* @var \Nemundo\Process\Content\Data\Document\DocumentExternalType
+* @var \Nemundo\Process\Content\Data\Content\ContentExternalType
 */
 public $document;
 
@@ -39,7 +39,7 @@ $this->id->visible->table = false;
 $this->id->visible->view = false;
 $this->id->visible->form = false;
 
-$this->documentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
+$this->documentId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
 $this->documentId->tableName = "content_access";
 $this->documentId->fieldName = "document";
 $this->documentId->aliasFieldName = "content_access_document";
@@ -56,7 +56,7 @@ $this->identification->allowNullValue = false;
 }
 public function loadDocument() {
 if ($this->document == null) {
-$this->document = new \Nemundo\Process\Content\Data\Document\DocumentExternalType($this, "content_access_document");
+$this->document = new \Nemundo\Process\Content\Data\Content\ContentExternalType($this, "content_access_document");
 $this->document->tableName = "content_access";
 $this->document->fieldName = "document";
 $this->document->aliasFieldName = "content_access_document";

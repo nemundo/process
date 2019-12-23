@@ -15,8 +15,8 @@ class DocumentDeleteProcessStatus extends AbstractProcessStatus
     protected function loadContentType()
     {
 
-        $this->label[LanguageCode::EN] = 'Document Delete';
-        $this->label[LanguageCode::DE] = 'Dokument löschen';
+        $this->type[LanguageCode::EN] = 'Document Delete';
+        $this->type[LanguageCode::DE] = 'Dokument löschen';
         $this->id ='a83ea4f8-9605-40d0-9557-bb8224d41e24';
         $this->changeStatus=false;
 

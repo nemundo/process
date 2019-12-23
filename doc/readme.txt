@@ -1,3 +1,31 @@
+Aufteilung in Repo
+
+- Content
+- App
+
+oder ContentType/Search als Framework
+
+
+
+
+
+Listen Generator
+--> wie Prozesssteuerung
+
+Termin Finder
+
+Survey
+
+Listen Form (nächstes Element automatisch anfügen)
+
+VersionTextContentType
+
+
+alle Site nach Site oder Admin
+
+
+
+
 
 
 Nemundo\Content

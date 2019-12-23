@@ -34,7 +34,9 @@ class WikiPageContentForm extends AbstractContentForm
         $item->title=$this->pageTitle->getValue();
         $item->saveItem();
 
+        if ($this->appendParameter) {
         $this->redirectSite->addParameter(new WikiParameter($item->dataId));
+        }
 
         // TODO: Implement onSubmit() method.
     }

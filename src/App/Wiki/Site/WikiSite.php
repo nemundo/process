@@ -19,20 +19,18 @@ use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\App\Wiki\Data\Wiki\WikiReader;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\Content\Com\Dropdown\ContentTypeDropdown;
-use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Template\Container\DocumentParentContainer;
 use Nemundo\Process\Template\Type\DocumentContentType;
 use Nemundo\Process\Template\Type\LargeTextContentType;
 use Nemundo\Process\Template\Type\WebImageContentType;
 use Nemundo\Process\Template\Type\YoutubeContentType;
-use Nemundo\ToDo\Com\ToDoParentContainer;
+use Nemundo\Srf\Content\Livestream\SrfLivestreamContentType;
 use Nemundo\ToDo\Workflow\Process\ToDoProcess;
 use Nemundo\ToDo\Workflow\Type\ToDoAddContentType;
 use Nemundo\Web\Site\AbstractSite;
-use Schleuniger\App\ChangeRequest\Workflow\Process\EcrProcess;
+
 
 class WikiSite extends AbstractSite
 {
@@ -111,11 +109,12 @@ class WikiSite extends AbstractSite
             /*$dropdown->addContentType(new IssueTrackerProcess());
             $dropdown->addContentType(new PhotoContentType());*/
             $dropdown->addContentType(new WebImageContentType());
-            $dropdown->addContentType(new EcrProcess());
+            //$dropdown->addContentType(new EcrProcess());
             $dropdown->addContentType(new YoutubeContentType());
             $dropdown->addContentType(new NewsContentType());
             $dropdown->addContentType(new DocumentContentType());
             $dropdown->addContentType(new ToDoAddContentType());
+            $dropdown->addContentType(new SrfLivestreamContentType());
 
 
             /*$dropdown = new ContentDropdown($layout->col2);
@@ -138,13 +137,14 @@ class WikiSite extends AbstractSite
             }
 
 
-
             foreach ($wikiItem->getChild() as $contentRow) {
 
                 $contentType = $contentRow->contentType->getContentType();
 
+                if ($contentType !==null) {
+
                 $subtitle = new AdminSubtitle($layout->col2);
-                $subtitle->content = $contentType->getSubject($contentRow->dataId) . ' - ' . $contentRow->dateTimeCreated->getShortDateTimeFormat() . ' ' . $contentRow->itemOrder;
+                $subtitle->content = $contentType->getSubject($contentRow->id) . ' - ' . $contentRow->dateTime->getShortDateTimeFormat();
 
                 $btn = new AdminIconSiteButton($layout->col2);
                 $btn->site = clone(ContentDeleteSite::$site);
@@ -157,24 +157,28 @@ class WikiSite extends AbstractSite
 
                 if ($contentType->hasViewSite()) {
                     $btn = new AdminSiteButton($layout->col2);
-                    $btn->site = $contentType->getViewSite($contentRow->dataId);
+                    $btn->site = $contentType->getViewSite($contentRow->id);
                 }
 
                 $div = new Div($layout->col2);
 
                 $view = $contentType->getView($div);
-                $view->dataId = $contentRow->dataId;
+                $view->dataId = $contentRow->id;
+
 
                 (new Hr($layout->col2));
+
+                }
 
             }
 
 
+            /*
             $container = new ToDoParentContainer($layout->col3);
             $container->parentId = $wikiId;
 
             $container = new DocumentParentContainer($layout->col3);
-            $container->parentId = $wikiId;
+            $container->parentId = $wikiId;*/
 
         }
 

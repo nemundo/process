@@ -11,6 +11,7 @@ use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Process\Content\Data\Content\ContentReader;
+use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Item\AbstractContentItem;
 use Nemundo\Process\Workflow\Content\Item\Status\DateTimeUserIdStatusItem;
 use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
@@ -119,7 +120,7 @@ abstract class AbstractWorkflowItem extends AbstractContentItem
         $data->subject = $this->subject;
         $data->assignment = $this->assignment;
         $data->dateTime = $this->dateTime;
-        $data->userId = $this->mitarbeiterId;
+        $data->userId = $this->userId;
         $this->dataId = $data->save();
 
         $this->saveContent();
@@ -128,7 +129,7 @@ abstract class AbstractWorkflowItem extends AbstractContentItem
         $builder->parentId = $this->dataId;
         $builder->contentType = $this->contentType->startStatus;
         $builder->dateTime = $this->dateTime;
-        $builder->mitarbeiterId = $this->mitarbeiterId;
+        $builder->userId = $this->userId;
         $builder->saveItem();
 
 
@@ -338,12 +339,24 @@ abstract class AbstractWorkflowItem extends AbstractContentItem
     private function getDateTime($sortOrder)
     {
 
+        $reader = new TreeReader();
+        $reader->model->loadChild();
+        //$reader->model->child->loadContentType();
+        $reader->filter->andEqual($reader->model->parentId, $this->dataId);
+        $reader->addOrder($reader->model->id, $sortOrder);
+        $dateTime = $reader->getRow()->child->dateTime;
+
+        return $dateTime;
+
+
+       /* $this->getChild()
+
         $reader = new ContentReader();
         $reader->filter->andEqual($reader->model->parentId, $this->dataId);
         $reader->addOrder($reader->model->id, $sortOrder);
         $dateTime = $reader->getRow()->dateTimeCreated;
 
-        return $dateTime;
+        return $dateTime;*/
 
     }
 

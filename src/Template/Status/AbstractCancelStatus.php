@@ -18,8 +18,8 @@ class AbstractCancelStatus extends AbstractProcessStatus
     {
 
 
-        $this->label[LanguageCode::EN] = 'Cancel';
-        $this->label[LanguageCode::DE] = 'Abbruch';
+        $this->type[LanguageCode::EN] = 'Cancel';
+        $this->type[LanguageCode::DE] = 'Abbruch';
 
         //$this->id='510c9d20-74cc-43b6-82d3-d6a6df487813';
 

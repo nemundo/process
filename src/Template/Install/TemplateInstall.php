@@ -5,8 +5,15 @@ namespace Nemundo\Process\Template\Install;
 
 
 use Nemundo\Model\Setup\ModelCollectionSetup;
+use Nemundo\Process\App\News\Type\NewsContentType;
+use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
+use Nemundo\Process\Content\Setup\ContentTypeSetup;
+use Nemundo\Process\Template\Content\User\UserContentType;
 use Nemundo\Process\Template\Data\TemplateCollection;
 use Nemundo\Process\Template\Status\DocumentDeleteProcessStatus;
+use Nemundo\Process\Template\Type\DocumentContentType;
+use Nemundo\Process\Template\Type\LargeTextContentType;
+use Nemundo\Process\Template\Type\WebImageContentType;
 use Nemundo\Process\Workflow\Setup\StatusSetup;
 use Nemundo\Project\Install\AbstractInstall;
 
@@ -24,14 +31,15 @@ class TemplateInstall extends AbstractInstall
         //$setup->addStatus(new ReopenStatus());
 
 
-        /*
+
         $setup = new ContentTypeSetup();
         $setup->addContentType(new LargeTextContentType());
         $setup->addContentType(new DocumentContentType());
 
         $setup->addContentType(new NewsContentType());
         $setup->addContentType(new WikiPageContentType());
-        $setup->addContentType(new WebImageContentType());*/
+        $setup->addContentType(new WebImageContentType());
+$setup->addContentType(new UserContentType());
 
 
 

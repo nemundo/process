@@ -16,7 +16,7 @@ trait ProcessStatusTrait
     /**
      * @var string|string[]
      */
-    public $label;
+    public $type;
     // statusLabel
 
     /**
@@ -70,7 +70,7 @@ trait ProcessStatusTrait
 
         $logText = $this->logText;
         if ($logText == null) {
-            $logText = (new Translation())->getText( $this->label);
+            $logText = (new Translation())->getText( $this->type);
         }
 
         return $logText;

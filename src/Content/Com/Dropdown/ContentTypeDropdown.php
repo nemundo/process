@@ -40,7 +40,7 @@ class ContentTypeDropdown extends BootstrapSiteDropdown
 
             $site = clone($this->redirectSite);
             $site->addParameter(new ContentTypeParameter($contentType->id));
-            $site->title = $contentType->getClassNameWithoutNamespace();
+            $site->title = $contentType->type;  //getClassNameWithoutNamespace();
             $this->addSite($site);
 
         }

@@ -9,46 +9,47 @@ protected $model;
 /**
 * @var string
 */
-public $contentTypeId;
+public $id;
 
 /**
 * @var string
 */
-public $dataId;
+public $subject;
+
+/**
+* @var string
+*/
+public $text;
 
 /**
 * @var \Nemundo\Core\Type\DateTime\DateTime
 */
-public $dateTimeCreated;
+public $dateTime;
 
 /**
 * @var string
 */
-public $parentId;
-
-/**
-* @var int
-*/
-public $itemOrder;
+public $userId;
 
 /**
 * @var string
 */
-public $userCreatedId;
+public $contentTypeId;
 
 public function __construct() {
 parent::__construct();
 $this->model = new ContentModel();
-$this->dateTimeCreated = new \Nemundo\Core\Type\DateTime\DateTime();
+$this->dateTime = new \Nemundo\Core\Type\DateTime\DateTime();
 }
 public function save() {
+$id = $this->id;
+$this->typeValueList->setModelValue($this->model->id, $id);
+$this->typeValueList->setModelValue($this->model->subject, $this->subject);
+$this->typeValueList->setModelValue($this->model->text, $this->text);
+$property = new \Nemundo\Model\Data\Property\DateTime\DateTimeDataProperty($this->model->dateTime, $this->typeValueList);
+$property->setValue($this->dateTime);
+$this->typeValueList->setModelValue($this->model->userId, $this->userId);
 $this->typeValueList->setModelValue($this->model->contentTypeId, $this->contentTypeId);
-$this->typeValueList->setModelValue($this->model->dataId, $this->dataId);
-$property = new \Nemundo\Model\Data\Property\DateTime\DateTimeDataProperty($this->model->dateTimeCreated, $this->typeValueList);
-$property->setValue($this->dateTimeCreated);
-$this->typeValueList->setModelValue($this->model->parentId, $this->parentId);
-$this->typeValueList->setModelValue($this->model->itemOrder, $this->itemOrder);
-$this->typeValueList->setModelValue($this->model->userCreatedId, $this->userCreatedId);
 $id = parent::save();
 return $id;
 }

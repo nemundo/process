@@ -23,8 +23,8 @@ class LargeTextContentType extends AbstractContentType
        $this->formClass=LargeTextContentForm::class;
        $this->viewClass= LargeTextContentView::class;
 
-       //$this->label='Large Text';
-        $this->label = 'LARGE TEXT';
+       $this->type='Large Text';
+        $this->type = 'LARGE TEXT';
 
 
     }

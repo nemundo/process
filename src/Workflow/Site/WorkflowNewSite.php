@@ -51,7 +51,7 @@ class WorkflowNewSite extends AbstractSite
         $process = $processRow->getProcess();
 
         $title = new AdminTitle($page);
-        $title->content = $process->process;
+        $title->content = $process->type;
 
         $view = new ProcessView($page);
         $view->contentType = $process;

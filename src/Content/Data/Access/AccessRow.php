@@ -22,7 +22,7 @@ public $id;
 public $documentId;
 
 /**
-* @var \Nemundo\Process\Content\Data\Document\DocumentRow
+* @var \Nemundo\Process\Content\Data\Content\ContentRow
 */
 public $document;
 
@@ -37,12 +37,12 @@ $this->row = $row;
 $this->id = $this->getModelValue($model->id);
 $this->documentId = $this->getModelValue($model->documentId);
 if ($model->document !== null) {
-$this->loadNemundoProcessContentDataDocumentDocumentdocumentRow($model->document);
+$this->loadNemundoProcessContentDataContentContentdocumentRow($model->document);
 }
 $property = new \Nemundo\Workflow\App\Identification\Model\IdentificationReaderProperty($row, $model->identification);
 $this->identification = $property->getValue();
 }
-private function loadNemundoProcessContentDataDocumentDocumentdocumentRow($model) {
-$this->document = new \Nemundo\Process\Content\Data\Document\DocumentRow($this->row, $model);
+private function loadNemundoProcessContentDataContentContentdocumentRow($model) {
+$this->document = new \Nemundo\Process\Content\Data\Content\ContentRow($this->row, $model);
 }
 }

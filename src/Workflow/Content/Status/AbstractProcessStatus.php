@@ -13,6 +13,7 @@ abstract class AbstractProcessStatus extends AbstractContentType
     use ProcessStatusTrait;
 
 
+    /*
     public function getViewSite($dataId)
     {
 
@@ -22,7 +23,7 @@ abstract class AbstractProcessStatus extends AbstractContentType
 
         return $site;
 
-    }
+    }*/
 
     /**
      * @param AbstractHtmlContainer $parent

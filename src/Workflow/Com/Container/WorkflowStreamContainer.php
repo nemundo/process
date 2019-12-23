@@ -23,11 +23,13 @@ class WorkflowStreamContainer extends AbstractWorkflowContainer
 
                 $widget = new AdminWidget($this);
 //            $widget->widgetTitle = $status->getLogText($logRow->dataId) . ' ' . $logRow->user->displayName . ' ' . $logRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat();
-                $widget->widgetTitle =$status->getSubject($logRow->dataId) . ' ' . $logRow->userCreated->displayName . ' ' . $logRow->dateTimeCreated->getShortDateTimeLeadingZeroFormat();
+
+
+                $widget->widgetTitle =$status->getSubject($logRow->id) . ' ' . $logRow->user->displayName . ' ' . $logRow->dateTime->getShortDateTimeLeadingZeroFormat();
 
                 if ($status->hasView()) {
                     $view = $status->getView($widget);
-                    $view->dataId = $logRow->dataId;
+                    $view->dataId = $logRow->id;  //dataId;
                 }
 
             }

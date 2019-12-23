@@ -35,9 +35,8 @@ class ContentEditSite extends AbstractEditIconSite
 
         $reader = new ContentReader();
         $reader->model->loadContentType();
-        $reader->filter->andEqual($reader->model->dataId, $dataId);
-
-        $contentRow = $reader->getRow();
+        //$reader->filter->andEqual($reader->model->dataId, $dataId);
+        $contentRow = $reader->getRowById($dataId);
 
         $contentType = $contentRow->contentType->getContentType();
 

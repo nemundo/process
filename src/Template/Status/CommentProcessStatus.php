@@ -18,8 +18,8 @@ class CommentProcessStatus extends AbstractProcessStatus
     public function __construct()
     {
 
-        $this->label[LanguageCode::EN] = 'Comment';
-        $this->label[LanguageCode::DE] = 'Kommentar';
+        $this->type[LanguageCode::EN] = 'Comment';
+        $this->type[LanguageCode::DE] = 'Kommentar';
         $this->id = '63fa85d4-4c49-42cc-bd0d-af00a7d96458';
         $this->changeStatus = false;
         $this->formClass = CommentForm::class;

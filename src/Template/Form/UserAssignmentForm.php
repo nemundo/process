@@ -44,7 +44,7 @@ class UserAssignmentForm extends AbstractStatusForm
 
         $item = new UserAssignmentItem();
         $item->parentId = $this->parentId;
-        $item->mitarbeiterId = $this->user->getValue();
+        $item->userId = $this->user->getValue();
         $item->saveItem();
 
     }

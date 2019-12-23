@@ -20,7 +20,6 @@ class ContentDeleteSite extends AbstractDeleteIconSite
 
     protected function loadSite()
     {
-        //$this->title = 'Content';
         $this->url = 'content-delete';
         ContentDeleteSite::$site = $this;
     }
@@ -33,18 +32,20 @@ class ContentDeleteSite extends AbstractDeleteIconSite
         $dataId = (new DataIdParameter())->getValue();
 
 
+
         $reader = new ContentReader();
         $reader->model->loadContentType();
-        $reader->filter->andEqual($reader->model->dataId, $dataId);
+        //$reader->filter->andEqual($reader->model->dataId, $dataId);
 
-        $contentRow = $reader->getRow();
+        $contentRow = $reader->getRowById($dataId);
 
         $contentType = $contentRow->contentType->getContentType();
 
-        $contentItem = $contentType->getItem($contentRow->dataId);
+        $contentItem = $contentType->getItem($contentRow->id);
         $contentItem->deleteItem();
 
         (new UrlReferer())->redirect();
+
 
 
     }

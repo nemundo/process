@@ -11,6 +11,11 @@ public $id;
 */
 public $phpClass;
 
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $contentType;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = ContentTypeModel::class;
@@ -29,6 +34,13 @@ $this->phpClass->tableName = $this->parentFieldName . "_" . $this->externalTable
 $this->phpClass->aliasFieldName = $this->phpClass->tableName . "_" . $this->phpClass->fieldName;
 $this->phpClass->label = "Php Class";
 $this->addType($this->phpClass);
+
+$this->contentType = new \Nemundo\Model\Type\Text\TextType();
+$this->contentType->fieldName = "content_type";
+$this->contentType->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->contentType->aliasFieldName = $this->contentType->tableName . "_" . $this->contentType->fieldName;
+$this->contentType->label = "Content Type";
+$this->addType($this->contentType);
 
 }
 }

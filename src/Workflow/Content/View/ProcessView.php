@@ -8,13 +8,14 @@ use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Admin\Com\Widget\AdminWidget;
 use Nemundo\Com\FormBuilder\RedirectTrait;
 use Nemundo\Html\Block\Hr;
+use Nemundo\Process\App\Favorite\Com\FavoriteButton;
 use Nemundo\Process\Workflow\Com\Container\AbstractWorkflowContainer;
 use Nemundo\Process\Workflow\Com\Container\StatusFormContainer;
 use Nemundo\Process\Workflow\Com\Container\WorkflowStreamContainer;
 use Nemundo\Process\Workflow\Com\Layout\WorkflowLayout;
 use Nemundo\Process\Workflow\Com\Menu\HistoryProcessMenu;
 use Nemundo\Process\Workflow\Com\Menu\ProcessMenu;
-use Nemundo\Process\Workflow\Com\Menu\ProcessMenuOld;
+
 use Nemundo\Process\Workflow\Com\Table\SourceTable;
 use Nemundo\Process\Workflow\Com\Table\WorkflowLogTable;
 use Nemundo\Process\Content\View\AbstractContentView;
@@ -87,6 +88,11 @@ class ProcessView extends AbstractContentView
 
         if ($this->dataId !== null) {
 
+
+            $btn=new FavoriteButton($layout->col3);
+            $btn->contentType = $this->contentType;
+            $btn->dataId = $this->dataId;
+
             if ($this->contentType->baseViewClass !== null) {
 
                 /** @var AbstractWorkflowContainer $view */
@@ -154,7 +160,7 @@ class ProcessView extends AbstractContentView
 
         if ($formStatus !== null) {
             $widget = new AdminWidget($layout->col2);
-            $widget->widgetTitle = $formStatus->label;
+            $widget->widgetTitle = $formStatus->type;
 
             $form = new StatusFormContainer($widget);
             $form->formStatus = $formStatus;
@@ -172,8 +178,8 @@ class ProcessView extends AbstractContentView
         $table = new SourceTable($layout->col3);
         $table->workflowId =  $this->dataId;
 
-        $table = new ToDoParentContainer($layout->col3);
-        $table->parentId = $this->dataId;
+        //$table = new ToDoParentContainer($layout->col3);
+        //$table->parentId = $this->dataId;
 
 
         $table = new WorkflowLogTable($layout->col3);

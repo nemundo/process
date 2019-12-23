@@ -25,7 +25,7 @@ abstract class AbstractProcess extends AbstractContentType
     /**
      * @var string
      */
-    public $process;
+    public $type;
 
     /**
      * @var string

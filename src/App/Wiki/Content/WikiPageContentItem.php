@@ -6,6 +6,7 @@ namespace Nemundo\Process\App\Wiki\Content;
 
 use Nemundo\Process\App\Wiki\Data\Wiki\Wiki;
 use Nemundo\Process\Content\Item\AbstractContentItem;
+use Nemundo\Process\Search\Index\SearchIndexBuilder;
 
 class WikiPageContentItem extends AbstractContentItem
 {
@@ -23,6 +24,11 @@ class WikiPageContentItem extends AbstractContentItem
         $data->save();
 
         $this->saveContent();
+
+        $search = new SearchIndexBuilder($this->dataId);
+        $search->addText($this->title);
+        $search->saveIndex();
+
 
     }
 
