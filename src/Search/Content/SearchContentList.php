@@ -38,9 +38,9 @@ class SearchContentList extends AbstractContentList
         $reader->model->loadContent();
         $reader->model->content->loadContentType();
 
-        foreach ($textBold->getWordIdList() as $wordId) {
 
-            //(new Debug())->write($wordId);
+        // DATA IN
+        foreach ($textBold->getWordIdList() as $wordId) {
         $reader->filter->orEqual($reader->model->wordId, $wordId);  // $form->getWordId());
         }
 

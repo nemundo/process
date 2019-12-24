@@ -37,6 +37,82 @@
         },
         {
             "template": "default",
+            "model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35",
+            "label": "Content",
+            "class_name": "Content",
+            "table_name": "content2_content",
+            "namespace": "Nemundo\\Process\\Content\\Data\\Content",
+            "row_class_name": "",
+            "primary_index": "text_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Data Id",
+                    "field_name": "data_id",
+                    "variable_name": "dataId",
+                    "allow_null": false,
+                    "is_deleted": true,
+                    "length": "36"
+                },
+                {
+                    "type": "text",
+                    "label": "Subject",
+                    "field_name": "subject",
+                    "variable_name": "subject",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "large_text",
+                    "label": "Text",
+                    "field_name": "text",
+                    "variable_name": "text",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "date_time",
+                    "label": "Date Time",
+                    "field_name": "date_time",
+                    "variable_name": "dateTime",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "user",
+                    "label": "User",
+                    "field_name": "user",
+                    "variable_name": "user",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "Content Type",
+                    "field_name": "content_type",
+                    "variable_name": "contentType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "content_type",
+                    "index_type": "index",
+                    "field_name": []
+                },
+                {
+                    "index_name": "date_time",
+                    "index_type": "index",
+                    "field_name": []
+                }
+            ]
+        },
+        {
+            "template": "default",
             "model_id": "e7460973-aefe-494b-9c8f-9d1ee0858695",
             "label": "Content",
             "class_name": "Content",
@@ -110,65 +186,32 @@
         },
         {
             "template": "default",
-            "model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35",
-            "label": "Content",
-            "class_name": "Content",
-            "table_name": "content2_content",
-            "namespace": "Nemundo\\Process\\Content\\Data\\Content",
+            "model_id": "3e5cd4e5-5315-413b-9eea-6b4e0fd7e762",
+            "label": "Content Group",
+            "class_name": "ContentGroup",
+            "table_name": "content_content_group",
+            "namespace": "Nemundo\\Process\\Content\\Data\\ContentGroup",
             "row_class_name": "",
-            "primary_index": "text_id",
+            "primary_index": "auto_increment",
             "is_deleted": false,
             "type": [
                 {
-                    "type": "text",
-                    "label": "Data Id",
-                    "field_name": "data_id",
-                    "variable_name": "dataId",
-                    "allow_null": false,
-                    "is_deleted": true,
-                    "length": "36"
-                },
-                {
-                    "type": "text",
-                    "label": "Subject",
-                    "field_name": "subject",
-                    "variable_name": "subject",
+                    "type": "external",
+                    "label": "Content",
+                    "field_name": "content",
+                    "variable_name": "content",
                     "allow_null": false,
                     "is_deleted": false,
-                    "length": "255"
-                },
-                {
-                    "type": "large_text",
-                    "label": "Text",
-                    "field_name": "text",
-                    "variable_name": "text",
-                    "allow_null": false,
-                    "is_deleted": false
-                },
-                {
-                    "type": "date_time",
-                    "label": "Date Time",
-                    "field_name": "date_time",
-                    "variable_name": "dateTime",
-                    "allow_null": false,
-                    "is_deleted": false
-                },
-                {
-                    "type": "user",
-                    "label": "User",
-                    "field_name": "user",
-                    "variable_name": "user",
-                    "allow_null": false,
-                    "is_deleted": false
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
                 },
                 {
                     "type": "external",
-                    "label": "Content Type",
-                    "field_name": "content_type",
-                    "variable_name": "contentType",
+                    "label": "Group",
+                    "field_name": "group",
+                    "variable_name": "group",
                     "allow_null": false,
                     "is_deleted": false,
-                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                    "external_model_id": "c6e00009-24e0-4cef-82ee-34a89152415f"
                 }
             ],
             "index": []

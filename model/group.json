@@ -1,0 +1,71 @@
+{
+    "app": "Group",
+    "name": "group",
+    "namespace": "Nemundo\\Process\\Group",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "c6e00009-24e0-4cef-82ee-34a89152415f",
+            "label": "Group",
+            "class_name": "Group",
+            "table_name": "group_group",
+            "namespace": "Nemundo\\Process\\Group\\Data\\Group",
+            "row_class_name": "",
+            "primary_index": "text_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Group",
+                    "field_name": "group",
+                    "variable_name": "group",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "fb520268-5a48-4ebf-baac-0f3bfa028945",
+            "label": "Group User",
+            "class_name": "GroupUser",
+            "table_name": "group_group_user",
+            "namespace": "Nemundo\\Process\\Group\\Data\\GroupUser",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Group",
+                    "field_name": "group",
+                    "variable_name": "group",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "c6e00009-24e0-4cef-82ee-34a89152415f"
+                },
+                {
+                    "type": "user",
+                    "label": "User",
+                    "field_name": "user",
+                    "variable_name": "user",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "group_user",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "group",
+                        "user"
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -9,6 +9,7 @@ use Nemundo\Process\App\Favorite\Install\FavoriteInstall;
 use Nemundo\Process\App\Inbox\Install\InboxInstall;
 use Nemundo\Process\App\Wiki\Install\WikiInstall;
 use Nemundo\Process\Content\Install\ContentInstall;
+use Nemundo\Process\Group\Data\GroupCollection;
 use Nemundo\Process\Script\ProcessCleanScript;
 use Nemundo\Process\Script\ProcessTestScript;
 use Nemundo\Process\Search\Data\SearchCollection;
@@ -44,6 +45,7 @@ class ProcessInstall extends AbstractInstall
 
         $setup=new ModelCollectionSetup();
         $setup->addCollection(new SearchCollection());
+        $setup->addCollection(new GroupCollection());
 
         $setup = new ScriptSetup();
         $setup->addScript(new ProcessCleanScript());

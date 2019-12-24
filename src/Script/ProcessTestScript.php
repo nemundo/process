@@ -6,6 +6,7 @@ namespace Nemundo\Process\Script;
 
 use Nemundo\App\Script\Type\AbstractConsoleScript;
 use Nemundo\Core\Structure\ForLoop;
+use Nemundo\Process\Group\Content\GroupContentItem;
 use Nemundo\Process\Template\Content\User\UserContentItem;
 
 class ProcessTestScript extends AbstractConsoleScript
@@ -22,9 +23,18 @@ class ProcessTestScript extends AbstractConsoleScript
         $loop=new ForLoop();
         foreach ($loop->getData() as $number){
 
+
+            $email =  'test'.$number.'@test.com';
+
             $item=new UserContentItem();
-            $item->email = 'test'.$number.'@test.com';
+            $item->email = $email;
             $item->saveItem();
+
+            $groupItem = new GroupContentItem();
+            $groupItem->group=$email;
+            $groupItem->saveItem();
+            $groupItem->addUser($item->dataId);
+
         }
 
     }

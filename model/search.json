@@ -65,7 +65,13 @@
                     "length": "50"
                 }
             ],
-            "index": []
+            "index": [
+                {
+                    "index_name": "word",
+                    "index_type": "search_index",
+                    "field_name": []
+                }
+            ]
         }
     ]
 }

@@ -94,10 +94,7 @@ class ContentItemSite extends AbstractSite
 
             }
 
-
         }
-
-
 
         $btn = new AdminIconSiteButton($page);
         $btn->site=ContentEditSite::$site;

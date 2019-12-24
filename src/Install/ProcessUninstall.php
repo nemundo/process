@@ -9,6 +9,7 @@ use Nemundo\Process\App\Favorite\Data\FavoriteCollection;
 use Nemundo\Process\App\Inbox\Install\InboxUninstall;
 use Nemundo\Process\App\Wiki\Install\WikiUninstall;
 use Nemundo\Process\Content\Install\ContentUninstall;
+use Nemundo\Process\Group\Data\GroupCollection;
 use Nemundo\Process\Search\Data\SearchCollection;
 use Nemundo\Process\Workflow\Install\WorkflowUninstall;
 use Nemundo\Project\Install\AbstractUninstall;
@@ -35,6 +36,7 @@ class ProcessUninstall extends AbstractUninstall
         $setup->removeCollection(new SwissPostCollection());
         $setup->removeCollection(new SearchCollection());
         $setup->removeCollection(new FavoriteCollection());
+        $setup->removeCollection(new GroupCollection());
 
     }
 

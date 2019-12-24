@@ -32,6 +32,7 @@ class FavoriteContainer extends AbstractHtmlContainer
         $favoriteReader->model->loadContent();
         $favoriteReader->model->content->loadContentType();
         $favoriteReader->filter->andEqual($favoriteReader->model->userId, (new UserSessionType())->userId);
+        $favoriteReader->addOrder($favoriteReader->model->content->subject);
 
         foreach ($favoriteReader->getData() as $favoriteRow) {
 

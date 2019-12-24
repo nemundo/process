@@ -4,13 +4,12 @@
 namespace Nemundo\Process\Site;
 
 
-use Nemundo\Process\App\Favorite\Site\FavoriteSaveSite;
 use Nemundo\Process\App\Favorite\Site\FavoriteSite;
 use Nemundo\Process\App\Inbox\Site\InboxSite;
 use Nemundo\Process\App\Wiki\Site\WikiSite;
 use Nemundo\Process\Content\Site\ContentSite;
 use Nemundo\Process\Content\Site\ContentTypeSite;
-use Nemundo\Process\Content\Site\DocumentSite;
+use Nemundo\Process\Group\Site\GroupSite;
 use Nemundo\Process\Search\Site\SearchSite;
 use Nemundo\Process\Template\Site\ProcessTemplateSite;
 use Nemundo\Process\Workflow\Site\WorkflowSite;
@@ -45,8 +44,9 @@ class ProcessSite extends AbstractSite
         new ToDoSite($this);
         new SearchSite($this);
         new FavoriteSite($this);
-
+        new GroupSite($this);
         new StartSite($this);
+
 
 
     }

@@ -69,18 +69,19 @@ class ContentSite extends AbstractSite
         $table = new AdminClickableTable($page);
 
         $header = new TableHeader($table);
-        $header->addText('Php Class');
-        //$header->addText('Parent Id');
+        $header->addText('Content Type');
         $header->addText('Data Id');
         $header->addText('Subject (Content)');
         $header->addText('Subject (Item)');
         $header->addText('Date/Time');
+        $header->addText('User');
+        $header->addEmpty();
 
 
         $contentReader = new ContentPaginationReader();
         $contentReader->model->loadContentType();
         $contentReader->model->loadUser();
-        $contentReader->addOrder($contentReader->model->id, SortOrder::DESCENDING);
+        $contentReader->addOrder($contentReader->model->dateTime, SortOrder::DESCENDING);
         $contentReader->paginationLimit=50;
 
         $contentTypeParameter = new ContentTypeParameter();

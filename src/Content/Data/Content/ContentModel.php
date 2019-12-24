@@ -95,6 +95,12 @@ $this->contentTypeId->aliasFieldName = "content2_content_content_type";
 $this->contentTypeId->label = "Content Type";
 $this->contentTypeId->allowNullValue = false;
 
+$index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
+$index->indexName = "content_type";
+
+$index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
+$index->indexName = "date_time";
+
 }
 public function loadUser() {
 if ($this->user == null) {

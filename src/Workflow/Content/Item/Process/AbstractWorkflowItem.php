@@ -13,6 +13,7 @@ use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Item\AbstractContentItem;
+use Nemundo\Process\Search\Index\SearchIndexBuilder;
 use Nemundo\Process\Workflow\Content\Item\Status\DateTimeUserIdStatusItem;
 use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
@@ -38,6 +39,9 @@ abstract class AbstractWorkflowItem extends AbstractContentItem
      * @var AbstractProcess
      */
     public $contentType;
+
+
+
 
     /**
      * @var int
@@ -132,6 +136,11 @@ abstract class AbstractWorkflowItem extends AbstractContentItem
         $builder->userId = $this->userId;
         $builder->saveItem();
 
+        $builder = new SearchIndexBuilder($this->dataId);
+        $builder->addWord($this->workflowNumber);
+        $builder->addText($this->subject);
+        $builder->saveIndex();
+
 
     }
 
@@ -207,12 +216,10 @@ abstract class AbstractWorkflowItem extends AbstractContentItem
     public function clearAssignment()
     {
 
-
         $update = new WorkflowUpdate();
-        $update->assignment->clearIdentification();  // = $assignment;
+        $update->assignment->clearIdentification();
         $update->updateById($this->dataId);
 
-        // Assignment reset
     }
 
 
@@ -271,8 +278,7 @@ abstract class AbstractWorkflowItem extends AbstractContentItem
         // save in private variable
        // $workflowRow =null;
         if ($this->workflowRow == null) {
-        //    if ($this->dataId !== null) {
-         $reader = new WorkflowReader();  //)->getRowById($this->dataId);
+         $reader = new WorkflowReader();
             foreach ($reader->getData() as $workflowCustomRow) {
                 $this->workflowRow=$workflowCustomRow;
             }
@@ -282,31 +288,6 @@ abstract class AbstractWorkflowItem extends AbstractContentItem
 
     }
 
-
-    // getWorkflowHistory
-    /*public function getWorkflowLog()
-     {
-
-
-         $reader = new ContentReader();
-         $reader->model->loadContentType();
-         $reader->model->loadUserCreated();
-         $reader->filter->andEqual($reader->model->parentId, $this->workflowId);
-         $reader->addOrder($reader->model->itemOrder);
-
-         return $reader->getData();
-
-         /*
-                 $reader = new WorkflowLogReader();
-                 $reader->model->loadStatus();
-                 $reader->model->loadUser();
-
-                 $reader->filter->andEqual($reader->model->workflowId, $this->workflowId);
-                 $reader->addOrder($reader->model->id);
-                 return $reader->getData();*/
-
-
-    //}
 
 
     public function getStart()
@@ -341,22 +322,11 @@ abstract class AbstractWorkflowItem extends AbstractContentItem
 
         $reader = new TreeReader();
         $reader->model->loadChild();
-        //$reader->model->child->loadContentType();
         $reader->filter->andEqual($reader->model->parentId, $this->dataId);
         $reader->addOrder($reader->model->id, $sortOrder);
         $dateTime = $reader->getRow()->child->dateTime;
 
         return $dateTime;
-
-
-       /* $this->getChild()
-
-        $reader = new ContentReader();
-        $reader->filter->andEqual($reader->model->parentId, $this->dataId);
-        $reader->addOrder($reader->model->id, $sortOrder);
-        $dateTime = $reader->getRow()->dateTimeCreated;
-
-        return $dateTime;*/
 
     }
 
@@ -374,17 +344,6 @@ abstract class AbstractWorkflowItem extends AbstractContentItem
 
         return $day;
 
-
-    }
-
-
-    public function getLogCount()
-    {
-
-        $count = new ContentLogCount();
-        $count->filter->andEqual($count->model->dataId, $this->dataId);
-
-        return $count->getCount();
 
     }
 

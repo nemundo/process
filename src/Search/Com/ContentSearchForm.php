@@ -7,8 +7,10 @@ use Nemundo\Admin\Com\Button\AdminSearchButton;
 use Nemundo\App\Search\Parameter\SearchQueryParameter;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Html\Character\HtmlCharacter;
+use Nemundo\Package\Bootstrap\Autocomplete\BootstrapAutocompleteMultipleValueTextBox;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
+use Nemundo\Process\Search\Site\SearchJsonSite;
 
 
 class ContentSearchForm extends SearchForm
@@ -24,12 +26,21 @@ class ContentSearchForm extends SearchForm
 
         $formRow = new BootstrapFormRow($this);
 
-        $this->query = new BootstrapTextBox($formRow);
+        /*$this->query = new BootstrapTextBox($formRow);
         $this->query->name = (new SearchQueryParameter())->parameterName;
         $this->query->searchItem = true;
         $this->query->placeholder = 'Search';
         $this->query->label = HtmlCharacter::NON_BREAKING_SPACE;
-        $this->query->autofocus = true;
+        $this->query->autofocus = true;*/
+
+        $this->query = new BootstrapAutocompleteMultipleValueTextBox($formRow);
+        $this->query->name = (new SearchQueryParameter())->parameterName;
+        $this->query->seperator = ' ';
+        $this->query->searchItem = true;
+        $this->query->placeholder = 'Search';
+        $this->query->label = HtmlCharacter::NON_BREAKING_SPACE;
+        $this->query->sourceSite = SearchJsonSite::$site;
+
 
         new AdminSearchButton($formRow);
 

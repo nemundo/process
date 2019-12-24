@@ -7,6 +7,7 @@ use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
+use Nemundo\Process\App\Favorite\Com\FavoriteContainer;
 use Nemundo\User\Type\UserSessionType;
 use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Process\App\Favorite\Data\Favorite\FavoriteReader;
@@ -33,6 +34,9 @@ class FavoriteSite extends AbstractSite
         $title->content = $this->title;
 
 
+        new FavoriteContainer($page);
+
+        /*
         $table = new AdminClickableTable($page);
 
         $header = new TableHeader($table);
@@ -69,14 +73,14 @@ class FavoriteSite extends AbstractSite
 
             //$row->addText($favoriteRow->user->displayName);
 
-            $site = clone(FavoriteDeleteSite::$site);
+        /*    $site = clone(FavoriteDeleteSite::$site);
             $site->addParameter(new FavoriteParameter($favoriteRow->id));
             $row->addIconSite($site);
 
             $row->addClickableSite($contentType->getViewSite($favoriteRow->contentId));  //$favoriteRow->dataId));
 
 
-        }
+        }*/
 
         $page->render();
 

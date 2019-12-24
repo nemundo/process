@@ -9,6 +9,7 @@ use Nemundo\Admin\Com\Widget\AdminWidget;
 use Nemundo\Com\FormBuilder\RedirectTrait;
 use Nemundo\Html\Block\Hr;
 use Nemundo\Process\App\Favorite\Com\FavoriteButton;
+use Nemundo\Process\Group\Com\GroupParentContainer;
 use Nemundo\Process\Workflow\Com\Container\AbstractWorkflowContainer;
 use Nemundo\Process\Workflow\Com\Container\StatusFormContainer;
 use Nemundo\Process\Workflow\Com\Container\WorkflowStreamContainer;
@@ -90,7 +91,7 @@ class ProcessView extends AbstractContentView
 
 
             $btn=new FavoriteButton($layout->col3);
-            $btn->contentType = $this->contentType;
+            //$btn->contentType = $this->contentType;
             $btn->dataId = $this->dataId;
 
             if ($this->contentType->baseViewClass !== null) {
@@ -184,6 +185,9 @@ class ProcessView extends AbstractContentView
 
         $table = new WorkflowLogTable($layout->col3);
         $table->workflowId = $this->dataId;
+
+        $container=new GroupParentContainer($layout->col3);
+        $container->parentId=$this->dataId;
 
         return parent::getContent();
 
