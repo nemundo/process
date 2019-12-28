@@ -7,9 +7,19 @@ use Nemundo\App\Script\Setup\ScriptSetup;
 use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\App\Favorite\Install\FavoriteInstall;
 use Nemundo\Process\App\Inbox\Install\InboxInstall;
+use Nemundo\Process\App\Survey\Content\Type\DescriptionContentType;
+use Nemundo\Process\App\Survey\Content\Type\OptionTextContentType;
+use Nemundo\Process\App\Survey\Content\Type\SurveyContentType;
+use Nemundo\Process\App\Survey\Data\SurveyCollection;
 use Nemundo\Process\App\Wiki\Install\WikiInstall;
 use Nemundo\Process\Content\Install\ContentInstall;
+use Nemundo\Process\Content\Script\ContentUpdateScript;
+use Nemundo\Process\Content\Setup\ContentTypeSetup;
+use Nemundo\Process\Geo\Data\GeoCollection;
+use Nemundo\Process\Group\Content\Group\GroupContentType;
 use Nemundo\Process\Group\Data\GroupCollection;
+use Nemundo\Process\Group\Setup\GroupSetup;
+use Nemundo\Process\Group\Type\PublicGroup;
 use Nemundo\Process\Script\ProcessCleanScript;
 use Nemundo\Process\Script\ProcessTestScript;
 use Nemundo\Process\Search\Data\SearchCollection;
@@ -46,18 +56,33 @@ class ProcessInstall extends AbstractInstall
         $setup=new ModelCollectionSetup();
         $setup->addCollection(new SearchCollection());
         $setup->addCollection(new GroupCollection());
+        $setup->addCollection(new GeoCollection());
+        $setup->addCollection(new SurveyCollection());
 
         $setup = new ScriptSetup();
         $setup->addScript(new ProcessCleanScript());
         $setup->addScript(new ProcessTestScript());
+        $setup->addScript(new ContentUpdateScript());
+
+        $setup=new ContentTypeSetup();
+        $setup->addContentType(new GroupContentType());
+
+        $setup->addContentType(new SurveyContentType());
+        $setup->addContentType(new OptionTextContentType());
+        $setup->addContentType(new DescriptionContentType());
+
+        $setup=new GroupSetup();
+        $setup->addGroup(new PublicGroup());
 
 
 
+        /*
         $reader = new UserReader();
         foreach ($reader->getData() as $userRow) {
             $item = new UserContentItem($userRow->id);
             $item->saveItem();
-        }
+            $item->addGroup(new PublicGroup());
+        }*/
 
 
 

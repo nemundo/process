@@ -25,9 +25,7 @@ class UserAssignmentItem extends AbstractContentItem
     public $userId;
 
 
-
-
-    public function saveItem()
+    protected function saveData()
     {
 
         $this->contentType=new UserAssignmentProcessStatus();

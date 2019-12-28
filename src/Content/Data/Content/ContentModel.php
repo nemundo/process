@@ -97,9 +97,11 @@ $this->contentTypeId->allowNullValue = false;
 
 $index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
 $index->indexName = "content_type";
+$index->addType($this->contentTypeId);
 
 $index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
 $index->indexName = "date_time";
+$index->addType($this->dateTime);
 
 }
 public function loadUser() {

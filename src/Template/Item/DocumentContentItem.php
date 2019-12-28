@@ -18,7 +18,8 @@ class DocumentContentItem extends AbstractContentItem
      */
     public $fileRequest;
 
-    public function saveItem()
+
+    protected function saveData()
     {
 
         $this->contentType = new DocumentContentType();
@@ -29,7 +30,7 @@ class DocumentContentItem extends AbstractContentItem
         $data->document->fromFileRequest($this->fileRequest);
         $data->save();
 
-        $this->saveContent();
+        //$this->saveContent();
 
     }
 

@@ -23,19 +23,18 @@ class CommentItem extends AbstractContentItem
     }
 
 
-    public function saveItem()
+    protected function saveData()
     {
-
-
-
-
 
         $data = new LargeText();
         $data->id=$this->dataId;
         $data->largeText = $this->comment;
         $data->save();
 
-        $this->saveContent();  //saveWorkflowLog();
+
+        $this->addSearchText($this->comment);
+
+        //$this->saveContent();  //saveWorkflowLog();
 
         // search index
 

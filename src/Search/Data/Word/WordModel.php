@@ -39,6 +39,7 @@ $this->word->length = 50;
 
 $index = new \Nemundo\Model\Definition\Index\ModelSearchIndex($this);
 $index->indexName = "word";
+$index->addType($this->word);
 
 }
 }

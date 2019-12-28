@@ -59,6 +59,37 @@
         },
         {
             "template": "default",
+            "model_id": "f1f0967e-35db-4715-8c44-0198426ced53",
+            "label": "Event",
+            "class_name": "Event",
+            "table_name": "template_event",
+            "namespace": "Nemundo\\Process\\Template\\Data\\Event",
+            "row_class_name": "",
+            "primary_index": "text_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "date",
+                    "label": "Date",
+                    "field_name": "date",
+                    "variable_name": "date",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "text",
+                    "label": "Event",
+                    "field_name": "event",
+                    "variable_name": "event",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "eab3bc8e-1377-4454-bdf2-53bdf1057b24",
             "label": "Large Text",
             "class_name": "LargeText",

@@ -6,6 +6,7 @@ namespace Nemundo\Process\Content\Item;
 
 use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Process\Content\Data\Tree\Tree;
+use Nemundo\Process\Content\Data\Tree\TreeDelete;
 use Nemundo\Process\Content\Data\Tree\TreeValue;
 
 class TreeItem extends AbstractBase
@@ -33,6 +34,17 @@ class TreeItem extends AbstractBase
         $data->itemOrder=$itemOrder;
         $data->save();
 
+
+
+    }
+
+
+    public function removeTree() {
+
+        $delete = new TreeDelete();
+        $delete->filter->andEqual($delete->model->parentId,$this->parentId);
+        $delete->filter->andEqual($delete->model->childId,$this->dataId);
+        $delete->delete();
 
 
     }

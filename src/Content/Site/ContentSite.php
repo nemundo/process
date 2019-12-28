@@ -71,7 +71,7 @@ class ContentSite extends AbstractSite
         $header = new TableHeader($table);
         $header->addText('Content Type');
         $header->addText('Data Id');
-        $header->addText('Subject (Content)');
+        $header->addText('Subject (Db Content)');
         $header->addText('Subject (Item)');
         $header->addText('Date/Time');
         $header->addText('User');
@@ -106,9 +106,10 @@ class ContentSite extends AbstractSite
                 //$row->addText($contentRow->parentId);
                 //$row->addText($contentRow->id);
 
-                $item = new ContentItem($contentRow->id);
-                $item->contentType = $contentType;
+                //$item = new ContentItem($contentRow->id);
+                //$item->contentType = $contentType;
 
+                $item = $contentType->getItem($contentRow->id);
                 $row->addText($item->getSubject());
 
                 //$row->addText($contentType->getSubject($contentRow->id));

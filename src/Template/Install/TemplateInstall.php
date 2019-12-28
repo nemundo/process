@@ -8,6 +8,7 @@ use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\App\News\Type\NewsContentType;
 use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
+use Nemundo\Process\Template\Content\Event\EventContentType;
 use Nemundo\Process\Template\Content\User\UserContentType;
 use Nemundo\Process\Template\Data\TemplateCollection;
 use Nemundo\Process\Template\Status\DocumentDeleteProcessStatus;
@@ -40,7 +41,7 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new WikiPageContentType());
         $setup->addContentType(new WebImageContentType());
 $setup->addContentType(new UserContentType());
-
+$setup->addContentType(new EventContentType());
 
 
 

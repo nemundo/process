@@ -47,12 +47,12 @@ abstract class AbstractStatusItem extends AbstractContentItem
 
         if ($this->contentType->changeStatus) {
 
-            $id = new StatusId();
+            /*$id = new StatusId();
             $id->filter->andEqual($id->model->contentTypeId,$this->contentType->id);
-            $stausId = $id->getId();
+            $stausId = $id->getId();*/
 
             $update = new WorkflowUpdate();
-            $update->statusId =$stausId;
+            $update->statusId = $this->contentType->id;  //   $stausId;
             $update->updateById($this->parentId);
         }
 

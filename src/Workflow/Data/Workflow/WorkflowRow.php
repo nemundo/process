@@ -37,7 +37,7 @@ public $subject;
 public $processId;
 
 /**
-* @var \Nemundo\Process\Workflow\Row\ProcessCustomRow
+* @var \Nemundo\Process\Content\Row\ContentTypeCustomRow
 */
 public $process;
 
@@ -52,7 +52,7 @@ public $workflowClosed;
 public $statusId;
 
 /**
-* @var \Nemundo\Process\Workflow\Row\StatusCustomRow
+* @var \Nemundo\Process\Content\Row\ContentTypeCustomRow
 */
 public $status;
 
@@ -90,12 +90,12 @@ $this->workflowNumber = $this->getModelValue($model->workflowNumber);
 $this->subject = $this->getModelValue($model->subject);
 $this->processId = $this->getModelValue($model->processId);
 if ($model->process !== null) {
-$this->loadNemundoProcessWorkflowDataProcessProcessprocessRow($model->process);
+$this->loadNemundoProcessContentDataContentTypeContentTypeprocessRow($model->process);
 }
 $this->workflowClosed = boolval($this->getModelValue($model->workflowClosed));
 $this->statusId = $this->getModelValue($model->statusId);
 if ($model->status !== null) {
-$this->loadNemundoProcessWorkflowDataStatusStatusstatusRow($model->status);
+$this->loadNemundoProcessContentDataContentTypeContentTypestatusRow($model->status);
 }
 $property = new \Nemundo\Workflow\App\Identification\Model\IdentificationReaderProperty($row, $model->assignment);
 $this->assignment = $property->getValue();
@@ -109,11 +109,11 @@ if ($model->user !== null) {
 $this->loadNemundoUserDataUserUseruserRow($model->user);
 }
 }
-private function loadNemundoProcessWorkflowDataProcessProcessprocessRow($model) {
-$this->process = new \Nemundo\Process\Workflow\Row\ProcessCustomRow($this->row, $model);
+private function loadNemundoProcessContentDataContentTypeContentTypeprocessRow($model) {
+$this->process = new \Nemundo\Process\Content\Row\ContentTypeCustomRow($this->row, $model);
 }
-private function loadNemundoProcessWorkflowDataStatusStatusstatusRow($model) {
-$this->status = new \Nemundo\Process\Workflow\Row\StatusCustomRow($this->row, $model);
+private function loadNemundoProcessContentDataContentTypeContentTypestatusRow($model) {
+$this->status = new \Nemundo\Process\Content\Row\ContentTypeCustomRow($this->row, $model);
 }
 private function loadNemundoUserDataUserUseruserRow($model) {
 $this->user = new \Nemundo\User\Data\User\UserRow($this->row, $model);

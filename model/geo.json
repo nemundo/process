@@ -2,5 +2,38 @@
     "app": "Geo",
     "name": "geo",
     "namespace": "Nemundo\\Process\\Geo",
-    "is_deleted": false
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "5d630988-afd0-4cca-a477-9dc0ffa5fd3a",
+            "label": "Geo",
+            "class_name": "Geo",
+            "table_name": "geo_geo",
+            "namespace": "Nemundo\\Process\\Geo\\Data\\Geo",
+            "row_class_name": "",
+            "primary_index": "text_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "geo_coordinate",
+                    "label": "Coordinate",
+                    "field_name": "coordinate",
+                    "variable_name": "coordinate",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "text",
+                    "label": "Place",
+                    "field_name": "place",
+                    "variable_name": "place",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": []
+        }
+    ]
 }

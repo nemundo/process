@@ -1,0 +1,72 @@
+{
+    "app": "Survey",
+    "name": "survey",
+    "namespace": "Nemundo\\Process\\App\\Survey",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "72012fa7-4257-46fd-9cb4-8a63baf17fa4",
+            "label": "Survey",
+            "class_name": "Survey",
+            "table_name": "survey_survey",
+            "namespace": "Nemundo\\Process\\App\\Survey\\Data\\Survey",
+            "row_class_name": "",
+            "primary_index": "text_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Name",
+                    "field_name": "name",
+                    "variable_name": "name",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Vorname",
+                    "field_name": "vorname",
+                    "variable_name": "vorname",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "ed60e6e2-e7fb-4c4b-9a1b-9590edac63ca",
+            "label": "Survey Option",
+            "class_name": "SurveyOption",
+            "table_name": "survey_survey_option",
+            "namespace": "Nemundo\\Process\\App\\Survey\\Data\\SurveyOption",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Survey",
+                    "field_name": "survey",
+                    "variable_name": "survey",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "72012fa7-4257-46fd-9cb4-8a63baf17fa4"
+                },
+                {
+                    "type": "text",
+                    "label": "Option Text",
+                    "field_name": "option_text",
+                    "variable_name": "optionText",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": []
+        }
+    ]
+}

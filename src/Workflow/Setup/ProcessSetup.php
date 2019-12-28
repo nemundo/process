@@ -22,11 +22,11 @@ class ProcessSetup extends AbstractBase
         $setup->addContentType($process);
 
 
-        $data = new Process();
+        /*$data = new Process();
         $data->updateOnDuplicate = true;
         $data->process = $process->type;
         $data->contentTypeId = $process->id;
-        $data->save();
+        $data->save();*/
 
 
         foreach ($process->getProcessStatusList() as $status) {

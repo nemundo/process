@@ -1,0 +1,40 @@
+{
+    "app": "Plz",
+    "name": "plz",
+    "namespace": "Nemundo\\Process\\App\\Plz",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "4925df44-cef7-41dd-9777-8ecc9b13449c",
+            "label": "Plz",
+            "class_name": "Plz",
+            "table_name": "plz_plz",
+            "namespace": "Nemundo\\Process\\App\\Plz\\Data\\Plz",
+            "row_class_name": "",
+            "primary_index": "text_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Plz",
+                    "field_name": "plz",
+                    "variable_name": "plz",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Ort",
+                    "field_name": "ort",
+                    "variable_name": "ort",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": []
+        }
+    ]
+}

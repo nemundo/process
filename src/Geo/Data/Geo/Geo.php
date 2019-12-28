@@ -1,0 +1,38 @@
+<?php
+namespace Nemundo\Process\Geo\Data\Geo;
+class Geo extends \Nemundo\Model\Data\AbstractModelData {
+/**
+* @var GeoModel
+*/
+protected $model;
+
+/**
+* @var string
+*/
+public $id;
+
+/**
+* @var \Nemundo\Core\Type\Geo\GeoCoordinate
+*/
+public $coordinate;
+
+/**
+* @var string
+*/
+public $place;
+
+public function __construct() {
+parent::__construct();
+$this->model = new GeoModel();
+$this->coordinate = new \Nemundo\Core\Type\Geo\GeoCoordinate();
+}
+public function save() {
+$id = $this->id;
+$this->typeValueList->setModelValue($this->model->id, $id);
+$property = new \Nemundo\Model\Data\Property\Geo\GeoCoordinateDataProperty($this->model->coordinate, $this->typeValueList);
+$property->setValue($this->coordinate);
+$this->typeValueList->setModelValue($this->model->place, $this->place);
+$id = parent::save();
+return $id;
+}
+}

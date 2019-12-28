@@ -10,6 +10,8 @@ use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\Content\Data\Content\Content;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\Content\ContentValue;
+use Nemundo\Process\Content\Item\TreeItem;
+use Nemundo\Process\Content\Parameter\DataIdParameter;
 use Nemundo\Process\Item\ContentItem;
 use Nemundo\Process\Parameter\ContentParameter;
 use Nemundo\Web\Site\AbstractSite;
@@ -34,6 +36,15 @@ class WikiAddSite extends AbstractSite
     public function loadContent()
     {
 
+
+        $item = new TreeItem();
+        $item->parentId = (new WikiParameter())->getValue();
+        $item->dataId = (new DataIdParameter())->getValue();
+        $item->saveTree();
+
+
+
+        /*
         $contentId = (new ContentParameter())->getValue();
         $wikiId =  (new WikiParameter())->getValue();
         $contentReader = new ContentReader();

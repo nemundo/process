@@ -18,8 +18,10 @@ class DeadlineChangeItem extends AbstractStatusItem
      */
     public $deadline;
 
-    public function saveItem()
+
+    protected function saveData()
     {
+
 
         $this->contentType = new DeadlineChangeProcessStatus();
 

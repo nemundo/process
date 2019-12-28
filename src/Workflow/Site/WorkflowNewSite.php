@@ -7,6 +7,7 @@ namespace Nemundo\Process\Workflow\Site;
 use Nemundo\Admin\Com\Navigation\AdminNavigation;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
+use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Workflow\Data\Process\ProcessReader;
 use Nemundo\Process\Workflow\Parameter\ProcessParameter;
 use Nemundo\Process\Workflow\Content\View\ProcessView;
@@ -41,14 +42,16 @@ class WorkflowNewSite extends AbstractSite
         $nav->site = WorkflowSite::$site;
 
 
-        $processParameter = new ProcessParameter();
+        //$processParameter = new ProcessParameter();
+$process= (new ContentTypeParameter())->getContentType();  //  $processParameter->getProcess();
 
-        $processId = $processParameter->getValue();
 
-        $processReader = new ProcessReader();
+//        $processId = $processParameter->getValue();
+
+        /*$processReader = new ProcessReader();
         $processReader->model->loadContentType();
         $processRow = $processReader->getRowById($processId);
-        $process = $processRow->getProcess();
+        $process = $processRow->getProcess();*/
 
         $title = new AdminTitle($page);
         $title->content = $process->type;

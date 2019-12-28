@@ -4,6 +4,8 @@
 namespace Nemundo\Process\Workflow\Site;
 
 
+use App\App\IssueTracker\Workflow\Process\IssueTrackerProcess;
+use App\App\Journey\Content\Process\JourneyProcess;
 use Nemundo\Admin\Com\Navigation\AdminNavigation;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\TableBuilder\TableHeader;
@@ -12,6 +14,7 @@ use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Dropdown\BootstrapSiteDropdown;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
+use Nemundo\Process\Content\Com\Dropdown\ContentTypeDropdown;
 use Nemundo\Process\Workflow\Com\Form\WorkflowSearchForm;
 use Nemundo\Process\Workflow\Data\Process\ProcessReader;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowPaginationReader;
@@ -19,6 +22,7 @@ use Nemundo\Process\Workflow\Parameter\ProcessParameter;
 use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
 use Nemundo\Process\Template\Data\Document\Redirect\DocumentDocumentRedirectSite;
 use Nemundo\Process\Template\Site\DocumentDeleteSite;
+use Nemundo\ToDo\Workflow\Process\ToDoProcess;
 use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Workflow\Com\TrafficLight\DateTrafficLight;
 use Nemundo\Workflow\Com\TrafficLight\TrafficLight;
@@ -55,11 +59,10 @@ class WorkflowSite extends AbstractSite
         $nav->site = WorkflowSite::$site;
 
 
-        $dropdown = new BootstrapSiteDropdown($page);
+        $dropdown =new ContentTypeDropdown($page);  // new BootstrapSiteDropdown($page);
+$dropdown->redirectSite = WorkflowNewSite::$site;
 
-        new WorkflowSearchForm($page);
-
-        $processReader = new ProcessReader();
+        /*$processReader = new ProcessReader();
         $processReader->model->loadContentType();
         $processReader->addOrder($processReader->model->process);
         foreach ($processReader->getData() as $processRow) {
@@ -68,7 +71,16 @@ class WorkflowSite extends AbstractSite
             $site->addParameter(new ProcessParameter($processRow->id));
 
             $dropdown->addSite($site);
-        }
+        }*/
+
+        $dropdown->addContentType(new IssueTrackerProcess());
+        $dropdown->addContentType(new JourneyProcess());
+        $dropdown->addContentType(new ToDoProcess());
+
+
+        //new WorkflowSearchForm($page);
+
+
 
         $table = new AdminClickableTable($page);
 
@@ -77,11 +89,8 @@ class WorkflowSite extends AbstractSite
         $header->addText('Closed');
         $header->addText('Process');
         $header->addText('Workflow');
-
         $header->addText('Deadline');
         $header->addText('Assign to');
-
-
         $header->addText('Status');
         $header->addText('User');
         $header->addText('Date/Time');
@@ -104,7 +113,7 @@ class WorkflowSite extends AbstractSite
             $trafficLight->date = $workflowRow->deadline;
 
             $row->addYesNo($workflowRow->workflowClosed);
-            $row->addText($workflowRow->process->process);
+            $row->addText($workflowRow->process->contentType);
             $row->addText($workflowRow->getSubject());
 
 
@@ -116,7 +125,7 @@ class WorkflowSite extends AbstractSite
 
             $row->addText($workflowRow->assignment->getValue());
 
-            $row->addText($workflowRow->status->statusLabel);
+            $row->addText($workflowRow->status->contentType);
             $row->addText($workflowRow->user->displayName);
             $row->addText($workflowRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
 

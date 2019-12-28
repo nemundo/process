@@ -6,6 +6,7 @@ namespace Nemundo\Process\Content\Row;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeRow;
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Content\Type\MenuTrait;
 
 
 class ContentTypeCustomRow extends ContentTypeRow
@@ -20,7 +21,7 @@ class ContentTypeCustomRow extends ContentTypeRow
         $contentType=null;
         if (class_exists($className)) {
 
-        /** @var AbstractContentType $contentType */
+        /** @var AbstractContentType|MenuTrait $contentType */
         $contentType = new $className();
 
         } else {

@@ -10,6 +10,7 @@ use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\Content\Com\Dropdown\ContentTypeDropdown;
 use Nemundo\Process\Content\Parameter\DataIdParameter;
+use Nemundo\Process\Content\Site\ContentItemSite;
 use Nemundo\Process\Content\Site\ContentNewSite;
 use Nemundo\Process\Search\Com\ContentSearchForm;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexPaginationReader;
@@ -44,8 +45,6 @@ class SearchSite extends AbstractSite
 
         $form = new ContentSearchForm($page);
 
-        //$wordId = md5(mb_strtolower( $form->getSearchQuery()));
-
 
         // redefine nach content type
 
@@ -60,20 +59,20 @@ class SearchSite extends AbstractSite
         foreach ($reader->getData() as $indexRow) {
 
             $row = new BootstrapClickableTableRow($table);
-
             $row->addText($indexRow->content->contentType->contentType);
-
             $row->addText($indexRow->content->subject);
 
-            //$site = $indexRow->content->contentType->getContentType()->getViewSite($indexRow->content->dataId);
-
-            $site = new Site();  // clone(ContentItemSite::$site);
-            $site->addParameter(new DataIdParameter($indexRow->contentId));
-            $row->addClickableSite($site);
-
+            $contentType =  $indexRow->content->contentType->getContentType();
+            if ($contentType->hasViewSite()) {
+                $site = $contentType->getViewSite($indexRow->contentId);
+                $row->addClickableSite($site);
+            } else {
+                $site =  clone(ContentItemSite::$site);
+                $site->addParameter(new DataIdParameter($indexRow->contentId));
+                $row->addClickableSite($site);
+            }
 
         }
-
 
         $page->render();
 

@@ -21,11 +21,12 @@ class StatusSetup extends AbstractBase
         $setup = new ContentTypeSetup();
         $setup->addContentType($status);
 
+        /*
         $data = new Status();
         $data->updateOnDuplicate = true;
         $data->statusLabel = (new Translation())->getText( $status->type);
         $data->contentTypeId = $status->id;
-        $data->save();
+        $data->save();*/
 
     }
 

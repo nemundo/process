@@ -3,7 +3,7 @@
 namespace Nemundo\Process\App\Wiki\Site;
 
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
-use Nemundo\Process\Content\Data\Content\ContentDelete;
+use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Web\Url\UrlReferer;
 
@@ -26,7 +26,17 @@ class ContentDeleteSite extends AbstractDeleteIconSite
     {
 
         $contentId = (new ContentParameter())->getValue();
-        (new ContentDelete())->deleteById($contentId);
+        //(new ContentDelete())->deleteById($contentId);
+
+        $contentReader = new ContentReader();
+        $contentReader->model->loadContentType();
+        $contentRow = $contentReader->getRowById($contentId);
+        $item = $contentRow->contentType->getContentType()->getItem($contentId);
+
+        //$item = new ContentItem($contentId);
+        $item->deleteItem();
+
+
         (new UrlReferer())->redirect();
 
     }

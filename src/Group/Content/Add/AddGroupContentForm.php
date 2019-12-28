@@ -26,6 +26,12 @@ class AddGroupContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
+        $item = new AddGroupContentItem();
+        $item->parentId=$this->parentId;
+        $item->groupId = $this->group->getValue();
+        $item->saveItem();
+
+        /*
         $data = new ContentGroup();
         $data->ignoreIfExists=true;
         $data->contentId = $this->parentId;
@@ -37,7 +43,7 @@ class AddGroupContentForm extends AbstractContentForm
         $item->contentType=new AddGroupContentType();
         $item->parentId=$this->parentId;
         $item->dataId=$this->group->getValue();
-        $item->saveItem();
+        $item->saveItem();*/
 
         // TODO: Implement onSubmit() method.
     }

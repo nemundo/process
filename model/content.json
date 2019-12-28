@@ -102,12 +102,16 @@
                 {
                     "index_name": "content_type",
                     "index_type": "index",
-                    "field_name": []
+                    "field_name": [
+                        "content_type"
+                    ]
                 },
                 {
                     "index_name": "date_time",
                     "index_type": "index",
-                    "field_name": []
+                    "field_name": [
+                        "date_time"
+                    ]
                 }
             ]
         },

@@ -9,6 +9,7 @@ use Nemundo\Process\App\Inbox\Site\InboxSite;
 use Nemundo\Process\App\Wiki\Site\WikiSite;
 use Nemundo\Process\Content\Site\ContentSite;
 use Nemundo\Process\Content\Site\ContentTypeSite;
+use Nemundo\Process\Geo\Site\GeoSite;
 use Nemundo\Process\Group\Site\GroupSite;
 use Nemundo\Process\Search\Site\SearchSite;
 use Nemundo\Process\Template\Site\ProcessTemplateSite;
@@ -47,7 +48,7 @@ class ProcessSite extends AbstractSite
         new GroupSite($this);
         new StartSite($this);
 
-
+new GeoSite($this);
 
     }
 

@@ -22,12 +22,12 @@ public $workflowNumber;
 public $subject;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
 */
 public $processId;
 
 /**
-* @var \Nemundo\Process\Workflow\Data\Process\ProcessExternalType
+* @var \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType
 */
 public $process;
 
@@ -37,12 +37,12 @@ public $process;
 public $workflowClosed;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
 */
 public $statusId;
 
 /**
-* @var \Nemundo\Process\Workflow\Data\Status\StatusExternalType
+* @var \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType
 */
 public $status;
 
@@ -112,7 +112,7 @@ $this->subject->label = "Betreff";
 $this->subject->allowNullValue = false;
 $this->subject->length = 255;
 
-$this->processId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
+$this->processId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
 $this->processId->tableName = "process_workflow";
 $this->processId->fieldName = "process";
 $this->processId->aliasFieldName = "process_workflow_process";
@@ -126,7 +126,7 @@ $this->workflowClosed->aliasFieldName = "process_workflow_workflow_closed";
 $this->workflowClosed->label = "Workflow Closed";
 $this->workflowClosed->allowNullValue = false;
 
-$this->statusId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
+$this->statusId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
 $this->statusId->tableName = "process_workflow";
 $this->statusId->fieldName = "status";
 $this->statusId->aliasFieldName = "process_workflow_status";
@@ -168,7 +168,7 @@ $index->addType($this->dateTime);
 }
 public function loadProcess() {
 if ($this->process == null) {
-$this->process = new \Nemundo\Process\Workflow\Data\Process\ProcessExternalType($this, "process_workflow_process");
+$this->process = new \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType($this, "process_workflow_process");
 $this->process->tableName = "process_workflow";
 $this->process->fieldName = "process";
 $this->process->aliasFieldName = "process_workflow_process";
@@ -178,7 +178,7 @@ return $this;
 }
 public function loadStatus() {
 if ($this->status == null) {
-$this->status = new \Nemundo\Process\Workflow\Data\Status\StatusExternalType($this, "process_workflow_status");
+$this->status = new \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType($this, "process_workflow_status");
 $this->status->tableName = "process_workflow";
 $this->status->fieldName = "status";
 $this->status->aliasFieldName = "process_workflow_status";

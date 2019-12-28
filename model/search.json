@@ -69,7 +69,9 @@
                 {
                     "index_name": "word",
                     "index_type": "search_index",
-                    "field_name": []
+                    "field_name": [
+                        "word"
+                    ]
                 }
             ]
         }

@@ -8,6 +8,8 @@ abstract class AbstractDocumentContentType extends AbstractContentType
 {
 
 
+    // getSubject
+
 
 
 }

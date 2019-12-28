@@ -5,28 +5,21 @@ namespace Nemundo\Process\Group\Content;
 
 
 use Nemundo\Process\Content\Item\AbstractContentItem;
+use Nemundo\Process\Group\Content\Group\GroupContentType;
 use Nemundo\Process\Group\Data\Group\Group;
 use Nemundo\Process\Group\Data\GroupUser\GroupUser;
 
 class GroupContentItem extends AbstractContentItem
 {
 
-    //public $id;
-
     public $group;
 
 
-    /*
-    public function __construct()
+    protected function saveData()
     {
 
-        $this->loadGroup();
-    }*/
 
-
-    public function saveItem()
-    {
-        // TODO: Implement saveItem() method.
+        $this->contentType=new GroupContentType();
 
         $data = new Group();
         $data->updateOnDuplicate = true;
@@ -41,11 +34,10 @@ class GroupContentItem extends AbstractContentItem
     public function addUser($userId)
     {
         $data = new GroupUser();
+        $data->ignoreIfExists=true;
         $data->groupId = $this->dataId;
         $data->userId = $userId;
         $data->save();
-
-        //exit;
 
         return $this;
     }

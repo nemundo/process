@@ -4,10 +4,10 @@
 namespace Nemundo\Process\Template\Content\User;
 
 
-use App\App\Group\Builder\GroupUserBuilder;
-use App\App\Group\Usergroup\GroupUsergroup;
 use App\Usergroup\AppUsergroup;
 use Nemundo\Process\Content\Item\AbstractContentItem;
+use Nemundo\Process\Group\Data\GroupUser\GroupUser;
+use Nemundo\Process\Group\Type\AbstractGroup;
 use Nemundo\User\Data\User\UserReader;
 use Nemundo\User\Type\UserBuilder;
 
@@ -19,16 +19,16 @@ class UserContentItem extends AbstractContentItem
     public function getSubject()
     {
 
-        $userRow=(new UserReader())->getRowById($this->dataId);
+        $userRow = (new UserReader())->getRowById($this->dataId);
         return $userRow->login;
 
     }
 
 
-    public function saveItem()
+    protected function saveData()
     {
-        $this->contentType=new UserContentType();
-        $this->saveContent();
+        $this->contentType = new UserContentType();
+        //$this->saveContent();
 
         $user = new UserBuilder();
         $user->login = $this->email;
@@ -38,9 +38,29 @@ class UserContentItem extends AbstractContentItem
 
         $user->addUsergroup(new AppUsergroup());
 
-     $this->dataId= $user->userId;
+        $this->dataId = $user->userId;
+
+        $this->addSearchWord($this->email);
+
 
         // TODO: Implement saveItem() method.
     }
+
+
+    public function addGroup(AbstractGroup $group)
+    {
+
+
+        $data = new GroupUser();
+        $data->ignoreIfExists = true;
+        $data->groupId = $group->id;
+        $data->userId = $this->dataId;
+        $data->save();
+
+        return $this;
+
+
+    }
+
 
 }

@@ -60,14 +60,14 @@ class ProcessView extends AbstractContentView
             $workflowReader = new WorkflowReader();
             $workflowReader->model->loadProcess();
             $workflowReader->model->loadStatus();
-            $workflowReader->model->status->loadContentType();
-            $workflowReader->model->process->loadContentType();
+            //$workflowReader->model->status->loadContentType();
+            //$workflowReader->model->process->loadContentType();
             $workflowRow = $workflowReader->getRowById($this->dataId);
 
-            $workflowStatus = $workflowRow->status->getStatus();
+            $workflowStatus = $workflowRow->status->getContentType();  //getStatus();
             $formStatus = (new StatusParameter())->getStatus();
             $workflowTitle = $workflowRow->getSubject();
-            $this->contentType = $workflowRow->process->getProcess();
+            $this->contentType = $workflowRow->process->getContentType();  //getProcess();
 
         } else {
 

@@ -7,8 +7,9 @@ namespace Nemundo\Process\Content\Item;
 class ContentItem extends AbstractContentItem
 {
 
-    public function saveItem()
+    protected function saveData()
     {
+
         $this->saveContent();
     }
 

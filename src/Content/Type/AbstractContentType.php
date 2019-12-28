@@ -22,6 +22,7 @@ use Nemundo\Web\View\ViewSiteTrait;
 abstract class AbstractContentType extends AbstractBaseClass
 {
 
+    // müsste auch nach ContentItem
     use ViewSiteTrait;
 
     /**
@@ -30,6 +31,9 @@ abstract class AbstractContentType extends AbstractBaseClass
     public $id;
 
     public $type;
+
+
+    public $restricted=false;
 
 
     /**
@@ -71,6 +75,9 @@ abstract class AbstractContentType extends AbstractBaseClass
     abstract protected function loadContentType();
 
 
+
+
+
     public function __construct()
     {
 
@@ -85,14 +92,20 @@ abstract class AbstractContentType extends AbstractBaseClass
     }
 
 
+
+
+
+
+
+
     // move to Item
-    public function getSubject($dataId)
+    /*public function getSubject($dataId)
     {
 
         $subject = $this->getClassNameWithoutNamespace();
         return $subject;
 
-    }
+    }*/
 
 
     public function getItem($dataId) {
