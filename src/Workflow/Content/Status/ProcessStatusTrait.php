@@ -5,6 +5,7 @@ namespace Nemundo\Process\Workflow\Content\Status;
 
 
 use Nemundo\Core\Language\Translation;
+use Nemundo\Process\Content\Type\MenuTrait;
 use Nemundo\User\Access\UserRestrictionTrait;
 
 
@@ -12,17 +13,18 @@ trait ProcessStatusTrait
 {
 
     use UserRestrictionTrait;
+    use MenuTrait;
 
     /**
      * @var string|string[]
      */
-    public $type;
+    //public $type;
     // statusLabel
 
     /**
      * @var string
      */
-    public $logText;
+    //public $logText;
 
     /**
      * @var bool
@@ -57,14 +59,15 @@ trait ProcessStatusTrait
     /**
      * @var string
      */
-    protected $nextStatusClass;
+    //protected $nextStatusClass;
 
     /**
      * @var string[]
      */
-    private $menuStatusClassList = [];
+    //private $menuStatusClassList = [];
 
 
+    /*
     public function getSubject($dataId)
     {
 
@@ -75,17 +78,17 @@ trait ProcessStatusTrait
 
         return $logText;
 
-    }
+    }*/
 
-
+/*
     public function getNextStatus()
     {
 
         /** @var AbstractProcessStatus $nextStatus */
-        $nextStatus = null;
+     /*   $nextStatus = null;
 
-        if ($this->nextStatusClass !== null) {
-            $className = $this->nextStatusClass;
+        if ($this->nextMenuClass !== null) {
+            $className = $this->nextMenuClass;
             $nextStatus = new $className();
         }
 
@@ -98,7 +101,7 @@ trait ProcessStatusTrait
     {
 
         /** @var AbstractProcessStatus[] $statusList */
-        $statusList = [];
+       /* $statusList = [];
         foreach ($this->menuStatusClassList as $className) {
             $statusList[] = new $className();
         }
@@ -113,6 +116,6 @@ trait ProcessStatusTrait
         $this->menuStatusClassList[] = $statusClass;
         return $this;
 
-    }
+    }*/
 
 }

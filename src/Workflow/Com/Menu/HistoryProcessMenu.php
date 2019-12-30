@@ -37,7 +37,7 @@ class HistoryProcessMenu extends AbstractProcessMenu
             $this->addArrowLabel($this->process->startStatus);
             $this->workflowStatusFound = true;
 
-            $this->addNextStatusMenu($this->process->startStatus->getNextStatus());
+            $this->addNextStatusMenu($this->process->startStatus->getNextMenu());
         } else {
 
             $this->addActiveMenu($this->nextStatus);
@@ -46,7 +46,7 @@ class HistoryProcessMenu extends AbstractProcessMenu
             $this->workflowStatusFound = true;
 
             if ($this->nextStatus !== null) {
-                $this->addNextStatusMenu($this->nextStatus->getNextStatus());
+                $this->addNextStatusMenu($this->nextStatus->getNextMenu());
             }
 
         }

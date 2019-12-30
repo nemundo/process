@@ -17,7 +17,7 @@ class OptionTextContentType extends AbstractMenuContentType
 
      $this->nextMenuClass=DescriptionContentType::class;
         // TODO: Implement loadContentType() method.
-        $this->previousMenuClass=SurveyContentType::class;
+        $this->previousMenuClass=ErfassungContentType::class;
     }
 
 }

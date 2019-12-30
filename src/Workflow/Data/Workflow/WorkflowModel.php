@@ -76,7 +76,7 @@ $this->tableName = "process_workflow";
 $this->aliasTableName = "process_workflow";
 $this->label = "Workflow";
 
-$this->primaryIndex = new \Nemundo\Db\Index\UniqueIdPrimaryIndex();
+$this->primaryIndex = new \Nemundo\Db\Index\TextIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
 $this->id->tableName = "process_workflow";

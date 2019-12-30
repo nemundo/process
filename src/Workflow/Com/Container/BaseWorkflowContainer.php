@@ -4,18 +4,19 @@
 namespace Nemundo\Process\Workflow\Com\Container;
 
 
+use Nemundo\Process\Content\Com\Container\AbstractParentContainer;
 use Nemundo\Process\Template\Container\DocumentParentContainer;
 use Nemundo\Process\Workflow\Com\Table\BaseWorkflowTable;
 use Nemundo\Process\Workflow\Com\Table\SourceTable;
 
-class BaseWorkflowContainer extends AbstractWorkflowContainer
+class BaseWorkflowContainer extends AbstractParentContainer
 {
 
     public function getContent()
     {
 
         $base = new BaseWorkflowTable($this);
-        $base->workflowId = $this->workflowId;
+        $base->workflowId = $this->parentId;
 
         /*$table = new SourceTable($this);
         $table->workflowId = $this->workflowId;*/

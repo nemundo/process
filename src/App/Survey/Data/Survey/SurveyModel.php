@@ -16,6 +16,11 @@ public $name;
 */
 public $vorname;
 
+/**
+* @var \Nemundo\Model\Type\Text\LargeTextType
+*/
+public $beschreibung;
+
 protected function loadModel() {
 $this->tableName = "survey_survey";
 $this->aliasTableName = "survey_survey";
@@ -49,6 +54,13 @@ $this->vorname->aliasFieldName = "survey_survey_vorname";
 $this->vorname->label = "Vorname";
 $this->vorname->allowNullValue = false;
 $this->vorname->length = 255;
+
+$this->beschreibung = new \Nemundo\Model\Type\Text\LargeTextType($this);
+$this->beschreibung->tableName = "survey_survey";
+$this->beschreibung->fieldName = "beschreibung";
+$this->beschreibung->aliasFieldName = "survey_survey_beschreibung";
+$this->beschreibung->label = "Beschreibung";
+$this->beschreibung->allowNullValue = false;
 
 }
 }

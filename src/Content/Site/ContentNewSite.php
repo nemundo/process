@@ -66,6 +66,10 @@ class ContentNewSite extends AbstractSite
             $contentType = (new ContentTypeReader())->getRowById($contentTypeParameter->getValue())->getContentType();
 
             $form = $contentType->getForm($page);
+            $form->redirectSite= ContentNewSite::$site;
+            $form->redirectSite->addParameter(new ContentTypeParameter());
+
+
             //$form->parentId = $dataId;
             //$form->redirectSite = ContentItemSite::$site;
             //$form->appendParameter=true;

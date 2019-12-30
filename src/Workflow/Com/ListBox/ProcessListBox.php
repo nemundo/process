@@ -18,9 +18,10 @@ class ProcessListBox extends BootstrapListBox
         $this->name = (new ProcessParameter())->parameterName;
 
         $reader = new ProcessReader();
-        $reader->addOrder($reader->model->process);
+        $reader->model->loadContentType();
+        $reader->addOrder($reader->model->contentType->contentType);
         foreach ($reader->getData() as $processRow) {
-            $this->addItem($processRow->id, $processRow->process);
+            $this->addItem($processRow->contentTypeId, $processRow->contentType->contentType);
         }
 
         return parent::getContent();

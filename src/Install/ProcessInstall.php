@@ -8,6 +8,7 @@ use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\App\Favorite\Install\FavoriteInstall;
 use Nemundo\Process\App\Inbox\Install\InboxInstall;
 use Nemundo\Process\App\Survey\Content\Type\DescriptionContentType;
+use Nemundo\Process\App\Survey\Content\Type\ErfassungContentType;
 use Nemundo\Process\App\Survey\Content\Type\OptionTextContentType;
 use Nemundo\Process\App\Survey\Content\Type\SurveyContentType;
 use Nemundo\Process\App\Survey\Data\SurveyCollection;
@@ -70,6 +71,7 @@ class ProcessInstall extends AbstractInstall
         $setup->addContentType(new SurveyContentType());
         $setup->addContentType(new OptionTextContentType());
         $setup->addContentType(new DescriptionContentType());
+        $setup->addContentType(new ErfassungContentType());
 
         $setup=new GroupSetup();
         $setup->addGroup(new PublicGroup());

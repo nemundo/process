@@ -43,7 +43,7 @@ class WorkflowNewSite extends AbstractSite
 
 
         //$processParameter = new ProcessParameter();
-$process= (new ContentTypeParameter())->getContentType();  //  $processParameter->getProcess();
+$process= (new ProcessParameter())->getProcess();  //  $processParameter->getProcess();
 
 
 //        $processId = $processParameter->getValue();

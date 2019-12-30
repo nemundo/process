@@ -99,6 +99,8 @@ class ContentSite extends AbstractSite
                 $row = new BootstrapClickableTableRow($table);
                 //$row->addText($contentRow->contentType->phpClass);
                 $row->addText($contentRow->contentType->contentType);
+                $row->addText($contentType->getClassName());
+
                 $row->addText($contentRow->id);
 
                 $row->addText($contentRow->subject);
@@ -110,6 +112,8 @@ class ContentSite extends AbstractSite
                 //$item->contentType = $contentType;
 
                 $item = $contentType->getItem($contentRow->id);
+
+                $row->addText($item->getClassName());
                 $row->addText($item->getSubject());
 
                 //$row->addText($contentType->getSubject($contentRow->id));

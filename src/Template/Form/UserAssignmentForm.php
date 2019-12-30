@@ -31,8 +31,8 @@ class UserAssignmentForm extends AbstractStatusForm
             $this->user->addItem($userCustomRow->id, $userCustomRow->displayName);
         }
 
-        $workflowRow = (new WorkflowReader())->getRowById($this->parentId);
-        $this->user->value = $workflowRow->assignment->identificationId;
+        //$workflowRow = (new WorkflowReader())->getRowById($this->parentId);
+        //$this->user->value = $workflowRow->assignment->identificationId;
 
         return parent::getContent();
 

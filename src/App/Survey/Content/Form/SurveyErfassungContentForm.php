@@ -7,10 +7,13 @@ namespace Nemundo\Process\App\Survey\Content\Form;
 use Nemundo\Core\Random\UniqueId;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
 use Nemundo\Process\App\Survey\Data\Survey\Survey;
+use Nemundo\Process\App\Survey\Data\Survey\SurveyReader;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Content\Parameter\DataIdParameter;
+use Nemundo\Process\Content\Form\AbstractSequenceForm;
+use Nemundo\Process\Content\Parameter\SequenceDataIdParameter;
 
-class SurveyContentForm extends AbstractContentForm
+class SurveyErfassungContentForm extends AbstractSequenceForm
 {
 
     /**
@@ -33,19 +36,30 @@ class SurveyContentForm extends AbstractContentForm
     }
 
 
+    protected function loadUpdateForm()
+    {
+
+        $row = (new SurveyReader())->getRowById($this->parentId);
+
+        $this->firstName->value=$row->vorname;
+
+    }
+
     protected function onSubmit()
     {
         // TODO: Implement onSubmit() method.
 
-
-        $dataId = (new UniqueId())->getUniqueId();
+if ($this->dataId == null) {
+        $this->dataId = (new UniqueId())->getUniqueId();
+}
 
         $data= new Survey();
-        $data->id=$dataId;
+        $data->updateOnDuplicate=true;
+        $data->id=$this->dataId;  //   $dataId;
         $data->vorname = $this->firstName->getValue();
         $data->save();
 
-        $this->redirectSite->addParameter(new DataIdParameter($dataId));
+        $this->redirectSite->addParameter(new SequenceDataIdParameter($this->dataId));
 
 
     }

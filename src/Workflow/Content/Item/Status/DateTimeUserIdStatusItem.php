@@ -23,7 +23,7 @@ class DateTimeUserIdStatusItem extends AbstractStatusItem
     protected function saveData()
     {
 
-        $this->saveWorkflowLog();
+     //   $this->saveWorkflowLog();
 
     }
 

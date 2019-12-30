@@ -4,18 +4,10 @@
 namespace Nemundo\Process\Workflow\Content\Item\Status;
 
 
-use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Core\Type\DateTime\DateTime;
-use Nemundo\Process\Content\Data\Content\Content;
 use Nemundo\Process\Content\Item\AbstractContentItem;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
-use Nemundo\Process\Workflow\Data\Status\StatusId;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowUpdate;
-
-use Nemundo\User\Type\UserSessionType;
-
-
-
 
 // AbstractProcessStatusItem
 abstract class AbstractStatusItem extends AbstractContentItem
@@ -28,7 +20,6 @@ abstract class AbstractStatusItem extends AbstractContentItem
     public $contentType;
 
 
-
     /**
      * @var DateTime
      */
@@ -37,13 +28,20 @@ abstract class AbstractStatusItem extends AbstractContentItem
     //protected $userId;
 
 
-
-
-
-    protected function saveWorkflowLog()
+    public function saveItem()
     {
 
-        $this->saveContent();
+        parent::saveItem();
+        $this->saveWorkflowLog();
+
+
+    }
+
+
+    private function saveWorkflowLog()
+    {
+
+        //$this->saveContent();
 
         if ($this->contentType->changeStatus) {
 
@@ -58,7 +56,7 @@ abstract class AbstractStatusItem extends AbstractContentItem
 
         if ($this->contentType->closeWorkflow) {
             $update = new WorkflowUpdate();
-            $update->workflowClosed =true;
+            $update->workflowClosed = true;
             $update->updateById($this->parentId);
         }
 

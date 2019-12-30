@@ -16,6 +16,11 @@ public $name;
 */
 public $vorname;
 
+/**
+* @var \Nemundo\Model\Type\Text\LargeTextType
+*/
+public $beschreibung;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = SurveyModel::class;
@@ -41,6 +46,13 @@ $this->vorname->tableName = $this->parentFieldName . "_" . $this->externalTableN
 $this->vorname->aliasFieldName = $this->vorname->tableName . "_" . $this->vorname->fieldName;
 $this->vorname->label = "Vorname";
 $this->addType($this->vorname);
+
+$this->beschreibung = new \Nemundo\Model\Type\Text\LargeTextType();
+$this->beschreibung->fieldName = "beschreibung";
+$this->beschreibung->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->beschreibung->aliasFieldName = $this->beschreibung->tableName . "_" . $this->beschreibung->fieldName;
+$this->beschreibung->label = "Beschreibung";
+$this->addType($this->beschreibung);
 
 }
 }

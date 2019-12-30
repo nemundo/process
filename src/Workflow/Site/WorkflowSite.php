@@ -62,23 +62,23 @@ class WorkflowSite extends AbstractSite
         $dropdown =new ContentTypeDropdown($page);  // new BootstrapSiteDropdown($page);
 $dropdown->redirectSite = WorkflowNewSite::$site;
 
-        /*$processReader = new ProcessReader();
+        $processReader = new ProcessReader();
         $processReader->model->loadContentType();
-        $processReader->addOrder($processReader->model->process);
+        $processReader->addOrder($processReader->model->contentType->contentType);
         foreach ($processReader->getData() as $processRow) {
             $site = clone(WorkflowNewSite::$site);
             $site->title = $processRow->getProcess()->type;
-            $site->addParameter(new ProcessParameter($processRow->id));
+            $site->addParameter(new ProcessParameter($processRow->contentTypeId));
 
             $dropdown->addSite($site);
-        }*/
+        }
 
-        $dropdown->addContentType(new IssueTrackerProcess());
-        $dropdown->addContentType(new JourneyProcess());
-        $dropdown->addContentType(new ToDoProcess());
+        //$dropdown->addContentType(new IssueTrackerProcess());
+        //$dropdown->addContentType(new JourneyProcess());
+        //$dropdown->addContentType(new ToDoProcess());
 
 
-        //new WorkflowSearchForm($page);
+        new WorkflowSearchForm($page);
 
 
 

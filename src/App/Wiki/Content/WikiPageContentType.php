@@ -4,6 +4,7 @@
 namespace Nemundo\Process\App\Wiki\Content;
 
 
+use Nemundo\Process\App\Survey\Content\Type\SurveyContentType;
 use Nemundo\Process\App\Wiki\Data\Wiki\WikiReader;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\App\Wiki\Site\WikiSite;
@@ -32,6 +33,7 @@ class WikiPageContentType extends AbstractContentType
 
         $this->addMenuClass(LargeTextContentType::class);
         $this->addMenuClass(EventContentType::class);
+        $this->addMenuClass(SurveyContentType::class);
 
 
     }

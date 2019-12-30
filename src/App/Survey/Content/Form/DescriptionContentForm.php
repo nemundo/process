@@ -5,12 +5,17 @@ namespace Nemundo\Process\App\Survey\Content\Form;
 
 
 use Nemundo\Package\Bootstrap\FormElement\BootstrapLargeTextBox;
+use Nemundo\Process\App\Survey\Data\Survey\SurveyReader;
+use Nemundo\Process\App\Survey\Data\Survey\SurveyUpdate;
 use Nemundo\Process\Content\Form\AbstractContentForm;
+use Nemundo\Process\Content\Form\AbstractSequenceForm;
 
-class DescriptionContentForm extends AbstractContentForm
+class DescriptionContentForm extends AbstractSequenceForm
 {
 
-
+    /**
+     * @var BootstrapLargeTextBox
+     */
     private $description;
 
     public function getContent()
@@ -23,9 +28,21 @@ class DescriptionContentForm extends AbstractContentForm
     }
 
 
+    protected function loadUpdateForm()
+    {
+
+        $reader = new SurveyReader();
+
+    }
+
     protected function onSubmit()
     {
         // TODO: Implement onSubmit() method.
+
+        $update=new SurveyUpdate();
+        $update->beschreibung=$this->description->getValue();
+        $update->updateById($this->parentId);
+
     }
 
 }

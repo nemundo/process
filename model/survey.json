@@ -32,6 +32,14 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "length": "255"
+                },
+                {
+                    "type": "large_text",
+                    "label": "Beschreibung",
+                    "field_name": "beschreibung",
+                    "variable_name": "beschreibung",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": []

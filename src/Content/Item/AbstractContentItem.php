@@ -5,6 +5,7 @@ namespace Nemundo\Process\Content\Item;
 
 
 use Nemundo\Core\Base\AbstractBaseClass;
+use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Random\UniqueId;
 use Nemundo\Core\Type\DateTime\DateTime;
@@ -14,9 +15,6 @@ use Nemundo\Process\Content\Data\Content\Content;
 use Nemundo\Process\Content\Data\Content\ContentDelete;
 use Nemundo\Process\Content\Data\Content\ContentRow;
 use Nemundo\Process\Content\Data\ContentGroup\ContentGroup;
-use Nemundo\Process\Content\Data\Document\Document;
-use Nemundo\Process\Content\Data\Document\DocumentId;
-use Nemundo\Process\Content\Data\Document\DocumentRow;
 use Nemundo\Process\Content\Data\Tree\Tree;
 use Nemundo\Process\Content\Data\Tree\TreeCount;
 use Nemundo\Process\Content\Data\Tree\TreeDelete;
@@ -80,10 +78,8 @@ abstract class AbstractContentItem extends AbstractBaseClass
 
         }
 
-
         $this->dateTime = (new DateTime())->setNow();
         $this->userId = (new UserSessionType())->userId;
-
 
         $this->loadItem();
 
@@ -93,7 +89,6 @@ abstract class AbstractContentItem extends AbstractBaseClass
     public function saveItem()
     {
 
-
         $this->saveData();
 
         if ($this->contentType == null) {
@@ -102,21 +97,14 @@ abstract class AbstractContentItem extends AbstractBaseClass
 
         $this->saveContent();
 
-        if ($this->searchIndex !== null) {
-            $this->searchIndex->saveIndex();
-        }
 
-
-        if (!$this->contentType->restricted) {
-            $data = new ContentGroup();
-            $data->ignoreIfExists = true;
-            $data->contentId = $this->dataId;
-            $data->groupId = (new PublicGroup())->id;  // $this->groupId;
-            $data->save();
-        }
 
 
     }
+
+
+    //protected function save
+
 
 
     public function addSearchWord($word)
@@ -171,6 +159,21 @@ abstract class AbstractContentItem extends AbstractBaseClass
             $tree->dataId = $this->dataId;
             $tree->saveTree();
         }
+
+
+        if ($this->searchIndex !== null) {
+            $this->searchIndex->saveIndex();
+        }
+
+
+        if (!$this->contentType->restricted) {
+            $data = new ContentGroup();
+            $data->ignoreIfExists = true;
+            $data->contentId = $this->dataId;
+            $data->groupId = (new PublicGroup())->id;  // $this->groupId;
+            $data->save();
+        }
+
 
     }
 
@@ -340,7 +343,7 @@ abstract class AbstractContentItem extends AbstractBaseClass
         $subject = '[No Content Type]';
 
         if ($this->contentType !== null) {
-            $subject = $this->contentType->type;
+            $subject = (new Translation())->getText( $this->contentType->type);
         }
 
         return $subject;
@@ -349,6 +352,16 @@ abstract class AbstractContentItem extends AbstractBaseClass
 
 
     }
+
+
+    public function getText() {
+
+        $text='[No Text]';
+        return $text;
+
+
+    }
+
 
 
 }

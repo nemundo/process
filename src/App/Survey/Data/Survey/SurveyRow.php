@@ -26,11 +26,17 @@ public $name;
 */
 public $vorname;
 
+/**
+* @var string
+*/
+public $beschreibung;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
 $this->name = $this->getModelValue($model->name);
 $this->vorname = $this->getModelValue($model->vorname);
+$this->beschreibung = $this->getModelValue($model->beschreibung);
 }
 }

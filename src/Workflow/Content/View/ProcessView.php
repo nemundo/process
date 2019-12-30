@@ -9,6 +9,7 @@ use Nemundo\Admin\Com\Widget\AdminWidget;
 use Nemundo\Com\FormBuilder\RedirectTrait;
 use Nemundo\Html\Block\Hr;
 use Nemundo\Process\App\Favorite\Com\FavoriteButton;
+use Nemundo\Process\Content\Com\Container\AbstractParentContainer;
 use Nemundo\Process\Group\Com\GroupParentContainer;
 use Nemundo\Process\Workflow\Com\Container\AbstractWorkflowContainer;
 use Nemundo\Process\Workflow\Com\Container\StatusFormContainer;
@@ -71,14 +72,15 @@ class ProcessView extends AbstractContentView
 
         } else {
 
-            $formStatus = $this->contentType->startStatus;
+            $formStatus = $this->contentType->startContentType;
             $workflowStatus = $formStatus;
             $workflowTitle = 'Neu';
 
         }
 
         if ($formStatus === null) {
-            $formStatus = $workflowStatus->getNextStatus();
+            //$formStatus = $workflowStatus->getNextStatus();
+            $formStatus = $workflowStatus->getNextMenu();
         }
 
         $title = new AdminTitle($this);
@@ -96,9 +98,9 @@ class ProcessView extends AbstractContentView
 
             if ($this->contentType->baseViewClass !== null) {
 
-                /** @var AbstractWorkflowContainer $view */
+                /** @var AbstractParentContainer $view */
                 $view = new $this->contentType->baseViewClass($layout->col3);
-                $view->workflowId = $this->dataId;
+                $view->parentId = $this->dataId;
 
             }
 
@@ -174,17 +176,17 @@ class ProcessView extends AbstractContentView
 
 
         $view = new WorkflowStreamContainer($layout->col2);
-        $view->workflowId = $this->dataId;
+        $view->parentId = $this->dataId;
 
         $table = new SourceTable($layout->col3);
-        $table->workflowId =  $this->dataId;
+        $table->parentId =  $this->dataId;
 
         //$table = new ToDoParentContainer($layout->col3);
         //$table->parentId = $this->dataId;
 
 
         $table = new WorkflowLogTable($layout->col3);
-        $table->workflowId = $this->dataId;
+        $table->parentId = $this->dataId;
 
         $container=new GroupParentContainer($layout->col3);
         $container->parentId=$this->dataId;

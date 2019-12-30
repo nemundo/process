@@ -7,6 +7,11 @@ class WorkflowBulk extends \Nemundo\Model\Data\AbstractModelDataBulk {
 protected $model;
 
 /**
+* @var string
+*/
+public $id;
+
+/**
 * @var int
 */
 public $number;
@@ -64,6 +69,8 @@ $this->deadline = new \Nemundo\Core\Type\DateTime\Date();
 $this->dateTime = new \Nemundo\Core\Type\DateTime\DateTime();
 }
 public function save() {
+$id = $this->id;
+$this->typeValueList->setModelValue($this->model->id, $id);
 $this->typeValueList->setModelValue($this->model->number, $this->number);
 $this->typeValueList->setModelValue($this->model->workflowNumber, $this->workflowNumber);
 $this->typeValueList->setModelValue($this->model->subject, $this->subject);

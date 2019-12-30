@@ -102,7 +102,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
         $this->workflowItem = new WorkflowItem($this->workflowId);
         $this->workflowExist = $this->workflowItem->existWorkflow();
         $this->workflowClosed = $this->workflowItem->isWorkflowClosed();
-        $this->nextStatus = $this->workflowStatus->getNextStatus();
+        $this->nextStatus = $this->workflowStatus->getNextMenu();
 
     }
 
@@ -128,8 +128,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
 
         if ($this->workflowExist && !$this->workflowClosed) {
 
-            foreach ($status->getMenuStatus() as $menuStatus) {
-
+            foreach ($status->getMenuList() as $menuStatus) {
 
                 $row = new TableRow($this->table);
                 if ($this->formStatus->id == $menuStatus->id) {
@@ -169,7 +168,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
         if ($status !== null) {
             //$this->addStatusLabel($status);
             $this->addLabel($status);
-            $this->addNextStatusMenu($status->getNextStatus());
+            $this->addNextStatusMenu($status->getNextMenu());
         }
 
     }

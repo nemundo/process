@@ -4,6 +4,8 @@
 namespace Nemundo\Process\Script;
 
 
+use App\App\Group\Setup\AppSetup;
+use App\App\IssueTracker\Install\IssueTrackerClean;
 use Nemundo\App\Script\Type\AbstractConsoleScript;
 use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\Install\ProcessInstall;
@@ -32,6 +34,9 @@ class ProcessCleanScript extends AbstractConsoleScript
         (new ProcessUninstall())->uninstall();
         (new ProcessInstall())->install();
 
+        (new IssueTrackerClean())->run();
+
+        (new \App\Setup\AppSetup())->run();
         //(new SchleunigerSetup())->run();
 
     }

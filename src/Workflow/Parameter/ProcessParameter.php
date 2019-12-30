@@ -13,18 +13,18 @@ class ProcessParameter extends AbstractUrlParameter
 
     protected function loadParameter()
     {
-        $this->parameterName='process';
+        $this->parameterName = 'process';
         // TODO: Implement loadParameter() method.
     }
 
 
-    public function getProcess() {
+    public function getProcess()
+    {
 
         /** @var AbstractProcess $contentType */
-             $contentType = (new ContentTypeReader())->getRowById($this->getValue())->getContentType();
+        $contentType = (new ContentTypeReader())->getRowById($this->getValue())->getContentType();
 
-            return $contentType;
-
+        return $contentType;
 
 
     }

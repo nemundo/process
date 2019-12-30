@@ -6,6 +6,8 @@ namespace Nemundo\Process\Workflow\Content\Process;
 
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Content\Type\AbstractSequenceContentType;
+use Nemundo\Process\Workflow\Content\Item\Process\WorkflowItem;
 use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
 use Nemundo\Process\Workflow\Com\Container\BaseWorkflowContainer;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
@@ -14,18 +16,18 @@ use Nemundo\Process\Workflow\Data\Workflow\WorkflowReader;
 use Nemundo\Process\Workflow\Site\WorkflowItemSite;
 
 
-abstract class AbstractProcess extends AbstractContentType
+abstract class AbstractProcess extends AbstractSequenceContentType  // AbstractContentType
 {
 
     /**
      * @var string
      */
-    public $id;
+    //public $id;
 
     /**
      * @var string
      */
-    public $type;
+    //public $type;
 
     /**
      * @var string
@@ -50,37 +52,42 @@ abstract class AbstractProcess extends AbstractContentType
     /**
      * @var AbstractProcessStatus
      */
-    public $startStatus;
+   // public $startStatus;
 
     /**
      * @var AbstractProcessStatus[]
      */
-    private $statusList = [];
+   // private $statusList = [];
 
 
-    abstract protected function loadProcess();
+    //abstract protected function loadProcess();
 
 
     public function __construct()
     {
 
-        parent::__construct();
-
         $this->viewClass = ProcessView::class;
+        $this->itemClass=WorkflowItem::class;
         $this->baseViewClass = BaseWorkflowContainer::class;
         $this->viewSite = WorkflowItemSite::$site;
         $this->parameterClass = WorkflowParameter::class;
 
-        $this->loadProcess();
+
+        parent::__construct();
+
+
+        //$this->loadProcess();
 
     }
 
+    /*
     protected function loadContentType()
     {
         // TODO: Implement loadContentType() method.
-    }
+    }*/
 
 
+    /*
     public function getSubject($dataId)
     {
 
@@ -88,16 +95,17 @@ abstract class AbstractProcess extends AbstractContentType
         $subject = $workflowRow->getSubject();
         return $subject;
 
-    }
+    }*/
 
 
+    /*
     public function getForm(AbstractHtmlContainer $parent)
     {
 
         $form = $this->startStatus->getForm($parent);
         return $form;
 
-    }
+    }*/
 
 
     /**
@@ -106,7 +114,7 @@ abstract class AbstractProcess extends AbstractContentType
     public function getProcessStatusList()
     {
 
-        $statusList = $this->getProcessNextStatus($this->startStatus, []);
+        $statusList = $this->getProcessNextStatus($this->startContentType, []);
         return $statusList;
 
     }
@@ -117,7 +125,7 @@ abstract class AbstractProcess extends AbstractContentType
 
         $statusList[] = $status;
 
-        $nextStatus = $status->getNextStatus();
+        $nextStatus = $status->getNextMenu();
         if ($nextStatus !== null) {
             $statusList = $this->getProcessNextStatus($nextStatus, $statusList);
         }

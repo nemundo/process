@@ -7,6 +7,8 @@ namespace Nemundo\Process\Content\Type;
 use Nemundo\Core\Base\AbstractBaseClass;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Html\Container\AbstractHtmlContainer;
+use Nemundo\Process\Content\Form\AbstractContentForm;
+use Nemundo\Process\Content\Form\ContentForm;
 use Nemundo\Process\Content\Item\AbstractContentItem;
 use Nemundo\Process\Content\Item\ContentItem;
 use Nemundo\Process\Content\Parameter\DataIdParameter;
@@ -14,8 +16,6 @@ use Nemundo\Process\Content\Site\ContentItemSite;
 use Nemundo\Process\Content\View\AbstractContentList;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Content\View\ContentView;
-use Nemundo\Process\Content\Form\AbstractContentForm;
-use Nemundo\Process\Content\Form\ContentForm;
 use Nemundo\Web\View\ViewSiteTrait;
 
 
@@ -30,10 +30,13 @@ abstract class AbstractContentType extends AbstractBaseClass
      */
     public $id;
 
+    /**
+     * @var string|string[]
+     */
     public $type;
 
 
-    public $restricted=false;
+    public $restricted = false;
 
 
     /**
@@ -55,7 +58,6 @@ abstract class AbstractContentType extends AbstractBaseClass
 //listClass
 
 
-
     // teaserView
 
     // adminViewClass
@@ -63,7 +65,6 @@ abstract class AbstractContentType extends AbstractBaseClass
     // listViewClass
 
     // searchViewClass
-
 
 
     /**
@@ -75,20 +76,31 @@ abstract class AbstractContentType extends AbstractBaseClass
     abstract protected function loadContentType();
 
 
-
-
-
     public function __construct()
     {
 
-        $this->formClass = ContentForm::class;
-        $this->viewClass = ContentView::class;
-        $this->itemClass=ContentItem::class;
+        if ($this->formClass == null) {
+            $this->formClass = ContentForm::class;
+        }
 
-        $this->viewSite=ContentItemSite::$site;
-        $this->parameterClass=DataIdParameter::class;
+        if ($this->viewClass == null) {
+            $this->viewClass = ContentView::class;
+        }
+
+        if ($this->itemClass == null) {
+            $this->itemClass = ContentItem::class;
+        }
+
+        if ($this->viewSite == null) {
+            $this->viewSite = ContentItemSite::$site;
+        }
+
+        if ($this->parameterClass == null) {
+            $this->parameterClass = DataIdParameter::class;
+        }
 
         $this->loadContentType();
+
     }
 
 
@@ -108,7 +120,8 @@ abstract class AbstractContentType extends AbstractBaseClass
     }*/
 
 
-    public function getItem($dataId) {
+    public function getItem($dataId)
+    {
 
         /** @var AbstractContentItem $item */
         $item = new $this->itemClass($dataId);
@@ -168,7 +181,6 @@ abstract class AbstractContentType extends AbstractBaseClass
         return $list;
 
     }
-
 
 
     public function hasView()

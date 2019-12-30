@@ -6,6 +6,7 @@ namespace Nemundo\Process\Template\Item;
 
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Process\Template\Data\DeadlineChange\DeadlineChange;
+use Nemundo\Process\Template\Data\DeadlineChange\DeadlineChangeReader;
 use Nemundo\Process\Template\Status\DeadlineChangeProcessStatus;
 use Nemundo\Process\Workflow\Content\Item\Process\WorkflowItem;
 use Nemundo\Process\Workflow\Content\Item\Status\AbstractStatusItem;
@@ -44,10 +45,22 @@ class DeadlineChangeItem extends AbstractStatusItem
             $item = new WorkflowItem($this->parentId);
             $item->changeDeadline($this->deadline);
 
-            $this->saveWorkflowLog();
+            //$this->saveWorkflowLog();
 
         }
 
+
+    }
+
+
+
+    public function getSubject()
+    {
+
+        $deadlineRow = (new DeadlineChangeReader())->getRowById($this->dataId);
+        $subject = 'Neues Datum für Fertigstellung: ' . $deadlineRow->deadline->getShortDateLeadingZeroFormat();
+
+        return $subject;
 
     }
 

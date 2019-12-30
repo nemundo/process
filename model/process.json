@@ -13,7 +13,7 @@
             "namespace": "Nemundo\\Process\\Workflow\\Data\\Process",
             "row_class_name": "Nemundo\\Process\\Workflow\\Row\\ProcessCustomRow",
             "primary_index": "auto_increment",
-            "is_deleted": true,
+            "is_deleted": false,
             "type": [
                 {
                     "type": "text",
@@ -21,7 +21,7 @@
                     "field_name": "process",
                     "variable_name": "process",
                     "allow_null": false,
-                    "is_deleted": false,
+                    "is_deleted": true,
                     "length": "255"
                 },
                 {
@@ -102,7 +102,7 @@
             "table_name": "process_workflow",
             "namespace": "Nemundo\\Process\\Workflow\\Data\\Workflow",
             "row_class_name": "Nemundo\\Process\\Workflow\\Row\\WorkflowCustomRow",
-            "primary_index": "unique_id",
+            "primary_index": "text_id",
             "is_deleted": false,
             "type": [
                 {

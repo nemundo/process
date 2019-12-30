@@ -27,7 +27,7 @@ class CancelContentItem extends AbstractStatusItem
     }*/
 
 
-    public function saveItem()
+    public function saveData()
     {
 
 
@@ -38,7 +38,7 @@ class CancelContentItem extends AbstractStatusItem
         $data->largeText = $this->comment;
         $data->save();
 
-        $this->saveWorkflowLog();
+        //$this->saveWorkflowLog();
 
         $item = new WorkflowItem($this->parentId);
         $item->clearAssignment();
