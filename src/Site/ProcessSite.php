@@ -13,6 +13,7 @@ use Nemundo\Process\Geo\Site\GeoSite;
 use Nemundo\Process\Group\Site\GroupSite;
 use Nemundo\Process\Search\Site\SearchSite;
 use Nemundo\Process\Template\Site\ProcessTemplateSite;
+use Nemundo\Process\Workflow\Site\AssignmentSite;
 use Nemundo\Process\Workflow\Site\WorkflowSite;
 use Nemundo\ToDo\Site\ToDoSite;
 use Nemundo\Web\Site\AbstractSite;
@@ -49,6 +50,8 @@ class ProcessSite extends AbstractSite
         new StartSite($this);
 
 new GeoSite($this);
+
+new AssignmentSite($this);
 
     }
 

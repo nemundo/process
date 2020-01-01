@@ -67,7 +67,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType  // AbstractC
     {
 
         $this->viewClass = ProcessView::class;
-        $this->itemClass=WorkflowItem::class;
+        //$this->itemClass=WorkflowItem::class;
         $this->baseViewClass = BaseWorkflowContainer::class;
         $this->viewSite = WorkflowItemSite::$site;
         $this->parameterClass = WorkflowParameter::class;

@@ -188,6 +188,15 @@
                     "variable_name": "user",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "Group Assignment",
+                    "field_name": "group_assignment",
+                    "variable_name": "groupAssignment",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "c6e00009-24e0-4cef-82ee-34a89152415f"
                 }
             ],
             "index": [

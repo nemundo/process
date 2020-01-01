@@ -11,6 +11,16 @@ public $id;
 */
 public $group;
 
+/**
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+*/
+public $groupTypeId;
+
+/**
+* @var \Nemundo\Process\Group\Data\GroupType\GroupTypeExternalType
+*/
+public $groupType;
+
 protected function loadModel() {
 $this->tableName = "group_group";
 $this->aliasTableName = "group_group";
@@ -37,5 +47,22 @@ $this->group->label = "Group";
 $this->group->allowNullValue = false;
 $this->group->length = 255;
 
+$this->groupTypeId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->groupTypeId->tableName = "group_group";
+$this->groupTypeId->fieldName = "group_type";
+$this->groupTypeId->aliasFieldName = "group_group_group_type";
+$this->groupTypeId->label = "Group Type";
+$this->groupTypeId->allowNullValue = false;
+
+}
+public function loadGroupType() {
+if ($this->groupType == null) {
+$this->groupType = new \Nemundo\Process\Group\Data\GroupType\GroupTypeExternalType($this, "group_group_group_type");
+$this->groupType->tableName = "group_group";
+$this->groupType->fieldName = "group_type";
+$this->groupType->aliasFieldName = "group_group_group_type";
+$this->groupType->label = "Group Type";
+}
+return $this;
 }
 }

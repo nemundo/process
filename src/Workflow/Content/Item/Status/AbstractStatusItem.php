@@ -50,7 +50,7 @@ abstract class AbstractStatusItem extends AbstractContentItem
             $stausId = $id->getId();*/
 
             $update = new WorkflowUpdate();
-            $update->statusId = $this->contentType->id;  //   $stausId;
+            $update->statusId = $this->contentType->contentId;  //   $stausId;
             $update->updateById($this->parentId);
         }
 

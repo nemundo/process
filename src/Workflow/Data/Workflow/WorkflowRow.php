@@ -81,6 +81,16 @@ public $userId;
 */
 public $user;
 
+/**
+* @var string
+*/
+public $groupAssignmentId;
+
+/**
+* @var \Nemundo\Process\Group\Data\Group\GroupRow
+*/
+public $groupAssignment;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -108,6 +118,10 @@ $this->userId = $this->getModelValue($model->userId);
 if ($model->user !== null) {
 $this->loadNemundoUserDataUserUseruserRow($model->user);
 }
+$this->groupAssignmentId = $this->getModelValue($model->groupAssignmentId);
+if ($model->groupAssignment !== null) {
+$this->loadNemundoProcessGroupDataGroupGroupgroupAssignmentRow($model->groupAssignment);
+}
 }
 private function loadNemundoProcessContentDataContentTypeContentTypeprocessRow($model) {
 $this->process = new \Nemundo\Process\Content\Row\ContentTypeCustomRow($this->row, $model);
@@ -117,5 +131,8 @@ $this->status = new \Nemundo\Process\Content\Row\ContentTypeCustomRow($this->row
 }
 private function loadNemundoUserDataUserUseruserRow($model) {
 $this->user = new \Nemundo\User\Data\User\UserRow($this->row, $model);
+}
+private function loadNemundoProcessGroupDataGroupGroupgroupAssignmentRow($model) {
+$this->groupAssignment = new \Nemundo\Process\Group\Data\Group\GroupRow($this->row, $model);
 }
 }

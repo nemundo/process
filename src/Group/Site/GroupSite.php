@@ -7,6 +7,7 @@ namespace Nemundo\Process\Group\Site;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Com\FormBuilder\SearchForm;
+use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
@@ -17,6 +18,7 @@ use Nemundo\Process\Group\Content\GroupUserForm;
 use Nemundo\Process\Group\Data\Group\GroupReader;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
 use Nemundo\Process\Group\Parameter\GroupParameter;
+use Nemundo\User\Data\Usergroup\UsergroupReader;
 use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Web\Site\Site;
 
@@ -33,6 +35,9 @@ class GroupSite extends AbstractSite
         $this->title = 'Group';
         $this->url = 'group';
         GroupSite::$site=$this;
+
+        new GroupItemSite($this);
+
     }
 
 
@@ -89,6 +94,25 @@ class GroupSite extends AbstractSite
 
 
         $form = new GroupContentForm($layout->col2);
+
+
+
+
+        $table=new AdminTable($layout->col2);
+
+        $header=new TableHeader($table);
+        $header->addText('Group');
+        $header->addText('Group Type');
+
+        $reader=new GroupReader();
+        $reader->model->loadGroupType();
+        foreach ($reader->getData() as $groupRow) {
+            $row=new TableRow($table);
+            $row->addText($groupRow->group);
+            $row->addText($groupRow->groupType->groupType);
+        }
+
+
 
 
         $page->render();

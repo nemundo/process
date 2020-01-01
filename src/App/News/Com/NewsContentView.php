@@ -14,6 +14,10 @@ class NewsContentView extends AbstractContentView
 
     public function getContent()
     {
+        $p = new Paragraph($this);
+        $p->content = $this->dataId;
+
+
 
         $row = (new NewsReader())->getRowById($this->dataId);
 

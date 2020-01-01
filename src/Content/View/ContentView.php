@@ -12,10 +12,12 @@ class ContentView extends AbstractContentView
     public function getContent()
     {
 
-        $item = $this->contentType->getItem($this->dataId);
+        //$item = $this->contentType->getItem($this->dataId);
+
+        //$type = new ContentTy
 
         $p = new Paragraph($this);
-        $p->content= $item->getSubject();
+        //$p->content= $item->getSubject();
         
 
 //        $p = new Paragraph($this);

@@ -26,7 +26,7 @@ class ReopenStatusButton extends AdminSiteButton
         //if ($this->status !== null) {
         $this->content = $this->status->type;
         $this->site=new Site();
-        $this->site->addParameter(new StatusParameter($this->status->id));
+        $this->site->addParameter(new StatusParameter($this->status->contentId));
         /*} else {
             $this->disabled=true;
         }*/

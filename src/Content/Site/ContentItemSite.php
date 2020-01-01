@@ -15,7 +15,6 @@ use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Block\Div;
 use Nemundo\Package\Bootstrap\Dropdown\BootstrapSiteDropdown;
-use Nemundo\Process\App\Favorite\Com\FavoriteButton;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentGroup\ContentGroupReader;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
@@ -62,8 +61,8 @@ class ContentItemSite extends AbstractSite
 
         $contentRow = $reader->getRowById($dataId);
 
-        $contentType = $contentRow->contentType->getContentType();
-        $contentItem = $contentType->getItem($contentRow->id);
+        $contentType = $contentRow->contentType->getContentType($dataId);
+        //$contentItem = $contentType->getItem($contentRow->id);
 
         $title = new AdminTitle($page);
         $title->content = $contentItem->getSubject();  //Type->getSubject($contentRow->id);
@@ -120,27 +119,27 @@ class ContentItemSite extends AbstractSite
         $btn->site->addParameter(new DataIdParameter());
 
 
-        $btn = new FavoriteButton($page);
-        $btn->dataId = $dataId;
+        //$btn = new FavoriteButton($page);
+        //$btn->dataId = $dataId;
 
 
         if ($contentType->isObjectOfTrait(MenuTrait::class)) {
 
-        $dropdown = new BootstrapSiteDropdown($page);
+            $dropdown = new BootstrapSiteDropdown($page);
 
-        //$reader = new ContentTypeReader();
-        //foreach ($reader->getData() as $contentTypeRow) {
+            //$reader = new ContentTypeReader();
+            //foreach ($reader->getData() as $contentTypeRow) {
 
-         foreach ($contentType->getMenuList() as $menuContentType) {
+            foreach ($contentType->getMenuList() as $menuContentType) {
 
-            $site = clone(ContentItemSite::$site);
-            $site->title = $menuContentType->type;  // $contentTypeRow->contentType;
-            $site->addParameter(new DataIdParameter());
-            $site->addParameter(new ContentTypeParameter($menuContentType->id));
+                $site = clone(ContentItemSite::$site);
+                $site->title = $menuContentType->type;  // $contentTypeRow->contentType;
+                $site->addParameter(new DataIdParameter());
+                $site->addParameter(new ContentTypeParameter($menuContentType->contentId));
 
-            $dropdown->addSite($site);
+                $dropdown->addSite($site);
 
-        }
+            }
 
         }
 
@@ -156,7 +155,6 @@ class ContentItemSite extends AbstractSite
             $form->redirectSite->addParameter(new DataIdParameter());
 
         }
-
 
 
         foreach ($contentItem->getChild() as $contentRow) {

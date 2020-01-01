@@ -39,10 +39,13 @@ class ContentDeleteSite extends AbstractDeleteIconSite
 
         $contentRow = $reader->getRowById($dataId);
 
-        $contentType = $contentRow->contentType->getContentType();
+        $contentType = $contentRow->contentType->getContentType($dataId);
 
-        $contentItem = $contentType->getItem($contentRow->id);
-        $contentItem->deleteItem();
+        //$contentItem = $contentType->getItem($contentRow->id);
+        //$contentItem->deleteItem();
+
+
+        $contentType->deleteItem();
 
         (new UrlReferer())->redirect();
 

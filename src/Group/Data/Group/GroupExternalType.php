@@ -11,6 +11,16 @@ public $id;
 */
 public $group;
 
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $groupTypeId;
+
+/**
+* @var \Nemundo\Process\Group\Data\GroupType\GroupTypeExternalType
+*/
+public $groupType;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = GroupModel::class;
@@ -30,5 +40,23 @@ $this->group->aliasFieldName = $this->group->tableName . "_" . $this->group->fie
 $this->group->label = "Group";
 $this->addType($this->group);
 
+$this->groupTypeId = new \Nemundo\Model\Type\Id\IdType();
+$this->groupTypeId->fieldName = "group_type";
+$this->groupTypeId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->groupTypeId->aliasFieldName = $this->groupTypeId->tableName ."_".$this->groupTypeId->fieldName;
+$this->groupTypeId->label = "Group Type";
+$this->addType($this->groupTypeId);
+
+}
+public function loadGroupType() {
+if ($this->groupType == null) {
+$this->groupType = new \Nemundo\Process\Group\Data\GroupType\GroupTypeExternalType(null, $this->parentFieldName . "_group_type");
+$this->groupType->fieldName = "group_type";
+$this->groupType->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->groupType->aliasFieldName = $this->groupType->tableName ."_".$this->groupType->fieldName;
+$this->groupType->label = "Group Type";
+$this->addType($this->groupType);
+}
+return $this;
 }
 }

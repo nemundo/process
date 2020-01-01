@@ -21,7 +21,7 @@ class LargeTextContentType extends AbstractContentType
     protected function loadContentType()
     {
 
-        $this->id = '1b4e6652-8f85-4cd8-b44a-1f50afb696ac';
+        $this->contentId = '1b4e6652-8f85-4cd8-b44a-1f50afb696ac';
         $this->formClass = LargeTextContentForm::class;
         $this->viewClass = LargeTextContentView::class;
         $this->itemClass = LargeTextContentItem::class;

@@ -57,6 +57,11 @@ public $dateTime;
 */
 public $userId;
 
+/**
+* @var string
+*/
+public $groupAssignmentId;
+
 public function __construct() {
 parent::__construct();
 $this->model = new WorkflowModel();
@@ -78,6 +83,7 @@ $property->setValue($this->deadline);
 $property = new \Nemundo\Model\Data\Property\DateTime\DateTimeDataProperty($this->model->dateTime, $this->typeValueList);
 $property->setValue($this->dateTime);
 $this->typeValueList->setModelValue($this->model->userId, $this->userId);
+$this->typeValueList->setModelValue($this->model->groupAssignmentId, $this->groupAssignmentId);
 parent::update();
 }
 }

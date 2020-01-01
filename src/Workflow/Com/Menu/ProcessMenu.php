@@ -18,7 +18,7 @@ class ProcessMenu extends AbstractProcessMenu
 
             if (!$this->workflowExist) {
 
-                if ($this->workflowStatus->id === $status->id) {
+                if ($this->workflowStatus->contentId === $status->contentId) {
                     $this->addArrowLabel($status);
                 } else {
                     $this->addLabel($status);
@@ -43,7 +43,7 @@ class ProcessMenu extends AbstractProcessMenu
 
                 $this->addSubmenu($status);
 
-                if ($status->id == $this->workflowStatus->id) {
+                if ($status->contentId == $this->workflowStatus->contentId) {
                     $this->workflowStatusFound = true;
                 }
 

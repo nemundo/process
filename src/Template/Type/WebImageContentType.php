@@ -12,7 +12,7 @@ class WebImageContentType extends AbstractContentType
 
     protected function loadContentType()
     {
-        $this->id = '585ec68c-831a-4a80-8dbb-f82bdb6832b3';
+        $this->contentId = '585ec68c-831a-4a80-8dbb-f82bdb6832b3';
         $this->viewClass = WebImageContentView::class;
 //        $this->formClass = ContentForm::class;
     }

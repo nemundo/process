@@ -113,7 +113,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
 
         if ($this->workflowExist && !$this->workflowClosed) {
 
-            if ($this->nextStatus->id == $status->id) {
+            if ($this->nextStatus->contentId == $status->contentId) {
 
                 $this->addSubmenuWithoutCheck($this->workflowStatus);
 
@@ -131,7 +131,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
             foreach ($status->getMenuList() as $menuStatus) {
 
                 $row = new TableRow($this->table);
-                if ($this->formStatus->id == $menuStatus->id) {
+                if ($this->formStatus->contentId == $menuStatus->contentId) {
                     new ArrowRightIcon($row);
 
                     $bold = new Bold($row);
@@ -143,7 +143,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
                     $row->addEmpty();
 
                     $site = clone($this->site);
-                    $site->addParameter(new StatusParameter($menuStatus->id));
+                    $site->addParameter(new StatusParameter($menuStatus->contentId));
                     $site->title = $menuStatus->type;
 
                     $hyperlink = new SiteHyperlink($row);
@@ -181,9 +181,9 @@ class AbstractProcessMenu extends AbstractHtmlContainer
 
             if ($this->nextStatus !== null) {
 
-                if ($this->nextStatus->id == $status->id) {
+                if ($this->nextStatus->contentId == $status->contentId) {
 
-                    if ($this->formStatus->id == $status->id) {
+                    if ($this->formStatus->contentId == $status->contentId) {
 
                         $row = new TableRow($this->table);
 
@@ -198,7 +198,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
                         $row->addEmpty();
 
                         $site = clone($this->site);
-                        $site->addParameter(new StatusParameter($status->id));
+                        $site->addParameter(new StatusParameter($status->contentId));
                         $site->title = $status->type;
 
                         $hyperlink = new SiteHyperlink($row);
@@ -244,7 +244,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
                 new CheckIcon($row);
 
                 $site = clone($this->site);
-                $site->addParameter(new StatusParameter($status->id));
+                $site->addParameter(new StatusParameter($status->contentId));
                 $site->title = $status->type;
 
                 $hyperlink = new SiteHyperlink($row);

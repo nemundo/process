@@ -90,6 +90,37 @@
         },
         {
             "template": "default",
+            "model_id": "26fefe1a-1b93-46a1-9397-376af697edb5",
+            "label": "Group Assignment",
+            "class_name": "GroupAssignment",
+            "table_name": "template_group_assignment",
+            "namespace": "Nemundo\\Process\\Template\\Data\\GroupAssignment",
+            "row_class_name": "",
+            "primary_index": "text_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Group",
+                    "field_name": "group",
+                    "variable_name": "group",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "c6e00009-24e0-4cef-82ee-34a89152415f"
+                },
+                {
+                    "type": "date",
+                    "label": "Deadline",
+                    "field_name": "deadline",
+                    "variable_name": "deadline",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "eab3bc8e-1377-4454-bdf2-53bdf1057b24",
             "label": "Large Text",
             "class_name": "LargeText",

@@ -5,8 +5,9 @@ namespace Nemundo\Process\Content\Type;
 
 
 use Nemundo\Html\Container\AbstractHtmlContainer;
+use Nemundo\Process\Content\Item\AbstractTreeContentType;
 
-abstract class AbstractSequenceContentType extends AbstractContentType
+abstract class AbstractSequenceContentType extends AbstractTreeContentType
 {
 
     /**

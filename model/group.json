@@ -23,6 +23,38 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "length": "255"
+                },
+                {
+                    "type": "external",
+                    "label": "Group Type",
+                    "field_name": "group_type",
+                    "variable_name": "groupType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "31e21ebb-7b67-482a-a24f-04afb70e5aa8"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "31e21ebb-7b67-482a-a24f-04afb70e5aa8",
+            "label": "Group Type",
+            "class_name": "GroupType",
+            "table_name": "group_group_type",
+            "namespace": "Nemundo\\Process\\Group\\Data\\GroupType",
+            "row_class_name": "",
+            "primary_index": "text_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Group Type",
+                    "field_name": "group_type",
+                    "variable_name": "groupType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
                 }
             ],
             "index": []

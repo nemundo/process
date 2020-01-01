@@ -21,7 +21,7 @@ class WikiPageContentType extends AbstractContentType
     protected function loadContentType()
     {
 
-        $this->id ='b94ec710-d1bd-4430-8866-4a7f9a493c52';
+        $this->contentId ='b94ec710-d1bd-4430-8866-4a7f9a493c52';
         $this->type='Wiki Page';
         $this->formClass=WikiPageContentForm::class;
         $this->listClass=WikiPageContentList::class;

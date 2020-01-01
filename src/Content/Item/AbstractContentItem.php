@@ -26,6 +26,8 @@ use Nemundo\Process\Search\Data\SearchIndex\SearchIndexDelete;
 use Nemundo\Process\Search\Index\SearchIndexBuilder;
 use Nemundo\User\Type\UserSessionType;
 
+
+// AbstractContentTreeContentType
 abstract class AbstractContentItem extends AbstractBaseClass
 {
 
@@ -55,7 +57,7 @@ abstract class AbstractContentItem extends AbstractBaseClass
     public $dataId;
 
 
-    private $createMode = false;
+    //private $createMode = false;
 
     /**
      * @var SearchIndexBuilder
@@ -70,7 +72,7 @@ abstract class AbstractContentItem extends AbstractBaseClass
 
         if ($id == null) {
             $this->dataId = (new UniqueId())->getUniqueId();
-            $this->createMode = true;
+            //$this->createMode = true;
         } else {
 
             $this->dataId = $id;
@@ -146,7 +148,7 @@ abstract class AbstractContentItem extends AbstractBaseClass
 
         $data = new Content();
         $data->updateOnDuplicate = true;
-        $data->contentTypeId = $this->contentType->id;
+        $data->contentTypeId = $this->contentType->contentId;
         $data->id = $this->dataId;
         $data->subject = $this->getSubject();
         $data->dateTime = $this->dateTime;
@@ -322,7 +324,7 @@ abstract class AbstractContentItem extends AbstractBaseClass
 
         $data = new Inbox();
         $data->userId = $userId;
-        $data->contentTypeId = $this->contentType->id;
+        $data->contentTypeId = $this->contentType->contentId;
         $data->dataId = $this->dataId;
         $data->save();
 

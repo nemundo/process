@@ -27,7 +27,7 @@ class ContentTypeSetup extends AbstractBase
 
         $data = new ContentType();
         $data->updateOnDuplicate=true;
-        $data->id=$contentType->id;
+        $data->id=$contentType->contentId;
         $data->contentType=$type;
         $data->phpClass=$contentType->getClassName();
         $data->save();
@@ -46,7 +46,7 @@ class ContentTypeSetup extends AbstractBase
 
 
         $delete = new ContentDelete();
-        $delete->filter->andEqual($delete->model->contentTypeId,$contentType->id);
+        $delete->filter->andEqual($delete->model->contentTypeId,$contentType->contentId);
         $delete->delete();
 
 

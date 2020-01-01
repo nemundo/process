@@ -47,7 +47,7 @@ class DocumentParentContainer extends AbstractParentContainer
         $join->externalType = $externalModel->dataId;
 
         $documentReader->filter->andEqual($externalModel->parentId, $this->parentId);
-        $documentReader->filter->andEqual($externalModel->contentTypeId, (new DocumentProcessStatus())->id);
+        $documentReader->filter->andEqual($externalModel->contentTypeId, (new DocumentProcessStatus())->contentId);
 
         $documentReader->checkExternal($externalModel);
         $documentReader->addFieldByModel($externalModel);

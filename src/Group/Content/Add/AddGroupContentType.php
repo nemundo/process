@@ -12,7 +12,7 @@ class AddGroupContentType extends AbstractProcessStatus  // AbstractContentType
     protected function loadContentType()
     {
         $this->type = 'Add Group';
-        $this->id = '43959909-7aca-4a0f-a486-02f993266ad1';
+        $this->contentId = '43959909-7aca-4a0f-a486-02f993266ad1';
         $this->formClass = AddGroupContentForm::class;
         $this->itemClass=AddGroupContentItem::class;
         // TODO: Implement loadContentType() method.

@@ -12,12 +12,18 @@ public $model;
 */
 public $group;
 
+/**
+* @var string
+*/
+public $groupTypeId;
+
 public function __construct() {
 parent::__construct();
 $this->model = new GroupModel();
 }
 public function update() {
 $this->typeValueList->setModelValue($this->model->group, $this->group);
+$this->typeValueList->setModelValue($this->model->groupTypeId, $this->groupTypeId);
 parent::update();
 }
 }

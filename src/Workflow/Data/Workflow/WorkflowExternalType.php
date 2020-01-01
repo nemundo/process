@@ -71,6 +71,16 @@ public $userId;
 */
 public $user;
 
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $groupAssignmentId;
+
+/**
+* @var \Nemundo\Process\Group\Data\Group\GroupExternalType
+*/
+public $groupAssignment;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = WorkflowModel::class;
@@ -154,6 +164,13 @@ $this->userId->aliasFieldName = $this->userId->tableName ."_".$this->userId->fie
 $this->userId->label = "User";
 $this->addType($this->userId);
 
+$this->groupAssignmentId = new \Nemundo\Model\Type\Id\IdType();
+$this->groupAssignmentId->fieldName = "group_assignment";
+$this->groupAssignmentId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->groupAssignmentId->aliasFieldName = $this->groupAssignmentId->tableName ."_".$this->groupAssignmentId->fieldName;
+$this->groupAssignmentId->label = "Group Assignment";
+$this->addType($this->groupAssignmentId);
+
 }
 public function loadProcess() {
 if ($this->process == null) {
@@ -185,6 +202,17 @@ $this->user->tableName = $this->parentFieldName . "_" . $this->externalTableName
 $this->user->aliasFieldName = $this->user->tableName ."_".$this->user->fieldName;
 $this->user->label = "User";
 $this->addType($this->user);
+}
+return $this;
+}
+public function loadGroupAssignment() {
+if ($this->groupAssignment == null) {
+$this->groupAssignment = new \Nemundo\Process\Group\Data\Group\GroupExternalType(null, $this->parentFieldName . "_group_assignment");
+$this->groupAssignment->fieldName = "group_assignment";
+$this->groupAssignment->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->groupAssignment->aliasFieldName = $this->groupAssignment->tableName ."_".$this->groupAssignment->fieldName;
+$this->groupAssignment->label = "Group Assignment";
+$this->addType($this->groupAssignment);
 }
 return $this;
 }

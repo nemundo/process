@@ -75,7 +75,7 @@ $form->parentId=$dataId;
 
        // $form->redirectSite = TestSite::$site;
         if ($nextMenu !== null) {
-            $form->redirectSite->addParameter(new SequenceContentTypeParameter($nextMenu->id));
+            $form->redirectSite->addParameter(new SequenceContentTypeParameter($nextMenu->contentId));
             //$form->redirectSite->addParameter(new DataIdParameter());
 
         }
@@ -87,7 +87,7 @@ $form->parentId=$dataId;
             $previous->site = clone($this->redirectSite);
             $previous->site->title = 'Previous';
             $previous->site->addParameter(new DataIdParameter());
-            $previous->site->addParameter(new SequenceContentTypeParameter($previsousMenu->id));
+            $previous->site->addParameter(new SequenceContentTypeParameter($previsousMenu->contentId));
         }
 
 

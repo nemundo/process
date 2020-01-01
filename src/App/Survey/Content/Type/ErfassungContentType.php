@@ -12,7 +12,7 @@ class ErfassungContentType extends AbstractMenuContentType
 {
     protected function loadContentType()
     {
-     $this->id='77390376-d9d2-4538-ac6b-297629531f5c';
+     $this->contentId='77390376-d9d2-4538-ac6b-297629531f5c';
      $this->type='Erfassung';
      $this->formClass=SurveyErfassungContentForm::class;
         // TODO: Implement loadContentType() method.

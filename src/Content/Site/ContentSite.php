@@ -93,7 +93,7 @@ class ContentSite extends AbstractSite
 
             if (class_exists($contentRow->contentType->phpClass)) {
 
-                $contentType = $contentRow->contentType->getContentType();
+                $contentType = $contentRow->contentType->getContentType($contentRow->id);
 
 
                 $row = new BootstrapClickableTableRow($table);
@@ -111,10 +111,10 @@ class ContentSite extends AbstractSite
                 //$item = new ContentItem($contentRow->id);
                 //$item->contentType = $contentType;
 
-                $item = $contentType->getItem($contentRow->id);
+                //$item = $contentType->getItem($contentRow->id);
 
-                $row->addText($item->getClassName());
-                $row->addText($item->getSubject());
+                $row->addText($contentType->getClassName());
+                $row->addText($contentType->getSubject());
 
                 //$row->addText($contentType->getSubject($contentRow->id));
 

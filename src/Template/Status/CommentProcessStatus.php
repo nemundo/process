@@ -20,7 +20,7 @@ class CommentProcessStatus extends AbstractProcessStatus
 
         $this->type[LanguageCode::EN] = 'Comment';
         $this->type[LanguageCode::DE] = 'Kommentar';
-        $this->id = '63fa85d4-4c49-42cc-bd0d-af00a7d96458';
+        $this->contentId = '63fa85d4-4c49-42cc-bd0d-af00a7d96458';
         $this->changeStatus = false;
         $this->formClass = CommentForm::class;
 

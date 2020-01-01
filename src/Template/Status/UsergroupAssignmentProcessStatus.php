@@ -12,7 +12,7 @@ class UsergroupAssignmentProcessStatus extends AbstractProcessStatus
     protected function loadContentType()
     {
    $this->type='Assignment (Usergroup)';
-   $this->id = '90a77704-0677-45b4-abc2-cb4590701c81';
+   $this->contentId = '90a77704-0677-45b4-abc2-cb4590701c81';
     }
 
 }

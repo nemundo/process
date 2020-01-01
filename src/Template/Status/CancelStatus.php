@@ -19,7 +19,7 @@ class CancelStatus extends AbstractProcessStatus  // CommentProcessStatus
         $this->type[LanguageCode::EN] = 'Cancel';
         $this->type[LanguageCode::DE] = 'Abbruch';
 
-        $this->id='510c9d20-74cc-43b6-82d3-d6a6df487813';
+        $this->contentId='510c9d20-74cc-43b6-82d3-d6a6df487813';
 
         $this->changeStatus=true;
         $this->closeWorkflow=true;

@@ -8,6 +8,7 @@ use Nemundo\Core\Type\Text\Html;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapLargeTextBox;
 use Nemundo\Process\Content\Form\AbstractContentForm;
+use Nemundo\Process\Template\Data\LargeText\LargeText;
 use Nemundo\Process\Template\Data\LargeText\LargeTextReader;
 use Nemundo\Process\Template\Item\LargeTextContentItem;
 
@@ -54,10 +55,18 @@ class LargeTextContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
+        $data=new LargeText();
+        $data->updateOnDuplicate=true;
+        $data->id=$this->dataId;
+        $data->largeText=$this->largeText->getValue();
+        $data->save();
+
+
+        /*
         $item = new LargeTextContentItem($this->dataId);
         $item->parentId = $this->parentId;
         $item->largeText = $this->largeText->getValue();
-        $item->saveItem();
+        $item->saveItem();*/
 
     }
 
