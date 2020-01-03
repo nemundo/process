@@ -92,9 +92,9 @@ class ProcessView extends AbstractContentView
         if ($this->dataId !== null) {
 
 
-            $btn=new FavoriteButton($layout->col3);
+            //$btn=new FavoriteButton($layout->col3);
             //$btn->contentType = $this->contentType;
-            $btn->dataId = $this->dataId;
+            //$btn->dataId = $this->dataId;
 
             if ($this->contentType->baseViewClass !== null) {
 
@@ -107,39 +107,6 @@ class ProcessView extends AbstractContentView
         }
 
 
-        /*$btn = new NextStatusButton($layout->col1);
-        $btn->site = clone($this->redirectSite);
-        $btn->status = $workflowStatus->getNextStatus();
-
-        $dropdown = new MenuStatusDropdown($layout->col1);
-        $dropdown->status = $workflowStatus;
-        $dropdown->redirectSite = clone($this->redirectSite);*/
-
-
-        /*$menu =  new HistoryProcessMenu($layout->col1);
-        $menu->process = $this->process;
-        $menu->workflowId = $this->workflowId;
-        $menu->formStatus = $formStatus;
-        $menu->workflowStatus = $workflowStatus;
-        $menu->site = clone($this->redirectSite);
-        $menu->site->addParameter(new WorkflowParameter($this->workflowId));
-
-
-        $menu = new ProcessMenu($layout->col1);  // new HistoryProcessMenu($layout->col1);
-        $menu->process = $this->process;
-        $menu->workflowId = $this->workflowId;
-        $menu->formStatus = $formStatus;
-        $menu->workflowStatus = $workflowStatus;
-        $menu->site = clone($this->redirectSite);
-        $menu->site->addParameter(new WorkflowParameter($this->workflowId));*/
-
-
-
-
-
-
-        //(new Hr($layout->col1));
-
         $menu =new ProcessMenu($layout->col1);
         $menu->process = $this->contentType;
         $menu->workflowId = $this->dataId;
@@ -149,25 +116,16 @@ class ProcessView extends AbstractContentView
         $menu->site->addParameter(new WorkflowParameter($this->dataId));
 
 
-        /*
-        (new Hr($layout->col1));
-
-        $menu =new HistoryProcessMenu($layout->col1);
-        $menu->process = $this->contentType;
-        $menu->workflowId = $this->dataId;
-        $menu->formStatus = $formStatus;
-        $menu->workflowStatus = $workflowStatus;
-        $menu->site = clone($this->redirectSite);
-        $menu->site->addParameter(new WorkflowParameter($this->dataId));
-*/
 
         if ($formStatus !== null) {
             $widget = new AdminWidget($layout->col2);
-            $widget->widgetTitle = $formStatus->type;
+            $widget->widgetTitle = $formStatus->contentLabel;
 
             $form = new StatusFormContainer($widget);
             $form->formStatus = $formStatus;
             $form->workflowStatus = $workflowStatus;
+            $form->appendWorkflowParameter=true;
+
             $form->site = clone($this->redirectSite);
             $form->workflowId = $this->dataId;
             $form->appendWorkflowParameter=$this->appendWorkflowParameter;

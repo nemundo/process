@@ -46,7 +46,7 @@ class StatusFormContainer extends AbstractHtmlContainer
         if ($this->formStatus !== null) {
 
             $subtitle = new AdminSubtitle($this);
-            $subtitle->content = $this->formStatus->type;
+            $subtitle->content = $this->formStatus->contentLabel;
 
             if ($this->formStatus->checkUserVisibility()) {
 

@@ -15,11 +15,12 @@ use Nemundo\Package\Bootstrap\Listing\BootstrapHyperlinkList;
 use Nemundo\Process\App\Wiki\Content\WikiPageContentForm;
 use Nemundo\Process\App\Wiki\Content\WikiPageContentItem;
 use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
+use Nemundo\Process\App\Wiki\Content\WikiSubject;
 use Nemundo\Process\App\Wiki\Data\Wiki\WikiReader;
+use Nemundo\Process\App\Wiki\Data\WikiType\WikiTypeReader;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\Content\Com\Dropdown\ContentTypeDropdown;
 use Nemundo\Process\Content\Com\Form\AddContentForm;
-use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Web\Site\AbstractSite;
@@ -85,10 +86,20 @@ class WikiSite extends AbstractSite
 
             $wikiItem = new WikiPageContentItem($wikiId);
 
-            $wikiType = new WikiPageContentType();
+            $wikiType = new WikiPageContentType($wikiId);
 
             $title = new AdminTitle($layout->col2);
-            $title->content = $wikiItem->getSubject();
+            $title->content = $wikiType->getSubject();  // $wikiItem->getSubject();
+
+            $title = new AdminTitle($layout->col2);
+            $title->content = (new WikiSubject($wikiId))->getSubject();
+
+
+            foreach ($wikiType->getChild() as $contentCustomRow) {
+                $contentCustomRow->getContentType()->getView($layout->col3);
+
+            }
+
 
             $wikiRow = (new WikiReader())->getRowById($wikiId);
 
@@ -99,16 +110,21 @@ class WikiSite extends AbstractSite
             $dropdown->redirectSite = WikiSite::$site;
             $dropdown->redirectSite->addParameter(new WikiParameter());
 
-
-            foreach ((new WikiPageContentType())->getMenuList() as $contentType) {
-                $dropdown->addContentType($contentType);
+            $wikiTypeReader = new WikiTypeReader();
+            $wikiTypeReader->model->loadContentType();
+            $wikiTypeReader->addOrder($wikiTypeReader->model->contentType->contentType);
+            foreach ($wikiTypeReader->getData() as $wikiTypeRow) {
+                //foreach ((new WikiPageContentType())->getMenuList() as $contentType) {
+                // $dropdown->addContentType($contentType);
+                $dropdown->addContentType($wikiTypeRow->contentType->getContentType());
             }
 
 
             $contentTypeParameter = new ContentTypeParameter();
             if ($contentTypeParameter->exists()) {
 
-                $contentType = (new ContentTypeReader())->getRowById($contentTypeParameter->getValue())->getContentType();
+                $contentType = $contentTypeParameter->getContentType();
+                //(new ContentTypeReader())->getRowById($contentTypeParameter->getValue())->getContentType();
 
                 $form = $contentType->getForm($layout->col2);
                 $form->parentId = $wikiId;
@@ -125,13 +141,14 @@ class WikiSite extends AbstractSite
 
             foreach ($wikiItem->getChild() as $contentRow) {
 
-                $contentType = $contentRow->contentType->getContentType();
+                $contentType = $contentRow->getContentType();  // contentType->getContentType();
+
                 if ($contentType !== null) {
 
-                    $contentItem = $contentType->getItem($contentRow->id);
+                    //$contentItem = $contentType->getItem($contentRow->id);
 
                     $subtitle = new AdminSubtitle($layout->col2);
-                    $subtitle->content = $contentItem->getSubject() . ' - ' . $contentRow->dateTime->getShortDateTimeFormat();
+                    $subtitle->content = $contentType->getSubject() . ' - ' . $contentRow->dateTime->getShortDateTimeFormat();
 
                     $btn = new AdminIconSiteButton($layout->col2);
                     $btn->site = clone(ContentDeleteSite::$site);
@@ -145,10 +162,12 @@ class WikiSite extends AbstractSite
                     $btn = new AdminIconSiteButton($layout->col2);
                     $btn->site = clone(ContentEditSite::$site);
                     $btn->site->addParameter(new ContentParameter($contentRow->id));
+                    $btn->site->addParameter(new WikiParameter());
+
 
                     if ($contentType->hasViewSite()) {
                         $btn = new AdminSiteButton($layout->col2);
-                        $btn->site = $contentType->getViewSite($contentRow->id);
+                        $btn->site = $contentType->getViewSite();
                     }
 
                     $div = new Div($layout->col2);

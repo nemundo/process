@@ -5,11 +5,8 @@ namespace Nemundo\Process\Content\Script;
 
 
 use Nemundo\App\Script\Type\AbstractConsoleScript;
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\Content\ContentUpdate;
-use Nemundo\Process\Content\Install\ContentInstall;
-use Nemundo\Process\Content\Install\ContentUninstall;
 
 class ContentUpdateScript extends AbstractConsoleScript
 {
@@ -27,13 +24,16 @@ class ContentUpdateScript extends AbstractConsoleScript
         $reader->model->loadContentType();
         foreach ($reader->getData() as $contentRow) {
 
-            $contentType = $contentRow->contentType->getContentType();
-            $contentItem = $contentType->getItem($contentRow->id);
+            $contentType = $contentRow->getContentType();  // contentType->getContentType();
+
+            //(new Debug())->write($contentType->getSubject());
+
+            //$contentItem = $contentType->getItem($contentRow->id);
             //(new Debug())->write($contentItem->getSubject());
 
 
             $update = new ContentUpdate();
-            $update->subject= $contentItem->getSubject();
+            $update->subject = $contentType->getSubject();
             $update->updateById($contentRow->id);
 
         }

@@ -5,9 +5,9 @@ namespace Nemundo\Process\Template\Form;
 
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapDatePicker;
-use Nemundo\Process\Template\Item\DeadlineChangeItem;
+use Nemundo\Process\Template\Status\DeadlineChangeProcessStatus;
 use Nemundo\Process\Workflow\Content\Form\AbstractStatusForm;
-use Nemundo\Process\Workflow\Content\Item\Process\WorkflowItem;
+use Nemundo\Process\Workflow\Content\Process\WorkflowProcess;
 
 class DeadlineChangeForm extends AbstractStatusForm
 {
@@ -25,21 +25,10 @@ class DeadlineChangeForm extends AbstractStatusForm
         $this->datum->validation = true;
 
 
-        $workflowItem = new WorkflowItem($this->parentId);
+        $workflowItem = new WorkflowProcess($this->parentId);
         if ($workflowItem->hasDeadline()) {
             $this->datum->value = $workflowItem->getDeadline()->getShortDateLeadingZeroFormat();
         }
-
-
-        //$taskRow = (new TaskReader())->getRowById($this->parentContentType->dataId);
-        //$this->datum->value = $taskRow->deadline->getShortDateLeadingZeroFormat();
-
-        /*
-        if ($this->contentType->parentContentType->erledigenBis !== null) {
-            $this->datum->value = $this->contentType->parentContentType->erledigenBis->getShortDateLeadingZeroFormat();
-        } else {
-            $this->datum->value = (new Date())->setNow()->getShortDateLeadingZeroFormat();
-        }*/
 
         return parent::getContent();
     }
@@ -49,10 +38,10 @@ class DeadlineChangeForm extends AbstractStatusForm
     {
 
 
-        $item = new DeadlineChangeItem();
+        $item = new DeadlineChangeProcessStatus();
         $item->parentId = $this->parentId;
         $item->deadline = (new Date())->fromGermanFormat($this->datum->getValue());
-        $item->saveItem();
+        $item->saveType();
 
 
     }

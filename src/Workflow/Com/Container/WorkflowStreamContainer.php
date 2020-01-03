@@ -7,6 +7,7 @@ namespace Nemundo\Process\Workflow\Com\Container;
 use Nemundo\Admin\Com\Widget\AdminWidget;
 use Nemundo\Process\Content\Com\Container\AbstractParentContainer;
 use Nemundo\Process\Workflow\Content\Item\Process\WorkflowItem;
+use Nemundo\Process\Workflow\Content\Process\WorkflowProcess;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
 class WorkflowStreamContainer extends AbstractParentContainer  //WorkflowContainer
@@ -15,7 +16,9 @@ class WorkflowStreamContainer extends AbstractParentContainer  //WorkflowContain
     public function getContent()
     {
 
-        foreach ((new WorkflowItem($this->parentId))->getChild() as $logRow) {
+        //foreach ((new WorkflowItem($this->parentId))->getChild() as $logRow) {
+
+            foreach ((new WorkflowProcess($this->parentId))->getChild() as $logRow) {
 
             /** @var AbstractProcessStatus $status */
             $status = $logRow->contentType->getContentType();

@@ -15,8 +15,8 @@ class DocumentDeleteProcessStatus extends AbstractProcessStatus
     protected function loadContentType()
     {
 
-        $this->type[LanguageCode::EN] = 'Document Delete';
-        $this->type[LanguageCode::DE] = 'Dokument löschen';
+        $this->contentLabel[LanguageCode::EN] = 'Document Delete';
+        $this->contentLabel[LanguageCode::DE] = 'Dokument löschen';
         $this->contentId ='a83ea4f8-9605-40d0-9557-bb8224d41e24';
         $this->changeStatus=false;
 
@@ -25,10 +25,10 @@ class DocumentDeleteProcessStatus extends AbstractProcessStatus
     }
 
 
-    public function getSubject($dataId)
+    public function getSubject()
     {
 
-        $documentRow = (new DocumentReader())->getRowById($dataId);
+        $documentRow = (new DocumentReader())->getRowById($this->dataId);
         $text = 'Document '.$documentRow->document->getFilename().' was deleted';
 
    //     $text = 'Doc Deleted';

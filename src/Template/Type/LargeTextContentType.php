@@ -5,16 +5,17 @@ namespace Nemundo\Process\Template\Type;
 
 
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Template\Form\LargeTextContentForm;
 use Nemundo\Process\Template\Item\LargeTextContentItem;
 use Nemundo\Process\Template\View\LargeTextContentView;
 use Nemundo\Process\Workflow\Content\Status\ProcessStatusTrait;
 
 
-class LargeTextContentType extends AbstractContentType
+class LargeTextContentType extends AbstractTreeContentType
 {
 
-    use ProcessStatusTrait;
+    //use ProcessStatusTrait;
 
     //public $label;
 
@@ -24,10 +25,17 @@ class LargeTextContentType extends AbstractContentType
         $this->contentId = '1b4e6652-8f85-4cd8-b44a-1f50afb696ac';
         $this->formClass = LargeTextContentForm::class;
         $this->viewClass = LargeTextContentView::class;
-        $this->itemClass = LargeTextContentItem::class;
+        //$this->itemClass = LargeTextContentItem::class;
 
-        $this->type = 'Large Text';
+        $this->contentLabel = 'Large Text';
 
     }
+
+
+    /*
+    protected function saveData()
+    {
+        // TODO: Implement saveData() method.
+    }*/
 
 }

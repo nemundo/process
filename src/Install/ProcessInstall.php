@@ -48,8 +48,8 @@ class ProcessInstall extends AbstractInstall
         (new ContentInstall())->install();
         (new WorkflowInstall())->install();
         (new InboxInstall())->install();
-        //(new WikiInstall())->install();
-        //(new TemplateInstall())->install();
+        (new WikiInstall())->install();
+        (new TemplateInstall())->install();
         //(new FavoriteInstall())->install();
 
         //(new ToDoInstall())->install();
@@ -119,6 +119,9 @@ $setup->addContentType(new NewsContentType());
 
         $setup = new ScriptSetup();
         $setup->addScript(new ProcessCleanScript());*/
+
+
+
 
 
     }

@@ -9,15 +9,11 @@ use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Process\Content\Com\Container\AbstractParentContainer;
 use Nemundo\Process\Workflow\Content\Item\Process\WorkflowItem;
+use Nemundo\Process\Workflow\Content\Process\WorkflowProcess;
 
 
-class WorkflowLogTable extends AbstractParentContainer // AdminTable
+class WorkflowLogTable extends AbstractParentContainer
 {
-
-    /**
-     * @var string
-     */
-    //public $workflowId;
 
 
     public function getContent()
@@ -30,17 +26,17 @@ class WorkflowLogTable extends AbstractParentContainer // AdminTable
         $header->addText('History');
         $header->addText('Ersteller');
 
-        foreach ((new WorkflowItem($this->parentId))->getChild() as $contentRow) {
+        foreach ((new WorkflowProcess($this->parentId))->getChild() as $contentRow) {
 
-            $status = $contentRow->contentType->getContentType();
+            $status = $contentRow->getContentType();
 
             if ($status->showLog) {
                 $row = new TableRow($table);
                 //$row->addText($status->getSubject($contentRow->id));
                 $row->addText($contentRow->subject);
 
-                $item = $status->getItem($contentRow->id);
-                $row->addText($item->getSubject());
+                //$item = $status->getItem($contentRow->id);
+                $row->addText($status->getSubject());
 
 
                 $row->addText($contentRow->user->displayName . ' ' . $contentRow->dateTime->getShortDateTimeLeadingZeroFormat());

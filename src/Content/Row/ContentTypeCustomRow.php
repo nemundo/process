@@ -13,7 +13,7 @@ use Nemundo\Process\Content\Type\MenuTrait;
 class ContentTypeCustomRow extends ContentTypeRow
 {
 
-    public function getContentType($dataId)
+    public function getContentType($dataId=null)
     {
 
         $className = $this->phpClass;

@@ -39,13 +39,15 @@ class ContentEditSite extends AbstractEditIconSite
         $reader->model->loadContentType();
         $contentRow = $reader->getRowById($contentId);
 
-        $contentType = $contentRow->contentType->getContentType();
+        //$contentType = $contentRow->contentType->getContentType();
+        $contentType = $contentRow->getContentType();
+
 
         $form = $contentType->getForm($page);
-        $form->dataId=$contentRow->id;
+        //$form->dataId=$contentRow->id;
 
         $form->redirectSite= WikiSite::$site;
-        //$form->redirectSite->addParameter(new WikiParameter($contentRow->parentId));
+        $form->redirectSite->addParameter(new WikiParameter());
 
         $page->render();
 

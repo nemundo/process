@@ -22,7 +22,7 @@ public $id;
 public $childId;
 
 /**
-* @var \Nemundo\Process\Content\Data\Content\ContentRow
+* @var \Nemundo\Process\Content\Row\ContentCustomRow
 */
 public $child;
 
@@ -32,7 +32,7 @@ public $child;
 public $parentId;
 
 /**
-* @var \Nemundo\Process\Content\Data\Content\ContentRow
+* @var \Nemundo\Process\Content\Row\ContentCustomRow
 */
 public $parent;
 
@@ -56,9 +56,9 @@ $this->loadNemundoProcessContentDataContentContentparentRow($model->parent);
 $this->itemOrder = intval($this->getModelValue($model->itemOrder));
 }
 private function loadNemundoProcessContentDataContentContentchildRow($model) {
-$this->child = new \Nemundo\Process\Content\Data\Content\ContentRow($this->row, $model);
+$this->child = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $model);
 }
 private function loadNemundoProcessContentDataContentContentparentRow($model) {
-$this->parent = new \Nemundo\Process\Content\Data\Content\ContentRow($this->row, $model);
+$this->parent = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $model);
 }
 }

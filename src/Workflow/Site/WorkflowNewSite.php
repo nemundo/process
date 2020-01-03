@@ -7,10 +7,8 @@ namespace Nemundo\Process\Workflow\Site;
 use Nemundo\Admin\Com\Navigation\AdminNavigation;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
-use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Workflow\Data\Process\ProcessReader;
-use Nemundo\Process\Workflow\Parameter\ProcessParameter;
 use Nemundo\Process\Workflow\Content\View\ProcessView;
+use Nemundo\Process\Workflow\Parameter\ProcessParameter;
 use Nemundo\Web\Site\AbstractSite;
 
 class WorkflowNewSite extends AbstractSite
@@ -43,7 +41,7 @@ class WorkflowNewSite extends AbstractSite
 
 
         //$processParameter = new ProcessParameter();
-$process= (new ProcessParameter())->getProcess();  //  $processParameter->getProcess();
+        $process = (new ProcessParameter())->getProcess();  //  $processParameter->getProcess();
 
 
 //        $processId = $processParameter->getValue();
@@ -54,12 +52,12 @@ $process= (new ProcessParameter())->getProcess();  //  $processParameter->getPro
         $process = $processRow->getProcess();*/
 
         $title = new AdminTitle($page);
-        $title->content = $process->type;
+        $title->content = $process->contentLabel;
 
         $view = new ProcessView($page);
         $view->contentType = $process;
         $view->redirectSite = WorkflowItemSite::$site;
-        $view->appendWorkflowParameter=true;
+        $view->appendWorkflowParameter = true;
 
         $page->render();
 

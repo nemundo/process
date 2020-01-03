@@ -4,9 +4,7 @@
 namespace Nemundo\Process\Content\Type;
 
 
-
-// SequenceContentType
-abstract class AbstractMenuContentType extends AbstractContentType
+abstract class AbstractMenuContentType extends AbstractTreeContentType
 {
 
 

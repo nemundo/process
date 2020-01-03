@@ -17,6 +17,9 @@ class WikiPageContentList extends AbstractContentList
     public function getContent()
     {
 
+        $this->redirectSite = WikiSite::$site;
+        $this->redirectParameter =new WikiParameter();
+
         $list = new BootstrapHyperlinkList($this);
 
         $reader = new WikiReader();

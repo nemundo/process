@@ -70,7 +70,7 @@ $dropdown->redirectSite = WorkflowNewSite::$site;
         $processReader->addOrder($processReader->model->contentType->contentType);
         foreach ($processReader->getData() as $processRow) {
             $site = clone(WorkflowNewSite::$site);
-            $site->title = $processRow->getProcess()->type;
+            $site->title = $processRow->getProcess()->contentLabel;
             $site->addParameter(new ProcessParameter($processRow->contentTypeId));
 
             $dropdown->addSite($site);

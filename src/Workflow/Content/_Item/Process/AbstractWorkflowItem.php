@@ -110,6 +110,10 @@ abstract class AbstractWorkflowItem extends AbstractContentItem
         $id->filter->andEqual($id->model->contentTypeId, $this->contentType->id);
         $processId = $id->getId();*/
 
+
+
+
+
         $processId = $this->contentType->contentId;
 
         if ($this->number == null) {

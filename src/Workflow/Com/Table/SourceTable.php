@@ -11,17 +11,13 @@ use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Process\Content\Com\Container\AbstractParentContainer;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Workflow\Content\Item\Process\WorkflowItem;
+use Nemundo\Process\Workflow\Content\Process\WorkflowProcess;
 
 
 // müsste nach Content
 
-class SourceTable extends AbstractParentContainer  // AdminTable
+class SourceTable extends AbstractParentContainer
 {
-
-    /**
-     * @var string
-     */
-    //public $workflowId;
 
     public function getContent()
     {
@@ -31,25 +27,10 @@ class SourceTable extends AbstractParentContainer  // AdminTable
         $header = new TableHeader($table);
         $header->addText('Quelle');
 
-        /*$contentReader = new ContentReader();
-        $contentReader->filter->andEqual($contentReader->model->id,$this->workflowId);
-        $contentReader->filter->andNotEqual($contentReader->model->parentId,'');*/
-
-        foreach ((new WorkflowItem($this->parentId))->getParentContent() as $contentRow) {
-
+        foreach ((new WorkflowProcess($this->parentId))->getParentContent() as $contentRow) {
             $row = new TableRow($this);
-            //$row->addText('parentid'.$contentRow->parentId);
-
-            /*$parentReader = new ContentReader();
-            $parentReader->model->loadContentType();
-            $parentReader->filter->andEqual($parentReader->model->dataId, $contentRow->parentId);
-            $contentType = $parentReader->getRow()->contentType->getContentType();*/
-
             $contentType = $contentRow->contentType->getContentType();
             $row->addText($contentType->getClassName());
-
-           // $row->addSite($contentType->getViewSite($contentRow->parentId));
-
         }
 
         return parent::getContent();

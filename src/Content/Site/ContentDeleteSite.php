@@ -45,7 +45,7 @@ class ContentDeleteSite extends AbstractDeleteIconSite
         //$contentItem->deleteItem();
 
 
-        $contentType->deleteItem();
+        $contentType->deleteType();
 
         (new UrlReferer())->redirect();
 

@@ -15,6 +15,7 @@ use Nemundo\Package\FontAwesome\Icon\ArrowRightIcon;
 use Nemundo\Package\FontAwesome\Icon\CheckIcon;
 use Nemundo\Process\Workflow\Content\Item\Process\WorkflowItem;
 use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
+use Nemundo\Process\Workflow\Content\Process\WorkflowProcess;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Parameter\StatusParameter;
 use Nemundo\Web\Site\AbstractSite;
@@ -73,7 +74,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
     protected $workflowClosed;
 
     /**
-     * @var WorkflowItem
+     * @var WorkflowProcess
      */
     protected $workflowItem;
 
@@ -99,7 +100,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
     protected function loadWorkflowItem()
     {
 
-        $this->workflowItem = new WorkflowItem($this->workflowId);
+        $this->workflowItem =new WorkflowProcess($this->workflowId);
         $this->workflowExist = $this->workflowItem->existWorkflow();
         $this->workflowClosed = $this->workflowItem->isWorkflowClosed();
         $this->nextStatus = $this->workflowStatus->getNextMenu();
@@ -135,7 +136,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
                     new ArrowRightIcon($row);
 
                     $bold = new Bold($row);
-                    $bold->content = $menuStatus->type;
+                    $bold->content = $menuStatus->contentLabel;
                     $bold->addCssClass('ml-3');
 
 
@@ -144,7 +145,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
 
                     $site = clone($this->site);
                     $site->addParameter(new StatusParameter($menuStatus->contentId));
-                    $site->title = $menuStatus->type;
+                    $site->title = $menuStatus->contentLabel;
 
                     $hyperlink = new SiteHyperlink($row);
                     $hyperlink->site = $site;
@@ -190,7 +191,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
                         new ArrowRightIcon($row);
 
                         $bold = new Bold($row);
-                        $bold->content = $status->type;
+                        $bold->content = $status->contentLabel;
 
                     } else {
 
@@ -199,7 +200,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
 
                         $site = clone($this->site);
                         $site->addParameter(new StatusParameter($status->contentId));
-                        $site->title = $status->type;
+                        $site->title = $status->contentLabel;
 
                         $hyperlink = new SiteHyperlink($row);
                         $hyperlink->site = $site;
@@ -222,7 +223,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
             if (!$this->menuFound) {
                 $row = new TableRow($this->table);
                 new CheckIcon($row);
-                $row->addText($status->type);
+                $row->addText($status->contentLabel);
                 $row->addEmpty();
 
                 $this->menuFound = true;
@@ -245,7 +246,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
 
                 $site = clone($this->site);
                 $site->addParameter(new StatusParameter($status->contentId));
-                $site->title = $status->type;
+                $site->title = $status->contentLabel;
 
                 $hyperlink = new SiteHyperlink($row);
                 $hyperlink->site = $site;
@@ -269,7 +270,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
 
                 $row = new TableRow($this->table);
                 new ArrowRightIcon($row);
-                $row->addText($status->type);
+                $row->addText($status->contentLabel);
                 $row->addEmpty();
 
                 $this->menuFound = true;
@@ -289,7 +290,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
 
                 $row = new TableRow($this->table);
                 $row->addEmpty();
-                $row->addText($status->type);
+                $row->addText($status->contentLabel);
                 $row->addEmpty();
                 $this->menuFound = true;
             }

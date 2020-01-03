@@ -17,10 +17,10 @@ class EventContentType extends AbstractContentType
     protected function loadContentType()
     {
         // TODO: Implement loadContentType() method.
-        $this->type='Event';
+        $this->contentLabel='Event';
         $this->contentId = '6af8dd00-7aa7-4dd4-8906-9d00abcbfe7c';
         $this->viewClass=EventContentView::class;
-        $this->itemClass=EventContentItem::class;
+        //$this->itemClass=EventContentItem::class;
         $this->listClass=EventContentList::class;
 
 

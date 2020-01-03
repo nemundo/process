@@ -62,11 +62,11 @@ class LargeTextContentForm extends AbstractContentForm
         $data->save();
 
 
-        /*
+
         $item = new LargeTextContentItem($this->dataId);
         $item->parentId = $this->parentId;
         $item->largeText = $this->largeText->getValue();
-        $item->saveItem();*/
+        $item->saveItem();
 
     }
 

@@ -4,50 +4,61 @@
 namespace Nemundo\Process\App\Wiki\Content;
 
 
-use Nemundo\Process\App\Survey\Content\Type\SurveyContentType;
+use App\App\IssueTracker\Workflow\Process\IssueTrackerProcess;
 use Nemundo\Process\App\Wiki\Data\Wiki\WikiReader;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\App\Wiki\Site\WikiSite;
-use Nemundo\Process\Content\Type\AbstractContentType;
-use Nemundo\Process\Content\Type\MenuTrait;
-use Nemundo\Process\Template\Content\Event\EventContentType;
+use Nemundo\Process\Content\Type\AbstractMenuContentType;
 use Nemundo\Process\Template\Type\LargeTextContentType;
+use Nemundo\ToDo\Workflow\Process\ToDoProcess;
 
-class WikiPageContentType extends AbstractContentType
+class WikiPageContentType extends AbstractMenuContentType
 {
 
-    use MenuTrait;
+    //use MenuTrait;
 
     protected function loadContentType()
     {
 
-        $this->contentId ='b94ec710-d1bd-4430-8866-4a7f9a493c52';
-        $this->type='Wiki Page';
-        $this->formClass=WikiPageContentForm::class;
-        $this->listClass=WikiPageContentList::class;
-        $this->itemClass=WikiPageContentItem::class;
+        $this->contentId = 'b94ec710-d1bd-4430-8866-4a7f9a493c52';
+        $this->contentLabel = 'Wiki Page';
+        $this->formClass = WikiPageContentForm::class;
+        $this->listClass = WikiPageContentList::class;
+        //$this->itemClass=WikiPageContentItem::class;
 
-        $this->viewSite= WikiSite::$site;
-        $this->parameterClass=WikiParameter::class;
+        $this->viewSite = WikiSite::$site;
+        $this->parameterClass = WikiParameter::class;
 
 
-        $this->addMenuClass(LargeTextContentType::class);
-        $this->addMenuClass(EventContentType::class);
-        $this->addMenuClass(SurveyContentType::class);
+       /* $this->addMenuClass(LargeTextContentType::class);
+        $this->addMenuClass(ToDoProcess::class);
+        $this->addMenuClass(IssueTrackerProcess::class);
+        /*$this->addMenuClass(EventContentType::class);
+        $this->addMenuClass(SurveyContentType::class);*/
 
 
     }
 
 
     /*
-    public function getSubject($dataId)
+    protected function saveData()
     {
 
-        $wikiRow = (new WikiReader())->getRowById($dataId);
-        $subject = 'Wiki: '. $wikiRow->title;
+
+
+        // TODO: Implement saveData() method.
+    }
+
+*/
+
+    public function getSubject()
+    {
+
+        $wikiRow = (new WikiReader())->getRowById($this->dataId);
+        $subject = $wikiRow->title;
 
         return $subject;
 
-    }*/
+    }
 
 }

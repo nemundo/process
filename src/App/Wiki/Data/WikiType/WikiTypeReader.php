@@ -1,17 +1,17 @@
 <?php
-namespace Nemundo\Process\Content\Data\Access;
-class AccessReader extends \Nemundo\Model\Reader\ModelDataReader {
+namespace Nemundo\Process\App\Wiki\Data\WikiType;
+class WikiTypeReader extends \Nemundo\Model\Reader\ModelDataReader {
 /**
-* @var AccessModel
+* @var WikiTypeModel
 */
 public $model;
 
 public function __construct() {
 parent::__construct();
-$this->model = new AccessModel();
+$this->model = new WikiTypeModel();
 }
 /**
-* @return AccessRow[]
+* @return WikiTypeRow[]
 */
 public function getData() {
 $this->addFieldByModel($this->model);
@@ -24,7 +24,7 @@ $list[] = $row;
 return $list;
 }
 /**
-* @return AccessRow
+* @return WikiTypeRow
 */
 public function getRow() {
 $this->addFieldByModel($this->model);
@@ -34,13 +34,13 @@ $row = $this->getModelRow($dataRow);
 return $row;
 }
 /**
-* @return AccessRow
+* @return WikiTypeRow
 */
 public function getRowById($id) {
 return parent::getRowById($id);
 }
 private function getModelRow($dataRow) {
-$row = new AccessRow($dataRow, $this->model);
+$row = new WikiTypeRow($dataRow, $this->model);
 $row->model = $this->model;
 return $row;
 }

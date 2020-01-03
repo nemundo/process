@@ -13,7 +13,7 @@
             "namespace": "Nemundo\\Process\\Content\\Data\\Access",
             "row_class_name": "",
             "primary_index": "auto_increment",
-            "is_deleted": false,
+            "is_deleted": true,
             "type": [
                 {
                     "type": "external",
@@ -34,86 +34,6 @@
                 }
             ],
             "index": []
-        },
-        {
-            "template": "default",
-            "model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35",
-            "label": "Content",
-            "class_name": "Content",
-            "table_name": "content2_content",
-            "namespace": "Nemundo\\Process\\Content\\Data\\Content",
-            "row_class_name": "",
-            "primary_index": "text_id",
-            "is_deleted": false,
-            "type": [
-                {
-                    "type": "text",
-                    "label": "Data Id",
-                    "field_name": "data_id",
-                    "variable_name": "dataId",
-                    "allow_null": false,
-                    "is_deleted": true,
-                    "length": "36"
-                },
-                {
-                    "type": "text",
-                    "label": "Subject",
-                    "field_name": "subject",
-                    "variable_name": "subject",
-                    "allow_null": false,
-                    "is_deleted": false,
-                    "length": "255"
-                },
-                {
-                    "type": "large_text",
-                    "label": "Text",
-                    "field_name": "text",
-                    "variable_name": "text",
-                    "allow_null": false,
-                    "is_deleted": false
-                },
-                {
-                    "type": "date_time",
-                    "label": "Date Time",
-                    "field_name": "date_time",
-                    "variable_name": "dateTime",
-                    "allow_null": false,
-                    "is_deleted": false
-                },
-                {
-                    "type": "user",
-                    "label": "User",
-                    "field_name": "user",
-                    "variable_name": "user",
-                    "allow_null": false,
-                    "is_deleted": false
-                },
-                {
-                    "type": "external",
-                    "label": "Content Type",
-                    "field_name": "content_type",
-                    "variable_name": "contentType",
-                    "allow_null": false,
-                    "is_deleted": false,
-                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
-                }
-            ],
-            "index": [
-                {
-                    "index_name": "content_type",
-                    "index_type": "index",
-                    "field_name": [
-                        "content_type"
-                    ]
-                },
-                {
-                    "index_name": "date_time",
-                    "index_type": "index",
-                    "field_name": [
-                        "date_time"
-                    ]
-                }
-            ]
         },
         {
             "template": "default",
@@ -184,6 +104,86 @@
                     "index_type": "index",
                     "field_name": [
                         "data_id"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
+            "model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35",
+            "label": "Content",
+            "class_name": "Content",
+            "table_name": "content2_content",
+            "namespace": "Nemundo\\Process\\Content\\Data\\Content",
+            "row_class_name": "Nemundo\\Process\\Content\\Row\\ContentCustomRow",
+            "primary_index": "text_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Data Id",
+                    "field_name": "data_id",
+                    "variable_name": "dataId",
+                    "allow_null": false,
+                    "is_deleted": true,
+                    "length": "36"
+                },
+                {
+                    "type": "text",
+                    "label": "Subject",
+                    "field_name": "subject",
+                    "variable_name": "subject",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "large_text",
+                    "label": "Text",
+                    "field_name": "text",
+                    "variable_name": "text",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "date_time",
+                    "label": "Date Time",
+                    "field_name": "date_time",
+                    "variable_name": "dateTime",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "user",
+                    "label": "User",
+                    "field_name": "user",
+                    "variable_name": "user",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "Content Type",
+                    "field_name": "content_type",
+                    "variable_name": "contentType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "content_type",
+                    "index_type": "index",
+                    "field_name": [
+                        "content_type"
+                    ]
+                },
+                {
+                    "index_name": "date_time",
+                    "index_type": "index",
+                    "field_name": [
+                        "date_time"
                     ]
                 }
             ]

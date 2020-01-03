@@ -10,7 +10,7 @@ use Nemundo\Process\Template\View\CommentView;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\User\Usergroup\AbstractUsergroup;
 
-class AbstractCancelStatus extends AbstractProcessStatus
+abstract class AbstractCancelStatus extends AbstractProcessStatus
 {
 
 
@@ -18,8 +18,8 @@ class AbstractCancelStatus extends AbstractProcessStatus
     {
 
 
-        $this->type[LanguageCode::EN] = 'Cancel';
-        $this->type[LanguageCode::DE] = 'Abbruch';
+        $this->contentLabel[LanguageCode::EN] = 'Cancel';
+        $this->contentLabel[LanguageCode::DE] = 'Abbruch';
 
         //$this->id='510c9d20-74cc-43b6-82d3-d6a6df487813';
 

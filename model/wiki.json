@@ -26,6 +26,37 @@
                 }
             ],
             "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "976328e6-9f25-4ee3-935e-7d26f92c2345",
+            "label": "Wiki Type",
+            "class_name": "WikiType",
+            "table_name": "wiki_wiki_type",
+            "namespace": "Nemundo\\Process\\App\\Wiki\\Data\\WikiType",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Content Type",
+                    "field_name": "content_type",
+                    "variable_name": "contentType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "content_type",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "content_type"
+                    ]
+                }
+            ]
         }
     ]
 }

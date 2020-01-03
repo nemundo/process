@@ -22,7 +22,7 @@ public $id;
 public $contentId;
 
 /**
-* @var \Nemundo\Process\Content\Data\Content\ContentRow
+* @var \Nemundo\Process\Content\Row\ContentCustomRow
 */
 public $content;
 
@@ -50,7 +50,7 @@ $this->loadNemundoUserDataUserUseruserRow($model->user);
 }
 }
 private function loadNemundoProcessContentDataContentContentcontentRow($model) {
-$this->content = new \Nemundo\Process\Content\Data\Content\ContentRow($this->row, $model);
+$this->content = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $model);
 }
 private function loadNemundoUserDataUserUseruserRow($model) {
 $this->user = new \Nemundo\User\Data\User\UserRow($this->row, $model);

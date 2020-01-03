@@ -32,13 +32,13 @@ class ContentTypeCollectionHyperlinkList extends BootstrapHyperlinkList
 
 
             if ($contentTypeParameter->getValue() == $contentType->contentId) {
-                $this->addActiveHyperlink($contentType->type);
+                $this->addActiveHyperlink($contentType->contentLabel);
             } else {
 
                 $site=clone($this->redirectSite);
                 $site->addParameter(new ContentTypeParameter($contentType->contentId));
                 $site->removeParameter(new SearchQueryParameter());
-                $site->title=$contentType->type;
+                $site->title=$contentType->contentLabel;
                 $this->addSite($site);
 
             }

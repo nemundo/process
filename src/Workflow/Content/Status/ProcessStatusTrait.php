@@ -13,7 +13,8 @@ trait ProcessStatusTrait
 {
 
     use UserRestrictionTrait;
-    use MenuTrait;
+    //use MenuTrait;
+
 
     /**
      * @var string|string[]

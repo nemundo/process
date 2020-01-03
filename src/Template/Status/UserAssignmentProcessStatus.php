@@ -16,11 +16,11 @@ class UserAssignmentProcessStatus extends AbstractProcessStatus
     protected function loadContentType()
     {
 
-        $this->type[LanguageCode::EN] = 'Assignment (User)';
-        $this->type[LanguageCode::DE] = 'Zuweisung an';
+        $this->contentLabel[LanguageCode::EN] = 'Assignment (User)';
+        $this->contentLabel[LanguageCode::DE] = 'Zuweisung an';
         $this->contentId = '3ca6ccea-7eb0-4a5c-945c-9c0da28e0cc1';
         $this->formClass = UserAssignmentForm::class;
-        $this->itemClass=UserAssignmentItem::class;
+        //$this->itemClass=UserAssignmentItem::class;
         $this->changeStatus = false;
 
     }

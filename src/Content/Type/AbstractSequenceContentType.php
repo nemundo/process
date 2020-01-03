@@ -5,25 +5,61 @@ namespace Nemundo\Process\Content\Type;
 
 
 use Nemundo\Html\Container\AbstractHtmlContainer;
-use Nemundo\Process\Content\Item\AbstractTreeContentType;
+
 
 abstract class AbstractSequenceContentType extends AbstractTreeContentType
 {
+
+    use MenuTrait;
 
     /**
      * @var AbstractMenuContentType
      */
     public $startContentType;
 
+    /**
+     * @var string
+     */
+    protected $nextMenuClass;
 
-    /*
-    public function getForm(AbstractHtmlContainer $parent)
+    /**
+     * @var string
+     */
+    protected $previousMenuClass;
+
+
+    // getNextContentType
+    public function getNextMenu()
     {
 
-        $form = $this->startContentType->getForm($parent);
-        return $form;
+        /** @var AbstractMenuContentType $nextStatus */
+        $nextStatus = null;
 
-    }*/
+        if ($this->nextMenuClass !== null) {
+            $className = $this->nextMenuClass;
+            $nextStatus = new $className();
+        }
+
+        return $nextStatus;
+
+    }
+
+
+    public function getPreviousMenu()
+    {
+
+        /** @var AbstractMenuContentType $nextStatus */
+        $nextStatus = null;
+
+        if ($this->previousMenuClass !== null) {
+            $className = $this->previousMenuClass;
+            $nextStatus = new $className();
+        }
+
+        return $nextStatus;
+
+    }
+
 
 
 }

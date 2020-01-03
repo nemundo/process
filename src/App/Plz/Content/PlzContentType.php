@@ -8,9 +8,9 @@ use Nemundo\Process\Content\Type\AbstractContentType;
 
 class PlzContentType extends AbstractContentType
 {
-protected function loadContentType()
-{
-$this->type='PLZ';
-$this->contentId='a583f8d1-dd76-430d-94bf-a3d77f95cef4';
-}
+    protected function loadContentType()
+    {
+        $this->contentLabel = 'PLZ';
+        $this->contentId = 'a583f8d1-dd76-430d-94bf-a3d77f95cef4';
+    }
 }

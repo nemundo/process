@@ -65,7 +65,7 @@ class ContentItemSite extends AbstractSite
         //$contentItem = $contentType->getItem($contentRow->id);
 
         $title = new AdminTitle($page);
-        $title->content = $contentItem->getSubject();  //Type->getSubject($contentRow->id);
+        $title->content = $contentType->getSubject();  //Type->getSubject($contentRow->id);
 
         $view = $contentType->getView($page);
         $view->dataId = $dataId;
@@ -73,7 +73,7 @@ class ContentItemSite extends AbstractSite
         //$contentItem = $contentType->getItem($dataId);
         $table = new AdminLabelValueTable($page);
 
-        //$table->addLabelYesNoValue('Has Parent', $contentItem->hasParent());
+        $table->addLabelYesNoValue('Has Parent', $contentItem->hasParent());
         $table->addLabelValue('Child Count', $contentItem->getChildCount());
         $table->addLabelValue('Parent Count', $contentItem->getParentCount());
 
@@ -133,7 +133,7 @@ class ContentItemSite extends AbstractSite
             foreach ($contentType->getMenuList() as $menuContentType) {
 
                 $site = clone(ContentItemSite::$site);
-                $site->title = $menuContentType->type;  // $contentTypeRow->contentType;
+                $site->title = $menuContentType->contentLabel;  // $contentTypeRow->contentType;
                 $site->addParameter(new DataIdParameter());
                 $site->addParameter(new ContentTypeParameter($menuContentType->contentId));
 

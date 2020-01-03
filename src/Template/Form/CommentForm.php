@@ -30,10 +30,10 @@ class CommentForm extends AbstractContentForm
     {
 
         $builder = new CommentItem();
-        $builder->contentType = $this->contentType;
+        //$builder->contentType = $this->contentType;
         $builder->parentId = $this->parentId;
         $builder->comment = $this->comment->getValue();
-        $builder->saveItem();
+        $builder->saveType();
 
     }
 

@@ -61,7 +61,7 @@ abstract class AbstractSequenceContainer extends AbstractHtmlContainer
         $menu->currentContentType=$currentContentType;
 
         $subtitle=new AdminSubtitle($layout->col2);
-        $subtitle->content=$currentContentType->type;
+        $subtitle->content=$currentContentType->contentLabel;
 
         $form = $currentContentType->getForm($layout->col2);
         $form->redirectSite=$this->redirectSite;

@@ -5,6 +5,7 @@ namespace Nemundo\Process\Content\Type;
 
 
 use Nemundo\Core\Base\AbstractBaseClass;
+use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Html\Container\AbstractHtmlContainer;
@@ -22,6 +23,7 @@ use Nemundo\Process\Content\Site\ContentItemSite;
 use Nemundo\Process\Content\View\AbstractContentList;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Content\View\ContentView;
+use Nemundo\Process\Content\Writer\ContentWriter;
 use Nemundo\Process\Group\Type\PublicGroup;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexDelete;
 use Nemundo\Process\Search\Index\SearchIndexBuilder;
@@ -29,9 +31,10 @@ use Nemundo\User\Type\UserSessionType;
 use Nemundo\Web\View\ViewSiteTrait;
 
 
-abstract class AbstractContentType extends AbstractType   // AbstractBaseClass
+abstract class AbstractContentType extends AbstractType
 {
 
+    use SearchIndexTrait;
 
     /**
      * @var DateTime
@@ -55,25 +58,11 @@ abstract class AbstractContentType extends AbstractType   // AbstractBaseClass
     /**
      * @var string|string[]
      */
-    public $type;
+    public $contentLabel;
 
 
     public $restricted = false;
 
-
-    /**
-     * @var string
-     */
-    //protected $formClass;
-
-    /**
-     * @var string
-     */
-    //protected $viewClass;
-    // -->
-
-
-    //protected $dataId;
 
     /**
      * @var string
@@ -85,33 +74,6 @@ abstract class AbstractContentType extends AbstractType   // AbstractBaseClass
      * @var string
      */
     protected $adminClass;
-
-
-    //listClass
-
-
-    // teaserView
-
-    // adminViewClass
-
-    // listViewClass
-
-    // searchViewClass
-
-
-    /**
-     * @var string
-     */
-    //protected $itemClass;
-
-
-
-    /**
-     * @var SearchIndexBuilder
-     */
-    private $searchIndex;
-
-
 
     abstract protected function loadContentType();
 
@@ -148,39 +110,8 @@ abstract class AbstractContentType extends AbstractType   // AbstractBaseClass
         $this->userId = (new UserSessionType())->userId;
 
 
-
     }
 
-
-
-    //public function __construct($dataId = null)
-    /*{
-
-        $this->dataId=$dataId;
-
-        if ($this->formClass == null) {
-            $this->formClass = ContentForm::class;
-        }
-
-        if ($this->viewClass == null) {
-            $this->viewClass = ContentView::class;
-        }
-
-        if ($this->itemClass == null) {
-            $this->itemClass = ContentItem::class;
-        }
-
-        if ($this->viewSite == null) {
-            $this->viewSite = ContentItemSite::$site;
-        }
-
-        if ($this->parameterClass == null) {
-            $this->parameterClass = DataIdParameter::class;
-        }
-
-        $this->loadContentType();
-
-    }*/
 
 
 
@@ -196,7 +127,19 @@ abstract class AbstractContentType extends AbstractType   // AbstractBaseClass
 
 
 
+    public function getSubject()
+    {
 
+
+        $subject = '[No Content Type]';
+
+        if ($this->contentLabel !== null) {
+            $subject = (new Translation())->getText($this->contentLabel);
+        }
+
+        return $subject;
+
+    }
 
 
     // move to Item
@@ -253,12 +196,14 @@ abstract class AbstractContentType extends AbstractType   // AbstractBaseClass
     public function hasAdmin()
     {
 
-        $value = false;
+        /*$value = false;
         if ($this->adminClass !== null) {
             $value = true;
         }
 
-        return $value;
+        return $value;*/
+
+        return $this->hasProperty($this->adminClass);
 
     }
 
@@ -283,35 +228,32 @@ abstract class AbstractContentType extends AbstractType   // AbstractBaseClass
 
 
 
+    private function hasProperty($class) {
+
+        $value = false;
+        if ($class !== null) {
+            $value = true;
+        }
+
+        return $value;
+
+
+    }
+
+
+
     protected function saveContent()
     {
 
-        /*
-        if ($this->contentType == null) {
-            (new LogMessage())->writeError('content type not defined' . $this->getClassName());
-        }*/
 
-        $data = new Content();
-        $data->updateOnDuplicate = true;
-        $data->id = $this->dataId;
-        $data->contentTypeId = $this->contentId;
-        $data->subject = $this->getSubject();
-        $data->dateTime = $this->dateTime;
-        $data->userId = $this->userId;
-        $data->save();
+        $writer = new ContentWriter();
+        $writer->contentType = $this;
+        $writer->dataId = $this->dataId;
+        $writer->subject = $this->getSubject();
+        $writer->write();
 
-        /*
-        if ($this->parentId !== null) {
-            $tree = new TreeItem();
-            $tree->parentId = $this->parentId;
-            $tree->dataId = $this->dataId;
-            $tree->saveTree();
-        }*/
+        $this->saveSearchIndex();
 
-
-        if ($this->searchIndex !== null) {
-            $this->searchIndex->saveIndex();
-        }
 
 
         /*
@@ -327,9 +269,13 @@ abstract class AbstractContentType extends AbstractType   // AbstractBaseClass
     }
 
 
+public function getDataRow() {
+    (new LogMessage())->writeError('getDataRow not defined');
+}
 
 
-    public function deleteItem()
+
+    public function deleteType()
     {
 
         (new ContentDelete())->deleteById($this->dataId);

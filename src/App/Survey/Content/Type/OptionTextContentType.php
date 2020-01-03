@@ -11,7 +11,7 @@ class OptionTextContentType extends AbstractMenuContentType
 {
     protected function loadContentType()
     {
-        $this->type='Text Optionen';
+        $this->contentLabel='Text Optionen';
      $this->contentId='89aa7b94-9291-4a86-894e-e5af2663c960';
      $this->formClass=OptionTextContentForm::class;
 

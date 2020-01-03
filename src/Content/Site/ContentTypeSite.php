@@ -5,6 +5,7 @@ namespace Nemundo\Process\Content\Site;
 
 
 use Nemundo\Com\FormBuilder\SearchForm;
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Process\Content\Com\ListBox\ContentTypeListBox;
@@ -41,12 +42,18 @@ class ContentTypeSite extends AbstractSite
         if ($contentTypeParameter->hasValue()) {
             //    $contentReader->filter->andEqual($contentReader->model->contentTypeId, $contentTypeParameter->getValue());
 
-
             $contentType = $contentTypeParameter->getContentType();
+
+           // (new Debug())->write($contentType);
 
 
             if ($contentType->hasList()) {
                 $contentType->getList($page);
+            }
+
+
+            if ($contentType->hasAdmin()) {
+                $contentType->getAdmin($page);
             }
 
 

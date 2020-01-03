@@ -11,12 +11,12 @@ parent::__construct();
 $this->model = new ContentModel();
 }
 /**
-* @return ContentRow[]
+* @return \Nemundo\Process\Content\Row\ContentCustomRow[]
 */
 public function getData() {
 $list = [];
 foreach (parent::getData() as $dataRow) {
-$row = new ContentRow($dataRow, $this->model);
+$row = new \Nemundo\Process\Content\Row\ContentCustomRow($dataRow, $this->model);
 $list[] = $row;
 }
 return $list;

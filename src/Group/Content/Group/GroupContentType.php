@@ -15,7 +15,7 @@ class GroupContentType extends AbstractContentType
     {
         // TODO: Implement loadContentType() method.
         $this->contentId = '3e7f52c9-63d6-4c49-abad-63f9836e1bce';
-        $this->type = 'Group';
+        $this->contentLabel = 'Group';
 
         $this->viewClass=GroupContentView::class;
 

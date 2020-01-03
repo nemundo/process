@@ -20,7 +20,11 @@ use Nemundo\Process\Content\Data\Tree\TreeCount;
 use Nemundo\Process\Content\Data\Tree\TreeDelete;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Data\Tree\TreeValue;
+use Nemundo\Process\Content\Row\ContentCustomRow;
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Content\Type\ContentTreeTrait;
+use Nemundo\Process\Content\Type\SearchIndexTrait;
+use Nemundo\Process\Content\Writer\TreeContentWriter;
 use Nemundo\Process\Group\Type\PublicGroup;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexDelete;
 use Nemundo\Process\Search\Index\SearchIndexBuilder;
@@ -28,8 +32,17 @@ use Nemundo\User\Type\UserSessionType;
 
 
 // AbstractContentTreeContentType
+
+// AbstractContentWriter
+
+// ContentWriterTrait
+
+
 abstract class AbstractContentItem extends AbstractBaseClass
 {
+
+    use SearchIndexTrait;
+    use ContentTreeTrait;
 
     /**
      * @var string
@@ -39,7 +52,7 @@ abstract class AbstractContentItem extends AbstractBaseClass
     /**
      * @var AbstractContentType
      */
-    public $contentType;
+    protected $contentType;
 
     /**
      * @var DateTime
@@ -62,7 +75,7 @@ abstract class AbstractContentItem extends AbstractBaseClass
     /**
      * @var SearchIndexBuilder
      */
-    private $searchIndex;
+   // private $searchIndex;
 
 
     abstract protected function saveData();
@@ -97,10 +110,16 @@ abstract class AbstractContentItem extends AbstractBaseClass
             (new LogMessage())->writeError('No Content Type.' . $this->getClassName());
         }
 
-        $this->saveContent();
+        //$this->saveContent();
 
+        $writer=new TreeContentWriter();
+        $writer->contentType=$this->contentType;
+        $writer->parentId= $this->parentId;
+        $writer->dataId=$this->dataId;
+        $writer->subject = '[Subject]';  // $this->getSubject();
+        $writer->write();
 
-
+        $this->saveSearchIndex();
 
     }
 
@@ -109,6 +128,7 @@ abstract class AbstractContentItem extends AbstractBaseClass
 
 
 
+    /*
     public function addSearchWord($word)
     {
 
@@ -130,7 +150,7 @@ abstract class AbstractContentItem extends AbstractBaseClass
 
         $this->searchIndex->addText($text);
 
-    }
+    }*/
 
 
     protected function loadItem()
@@ -139,6 +159,7 @@ abstract class AbstractContentItem extends AbstractBaseClass
     }
 
 
+    /*
     protected function saveContent()
     {
 
@@ -146,6 +167,16 @@ abstract class AbstractContentItem extends AbstractBaseClass
             (new LogMessage())->writeError('content type not defined' . $this->getClassName());
         }
 
+
+        $writer=new TreeContentWriter();
+        $writer->contentType=$this->contentType;
+        $writer->parentId= $this->parentId;
+        $writer->dataId=$this->dataId;
+        $writer->subject = $this->getSubject();
+        $writer->write();
+
+
+        /*
         $data = new Content();
         $data->updateOnDuplicate = true;
         $data->contentTypeId = $this->contentType->contentId;
@@ -160,10 +191,10 @@ abstract class AbstractContentItem extends AbstractBaseClass
             $tree->parentId = $this->parentId;
             $tree->dataId = $this->dataId;
             $tree->saveTree();
-        }
+        }*/
 
 
-        if ($this->searchIndex !== null) {
+        /*if ($this->searchIndex !== null) {
             $this->searchIndex->saveIndex();
         }
 
@@ -259,8 +290,8 @@ abstract class AbstractContentItem extends AbstractBaseClass
         $reader->model->child->loadUser();
         $reader->filter->andEqual($reader->model->parentId, $this->dataId);
 
-        /** @var ContentRow[] $doc */
-        $doc = [];
+        /** @var ContentCustomRow[] $doc */
+       /* $doc = [];
         foreach ($reader->getData() as $treeRow) {
             $doc[] = $treeRow->child;
         }
@@ -279,7 +310,7 @@ abstract class AbstractContentItem extends AbstractBaseClass
         $reader->filter->andEqual($reader->model->childId, $this->dataId);
 
         /** @var ContentRow[] $doc */
-        $doc = [];
+       /* $doc = [];
         foreach ($reader->getData() as $treeRow) {
             $doc[] = $treeRow->parent;
         }
@@ -341,11 +372,10 @@ abstract class AbstractContentItem extends AbstractBaseClass
     public function getSubject()
     {
 
-
         $subject = '[No Content Type]';
 
         if ($this->contentType !== null) {
-            $subject = (new Translation())->getText( $this->contentType->type);
+            $subject = (new Translation())->getText( $this->contentType->contentLabel);
         }
 
         return $subject;
@@ -362,7 +392,7 @@ abstract class AbstractContentItem extends AbstractBaseClass
         return $text;
 
 
-    }
+    }*/
 
 
 

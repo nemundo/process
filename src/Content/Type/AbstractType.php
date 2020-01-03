@@ -17,7 +17,7 @@ abstract class AbstractType extends AbstractBaseClass
 {
 
 
-    protected $dataId;
+    public $dataId;
 
 
     /**
@@ -43,7 +43,10 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
-    abstract protected function saveData();
+    protected function saveData()
+    {
+
+    }
 
 
     public function saveType()
@@ -161,7 +164,7 @@ abstract class AbstractType extends AbstractBaseClass
         if ($this->viewSite !== null) {
             $site = clone($this->viewSite);
             $site->addParameter($parameter);
-            // $site->title = $this->getSubject($dataId);
+            $site->title = $this->getSubject($this->dataId);
 
         }
 
@@ -170,8 +173,8 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
-    public function deleteItem() {
-
+    public function deleteType()
+    {
 
 
     }

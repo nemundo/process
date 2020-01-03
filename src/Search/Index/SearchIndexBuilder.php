@@ -15,6 +15,7 @@ use Nemundo\Model\Id\ModelId;
 use Nemundo\Model\Reader\ModelDataReader;
 use Nemundo\Process\Content\Data\Content\ContentId;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexBulk;
+use Nemundo\Process\Search\Data\SearchIndex\SearchIndexDelete;
 use Nemundo\Process\Search\Data\Word\WordBulk;
 
 
@@ -94,6 +95,9 @@ class SearchIndexBuilder extends AbstractBase
     {
 
 
+        $delete = new SearchIndexDelete();
+        $delete->filter->andEqual($delete->model->contentId,$this->dataId);
+        $delete->delete();
 
         // delete existing
 
