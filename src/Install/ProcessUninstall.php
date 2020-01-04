@@ -14,7 +14,6 @@ use Nemundo\Process\Group\Data\GroupCollection;
 use Nemundo\Process\Search\Data\SearchCollection;
 use Nemundo\Process\Workflow\Install\WorkflowUninstall;
 use Nemundo\Project\Install\AbstractUninstall;
-use Nemundo\SwissPost\Data\SwissPostCollection;
 use Nemundo\ToDo\Install\ToDoUninstall;
 
 
@@ -34,7 +33,6 @@ class ProcessUninstall extends AbstractUninstall
         (new ToDoUninstall())->uninstall();
 
         $setup=new ModelCollectionSetup();
-        $setup->removeCollection(new SwissPostCollection());
         $setup->removeCollection(new SearchCollection());
         $setup->removeCollection(new FavoriteCollection());
         $setup->removeCollection(new GroupCollection());

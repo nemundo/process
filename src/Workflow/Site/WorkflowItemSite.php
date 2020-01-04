@@ -6,6 +6,7 @@ namespace Nemundo\Process\Workflow\Site;
 
 use Nemundo\Admin\Com\Navigation\AdminNavigation;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
+use Nemundo\Process\Workflow\Content\Process\WorkflowProcess;
 use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
 use Nemundo\Process\Workflow\Content\View\ProcessView;
 use Nemundo\Web\Site\AbstractSite;
@@ -37,7 +38,15 @@ class WorkflowItemSite extends AbstractSite
         $nav = new AdminNavigation($page);
         $nav->site =WorkflowSite::$site;
 
+        $workflowId =  (new WorkflowParameter())->getValue();
+
+        $workflowType = new WorkflowProcess($workflowId);
+        $process= $workflowType->getProcess();
+
+
+
         $view = new ProcessView($page);
+        $view->process=$process;
         $view->dataId = (new WorkflowParameter())->getValue();
         $view->redirectSite = WorkflowItemSite::$site;
         $view->redirectSite->addParameter(new WorkflowParameter());

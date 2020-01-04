@@ -115,7 +115,7 @@ trait ContentTreeTrait
         $reader->model->parent->loadContentType();
         $reader->filter->andEqual($reader->model->childId, $this->dataId);
 
-        /** @var ContentRow[] $doc */
+        /** @var ContentCustomRow[] $doc */
         $doc = [];
         foreach ($reader->getData() as $treeRow) {
             $doc[] = $treeRow->parent;

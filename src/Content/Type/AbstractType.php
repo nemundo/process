@@ -17,7 +17,9 @@ abstract class AbstractType extends AbstractBaseClass
 {
 
 
-    public $dataId;
+    // eigentlich protected!!! unmutable
+    // getDataId()
+    protected $dataId;
 
 
     /**
@@ -40,6 +42,11 @@ abstract class AbstractType extends AbstractBaseClass
             $this->dataId = $dataId;
         }
 
+    }
+
+
+    public function getDataId() {
+        return $this->dataId;
     }
 
 
@@ -104,7 +111,7 @@ abstract class AbstractType extends AbstractBaseClass
 
             /** @var AbstractContentView $view */
             $view = new $this->viewClass($parent);
-            $view->contentType = $this;
+            //$view->contentType = $this;
             $view->dataId = $this->dataId;
 
 

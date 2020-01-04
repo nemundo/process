@@ -13,7 +13,7 @@ abstract class AbstractContentView extends AbstractHtmlContainer
     /**
      * @var AbstractContentType
      */
-    public $contentType;
+    //public $contentType;
 
     /**
      * @var string

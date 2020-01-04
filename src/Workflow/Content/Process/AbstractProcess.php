@@ -20,9 +20,10 @@ use Nemundo\Process\Workflow\Data\Workflow\WorkflowRow;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowUpdate;
 use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
 use Nemundo\Process\Workflow\Site\WorkflowItemSite;
+use Nemundo\Workflow\App\Identification\Model\Identification;
 
 // AbstractWorkflowProcess
-abstract class AbstractProcess extends AbstractSequenceContentType  // AbstractContentType
+abstract class AbstractProcess extends AbstractSequenceContentType
 {
 
 
@@ -37,7 +38,12 @@ abstract class AbstractProcess extends AbstractSequenceContentType  // AbstractC
     public $startNumber;
 
 
-    public $subject;
+    protected $workflowSubject;
+
+    /**
+     * @var Identification
+     */
+    protected $assignment;
 
 
     /**
@@ -58,6 +64,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType  // AbstractC
         $this->baseViewClass = BaseWorkflowContainer::class;
         $this->viewSite = WorkflowItemSite::$site;
         $this->parameterClass = WorkflowParameter::class;
+        $this->assignment = new Identification();
 
         parent::__construct($dataId);
 
@@ -74,34 +81,33 @@ abstract class AbstractProcess extends AbstractSequenceContentType  // AbstractC
         $writer->contentType = $this;
         $writer->parentId = $this->parentId;
         $writer->dataId = $this->dataId;
-        $writer->subject=$this->subject;
-        $writer->dateTime=$this->dateTime;
-        $writer->userId=$this->userId;
+        $writer->subject = $this->workflowSubject;
+        $writer->workflowSubject = $this->workflowSubject;
+        $writer->assignment = $this->assignment;
+        $writer->dateTime = $this->dateTime;
+        $writer->userId = $this->userId;
         $writer->write();
-
-        /*
-        $update = new WorkflowUpdate();
-        $update->subject = $this->getSubject();
-        $update->updateById($this->dataId);*/
-
 
         $this->addSearchWord($writer->workflowNumber);
         $this->addSearchText($this->getSubject());
 
-$this->saveSearchIndex();
+        $this->saveSearchIndex();
 
+        return $this->dataId;
 
 
     }
-
 
 
     public function getSubject()
     {
 
         $workflowRow = (new WorkflowReader())->getRowById($this->dataId);
-        $subject = $workflowRow->getSubject();
+//        $subject = 'workflow'.$workflowRow->getSubject();
+
+        $subject = $workflowRow->workflowNumber . ' ' . $workflowRow->subject;
         return $subject;
+
 
     }
 
@@ -131,14 +137,13 @@ $this->saveSearchIndex();
     public function getWorkflowRow()
     {
 
-        //(new Debug())->write($this->dataId);
-
-        // save in private variable
-        // $workflowRow =null;
         if ($this->workflowRow == null) {
             $reader = new WorkflowReader();
+            $reader->model->loadProcess();
+            $reader->model->loadUser();
+
             foreach ($reader->getData() as $workflowCustomRow) {
-                $this->workflowRow=$workflowCustomRow;
+                $this->workflowRow = $workflowCustomRow;
             }
 
         }
@@ -147,13 +152,12 @@ $this->saveSearchIndex();
     }
 
 
-
     public function isWorkflowClosed()
     {
         $workflowRow = $this->getWorkflowRow();
-        $workflowClosed=false;
+        $workflowClosed = false;
         if ($workflowRow !== null) {
-            $workflowClosed =  $workflowRow->workflowClosed;
+            $workflowClosed = $workflowRow->workflowClosed;
         }
 
         return $workflowClosed;
@@ -161,19 +165,30 @@ $this->saveSearchIndex();
     }
 
 
-    public function existWorkflow() {
+    public function closeWorkflow()
+    {
 
-        $value=false;
+        // Assignment reset
+
+        $update = new WorkflowUpdate();
+        $update->workflowClosed = true;
+        //$update->verantwortlicher->clearIdentification();
+        $update->updateById($this->dataId);
+
+    }
+
+    public function existWorkflow()
+    {
+
+        $value = false;
         $count = new WorkflowCount();
         $count->filter->andEqual($count->model->id, $this->dataId);
         if ($count->getCount() == 1) {
-            $value=true;
+            $value = true;
         }
         return $value;
 
     }
-
-
 
 
     public function hasDeadline()
@@ -205,6 +220,29 @@ $this->saveSearchIndex();
         $update->updateById($this->dataId);
 
     }
+
+
+    public function changeAssignment(Identification $assignment)
+    {
+
+
+        $update = new WorkflowUpdate();
+        $update->assignment = $assignment;
+        $update->updateById($this->dataId);
+
+        // Assignment reset
+    }
+
+
+    public function clearAssignment()
+    {
+
+        $update = new WorkflowUpdate();
+        $update->assignment->clearIdentification();
+        $update->updateById($this->dataId);
+
+    }
+
 
     public function getStart()
     {
@@ -259,8 +297,6 @@ $this->saveSearchIndex();
 
 
     }
-
-
 
 
     private function getProcessNextStatus(AbstractProcessStatus $status, $statusList)

@@ -119,7 +119,7 @@ class ContentSite extends AbstractSite
                 //$row->addText($contentType->getSubject($contentRow->id));
 
 
-                $row->addText($contentRow->dateTime->getShortDateTimeFormat());
+                $row->addText($contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
                 $row->addText($contentRow->user->login);
 
 

@@ -39,23 +39,13 @@ class WorkflowNewSite extends AbstractSite
         $nav = new AdminNavigation($page);
         $nav->site = WorkflowSite::$site;
 
-
-        //$processParameter = new ProcessParameter();
-        $process = (new ProcessParameter())->getProcess();  //  $processParameter->getProcess();
-
-
-//        $processId = $processParameter->getValue();
-
-        /*$processReader = new ProcessReader();
-        $processReader->model->loadContentType();
-        $processRow = $processReader->getRowById($processId);
-        $process = $processRow->getProcess();*/
+        $process = (new ProcessParameter())->getProcess();
 
         $title = new AdminTitle($page);
         $title->content = $process->contentLabel;
 
         $view = new ProcessView($page);
-        $view->contentType = $process;
+        $view->process = $process;
         $view->redirectSite = WorkflowItemSite::$site;
         $view->appendWorkflowParameter = true;
 

@@ -39,15 +39,16 @@ class DocumentParentContainer extends AbstractParentContainer
         $documentReader = new DocumentReader();
 
         $externalModel = new TreeModel();  // new ContentModel();
-        $externalModel->loadUser();
+        $externalModel->loadChild();  // loadUser();
+$externalModel->child->loadUser();
 
         $join = new ModelJoin($documentReader);
         $join->type = $documentReader->model->id;
         $join->externalModel = $externalModel;
-        $join->externalType = $externalModel->dataId;
+        $join->externalType = $externalModel->childId;  // dataId;
 
         $documentReader->filter->andEqual($externalModel->parentId, $this->parentId);
-        $documentReader->filter->andEqual($externalModel->contentTypeId, (new DocumentProcessStatus())->contentId);
+        $documentReader->filter->andEqual($externalModel->child->contentTypeId, (new DocumentProcessStatus())->contentId);
 
         $documentReader->checkExternal($externalModel);
         $documentReader->addFieldByModel($externalModel);
@@ -62,8 +63,8 @@ class DocumentParentContainer extends AbstractParentContainer
                 $link->filename = $documentRow->document->getFilename();
                 $link->url = $documentRow->document->getUrl();
 
-                $row->addText($documentRow->getModelValue($externalModel->dateTimeCreated));
-                $row->addText($documentRow->getModelValue($externalModel->userCreated->displayName));
+                $row->addText($documentRow->getModelValue($externalModel->child->dateTime));
+                $row->addText($documentRow->getModelValue($externalModel->child->user->displayName));
 
                 $site = clone(DocumentDeleteSite::$site);
                 $site->addParameter(new WorkflowParameter($this->parentId));

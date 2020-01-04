@@ -12,8 +12,6 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
 
     use ProcessStatusTrait;
 
-    //use MenuTrait;
-
     public function __construct($dataId = null)
     {
         $this->formClass=StatusForm::class;

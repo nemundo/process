@@ -18,21 +18,24 @@ class TreeContentWriter extends ContentWriter
 
         parent::write();
 
-        $value = new TreeValue();
-        $value->field = $value->model->itemOrder;
-        $value->filter->andEqual($value->model->parentId, $this->parentId);
-        $itemOrder = $value->getMaxValue();
 
-        if ($itemOrder == '') {
-            $itemOrder = -1;
+        if ($this->parentId !== null) {
+            $value = new TreeValue();
+            $value->field = $value->model->itemOrder;
+            $value->filter->andEqual($value->model->parentId, $this->parentId);
+            $itemOrder = $value->getMaxValue();
+
+            if ($itemOrder == '') {
+                $itemOrder = -1;
+            }
+            $itemOrder++;
+
+            $data = new Tree();
+            $data->parentId = $this->parentId;
+            $data->childId = $this->dataId;
+            $data->itemOrder = $itemOrder;
+            $data->save();
         }
-        $itemOrder++;
-
-        $data = new Tree();
-        $data->parentId =$this->parentId;
-        $data->childId =$this->dataId;
-        $data->itemOrder=$itemOrder;
-        $data->save();
 
     }
 

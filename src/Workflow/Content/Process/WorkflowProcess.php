@@ -12,4 +12,16 @@ class WorkflowProcess extends AbstractProcess
         // TODO: Implement loadContentType() method.
     }
 
+
+    public function getProcess() {
+
+        $workflowRow = $this->getWorkflowRow();
+
+        /** @var AbstractProcess $process */
+        $process= $workflowRow->process->getContentType($this->dataId);
+
+        return $process;
+
+    }
+
 }

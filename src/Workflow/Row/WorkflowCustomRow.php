@@ -19,9 +19,9 @@ class WorkflowCustomRow extends WorkflowRow
     public function getViewSite()
     {
 
-        $process = $this->process->getProcess();
-        $site = $process->getViewSite($this->id);
-        $site->title = $this->getSubject();
+        $process = $this->process->getContentType($this->id);
+        $site = $process->getViewSite();
+        //$site->title = $this->getSubject();
 
         return $site;
 
