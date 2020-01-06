@@ -5,12 +5,15 @@ namespace Nemundo\Process\Template\Status;
 
 
 use Nemundo\Core\Language\LanguageCode;
+use Nemundo\Process\Template\Data\Document\DocumentUpdate;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Template\Data\Document\DocumentReader;
 use Nemundo\Process\Template\Form\DocumentContentForm;
 
 class DocumentDeleteProcessStatus extends AbstractProcessStatus
 {
+
+    public $documentId;
 
     protected function loadContentType()
     {
@@ -28,12 +31,22 @@ class DocumentDeleteProcessStatus extends AbstractProcessStatus
     public function getSubject()
     {
 
-        $documentRow = (new DocumentReader())->getRowById($this->dataId);
-        $text = 'Document '.$documentRow->document->getFilename().' was deleted';
+        //$documentRow = (new DocumentReader())->getRowById($this->dataId);
+        //$text = 'Document '.$documentRow->document->getFilename().' was deleted';
 
-   //     $text = 'Doc Deleted';
+        $text = 'Doc Deleted';
 
         return $text;
+
+    }
+
+
+    protected function onCreate()
+    {
+
+        $update = new DocumentUpdate();
+        $update->active = false;
+        $update->updateById($this->documentId);
 
     }
 

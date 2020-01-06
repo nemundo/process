@@ -5,6 +5,7 @@ namespace Nemundo\Process\Template\Form;
 
 
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
+use Nemundo\Process\Template\Status\UserAssignmentProcessStatus;
 use Nemundo\Process\Workflow\Content\Form\AbstractStatusForm;
 use Nemundo\Process\Template\Item\UserAssignmentItem;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowReader;
@@ -42,10 +43,10 @@ class UserAssignmentForm extends AbstractStatusForm
     protected function onSubmit()
     {
 
-        $item = new UserAssignmentItem();
+        $item = new UserAssignmentProcessStatus();
         $item->parentId = $this->parentId;
         $item->userId = $this->user->getValue();
-        $item->saveItem();
+        $item->saveType();
 
     }
 

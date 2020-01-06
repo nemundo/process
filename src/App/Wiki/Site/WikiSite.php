@@ -94,11 +94,11 @@ class WikiSite extends AbstractSite
             $title = new AdminTitle($layout->col2);
             $title->content = (new WikiSubject($wikiId))->getSubject();
 
-
+/*
             foreach ($wikiType->getChild() as $contentCustomRow) {
                 $contentCustomRow->getContentType()->getView($layout->col3);
 
-            }
+            }*/
 
 
             $wikiRow = (new WikiReader())->getRowById($wikiId);
@@ -134,10 +134,10 @@ class WikiSite extends AbstractSite
             }
 
 
-            $form = new AddContentForm($layout->col2);
+            /*$form = new AddContentForm($layout->col2);
             $form->parentId = $wikiId;
             $form->redirectSite = WikiSite::$site;
-            $form->redirectSite->addParameter(new WikiParameter());
+            $form->redirectSite->addParameter(new WikiParameter());*/
 
             foreach ($wikiItem->getChild() as $contentRow) {
 

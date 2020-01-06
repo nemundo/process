@@ -31,10 +31,10 @@ class ContentDeleteSite extends AbstractDeleteIconSite
         $contentReader = new ContentReader();
         $contentReader->model->loadContentType();
         $contentRow = $contentReader->getRowById($contentId);
-        $item = $contentRow->contentType->getContentType()->getItem($contentId);
+        $item = $contentRow->getContentType();  // contentType->getContentType()->getItem($contentId);
 
         //$item = new ContentItem($contentId);
-        $item->deleteItem();
+        $item->deleteType();
 
 
         (new UrlReferer())->redirect();

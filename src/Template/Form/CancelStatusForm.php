@@ -7,6 +7,7 @@ namespace Nemundo\Process\Template\Form;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapLargeTextBox;
 use Nemundo\Process\Template\Item\CancelContentItem;
+use Nemundo\Process\Template\Status\CancelStatus;
 use Nemundo\Process\Workflow\Content\Form\AbstractStatusForm;
 use Nemundo\Process\Template\Item\CommentItem;
 
@@ -33,10 +34,10 @@ class CancelStatusForm extends AbstractStatusForm
     protected function onSubmit()
     {
 
-        $item = new CancelContentItem();
+        $item = new CancelStatus();
         $item->parentId = $this->parentId;
         $item->comment = $this->comment->getValue();
-        $item->saveItem();
+        $item->saveType();
 
     }
 

@@ -7,6 +7,7 @@ namespace Nemundo\Process\Template\Form;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapFileUpload;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Template\Item\DocumentContentItem;
+use Nemundo\Process\Template\Status\DocumentProcessStatus;
 
 class DocumentContentForm extends AbstractContentForm
 {
@@ -32,10 +33,10 @@ class DocumentContentForm extends AbstractContentForm
 
         foreach ($this->document->getMultiFileRequest() as $fileRequest) {
 
-            $builder = new DocumentContentItem();
-            $builder->parentId = $this->parentId;
-            $builder->fileRequest = $fileRequest;
-            $builder->saveItem();
+            $status = new DocumentProcessStatus();  // new DocumentContentItem();
+            $status->parentId = $this->parentId;
+            $status->fileRequest = $fileRequest;
+            $status->saveType();
 
         }
 

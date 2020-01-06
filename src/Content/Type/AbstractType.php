@@ -5,6 +5,7 @@ namespace Nemundo\Process\Content\Type;
 
 
 use Nemundo\Core\Base\AbstractBaseClass;
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Random\UniqueId;
 use Nemundo\Html\Container\AbstractHtmlContainer;
@@ -33,25 +34,54 @@ abstract class AbstractType extends AbstractBaseClass
     protected $viewClass;
 
 
+    protected $createMode = true;
+
     public function __construct($dataId = null)
     {
+
+        //(new Debug())->write($dataId);
+
+        //$this->dataId = $dataId;
+
+        //(new Debug())->write($this->createMode);
 
         if ($dataId == null) {
             $this->dataId = (new UniqueId())->getUniqueId();
         } else {
             $this->dataId = $dataId;
+            $this->createMode = false;
         }
+
+        //(new Debug())->write($this->createMode);
 
     }
 
 
-    public function getDataId() {
+    public function getDataId()
+    {
+
+
+        /*if ($this->dataId == null) {
+            $this->dataId = (new UniqueId())->getUniqueId();
+        }
+
+        /*else {
+            //$this->dataId = $tdataId;
+        }*/
+
         return $this->dataId;
     }
 
 
-    protected function saveData()
+    protected function onCreate()
     {
+
+    }
+
+    protected function onUpdate()
+    {
+
+        //$this->onCreate();
 
     }
 
@@ -59,7 +89,11 @@ abstract class AbstractType extends AbstractBaseClass
     public function saveType()
     {
 
-        $this->saveData();
+        if ($this->createMode) {
+            $this->onCreate();
+        } else {
+            $this->onUpdate();
+        }
 
     }
 
@@ -73,8 +107,16 @@ abstract class AbstractType extends AbstractBaseClass
 
         /** @var AbstractContentForm $form */
         $form = new $this->formClass($parent);
+
+        if (!$this->createMode) {
         $form->dataId = $this->dataId;
+        }
         $form->contentType = $this;
+        $form->createMode=$this->createMode;
+
+        //(new Debug())->write('set create mode');
+        //(new Debug())->write($this->createMode);
+
 
         return $form;
 

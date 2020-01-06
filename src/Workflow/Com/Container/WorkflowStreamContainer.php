@@ -19,14 +19,17 @@ class WorkflowStreamContainer extends AbstractParentContainer  //WorkflowContain
             foreach ((new WorkflowProcess($this->parentId))->getChild() as $logRow) {
 
             /** @var AbstractProcessStatus $status */
-            $status = $logRow->contentType->getContentType();
+            $status = $logRow->getContentType();  //contentType->getContentType();
+
+
+                //$status = $logRow->contentType->getContentType();
 
             //if ($status->showLog) {
 
                 if ($status->hasView()) {
 
                 $widget = new AdminWidget($this);
-                $widget->widgetTitle =$logRow->subject . ' ' . $logRow->user->displayName . ' ' . $logRow->dateTime->getShortDateTimeLeadingZeroFormat();
+                $widget->widgetTitle =$status->getSubject() . ' ' . $logRow->user->displayName . ' ' . $logRow->dateTime->getShortDateTimeLeadingZeroFormat();
 
                 if ($status->hasView()) {
                     $view = $status->getView($widget);

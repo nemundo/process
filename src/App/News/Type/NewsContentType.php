@@ -30,7 +30,7 @@ class NewsContentType extends AbstractContentType
     public $teaser;
 
 
-    protected function saveData()
+    protected function onCreate()
     {
 
         $data = new News();

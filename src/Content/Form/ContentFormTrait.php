@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Content\Form;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Process\Content\Type\AbstractContentType;
 
 trait ContentFormTrait
@@ -27,10 +28,16 @@ trait ContentFormTrait
     /**
      * @var bool
      */
+    public $createMode = true;
+
+    /**
+     * @var bool
+     */
     public $appendParameter = false;
 
-    protected function loadUpdateForm() {
-
+    protected function loadUpdateForm()
+    {
+        (new Debug())->write('loadUpdateForm');
     }
 
 }

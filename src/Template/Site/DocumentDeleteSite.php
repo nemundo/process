@@ -38,11 +38,18 @@ class DocumentDeleteSite extends AbstractDeleteIconSite
         $documentId = (new DocumentParameter())->getValue();
         $workflowId = (new WorkflowParameter())->getValue();
 
+
+        /*
         $update = new DocumentUpdate();
         $update->active = false;
-        $update->updateById($documentId);
+        $update->updateById($documentId);*/
 
+        $status=new DocumentDeleteProcessStatus();
+        $status->parentId = $workflowId;
+        $status->documentId = $documentId;
+        $status->saveType();
 
+        /*
         $builder = new StatusItem();
         $builder->contentType = new DocumentDeleteProcessStatus();
         $builder->dataId = $documentId;

@@ -28,11 +28,11 @@ class WorkflowLogTable extends AbstractParentContainer
 
             $status = $contentRow->getContentType();
 
-            if ($status->showLog) {
+            //if ($status->showLog) {
                 $row = new TableRow($table);
                 $row->addText($status->getSubject());
                 $row->addText($contentRow->user->displayName . ' ' . $contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
-            }
+            //}
 
         }
 

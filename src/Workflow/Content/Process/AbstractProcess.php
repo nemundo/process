@@ -15,27 +15,35 @@ use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Content\View\ProcessView;
 use Nemundo\Process\Workflow\Content\Writer\WorkflowWriter;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowCount;
+use Nemundo\Process\Workflow\Data\Workflow\WorkflowDelete;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowReader;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowRow;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowUpdate;
 use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
 use Nemundo\Process\Workflow\Site\WorkflowItemSite;
+use Nemundo\User\Access\UserRestrictionTrait;
 use Nemundo\Workflow\App\Identification\Model\Identification;
 
 // AbstractWorkflowProcess
 abstract class AbstractProcess extends AbstractSequenceContentType
 {
 
+    use UserRestrictionTrait;
+
+    public $number;
+
+    public $workflowNumber;
+
 
     /**
      * @var string
      */
-    public $prefixNumber;
+    protected $prefixNumber;
 
     /**
      * @var int
      */
-    public $startNumber;
+    protected $startNumber;
 
 
     protected $workflowSubject;
@@ -75,18 +83,27 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public function saveType()
     {
 
-        $this->saveData();
+        if ($this->createMode) {
+            $this->onCreate();
+        } else {
+            $this->onUpdate();
+        }
 
         $writer = new WorkflowWriter();
         $writer->contentType = $this;
+        $writer->prefixNumber=$this->prefixNumber;
+        $writer->startNumber=$this->startNumber;
         $writer->parentId = $this->parentId;
         $writer->dataId = $this->dataId;
         $writer->subject = $this->workflowSubject;
+        $writer->number=$this->number;
+        $writer->workflowNumber=$this->workflowNumber;
         $writer->workflowSubject = $this->workflowSubject;
         $writer->assignment = $this->assignment;
         $writer->dateTime = $this->dateTime;
         $writer->userId = $this->userId;
         $writer->write();
+
 
         $this->addSearchWord($writer->workflowNumber);
         $this->addSearchText($this->getSubject());
@@ -95,6 +112,15 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         return $this->dataId;
 
+    }
+
+
+    public function deleteType()
+    {
+
+        parent::deleteType();
+        (new WorkflowDelete())->deleteById($this->dataId);
+        //$this->deleteChild();
 
     }
 
@@ -103,11 +129,9 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     {
 
         $workflowRow = (new WorkflowReader())->getRowById($this->dataId);
-//        $subject = 'workflow'.$workflowRow->getSubject();
 
         $subject = $workflowRow->workflowNumber . ' ' . $workflowRow->subject;
         return $subject;
-
 
     }
 
@@ -141,11 +165,15 @@ abstract class AbstractProcess extends AbstractSequenceContentType
             $reader = new WorkflowReader();
             $reader->model->loadProcess();
             $reader->model->loadUser();
+$reader->filter->andEqual($reader->model->id,$this->dataId);
 
             foreach ($reader->getData() as $workflowCustomRow) {
                 $this->workflowRow = $workflowCustomRow;
             }
 
+
+
+            //$this->workflowRow =$reader->getRowById($this->dataId);  // $workflowCustomRow;
         }
         return $this->workflowRow;
 
@@ -217,6 +245,16 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $update = new WorkflowUpdate();
         $update->deadline = $date;
+        $update->updateById($this->dataId);
+
+    }
+
+
+    public function changeSubject($subject)
+    {
+
+        $update = new WorkflowUpdate();
+        $update->subject = $subject;
         $update->updateById($this->dataId);
 
     }

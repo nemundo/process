@@ -21,9 +21,10 @@ abstract class AbstractStatusForm extends AbstractContentForm
     }
 
 
+    /*
     protected function loadUpdateForm()
     {
-    }
+    }*/
 
 
 }

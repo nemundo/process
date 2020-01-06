@@ -4,7 +4,10 @@
 namespace Nemundo\Process\Template\Status;
 
 
+use Nemundo\Core\Http\Request\File\FileRequest;
 use Nemundo\Core\Language\LanguageCode;
+use Nemundo\Model\Data\Property\File\RedirectFilenameDataProperty;
+use Nemundo\Process\Template\Data\Document\Document;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Template\Data\Document\DocumentReader;
 use Nemundo\Process\Template\Form\DocumentContentForm;
@@ -12,6 +15,14 @@ use Nemundo\Process\Template\View\DocumentContentView;
 
 class DocumentProcessStatus extends AbstractProcessStatus
 {
+
+
+    public $filename;
+
+    /**
+     * @var FileRequest
+     */
+    public $fileRequest;
 
     protected function loadContentType()
     {
@@ -22,6 +33,28 @@ class DocumentProcessStatus extends AbstractProcessStatus
         $this->changeStatus=false;
         $this->formClass=DocumentContentForm::class;
         $this->viewClass=DocumentContentView::class;
+
+
+
+    }
+
+
+    protected function onCreate()
+    {
+
+        $data = new Document();
+        $data->id = $this->dataId;
+        $data->active = true;
+
+        if ($this->fileRequest !==null) {
+            $data->document->fromFileRequest($this->fileRequest);
+        }
+
+        if ($this->filename !==null) {
+            $data->document->fromFilename($this->filename);
+        }
+
+        $data->save();
 
     }
 

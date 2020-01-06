@@ -6,6 +6,7 @@ namespace Nemundo\Process\Template\Status;
 
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Template\Data\LargeText\LargeText;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Template\Form\CommentForm;
 use Nemundo\Process\Template\View\CommentView;
@@ -14,6 +15,8 @@ use Nemundo\Process\Template\View\CommentView;
 // AbstractLargeTextStatus
 class CommentProcessStatus extends AbstractProcessStatus
 {
+
+    public $comment;
 
     public function __construct()
     {
@@ -33,6 +36,18 @@ class CommentProcessStatus extends AbstractProcessStatus
         $this->formClass = CommentForm::class;
         $this->viewClass = CommentView::class;
 
+    }
+
+    protected function onCreate()
+    {
+
+        $data = new LargeText();
+        $data->id=$this->dataId;
+        $data->largeText = $this->comment;
+        $data->save();
+
+
+        $this->addSearchText($this->comment);
 
     }
 

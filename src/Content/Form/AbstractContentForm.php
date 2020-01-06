@@ -5,6 +5,7 @@ namespace Nemundo\Process\Content\Form;
 
 
 use Nemundo\Admin\Com\Form\AbstractAdminForm;
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Html\Paragraph\Paragraph;
 
 
@@ -24,8 +25,7 @@ abstract class AbstractContentForm extends AbstractAdminForm
         $p = new Paragraph($this);
         $p->content = 'dataid'.$this->dataId;*/
 
-
-        if ($this->dataId !== null) {
+        if (!$this->createMode) {
             $this->loadUpdateForm();
         }
 

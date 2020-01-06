@@ -23,7 +23,7 @@ class CommentItem extends CommentProcessStatus  // AbstractContentItem
     }*/
 
 
-    protected function saveData()
+    protected function onCreate()
     {
 
         $data = new LargeText();

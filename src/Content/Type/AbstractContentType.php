@@ -4,31 +4,18 @@
 namespace Nemundo\Process\Content\Type;
 
 
-use Nemundo\Core\Base\AbstractBaseClass;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Html\Container\AbstractHtmlContainer;
-use Nemundo\Process\Content\Data\Content\Content;
 use Nemundo\Process\Content\Data\Content\ContentDelete;
-use Nemundo\Process\Content\Data\ContentGroup\ContentGroup;
-use Nemundo\Process\Content\Data\Tree\TreeDelete;
-use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Content\Form\ContentForm;
-use Nemundo\Process\Content\Item\AbstractContentItem;
-use Nemundo\Process\Content\Item\ContentItem;
-use Nemundo\Process\Content\Item\TreeItem;
 use Nemundo\Process\Content\Parameter\DataIdParameter;
 use Nemundo\Process\Content\Site\ContentItemSite;
 use Nemundo\Process\Content\View\AbstractContentList;
-use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Content\View\ContentView;
 use Nemundo\Process\Content\Writer\ContentWriter;
-use Nemundo\Process\Group\Type\PublicGroup;
-use Nemundo\Process\Search\Data\SearchIndex\SearchIndexDelete;
-use Nemundo\Process\Search\Index\SearchIndexBuilder;
 use Nemundo\User\Type\UserSessionType;
-use Nemundo\Web\View\ViewSiteTrait;
 
 
 abstract class AbstractContentType extends AbstractType
@@ -48,7 +35,7 @@ abstract class AbstractContentType extends AbstractType
 
 
     // müsste auch nach ContentItem
-   // use ViewSiteTrait;
+    // use ViewSiteTrait;
 
     /**
      * @var string
@@ -78,7 +65,6 @@ abstract class AbstractContentType extends AbstractType
     abstract protected function loadContentType();
 
 
-
     public function __construct($dataId = null)
     {
         parent::__construct($dataId);
@@ -89,13 +75,15 @@ abstract class AbstractContentType extends AbstractType
             $this->formClass = ContentForm::class;
         }
 
+
+        /*
         if ($this->viewClass == null) {
             $this->viewClass = ContentView::class;
-        }
-
-       /* if ($this->itemClass == null) {
-            $this->itemClass = ContentItem::class;
         }*/
+
+        /* if ($this->itemClass == null) {
+             $this->itemClass = ContentItem::class;
+         }*/
 
         if ($this->viewSite == null) {
             $this->viewSite = ContentItemSite::$site;
@@ -113,10 +101,6 @@ abstract class AbstractContentType extends AbstractType
     }
 
 
-
-
-
-
     public function saveType()
     {
 
@@ -124,7 +108,6 @@ abstract class AbstractContentType extends AbstractType
         $this->saveContent();
 
     }
-
 
 
     public function getSubject()
@@ -157,11 +140,11 @@ abstract class AbstractContentType extends AbstractType
     {
 
         /** @var AbstractContentItem $item */
-      /*  $item = new $this->itemClass($dataId);
+    /*  $item = new $this->itemClass($dataId);
 
-        return $item;
+      return $item;
 
-    }*/
+  }*/
 
 
     public function hasList()
@@ -189,8 +172,6 @@ abstract class AbstractContentType extends AbstractType
         return $list;
 
     }
-
-
 
 
     public function hasAdmin()
@@ -227,8 +208,8 @@ abstract class AbstractContentType extends AbstractType
     }
 
 
-
-    private function hasProperty($class) {
+    private function hasProperty($class)
+    {
 
         $value = false;
         if ($class !== null) {
@@ -239,7 +220,6 @@ abstract class AbstractContentType extends AbstractType
 
 
     }
-
 
 
     protected function saveContent()
@@ -255,7 +235,6 @@ abstract class AbstractContentType extends AbstractType
         $this->saveSearchIndex();
 
 
-
         /*
         if (!$this->contentType->restricted) {
             $data = new ContentGroup();
@@ -269,10 +248,10 @@ abstract class AbstractContentType extends AbstractType
     }
 
 
-public function getDataRow() {
-    (new LogMessage())->writeError('getDataRow not defined');
-}
-
+    public function getDataRow()
+    {
+        (new LogMessage())->writeError('getDataRow not defined');
+    }
 
 
     public function deleteType()

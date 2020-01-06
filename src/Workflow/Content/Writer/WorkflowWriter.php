@@ -18,12 +18,16 @@ class WorkflowWriter extends TreeContentWriter
      */
     public $contentType;
 
-
     public $number;
 
     public $workflowNumber;
 
     public $workflowSubject;
+
+    public $prefixNumber;
+
+    public $startNumber;
+
 
     /**
      * @var Identification
@@ -32,7 +36,6 @@ class WorkflowWriter extends TreeContentWriter
 
     public function write()
     {
-
 
         parent::write();
 
@@ -44,35 +47,43 @@ class WorkflowWriter extends TreeContentWriter
             $value->filter->andEqual($value->model->processId, $processId);
             $this->number = $value->getMaxValue();
             if ($this->number == "") {
-                $this->number = $this->contentType->startNumber;
+                $this->number = $this->startNumber;
             }
             $this->number = $this->number + 1;
 
-            $this->workflowNumber = $this->contentType->prefixNumber . $this->number;
+            $this->workflowNumber = $this->prefixNumber . $this->number;
         }
 
 
-        $stausId = $this->contentType->startContentType->contentId;
+        //$stausId = $this->contentType->startContentType->contentId;
 
         $data = new Workflow();
         $data->id = $this->dataId;
         $data->processId = $processId;
         $data->number = $this->number;
         $data->workflowNumber = $this->workflowNumber;
-        $data->statusId = $stausId;
+        $data->statusId = $this->contentType->startContentType->contentId;  //$stausId;
         $data->subject = $this->workflowSubject;
         $data->assignment = $this->assignment;
         $data->dateTime = $this->dateTime;
         $data->userId = $this->userId;
         $data->save();
 
+        //$type = clone( $this->contentType->startContentType);
+        //$type->saveType();
+
+        //$this->contentType->startContentType->parentId = $this->dataId;
+        //$this->contentType->startContentType->saveType();
+
+
         //if ($this->parentId !==null) {
-        $writer = new TreeContentWriter();
+        /*$writer = new TreeContentWriter();
         $writer->parentId = $this->dataId;
+        $writer->dataId = null;  //  $this->contentType->startContentType->getDataId();
         $writer->contentType = $this->contentType->startContentType;
         $writer->dateTime = $this->dateTime;
         $writer->userId = $this->userId;
-        $writer->write();
+        $writer->write();*/
         //}
 
     }

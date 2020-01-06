@@ -13,18 +13,15 @@ use Nemundo\Process\Template\Form\LargeTextContentForm;
 use Nemundo\Process\Template\Type\LargeTextContentType;
 use Nemundo\Process\Template\View\LargeTextContentView;
 
-abstract class AbstractLargeTextStore extends AbstractType  // LargeTextContentType
+abstract class AbstractLargeTextStore extends AbstractType
 {
 
 
     public $largeText;
 
 
-
     protected $defaultValue;
 
-
-    //public $dataId;
 
     abstract protected function loadStore();
 
@@ -51,37 +48,12 @@ abstract class AbstractLargeTextStore extends AbstractType  // LargeTextContentT
         $data->largeText=$this->largeText;
         $data->save();
 
-    }
 
-
-    /*
-
-    protected function loadStore() {
+        // send to inbox
 
     }
 
 
-    public function getForm(AbstractHtmlContainer $parent)
-    {
-
-        $form = parent::getForm($parent);
-        $form->dataId=$this->dataId;
-
-        return $form;
-
-    }
-
-
-    public function getView(AbstractHtmlContainer $parent)
-    {
-
-        $view =parent::getView($parent);
-        $view->dataId = $this->dataId;
-
-        return $view;
-
-
-    }*/
 
 
 }

@@ -14,7 +14,7 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
 
     public function __construct($dataId = null)
     {
-        $this->formClass=StatusForm::class;
+        $this->formClass = StatusForm::class;
         parent::__construct($dataId);
     }
 
@@ -22,14 +22,15 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
     final public function saveType()
     {
 
-        $this->saveData();
+        $this->onCreate();
 
         $writer = new ProcessStatusWriter();
         $writer->contentType = $this;
         $writer->parentId = $this->parentId;
         $writer->dataId = $this->dataId;
+        $writer->dateTime = $this->dateTime;
+        $writer->userId = $this->userId;
         $writer->write();
-
 
     }
 

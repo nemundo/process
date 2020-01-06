@@ -4,19 +4,15 @@
 namespace Nemundo\Process\Content\Type;
 
 
-use Nemundo\Core\Language\Translation;
-use Nemundo\Process\App\Inbox\Data\Inbox\Inbox;
 use Nemundo\Process\Content\Data\Content\ContentDelete;
 use Nemundo\Process\Content\Data\Tree\TreeDelete;
+use Nemundo\Process\Content\Writer\TreeContentWriter;
 
 
-// AbstractContentTreeContentType
 abstract class AbstractTreeContentType extends AbstractContentType
 {
 
     use ContentTreeTrait;
-
-    //use SearchIndexTrait;
 
     /**
      * @var string
@@ -24,16 +20,27 @@ abstract class AbstractTreeContentType extends AbstractContentType
     public $parentId;
 
 
-     public function saveType()
+    public function saveType()
     {
 
-        $this->saveData();
-        $this->saveContent();
+        if ($this->createMode) {
+            $this->onCreate();
+        } else {
+            $this->onUpdate();
+        }
+
+        $writer = new TreeContentWriter();
+        $writer->contentType = $this;
+        $writer->parentId = $this->parentId;
+        $writer->dataId = $this->dataId;
+        $writer->subject = $this->getSubject();
+        $writer->write();
+
+        $this->saveSearchIndex();
 
         return $this->dataId;
 
     }
-
 
 
     protected function loadItem()
@@ -42,9 +49,6 @@ abstract class AbstractTreeContentType extends AbstractContentType
     }
 
 
-
-    // recursives löschen
-    // deleteType
     public function deleteType()
     {
 
@@ -57,38 +61,20 @@ abstract class AbstractTreeContentType extends AbstractContentType
 
         $this->deleteSearchIndex();
 
-        /*
-        $delete = new SearchIndexDelete();
-        $delete->filter->andEqual($delete->model->contentId, $this->dataId);
-        $delete->delete();*/
-
-
-        // delete child
-        // kann mehrere items beinhalten !!!
-
     }
 
 
-    public function sendToInbox($userId)
+    protected function deleteChild()
     {
 
-        $data = new Inbox();
-        $data->userId = $userId;
-        $data->contentTypeId = $this->contentId;
-        $data->dataId = $this->dataId;
-        $data->save();
+        foreach ($this->getChild() as $customRow) {
+
+            $type = $customRow->getContentType();
+            $type->deleteType();
+
+        }
 
     }
-
-
-    public function sendToTask()
-    {
-
-
-    }
-
-
-
 
 
     public function getText()
@@ -97,8 +83,6 @@ abstract class AbstractTreeContentType extends AbstractContentType
         $text = '[No Text]';
         return $text;
 
-
     }
-
 
 }

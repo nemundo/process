@@ -10,14 +10,12 @@ use Nemundo\Process\Content\Data\Tree\TreeValue;
 class TreeContentWriter extends ContentWriter
 {
 
-
     public $parentId;
 
     public function write()
     {
 
         parent::write();
-
 
         if ($this->parentId !== null) {
             $value = new TreeValue();
