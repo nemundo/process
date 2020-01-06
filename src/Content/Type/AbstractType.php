@@ -21,6 +21,7 @@ abstract class AbstractType extends AbstractBaseClass
     // eigentlich protected!!! unmutable
     // getDataId()
     protected $dataId;
+    //public $dataId;
 
 
     /**
@@ -35,15 +36,11 @@ abstract class AbstractType extends AbstractBaseClass
 
 
     protected $createMode = true;
+    //public $createMode = true;
+
 
     public function __construct($dataId = null)
     {
-
-        //(new Debug())->write($dataId);
-
-        //$this->dataId = $dataId;
-
-        //(new Debug())->write($this->createMode);
 
         if ($dataId == null) {
             $this->dataId = (new UniqueId())->getUniqueId();
@@ -51,8 +48,6 @@ abstract class AbstractType extends AbstractBaseClass
             $this->dataId = $dataId;
             $this->createMode = false;
         }
-
-        //(new Debug())->write($this->createMode);
 
     }
 
@@ -81,7 +76,7 @@ abstract class AbstractType extends AbstractBaseClass
     protected function onUpdate()
     {
 
-        //$this->onCreate();
+        $this->onCreate();
 
     }
 

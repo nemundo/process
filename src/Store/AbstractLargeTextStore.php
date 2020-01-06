@@ -38,8 +38,7 @@ abstract class AbstractLargeTextStore extends AbstractType
     }
 
 
-
-    public function saveType()
+    protected function onCreate()
     {
 
         $data=new LargeText();
@@ -48,11 +47,7 @@ abstract class AbstractLargeTextStore extends AbstractType
         $data->largeText=$this->largeText;
         $data->save();
 
-
-        // send to inbox
-
     }
-
 
 
 

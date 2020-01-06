@@ -5,28 +5,37 @@ namespace Nemundo\Process\Search\Site;
 
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
+use Nemundo\App\Search\Parameter\SearchQueryParameter;
+use Nemundo\App\Search\Query\SearchSelectQuery;
+use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Db\Sql\Field\CountField;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Paragraph\Paragraph;
+use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
+use Nemundo\Package\Bootstrap\Listing\BootstrapHyperlinkList;
+use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
-use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
-use Nemundo\Process\Content\Com\Dropdown\ContentTypeDropdown;
+use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Parameter\DataIdParameter;
 use Nemundo\Process\Content\Site\ContentItemSite;
-use Nemundo\Process\Content\Site\ContentNewSite;
 use Nemundo\Process\Search\Com\ContentSearchForm;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexCount;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexPaginationReader;
-use Nemundo\ToDo\Workflow\Process\ToDoProcess;
 use Nemundo\Web\Site\AbstractSite;
-use Nemundo\Web\Site\Site;
 
 class SearchSite extends AbstractSite
 {
+
+    /**
+     * @var SearchSite
+     */
+    public static $site;
 
     protected function loadSite()
     {
         $this->title = 'Search';
         $this->url = 'search';
+        SearchSite::$site = $this;
 
         new SearchJsonSite($this);
 
@@ -39,8 +48,8 @@ class SearchSite extends AbstractSite
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
 
-        $dropdown = new ContentTypeDropdown($page);
-        $dropdown->redirectSite = ContentNewSite::$site;
+        //$dropdown = new ContentTypeDropdown($page);
+        //$dropdown->redirectSite = ContentNewSite::$site;
         //$dropdown->addContentType(new ToDoProcess());
         //$dropdown->addContentType(new WikiPageContentType());
 
@@ -50,32 +59,44 @@ class SearchSite extends AbstractSite
 
         // redefine nach content type
 
-        $reader = new SearchIndexPaginationReader();
-        $reader->model->loadContent();
-        $reader->model->content->loadContentType();
-        $reader->filter->andEqual($reader->model->wordId, $form->getWordId());
-        $reader->paginationLimit = 50;
+        $searchIndexReader = new SearchIndexPaginationReader();
+        $searchIndexReader->model->loadContent();
+        $searchIndexReader->model->content->loadContentType();
+        $searchIndexReader->filter->andEqual($searchIndexReader->model->wordId, $form->getWordId());
 
+        $contentTypeParameter=new ContentTypeParameter();
+        if ($contentTypeParameter->hasValue()) {
+            $searchIndexReader->filter->andEqual($searchIndexReader->model->content->contentTypeId,$contentTypeParameter->getValue());
+        }
+
+        $searchIndexReader->paginationLimit = 50;
+
+
+        // Search Filter
 
         $count = new SearchIndexCount();
-        $count->filter->andEqual($reader->model->wordId, $form->getWordId());
+        $count->filter->andEqual($searchIndexReader->model->wordId, $form->getWordId());
         $searchCount = $count->getCount();
 
-        $p=new Paragraph($page);
-        $p->content=$searchCount.' Results found';
+        $p = new Paragraph($page);
+        $p->content = $searchCount . ' Results found';
 
 
+        $layout = new BootstrapTwoColumnLayout($page);
 
-        $table = new AdminClickableTable($page);
+        $table = new AdminClickableTable($layout->col1);
 
-        foreach ($reader->getData() as $indexRow) {
+        $header = new TableHeader($table);
+
+
+        foreach ($searchIndexReader->getData() as $indexRow) {
 
             $row = new BootstrapClickableTableRow($table);
             $row->addText($indexRow->content->contentType->contentType);
-            $row->addText($indexRow->content->subject);
+            //$row->addText($indexRow->content->subject);
 
             //$contentType =  $indexRow->content->contentType->getContentType();
-            $contentType =  $indexRow->content->getContentType();
+            $contentType = $indexRow->content->getContentType();
 
             $row->addText($contentType->getSubject());
 
@@ -83,12 +104,42 @@ class SearchSite extends AbstractSite
                 $site = $contentType->getViewSite();
                 $row->addClickableSite($site);
             } else {
-                $site =  clone(ContentItemSite::$site);
+                $site = clone(ContentItemSite::$site);
                 $site->addParameter(new DataIdParameter($indexRow->contentId));
                 $row->addClickableSite($site);
             }
 
         }
+
+
+        $pagination = new BootstrapPagination($layout->col1);
+        $pagination->paginationReader = $searchIndexReader;
+
+
+
+        // Alle Anzeigen
+
+        $list = new BootstrapHyperlinkList($layout->col2);
+
+
+        $searchIndexReader = new SearchIndexPaginationReader();
+        $searchIndexReader->model->loadContent();
+        $searchIndexReader->model->content->loadContentType();
+        $searchIndexReader->filter->andEqual($searchIndexReader->model->wordId, $form->getWordId());
+        $searchIndexReader->addGroup($searchIndexReader->model->content->contentTypeId);
+
+        $count = new CountField($searchIndexReader);
+
+        foreach ($searchIndexReader->getData() as $searchIndexRow) {
+
+            $site = clone(SearchSite::$site);
+            $site->addParameter(new SearchQueryParameter());
+            $site->addParameter(new ContentTypeParameter($searchIndexRow->content->contentTypeId));
+            $site->title = $searchIndexRow->content->contentType->contentType.' ('.$searchIndexRow->getModelValue($count).')';
+            $list->addSite($site);
+
+        }
+
 
         $page->render();
 

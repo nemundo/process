@@ -320,6 +320,7 @@ $reader->filter->andEqual($reader->model->id,$this->dataId);
     }
 
 
+    //getLeadTimeText();
     // getLeapTime
     public function getDurchlaufzeit()
     {

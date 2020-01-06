@@ -87,6 +87,7 @@ $setup->addContentType(new NewsContentType());
         $reader = new UserReader();
         foreach ($reader->getData() as $userRow) {
 
+            /*
             $group=new Group();
             $group->id = $userRow->id;
             $group->group = $userRow->displayName;
@@ -97,7 +98,7 @@ $setup->addContentType(new NewsContentType());
             $item->addGroup($group);
 
             $setup=new GroupSetup();
-            $setup->addGroup($group,new UserGroupType());
+            $setup->addGroup($group,new UserGroupType());*/
 
 
         }

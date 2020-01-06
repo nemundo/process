@@ -37,27 +37,13 @@ class LargeTextContentForm extends AbstractContentForm
         $row = (new LargeTextReader())->getRowById($this->dataId);
         $this->largeText->value = $row->largeText;
 
-
-        /*
-        $reader = new LargeTextReader();
-        $reader->filter->andEqual($reader->model->id, $this->dataId);
-        foreach ($reader->getData() as $row) {
-            //$p = new Paragraph($this);
-            //$p->content = (new Html($row->largeText))->getValue();
-            $this->largeText->value = $row->largeText;
-        }*/
-
-
-        //(new Debug())->write($row->largeText);
-        //exit;
-
     }
 
 
     protected function onSubmit()
     {
 
-        $type = new LargeTextContentType();
+        $type = new LargeTextContentType($this->dataId);
         $type->parentId = $this->parentId;
         $type->largeText = $this->largeText->getValue();
         $type->saveType();

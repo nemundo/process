@@ -32,6 +32,8 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
         $writer->userId = $this->userId;
         $writer->write();
 
+        $this->saveSearchIndex();
+
     }
 
 }

@@ -8,9 +8,11 @@ use Nemundo\Admin\Com\Button\AdminIconSiteButton;
 use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
+use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Com\Html\Listing\UnorderedList;
+use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Block\Div;
@@ -18,7 +20,6 @@ use Nemundo\Package\Bootstrap\Dropdown\BootstrapSiteDropdown;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentGroup\ContentGroupReader;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
-use Nemundo\Process\Content\Item\ContentItem;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Parameter\DataIdParameter;
 use Nemundo\Process\Content\Type\MenuTrait;
@@ -49,33 +50,44 @@ class ContentItemSite extends AbstractSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
-
         $dataId = (new DataIdParameter())->getValue();
-
-        $contentItem = new ContentItem($dataId);
-
 
         $reader = new ContentReader();
         $reader->model->loadContentType();
-        //$reader->filter->andEqual($reader->model->dataId, $dataId);
-
         $contentRow = $reader->getRowById($dataId);
+        $contentType = $contentRow->getContentType();
 
-        $contentType = $contentRow->contentType->getContentType($dataId);
-        //$contentItem = $contentType->getItem($contentRow->id);
 
         $title = new AdminTitle($page);
-        $title->content = $contentType->getSubject();  //Type->getSubject($contentRow->id);
+        $title->content = $contentType->getSubject();
 
-        $view = $contentType->getView($page);
-        $view->dataId = $dataId;
+        if ($contentType->hasView()) {
+            $contentType->getView($page);
+        }
 
-        //$contentItem = $contentType->getItem($dataId);
         $table = new AdminLabelValueTable($page);
 
-        $table->addLabelYesNoValue('Has Parent', $contentItem->hasParent());
-        $table->addLabelValue('Child Count', $contentItem->getChildCount());
-        $table->addLabelValue('Parent Count', $contentItem->getParentCount());
+        $table->addLabelYesNoValue('Subject', $contentType->getSubject());
+        $table->addLabelYesNoValue('Has Parent', $contentType->hasParent());
+        $table->addLabelValue('Child Count', $contentType->getChildCount());
+        $table->addLabelValue('Parent Count', $contentType->getParentCount());
+        $table->addLabelSite('View', $contentType->getViewSite());
+
+        $subtitle = new AdminSubtitle($page);
+        $subtitle->content = 'Child';
+
+        $table = new AdminTable($page);
+
+        $header = new TableHeader($table);
+        $header->addText('Content Type');
+        $header->addText('Subject');
+
+        foreach ($contentType->getChild() as $contentRow) {
+            $row = new TableRow($table);
+            $row->addText($contentRow->contentType->contentType);
+            $row->addText($contentRow->subject);
+
+        }
 
 
         $subtitle = new AdminSubtitle($page);
@@ -91,13 +103,13 @@ class ContentItemSite extends AbstractSite
         }
 
 
-        if ($contentItem->hasParent()) {
+        if ($contentType->hasParent()) {
 
             $subtitle = new AdminSubtitle($page);
             $subtitle->content = 'Parent Type';
 
             $table = new AdminClickableTable($page);
-            foreach ($contentItem->getParentContent() as $contentRow) {
+            foreach ($contentType->getParentContent() as $contentRow) {
 
                 $row = new TableRow($table);
 
@@ -157,17 +169,20 @@ class ContentItemSite extends AbstractSite
         }
 
 
-        foreach ($contentItem->getChild() as $contentRow) {
+        foreach ($contentType->getChild() as $contentRow) {
 
             $subtitle = new AdminSubtitle($page);
             $subtitle->content = $contentRow->dateTime->getShortDateTimeFormat();
 
-            $div = new Div($page);
+            $contentType = $contentRow->getContentType();  // contentType->getContentType();
 
-            $contentRow->contentType->getContentType();
+            if ($contentType->hasView()) {
+                $div = new Div($page);
+                $contentType->getView($div);
+            }
 
-            $view = $contentRow->contentType->getContentType()->getView($div);
-            $view->dataId = $contentRow->id;
+            // $view = $contentRow->contentType->getContentType()->getView($div);
+            //  $view->dataId = $contentRow->id;
 
             $btn = new AdminSiteButton($page);
             $btn->site = clone(ContentItemSite::$site);

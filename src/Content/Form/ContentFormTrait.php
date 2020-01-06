@@ -6,12 +6,13 @@ namespace Nemundo\Process\Content\Form;
 
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Content\Type\AbstractTreeContentType;
 
 trait ContentFormTrait
 {
 
     /**
-     * @var AbstractContentType
+     * @var AbstractTreeContentType
      */
     public $contentType;
 

@@ -8,6 +8,7 @@ use Nemundo\Core\Log\LogMessage;
 use Nemundo\Process\Content\Data\Content\ContentRow;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeRow;
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Content\Type\MenuTrait;
 
 
@@ -16,13 +17,13 @@ class ContentCustomRow extends ContentRow
 
     public function getContentType()
     {
-
+        //(new Debug())->write($this->id);
         $className = $this->contentType->phpClass;
 
         $contentType=null;
         if (class_exists($className)) {
 
-        /** @var AbstractContentType|MenuTrait $contentType */
+        /** @var AbstractContentType|AbstractTreeContentType|MenuTrait $contentType */
         $contentType = new $className($this->id);
 
         } else {
