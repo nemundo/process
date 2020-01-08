@@ -6,6 +6,7 @@ use Nemundo\Process\Content\Form\AbstractContentForm;
 
 
 // AbstractProcessStatusForm
+// AbstractWorkflowStatusForm
 abstract class AbstractStatusForm extends AbstractContentForm
 {
 
@@ -19,12 +20,5 @@ abstract class AbstractStatusForm extends AbstractContentForm
         $this->submitButton->label = 'Weiter';
 
     }
-
-
-    /*
-    protected function loadUpdateForm()
-    {
-    }*/
-
 
 }

@@ -4,8 +4,10 @@
 namespace Nemundo\Process\Content\Type;
 
 
+use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\Content\Data\Content\ContentDelete;
 use Nemundo\Process\Content\Data\Tree\TreeDelete;
+use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Writer\TreeContentWriter;
 
 
@@ -56,6 +58,11 @@ abstract class AbstractTreeContentType extends AbstractContentType
         $this->deleteSearchIndex();
 
     }
+
+
+
+
+
 
 
     protected function deleteChild()

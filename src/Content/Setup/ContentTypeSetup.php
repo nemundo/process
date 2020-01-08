@@ -8,6 +8,7 @@ use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Process\Content\Data\Content\ContentDelete;
 use Nemundo\Process\Content\Data\ContentType\ContentType;
+use Nemundo\Process\Content\Data\ContentType\ContentTypeDelete;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexDelete;
 
@@ -44,6 +45,7 @@ class ContentTypeSetup extends AbstractBase
         $delete->filter->andEqual($delete->model->contentTypeId, $contentType->contentId);
         $delete->delete();
 
+        (new ContentTypeDelete())->deleteById($contentType->contentId);
 
        /*
         $delete = new SearchIndexDelete();

@@ -5,11 +5,14 @@ namespace Nemundo\Process\Content\Type;
 
 
 use Nemundo\Db\Sql\Order\SortOrder;
+use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\Content\Data\Content\ContentRow;
 use Nemundo\Process\Content\Data\Tree\Tree;
 use Nemundo\Process\Content\Data\Tree\TreeCount;
+use Nemundo\Process\Content\Data\Tree\TreeDelete;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Data\Tree\TreeValue;
+use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Row\ContentCustomRow;
 
 trait ContentTreeTrait
@@ -106,6 +109,17 @@ trait ContentTreeTrait
 
     }
 
+    public function removeFromParent()
+    {
+
+        $delete = new TreeDelete();
+        $delete->filter->andEqual($delete->model->parentId,$this->parentId);
+        $delete->filter->orEqual($delete->model->childId, $this->dataId);
+        $delete->delete();
+
+    }
+
+
 
     public function getParentContent()
     {
@@ -126,11 +140,6 @@ trait ContentTreeTrait
     }
 
 
-    public function removeFromParent()
-    {
-
-
-    }
 
 
 }

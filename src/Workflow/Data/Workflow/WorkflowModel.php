@@ -110,7 +110,7 @@ $this->workflowNumber = new \Nemundo\Model\Type\Text\TextType($this);
 $this->workflowNumber->tableName = "process_workflow";
 $this->workflowNumber->fieldName = "workflow_number";
 $this->workflowNumber->aliasFieldName = "process_workflow_workflow_number";
-$this->workflowNumber->label = "Workflow Number";
+$this->workflowNumber->label = "Nr.";
 $this->workflowNumber->allowNullValue = false;
 $this->workflowNumber->length = 50;
 

@@ -115,7 +115,7 @@
                 },
                 {
                     "type": "text",
-                    "label": "Workflow Number",
+                    "label": "Nr.",
                     "field_name": "workflow_number",
                     "variable_name": "workflowNumber",
                     "allow_null": false,

@@ -23,7 +23,15 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
     final public function saveType()
     {
 
-        $this->onCreate();
+        //$this->onCreate();
+
+        //parent::saveType();
+
+        if ($this->createMode) {
+            $this->onCreate();
+        } else {
+            $this->onUpdate();
+        }
 
         $writer = new ProcessStatusWriter();
         $writer->contentType = $this;

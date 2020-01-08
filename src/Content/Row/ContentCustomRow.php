@@ -17,7 +17,7 @@ class ContentCustomRow extends ContentRow
 
     public function getContentType()
     {
-        //(new Debug())->write($this->id);
+
         $className = $this->contentType->phpClass;
 
         $contentType=null;

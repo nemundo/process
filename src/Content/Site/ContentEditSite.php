@@ -27,29 +27,21 @@ class ContentEditSite extends AbstractEditIconSite
     public function loadContent()
     {
 
-
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
-
 
         $dataId = (new DataIdParameter())->getValue();
 
         $reader = new ContentReader();
         $reader->model->loadContentType();
-        //$reader->filter->andEqual($reader->model->dataId, $dataId);
         $contentRow = $reader->getRowById($dataId);
-
-        $contentType = $contentRow->contentType->getContentType();
+        $contentType = $contentRow->getContentType();
 
         $form = $contentType->getForm($page);
-        $form->dataId = $dataId;
-
         $form->redirectSite = ContentItemSite::$site;
         $form->redirectSite->addParameter(new DataIdParameter());
 
         $page->render();
 
-
     }
-
 
 }
