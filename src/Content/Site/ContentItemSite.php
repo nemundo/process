@@ -71,10 +71,10 @@ class ContentItemSite extends AbstractSite
         $table->addLabelValue('Child Count', $contentType->getChildCount());
         $table->addLabelValue('Parent Count', $contentType->getParentCount());
 
-        if ($contentType->hasView()) {
-        $table->addLabelSite('View', $contentType->getViewSite());
+        if ($contentType->hasViewSite()) {
+            $table->addLabelSite('View', $contentType->getViewSite());
         } else {
-            $table->addLabelValue('View','[No View Site]');
+            $table->addLabelValue('View', '[No View Site]');
         }
 
         $subtitle = new AdminSubtitle($page);
@@ -94,17 +94,7 @@ class ContentItemSite extends AbstractSite
         }
 
 
-        $subtitle = new AdminSubtitle($page);
-        $subtitle->content = 'Content User';
 
-        $list = new UnorderedList($page);
-
-        $reader = new ContentGroupReader();
-        $reader->model->loadGroup();
-        $reader->filter->andEqual($reader->model->contentId, $dataId);
-        foreach ($reader->getData() as $contentGroupRow) {
-            $list->addText($contentGroupRow->group->group);
-        }
 
 
         if ($contentType->hasParent()) {
@@ -113,13 +103,20 @@ class ContentItemSite extends AbstractSite
             $subtitle->content = 'Parent Type';
 
             $table = new AdminClickableTable($page);
+
+            $header->addText('Content Type');
+            $header->addText('Subject');
+
             foreach ($contentType->getParentContent() as $contentRow) {
 
                 $row = new TableRow($table);
 
+                $parentContentType=$contentRow->getContentType();
+                $row->addText($parentContentType->contentLabel);
+
                 $site = clone(ContentItemSite::$site);
                 $site->addParameter(new DataIdParameter($contentRow->id));
-                $site->title = $contentRow->subject;
+                $site->title =$parentContentType->getSubject();  // $contentRow->subject;
                 $row->addSite($site);
 
             }
@@ -133,6 +130,20 @@ class ContentItemSite extends AbstractSite
         $btn = new AdminIconSiteButton($page);
         $btn->site = ContentDeleteSite::$site;
         $btn->site->addParameter(new DataIdParameter());
+
+
+
+        $subtitle = new AdminSubtitle($page);
+        $subtitle->content = 'Content User';
+
+        $list = new UnorderedList($page);
+
+        $reader = new ContentGroupReader();
+        $reader->model->loadGroup();
+        $reader->filter->andEqual($reader->model->contentId, $dataId);
+        foreach ($reader->getData() as $contentGroupRow) {
+            $list->addText($contentGroupRow->group->group);
+        }
 
 
         //$btn = new FavoriteButton($page);

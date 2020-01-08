@@ -6,6 +6,7 @@ namespace Nemundo\Process\Content\Site;
 
 use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
+use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Core\Log\LogMessage;
@@ -14,16 +15,12 @@ use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
-use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\Com\ListBox\ContentTypeListBox;
 use Nemundo\Process\Content\Data\Content\ContentCount;
 use Nemundo\Process\Content\Data\Content\ContentModel;
 use Nemundo\Process\Content\Data\Content\ContentPaginationReader;
-use Nemundo\Process\Content\Data\Content\ContentReader;
-use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
-use Nemundo\Process\Content\Item\ContentItem;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Parameter\DataIdParameter;
 use Nemundo\Web\Site\AbstractSite;
@@ -65,10 +62,8 @@ class ContentSite extends AbstractSite
         }*/
 
 
-        $btn=new AdminSiteButton($page);
-        $btn->site=ContentNewSite::$site;
-
-
+        $btn = new AdminSiteButton($page);
+        $btn->site = ContentNewSite::$site;
 
 
         $filter = new Filter();
@@ -77,29 +72,30 @@ class ContentSite extends AbstractSite
         $contentTypeParameter = new ContentTypeParameter();
         if ($contentTypeParameter->hasValue()) {
             $filter->andEqual($model->contentTypeId, $contentTypeParameter->getValue());
-        }
 
+            $contentType = $contentTypeParameter->getContentType();
+
+            $table = new AdminLabelValueTable($page);
+            $table->addLabelValue('Class', $contentType->getClassName());
+
+        }
 
 
         $count = new ContentCount();
         $count->filter = $filter;
-        $contentCount=$count->getCount();
+        $contentCount = $count->getCount();
 
 
-        $p=new Paragraph($page);
-        $p->content=$contentCount.' Content found';
-
+        $p = new Paragraph($page);
+        $p->content = $contentCount . ' Content found';
 
 
         $contentReader = new ContentPaginationReader();
         $contentReader->model->loadContentType();
         $contentReader->model->loadUser();
-        $contentReader->filter=$filter;
+        $contentReader->filter = $filter;
         $contentReader->addOrder($contentReader->model->dateTime, SortOrder::DESCENDING);
-        $contentReader->paginationLimit=50;
-
-
-
+        $contentReader->paginationLimit = 50;
 
 
         $table = new AdminClickableTable($page);
@@ -164,7 +160,7 @@ class ContentSite extends AbstractSite
 
 
         $pagination = new BootstrapPagination($page);
-        $pagination->paginationReader= $contentReader;
+        $pagination->paginationReader = $contentReader;
 
 
         $page->render();

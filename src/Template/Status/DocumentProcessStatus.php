@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Template\Status;
 
 
+use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Core\Http\Request\File\FileRequest;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Model\Data\Property\File\RedirectFilenameDataProperty;
@@ -63,7 +64,14 @@ class DocumentProcessStatus extends AbstractProcessStatus
     {
 
         $documentRow = (new DocumentReader())->getRowById($this->dataId);
-        $text = 'Document '.$documentRow->document->getFilename().' was uploaded';
+
+        $hyperlink = new UrlHyperlink();
+        $hyperlink->content = $documentRow->document->getFilename();
+        $hyperlink->url = $documentRow->document->getUrl();
+
+
+        //$text = 'Document '.$documentRow->document->getFilename().' was uploaded';
+        $text = 'Document '.$hyperlink->getContent().' was uploaded';
 
         return $text;
 
