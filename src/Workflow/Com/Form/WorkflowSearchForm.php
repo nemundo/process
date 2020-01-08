@@ -7,6 +7,7 @@ namespace Nemundo\Process\Workflow\Com\Form;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Process\Workflow\Com\ListBox\ProcessListBox;
+use Nemundo\User\Com\ListBox\UserListBox;
 
 class WorkflowSearchForm extends SearchForm
 {
@@ -19,6 +20,12 @@ class WorkflowSearchForm extends SearchForm
         $list = new ProcessListBox($formRow);
         $list->submitOnChange = true;
         $list->searchItem = true;
+
+       $list=  new UserListBox($formRow);
+       $list->label='Assignment';
+        $list->submitOnChange = true;
+        $list->searchItem = true;
+
 
         return parent::getContent();
 

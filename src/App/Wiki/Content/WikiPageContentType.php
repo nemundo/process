@@ -5,6 +5,7 @@ namespace Nemundo\Process\App\Wiki\Content;
 
 
 use App\App\IssueTracker\Workflow\Process\IssueTrackerProcess;
+use Nemundo\Process\App\Wiki\Data\Wiki\Wiki;
 use Nemundo\Process\App\Wiki\Data\Wiki\WikiReader;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\App\Wiki\Site\WikiSite;
@@ -14,6 +15,9 @@ use Nemundo\ToDo\Workflow\Process\ToDoProcess;
 
 class WikiPageContentType extends AbstractMenuContentType
 {
+
+
+    public $title;
 
     //use MenuTrait;
 
@@ -39,6 +43,19 @@ class WikiPageContentType extends AbstractMenuContentType
 
     }
 
+
+
+    protected function onCreate()
+    {
+
+        $data = new Wiki();
+        $data->id = $this->dataId;
+        $data->title = $this->title;
+        $data->save();
+
+        $this->addSearchText($this->title);
+
+    }
 
     /*
     protected function saveData()

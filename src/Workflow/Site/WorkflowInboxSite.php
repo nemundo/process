@@ -27,29 +27,23 @@ use Nemundo\Process\Template\Data\Document\Redirect\DocumentDocumentRedirectSite
 use Nemundo\Process\Template\Site\DocumentDeleteSite;
 use Nemundo\ToDo\Workflow\Process\ToDoProcess;
 use Nemundo\User\Parameter\UserParameter;
+use Nemundo\User\Session\UserSession;
 use Nemundo\Web\Site\AbstractSite;
+use Nemundo\Workflow\App\Identification\Config\IdentificationConfig;
 use Nemundo\Workflow\Com\TrafficLight\DateTrafficLight;
 use Nemundo\Workflow\Com\TrafficLight\TrafficLight;
 
 
-class WorkflowSite extends AbstractSite
+class WorkflowInboxSite extends AbstractSite
 {
 
-    /**
-     * @var WorkflowSite
-     */
-    public static $site;
+
 
     protected function loadSite()
     {
 
-        $this->title = 'Workflow';
-        $this->url = 'workflow';
-
-        new WorkflowNewSite($this);
-        new WorkflowItemSite($this);
-
-        WorkflowSite::$site=$this;
+        $this->title = 'Workflow Inbox';
+        $this->url = 'workflow-inbox';
 
     }
 
@@ -59,30 +53,7 @@ class WorkflowSite extends AbstractSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
-        $nav = new AdminNavigation($page);
-        $nav->site = WorkflowSite::$site;
 
-
-        $dropdown =new ContentTypeDropdown($page);  // new BootstrapSiteDropdown($page);
-$dropdown->redirectSite = WorkflowNewSite::$site;
-
-        $processReader = new ProcessReader();
-        $processReader->model->loadContentType();
-        $processReader->addOrder($processReader->model->contentType->contentType);
-        foreach ($processReader->getData() as $processRow) {
-            $site = clone(WorkflowNewSite::$site);
-            $site->title = $processRow->getProcess()->contentLabel;
-            $site->addParameter(new ProcessParameter($processRow->contentTypeId));
-
-            $dropdown->addSite($site);
-        }
-
-        //$dropdown->addContentType(new IssueTrackerProcess());
-        //$dropdown->addContentType(new JourneyProcess());
-        //$dropdown->addContentType(new ToDoProcess());
-
-
-        new WorkflowSearchForm($page);
 
 
 
@@ -107,6 +78,7 @@ $dropdown->redirectSite = WorkflowNewSite::$site;
         $workflowReader->model->loadGroupAssignment();
         $workflowReader->model->loadUser();
 
+        /*
         $processParameter = new ProcessParameter();
         if ($processParameter->hasValue()) {
             $workflowReader->filter->andEqual($workflowReader->model->processId, $processParameter->getValue());
@@ -115,7 +87,19 @@ $dropdown->redirectSite = WorkflowNewSite::$site;
         $userParameter=new UserParameter();
         if ($userParameter->hasValue()) {
             $workflowReader->filter->andEqual($workflowReader->model->assignment->identificationId,$userParameter->getValue());
+        }*/
+
+
+        $userId = (new UserSession())->userId;
+        foreach ((new IdentificationConfig())->getIdentificationList() as $identification) {
+
+            foreach ($identification->getIdentificationIdFromUserId($userId) as $value) {
+                $workflowReader->filter->orEqual($workflowReader->model->assignment->identificationId, $value);
+            }
+
         }
+
+
 
         $workflowReader->addOrder($workflowReader->model->dateTime, SortOrder::DESCENDING);
         $workflowReader->paginationLimit = 50;

@@ -83,23 +83,10 @@ class WikiSite extends AbstractSite
         if ($wikiParameter->exists()) {
 
             $wikiId = $wikiParameter->getValue();
-
-            $wikiItem = new WikiPageContentItem($wikiId);
-
             $wikiType = new WikiPageContentType($wikiId);
 
             $title = new AdminTitle($layout->col2);
-            $title->content = $wikiType->getSubject();  // $wikiItem->getSubject();
-
-            $title = new AdminTitle($layout->col2);
-            $title->content = (new WikiSubject($wikiId))->getSubject();
-
-/*
-            foreach ($wikiType->getChild() as $contentCustomRow) {
-                $contentCustomRow->getContentType()->getView($layout->col3);
-
-            }*/
-
+            $title->content = $wikiType->getSubject();
 
             $wikiRow = (new WikiReader())->getRowById($wikiId);
 
@@ -139,7 +126,7 @@ class WikiSite extends AbstractSite
             $form->redirectSite = WikiSite::$site;
             $form->redirectSite->addParameter(new WikiParameter());*/
 
-            foreach ($wikiItem->getChild() as $contentRow) {
+            foreach ($wikiType->getChild() as $contentRow) {
 
                 $contentType = $contentRow->getContentType();  // contentType->getContentType();
 

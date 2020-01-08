@@ -25,6 +25,8 @@ trait SearchIndexTrait
 
         $this->searchIndex->addWord($word);
 
+        $this->addSearchText($word);
+
     }
 
     protected function addSearchText($text)

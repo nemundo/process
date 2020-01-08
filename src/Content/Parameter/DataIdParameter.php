@@ -22,7 +22,7 @@ class DataIdParameter extends AbstractUrlParameter
         $reader = new ContentReader();
         $reader->model->loadContentType();
         $row =$reader->getRowById($this->getValue());
-       $contentType= $row->contentType->getContentType();
+       $contentType= $row->getContentType();  //contentType->getContentType();
 return $contentType;
     }
 

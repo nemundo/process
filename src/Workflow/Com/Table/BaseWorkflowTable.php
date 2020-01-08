@@ -31,7 +31,7 @@ class BaseWorkflowTable extends AdminLabelValueTable
         $table->addLabelValue($model->status->label, $workflowRow->status->contentType);
         $table->addLabelYesNoValue($model->workflowClosed->label, $workflowRow->workflowClosed);
 
-        $table->addLabelValue($model->dateTime->label, $workflowRow->dateTime->getShortDateTimeFormat());
+        $table->addLabelValue($model->dateTime->label, $workflowRow->dateTime->getShortDateTimeLeadingZeroFormat());
         $table->addLabelValue($model->user->label, $workflowRow->user->displayName);
 
         if ($workflowRow->deadline !== null) {
@@ -40,8 +40,8 @@ class BaseWorkflowTable extends AdminLabelValueTable
 
         $workflowItem = new WorkflowProcess($this->workflowId);
 
-        $table->addLabelValue('Start', $workflowItem->getStart()->getShortDateTimeFormat());
-        $table->addLabelValue('End', $workflowItem->getEnd()->getShortDateTimeFormat());
+        $table->addLabelValue('Start', $workflowItem->getStart()->getShortDateTimeLeadingZeroFormat());
+        $table->addLabelValue('End', $workflowItem->getEnd()->getShortDateTimeLeadingZeroFormat());
         $table->addLabelValue('Durchlaufzeit', $workflowItem->getDurchlaufzeit() . ' Tage');
 
 

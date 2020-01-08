@@ -7,6 +7,7 @@ namespace Nemundo\Process\Workflow\Content\View;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Admin\Com\Widget\AdminWidget;
 use Nemundo\Com\FormBuilder\RedirectTrait;
+use Nemundo\Core\Log\LogMessage;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Group\Com\GroupParentContainer;
 use Nemundo\Process\Workflow\Com\Container\StatusFormContainer;
@@ -43,6 +44,11 @@ class ProcessView extends AbstractContentView
 
     public function getContent()
     {
+
+        if ($this->process == null) {
+            (new LogMessage())->writeError('No Process');
+        }
+
 
         $workflowStatus = null;
         $formStatus = null;

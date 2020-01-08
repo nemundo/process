@@ -66,12 +66,16 @@ class ContentItemSite extends AbstractSite
         }
 
         $table = new AdminLabelValueTable($page);
-
-        $table->addLabelYesNoValue('Subject', $contentType->getSubject());
+        $table->addLabelValue('Subject', $contentType->getSubject());
         $table->addLabelYesNoValue('Has Parent', $contentType->hasParent());
         $table->addLabelValue('Child Count', $contentType->getChildCount());
         $table->addLabelValue('Parent Count', $contentType->getParentCount());
+
+        if ($contentType->hasView()) {
         $table->addLabelSite('View', $contentType->getViewSite());
+        } else {
+            $table->addLabelValue('View','[No View Site]');
+        }
 
         $subtitle = new AdminSubtitle($page);
         $subtitle->content = 'Child';

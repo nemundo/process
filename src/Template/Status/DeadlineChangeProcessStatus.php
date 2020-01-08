@@ -32,7 +32,6 @@ class DeadlineChangeProcessStatus extends AbstractProcessStatus
         $this->changeStatus = false;
 
         $this->formClass = DeadlineChangeForm::class;
-        //$this->itemClass=DeadlineChangeItem::class;
 
     }
 

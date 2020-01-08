@@ -8,6 +8,7 @@ use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\App\Search\Parameter\SearchQueryParameter;
 use Nemundo\App\Search\Query\SearchSelectQuery;
 use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Db\Sql\Field\CountField;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Paragraph\Paragraph;
@@ -33,11 +34,14 @@ class SearchSite extends AbstractSite
 
     protected function loadSite()
     {
-        $this->title = 'Search';
+        $this->title[LanguageCode::EN] = 'Search';
+        $this->title[LanguageCode::DE]='Suche';
         $this->url = 'search';
         SearchSite::$site = $this;
 
+        new SearchItemSite($this);
         new SearchJsonSite($this);
+
 
     }
 
@@ -87,6 +91,9 @@ class SearchSite extends AbstractSite
         $table = new AdminClickableTable($layout->col1);
 
         $header = new TableHeader($table);
+        $header->addText('Content Type');
+        $header->addText('Subject');
+
 
 
         foreach ($searchIndexReader->getData() as $indexRow) {
@@ -104,7 +111,8 @@ class SearchSite extends AbstractSite
                 $site = $contentType->getViewSite();
                 $row->addClickableSite($site);
             } else {
-                $site = clone(ContentItemSite::$site);
+                //$site = clone(ContentItemSite::$site);
+                $site = clone(SearchItemSite::$site);
                 $site->addParameter(new DataIdParameter($indexRow->contentId));
                 $row->addClickableSite($site);
             }

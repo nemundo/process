@@ -7,6 +7,7 @@ use Nemundo\Process\Content\Type\AbstractSequenceContentType;
 use Nemundo\Process\Workflow\Content\Form\StatusForm;
 use Nemundo\Process\Workflow\Content\Writer\ProcessStatusWriter;
 
+// AbstractWorkflowStatus
 abstract class AbstractProcessStatus extends AbstractSequenceContentType
 {
 

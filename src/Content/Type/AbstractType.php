@@ -49,24 +49,22 @@ abstract class AbstractType extends AbstractBaseClass
             $this->createMode = false;
         }
 
+        $this->onLoad();
+
     }
 
 
     public function getDataId()
     {
 
-
-        /*if ($this->dataId == null) {
-            $this->dataId = (new UniqueId())->getUniqueId();
-        }
-
-        /*else {
-            //$this->dataId = $tdataId;
-        }*/
-
         return $this->dataId;
+
     }
 
+
+    protected function onLoad() {
+
+    }
 
     protected function onCreate()
     {
@@ -217,9 +215,15 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
+    protected function onDelete() {
+
+    }
+
+
     public function deleteType()
     {
 
+        $this->onDelete();
 
     }
 

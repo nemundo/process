@@ -4,9 +4,6 @@
 namespace Nemundo\Process\Content\Type;
 
 
-use Nemundo\Html\Container\AbstractHtmlContainer;
-
-
 abstract class AbstractSequenceContentType extends AbstractTreeContentType
 {
 
@@ -59,7 +56,6 @@ abstract class AbstractSequenceContentType extends AbstractTreeContentType
         return $nextStatus;
 
     }
-
 
 
 }

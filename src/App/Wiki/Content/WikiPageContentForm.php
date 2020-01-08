@@ -30,12 +30,13 @@ class WikiPageContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        $item = new WikiPageContentItem($this->dataId);
-        $item->title = $this->pageTitle->getValue();
-        $item->saveItem();
+        $type = new WikiPageContentType($this->dataId);
+        $type->parentId=$this->parentId;
+        $type->title = $this->pageTitle->getValue();
+        $type->saveType();
 
         if ($this->appendParameter) {
-            $this->redirectSite->addParameter(new WikiParameter($item->dataId));
+            $this->redirectSite->addParameter(new WikiParameter($type->getDataId()));
         }
 
     }

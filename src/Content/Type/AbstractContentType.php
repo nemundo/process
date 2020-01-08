@@ -56,6 +56,8 @@ abstract class AbstractContentType extends AbstractType
      */
     protected $listClass;
 
+    // parentContainerListClass
+
 
     /**
      * @var string
@@ -85,13 +87,14 @@ abstract class AbstractContentType extends AbstractType
              $this->itemClass = ContentItem::class;
          }*/
 
+        /*
         if ($this->viewSite == null) {
             $this->viewSite = ContentItemSite::$site;
         }
 
         if ($this->parameterClass == null) {
             $this->parameterClass = DataIdParameter::class;
-        }
+        }*/
 
 
         $this->dateTime = (new DateTime())->setNow();
@@ -257,6 +260,7 @@ abstract class AbstractContentType extends AbstractType
     public function deleteType()
     {
 
+        parent::deleteType();
         (new ContentDelete())->deleteById($this->dataId);
 
 

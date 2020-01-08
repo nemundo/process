@@ -24,7 +24,6 @@ class DeadlineChangeForm extends AbstractStatusForm
         $this->datum->label = 'Datum';
         $this->datum->validation = true;
 
-
         $workflowItem = new WorkflowProcess($this->parentId);
         if ($workflowItem->hasDeadline()) {
             $this->datum->value = $workflowItem->getDeadline()->getShortDateLeadingZeroFormat();
@@ -37,14 +36,11 @@ class DeadlineChangeForm extends AbstractStatusForm
     protected function onSubmit()
     {
 
-
-        $item = new DeadlineChangeProcessStatus();
-        $item->parentId = $this->parentId;
-        $item->deadline = (new Date())->fromGermanFormat($this->datum->getValue());
-        $item->saveType();
-
+        $status = new DeadlineChangeProcessStatus();
+        $status->parentId = $this->parentId;
+        $status->deadline = (new Date())->fromGermanFormat($this->datum->getValue());
+        $status->saveType();
 
     }
-
 
 }

@@ -43,16 +43,10 @@ abstract class AbstractTreeContentType extends AbstractContentType
     }
 
 
-    protected function loadItem()
-    {
-
-    }
-
-
     public function deleteType()
     {
 
-        (new ContentDelete())->deleteById($this->dataId);
+        parent::deleteType();
 
         $delete = new TreeDelete();
         $delete->filter->orEqual($delete->model->parentId, $this->dataId);
