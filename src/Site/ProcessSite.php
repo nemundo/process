@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Site;
 
 
+use Nemundo\Process\App\Calendar\Site\CalendarSite;
 use Nemundo\Process\App\Explorer\Site\ExplorerSite;
 use Nemundo\Process\App\Favorite\Site\FavoriteSite;
 use Nemundo\Process\App\Inbox\Site\InboxSite;
@@ -57,6 +58,7 @@ class ProcessSite extends AbstractSite
         //new StartSite($this);
 
 new GeoSite($this);
+new CalendarSite($this);
 
 new AssignmentSite($this);
 new ExplorerSite($this);

@@ -19,12 +19,12 @@ class WorkflowSearchForm extends SearchForm
 
         $list = new ProcessListBox($formRow);
         $list->submitOnChange = true;
-        $list->searchItem = true;
+        $list->searchMode = true;
 
        $list=  new UserListBox($formRow);
        $list->label='Assignment';
         $list->submitOnChange = true;
-        $list->searchItem = true;
+        $list->searchMode = true;
 
 
         return parent::getContent();

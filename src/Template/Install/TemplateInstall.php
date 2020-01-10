@@ -5,6 +5,7 @@ namespace Nemundo\Process\Template\Install;
 
 
 use Nemundo\Model\Setup\ModelCollectionSetup;
+use Nemundo\Process\App\Calendar\Setup\CalendarSourceSetup;
 use Nemundo\Process\App\News\Type\NewsContentType;
 use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\App\Wiki\Setup\WikiSetup;
@@ -18,7 +19,8 @@ use Nemundo\Process\Template\Type\LargeTextContentType;
 use Nemundo\Process\Template\Type\WebImageContentType;
 use Nemundo\Process\Workflow\Setup\StatusSetup;
 use Nemundo\Project\Install\AbstractInstall;
-use Nemundo\ToDo\Workflow\Process\ToDoProcess;
+use Schleuniger\App\Aufgabe\Content\Process\AufgabeProcess;
+use Schleuniger\App\ChangeRequest\Workflow\Process\EcrProcess;
 
 class TemplateInstall extends AbstractInstall
 {
@@ -34,7 +36,6 @@ class TemplateInstall extends AbstractInstall
         //$setup->addStatus(new ReopenStatus());
 
 
-
         $setup = new ContentTypeSetup();
         $setup->addContentType(new LargeTextContentType());
         $setup->addContentType(new DocumentContentType());
@@ -42,12 +43,17 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new NewsContentType());
         $setup->addContentType(new WikiPageContentType());
         $setup->addContentType(new WebImageContentType());
-$setup->addContentType(new UserContentType());
-$setup->addContentType(new EventContentType());
+        $setup->addContentType(new UserContentType());
+        $setup->addContentType(new EventContentType());
 
-        $setup=new WikiSetup();
+        $setup = new WikiSetup();
         $setup->addContentType(new LargeTextContentType());
+        $setup->addContentType(new EventContentType());
 
+        $setup= new CalendarSourceSetup();
+        $setup->addSourceContentType(new WikiPageContentType());
+        $setup->addSourceContentType(new AufgabeProcess());
+        $setup->addSourceContentType(new EcrProcess());
 
 
     }

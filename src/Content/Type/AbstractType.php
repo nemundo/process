@@ -5,7 +5,6 @@ namespace Nemundo\Process\Content\Type;
 
 
 use Nemundo\Core\Base\AbstractBaseClass;
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Random\UniqueId;
 use Nemundo\Html\Container\AbstractHtmlContainer;
@@ -36,6 +35,7 @@ abstract class AbstractType extends AbstractBaseClass
 
 
     protected $createMode = true;
+
     //public $createMode = true;
 
 
@@ -62,7 +62,8 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
-    protected function onLoad() {
+    protected function onLoad()
+    {
 
     }
 
@@ -102,14 +103,10 @@ abstract class AbstractType extends AbstractBaseClass
         $form = new $this->formClass($parent);
 
         if (!$this->createMode) {
-        $form->dataId = $this->dataId;
+            $form->dataId = $this->dataId;
         }
         $form->contentType = $this;
-        $form->createMode=$this->createMode;
-
-        //(new Debug())->write('set create mode');
-        //(new Debug())->write($this->createMode);
-
+        $form->createMode = $this->createMode;
 
         return $form;
 
@@ -215,7 +212,8 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
-    protected function onDelete() {
+    protected function onDelete()
+    {
 
     }
 

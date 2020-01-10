@@ -31,6 +31,7 @@ class EventContentView extends AbstractContentView
 
         // sub image
 
+        /*
         $contentItem = new ContentItem($this->dataId);
 
         foreach ($contentItem->getChild() as $contentRow) {
@@ -42,7 +43,7 @@ class EventContentView extends AbstractContentView
             $view = $contentRow->contentType->getContentType()->getView($div);
             $view->dataId = $contentRow->id;
 
-        }
+        }*/
 
 
 

@@ -9,7 +9,7 @@ use Nemundo\App\Script\Type\AbstractConsoleScript;
 use Nemundo\Core\Structure\ForLoop;
 use Nemundo\Process\App\Plz\Import\PlzImport;
 use Nemundo\Process\Group\Content\GroupContentItem;
-use Nemundo\Process\Group\Type\PublicGroup;
+use Nemundo\Process\Group\Type\PublicGroupContentType;
 use Nemundo\Process\Template\Content\Event\EventContentDelete;
 use Nemundo\Process\Template\Content\User\UserContentItem;
 use Nemundo\SwissPost\Install\SwissPostInstall;

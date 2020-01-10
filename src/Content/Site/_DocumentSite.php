@@ -45,7 +45,7 @@ class DocumentSite extends AbstractSite
         $listbox = new ContentTypeListBox($formRow);  // new BootstrapListBox($formRow);
         //$listbox->name = (new ContentTypeParameter())->parameterName;
         $listbox->submitOnChange = true;
-        $listbox->searchItem = true;
+        $listbox->searchMode = true;
 
         $reader = new ContentTypeReader();
         foreach ($reader->getData() as $contentTypeRow) {

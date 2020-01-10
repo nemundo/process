@@ -45,16 +45,14 @@ class StatusFormContainer extends AbstractHtmlContainer
 
         if ($this->formStatus !== null) {
 
-            $subtitle = new AdminSubtitle($this);
-            $subtitle->content = $this->formStatus->contentLabel;
+            //$subtitle = new AdminSubtitle($this);
+            //$subtitle->content = $this->formStatus->contentLabel;
 
             if ($this->formStatus->checkUserVisibility()) {
 
                 $form = $this->formStatus->getForm($this);
                 $form->contentType= $this->formStatus;
                 $form->parentId = $this->workflowId;
-                //$form->workflowId = $this->workflowId;
-                //$form->status = $this->formStatus;
                 $form->redirectSite =$this->site;
                 $form->appendParameter=$this->appendWorkflowParameter;
 

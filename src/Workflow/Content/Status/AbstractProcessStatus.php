@@ -23,10 +23,6 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
     final public function saveType()
     {
 
-        //$this->onCreate();
-
-        //parent::saveType();
-
         if ($this->createMode) {
             $this->onCreate();
         } else {

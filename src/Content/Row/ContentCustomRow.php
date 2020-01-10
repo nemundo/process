@@ -3,14 +3,12 @@
 
 namespace Nemundo\Process\Content\Row;
 
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Process\Content\Data\Content\ContentRow;
-use Nemundo\Process\Content\Data\ContentType\ContentTypeRow;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Content\Type\MenuTrait;
-
+use Nemundo\Process\Content\Type\TreeContentType;
 
 class ContentCustomRow extends ContentRow
 {
@@ -20,18 +18,20 @@ class ContentCustomRow extends ContentRow
 
         $className = $this->contentType->phpClass;
 
-        $contentType=null;
+        $contentType = null;
         if (class_exists($className)) {
 
-        /** @var AbstractContentType|AbstractTreeContentType|MenuTrait $contentType */
-        $contentType = new $className($this->id);
+            /** @var AbstractContentType|AbstractTreeContentType|MenuTrait $contentType */
+            $contentType = new $className($this->id);
 
         } else {
-            (new LogMessage())->writeError('Content Type is not registred. Class: '.$className);
+
+            (new LogMessage())->writeError('ContentCustomRow. Content Type is not registred. Class: ' . $className);
+            $contentType = new TreeContentType($this->id);
+
         }
 
         return $contentType;
-
 
     }
 

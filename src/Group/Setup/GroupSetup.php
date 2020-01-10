@@ -7,17 +7,17 @@ namespace Nemundo\Process\Group\Setup;
 use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Process\Group\Data\Group\Group;
 use Nemundo\Process\Group\Data\GroupType\GroupType;
-use Nemundo\Process\Group\Type\AbstractGroup;
+use Nemundo\Process\Group\Type\AbstractGroupContentType;
 use Nemundo\Process\Group\Type\AbstractGroupType;
 
 class GroupSetup extends AbstractBase
 {
 
-    public function addGroup(AbstractGroup $group, AbstractGroupType $groupType) {
+    public function addGroup(AbstractGroupContentType $group, AbstractGroupType $groupType) {
 
         $data = new Group();
         $data->updateOnDuplicate = true;
-        $data->id = $group->id;
+        $data->id = $group->contentId;
         $data->group = $group->group;
         $data->groupTypeId=$groupType->id;
         $data->save();

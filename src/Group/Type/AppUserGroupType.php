@@ -4,7 +4,7 @@
 namespace Nemundo\Process\Group\Type;
 
 
-class AppUserGroupType extends AbstractGroupType
+class AppUserGroupType extends AbstractGroupContentType
 {
     protected function loadGroupType()
     {

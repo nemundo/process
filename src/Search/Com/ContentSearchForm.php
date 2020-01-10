@@ -36,7 +36,7 @@ class ContentSearchForm extends SearchForm
         $this->query = new BootstrapAutocompleteMultipleValueTextBox($formRow);
         $this->query->name = (new SearchQueryParameter())->parameterName;
         $this->query->seperator = ' ';
-        $this->query->searchItem = true;
+        $this->query->searchMode = true;
         $this->query->placeholder = 'Search';
         $this->query->label = HtmlCharacter::NON_BREAKING_SPACE;
         $this->query->sourceSite = SearchJsonSite::$site;

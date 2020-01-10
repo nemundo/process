@@ -31,7 +31,7 @@
                     "variable_name": "groupType",
                     "allow_null": false,
                     "is_deleted": false,
-                    "external_model_id": "31e21ebb-7b67-482a-a24f-04afb70e5aa8"
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
                 }
             ],
             "index": []
@@ -45,7 +45,7 @@
             "namespace": "Nemundo\\Process\\Group\\Data\\GroupType",
             "row_class_name": "",
             "primary_index": "text_id",
-            "is_deleted": false,
+            "is_deleted": true,
             "type": [
                 {
                     "type": "text",

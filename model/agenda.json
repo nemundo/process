@@ -1,0 +1,6 @@
+{
+    "app": "Agenda",
+    "name": "agenda",
+    "namespace": "Nemundo\\Process\\App\\Agenda",
+    "is_deleted": true
+}

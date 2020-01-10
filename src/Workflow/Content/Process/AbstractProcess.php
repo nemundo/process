@@ -8,8 +8,10 @@ use Nemundo\Core\Date\DateTimeDifference;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Db\Sql\Order\SortOrder;
+use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
+use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Workflow\Com\Container\BaseWorkflowContainer;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Content\View\ProcessView;
@@ -54,6 +56,8 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     protected $assignment;
 
 
+    public $processViewClass;
+
     /**
      * @var string
      */
@@ -65,6 +69,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     private $workflowRow;
 
 
+    /*
     public function __construct($dataId = null)
     {
 
@@ -77,7 +82,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         parent::__construct($dataId);
 
 
-    }
+    }*/
 
 
     public function saveType()
@@ -91,13 +96,13 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $writer = new WorkflowWriter();
         $writer->contentType = $this;
-        $writer->prefixNumber=$this->prefixNumber;
-        $writer->startNumber=$this->startNumber;
+        $writer->prefixNumber = $this->prefixNumber;
+        $writer->startNumber = $this->startNumber;
         $writer->parentId = $this->parentId;
         $writer->dataId = $this->dataId;
         $writer->subject = $this->workflowSubject;
-        $writer->number=$this->number;
-        $writer->workflowNumber=$this->workflowNumber;
+        $writer->number = $this->number;
+        $writer->workflowNumber = $this->workflowNumber;
         $writer->workflowSubject = $this->workflowSubject;
         $writer->assignment = $this->assignment;
         $writer->dateTime = $this->dateTime;
@@ -165,16 +170,14 @@ abstract class AbstractProcess extends AbstractSequenceContentType
             $reader = new WorkflowReader();
             $reader->model->loadProcess();
             $reader->model->loadUser();
-$reader->filter->andEqual($reader->model->id,$this->dataId);
+            $reader->filter->andEqual($reader->model->id, $this->dataId);
 
             foreach ($reader->getData() as $workflowCustomRow) {
                 $this->workflowRow = $workflowCustomRow;
             }
 
-
-
-            //$this->workflowRow =$reader->getRowById($this->dataId);  // $workflowCustomRow;
         }
+
         return $this->workflowRow;
 
     }
@@ -349,6 +352,25 @@ $reader->filter->andEqual($reader->model->id,$this->dataId);
         }
 
         return $statusList;
+
+    }
+
+
+    public function getProcessView(AbstractHtmlContainer $parent)
+    {
+
+        /** @var AbstractContentView $view */
+        $view = new $this->processViewClass($parent);
+
+        if (!$this->createMode) {
+            $view->dataId = $this->dataId;
+        }
+
+        //$view->dataId = $this->dataId;
+
+
+        return $view;
+
 
     }
 

@@ -27,7 +27,7 @@ public $group;
 public $groupTypeId;
 
 /**
-* @var \Nemundo\Process\Group\Data\GroupType\GroupTypeRow
+* @var \Nemundo\Process\Content\Row\ContentTypeCustomRow
 */
 public $groupType;
 
@@ -38,10 +38,10 @@ $this->id = $this->getModelValue($model->id);
 $this->group = $this->getModelValue($model->group);
 $this->groupTypeId = $this->getModelValue($model->groupTypeId);
 if ($model->groupType !== null) {
-$this->loadNemundoProcessGroupDataGroupTypeGroupTypegroupTypeRow($model->groupType);
+$this->loadNemundoProcessContentDataContentTypeContentTypegroupTypeRow($model->groupType);
 }
 }
-private function loadNemundoProcessGroupDataGroupTypeGroupTypegroupTypeRow($model) {
-$this->groupType = new \Nemundo\Process\Group\Data\GroupType\GroupTypeRow($this->row, $model);
+private function loadNemundoProcessContentDataContentTypeContentTypegroupTypeRow($model) {
+$this->groupType = new \Nemundo\Process\Content\Row\ContentTypeCustomRow($this->row, $model);
 }
 }

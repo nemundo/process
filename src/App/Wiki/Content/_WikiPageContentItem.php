@@ -10,7 +10,7 @@ use Nemundo\Process\Content\Data\ContentGroup\ContentGroup;
 use Nemundo\Process\Content\Item\AbstractContentItem;
 use Nemundo\Process\Content\Type\ContentTreeTrait;
 use Nemundo\Process\Group\Content\Add\AddGroupContentItem;
-use Nemundo\Process\Group\Type\PublicGroup;
+use Nemundo\Process\Group\Type\PublicGroupContentType;
 use Nemundo\Process\Search\Index\SearchIndexBuilder;
 
 class WikiPageContentItem extends AbstractContentItem

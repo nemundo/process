@@ -32,7 +32,6 @@ trait SearchIndexTrait
     protected function addSearchText($text)
     {
 
-
         if ($this->searchIndex == null) {
             $this->searchIndex = new SearchIndexBuilder($this->dataId);
         }
@@ -41,8 +40,14 @@ trait SearchIndexTrait
 
     }
 
+    protected function onSearchIndex() {
+
+    }
 
     protected function saveSearchIndex() {
+
+       $this->onSearchIndex();
+
         if ($this->searchIndex !== null) {
             $this->searchIndex->saveIndex();
         }

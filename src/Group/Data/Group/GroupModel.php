@@ -17,7 +17,7 @@ public $group;
 public $groupTypeId;
 
 /**
-* @var \Nemundo\Process\Group\Data\GroupType\GroupTypeExternalType
+* @var \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType
 */
 public $groupType;
 
@@ -57,7 +57,7 @@ $this->groupTypeId->allowNullValue = false;
 }
 public function loadGroupType() {
 if ($this->groupType == null) {
-$this->groupType = new \Nemundo\Process\Group\Data\GroupType\GroupTypeExternalType($this, "group_group_group_type");
+$this->groupType = new \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType($this, "group_group_group_type");
 $this->groupType->tableName = "group_group";
 $this->groupType->fieldName = "group_type";
 $this->groupType->aliasFieldName = "group_group_group_type";

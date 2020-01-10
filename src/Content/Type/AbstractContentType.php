@@ -77,26 +77,6 @@ abstract class AbstractContentType extends AbstractType
             $this->formClass = ContentForm::class;
         }
 
-
-        /*
-        if ($this->viewClass == null) {
-            $this->viewClass = ContentView::class;
-        }*/
-
-        /* if ($this->itemClass == null) {
-             $this->itemClass = ContentItem::class;
-         }*/
-
-        /*
-        if ($this->viewSite == null) {
-            $this->viewSite = ContentItemSite::$site;
-        }
-
-        if ($this->parameterClass == null) {
-            $this->parameterClass = DataIdParameter::class;
-        }*/
-
-
         $this->dateTime = (new DateTime())->setNow();
         $this->userId = (new UserSessionType())->userId;
 
@@ -116,7 +96,6 @@ abstract class AbstractContentType extends AbstractType
     public function getSubject()
     {
 
-
         $subject = '[No Content Type]';
 
         if ($this->contentLabel !== null) {
@@ -127,27 +106,6 @@ abstract class AbstractContentType extends AbstractType
 
     }
 
-
-    // move to Item
-    /*public function getSubject($dataId)
-    {
-
-        $subject = $this->getClassNameWithoutNamespace();
-        return $subject;
-
-    }*/
-
-
-    /*
-    public function getItem($dataId)
-    {
-
-        /** @var AbstractContentItem $item */
-    /*  $item = new $this->itemClass($dataId);
-
-      return $item;
-
-  }*/
 
 
     public function hasList()
@@ -179,13 +137,6 @@ abstract class AbstractContentType extends AbstractType
 
     public function hasAdmin()
     {
-
-        /*$value = false;
-        if ($this->adminClass !== null) {
-            $value = true;
-        }
-
-        return $value;*/
 
         return $this->hasProperty($this->adminClass);
 
@@ -262,22 +213,6 @@ abstract class AbstractContentType extends AbstractType
 
         parent::deleteType();
         (new ContentDelete())->deleteById($this->dataId);
-
-
-        /*
-        $delete = new TreeDelete();
-        $delete->filter->orEqual($delete->model->parentId, $this->dataId);
-        $delete->filter->orEqual($delete->model->childId, $this->dataId);
-        $delete->delete();
-
-
-        $delete = new SearchIndexDelete();
-        $delete->filter->andEqual($delete->model->contentId, $this->dataId);
-        $delete->delete();
-
-
-        // delete child
-        // kann mehrere items beinhalten !!!*/
 
     }
 

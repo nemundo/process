@@ -53,7 +53,7 @@ class ContentSite extends AbstractSite
         $listbox = new ContentTypeListBox($formRow);
         //$listbox->name = (new ContentTypeParameter())->parameterName;
         $listbox->submitOnChange = true;
-        $listbox->searchItem = true;
+        $listbox->searchMode = true;
 
         /*
         $reader = new ContentTypeReader();

@@ -10,6 +10,7 @@ use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\App\Wiki\Data\WikiCollection;
 use Nemundo\Process\App\Wiki\Setup\WikiSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
+use Nemundo\Process\Template\Content\EventAdd\EventAddContentType;
 use Nemundo\Process\Template\Content\Html\HtmlContentType;
 use Nemundo\Process\Template\Type\LargeTextContentType;
 use Nemundo\Process\Template\Type\WebImageContentType;
@@ -31,6 +32,7 @@ class WikiInstall extends AbstractInstall
 
         $setup=new WikiSetup();
         $setup->addContentType(new HtmlContentType());
+        $setup->addContentType(new EventAddContentType());
 
 
         /*

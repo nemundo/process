@@ -37,79 +37,6 @@
         },
         {
             "template": "default",
-            "model_id": "e7460973-aefe-494b-9c8f-9d1ee0858695",
-            "label": "Content",
-            "class_name": "Content",
-            "table_name": "content2_content",
-            "namespace": "Nemundo\\Process\\Content\\Data\\Content",
-            "row_class_name": "",
-            "primary_index": "auto_increment",
-            "is_deleted": true,
-            "type": [
-                {
-                    "type": "external",
-                    "label": "Content Type",
-                    "field_name": "content_type",
-                    "variable_name": "contentType",
-                    "allow_null": false,
-                    "is_deleted": false,
-                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
-                },
-                {
-                    "type": "text",
-                    "label": "Data Id",
-                    "field_name": "data_id",
-                    "variable_name": "dataId",
-                    "allow_null": false,
-                    "is_deleted": false,
-                    "length": "36"
-                },
-                {
-                    "type": "date_time",
-                    "label": "Date Time Created",
-                    "field_name": "date_time_created",
-                    "variable_name": "dateTimeCreated",
-                    "allow_null": false,
-                    "is_deleted": false
-                },
-                {
-                    "type": "text",
-                    "label": "Parent Id",
-                    "field_name": "parent_id",
-                    "variable_name": "parentId",
-                    "allow_null": false,
-                    "is_deleted": false,
-                    "length": "36"
-                },
-                {
-                    "type": "number",
-                    "label": "Item Order",
-                    "field_name": "item_order",
-                    "variable_name": "itemOrder",
-                    "allow_null": false,
-                    "is_deleted": false
-                },
-                {
-                    "type": "user",
-                    "label": "User Created",
-                    "field_name": "user_created",
-                    "variable_name": "userCreated",
-                    "allow_null": false,
-                    "is_deleted": false
-                }
-            ],
-            "index": [
-                {
-                    "index_name": "data_id",
-                    "index_type": "index",
-                    "field_name": [
-                        "data_id"
-                    ]
-                }
-            ]
-        },
-        {
-            "template": "default",
             "model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35",
             "label": "Content",
             "class_name": "Content",
@@ -190,6 +117,79 @@
         },
         {
             "template": "default",
+            "model_id": "e7460973-aefe-494b-9c8f-9d1ee0858695",
+            "label": "Content",
+            "class_name": "Content",
+            "table_name": "content2_content",
+            "namespace": "Nemundo\\Process\\Content\\Data\\Content",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": true,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Content Type",
+                    "field_name": "content_type",
+                    "variable_name": "contentType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                },
+                {
+                    "type": "text",
+                    "label": "Data Id",
+                    "field_name": "data_id",
+                    "variable_name": "dataId",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "36"
+                },
+                {
+                    "type": "date_time",
+                    "label": "Date Time Created",
+                    "field_name": "date_time_created",
+                    "variable_name": "dateTimeCreated",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "text",
+                    "label": "Parent Id",
+                    "field_name": "parent_id",
+                    "variable_name": "parentId",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "36"
+                },
+                {
+                    "type": "number",
+                    "label": "Item Order",
+                    "field_name": "item_order",
+                    "variable_name": "itemOrder",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "user",
+                    "label": "User Created",
+                    "field_name": "user_created",
+                    "variable_name": "userCreated",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "data_id",
+                    "index_type": "index",
+                    "field_name": [
+                        "data_id"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
             "model_id": "3e5cd4e5-5315-413b-9eea-6b4e0fd7e762",
             "label": "Content Group",
             "class_name": "ContentGroup",
@@ -219,6 +219,46 @@
                 }
             ],
             "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "b398bd12-b77a-404c-bbaf-edae5486a5e5",
+            "label": "Content Status",
+            "class_name": "ContentStatus",
+            "table_name": "content_content_status",
+            "namespace": "Nemundo\\Process\\Content\\Data\\ContentStatus",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Content",
+                    "field_name": "content",
+                    "variable_name": "content",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": "external",
+                    "label": "Status",
+                    "field_name": "status",
+                    "variable_name": "status",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "content",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "content"
+                    ]
+                }
+            ]
         },
         {
             "template": "default",

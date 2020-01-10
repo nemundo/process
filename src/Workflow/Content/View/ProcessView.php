@@ -73,8 +73,7 @@ class ProcessView extends AbstractContentView
 
         } else {
 
-            //$formStatus = $this->process->startContentType;
-            $formStatus = $this->process;  //->startContentType;
+            $formStatus = $this->process;
             $workflowStatus = $formStatus;
             $workflowTitle = 'Neu';
 

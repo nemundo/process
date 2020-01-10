@@ -1,0 +1,108 @@
+{
+    "app": "Calendar",
+    "name": "calendar",
+    "namespace": "Nemundo\\Process\\App\\Calendar",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "20728c0e-77f7-408b-8a49-e5bfb5e3917d",
+            "label": "Calendar",
+            "class_name": "Calendar",
+            "table_name": "calendar_calendar",
+            "namespace": "Nemundo\\Process\\App\\Calendar\\Data\\Calendar",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": true,
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "770050e7-ff80-4df0-addf-0efdea460838",
+            "label": "Calendar Index",
+            "class_name": "CalendarIndex",
+            "table_name": "calendar_calendar_index",
+            "namespace": "Nemundo\\Process\\App\\Calendar\\Data\\CalendarIndex",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Content",
+                    "field_name": "content",
+                    "variable_name": "content",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": "date",
+                    "label": "Date",
+                    "field_name": "date",
+                    "variable_name": "date",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "text",
+                    "label": "Title",
+                    "field_name": "title",
+                    "variable_name": "title",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Place",
+                    "field_name": "place",
+                    "variable_name": "place",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "content",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "content"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
+            "model_id": "f2b014d9-0769-435f-894c-edf02e5d1bf7",
+            "label": "Calendar Source Type",
+            "class_name": "CalendarSourceType",
+            "table_name": "calendar_calendar_source_type",
+            "namespace": "Nemundo\\Process\\App\\Calendar\\Data\\CalendarSourceType",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Content Type",
+                    "field_name": "content_type",
+                    "variable_name": "contentType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "content_type",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "content_type"
+                    ]
+                }
+            ]
+        }
+    ]
+}

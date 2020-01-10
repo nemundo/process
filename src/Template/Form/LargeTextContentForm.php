@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Template\Form;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Type\Text\Html;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapLargeTextBox;
@@ -23,6 +24,11 @@ class LargeTextContentForm extends AbstractContentForm
 
     public function getContent()
     {
+
+        //(new Debug())->write($this->dataId);
+
+        $p=new Paragraph($this);
+        $p->content = 'dataid'.$this->dataId;
 
         $this->largeText = new BootstrapLargeTextBox($this);
         $this->largeText->label = 'Large Text';

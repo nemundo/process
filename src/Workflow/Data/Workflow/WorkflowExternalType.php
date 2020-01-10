@@ -139,7 +139,7 @@ $this->assignment = new \Nemundo\Workflow\App\Identification\Model\Identificatio
 $this->assignment->fieldName = "assignment";
 $this->assignment->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->assignment->aliasFieldName = $this->assignment->tableName . "_" . $this->assignment->fieldName;
-$this->assignment->label = "Assignment";
+$this->assignment->label = "Zuweisung";
 $this->assignment->createObject();
 $this->addType($this->assignment);
 
@@ -168,7 +168,7 @@ $this->groupAssignmentId = new \Nemundo\Model\Type\Id\IdType();
 $this->groupAssignmentId->fieldName = "group_assignment";
 $this->groupAssignmentId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->groupAssignmentId->aliasFieldName = $this->groupAssignmentId->tableName ."_".$this->groupAssignmentId->fieldName;
-$this->groupAssignmentId->label = "Group Assignment";
+$this->groupAssignmentId->label = "Zuweisung (Dev)";
 $this->addType($this->groupAssignmentId);
 
 }
@@ -211,7 +211,7 @@ $this->groupAssignment = new \Nemundo\Process\Group\Data\Group\GroupExternalType
 $this->groupAssignment->fieldName = "group_assignment";
 $this->groupAssignment->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->groupAssignment->aliasFieldName = $this->groupAssignment->tableName ."_".$this->groupAssignment->fieldName;
-$this->groupAssignment->label = "Group Assignment";
+$this->groupAssignment->label = "Zuweisung (Dev)";
 $this->addType($this->groupAssignment);
 }
 return $this;

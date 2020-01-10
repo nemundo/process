@@ -46,19 +46,38 @@ class GroupSite extends AbstractSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
+        /*
+        $table=new AdminTable($page);
+
+        $reader = new GroupReader();
+        $reader->model->loadGroupType();
+        foreach ($reader->getData() as $groupRow) {
+            $row=new TableRow($table);
+            $row->addText($groupRow->group);
+            $row->addText($groupRow->groupType->contentType);
+        }*/
+
+
+
+
         $layout = new BootstrapTwoColumnLayout($page);
+
+
+
+
 
         $search = new SearchForm($layout->col1);
 
         $listbox = new GroupListBox($search);  // new BootstrapListBox($search);
         //$listbox->name = (new GroupParameter())->getParameterName();
         $listbox->submitOnChange = true;
-        $listbox->searchItem = true;
+        $listbox->searchMode = true;
         $listbox->emptyValueAsDefault=false;
         /*$reader = new GroupReader();
         foreach ($reader->getData() as $groupRow) {
             $listbox->addItem($groupRow->id, $groupRow->group);
         }*/
+
 
 
         $groupParameter=new GroupParameter();
@@ -93,6 +112,7 @@ class GroupSite extends AbstractSite
         }
 
 
+        /*
         $form = new GroupContentForm($layout->col2);
 
 
@@ -111,7 +131,7 @@ class GroupSite extends AbstractSite
             $row->addText($groupRow->group);
             $row->addText($groupRow->groupType->groupType);
         }
-
+*/
 
 
 

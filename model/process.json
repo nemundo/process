@@ -55,6 +55,29 @@
         },
         {
             "template": "default",
+            "model_id": "057db5b5-b605-449b-8376-ed3c801170e2",
+            "label": "Process Status",
+            "class_name": "ProcessStatus",
+            "table_name": "process_process_status",
+            "namespace": "Nemundo\\Process\\Workflow\\Data\\ProcessStatus",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": true,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Content",
+                    "field_name": "content",
+                    "variable_name": "content",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "4b566756-7db2-4fd8-ade5-5df5a8877d8f",
             "label": "Status",
             "class_name": "Status",
@@ -159,7 +182,7 @@
                 },
                 {
                     "type": null,
-                    "label": "Assignment",
+                    "label": "Zuweisung",
                     "field_name": "assignment",
                     "variable_name": "assignment",
                     "allow_null": false,
@@ -191,7 +214,7 @@
                 },
                 {
                     "type": "external",
-                    "label": "Group Assignment",
+                    "label": "Zuweisung (Dev)",
                     "field_name": "group_assignment",
                     "variable_name": "groupAssignment",
                     "allow_null": false,

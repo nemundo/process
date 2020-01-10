@@ -6,6 +6,7 @@ namespace Nemundo\Process\App\Survey\Content\Form;
 
 use Nemundo\Core\Random\UniqueId;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
+use Nemundo\Process\App\Survey\Content\Type\ErfassungContentType;
 use Nemundo\Process\App\Survey\Data\Survey\Survey;
 use Nemundo\Process\App\Survey\Data\Survey\SurveyReader;
 use Nemundo\Process\Content\Form\AbstractContentForm;
@@ -49,6 +50,16 @@ class SurveyErfassungContentForm extends AbstractSequenceForm
     {
         // TODO: Implement onSubmit() method.
 
+
+        $type=new ErfassungContentType();
+        //$type->parentId=$this->parentId;
+        $type->firstName=$this->firstName->getValue();
+        $type->saveType();
+
+
+
+
+        /*
 if ($this->dataId == null) {
         $this->dataId = (new UniqueId())->getUniqueId();
 }
@@ -57,9 +68,9 @@ if ($this->dataId == null) {
         $data->updateOnDuplicate=true;
         $data->id=$this->dataId;  //   $dataId;
         $data->vorname = $this->firstName->getValue();
-        $data->save();
+        $data->save();*/
 
-        $this->redirectSite->addParameter(new SequenceDataIdParameter($this->dataId));
+        $this->redirectSite->addParameter(new SequenceDataIdParameter( $type->parentId));
 
 
     }

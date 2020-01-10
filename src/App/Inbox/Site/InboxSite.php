@@ -32,7 +32,7 @@ class InboxSite extends AbstractSite
         $form = new SearchForm($page);
 
         $userListbox = new UserListBox($form);
-        $userListbox->searchItem = true;
+        $userListbox->searchMode = true;
         $userListbox->submitOnChange = true;
 
         $layout = new BootstrapTwoColumnLayout($page);

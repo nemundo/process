@@ -147,7 +147,7 @@ $this->assignment = new \Nemundo\Workflow\App\Identification\Model\Identificatio
 $this->assignment->tableName = "process_workflow";
 $this->assignment->fieldName = "assignment";
 $this->assignment->aliasFieldName = "process_workflow_assignment";
-$this->assignment->label = "Assignment";
+$this->assignment->label = "Zuweisung";
 $this->assignment->allowNullValue = false;
 
 $this->deadline = new \Nemundo\Model\Type\DateTime\DateType($this);
@@ -175,7 +175,7 @@ $this->groupAssignmentId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdT
 $this->groupAssignmentId->tableName = "process_workflow";
 $this->groupAssignmentId->fieldName = "group_assignment";
 $this->groupAssignmentId->aliasFieldName = "process_workflow_group_assignment";
-$this->groupAssignmentId->label = "Group Assignment";
+$this->groupAssignmentId->label = "Zuweisung (Dev)";
 $this->groupAssignmentId->allowNullValue = false;
 
 $index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
@@ -219,7 +219,7 @@ $this->groupAssignment = new \Nemundo\Process\Group\Data\Group\GroupExternalType
 $this->groupAssignment->tableName = "process_workflow";
 $this->groupAssignment->fieldName = "group_assignment";
 $this->groupAssignment->aliasFieldName = "process_workflow_group_assignment";
-$this->groupAssignment->label = "Group Assignment";
+$this->groupAssignment->label = "Zuweisung (Dev)";
 }
 return $this;
 }

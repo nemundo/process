@@ -7,7 +7,7 @@ namespace Nemundo\Process\Template\Content\User;
 use App\Usergroup\AppUsergroup;
 use Nemundo\Process\Content\Item\AbstractContentItem;
 use Nemundo\Process\Group\Data\GroupUser\GroupUser;
-use Nemundo\Process\Group\Type\AbstractGroup;
+use Nemundo\Process\Group\Type\AbstractGroupContentType;
 use Nemundo\User\Data\User\UserReader;
 use Nemundo\User\Type\UserBuilder;
 
@@ -47,13 +47,13 @@ class UserContentItem extends AbstractContentItem
     }
 
 
-    public function addGroup(AbstractGroup $group)
+    public function addGroup(AbstractGroupContentType $group)
     {
 
 
         $data = new GroupUser();
         $data->ignoreIfExists = true;
-        $data->groupId = $group->id;
+        $data->groupId = $group->contentId;
         $data->userId = $this->dataId;
         $data->save();
 
