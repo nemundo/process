@@ -34,6 +34,7 @@ class GroupListBox extends BootstrapListBox
 
         $reader = new GroupReader();
         $reader->filter->andEqual($reader->model->groupTypeId, (new MitarbeiterContentType())->contentId);
+        $reader->addOrder($reader->model->group);
         foreach ($reader->getData() as $groupRow) {
             $this->addItem($groupRow->id, $groupRow->group);
         }

@@ -120,6 +120,26 @@ trait ContentTreeTrait
     }
 
 
+    public function getParentId() {
+
+        $parentId=null;
+
+        $reader = new TreeReader();
+        //$reader->model->loadParent();
+        //$reader->model->parent->loadContentType();
+        $reader->filter->andEqual($reader->model->childId, $this->dataId);
+
+        foreach ($reader->getData() as $treeRow) {
+            //$doc[] = $treeRow->parent;
+$parentId = $treeRow->parentId;
+        }
+
+        // warning if more than one parent!!!
+
+        return $parentId;
+
+    }
+
 
     public function getParentContent()
     {

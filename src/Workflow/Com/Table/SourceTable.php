@@ -19,22 +19,28 @@ class SourceTable extends AbstractParentContainer
     public function getContent()
     {
 
-        $table = new AdminClickableTable($this);
+        $workflowProcess = new WorkflowProcess($this->parentId);
 
-        $header = new TableHeader($table);
-        $header->addText('Quelle');
-        $header->addText('Type');
+        if ($workflowProcess->getParentCount() > 0) {
 
-        foreach ((new WorkflowProcess($this->parentId))->getParentContent() as $contentRow) {
+            $table = new AdminClickableTable($this);
 
-            $row = new BootstrapClickableTableRow($table);
+            $header = new TableHeader($table);
+            $header->addText('Quelle');
+            $header->addText('Type');
 
-            $contentType = $contentRow->getContentType();
-            $row->addText($contentType->getSubject());
+            foreach ($workflowProcess->getParentContent() as $contentRow) {
 
-            $row->addText($contentRow->contentType->contentType);
+                $row = new BootstrapClickableTableRow($table);
 
-            $row->addClickableSite($contentType->getViewSite());
+                $contentType = $contentRow->getContentType();
+                $row->addText($contentType->getSubject());
+
+                $row->addText($contentRow->contentType->contentType);
+
+                $row->addClickableSite($contentType->getViewSite());
+
+            }
 
         }
 
