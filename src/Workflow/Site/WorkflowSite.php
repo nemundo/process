@@ -4,9 +4,6 @@
 namespace Nemundo\Process\Workflow\Site;
 
 
-use App\App\Group\Item\GroupItem;
-use App\App\IssueTracker\Workflow\Process\IssueTrackerProcess;
-use App\App\Journey\Content\Process\JourneyProcess;
 use Nemundo\Admin\Com\Navigation\AdminNavigation;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\TableBuilder\TableHeader;
@@ -71,7 +68,7 @@ $dropdown->redirectSite = WorkflowNewSite::$site;
         $processReader->addOrder($processReader->model->contentType->contentType);
         foreach ($processReader->getData() as $processRow) {
             $site = clone(WorkflowNewSite::$site);
-            $site->title = $processRow->getProcess()->contentLabel;
+            $site->title = $processRow->getProcess()->typeLabel;
             $site->addParameter(new ProcessParameter($processRow->contentTypeId));
 
             $dropdown->addSite($site);
@@ -141,6 +138,7 @@ $dropdown->redirectSite = WorkflowNewSite::$site;
 
             $row->addText($workflowRow->groupAssignment->group);
 
+            /*
             if ($workflowRow->groupAssignmentId!=='') {
 
 //            $item=new GroupContentItem($workflowRow->groupAssignmentId);
@@ -149,7 +147,7 @@ $dropdown->redirectSite = WorkflowNewSite::$site;
                 $type->getView($row);
 
 
-            }
+            }*/
 
             $row->addText($workflowRow->status->contentType);
             $row->addText($workflowRow->user->displayName);

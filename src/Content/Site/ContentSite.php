@@ -5,6 +5,7 @@ namespace Nemundo\Process\Content\Site;
 
 
 use Nemundo\Admin\Com\Button\AdminSiteButton;
+use Nemundo\Admin\Com\Navigation\AdminNavigation;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Com\FormBuilder\SearchForm;
@@ -21,17 +22,25 @@ use Nemundo\Process\Content\Com\ListBox\ContentTypeListBox;
 use Nemundo\Process\Content\Data\Content\ContentCount;
 use Nemundo\Process\Content\Data\Content\ContentModel;
 use Nemundo\Process\Content\Data\Content\ContentPaginationReader;
+use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Content\Parameter\DataIdParameter;
+use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Web\Site\AbstractSite;
 
 class ContentSite extends AbstractSite
 {
 
+    /**
+     * @var ContentSite
+     */
+    public static $site;
+
     protected function loadSite()
     {
         $this->title = 'Content';
         $this->url = 'content';
+
+        ContentSite::$site=$this;
 
         new ContentItemSite($this);
         new ContentNewSite($this);
@@ -44,6 +53,10 @@ class ContentSite extends AbstractSite
 
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
+
+
+        $nav = new AdminNavigation($page);
+        $nav->site=ContentSite::$site;
 
 
         $form = new SearchForm($page);
@@ -101,7 +114,10 @@ class ContentSite extends AbstractSite
         $table = new AdminClickableTable($page);
 
         $header = new TableHeader($table);
-        $header->addText('Content Type');
+        $header->addText('ID');
+        $header->addText('Type');
+        $header->addText('Class');
+
         $header->addText('Data Id');
         $header->addText('Subject (Db Content)');
         $header->addText('Subject (Item)');
@@ -114,15 +130,17 @@ class ContentSite extends AbstractSite
 
             if (class_exists($contentRow->contentType->phpClass)) {
 
-                $contentType = $contentRow->contentType->getContentType($contentRow->id);
+
+                $contentType = $contentRow->getContentType();  // contentType->getContentType($contentRow->id);
 
 
                 $row = new BootstrapClickableTableRow($table);
                 //$row->addText($contentRow->contentType->phpClass);
+                $row->addText($contentRow->id);
                 $row->addText($contentRow->contentType->contentType);
                 $row->addText($contentType->getClassName());
 
-                $row->addText($contentRow->id);
+                $row->addText($contentRow->dataId);
 
                 $row->addText($contentRow->subject);
 
@@ -140,16 +158,18 @@ class ContentSite extends AbstractSite
                 //$row->addText($contentType->getSubject($contentRow->id));
 
 
-                $row->addText($contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
+                $row->addText($contentRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
                 $row->addText($contentRow->user->login);
 
 
-                $site = ContentDeleteSite::$site;
-                $site->addParameter(new DataIdParameter($contentRow->id));
+                $site = clone(ContentDeleteSite::$site);
+                $site->addParameter(new ContentParameter($contentRow->id));
                 $row->addIconSite($site);
 
                 $site = clone(ContentItemSite::$site);
-                $site->addParameter(new DataIdParameter($contentRow->id));
+                $site->addParameter(new ContentParameter($contentRow->id));
+
+//                $site->addParameter(new DataParameter($contentRow->id));
                 $row->addClickableSite($site);
 
             } else {

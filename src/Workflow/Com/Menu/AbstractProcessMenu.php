@@ -114,7 +114,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
 
         if ($this->workflowExist && !$this->workflowClosed) {
 
-            if ($this->nextStatus->contentId == $status->contentId) {
+            if ($this->nextStatus->typeId == $status->typeId) {
 
                 $this->addSubmenuWithoutCheck($this->workflowStatus);
 
@@ -132,11 +132,11 @@ class AbstractProcessMenu extends AbstractHtmlContainer
             foreach ($status->getMenuList() as $menuStatus) {
 
                 $row = new TableRow($this->table);
-                if ($this->formStatus->contentId == $menuStatus->contentId) {
+                if ($this->formStatus->typeId == $menuStatus->typeId) {
                     new ArrowRightIcon($row);
 
                     $bold = new Bold($row);
-                    $bold->content = $menuStatus->contentLabel;
+                    $bold->content = $menuStatus->typeLabel;
                     $bold->addCssClass('ml-3');
 
 
@@ -144,8 +144,8 @@ class AbstractProcessMenu extends AbstractHtmlContainer
                     $row->addEmpty();
 
                     $site = clone($this->site);
-                    $site->addParameter(new StatusParameter($menuStatus->contentId));
-                    $site->title = $menuStatus->contentLabel;
+                    $site->addParameter(new StatusParameter($menuStatus->typeId));
+                    $site->title = $menuStatus->typeLabel;
 
                     $hyperlink = new SiteHyperlink($row);
                     $hyperlink->site = $site;
@@ -182,16 +182,16 @@ class AbstractProcessMenu extends AbstractHtmlContainer
 
             if ($this->nextStatus !== null) {
 
-                if ($this->nextStatus->contentId == $status->contentId) {
+                if ($this->nextStatus->typeId == $status->typeId) {
 
-                    if ($this->formStatus->contentId == $status->contentId) {
+                    if ($this->formStatus->typeId == $status->typeId) {
 
                         $row = new TableRow($this->table);
 
                         new ArrowRightIcon($row);
 
                         $bold = new Bold($row);
-                        $bold->content = $status->contentLabel;
+                        $bold->content = $status->typeLabel;
 
                     } else {
 
@@ -199,8 +199,8 @@ class AbstractProcessMenu extends AbstractHtmlContainer
                         $row->addEmpty();
 
                         $site = clone($this->site);
-                        $site->addParameter(new StatusParameter($status->contentId));
-                        $site->title = $status->contentLabel;
+                        $site->addParameter(new StatusParameter($status->typeId));
+                        $site->title = $status->typeLabel;
 
                         $hyperlink = new SiteHyperlink($row);
                         $hyperlink->site = $site;
@@ -223,7 +223,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
             if (!$this->menuFound) {
                 $row = new TableRow($this->table);
                 new CheckIcon($row);
-                $row->addText($status->contentLabel);
+                $row->addText($status->typeLabel);
                 $row->addEmpty();
 
                 $this->menuFound = true;
@@ -245,8 +245,8 @@ class AbstractProcessMenu extends AbstractHtmlContainer
                 new CheckIcon($row);
 
                 $site = clone($this->site);
-                $site->addParameter(new StatusParameter($status->contentId));
-                $site->title = $status->contentLabel;
+                $site->addParameter(new StatusParameter($status->typeId));
+                $site->title = $status->typeLabel;
 
                 $hyperlink = new SiteHyperlink($row);
                 $hyperlink->site = $site;
@@ -270,7 +270,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
 
                 $row = new TableRow($this->table);
                 new ArrowRightIcon($row);
-                $row->addText($status->contentLabel);
+                $row->addText($status->typeLabel);
                 $row->addEmpty();
 
                 $this->menuFound = true;
@@ -290,7 +290,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
 
                 $row = new TableRow($this->table);
                 $row->addEmpty();
-                $row->addText($status->contentLabel);
+                $row->addText($status->typeLabel);
                 $row->addEmpty();
                 $this->menuFound = true;
             }

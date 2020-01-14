@@ -26,17 +26,17 @@ class SearchIndexBuilder extends AbstractBase
     /**
      * @var string
      */
-    public $dataId;
+    public $contentId;
 
     private $wordList = [];
     private $indexList = [];
 
 
-    public function __construct($dataId=null)
+    public function __construct($contentId=null)
     {
 
-        if ($dataId!==null) {
-        $this->dataId=$dataId;
+        if ($contentId!==null) {
+        $this->contentId=$contentId;
         }
 
     }
@@ -96,7 +96,7 @@ class SearchIndexBuilder extends AbstractBase
 
 
         $delete = new SearchIndexDelete();
-        $delete->filter->andEqual($delete->model->contentId,$this->dataId);
+        $delete->filter->andEqual($delete->model->contentId,$this->contentId);
         $delete->delete();
 
         // delete existing
@@ -123,7 +123,7 @@ $contentId=$id->getId();
 
             //$data->updateOnDuplicate = true;
             $data->ignoreIfExists = true;
-            $data->contentId = $this->dataId;
+            $data->contentId = $this->contentId;
             $data->wordId = $wordId;
             //$data->typeValueList->setModelValue($indexModel->relevance, $relevance);
             $data->save();
@@ -140,7 +140,7 @@ $contentId=$id->getId();
     {
 
 
-        if ($this->dataId == null) {
+        if ($this->contentId == null) {
             (new LogMessage())->writeError('No Data Id');
             exit;
         }
@@ -152,12 +152,12 @@ $contentId=$id->getId();
             $documentModel = new DocumentModel($searchEngine);
 
 
-            $dataIdTmp = $this->dataId;
+            $dataIdTmp = $this->contentId;
             if ($searchEngine->sourceMode) {
 
                 $id = new ModelId();
                 $id->model = $documentModel;
-                $id->filter->andEqual($id->model->dataId, $this->dataId);
+                $id->filter->andEqual($id->model->dataId, $this->contentId);
                 $dataIdTmp = $id->getId();
 
             }
@@ -193,7 +193,7 @@ $contentId=$id->getId();
                 $delete = new ModelDelete();
                 $delete->model = $documentModel;
                 $delete->filter->andEqual($delete->model->sourceId, $this->searchSource->sourceId);
-                $delete->filter->andEqual($delete->model->dataId, $this->dataId);
+                $delete->filter->andEqual($delete->model->dataId, $this->contentId);
                 $delete->delete();
 
             }

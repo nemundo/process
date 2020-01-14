@@ -5,6 +5,7 @@ namespace Nemundo\Process\Site;
 
 
 use Nemundo\Process\App\Calendar\Site\CalendarSite;
+use Nemundo\Process\App\Document\Site\DocumentSite;
 use Nemundo\Process\App\Explorer\Site\ExplorerSite;
 use Nemundo\Process\App\Favorite\Site\FavoriteSite;
 use Nemundo\Process\App\Inbox\Site\InboxSite;
@@ -14,6 +15,7 @@ use Nemundo\Process\Content\Site\ContentTypeSite;
 use Nemundo\Process\Content\Site\TreeSite;
 use Nemundo\Process\Geo\Site\GeoSite;
 use Nemundo\Process\Group\Site\GroupSite;
+use Nemundo\Process\Search\Site\SearchLogSite;
 use Nemundo\Process\Search\Site\SearchSite;
 use Nemundo\Process\Template\Site\ProcessTemplateSite;
 use Nemundo\Process\Workflow\Site\AssignmentSite;
@@ -62,6 +64,9 @@ new CalendarSite($this);
 
 new AssignmentSite($this);
 new ExplorerSite($this);
+
+new SearchLogSite($this);
+new DocumentSite($this);
 
     }
 

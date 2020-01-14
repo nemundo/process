@@ -13,14 +13,11 @@ use Nemundo\Html\Block\Hr;
 use Nemundo\Package\Bootstrap\Layout\BootstrapThreeColumnLayout;
 use Nemundo\Package\Bootstrap\Listing\BootstrapHyperlinkList;
 use Nemundo\Process\App\Wiki\Content\WikiPageContentForm;
-use Nemundo\Process\App\Wiki\Content\WikiPageContentItem;
 use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
-use Nemundo\Process\App\Wiki\Content\WikiSubject;
 use Nemundo\Process\App\Wiki\Data\Wiki\WikiReader;
 use Nemundo\Process\App\Wiki\Data\WikiType\WikiTypeReader;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\Content\Com\Dropdown\ContentTypeDropdown;
-use Nemundo\Process\Content\Com\Form\AddContentForm;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Web\Site\AbstractSite;
@@ -85,6 +82,9 @@ class WikiSite extends AbstractSite
             $wikiId = $wikiParameter->getValue();
             $wikiType = new WikiPageContentType($wikiId);
 
+            $wikiType->getForm($layout->col2);
+
+
             $title = new AdminTitle($layout->col2);
             $title->content = $wikiType->getSubject();
 
@@ -114,7 +114,7 @@ class WikiSite extends AbstractSite
                 //(new ContentTypeReader())->getRowById($contentTypeParameter->getValue())->getContentType();
 
                 $form = $contentType->getForm($layout->col2);
-                $form->parentId = $wikiId;
+                $form->parentId = $wikiType->getContentId();  // $wikiId;
                 $form->redirectSite = WikiSite::$site;
                 $form->redirectSite->addParameter(new WikiParameter());
 

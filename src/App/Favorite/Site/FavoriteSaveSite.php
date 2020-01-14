@@ -3,7 +3,7 @@
 namespace Nemundo\Process\App\Favorite\Site;
 
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Content\Parameter\DataIdParameter;
+use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\User\Type\UserSessionType;
 use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Web\Url\UrlReferer;
@@ -37,7 +37,7 @@ class FavoriteSaveSite extends AbstractSite
     {
 
         $data = new Favorite();
-        $data->contentId = (new DataIdParameter())->getValue();
+        $data->contentId = (new DataParameter())->getValue();
 
         //$data->dataId = (new DataIdParameter())->getValue();
         $data->userId = (new UserSessionType())->userId;

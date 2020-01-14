@@ -16,7 +16,7 @@ $this->tableName = "wiki_wiki";
 $this->aliasTableName = "wiki_wiki";
 $this->label = "Wiki";
 
-$this->primaryIndex = new \Nemundo\Db\Index\TextIdPrimaryIndex();
+$this->primaryIndex = new \Nemundo\Db\Index\UniqueIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
 $this->id->tableName = "wiki_wiki";

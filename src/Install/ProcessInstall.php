@@ -6,6 +6,8 @@ namespace Nemundo\Process\Install;
 use Nemundo\App\Script\Setup\ScriptSetup;
 use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\App\Calendar\Data\CalendarCollection;
+use Nemundo\Process\App\Document\Data\DocumentCollection;
+use Nemundo\Process\App\Favorite\Install\FavoriteInstall;
 use Nemundo\Process\App\Inbox\Install\InboxInstall;
 use Nemundo\Process\App\News\Data\NewsCollection;
 use Nemundo\Process\App\News\Type\NewsContentType;
@@ -25,6 +27,7 @@ use Nemundo\Process\Group\Type\UserGroupType;
 use Nemundo\Process\Script\ProcessCleanScript;
 use Nemundo\Process\Script\ProcessTestScript;
 use Nemundo\Process\Search\Data\SearchCollection;
+use Nemundo\Process\Search\Install\SearchInstall;
 use Nemundo\Process\Template\Install\TemplateInstall;
 use Nemundo\Process\Workflow\Install\WorkflowInstall;
 use Nemundo\Project\Install\AbstractInstall;
@@ -38,11 +41,15 @@ class ProcessInstall extends AbstractInstall
 
 
         (new ContentInstall())->install();
+        (new SearchInstall())->install();
+
         (new WorkflowInstall())->install();
         (new InboxInstall())->install();
         (new WikiInstall())->install();
         (new TemplateInstall())->install();
-        //(new FavoriteInstall())->install();
+        (new FavoriteInstall())->install();
+
+
 
         //(new ToDoInstall())->install();
 
@@ -57,6 +64,7 @@ class ProcessInstall extends AbstractInstall
         $setup->addCollection(new SurveyCollection());
         $setup->addCollection(new NewsCollection());
         $setup->addCollection(new CalendarCollection());
+        $setup->addCollection(new DocumentCollection());
 
         $setup = new ScriptSetup();
         $setup->addScript(new ProcessCleanScript());

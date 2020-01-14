@@ -5,7 +5,7 @@ namespace Nemundo\Process\App\Favorite\Com;
 
 use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Content\Parameter\DataIdParameter;
+use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Html\Paragraph\Paragraph;
@@ -46,7 +46,7 @@ class FavoriteButton extends AbstractHtmlContainer
             $button = new AdminSiteButton($this);
             $button->content = $this->label;
             $button->site = FavoriteSaveSite::$site;
-            $button->site->addParameter(new DataIdParameter($this->dataId));
+            $button->site->addParameter(new DataParameter($this->dataId));
             //$button->site->addParameter(new ContentTypeParameter($this->contentType->id));
 
         } else {
@@ -57,7 +57,7 @@ class FavoriteButton extends AbstractHtmlContainer
             $button->content = 'Favorit löschen';
             $button->site = FavoriteDeleteSite::$site;
             //$button->site->addParameter(new SubscriptionParameter())
-            $button->site->addParameter(new DataIdParameter($this->dataId));
+            $button->site->addParameter(new DataParameter($this->dataId));
             //$button->site->addParameter(new ContentTypeParameter($this->contentType->id));
 
         }

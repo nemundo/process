@@ -25,7 +25,7 @@ class HistoryProcessMenu extends AbstractProcessMenu
             /** @var AbstractProcessStatus $contentType */
             $contentType = $contentRow->contentType->getContentType();
 
-            $row->addText($contentType->contentLabel);
+            $row->addText($contentType->typeLabel);
 
             $text = $contentRow->userCreated->displayName . ' ' . $contentRow->dateTimeCreated->getShortDateFormat();
             $row->addText($text);

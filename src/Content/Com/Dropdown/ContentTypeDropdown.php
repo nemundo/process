@@ -8,6 +8,7 @@ use Nemundo\Package\Bootstrap\Dropdown\BootstrapSiteDropdown;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Web\Site\AbstractSite;
+use Nemundo\Web\Site\Site;
 
 class ContentTypeDropdown extends BootstrapSiteDropdown
 {
@@ -36,11 +37,15 @@ class ContentTypeDropdown extends BootstrapSiteDropdown
     public function getContent()
     {
 
+        if ($this->redirectSite == null) {
+            $this->redirectSite = new Site();
+        }
+
         foreach ($this->contentTypeList as $contentType) {
 
             $site = clone($this->redirectSite);
-            $site->addParameter(new ContentTypeParameter($contentType->contentId));
-            $site->title = $contentType->contentLabel;  //getClassNameWithoutNamespace();
+            $site->addParameter(new ContentTypeParameter($contentType->typeId));
+            $site->title = $contentType->typeLabel;  //getClassNameWithoutNamespace();
             $this->addSite($site);
 
         }

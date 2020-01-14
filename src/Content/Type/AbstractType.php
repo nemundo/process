@@ -5,6 +5,7 @@ namespace Nemundo\Process\Content\Type;
 
 
 use Nemundo\Core\Base\AbstractBaseClass;
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Random\UniqueId;
 use Nemundo\Html\Container\AbstractHtmlContainer;
@@ -43,11 +44,13 @@ abstract class AbstractType extends AbstractBaseClass
     {
 
         if ($dataId == null) {
-            $this->dataId = (new UniqueId())->getUniqueId();
+            //$this->dataId = (new UniqueId())->getUniqueId();
         } else {
             $this->dataId = $dataId;
             $this->createMode = false;
         }
+
+        //(new Debug())->write($this->createMode);
 
         $this->onLoad();
 
@@ -143,9 +146,8 @@ abstract class AbstractType extends AbstractBaseClass
 
             /** @var AbstractContentView $view */
             $view = new $this->viewClass($parent);
-            //$view->contentType = $this;
             $view->dataId = $this->dataId;
-
+$view->contentType=$this;
 
         } else {
             (new LogMessage())->writeError('No View Class. Class: ' . $this->getClassName());

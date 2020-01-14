@@ -14,8 +14,8 @@ class EventAddContentType extends AbstractTreeContentType
 
     protected function loadContentType()
     {
-    $this->contentLabel ='Add Event';
-    $this->contentId='e1d1b8ea-2607-4b20-9047-855127281454';
+    $this->typeLabel ='Add Event';
+    $this->typeId='e1d1b8ea-2607-4b20-9047-855127281454';
     $this->formClass=EventAddForm::class;
     }
 

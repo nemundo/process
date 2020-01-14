@@ -7,7 +7,7 @@ class FavoriteModel extends \Nemundo\Model\Definition\Model\AbstractModel {
 public $id;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalIdType
 */
 public $contentId;
 
@@ -44,7 +44,7 @@ $this->id->visible->table = false;
 $this->id->visible->view = false;
 $this->id->visible->form = false;
 
-$this->contentId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->contentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->contentId->tableName = "favorite_favorite";
 $this->contentId->fieldName = "content";
 $this->contentId->aliasFieldName = "favorite_favorite_content";

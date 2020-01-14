@@ -19,8 +19,8 @@ abstract class AbstractCancelStatus extends AbstractProcessStatus
     public function __construct()
     {
 
-        $this->contentLabel[LanguageCode::EN] = 'Cancel';
-        $this->contentLabel[LanguageCode::DE] = 'Abbruch';
+        $this->typeLabel[LanguageCode::EN] = 'Cancel';
+        $this->typeLabel[LanguageCode::DE] = 'Abbruch';
 
         //$this->id='510c9d20-74cc-43b6-82d3-d6a6df487813';
 

@@ -114,7 +114,7 @@ abstract class AbstractWorkflowItem extends AbstractContentItem
 
 
 
-        $processId = $this->contentType->contentId;
+        $processId = $this->contentType->typeId;
 
         if ($this->number == null) {
             $value = new WorkflowValue();
@@ -134,7 +134,7 @@ abstract class AbstractWorkflowItem extends AbstractContentItem
         $id->filter->andEqual($id->model->contentTypeId, $this->contentType->startStatus->id);
         $stausId = $id->getId();*/
 
-        $stausId = $this->contentType->startContentType->contentId;
+        $stausId = $this->contentType->startContentType->typeId;
 
         $data = new Workflow();
         $data->id = $this->dataId;
@@ -220,7 +220,7 @@ abstract class AbstractWorkflowItem extends AbstractContentItem
     {
 
         $update = new WorkflowUpdate();
-        $update->statusId = $status->contentId;
+        $update->statusId = $status->typeId;
         $update->updateById($this->dataId);
 
     }

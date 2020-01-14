@@ -60,10 +60,10 @@ class NextMenu extends AbstractHtmlContainer
 
             $row = new TableRow($this->table);
 
-            if ($status->contentId == $this->currentContentType->contentId) {
-                $row->addBoldText($status->contentLabel);
+            if ($status->typeId == $this->currentContentType->typeId) {
+                $row->addBoldText($status->typeLabel);
             } else {
-                $row->addText($status->contentLabel);
+                $row->addText($status->typeLabel);
             }
 
             //$this->addStatusLabel($status);

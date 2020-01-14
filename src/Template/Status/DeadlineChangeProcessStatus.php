@@ -26,9 +26,9 @@ class DeadlineChangeProcessStatus extends AbstractProcessStatus
     protected function loadContentType()
     {
 
-        $this->contentLabel[LanguageCode::EN] = 'Deadline Change';
-        $this->contentLabel[LanguageCode::DE] = 'Termverschiebung';
-        $this->contentId = 'cd3ade01-3ef1-452f-8a45-dce792547220';
+        $this->typeLabel[LanguageCode::EN] = 'Deadline Change';
+        $this->typeLabel[LanguageCode::DE] = 'Termverschiebung';
+        $this->typeId = 'cd3ade01-3ef1-452f-8a45-dce792547220';
         $this->changeStatus = false;
 
         $this->formClass = DeadlineChangeForm::class;

@@ -12,8 +12,8 @@ class DescriptionContentType extends AbstractMenuContentType
 
     protected function loadContentType()
     {
-        $this->contentLabel='Description';
-    $this->contentId='b977c350-a3a8-4279-b1c2-6d234fc749f7';
+        $this->typeLabel='Description';
+    $this->typeId='b977c350-a3a8-4279-b1c2-6d234fc749f7';
     $this->formClass=DescriptionContentForm::class;
         // TODO: Implement loadContentType() method.
 

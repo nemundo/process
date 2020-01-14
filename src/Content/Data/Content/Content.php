@@ -9,7 +9,7 @@ protected $model;
 /**
 * @var string
 */
-public $id;
+public $dataId;
 
 /**
 * @var string
@@ -42,8 +42,7 @@ $this->model = new ContentModel();
 $this->dateTime = new \Nemundo\Core\Type\DateTime\DateTime();
 }
 public function save() {
-$id = $this->id;
-$this->typeValueList->setModelValue($this->model->id, $id);
+$this->typeValueList->setModelValue($this->model->dataId, $this->dataId);
 $this->typeValueList->setModelValue($this->model->subject, $this->subject);
 $this->typeValueList->setModelValue($this->model->text, $this->text);
 $property = new \Nemundo\Model\Data\Property\DateTime\DateTimeDataProperty($this->model->dateTime, $this->typeValueList);

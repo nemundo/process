@@ -1,0 +1,39 @@
+{
+    "app": "Document",
+    "name": "document",
+    "namespace": "Nemundo\\Process\\App\\Document",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "c8a16902-873b-4517-bd00-5bb8c07e5e82",
+            "label": "Document Type",
+            "class_name": "DocumentType",
+            "table_name": "document_document_type",
+            "namespace": "Nemundo\\Process\\App\\Document\\Data\\DocumentType",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Content Type",
+                    "field_name": "content_type",
+                    "variable_name": "contentType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "content_type",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "content_type"
+                    ]
+                }
+            ]
+        }
+    ]
+}

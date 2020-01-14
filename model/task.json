@@ -1,0 +1,6 @@
+{
+    "app": "Task",
+    "name": "task",
+    "namespace": "Nemundo\\Process\\App\\Task",
+    "is_deleted": false
+}

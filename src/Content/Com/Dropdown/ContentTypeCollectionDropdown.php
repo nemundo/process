@@ -33,8 +33,8 @@ class ContentTypeCollectionDropdown extends BootstrapSiteDropdown
         foreach ($this->contentTypeCollection->getContentTypeList() as $contentType) {
 
             $site = clone($this->redirectSite);
-            $site->addParameter(new ContentTypeParameter($contentType->contentId));
-            $site->title = $contentType->contentLabel;  //getClassNameWithoutNamespace();
+            $site->addParameter(new ContentTypeParameter($contentType->typeId));
+            $site->title = $contentType->typeLabel;  //getClassNameWithoutNamespace();
             $this->addSite($site);
 
         }

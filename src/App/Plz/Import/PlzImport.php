@@ -31,17 +31,17 @@ class PlzImport extends AbstractBase
         // PLZ;ORT;Kanton;Longitude;Latitude
 
         $csvReader = new CsvReader();
-        $csvReader->filename = (new TmpPath())->addPath('plz_text.txt')->getFilename();
+        $csvReader->filename = (new TmpPath())->addPath('politische-gemeinden_v2.csv')->getFilename();
         $csvReader->utf8Encode = true;
         foreach ($csvReader->getData() as $csvRow) {
 
-            (new Debug())->write($csvRow->getValue('ORT'));
+            //(new Debug())->write($csvRow->getValue('ORT'));
 
             $item = new PlzContentItem();
-            $item->ort = $csvRow->getValue('ORT');
-            $item->plz = $csvRow->getValue('PLZ');
-            $item->coordinate->latitude = $csvRow->getValue('Latitude');
-            $item->coordinate->longitude = $csvRow->getValue('Longitude');
+            $item->ort = $csvRow->getValue('gemeindename');
+            $item->plz = $csvRow->getValue('bfsnr');
+            //$item->coordinate->latitude = $csvRow->getValue('Latitude');
+            //$item->coordinate->longitude = $csvRow->getValue('Longitude');
             $item->saveItem();
 
 

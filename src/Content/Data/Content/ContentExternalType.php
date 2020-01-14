@@ -9,6 +9,11 @@ public $id;
 /**
 * @var \Nemundo\Model\Type\Text\TextType
 */
+public $dataId;
+
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
 public $subject;
 
 /**
@@ -44,7 +49,7 @@ public $contentType;
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = ContentModel::class;
-$this->externalTableName = "content2_content";
+$this->externalTableName = "process_content";
 $this->aliasTableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id = new \Nemundo\Model\Type\Id\IdType();
 $this->id->fieldName = "id";
@@ -52,6 +57,13 @@ $this->id->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id->aliasFieldName = $this->id->tableName . "_" . $this->id->fieldName;
 $this->id->label = "Id";
 $this->addType($this->id);
+
+$this->dataId = new \Nemundo\Model\Type\Text\TextType();
+$this->dataId->fieldName = "data_id";
+$this->dataId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->dataId->aliasFieldName = $this->dataId->tableName . "_" . $this->dataId->fieldName;
+$this->dataId->label = "Data Id";
+$this->addType($this->dataId);
 
 $this->subject = new \Nemundo\Model\Type\Text\TextType();
 $this->subject->fieldName = "subject";

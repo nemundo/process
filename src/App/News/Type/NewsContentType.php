@@ -17,7 +17,7 @@ class NewsContentType extends AbstractContentType
     protected function loadContentType()
     {
 
-        $this->contentId = '4adb432d-f02a-476f-abaf-1eb17390726f';
+        $this->typeId = '4adb432d-f02a-476f-abaf-1eb17390726f';
 
         $this->viewClass = NewsContentView::class;
         $this->formClass = NewsContentForm::class;

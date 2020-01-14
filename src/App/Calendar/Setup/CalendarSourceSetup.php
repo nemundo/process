@@ -15,7 +15,7 @@ class CalendarSourceSetup extends AbstractBase
 
         $data = new CalendarSourceType();
         $data->ignoreIfExists=true;
-        $data->contentTypeId=$contentType->contentId;
+        $data->contentTypeId=$contentType->typeId;
         $data->save();
 
         return $this;

@@ -16,10 +16,10 @@ class ContentTypeParameter extends AbstractUrlParameter
     }
 
 
-    public function getContentType()
+    public function getContentType($dataId = null)
     {
 
-        $contentType = (new ContentTypeReader())->getRowById($this->getValue())->getContentType();
+        $contentType = (new ContentTypeReader())->getRowById($this->getValue())->getContentType($dataId);
         return $contentType;
 
     }

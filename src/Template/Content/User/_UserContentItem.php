@@ -53,7 +53,7 @@ class UserContentItem extends AbstractContentItem
 
         $data = new GroupUser();
         $data->ignoreIfExists = true;
-        $data->groupId = $group->contentId;
+        $data->groupId = $group->typeId;
         $data->userId = $this->dataId;
         $data->save();
 

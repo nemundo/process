@@ -5,7 +5,6 @@ namespace Nemundo\Process\App\Wiki\Site;
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\Content\Data\Tree\TreeDelete;
-use Nemundo\Process\Content\Item\TreeItem;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Type\TreeContentType;
 use Nemundo\Process\Content\Writer\TreeContentWriter;
@@ -31,6 +30,10 @@ class ContentRemoveSite extends AbstractDeleteIconSite
     {
 
 
+        $type = (new ContentParameter())->getContentType();
+        $type->removeFromParent();
+
+        /*
         $type=new TreeContentType((new ContentParameter())->getValue());
         $type->parentId= (new WikiParameter())->getValue();
         $type->removeFromParent();

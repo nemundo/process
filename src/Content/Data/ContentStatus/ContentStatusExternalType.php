@@ -29,7 +29,7 @@ public $status;
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = ContentStatusModel::class;
-$this->externalTableName = "content_content_status";
+$this->externalTableName = "process_content_status";
 $this->aliasTableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id = new \Nemundo\Model\Type\Id\IdType();
 $this->id->fieldName = "id";

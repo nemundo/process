@@ -5,7 +5,6 @@ namespace Nemundo\Process\Content\Form;
 
 
 use Nemundo\Html\Paragraph\Paragraph;
-use Nemundo\Process\Content\Item\ContentItem;
 
 class ContentForm extends AbstractContentForm
 {

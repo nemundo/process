@@ -11,7 +11,7 @@ use Nemundo\Process\Content\Data\Content\Content;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\Content\ContentValue;
 use Nemundo\Process\Content\Item\TreeItem;
-use Nemundo\Process\Content\Parameter\DataIdParameter;
+use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Process\Item\ContentItem;
 use Nemundo\Process\Parameter\ContentParameter;
 use Nemundo\Web\Site\AbstractSite;
@@ -39,7 +39,7 @@ class WikiAddSite extends AbstractSite
 
         $item = new TreeItem();
         $item->parentId = (new WikiParameter())->getValue();
-        $item->dataId = (new DataIdParameter())->getValue();
+        $item->dataId = (new DataParameter())->getValue();
         $item->saveTree();
 
 

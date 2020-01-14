@@ -66,7 +66,7 @@ abstract class AbstractSequenceContentType extends AbstractTreeContentType
         $data=new ContentStatus();
         $data->updateOnDuplicate=true;
         $data->contentId=$this->dataId;
-        $data->statusId=$status->contentId;
+        $data->statusId=$status->typeId;
         $data->save();
 
     }

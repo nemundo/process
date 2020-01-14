@@ -12,7 +12,7 @@ use Nemundo\Process\Content\Collection\DocContentCollection;
 use Nemundo\Process\Content\Com\Dropdown\ContentTypeCollectionDropdown;
 use Nemundo\Process\Content\Com\HyperlinkList\ContentTypeCollectionHyperlinkList;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Content\Parameter\DataIdParameter;
+use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Process\Search\Com\ContentSearchForm;
 use Nemundo\Process\Search\Content\SearchContentList;
 use Nemundo\Web\Site\AbstractSite;
@@ -76,7 +76,7 @@ class StartSite extends AbstractSite
                 $list = $contentType->getList($layout->col2);
                 $list->redirectSite = StartSite::$site;
                 $list->redirectSite->addParameter(new ContentTypeParameter());
-                $list->redirectParameter = new DataIdParameter();
+                $list->redirectParameter = new DataParameter();
 
             }
 
@@ -84,7 +84,7 @@ class StartSite extends AbstractSite
         }
 
 
-        $dataIdParameter = new DataIdParameter();
+        $dataIdParameter = new DataParameter();
         if ($dataIdParameter->exists()) {
 
             $dataId= $dataIdParameter->getValue();
@@ -104,7 +104,7 @@ class StartSite extends AbstractSite
             $list = new SearchContentList($layout->col2);
             $list->redirectSite = StartSite::$site;
             $list->redirectSite->addParameter($queryParameter);
-            $list->redirectParameter = new DataIdParameter();
+            $list->redirectParameter = new DataParameter();
 
         }
 

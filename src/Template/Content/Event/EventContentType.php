@@ -12,7 +12,7 @@ use Nemundo\Process\Template\Data\Event\Event;
 use Nemundo\Process\Template\Data\Event\EventDelete;
 use Nemundo\Process\Template\Data\Event\EventReader;
 use Nemundo\Process\Template\Data\Event\EventUpdate;
-use Nemundo\Process\Template\Type\DocumentContentType;
+use Nemundo\Process\Template\Type\FileContentType;
 use Nemundo\Process\Template\Type\LargeTextContentType;
 use Nemundo\User\Access\UserRestrictionTrait;
 
@@ -32,8 +32,8 @@ class EventContentType extends AbstractCalendarIndexContentType
     protected function loadContentType()
     {
         // TODO: Implement loadContentType() method.
-        $this->contentLabel='Event';
-        $this->contentId = '6af8dd00-7aa7-4dd4-8906-9d00abcbfe7c';
+        $this->typeLabel='Event';
+        $this->typeId = '6af8dd00-7aa7-4dd4-8906-9d00abcbfe7c';
         $this->viewClass=EventContentView::class;
         $this->formClass=EventContentForm::class;
         //$this->itemClass=EventContentItem::class;
@@ -45,7 +45,7 @@ class EventContentType extends AbstractCalendarIndexContentType
         //
 
         $this->addMenuClass(LargeTextContentType::class);
-        $this->addMenuClass(DocumentContentType::class);
+        $this->addMenuClass(FileContentType::class);
 
 
         $this->date = new Date();

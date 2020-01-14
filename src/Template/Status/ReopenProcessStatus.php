@@ -13,8 +13,8 @@ class ReopenProcessStatus extends AbstractProcessStatus
     {
 
         //$this->changeStatus=true;
-        $this->contentLabel = 'Reopen';
-        $this->contentId='a87e1038-8c01-4dae-af73-5334a6366a0f';
+        $this->typeLabel = 'Reopen';
+        $this->typeId='a87e1038-8c01-4dae-af73-5334a6366a0f';
 
     }
 

@@ -4,12 +4,19 @@
 namespace Nemundo\Process\App\Wiki\Content;
 
 
+use Nemundo\Core\Debug\Debug;
+use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 
 class WikiPageContentForm extends AbstractContentForm
 {
+
+    /**
+     * @var WikiPageContentType
+     */
+    public $contentType;
 
     /**
      * @var BootstrapTextBox
@@ -19,6 +26,9 @@ class WikiPageContentForm extends AbstractContentForm
     public function getContent()
     {
 
+        //$p=new Paragraph($this);
+        //$p->content='dataid: '.$this->dataId;
+
         $this->pageTitle = new BootstrapTextBox($this);
         $this->pageTitle->label = 'Wiki Title';
         $this->pageTitle->validation = true;
@@ -27,8 +37,18 @@ class WikiPageContentForm extends AbstractContentForm
     }
 
 
+    protected function loadUpdateForm()
+    {
+
+        $wikiRow = $this->contentType->getDataRow();
+        $this->pageTitle->value= $wikiRow->title;
+
+    }
+
     protected function onSubmit()
     {
+
+        //(new Debug())->write($this->dataId);
 
         $type = new WikiPageContentType($this->dataId);
         $type->parentId=$this->parentId;

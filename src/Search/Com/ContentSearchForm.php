@@ -49,6 +49,12 @@ class ContentSearchForm extends SearchForm
     }
 
 
+    public function hasValue() {
+
+        return (new SearchQueryParameter())->hasValue();
+
+    }
+
     public function getSearchQuery()
     {
 

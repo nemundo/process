@@ -5,9 +5,12 @@ namespace Nemundo\Process\App\Favorite\Site;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Favorite\Com\FavoriteContainer;
+use Nemundo\Process\App\Favorite\Content\FavoriteContentType;
+use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\User\Type\UserSessionType;
 use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Process\App\Favorite\Data\Favorite\FavoriteReader;
@@ -34,9 +37,11 @@ class FavoriteSite extends AbstractSite
         $title->content = $this->title;
 
 
-        new FavoriteContainer($page);
 
-        /*
+
+        //new FavoriteContainer($page);
+
+
         $table = new AdminClickableTable($page);
 
         $header = new TableHeader($table);
@@ -44,8 +49,43 @@ class FavoriteSite extends AbstractSite
         $header->addText('Subject');
         $header->addEmpty();
 
+
+
+
+
+        $reader = new ContentReader();
+        $reader->model->loadContentType();
+        $reader->filter->andEqual($reader->model->contentTypeId,(new FavoriteContentType())->typeId);
+        $reader->filter->andEqual($reader->model->userId, (new UserSessionType())->userId);
+
+        foreach ($reader->getData() as $contentRow ) {
+
+            $contentType= $contentRow->getContentType();
+
+            $row=new BootstrapClickableTableRow($table);
+            $row->addText($contentType->getSubject());
+
+
+            $parentContentType=$contentType->getParentContentType();
+            $row->addText($parentContentType->getSubject());
+
+            $row->addClickableSite($parentContentType->getViewSite());
+
+
+        }
+
+
+
+
+
+
+
+
+
         // löschen
 
+
+        /*
         $favoriteReader = new FavoriteReader();
         $favoriteReader->model->loadContent();
         $favoriteReader->model->content->loadContentType();

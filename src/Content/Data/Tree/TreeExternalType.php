@@ -34,7 +34,7 @@ public $itemOrder;
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = TreeModel::class;
-$this->externalTableName = "content_tree";
+$this->externalTableName = "process_content_tree";
 $this->aliasTableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id = new \Nemundo\Model\Type\Id\IdType();
 $this->id->fieldName = "id";

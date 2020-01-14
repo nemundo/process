@@ -4,16 +4,16 @@
 namespace Nemundo\Process\Content\Type;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Html\Container\AbstractHtmlContainer;
+use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Process\Content\Data\Content\ContentDelete;
+use Nemundo\Process\Content\Data\Content\ContentId;
 use Nemundo\Process\Content\Form\ContentForm;
-use Nemundo\Process\Content\Parameter\DataIdParameter;
-use Nemundo\Process\Content\Site\ContentItemSite;
 use Nemundo\Process\Content\View\AbstractContentList;
-use Nemundo\Process\Content\View\ContentView;
 use Nemundo\Process\Content\Writer\ContentWriter;
 use Nemundo\User\Type\UserSessionType;
 
@@ -40,16 +40,19 @@ abstract class AbstractContentType extends AbstractType
     /**
      * @var string
      */
-    public $contentId;
+    public $typeId;
+    // typeId
 
     /**
      * @var string|string[]
      */
-    public $contentLabel;
-
+    public $typeLabel;
+// typeLabel
 
     public $restricted = false;
 
+
+    protected $contentId;
 
     /**
      * @var string
@@ -84,11 +87,30 @@ abstract class AbstractContentType extends AbstractType
     }
 
 
-    public function saveType()
+    public function getContentId()
     {
 
+        if ($this->contentId == null) {
+
+            $id = new ContentId();
+            $id->filter->andEqual($id->model->contentTypeId, $this->typeId);
+            $id->filter->andEqual($id->model->dataId, $this->dataId);
+            $this->contentId = $id->getId();
+        }
+
+        return $this->contentId;
+
+
+    }
+
+
+    public function saveType()
+    {
+        (new LogMessage())->writeError('content type');
+        exit;
         parent::saveType();
         $this->saveContent();
+
 
     }
 
@@ -98,14 +120,13 @@ abstract class AbstractContentType extends AbstractType
 
         $subject = '[No Content Type]';
 
-        if ($this->contentLabel !== null) {
-            $subject = (new Translation())->getText($this->contentLabel);
+        if ($this->typeLabel !== null) {
+            $subject = (new Translation())->getText($this->typeLabel);
         }
 
         return $subject;
 
     }
-
 
 
     public function hasList()
@@ -123,12 +144,21 @@ abstract class AbstractContentType extends AbstractType
     public function getList(AbstractHtmlContainer $parent)
     {
 
+        $list=null;
+
         if ($this->listClass == null) {
-            (new LogMessage())->writeError('No Table' . $this->getClassName());
-        }
+            //(new LogMessage())->writeError('No Table' . $this->getClassName());
+
+            $list=new Paragraph($parent);
+            $list->content = '[No List Object]';
+
+
+        } else {
 
         /** @var AbstractContentList $list */
         $list = new $this->listClass($parent);
+
+        }
 
         return $list;
 
@@ -176,6 +206,8 @@ abstract class AbstractContentType extends AbstractType
     }
 
 
+
+    /*
     protected function saveContent()
     {
 
@@ -184,7 +216,7 @@ abstract class AbstractContentType extends AbstractType
         $writer->contentType = $this;
         $writer->dataId = $this->dataId;
         $writer->subject = $this->getSubject();
-        $writer->write();
+        $this->contentId = $writer->write();
 
         $this->saveSearchIndex();
 
@@ -198,8 +230,10 @@ abstract class AbstractContentType extends AbstractType
             $data->save();
         }*/
 
+   /*     return $this->contentId;
 
-    }
+
+    }*/
 
 
     public function getDataRow()
@@ -212,7 +246,11 @@ abstract class AbstractContentType extends AbstractType
     {
 
         parent::deleteType();
-        (new ContentDelete())->deleteById($this->dataId);
+        //(new ContentDelete())->deleteById($this->dataId);
+
+        //(new Debug())->write($this->getContentId());
+
+        (new ContentDelete())->deleteById($this->getContentId());
 
     }
 

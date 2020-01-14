@@ -25,7 +25,7 @@ class ProcessStatusWriter extends TreeContentWriter
         if ($this->contentType->changeStatus) {
 
             $update = new WorkflowUpdate();
-            $update->statusId = $this->contentType->contentId;
+            $update->statusId = $this->contentType->typeId;
             $update->updateById($this->parentId);
         }
 

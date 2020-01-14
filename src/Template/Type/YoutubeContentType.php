@@ -13,8 +13,8 @@ class YoutubeContentType extends AbstractContentType
 
     protected function loadContentType()
     {
-        $this->contentId = '5badc331-f0d1-4f14-8eba-e8468a64b9e3';
-        $this->contentLabel='YouTube';
+        $this->typeId = '5badc331-f0d1-4f14-8eba-e8468a64b9e3';
+        $this->typeLabel='YouTube';
         $this->formClass = YoutubeContentForm::class;
         $this->viewClass = YoutubeContentView::class;
     }

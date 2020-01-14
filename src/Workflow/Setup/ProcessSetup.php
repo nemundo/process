@@ -26,7 +26,7 @@ class ProcessSetup extends AbstractBase
         $data->ignoreIfExists=true;
         //$data->updateOnDuplicate = true;
         //$data->process = $process->type;
-        $data->contentTypeId = $process->contentId;
+        $data->contentTypeId = $process->typeId;
         $data->save();
 
 

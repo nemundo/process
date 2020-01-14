@@ -12,17 +12,13 @@ use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
 use Nemundo\Process\Content\View\AbstractContentView;
-use Nemundo\Process\Workflow\Com\Container\BaseWorkflowContainer;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
-use Nemundo\Process\Workflow\Content\View\ProcessView;
 use Nemundo\Process\Workflow\Content\Writer\WorkflowWriter;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowCount;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowDelete;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowReader;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowRow;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowUpdate;
-use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
-use Nemundo\Process\Workflow\Site\WorkflowItemSite;
 use Nemundo\User\Access\UserRestrictionTrait;
 use Nemundo\Workflow\App\Identification\Model\Identification;
 
@@ -54,6 +50,10 @@ abstract class AbstractProcess extends AbstractSequenceContentType
      * @var Identification
      */
     protected $assignment;
+
+    protected $groupAssignmentId;
+
+    protected $deadline;
 
 
     public $processViewClass;
@@ -94,6 +94,19 @@ abstract class AbstractProcess extends AbstractSequenceContentType
             $this->onUpdate();
         }
 
+       $this->saveWorkflow();
+
+
+
+
+        return $this->dataId;
+
+    }
+
+
+    protected function saveWorkflow() {
+
+
         $writer = new WorkflowWriter();
         $writer->contentType = $this;
         $writer->prefixNumber = $this->prefixNumber;
@@ -109,15 +122,18 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $writer->userId = $this->userId;
         $writer->write();
 
+        $this->changeDeadline($this->deadline);
+        $this->changeGroupAssignment($this->groupAssignmentId);
 
         $this->addSearchWord($writer->workflowNumber);
         $this->addSearchText($this->getSubject());
 
         $this->saveSearchIndex();
 
-        return $this->dataId;
 
     }
+
+
 
 
     public function deleteType()
@@ -243,12 +259,14 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         return $workflowRow->deadline;
     }
 
-    public function changeDeadline(Date $date)
+    public function changeDeadline(Date $date = null)
     {
 
-        $update = new WorkflowUpdate();
-        $update->deadline = $date;
-        $update->updateById($this->dataId);
+        if ($date !== null) {
+            $update = new WorkflowUpdate();
+            $update->deadline = $date;
+            $update->updateById($this->dataId);
+        }
 
     }
 
@@ -274,6 +292,17 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         // Assignment reset
     }
 
+
+    public function changeGroupAssignment($groupId = null)
+    {
+
+        if ($groupId !== null) {
+            $update = new WorkflowUpdate();
+            $update->groupAssignmentId = $groupId;
+            $update->updateById($this->dataId);
+        }
+
+    }
 
     public function clearAssignment()
     {
@@ -361,6 +390,9 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         /** @var AbstractContentView $view */
         $view = new $this->processViewClass($parent);
+        $view->contentType = $this;
+
+        //(new Debug())->write($this->createMode);
 
         if (!$this->createMode) {
             $view->dataId = $this->dataId;

@@ -21,7 +21,7 @@ use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentGroup\ContentGroupReader;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Content\Parameter\DataIdParameter;
+use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Process\Content\Type\MenuTrait;
 use Nemundo\Web\Site\AbstractSite;
 
@@ -49,7 +49,7 @@ class SearchItemSite extends AbstractSite
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
 
-        $dataIdParameter= new DataIdParameter();
+        $dataIdParameter= new DataParameter();
         $contentType=$dataIdParameter->getContentType();
 
 

@@ -10,11 +10,15 @@ use Nemundo\Process\App\News\Type\NewsContentType;
 use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\App\Wiki\Setup\WikiSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
+use Nemundo\Process\Template\Content\AddSource\AddSourceContentType;
 use Nemundo\Process\Template\Content\Event\EventContentType;
+use Nemundo\Process\Template\Content\File\FileContentType;
+use Nemundo\Process\Template\Content\Text\TextContentType;
 use Nemundo\Process\Template\Content\User\UserContentType;
+use Nemundo\Process\Template\Content\VersionText\VersionTextContentType;
 use Nemundo\Process\Template\Data\TemplateCollection;
 use Nemundo\Process\Template\Status\DocumentDeleteProcessStatus;
-use Nemundo\Process\Template\Type\DocumentContentType;
+
 use Nemundo\Process\Template\Type\LargeTextContentType;
 use Nemundo\Process\Template\Type\WebImageContentType;
 use Nemundo\Process\Workflow\Setup\StatusSetup;
@@ -38,17 +42,21 @@ class TemplateInstall extends AbstractInstall
 
         $setup = new ContentTypeSetup();
         $setup->addContentType(new LargeTextContentType());
-        $setup->addContentType(new DocumentContentType());
+        $setup->addContentType(new FileContentType());
+        $setup->addContentType(new TextContentType());
+        $setup->addContentType(new VersionTextContentType());
 
         $setup->addContentType(new NewsContentType());
         $setup->addContentType(new WikiPageContentType());
         $setup->addContentType(new WebImageContentType());
         $setup->addContentType(new UserContentType());
         $setup->addContentType(new EventContentType());
+        $setup->addContentType(new AddSourceContentType());
 
         $setup = new WikiSetup();
         $setup->addContentType(new LargeTextContentType());
         $setup->addContentType(new EventContentType());
+        $setup->addContentType(new TextContentType());
 
         $setup= new CalendarSourceSetup();
         $setup->addSourceContentType(new WikiPageContentType());

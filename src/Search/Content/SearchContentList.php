@@ -12,7 +12,7 @@ use Nemundo\Db\Sql\Field\DistinctField;
 use Nemundo\Model\Join\ModelJoin;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\Data\ContentGroup\ContentGroupModel;
-use Nemundo\Process\Content\Parameter\DataIdParameter;
+use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Process\Content\Site\ContentItemSite;
 use Nemundo\Process\Content\View\AbstractContentList;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserModel;

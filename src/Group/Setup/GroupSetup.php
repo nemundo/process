@@ -17,7 +17,7 @@ class GroupSetup extends AbstractBase
 
         $data = new Group();
         $data->updateOnDuplicate = true;
-        $data->id = $group->contentId;
+        $data->id = $group->typeId;
         $data->group = $group->group;
         $data->groupTypeId=$groupType->id;
         $data->save();

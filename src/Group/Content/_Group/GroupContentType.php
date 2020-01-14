@@ -14,8 +14,8 @@ class GroupContentType extends AbstractContentType
     protected function loadContentType()
     {
         // TODO: Implement loadContentType() method.
-        $this->contentId = '3e7f52c9-63d6-4c49-abad-63f9836e1bce';
-        $this->contentLabel = 'Group';
+        $this->typeId = '3e7f52c9-63d6-4c49-abad-63f9836e1bce';
+        $this->typeLabel = 'Group';
 
         $this->viewClass=GroupContentView::class;
 

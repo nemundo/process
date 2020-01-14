@@ -6,7 +6,6 @@ namespace Nemundo\Process\Search\Site;
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\App\Search\Parameter\SearchQueryParameter;
-use Nemundo\App\Search\Query\SearchSelectQuery;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Db\Sql\Field\CountField;
@@ -17,9 +16,9 @@ use Nemundo\Package\Bootstrap\Listing\BootstrapHyperlinkList;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Content\Parameter\DataIdParameter;
-use Nemundo\Process\Content\Site\ContentItemSite;
+use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Process\Search\Com\ContentSearchForm;
+use Nemundo\Process\Search\Content\Log\SearchLogContentType;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexCount;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexPaginationReader;
 use Nemundo\Web\Site\AbstractSite;
@@ -35,7 +34,7 @@ class SearchSite extends AbstractSite
     protected function loadSite()
     {
         $this->title[LanguageCode::EN] = 'Search';
-        $this->title[LanguageCode::DE]='Suche';
+        $this->title[LanguageCode::DE] = 'Suche';
         $this->url = 'search';
         SearchSite::$site = $this;
 
@@ -61,93 +60,100 @@ class SearchSite extends AbstractSite
         $form = new ContentSearchForm($page);
 
 
-        // redefine nach content type
+        if ($form->hasValue()) {
 
-        $searchIndexReader = new SearchIndexPaginationReader();
-        $searchIndexReader->model->loadContent();
-        $searchIndexReader->model->content->loadContentType();
-        $searchIndexReader->filter->andEqual($searchIndexReader->model->wordId, $form->getWordId());
+            // redefine nach content type
 
-        $contentTypeParameter=new ContentTypeParameter();
-        if ($contentTypeParameter->hasValue()) {
-            $searchIndexReader->filter->andEqual($searchIndexReader->model->content->contentTypeId,$contentTypeParameter->getValue());
-        }
+            $searchIndexReader = new SearchIndexPaginationReader();
+            $searchIndexReader->model->loadContent();
+            $searchIndexReader->model->content->loadContentType();
+            $searchIndexReader->filter->andEqual($searchIndexReader->model->wordId, $form->getWordId());
 
-        $searchIndexReader->paginationLimit = 50;
+            $contentTypeParameter = new ContentTypeParameter();
+            if ($contentTypeParameter->hasValue()) {
+                $searchIndexReader->filter->andEqual($searchIndexReader->model->content->contentTypeId, $contentTypeParameter->getValue());
+            }
 
-
-        // Search Filter
-
-        $count = new SearchIndexCount();
-        $count->filter->andEqual($searchIndexReader->model->wordId, $form->getWordId());
-        $searchCount = $count->getCount();
-
-        $p = new Paragraph($page);
-        $p->content = $searchCount . ' Results found';
+            $searchIndexReader->paginationLimit = 50;
 
 
-        $layout = new BootstrapTwoColumnLayout($page);
+            // Search Filter
 
-        $table = new AdminClickableTable($layout->col1);
+            $count = new SearchIndexCount();
+            $count->filter->andEqual($searchIndexReader->model->wordId, $form->getWordId());
+            $searchCount = $count->getCount();
 
-        $header = new TableHeader($table);
-        $header->addText('Content Type');
-        $header->addText('Subject');
+            $p = new Paragraph($page);
+            $p->content = $searchCount . ' Results found';
 
 
+            $logType = new SearchLogContentType();
+            $logType->searchQuery = $form->getSearchQuery();
+            $logType->resultCount = $searchCount;
+            $logType->saveType();
 
-        foreach ($searchIndexReader->getData() as $indexRow) {
 
-            $row = new BootstrapClickableTableRow($table);
-            $row->addText($indexRow->content->contentType->contentType);
-            //$row->addText($indexRow->content->subject);
+            $layout = new BootstrapTwoColumnLayout($page);
 
-            //$contentType =  $indexRow->content->contentType->getContentType();
-            $contentType = $indexRow->content->getContentType();
+            $table = new AdminClickableTable($layout->col1);
 
-            $row->addText($contentType->getSubject());
+            $header = new TableHeader($table);
+            $header->addText('Content Type');
+            $header->addText('Subject');
 
-            if ($contentType->hasViewSite()) {
-                $site = $contentType->getViewSite();
-                $row->addClickableSite($site);
-            } else {
-                //$site = clone(ContentItemSite::$site);
-                $site = clone(SearchItemSite::$site);
-                $site->addParameter(new DataIdParameter($indexRow->contentId));
-                $row->addClickableSite($site);
+
+            foreach ($searchIndexReader->getData() as $indexRow) {
+
+                $row = new BootstrapClickableTableRow($table);
+                $row->addText($indexRow->content->contentType->contentType);
+                //$row->addText($indexRow->content->subject);
+
+                //$contentType =  $indexRow->content->contentType->getContentType();
+                $contentType = $indexRow->content->getContentType();
+
+                $row->addText($contentType->getSubject());
+
+                if ($contentType->hasViewSite()) {
+                    $site = $contentType->getViewSite();
+                    $row->addClickableSite($site);
+                } else {
+                    //$site = clone(ContentItemSite::$site);
+                    $site = clone(SearchItemSite::$site);
+                    $site->addParameter(new DataParameter($indexRow->contentId));
+                    $row->addClickableSite($site);
+                }
+
+            }
+
+
+            $pagination = new BootstrapPagination($layout->col1);
+            $pagination->paginationReader = $searchIndexReader;
+
+
+            // Alle Anzeigen
+
+            $list = new BootstrapHyperlinkList($layout->col2);
+
+
+            $searchIndexReader = new SearchIndexPaginationReader();
+            $searchIndexReader->model->loadContent();
+            $searchIndexReader->model->content->loadContentType();
+            $searchIndexReader->filter->andEqual($searchIndexReader->model->wordId, $form->getWordId());
+            $searchIndexReader->addGroup($searchIndexReader->model->content->contentTypeId);
+
+            $count = new CountField($searchIndexReader);
+
+            foreach ($searchIndexReader->getData() as $searchIndexRow) {
+
+                $site = clone(SearchSite::$site);
+                $site->addParameter(new SearchQueryParameter());
+                $site->addParameter(new ContentTypeParameter($searchIndexRow->content->contentTypeId));
+                $site->title = $searchIndexRow->content->contentType->contentType . ' (' . $searchIndexRow->getModelValue($count) . ')';
+                $list->addSite($site);
+
             }
 
         }
-
-
-        $pagination = new BootstrapPagination($layout->col1);
-        $pagination->paginationReader = $searchIndexReader;
-
-
-
-        // Alle Anzeigen
-
-        $list = new BootstrapHyperlinkList($layout->col2);
-
-
-        $searchIndexReader = new SearchIndexPaginationReader();
-        $searchIndexReader->model->loadContent();
-        $searchIndexReader->model->content->loadContentType();
-        $searchIndexReader->filter->andEqual($searchIndexReader->model->wordId, $form->getWordId());
-        $searchIndexReader->addGroup($searchIndexReader->model->content->contentTypeId);
-
-        $count = new CountField($searchIndexReader);
-
-        foreach ($searchIndexReader->getData() as $searchIndexRow) {
-
-            $site = clone(SearchSite::$site);
-            $site->addParameter(new SearchQueryParameter());
-            $site->addParameter(new ContentTypeParameter($searchIndexRow->content->contentTypeId));
-            $site->title = $searchIndexRow->content->contentType->contentType.' ('.$searchIndexRow->getModelValue($count).')';
-            $list->addSite($site);
-
-        }
-
 
         $page->render();
 

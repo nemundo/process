@@ -16,7 +16,7 @@ use Nemundo\User\Reader\UserCustomRow;
 abstract class AbstractGroupContentType extends AbstractTreeContentType  // AbstractBase
 {
 
-    public $contentId;
+    public $typeId;
 
     public $group;
 
@@ -38,7 +38,7 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType  // Abst
         $data->updateOnDuplicate = true;
         $data->id =$this->dataId;
         $data->group = $this->group;
-        $data->groupTypeId=$this->contentId;  //groupType->id;
+        $data->groupTypeId=$this->typeId;  //groupType->id;
         $data->save();
 
 

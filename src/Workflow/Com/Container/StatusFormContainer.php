@@ -1,17 +1,13 @@
 <?php
 
 
-
 namespace Nemundo\Process\Workflow\Com\Container;
 
-use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
-use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
-
+use Nemundo\User\Access\UserRestrictionTrait;
 use Nemundo\Web\Site\AbstractSite;
-
 
 
 class StatusFormContainer extends AbstractHtmlContainer
@@ -38,7 +34,7 @@ class StatusFormContainer extends AbstractHtmlContainer
     public $workflowStatus;
 
 
-    public $appendWorkflowParameter=false;
+    public $appendWorkflowParameter = false;
 
     public function getContent()
     {
@@ -48,13 +44,21 @@ class StatusFormContainer extends AbstractHtmlContainer
             //$subtitle = new AdminSubtitle($this);
             //$subtitle->content = $this->formStatus->contentLabel;
 
-            if ($this->formStatus->checkUserVisibility()) {
+            $showForm = true;
 
+            if ($this->formStatus->isObjectOfTrait(UserRestrictionTrait::class)) {
+
+                if (!$this->formStatus->checkUserVisibility()) {
+                    $showForm = false;
+                }
+            }
+
+            if ($showForm) {
                 $form = $this->formStatus->getForm($this);
-                $form->contentType= $this->formStatus;
+                $form->contentType = $this->formStatus;
                 $form->parentId = $this->workflowId;
-                $form->redirectSite =$this->site;
-                $form->appendParameter=$this->appendWorkflowParameter;
+                $form->redirectSite = $this->site;
+                $form->appendParameter = $this->appendWorkflowParameter;
 
             } else {
                 $p = new Paragraph($this);
@@ -64,6 +68,7 @@ class StatusFormContainer extends AbstractHtmlContainer
         }
 
         return parent::getContent();
+
     }
 
 }

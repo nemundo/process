@@ -19,7 +19,7 @@ use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
 use Nemundo\Process\Content\Item\ContentItem;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Content\Parameter\DataIdParameter;
+use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Web\Site\AbstractSite;
 
 class ContentNewSite extends AbstractSite

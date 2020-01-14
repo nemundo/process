@@ -19,8 +19,8 @@ class HtmlContentType extends AbstractTreeContentType
 
     protected function loadContentType()
     {
-        $this->contentLabel = 'Html';
-        $this->contentId = 'e1daa5be-9302-4126-b85b-a79623a3c86c';
+        $this->typeLabel = 'Html';
+        $this->typeId = 'e1daa5be-9302-4126-b85b-a79623a3c86c';
 
         $this->formClass = HtmlContentForm::class;
         $this->viewClass = HtmlContentView::class;

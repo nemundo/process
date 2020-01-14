@@ -46,6 +46,37 @@
         },
         {
             "template": "default",
+            "model_id": "c62358cf-6385-498c-8d4c-31a171443550",
+            "label": "Search Log",
+            "class_name": "SearchLog",
+            "table_name": "search_search_log",
+            "namespace": "Nemundo\\Process\\Search\\Data\\SearchLog",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Search Query",
+                    "field_name": "search_query",
+                    "variable_name": "searchQuery",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "number",
+                    "label": "Result Count",
+                    "field_name": "result_count",
+                    "variable_name": "resultCount",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "78d1e336-761f-48bd-be52-9794409699e3",
             "label": "Word",
             "class_name": "Word",

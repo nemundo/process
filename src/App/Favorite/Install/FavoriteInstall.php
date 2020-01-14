@@ -15,8 +15,8 @@ class FavoriteInstall extends AbstractInstall
     {
 
 
-        $setup = new ModelCollectionSetup();
-        $setup->addCollection(new FavoriteCollection());
+        /*$setup = new ModelCollectionSetup();
+        $setup->addCollection(new FavoriteCollection());*/
 
 $setup=new ContentTypeSetup();
 $setup->addContentType(new FavoriteContentType());

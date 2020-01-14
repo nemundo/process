@@ -10,9 +10,9 @@ use Nemundo\Process\App\Survey\Content\Type\ErfassungContentType;
 use Nemundo\Process\App\Survey\Data\Survey\Survey;
 use Nemundo\Process\App\Survey\Data\Survey\SurveyReader;
 use Nemundo\Process\Content\Form\AbstractContentForm;
-use Nemundo\Process\Content\Parameter\DataIdParameter;
+use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Process\Content\Form\AbstractSequenceForm;
-use Nemundo\Process\Content\Parameter\SequenceDataIdParameter;
+use Nemundo\Process\Content\Parameter\SequenceDataParameter;
 
 class SurveyErfassungContentForm extends AbstractSequenceForm
 {
@@ -70,7 +70,7 @@ if ($this->dataId == null) {
         $data->vorname = $this->firstName->getValue();
         $data->save();*/
 
-        $this->redirectSite->addParameter(new SequenceDataIdParameter( $type->parentId));
+        $this->redirectSite->addParameter(new SequenceDataParameter( $type->parentId));
 
 
     }

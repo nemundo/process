@@ -18,8 +18,8 @@ class SurveyContentType extends AbstractSequenceContentType
     {
         // TODO: Implement loadContentType() method.
 
-        $this->contentId='b6757597-14a7-49a3-bf2c-8869917216a6';
-        $this->contentLabel = 'Survey';
+        $this->typeId='b6757597-14a7-49a3-bf2c-8869917216a6';
+        $this->typeLabel = 'Survey';
         //$this->formClass = SurveyContentContainer::class;
         $this->viewClass=SurveyContentView::class;
 

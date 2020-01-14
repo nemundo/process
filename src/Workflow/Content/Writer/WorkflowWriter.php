@@ -34,12 +34,15 @@ class WorkflowWriter extends TreeContentWriter
      */
     public $assignment;
 
+
+
+
     public function write()
     {
 
         parent::write();
 
-        $processId = $this->contentType->contentId;
+        $processId = $this->contentType->typeId;
 
         if ($this->number == null) {
             $value = new WorkflowValue();
@@ -54,37 +57,18 @@ class WorkflowWriter extends TreeContentWriter
             $this->workflowNumber = $this->prefixNumber . $this->number;
         }
 
-
-        //$stausId = $this->contentType->startContentType->contentId;
-
         $data = new Workflow();
         $data->id = $this->dataId;
         $data->processId = $processId;
         $data->number = $this->number;
         $data->workflowNumber = $this->workflowNumber;
-        $data->statusId = $this->contentType->startContentType->contentId;  //$stausId;
+        $data->statusId = $this->contentType->startContentType->typeId;
         $data->subject = $this->workflowSubject;
         $data->assignment = $this->assignment;
         $data->dateTime = $this->dateTime;
         $data->userId = $this->userId;
         $data->save();
 
-        //$type = clone( $this->contentType->startContentType);
-        //$type->saveType();
-
-        //$this->contentType->startContentType->parentId = $this->dataId;
-        //$this->contentType->startContentType->saveType();
-
-
-        //if ($this->parentId !==null) {
-        /*$writer = new TreeContentWriter();
-        $writer->parentId = $this->dataId;
-        $writer->dataId = null;  //  $this->contentType->startContentType->getDataId();
-        $writer->contentType = $this->contentType->startContentType;
-        $writer->dateTime = $this->dateTime;
-        $writer->userId = $this->userId;
-        $writer->write();*/
-        //}
 
     }
 

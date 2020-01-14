@@ -101,7 +101,7 @@ class CalendarSite extends AbstractSite
             $type=$calendarIndexRow->content->getContentType();
             $type->getView($div);
 
-            $row->addText($type->contentLabel);
+            $row->addText($type->typeLabel);
 
             $row->addText($calendarIndexRow->getModelValue($treeModel->parentId));
 
@@ -116,7 +116,7 @@ class CalendarSite extends AbstractSite
             foreach ($type->getParentContent() as $parentContentRow) {
 
                 $parentContentType = $parentContentRow->getContentType();
-                $ul->addText($parentContentType->getSubject().' / '.$parentContentType->contentLabel);
+                $ul->addText($parentContentType->getSubject().' / '.$parentContentType->typeLabel);
 
             }
 

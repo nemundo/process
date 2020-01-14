@@ -17,8 +17,8 @@ class GroupAssignmentStatus extends AbstractProcessStatus
 
     protected function loadContentType()
     {
-        $this->contentLabel = 'Group Assignment';
-        $this->contentId = 'e4368eda-9bb4-4610-9595-7ad9e86272ba';
+        $this->typeLabel = 'Group Assignment';
+        $this->typeId = 'e4368eda-9bb4-4610-9595-7ad9e86272ba';
         $this->changeStatus = false;
         $this->formClass = GroupAssignmentForm::class;
 

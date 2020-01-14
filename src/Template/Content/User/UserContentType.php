@@ -16,8 +16,8 @@ class UserContentType extends AbstractContentType
 
     protected function loadContentType()
     {
-        $this->contentLabel='User';
-        $this->contentId='8ef8e1d2-0c15-45b0-ba10-7c306d617406';
+        $this->typeLabel='User';
+        $this->typeId='8ef8e1d2-0c15-45b0-ba10-7c306d617406';
 $this->viewClass=UserContentView::class;
 
     }
@@ -39,6 +39,7 @@ $this->viewClass=UserContentView::class;
 
             $reader = new GroupUserReader();
             $reader->model->loadGroup();
+            $reader->model->group->loadGroupType();
             $reader->filter->andEqual($reader->model->userId,$this->dataId );
             $reader->addOrder($reader->model->group->group);
             foreach ($reader->getData() as $groupUserRow) {

@@ -12,7 +12,7 @@
             "table_name": "wiki_wiki",
             "namespace": "Nemundo\\Process\\App\\Wiki\\Data\\Wiki",
             "row_class_name": "",
-            "primary_index": "text_id",
+            "primary_index": "unique_id",
             "is_deleted": false,
             "type": [
                 {

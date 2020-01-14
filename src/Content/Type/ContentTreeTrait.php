@@ -36,7 +36,8 @@ trait ContentTreeTrait
 
         $value = new TreeValue();
         $value->field = $value->model->itemOrder;
-        $value->filter->andEqual($value->model->parentId, $this->dataId);
+        //$value->filter->andEqual($value->model->parentId, $this->dataId);
+        $value->filter->andEqual($value->model->parentId, $this->getContentId());
         $itemOrder = $value->getMaxValue();
 
         if ($itemOrder == '') {
@@ -45,7 +46,7 @@ trait ContentTreeTrait
         $itemOrder++;
 
         $data = new Tree();
-        $data->parentId = $this->dataId;
+        $data->parentId = $this->getContentId();
         $data->childId = $childId;
         $data->itemOrder = $itemOrder;
         $data->save();
@@ -73,7 +74,8 @@ trait ContentTreeTrait
     {
 
         $count = new TreeCount();
-        $count->filter->andEqual($count->model->parentId, $this->dataId);
+        //$count->filter->andEqual($count->model->parentId, $this->dataId);
+        $count->filter->andEqual($count->model->parentId, $this->getContentId());
         return $count->getCount();
 
     }
@@ -83,7 +85,8 @@ trait ContentTreeTrait
     {
 
         $count = new TreeCount();
-        $count->filter->andEqual($count->model->childId, $this->dataId);
+        //$count->filter->andEqual($count->model->childId, $this->dataId);
+        $count->filter->andEqual($count->model->childId, $this->getContentId());
         return $count->getCount();
 
     }
@@ -96,7 +99,9 @@ trait ContentTreeTrait
         $reader->model->loadChild();
         $reader->model->child->loadContentType();
         $reader->model->child->loadUser();
-        $reader->filter->andEqual($reader->model->parentId, $this->dataId);
+        //$reader->filter->andEqual($reader->model->parentId, $this->dataId);
+        $reader->filter->andEqual($reader->model->parentId, $this->getContentId());
+
         $reader->addOrder($reader->model->itemOrder, $sortOrder);
 
         /** @var ContentCustomRow[] $doc */
@@ -114,7 +119,8 @@ trait ContentTreeTrait
 
         $delete = new TreeDelete();
         $delete->filter->andEqual($delete->model->parentId,$this->parentId);
-        $delete->filter->orEqual($delete->model->childId, $this->dataId);
+        //$delete->filter->orEqual($delete->model->childId, $this->dataId);
+        $delete->filter->orEqual($delete->model->childId, $this->getContentId());
         $delete->delete();
 
     }
@@ -127,7 +133,8 @@ trait ContentTreeTrait
         $reader = new TreeReader();
         //$reader->model->loadParent();
         //$reader->model->parent->loadContentType();
-        $reader->filter->andEqual($reader->model->childId, $this->dataId);
+        //$reader->filter->andEqual($reader->model->childId, $this->dataId);
+        $reader->filter->andEqual($reader->model->childId, $this->getContentId());
 
         foreach ($reader->getData() as $treeRow) {
             //$doc[] = $treeRow->parent;
@@ -141,13 +148,15 @@ $parentId = $treeRow->parentId;
     }
 
 
+    // getParentContentRow
     public function getParentContent()
     {
 
         $reader = new TreeReader();
         $reader->model->loadParent();
         $reader->model->parent->loadContentType();
-        $reader->filter->andEqual($reader->model->childId, $this->dataId);
+        //$reader->filter->andEqual($reader->model->childId, $this->dataId);
+        $reader->filter->andEqual($reader->model->childId, $this->getContentId());
 
         /** @var ContentCustomRow[] $doc */
         $doc = [];
@@ -160,6 +169,18 @@ $parentId = $treeRow->parentId;
     }
 
 
+
+    public function getParentContentType() {
+
+       $parentContentType=null;
+        foreach ($this->getParentContent() as $contentRow) {
+            $parentContentType = $contentRow->getContentType();
+        }
+
+        return $parentContentType;
+
+
+    }
 
 
 }

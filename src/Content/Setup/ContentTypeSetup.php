@@ -18,14 +18,14 @@ class ContentTypeSetup extends AbstractBase
     public function addContentType(AbstractContentType $contentType)
     {
 
-        $contentLabel = (new Translation())->getText($contentType->contentLabel);
+        $contentLabel = (new Translation())->getText($contentType->typeLabel);
         if ($contentLabel == null) {
             $contentLabel = $contentType->getClassNameWithoutNamespace();
         }
 
         $data = new ContentType();
         $data->updateOnDuplicate = true;
-        $data->id = $contentType->contentId;
+        $data->id = $contentType->typeId;
         $data->contentType = $contentLabel;
         $data->phpClass = $contentType->getClassName();
         $data->save();
@@ -34,18 +34,29 @@ class ContentTypeSetup extends AbstractBase
     }
 
 
-    public function removeContentType(AbstractContentType $contentType)
-    {
+
+    public function removeContent(AbstractContentType $contentType) {
 
 
-        // tree delete
+
 
 
         $delete = new ContentDelete();
-        $delete->filter->andEqual($delete->model->contentTypeId, $contentType->contentId);
+        $delete->filter->andEqual($delete->model->contentTypeId, $contentType->typeId);
         $delete->delete();
 
-        (new ContentTypeDelete())->deleteById($contentType->contentId);
+        // tree delete
+
+    }
+
+
+    public function removeContentType(AbstractContentType $contentType)
+    {
+
+$this->removeContent($contentType);
+
+
+        (new ContentTypeDelete())->deleteById($contentType->typeId);
 
        /*
         $delete = new SearchIndexDelete();

@@ -120,7 +120,7 @@ class ProcessView extends AbstractContentView
 
         if ($formStatus !== null) {
             $widget = new AdminWidget($layout->col2);
-            $widget->widgetTitle = $formStatus->contentLabel;
+            $widget->widgetTitle = $formStatus->typeLabel;
 
             $form = new StatusFormContainer($widget);
             $form->formStatus = $formStatus;

@@ -36,12 +36,12 @@ class SurveyContentView extends AbstractContentView
 
         $status =$surveyType->getStatus();  // $contentStatusRow->status->getContentType();
 
-        $table->addLabelValue('Status Content Type',$status->contentLabel);
+        $table->addLabelValue('Status Content Type',$status->typeLabel);
 
 
         $ul = new UnorderedList($this);
         foreach ($status->getMenuList() as $menu) {
-            $ul->addText($menu->contentLabel);
+            $ul->addText($menu->typeLabel);
 
         }
 

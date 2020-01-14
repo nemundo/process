@@ -8,7 +8,7 @@ use Nemundo\Package\Bootstrap\Dropdown\BootstrapSiteDropdown;
 use Nemundo\Process\App\Wiki\Data\Wiki\WikiReader;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\App\Wiki\Site\WikiAddSite;
-use Nemundo\Process\Content\Parameter\DataIdParameter;
+use Nemundo\Process\Content\Parameter\DataParameter;
 
 class WikiAddDropdown extends BootstrapSiteDropdown
 {
@@ -23,7 +23,7 @@ class WikiAddDropdown extends BootstrapSiteDropdown
             $site=clone(WikiAddSite::$site);
             $site->title=$wikiRow->title;
             $site->addParameter(new WikiParameter($wikiRow->id));
-            $site->addParameter(new DataIdParameter($this->dataId));
+            $site->addParameter(new DataParameter($this->dataId));
             $this->addSite($site);
         }
 

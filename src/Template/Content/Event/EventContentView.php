@@ -9,7 +9,7 @@ use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Html\Block\Div;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Process\Content\Item\ContentItem;
-use Nemundo\Process\Content\Parameter\DataIdParameter;
+use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Process\Content\Site\ContentItemSite;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Template\Data\Event\EventReader;

@@ -41,7 +41,7 @@ class ContentDropdown extends BootstrapSiteDropdown
         $reader->model->loadContentType();
 
         foreach ($this->contentTypeFilterList as $contentType) {
-            $reader->filter->orEqual($reader->model->contentTypeId, $contentType->contentId);
+            $reader->filter->orEqual($reader->model->contentTypeId, $contentType->typeId);
         }
 
         foreach ($reader->getData() as $contentRow) {

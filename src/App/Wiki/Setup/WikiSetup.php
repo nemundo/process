@@ -9,17 +9,16 @@ use Nemundo\Process\App\Wiki\Data\WikiType\WikiType;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Content\Type\AbstractContentType;
 
-class WikiSetup extends AbstractBase
+class WikiSetup extends ContentTypeSetup
 {
 
     public function addContentType(AbstractContentType $contentType) {
 
-        $setup = new ContentTypeSetup();
-        $setup->addContentType($contentType);
+        parent::addContentType($contentType);
 
         $data=new WikiType();
         $data->updateOnDuplicate=true;
-        $data->contentTypeId=$contentType->contentId;
+        $data->contentTypeId=$contentType->typeId;
         $data->save();
 
         return $this;

@@ -12,9 +12,9 @@ use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Process\Content\Com\Menu\NextMenu;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Content\Parameter\DataIdParameter;
+use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Process\Content\Parameter\SequenceContentTypeParameter;
-use Nemundo\Process\Content\Parameter\SequenceDataIdParameter;
+use Nemundo\Process\Content\Parameter\SequenceDataParameter;
 use Nemundo\Process\Content\Type\AbstractMenuContentType;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
 
@@ -45,7 +45,7 @@ abstract class AbstractSequenceContainer extends AbstractHtmlContainer
         }
 
         $dataId=null;
-        $sequenceDataIdParameter = new SequenceDataIdParameter();
+        $sequenceDataIdParameter = new SequenceDataParameter();
         if ($sequenceDataIdParameter->exists()) {
             $dataId=$sequenceDataIdParameter->getValue();
         } else {
@@ -61,11 +61,11 @@ abstract class AbstractSequenceContainer extends AbstractHtmlContainer
         $menu->currentContentType=$currentContentType;
 
         $subtitle=new AdminSubtitle($layout->col2);
-        $subtitle->content=$currentContentType->contentLabel;
+        $subtitle->content=$currentContentType->typeLabel;
 
         $form = $currentContentType->getForm($layout->col2);
         $form->redirectSite=$this->redirectSite;
-        $form->redirectSite->addParameter(new SequenceDataIdParameter());
+        $form->redirectSite->addParameter(new SequenceDataParameter());
         $form->appendParameter = true;
         $form->dataId = $dataId;
 $form->parentId=$dataId;
@@ -86,7 +86,7 @@ $form->parentId=$dataId;
             $previous = new AdminSiteButton($layout->col2);
             $previous->site = clone($this->redirectSite);
             $previous->site->title = 'Previous';
-            $previous->site->addParameter(new DataIdParameter());
+            $previous->site->addParameter(new DataParameter());
             $previous->site->addParameter(new SequenceContentTypeParameter($previsousMenu->contentId));
         }
 

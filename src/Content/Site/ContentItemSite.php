@@ -6,6 +6,7 @@ namespace Nemundo\Process\Content\Site;
 
 use Nemundo\Admin\Com\Button\AdminIconSiteButton;
 use Nemundo\Admin\Com\Button\AdminSiteButton;
+use Nemundo\Admin\Com\Navigation\AdminNavigation;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Admin\Com\Table\AdminTable;
@@ -16,12 +17,13 @@ use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Block\Div;
+use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\Dropdown\BootstrapSiteDropdown;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentGroup\ContentGroupReader;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Content\Parameter\DataIdParameter;
+use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Process\Content\Type\MenuTrait;
 use Nemundo\Web\Site\AbstractSite;
 
@@ -50,7 +52,10 @@ class ContentItemSite extends AbstractSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
-        $dataId = (new DataIdParameter())->getValue();
+        $nav = new AdminNavigation($page);
+        $nav->site=ContentSite::$site;
+
+        $dataId = (new DataParameter())->getValue();
 
         $reader = new ContentReader();
         $reader->model->loadContentType();
@@ -63,6 +68,9 @@ class ContentItemSite extends AbstractSite
 
         if ($contentType->hasView()) {
             $contentType->getView($page);
+        } else {
+            $p=new Paragraph($page);
+            $p->content='[No View]';
         }
 
         $table = new AdminLabelValueTable($page);
@@ -87,9 +95,13 @@ class ContentItemSite extends AbstractSite
         $header->addText('Subject');
 
         foreach ($contentType->getChild() as $contentRow) {
+
+            $childContentType = $contentRow->getContentType();
+
             $row = new TableRow($table);
             $row->addText($contentRow->contentType->contentType);
             $row->addText($contentRow->subject);
+            $row->addText($childContentType->getSubject());
 
         }
 
@@ -112,10 +124,10 @@ class ContentItemSite extends AbstractSite
                 $row = new TableRow($table);
 
                 $parentContentType=$contentRow->getContentType();
-                $row->addText($parentContentType->contentLabel);
+                $row->addText($parentContentType->typeLabel);
 
                 $site = clone(ContentItemSite::$site);
-                $site->addParameter(new DataIdParameter($contentRow->id));
+                $site->addParameter(new DataParameter($contentRow->id));
                 $site->title =$parentContentType->getSubject();  // $contentRow->subject;
                 $row->addSite($site);
 
@@ -125,11 +137,11 @@ class ContentItemSite extends AbstractSite
 
         $btn = new AdminIconSiteButton($page);
         $btn->site = ContentEditSite::$site;
-        $btn->site->addParameter(new DataIdParameter());
+        $btn->site->addParameter(new DataParameter());
 
         $btn = new AdminIconSiteButton($page);
         $btn->site = ContentDeleteSite::$site;
-        $btn->site->addParameter(new DataIdParameter());
+        $btn->site->addParameter(new DataParameter());
 
 
 
@@ -160,9 +172,9 @@ class ContentItemSite extends AbstractSite
             foreach ($contentType->getMenuList() as $menuContentType) {
 
                 $site = clone(ContentItemSite::$site);
-                $site->title = $menuContentType->contentLabel;  // $contentTypeRow->contentType;
-                $site->addParameter(new DataIdParameter());
-                $site->addParameter(new ContentTypeParameter($menuContentType->contentId));
+                $site->title = $menuContentType->typeLabel;  // $contentTypeRow->contentType;
+                $site->addParameter(new DataParameter());
+                $site->addParameter(new ContentTypeParameter($menuContentType->typeId));
 
                 $dropdown->addSite($site);
 
@@ -179,7 +191,7 @@ class ContentItemSite extends AbstractSite
             $form = $contentType->getForm($page);
             $form->parentId = $dataId;
             $form->redirectSite = ContentItemSite::$site;
-            $form->redirectSite->addParameter(new DataIdParameter());
+            $form->redirectSite->addParameter(new DataParameter());
 
         }
 
@@ -201,7 +213,7 @@ class ContentItemSite extends AbstractSite
 
             $btn = new AdminSiteButton($page);
             $btn->site = clone(ContentItemSite::$site);
-            $btn->site->addParameter(new DataIdParameter($contentRow->id));
+            $btn->site->addParameter(new DataParameter($contentRow->id));
             $btn->site->title = 'View';
 
         }

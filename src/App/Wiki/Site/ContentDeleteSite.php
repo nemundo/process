@@ -25,13 +25,17 @@ class ContentDeleteSite extends AbstractDeleteIconSite
     public function loadContent()
     {
 
+        $type = (new ContentParameter())->getContentType();
+        $type->deleteType();
+
+/*
         $contentId = (new ContentParameter())->getValue();
 
         $contentReader = new ContentReader();
         $contentReader->model->loadContentType();
         $contentRow = $contentReader->getRowById($contentId);
         $type = $contentRow->getContentType();
-        $type->deleteType();
+        $type->deleteType();*/
 
 
         (new UrlReferer())->redirect();

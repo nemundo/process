@@ -16,7 +16,7 @@ $this->tableName = "process_template_large_text";
 $this->aliasTableName = "process_template_large_text";
 $this->label = "Large Text";
 
-$this->primaryIndex = new \Nemundo\Db\Index\TextIdPrimaryIndex();
+$this->primaryIndex = new \Nemundo\Db\Index\AutoIncrementIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
 $this->id->tableName = "process_template_large_text";

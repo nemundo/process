@@ -34,9 +34,12 @@ class TreeSite extends AbstractSite
 
         $header = new TableHeader($table);
         $header->addText('Parent');
+        $header->addText('Parent Subject');
         $header->addText('Parent Id');
         $header->addText('Child');
+        $header->addText('Child Subject');
         $header->addText('Child Id');
+        $header->addText('Item Order');
 
 /*
         $header->addText('Subject (Db Content)');
@@ -60,11 +63,20 @@ class TreeSite extends AbstractSite
             $row = new BootstrapClickableTableRow($table);
 
             $row->addText($treeRow->parent->contentType->contentType);
+
+            $contentType = $treeRow->parent->getContentType();
+            $row->addText($contentType->getSubject());
+
             $row->addText($treeRow->parentId);
 
 
             $row->addText($treeRow->child->contentType->contentType);
+            $contentType = $treeRow->child->getContentType();
+            $row->addText($contentType->getSubject());
             $row->addText($treeRow->childId);
+
+
+            $row->addText($treeRow->itemOrder);
 
         }
 

@@ -22,12 +22,14 @@ class ContentCustomRow extends ContentRow
         if (class_exists($className)) {
 
             /** @var AbstractContentType|AbstractTreeContentType|MenuTrait $contentType */
-            $contentType = new $className($this->id);
+            $contentType = new $className($this->dataId);
+
+            //$contentType = new $className($this->id);
 
         } else {
 
             (new LogMessage())->writeError('ContentCustomRow. Content Type is not registred. Class: ' . $className);
-            $contentType = new TreeContentType($this->id);
+            $contentType = new TreeContentType($this->dataId);
 
         }
 
