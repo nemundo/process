@@ -57,7 +57,7 @@ class ProcessSite extends AbstractSite
         new SearchSite($this);
         new FavoriteSite($this);
         new GroupSite($this);
-        //new StartSite($this);
+
 
 new GeoSite($this);
 new CalendarSite($this);
@@ -67,6 +67,8 @@ new ExplorerSite($this);
 
 new SearchLogSite($this);
 new DocumentSite($this);
+
+new ProcessTemplateSite($this);
 
     }
 

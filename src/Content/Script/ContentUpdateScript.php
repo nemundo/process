@@ -24,20 +24,13 @@ class ContentUpdateScript extends AbstractConsoleScript
         $reader->model->loadContentType();
         foreach ($reader->getData() as $contentRow) {
 
-            $contentType = $contentRow->getContentType();  // contentType->getContentType();
-
-            //(new Debug())->write($contentType->getSubject());
-
-            //$contentItem = $contentType->getItem($contentRow->id);
-            //(new Debug())->write($contentItem->getSubject());
-
+            $contentType = $contentRow->getContentType();
 
             $update = new ContentUpdate();
             $update->subject = $contentType->getSubject();
             $update->updateById($contentRow->id);
 
         }
-
 
     }
 

@@ -3,6 +3,7 @@
 namespace Nemundo\Process\Template\Form;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapDatePicker;
 use Nemundo\Process\Template\Status\DeadlineChangeProcessStatus;
@@ -24,7 +25,7 @@ class DeadlineChangeForm extends AbstractStatusForm
         $this->datum->label = 'Datum';
         $this->datum->validation = true;
 
-        $workflowItem = new WorkflowProcess($this->parentId);
+        $workflowItem = $this->contentType->getParentProcess();
         if ($workflowItem->hasDeadline()) {
             $this->datum->value = $workflowItem->getDeadline()->getShortDateLeadingZeroFormat();
         }

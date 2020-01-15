@@ -38,6 +38,7 @@ abstract class AbstractSequenceContentType extends AbstractTreeContentType
         if ($this->nextMenuClass !== null) {
             $className = $this->nextMenuClass;
             $nextStatus = new $className();
+            $nextStatus->parentId = $this->parentId;
         }
 
         return $nextStatus;

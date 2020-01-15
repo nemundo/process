@@ -58,15 +58,17 @@ class CommentProcessStatus extends AbstractProcessStatus
     {
 
         $data = new LargeText();
-        $data->id=$this->dataId;
+        //$data->id=$this->dataId;
         $data->largeText = $this->comment;
-        $data->save();
-
-
-        $this->addSearchText($this->comment);
+        $this->dataId=$data->save();
 
     }
 
+
+    protected function onSearchIndex()
+    {
+        $this->addSearchText($this->comment);
+    }
 
 
     public function getSubject()

@@ -19,9 +19,11 @@ use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Block\Div;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\Dropdown\BootstrapSiteDropdown;
+use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentGroup\ContentGroupReader;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
+use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Process\Content\Type\MenuTrait;
@@ -55,13 +57,15 @@ class ContentItemSite extends AbstractSite
         $nav = new AdminNavigation($page);
         $nav->site=ContentSite::$site;
 
-        $dataId = (new DataParameter())->getValue();
+        /*$dataId = (new DataParameter())->getValue();
 
         $reader = new ContentReader();
         $reader->model->loadContentType();
         $contentRow = $reader->getRowById($dataId);
-        $contentType = $contentRow->getContentType();
+        $contentType = $contentRow->getContentType();*/
 
+
+        $contentType = (new ContentParameter())->getContentType();
 
         $title = new AdminTitle($page);
         $title->content = $contentType->getSubject();
@@ -88,7 +92,7 @@ class ContentItemSite extends AbstractSite
         $subtitle = new AdminSubtitle($page);
         $subtitle->content = 'Child';
 
-        $table = new AdminTable($page);
+        $table = new AdminClickableTable($page);
 
         $header = new TableHeader($table);
         $header->addText('Content Type');
@@ -98,10 +102,16 @@ class ContentItemSite extends AbstractSite
 
             $childContentType = $contentRow->getContentType();
 
-            $row = new TableRow($table);
+            $row = new BootstrapClickableTableRow($table);
             $row->addText($contentRow->contentType->contentType);
             $row->addText($contentRow->subject);
             $row->addText($childContentType->getSubject());
+
+            $site = clone(ContentItemSite::$site);
+            $site->addParameter(new ContentParameter($contentRow->id));
+            //$site->title =$parentContentType->getSubject();  // $contentRow->subject;
+            $row->addClickableSite($site);
+
 
         }
 
@@ -121,15 +131,16 @@ class ContentItemSite extends AbstractSite
 
             foreach ($contentType->getParentContent() as $contentRow) {
 
-                $row = new TableRow($table);
+                $row = new BootstrapClickableTableRow($table);
 
                 $parentContentType=$contentRow->getContentType();
                 $row->addText($parentContentType->typeLabel);
 
+                $row->addText($parentContentType->getSubject());
                 $site = clone(ContentItemSite::$site);
-                $site->addParameter(new DataParameter($contentRow->id));
-                $site->title =$parentContentType->getSubject();  // $contentRow->subject;
-                $row->addSite($site);
+                $site->addParameter(new ContentParameter($contentRow->id));
+                //$site->title =$parentContentType->getSubject();  // $contentRow->subject;
+                $row->addClickableSite($site);
 
             }
 
@@ -137,11 +148,11 @@ class ContentItemSite extends AbstractSite
 
         $btn = new AdminIconSiteButton($page);
         $btn->site = ContentEditSite::$site;
-        $btn->site->addParameter(new DataParameter());
+        $btn->site->addParameter(new ContentParameter());
 
         $btn = new AdminIconSiteButton($page);
         $btn->site = ContentDeleteSite::$site;
-        $btn->site->addParameter(new DataParameter());
+        $btn->site->addParameter(new ContentParameter());
 
 
 
@@ -152,7 +163,7 @@ class ContentItemSite extends AbstractSite
 
         $reader = new ContentGroupReader();
         $reader->model->loadGroup();
-        $reader->filter->andEqual($reader->model->contentId, $dataId);
+        $reader->filter->andEqual($reader->model->contentId, $contentType->getContentId());
         foreach ($reader->getData() as $contentGroupRow) {
             $list->addText($contentGroupRow->group->group);
         }
@@ -173,7 +184,7 @@ class ContentItemSite extends AbstractSite
 
                 $site = clone(ContentItemSite::$site);
                 $site->title = $menuContentType->typeLabel;  // $contentTypeRow->contentType;
-                $site->addParameter(new DataParameter());
+                $site->addParameter(new ContentParameter());
                 $site->addParameter(new ContentTypeParameter($menuContentType->typeId));
 
                 $dropdown->addSite($site);
@@ -213,7 +224,7 @@ class ContentItemSite extends AbstractSite
 
             $btn = new AdminSiteButton($page);
             $btn->site = clone(ContentItemSite::$site);
-            $btn->site->addParameter(new DataParameter($contentRow->id));
+            $btn->site->addParameter(new ContentParameter($contentRow->id));
             $btn->site->title = 'View';
 
         }

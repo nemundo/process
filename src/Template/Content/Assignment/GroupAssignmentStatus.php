@@ -28,13 +28,15 @@ class GroupAssignmentStatus extends AbstractProcessStatus
     {
 
         $data=new GroupAssignment();
-        $data->id=$this->dataId;
+        //$data->id=$this->dataId;
         $data->groupId=$this->groupId;
-        $data->save();
+       $this->dataId= $data->save();
 
+
+       /*
         $update = new WorkflowUpdate();
         $update->groupAssignmentId = $this->groupId;
-        $update->updateById($this->parentId);
+        $update->updateById($this->parentId);*/
 
     }
 

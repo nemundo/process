@@ -2,6 +2,8 @@
 
 namespace Nemundo\Process\App\Favorite\Site;
 
+use Nemundo\Process\App\Favorite\Content\FavoriteContentType;
+use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\User\Type\UserSessionType;
@@ -36,12 +38,19 @@ class FavoriteSaveSite extends AbstractSite
     public function loadContent()
     {
 
+        $contentType = (new ContentParameter())->getContentType();
+
+        $type=new FavoriteContentType();
+        $type->parentId = $contentType->getContentId();
+        $type->saveType();
+
+        /*
         $data = new Favorite();
         $data->contentId = (new DataParameter())->getValue();
 
         //$data->dataId = (new DataIdParameter())->getValue();
         $data->userId = (new UserSessionType())->userId;
-        $data->save();
+        $data->save();*/
 
         (new UrlReferer())->redirect();
 

@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Content\Type;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\Content\Data\Content\ContentRow;
@@ -74,8 +75,7 @@ trait ContentTreeTrait
     {
 
         $count = new TreeCount();
-        //$count->filter->andEqual($count->model->parentId, $this->dataId);
-        $count->filter->andEqual($count->model->parentId, $this->getContentId());
+         $count->filter->andEqual($count->model->parentId, $this->getContentId());
         return $count->getCount();
 
     }
@@ -85,7 +85,6 @@ trait ContentTreeTrait
     {
 
         $count = new TreeCount();
-        //$count->filter->andEqual($count->model->childId, $this->dataId);
         $count->filter->andEqual($count->model->childId, $this->getContentId());
         return $count->getCount();
 
@@ -99,7 +98,6 @@ trait ContentTreeTrait
         $reader->model->loadChild();
         $reader->model->child->loadContentType();
         $reader->model->child->loadUser();
-        //$reader->filter->andEqual($reader->model->parentId, $this->dataId);
         $reader->filter->andEqual($reader->model->parentId, $this->getContentId());
 
         $reader->addOrder($reader->model->itemOrder, $sortOrder);
@@ -107,6 +105,9 @@ trait ContentTreeTrait
         /** @var ContentCustomRow[] $doc */
         $doc = [];
         foreach ($reader->getData() as $treeRow) {
+
+            $treeRow->child->version = $treeRow->itemOrder+1;
+
             $doc[] = $treeRow->child;
         }
 
@@ -119,8 +120,18 @@ trait ContentTreeTrait
 
         $delete = new TreeDelete();
         $delete->filter->andEqual($delete->model->parentId,$this->parentId);
-        //$delete->filter->orEqual($delete->model->childId, $this->dataId);
-        $delete->filter->orEqual($delete->model->childId, $this->getContentId());
+         $delete->filter->orEqual($delete->model->childId, $this->getContentId());
+        $delete->delete();
+
+    }
+
+
+    public function removeChild($childId)
+    {
+
+        $delete = new TreeDelete();
+        $delete->filter->andEqual($delete->model->parentId,$this->getContentId());
+        $delete->filter->andEqual($delete->model->childId, $childId);
         $delete->delete();
 
     }
@@ -149,14 +160,14 @@ $parentId = $treeRow->parentId;
 
 
     // getParentContentRow
+
     public function getParentContent()
     {
 
         $reader = new TreeReader();
         $reader->model->loadParent();
         $reader->model->parent->loadContentType();
-        //$reader->filter->andEqual($reader->model->childId, $this->dataId);
-        $reader->filter->andEqual($reader->model->childId, $this->getContentId());
+         $reader->filter->andEqual($reader->model->childId, $this->getContentId());
 
         /** @var ContentCustomRow[] $doc */
         $doc = [];

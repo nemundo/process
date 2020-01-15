@@ -32,7 +32,7 @@ class StatusForm extends AbstractStatusForm
         $writer->write();*/
 
 
-        $this->redirectSite->addParameter(new WorkflowParameter($this->parentId));
+        //$this->redirectSite->addParameter(new WorkflowParameter($this->parentId));
 
     }
 

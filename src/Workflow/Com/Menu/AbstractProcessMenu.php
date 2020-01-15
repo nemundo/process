@@ -100,7 +100,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
     protected function loadWorkflowItem()
     {
 
-        $this->workflowItem =new WorkflowProcess($this->workflowId);
+        $this->workflowItem = $this->process;  // new WorkflowProcess($this->workflowId);
         $this->workflowExist = $this->workflowItem->existWorkflow();
         $this->workflowClosed = $this->workflowItem->isWorkflowClosed();
         $this->nextStatus = $this->workflowStatus->getNextMenu();

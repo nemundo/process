@@ -87,6 +87,7 @@ class CalendarSite extends AbstractSite
         $header=new TableHeader($table);
         $header->addText($reader->model->date->label);
         $header->addText($reader->model->title->label);
+        $header->addText('View');
         $header->addText('Type');
         $header->addText('Source');
         $header->addText('Source Type');
@@ -99,7 +100,7 @@ class CalendarSite extends AbstractSite
 
 
             $type=$calendarIndexRow->content->getContentType();
-            $type->getView($div);
+            $type->getView($row);
 
             $row->addText($type->typeLabel);
 

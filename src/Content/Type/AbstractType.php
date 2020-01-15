@@ -5,10 +5,9 @@ namespace Nemundo\Process\Content\Type;
 
 
 use Nemundo\Core\Base\AbstractBaseClass;
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
-use Nemundo\Core\Random\UniqueId;
 use Nemundo\Html\Container\AbstractHtmlContainer;
+use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Web\Parameter\AbstractUrlParameter;
@@ -17,12 +16,15 @@ use Nemundo\Web\Site\AbstractSite;
 abstract class AbstractType extends AbstractBaseClass
 {
 
-
-    // eigentlich protected!!! unmutable
-    // getDataId()
+    /**
+     * @var string
+     */
     protected $dataId;
-    //public $dataId;
 
+    /**
+     * @var bool
+     */
+    public $createMode = true;
 
     /**
      * @var string
@@ -35,22 +37,13 @@ abstract class AbstractType extends AbstractBaseClass
     protected $viewClass;
 
 
-    protected $createMode = true;
-
-    //public $createMode = true;
-
-
     public function __construct($dataId = null)
     {
 
-        if ($dataId == null) {
-            //$this->dataId = (new UniqueId())->getUniqueId();
-        } else {
+        if ($dataId !== null) {
             $this->dataId = $dataId;
             $this->createMode = false;
         }
-
-        //(new Debug())->write($this->createMode);
 
         $this->onLoad();
 
@@ -147,10 +140,14 @@ abstract class AbstractType extends AbstractBaseClass
             /** @var AbstractContentView $view */
             $view = new $this->viewClass($parent);
             $view->dataId = $this->dataId;
-$view->contentType=$this;
+            $view->contentType = $this;
 
         } else {
-            (new LogMessage())->writeError('No View Class. Class: ' . $this->getClassName());
+            //(new LogMessage())->writeError('No View Class. Class: ' . $this->getClassName());
+
+            $view = new Paragraph($parent);
+            $view->content = '[No View]';
+
         }
 
         return $view;

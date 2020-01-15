@@ -13,6 +13,8 @@ use Nemundo\Process\Content\Type\TreeContentType;
 class ContentCustomRow extends ContentRow
 {
 
+    public $version;
+
     public function getContentType()
     {
 
@@ -23,8 +25,6 @@ class ContentCustomRow extends ContentRow
 
             /** @var AbstractContentType|AbstractTreeContentType|MenuTrait $contentType */
             $contentType = new $className($this->dataId);
-
-            //$contentType = new $className($this->id);
 
         } else {
 

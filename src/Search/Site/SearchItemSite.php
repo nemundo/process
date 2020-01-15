@@ -20,6 +20,7 @@ use Nemundo\Package\Bootstrap\Dropdown\BootstrapSiteDropdown;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentGroup\ContentGroupReader;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
+use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Process\Content\Type\MenuTrait;
@@ -49,10 +50,10 @@ class SearchItemSite extends AbstractSite
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
 
-        $dataIdParameter= new DataParameter();
-        $contentType=$dataIdParameter->getContentType();
+        //$dataIdParameter= new DataParameter();
+        //$contentType=$dataIdParameter->getContentType();
 
-
+        $contentType=(new ContentParameter())->getContentType();
 
 
         if ($contentType->hasView()) {
@@ -61,7 +62,6 @@ class SearchItemSite extends AbstractSite
 
             $title = new AdminTitle($page);
             $title->content = $contentType->getSubject();
-
 
         }
 

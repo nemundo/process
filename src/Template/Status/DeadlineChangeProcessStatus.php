@@ -39,29 +39,33 @@ class DeadlineChangeProcessStatus extends AbstractProcessStatus
     public function onCreate()
     {
 
+        $processItem = $this->getParentProcess();
 
+        /*
         $deadlineHasChanged = true;
 
-        $processItem = new WorkflowProcess($this->parentId);
+        $processItem = $this->getParentProcess();  // new WorkflowProcess($this->parentId);
         if ($processItem->hasDeadline()) {
             if ($this->deadline->getIsoDateFormat() == $processItem->getDeadline()->getIsoDateFormat()) {
                 $deadlineHasChanged = false;
             }
         }
 
-        if ($deadlineHasChanged) {
+        if ($deadlineHasChanged) {*/
 
             $data = new DeadlineChange();
-            $data->id = $this->dataId;
+            //$data->id = $this->dataId;
             $data->deadline = $this->deadline;
-            $data->save();
+            $this->dataId= $data->save();
 
             //$item = new WorkflowItem($this->parentId);
             $processItem->changeDeadline($this->deadline);
 
             //$this->saveWorkflowLog();
 
-        }
+            // nur hier content eintrag erstellen!!!
+
+        //}
     }
 
 

@@ -160,7 +160,6 @@ class WikiSite extends AbstractSite
                     $div = new Div($layout->col2);
 
                     $view = $contentType->getView($div);
-                    $view->dataId = $contentRow->id;
 
                     (new Hr($layout->col2));
 

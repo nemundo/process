@@ -37,13 +37,14 @@ class PlzImport extends AbstractBase
 
             //(new Debug())->write($csvRow->getValue('ORT'));
 
-            $item = new PlzContentItem();
-            $item->ort = $csvRow->getValue('gemeindename');
-            $item->plz = $csvRow->getValue('bfsnr');
+            $type = new PlzContentType();
+            $type->ort = $csvRow->getValue('gemeindename');
+            $type->plz = $csvRow->getValue('bfsnr');
             //$item->coordinate->latitude = $csvRow->getValue('Latitude');
             //$item->coordinate->longitude = $csvRow->getValue('Longitude');
-            $item->saveItem();
+            $type->saveType();
 
+            exit;
 
         }
 

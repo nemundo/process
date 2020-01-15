@@ -26,7 +26,7 @@ $this->tableName = "template_group_assignment";
 $this->aliasTableName = "template_group_assignment";
 $this->label = "Group Assignment";
 
-$this->primaryIndex = new \Nemundo\Db\Index\TextIdPrimaryIndex();
+$this->primaryIndex = new \Nemundo\Db\Index\UniqueIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
 $this->id->tableName = "template_group_assignment";

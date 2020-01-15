@@ -5,7 +5,7 @@ namespace Nemundo\Process\Template\Content\Event;
 
 
 use Nemundo\Core\Type\DateTime\Date;
-use Nemundo\Process\App\Calendar\Type\AbstractCalendarIndexContentType;
+use Nemundo\Process\App\Calendar\Type\AbstractCalendarContentType;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Content\Type\MenuTrait;
 use Nemundo\Process\Template\Data\Event\Event;
@@ -16,7 +16,7 @@ use Nemundo\Process\Template\Type\FileContentType;
 use Nemundo\Process\Template\Type\LargeTextContentType;
 use Nemundo\User\Access\UserRestrictionTrait;
 
-class EventContentType extends AbstractCalendarIndexContentType
+class EventContentType extends AbstractCalendarContentType
 {
 
     /**
@@ -45,7 +45,7 @@ class EventContentType extends AbstractCalendarIndexContentType
         //
 
         $this->addMenuClass(LargeTextContentType::class);
-        $this->addMenuClass(FileContentType::class);
+        //$this->addMenuClass(FileContentType::class);
 
 
         $this->date = new Date();
@@ -56,10 +56,10 @@ class EventContentType extends AbstractCalendarIndexContentType
     protected function onCreate()
     {
         $data = new Event();
-        $data->id=$this->dataId;
+        //$data->id=$this->dataId;
         $data->date=$this->date;
         $data->event=$this->event;
-        $data->save();
+        $this->dataId= $data->save();
 
     }
 
@@ -98,10 +98,6 @@ class EventContentType extends AbstractCalendarIndexContentType
     }
 
 
-
-    protected function onGetRow() {
-
-    }
 
     public function getDataRow()
     {

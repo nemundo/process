@@ -57,6 +57,7 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new LargeTextContentType());
         $setup->addContentType(new EventContentType());
         $setup->addContentType(new TextContentType());
+        $setup->addContentType(new FileContentType());
 
         $setup= new CalendarSourceSetup();
         $setup->addSourceContentType(new WikiPageContentType());

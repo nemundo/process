@@ -7,6 +7,7 @@ namespace Nemundo\Process\Template\Content\VersionText;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
+use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Template\Content\Text\TextContentForm;
@@ -37,6 +38,14 @@ class VersionTextContentForm extends AbstractContentForm
     protected function loadUpdateForm()
     {
 
+        $type=new VersionTextContentType($this->dataId);
+
+        //$p = new Paragraph($this);
+        //$p->content = $type->getDataRow()->text;
+
+        $this->text->value=$type->getDataRow()->text;
+
+
         $table = new AdminTable($this);
 
         $header=new TableHeader($table);
@@ -44,14 +53,14 @@ class VersionTextContentForm extends AbstractContentForm
         $header->addText('Version');
 
 
-        $type=new VersionTextContentType($this->dataId);
+
         foreach ($type->getChild() as $customRow) {
 
           $versionContentType =   $customRow->getContentType();
 
           $row=new TableRow($table);
           $row->addText($versionContentType->getSubject());
-          //$row->addText($customRow->)
+          $row->addText($customRow->version);
 
 
         }

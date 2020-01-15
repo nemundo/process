@@ -16,7 +16,7 @@ $this->tableName = "template_deadline_change";
 $this->aliasTableName = "template_deadline_change";
 $this->label = "Deadline Change";
 
-$this->primaryIndex = new \Nemundo\Db\Index\TextIdPrimaryIndex();
+$this->primaryIndex = new \Nemundo\Db\Index\AutoIncrementIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
 $this->id->tableName = "template_deadline_change";

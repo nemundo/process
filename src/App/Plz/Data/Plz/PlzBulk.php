@@ -9,11 +9,6 @@ protected $model;
 /**
 * @var string
 */
-public $id;
-
-/**
-* @var string
-*/
 public $plz;
 
 /**
@@ -26,8 +21,6 @@ parent::__construct();
 $this->model = new PlzModel();
 }
 public function save() {
-$id = $this->id;
-$this->typeValueList->setModelValue($this->model->id, $id);
 $this->typeValueList->setModelValue($this->model->plz, $this->plz);
 $this->typeValueList->setModelValue($this->model->ort, $this->ort);
 $id = parent::save();

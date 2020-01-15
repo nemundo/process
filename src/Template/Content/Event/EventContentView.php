@@ -30,6 +30,10 @@ class EventContentView extends AbstractContentView
 
 
         // sub image
+/*
+        Icalc Export
+    --> nach Calendar
+
 
         /*
         $contentItem = new ContentItem($this->dataId);

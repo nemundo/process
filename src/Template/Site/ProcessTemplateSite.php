@@ -4,7 +4,7 @@
 namespace Nemundo\Process\Template\Site;
 
 
-use Nemundo\Process\Template\Data\Document\Redirect\DocumentDocumentRedirectSite;
+use Nemundo\Process\Template\Data\TemplateFile\Redirect\TemplateFileFileRedirectSite;
 use Nemundo\Web\Site\AbstractSite;
 
 class ProcessTemplateSite extends AbstractSite
@@ -12,11 +12,12 @@ class ProcessTemplateSite extends AbstractSite
 
     protected function loadSite()
     {
-   $this->url = 'process-template';
-   $this->menuActive=false;
+        $this->url = 'process-template';
+        $this->menuActive = false;
 
-        new DocumentDocumentRedirectSite($this);
-        new DocumentDeleteSite($this);
+        new TemplateFileFileRedirectSite($this);
+        new FileDeleteSite($this);
+        new SourceDeleteSite($this);
 
     }
 

@@ -4,17 +4,18 @@
 namespace Nemundo\Process\Content\Type;
 
 
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Log\LogMessage;
+use Nemundo\Core\Random\UniqueId;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Html\Paragraph\Paragraph;
+use Nemundo\Process\Content\Data\Content\Content;
 use Nemundo\Process\Content\Data\Content\ContentDelete;
 use Nemundo\Process\Content\Data\Content\ContentId;
+use Nemundo\Process\Content\Data\Content\ContentUpdate;
 use Nemundo\Process\Content\Form\ContentForm;
 use Nemundo\Process\Content\View\AbstractContentList;
-use Nemundo\Process\Content\Writer\ContentWriter;
 use Nemundo\User\Type\UserSessionType;
 
 
@@ -91,7 +92,6 @@ abstract class AbstractContentType extends AbstractType
     {
 
         if ($this->contentId == null) {
-
             $id = new ContentId();
             $id->filter->andEqual($id->model->contentTypeId, $this->typeId);
             $id->filter->andEqual($id->model->dataId, $this->dataId);
@@ -106,11 +106,43 @@ abstract class AbstractContentType extends AbstractType
 
     public function saveType()
     {
-        (new LogMessage())->writeError('content type');
-        exit;
-        parent::saveType();
-        $this->saveContent();
 
+
+        $this->saveContent();
+        $this->saveSearchIndex();
+
+    }
+
+
+    protected function saveContent()
+    {
+
+        if ($this->createMode) {
+
+            $this->onCreate();
+
+            if ($this->dataId ==null) {
+                $this->dataId=(new UniqueId())->getUniqueId();
+            }
+
+            $data = new Content();
+            $data->ignoreIfExists=true;  // braucht es für onDuplicate datesets
+            $data->contentTypeId = $this->typeId;
+            $data->dateTime = $this->dateTime;
+            $data->userId = $this->userId;
+            $data->dataId = $this->dataId;
+            $data->subject = $this->getSubject();
+            $this->contentId = $data->save();
+
+        } else {
+
+            $this->onUpdate();
+
+            $update = new ContentUpdate();
+            $update->subject = $this->getSubject();
+            $update->updateById($this->contentId);
+
+        }
 
     }
 
@@ -144,19 +176,19 @@ abstract class AbstractContentType extends AbstractType
     public function getList(AbstractHtmlContainer $parent)
     {
 
-        $list=null;
+        $list = null;
 
         if ($this->listClass == null) {
             //(new LogMessage())->writeError('No Table' . $this->getClassName());
 
-            $list=new Paragraph($parent);
+            $list = new Paragraph($parent);
             $list->content = '[No List Object]';
 
 
         } else {
 
-        /** @var AbstractContentList $list */
-        $list = new $this->listClass($parent);
+            /** @var AbstractContentList $list */
+            $list = new $this->listClass($parent);
 
         }
 
@@ -202,38 +234,7 @@ abstract class AbstractContentType extends AbstractType
 
         return $value;
 
-
     }
-
-
-
-    /*
-    protected function saveContent()
-    {
-
-
-        $writer = new ContentWriter();
-        $writer->contentType = $this;
-        $writer->dataId = $this->dataId;
-        $writer->subject = $this->getSubject();
-        $this->contentId = $writer->write();
-
-        $this->saveSearchIndex();
-
-
-        /*
-        if (!$this->contentType->restricted) {
-            $data = new ContentGroup();
-            $data->ignoreIfExists = true;
-            $data->contentId = $this->dataId;
-            $data->groupId = (new PublicGroup())->id;  // $this->groupId;
-            $data->save();
-        }*/
-
-   /*     return $this->contentId;
-
-
-    }*/
 
 
     public function getDataRow()
@@ -246,13 +247,8 @@ abstract class AbstractContentType extends AbstractType
     {
 
         parent::deleteType();
-        //(new ContentDelete())->deleteById($this->dataId);
-
-        //(new Debug())->write($this->getContentId());
-
         (new ContentDelete())->deleteById($this->getContentId());
 
     }
-
 
 }

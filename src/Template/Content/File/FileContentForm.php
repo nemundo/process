@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Nemundo\Process\Template\Form;
+namespace Nemundo\Process\Template\Content\File;
 
 
 use Nemundo\Package\Bootstrap\FormElement\BootstrapFileUpload;
 use Nemundo\Process\Content\Form\AbstractContentForm;
-use Nemundo\Process\Template\Item\DocumentContentItem;
-use Nemundo\Process\Template\Status\DocumentProcessStatus;
+use Nemundo\Process\Template\Content\File\FileContentType;
+use Nemundo\Process\Template\Data\TemplateFile\TemplateFile;
 
 class FileContentForm extends AbstractContentForm
 {
@@ -15,14 +15,14 @@ class FileContentForm extends AbstractContentForm
     /**
      * @var BootstrapFileUpload
      */
-    private $document;
+    private $file;
 
     public function getContent()
     {
 
-        $this->document = new BootstrapFileUpload($this);
-        $this->document->label = 'Document';
-        $this->document->multiUpload = true;
+        $this->file = new BootstrapFileUpload($this);
+        $this->file->label = 'File';
+        $this->file->multiUpload = true;
 
         return parent::getContent();
     }
@@ -31,12 +31,17 @@ class FileContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        foreach ($this->document->getMultiFileRequest() as $fileRequest) {
+        foreach ($this->file->getMultiFileRequest() as $fileRequest) {
 
-            $status = new DocumentProcessStatus();  // new DocumentContentItem();
-            $status->parentId = $this->parentId;
-            $status->fileRequest = $fileRequest;
-            $status->saveType();
+            $data = new TemplateFile();
+            $data->active = true;
+            $data->file->fromFileRequest($fileRequest);
+            $dataId = $data->save();
+
+            $type = new FileContentType($dataId);
+            $type->parentId = $this->parentId;
+            $type->createMode=true;
+            $type->saveType();
 
         }
 

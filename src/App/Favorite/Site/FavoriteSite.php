@@ -49,10 +49,6 @@ class FavoriteSite extends AbstractSite
         $header->addText('Subject');
         $header->addEmpty();
 
-
-
-
-
         $reader = new ContentReader();
         $reader->model->loadContentType();
         $reader->filter->andEqual($reader->model->contentTypeId,(new FavoriteContentType())->typeId);
@@ -64,6 +60,10 @@ class FavoriteSite extends AbstractSite
 
             $row=new BootstrapClickableTableRow($table);
             $row->addText($contentType->getSubject());
+
+
+            // contentId =
+
 
 
             $parentContentType=$contentType->getParentContentType();

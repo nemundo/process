@@ -21,7 +21,7 @@ $this->tableName = "plz_plz";
 $this->aliasTableName = "plz_plz";
 $this->label = "Plz";
 
-$this->primaryIndex = new \Nemundo\Db\Index\TextIdPrimaryIndex();
+$this->primaryIndex = new \Nemundo\Db\Index\AutoIncrementIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
 $this->id->tableName = "plz_plz";
@@ -49,6 +49,10 @@ $this->ort->aliasFieldName = "plz_plz_ort";
 $this->ort->label = "Ort";
 $this->ort->allowNullValue = false;
 $this->ort->length = 255;
+
+$index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
+$index->indexName = "plz";
+$index->addType($this->plz);
 
 }
 }

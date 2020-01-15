@@ -8,7 +8,6 @@ use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Process\Content\Com\Container\AbstractParentContainer;
-use Nemundo\Process\Workflow\Content\Process\WorkflowProcess;
 
 
 class WorkflowLogTable extends AbstractParentContainer
@@ -24,14 +23,15 @@ class WorkflowLogTable extends AbstractParentContainer
         $header->addText('History');
         $header->addText('Ersteller');
 
-        foreach ((new WorkflowProcess($this->parentId))->getChild() as $contentRow) {
+//        foreach ((new WorkflowProcess($this->parentId))->getChild() as $contentRow) {
+        foreach ($this->contentType->getChild() as $contentRow) {
 
             $status = $contentRow->getContentType();
 
             //if ($status->showLog) {
-                $row = new TableRow($table);
-                $row->addText($status->getSubject());
-                $row->addText($contentRow->user->displayName . ' ' . $contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
+            $row = new TableRow($table);
+            $row->addText($status->getSubject());
+            $row->addText($contentRow->user->displayName . ' ' . $contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
             //}
 
         }

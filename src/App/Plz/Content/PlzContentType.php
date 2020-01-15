@@ -4,11 +4,14 @@
 namespace Nemundo\Process\App\Plz\Content;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Process\App\Plz\Data\Plz\Plz;
+use Nemundo\Process\App\Plz\Data\Plz\PlzDelete;
 use Nemundo\Process\App\Plz\Data\Plz\PlzReader;
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Content\Type\AbstractTreeContentType;
 
-class PlzContentType extends AbstractContentType
+class PlzContentType extends AbstractTreeContentType
 {
 
     public $plz;
@@ -22,21 +25,33 @@ class PlzContentType extends AbstractContentType
     }
 
 
-    protected function saveData()
+    protected function onCreate()
     {
 
-        //$this->contentType = new PlzContentType();
-
         $data = new Plz();
-        $data->id = $this->dataId;
+        $data->updateOnDuplicate=true;
+        //$data->id = $this->dataId;
         $data->plz = $this->plz;
         $data->ort = $this->ort;
-        $data->save();
+        $this->dataId =$data->save();
+
+        //(new Debug())->write($this->dataId);
+
+
+    }
+
+
+    protected function onSearchIndex()
+    {
 
         $this->addSearchWord($this->plz);
         $this->addSearchText($this->ort);
 
+    }
 
+    protected function onDelete()
+    {
+        (new PlzDelete())->deleteById($this->dataId);
     }
 
 

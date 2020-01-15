@@ -15,6 +15,7 @@ use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Listing\BootstrapHyperlinkList;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
+use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Process\Search\Com\ContentSearchForm;
@@ -119,7 +120,7 @@ class SearchSite extends AbstractSite
                 } else {
                     //$site = clone(ContentItemSite::$site);
                     $site = clone(SearchItemSite::$site);
-                    $site->addParameter(new DataParameter($indexRow->contentId));
+                    $site->addParameter(new ContentParameter($indexRow->contentId));
                     $row->addClickableSite($site);
                 }
 

@@ -21,7 +21,7 @@ use Nemundo\Process\Workflow\Data\Workflow\WorkflowPaginationReader;
 use Nemundo\Process\Workflow\Parameter\ProcessParameter;
 use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
 use Nemundo\Process\Template\Data\Document\Redirect\DocumentDocumentRedirectSite;
-use Nemundo\Process\Template\Site\DocumentDeleteSite;
+use Nemundo\Process\Template\Site\FileDeleteSite;
 use Nemundo\ToDo\Workflow\Process\ToDoProcess;
 use Nemundo\User\Parameter\UserParameter;
 use Nemundo\Web\Site\AbstractSite;

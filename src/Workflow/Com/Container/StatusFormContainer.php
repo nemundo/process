@@ -16,7 +16,7 @@ class StatusFormContainer extends AbstractHtmlContainer
     /**
      * @var string
      */
-    public $workflowId;
+    public $parentId;
 
     /**
      * @var AbstractSite
@@ -56,7 +56,7 @@ class StatusFormContainer extends AbstractHtmlContainer
             if ($showForm) {
                 $form = $this->formStatus->getForm($this);
                 $form->contentType = $this->formStatus;
-                $form->parentId = $this->workflowId;
+                $form->parentId = $this->parentId;
                 $form->redirectSite = $this->site;
                 $form->appendParameter = $this->appendWorkflowParameter;
 

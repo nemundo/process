@@ -53,8 +53,8 @@ class WikiPageContentType extends AbstractMenuContentType
     protected function onSearchIndex()
     {
 
-        $this->addSearchText($this->title);
-
+        $wikiRow = $this->getDataRow();
+        $this->addSearchText($wikiRow->title);
 
     }
 

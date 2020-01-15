@@ -12,7 +12,7 @@
             "table_name": "template_deadline_change",
             "namespace": "Nemundo\\Process\\Template\\Data\\DeadlineChange",
             "row_class_name": "",
-            "primary_index": "text_id",
+            "primary_index": "auto_increment",
             "is_deleted": false,
             "type": [
                 {
@@ -35,7 +35,7 @@
             "namespace": "Nemundo\\Process\\Template\\Data\\Document",
             "row_class_name": "",
             "primary_index": "text_id",
-            "is_deleted": false,
+            "is_deleted": true,
             "type": [
                 {
                     "type": "redirect_filename",
@@ -65,7 +65,7 @@
             "table_name": "template_event",
             "namespace": "Nemundo\\Process\\Template\\Data\\Event",
             "row_class_name": "",
-            "primary_index": "text_id",
+            "primary_index": "unique_id",
             "is_deleted": false,
             "type": [
                 {
@@ -96,7 +96,7 @@
             "table_name": "template_group_assignment",
             "namespace": "Nemundo\\Process\\Template\\Data\\GroupAssignment",
             "row_class_name": "",
-            "primary_index": "text_id",
+            "primary_index": "unique_id",
             "is_deleted": false,
             "type": [
                 {
@@ -165,6 +165,28 @@
             "index": []
         },
         {
+            "template": "active_model",
+            "model_id": "65744474-2555-49c2-8aec-ea15d7e842a1",
+            "label": "Template File",
+            "class_name": "TemplateFile",
+            "table_name": "template_template_file",
+            "namespace": "Nemundo\\Process\\Template\\Data\\TemplateFile",
+            "row_class_name": "",
+            "primary_index": "unique_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "redirect_filename",
+                    "label": "File",
+                    "field_name": "file",
+                    "variable_name": "file",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
             "template": "default",
             "model_id": "ed8adf06-bcee-420f-84eb-45944ee6192f",
             "label": "Template Text",
@@ -195,7 +217,7 @@
             "table_name": "template_user_assignment_log",
             "namespace": "Nemundo\\Process\\Template\\Data\\UserAssignmentLog",
             "row_class_name": "",
-            "primary_index": "text_id",
+            "primary_index": "unique_id",
             "is_deleted": false,
             "type": [
                 {

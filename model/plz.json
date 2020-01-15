@@ -12,7 +12,7 @@
             "table_name": "plz_plz",
             "namespace": "Nemundo\\Process\\App\\Plz\\Data\\Plz",
             "row_class_name": "",
-            "primary_index": "text_id",
+            "primary_index": "auto_increment",
             "is_deleted": false,
             "type": [
                 {
@@ -34,7 +34,15 @@
                     "length": "255"
                 }
             ],
-            "index": []
+            "index": [
+                {
+                    "index_name": "plz",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "plz"
+                    ]
+                }
+            ]
         }
     ]
 }

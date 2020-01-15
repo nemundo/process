@@ -107,7 +107,7 @@ class ContentSite extends AbstractSite
         $contentReader->model->loadContentType();
         $contentReader->model->loadUser();
         $contentReader->filter = $filter;
-        $contentReader->addOrder($contentReader->model->dateTime, SortOrder::DESCENDING);
+        $contentReader->addOrder($contentReader->model->id, SortOrder::DESCENDING);
         $contentReader->paginationLimit = 50;
 
 
@@ -119,8 +119,8 @@ class ContentSite extends AbstractSite
         $header->addText('Class');
 
         $header->addText('Data Id');
-        $header->addText('Subject (Db Content)');
-        $header->addText('Subject (Item)');
+        $header->addText('Subject (Data)');
+        $header->addText('Subject (Type)');
         $header->addText('Date/Time');
         $header->addText('User');
         $header->addEmpty();
@@ -152,7 +152,7 @@ class ContentSite extends AbstractSite
 
                 //$item = $contentType->getItem($contentRow->id);
 
-                $row->addText($contentType->getClassName());
+                //$row->addText($contentType->getClassName());
                 $row->addText($contentType->getSubject());
 
                 //$row->addText($contentType->getSubject($contentRow->id));

@@ -11,6 +11,8 @@ use Nemundo\Process\App\Favorite\Install\FavoriteInstall;
 use Nemundo\Process\App\Inbox\Install\InboxInstall;
 use Nemundo\Process\App\News\Data\NewsCollection;
 use Nemundo\Process\App\News\Type\NewsContentType;
+use Nemundo\Process\App\Plz\Content\PlzContentType;
+use Nemundo\Process\App\Plz\Data\PlzCollection;
 use Nemundo\Process\App\Survey\Content\Type\ErfassungContentType;
 use Nemundo\Process\App\Survey\Content\Type\SurveyContentType;
 use Nemundo\Process\App\Survey\Data\SurveyCollection;
@@ -65,6 +67,7 @@ class ProcessInstall extends AbstractInstall
         $setup->addCollection(new NewsCollection());
         $setup->addCollection(new CalendarCollection());
         $setup->addCollection(new DocumentCollection());
+        $setup->addCollection(new PlzCollection());
 
         $setup = new ScriptSetup();
         $setup->addScript(new ProcessCleanScript());
@@ -78,6 +81,7 @@ class ProcessInstall extends AbstractInstall
         //$setup->addContentType(new OptionTextContentType());
         //$setup->addContentType(new DescriptionContentType());
         $setup->addContentType(new ErfassungContentType());
+        $setup->addContentType(new PlzContentType());
 
 
         $setup = new GroupSetup();

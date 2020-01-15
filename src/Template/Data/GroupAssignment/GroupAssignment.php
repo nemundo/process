@@ -9,11 +9,6 @@ protected $model;
 /**
 * @var string
 */
-public $id;
-
-/**
-* @var string
-*/
 public $groupId;
 
 /**
@@ -27,8 +22,6 @@ $this->model = new GroupAssignmentModel();
 $this->deadline = new \Nemundo\Core\Type\DateTime\Date();
 }
 public function save() {
-$id = $this->id;
-$this->typeValueList->setModelValue($this->model->id, $id);
 $this->typeValueList->setModelValue($this->model->groupId, $this->groupId);
 $property = new \Nemundo\Model\Data\Property\DateTime\DateDataProperty($this->model->deadline, $this->typeValueList);
 $property->setValue($this->deadline);

@@ -53,6 +53,7 @@ class DocumentSite extends AbstractSite
             $contentType->getList($layout->col2);
 
 
+            /*
             $dataParameter=new DataParameter();
             if ($dataParameter->exists()) {
 
@@ -60,7 +61,7 @@ class DocumentSite extends AbstractSite
 
                 $contentType->getView($layout->col3);
 
-            }
+            }*/
 
 
 

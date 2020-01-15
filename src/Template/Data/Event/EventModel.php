@@ -21,7 +21,7 @@ $this->tableName = "template_event";
 $this->aliasTableName = "template_event";
 $this->label = "Event";
 
-$this->primaryIndex = new \Nemundo\Db\Index\TextIdPrimaryIndex();
+$this->primaryIndex = new \Nemundo\Db\Index\UniqueIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
 $this->id->tableName = "template_event";

@@ -1,3 +1,0 @@
-Icalc Export
---> nach Calendar
-

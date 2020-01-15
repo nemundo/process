@@ -8,13 +8,13 @@ use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Admin\Com\Widget\AdminWidget;
 use Nemundo\Com\FormBuilder\RedirectTrait;
 use Nemundo\Core\Log\LogMessage;
+use Nemundo\Process\Content\Com\Table\SourceTable;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Group\Com\GroupParentContainer;
 use Nemundo\Process\Workflow\Com\Container\StatusFormContainer;
 use Nemundo\Process\Workflow\Com\Container\WorkflowStreamContainer;
 use Nemundo\Process\Workflow\Com\Layout\WorkflowLayout;
 use Nemundo\Process\Workflow\Com\Menu\ProcessMenu;
-use Nemundo\Process\Workflow\Com\Table\SourceTable;
 use Nemundo\Process\Workflow\Com\Table\WorkflowLogTable;
 use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowReader;
@@ -22,23 +22,9 @@ use Nemundo\Process\Workflow\Parameter\StatusParameter;
 use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
 use Nemundo\Web\Site\Site;
 
-class ProcessView extends AbstractContentView
+class ProcessView extends AbstractProcessView
 {
 
-    use RedirectTrait;
-
-    /**
-     * @var AbstractProcess
-     */
-    //public $contentType;
-
-    /**
-     * @var AbstractProcess
-     */
-    public $process;
-
-
-    public $appendWorkflowParameter = false;
 
     public $showDocument = true;
 
@@ -128,7 +114,7 @@ class ProcessView extends AbstractContentView
             //$form->appendWorkflowParameter=true;
 
             $form->site = clone($this->redirectSite);
-            $form->workflowId = $this->dataId;
+            $form->parentId = $this->dataId;
             $form->appendWorkflowParameter = $this->appendWorkflowParameter;
         }
 
@@ -138,8 +124,8 @@ class ProcessView extends AbstractContentView
 
 
 
-        $table = new SourceTable($layout->col3);
-        $table->parentId = $this->dataId;
+        $table =new SourceTable($layout->col3);
+        $table->contentType = $this->contentType;  //parentId = $this->dataId;
 
 
         $table = new WorkflowLogTable($layout->col3);

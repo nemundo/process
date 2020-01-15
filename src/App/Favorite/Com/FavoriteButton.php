@@ -4,6 +4,11 @@ namespace Nemundo\Process\App\Favorite\Com;
 
 
 use Nemundo\Admin\Com\Button\AdminSiteButton;
+use Nemundo\Model\Join\ModelJoin;
+use Nemundo\Process\App\Favorite\Content\FavoriteContentType;
+use Nemundo\Process\Content\Data\Content\ContentCount;
+use Nemundo\Process\Content\Data\Tree\TreeModel;
+use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Process\Content\Type\AbstractContentType;
@@ -21,12 +26,12 @@ class FavoriteButton extends AbstractHtmlContainer
     /**
      * @var AbstractContentType
      */
-    ///public $contentType;
+    public $contentType;
 
     /**
      * @var string
      */
-    public $dataId;  // = '0';
+    //public $dataId;  // = '0';
 
     /**
      * @var string
@@ -36,17 +41,33 @@ class FavoriteButton extends AbstractHtmlContainer
     public function getContent()
     {
 
-        $count = new FavoriteCount();
+        /*$count = new FavoriteCount();
         //$count->filter->andEqual($count->model->contentTypeId, $this->contentType->contentId);
         $count->filter->andEqual($count->model->contentId, $this->dataId);
-        $count->filter->andEqual($count->model->userId, (new UserSessionType())->userId);
+        $count->filter->andEqual($count->model->userId, (new UserSessionType())->userId);*/
+
+        $contentCount=new ContentCount();
+        $contentCount->filter->andEqual($contentCount->model->contentTypeId, (new FavoriteContentType())->typeId);
+
+        $contentCount->filter->andEqual($contentCount->model->userId, (new UserSessionType())->userId);
+
+        $treeModel  = new TreeModel();
+        $join=new ModelJoin();
+        $join->externalModel=$treeModel;
+        $join->externalType=$treeModel->childId;
+        $join->type = $contentCount->model->id;
+
+        $contentCount->addJoin($join);
+
+        $contentCount->filter->andEqual($treeModel->parentId,$this->contentType->getContentId());
 
 
-        if ($count->getCount() == 0) {
+        if ($contentCount->getCount() == 0) {
             $button = new AdminSiteButton($this);
             $button->content = $this->label;
             $button->site = FavoriteSaveSite::$site;
-            $button->site->addParameter(new DataParameter($this->dataId));
+            $button->site->addParameter(new ContentParameter($this->contentType->getContentId()));
+            //$button->site->addParameter(new DataParameter($this->dataId));
             //$button->site->addParameter(new ContentTypeParameter($this->contentType->id));
 
         } else {
@@ -56,8 +77,9 @@ class FavoriteButton extends AbstractHtmlContainer
             $button = new AdminSiteButton($this);
             $button->content = 'Favorit löschen';
             $button->site = FavoriteDeleteSite::$site;
-            //$button->site->addParameter(new SubscriptionParameter())
-            $button->site->addParameter(new DataParameter($this->dataId));
+            $button->site->addParameter(new ContentParameter());
+            //$button->site->addParameter(new DataParameter($this->dataId));
+            //$button->site->addParameter(new DataParameter($this->dataId));
             //$button->site->addParameter(new ContentTypeParameter($this->contentType->id));
 
         }

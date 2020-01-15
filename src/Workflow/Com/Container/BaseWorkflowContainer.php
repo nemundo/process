@@ -5,7 +5,7 @@ namespace Nemundo\Process\Workflow\Com\Container;
 
 
 use Nemundo\Process\Content\Com\Container\AbstractParentContainer;
-use Nemundo\Process\Template\Container\DocumentParentContainer;
+use Nemundo\Process\Template\Container\FileParentContainer;
 use Nemundo\Process\Workflow\Com\Table\BaseWorkflowTable;
 use Nemundo\Process\Workflow\Com\Table\SourceTable;
 
