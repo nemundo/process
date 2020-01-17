@@ -6,7 +6,7 @@ namespace Nemundo\Process\Group\Type;
 
 use Nemundo\Core\Base\AbstractBase;
 
-abstract class AbstractGroupType extends AbstractBase
+abstract class AbstractGroupTypeOld extends AbstractBase
 {
 
     public $id;

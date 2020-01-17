@@ -20,19 +20,19 @@ class WorkflowLogTable extends AbstractParentContainer
         $table = new AdminTable($this);
 
         $header = new TableHeader($table);
+        $header->addText('Typ');
+
         $header->addText('History');
         $header->addText('Ersteller');
 
-//        foreach ((new WorkflowProcess($this->parentId))->getChild() as $contentRow) {
         foreach ($this->contentType->getChild() as $contentRow) {
 
             $status = $contentRow->getContentType();
 
-            //if ($status->showLog) {
             $row = new TableRow($table);
+            $row->addText($status->typeLabel);
             $row->addText($status->getSubject());
             $row->addText($contentRow->user->displayName . ' ' . $contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
-            //}
 
         }
 

@@ -5,6 +5,7 @@ namespace Nemundo\Process\Install;
 
 
 use Nemundo\Model\Setup\ModelCollectionSetup;
+use Nemundo\Process\App\Assignment\Install\AssignmentUninstall;
 use Nemundo\Process\App\Document\Data\DocumentCollection;
 use Nemundo\Process\App\Favorite\Data\FavoriteCollection;
 use Nemundo\Process\App\Inbox\Install\InboxUninstall;
@@ -32,6 +33,7 @@ class ProcessUninstall extends AbstractUninstall
 
         //(new ChangeRequestUninstall())->uninstall();
         (new ToDoUninstall())->uninstall();
+        (new AssignmentUninstall())->uninstall();
 
         $setup=new ModelCollectionSetup();
         $setup->removeCollection(new SearchCollection());

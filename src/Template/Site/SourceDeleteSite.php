@@ -4,13 +4,9 @@ namespace Nemundo\Process\Template\Site;
 
 
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
-
 use Nemundo\Process\Content\Parameter\ChildParameter;
 use Nemundo\Process\Content\Parameter\ContentParameter;
-use Nemundo\Process\Workflow\Content\Item\Status\StatusItem;
-use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
-use Nemundo\Process\Template\Parameter\DocumentParameter;
-use Nemundo\Process\Template\Status\DocumentDeleteProcessStatus;
+use Nemundo\Process\Template\Content\SourceRemove\SourceRemoveContentType;
 use Nemundo\Web\Url\UrlReferer;
 
 
@@ -26,18 +22,23 @@ class SourceDeleteSite extends AbstractDeleteIconSite
     {
         $this->url = 'source-delete';
         $this->menuActive = false;
-        SourceDeleteSite::$site= $this;
+        SourceDeleteSite::$site = $this;
     }
-
 
 
     public function loadContent()
     {
 
-        $childId = (new ChildParameter())->getValue();
+      //  $childId = (new ChildParameter())->getValue();
 
-        $contentType = (new ContentParameter())->getContentType();
-$contentType->removeChild($childId);
+        $type = new SourceRemoveContentType();
+        $type->parentId = (new ContentParameter())->getValue();
+        $type->removeId=(new ChildParameter())->getValue();
+        $type->saveType();
+
+
+        //$contentType = (new ContentParameter())->getContentType();
+        //$contentType->removeChild($childId);
 
         (new UrlReferer())->redirect();
 

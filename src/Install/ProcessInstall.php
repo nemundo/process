@@ -5,6 +5,8 @@ namespace Nemundo\Process\Install;
 
 use Nemundo\App\Script\Setup\ScriptSetup;
 use Nemundo\Model\Setup\ModelCollectionSetup;
+use Nemundo\Process\App\Assignment\Content\Message\MessageAssignmentContentType;
+use Nemundo\Process\App\Assignment\Install\AssignmentInstall;
 use Nemundo\Process\App\Calendar\Data\CalendarCollection;
 use Nemundo\Process\App\Document\Data\DocumentCollection;
 use Nemundo\Process\App\Favorite\Install\FavoriteInstall;
@@ -22,6 +24,7 @@ use Nemundo\Process\Content\Script\ContentUpdateScript;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Geo\Data\GeoCollection;
 use Nemundo\Process\Group\Data\GroupCollection;
+use Nemundo\Process\Group\Install\GroupInstall;
 use Nemundo\Process\Group\Setup\GroupSetup;
 use Nemundo\Process\Group\Type\AppUserGroupType;
 use Nemundo\Process\Group\Type\PublicGroupContentType;
@@ -50,8 +53,9 @@ class ProcessInstall extends AbstractInstall
         (new WikiInstall())->install();
         (new TemplateInstall())->install();
         (new FavoriteInstall())->install();
+        (new GroupInstall())->install();
 
-
+        (new AssignmentInstall())->install();
 
         //(new ToDoInstall())->install();
 
@@ -82,6 +86,7 @@ class ProcessInstall extends AbstractInstall
         //$setup->addContentType(new DescriptionContentType());
         $setup->addContentType(new ErfassungContentType());
         $setup->addContentType(new PlzContentType());
+        $setup->addContentType(new MessageAssignmentContentType());
 
 
         $setup = new GroupSetup();
@@ -90,6 +95,7 @@ class ProcessInstall extends AbstractInstall
         //$setup->addGroupType(new AppUserGroupType());
 
 
+        /*
         $reader = new UserReader();
         foreach ($reader->getData() as $userRow) {
 
@@ -107,7 +113,7 @@ class ProcessInstall extends AbstractInstall
             $setup->addGroup($group,new UserGroupType());*/
 
 
-        }
+        //}
 
 
         /*

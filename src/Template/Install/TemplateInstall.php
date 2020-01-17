@@ -13,10 +13,13 @@ use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Template\Content\AddSource\AddSourceContentType;
 use Nemundo\Process\Template\Content\Event\EventContentType;
 use Nemundo\Process\Template\Content\File\FileContentType;
+use Nemundo\Process\Template\Content\File\FileDeleteContentType;
+use Nemundo\Process\Template\Content\SourceRemove\SourceRemoveContentType;
 use Nemundo\Process\Template\Content\Text\TextContentType;
 use Nemundo\Process\Template\Content\User\UserContentType;
 use Nemundo\Process\Template\Content\VersionText\VersionTextContentType;
 use Nemundo\Process\Template\Data\TemplateCollection;
+
 use Nemundo\Process\Template\Status\DocumentDeleteProcessStatus;
 
 use Nemundo\Process\Template\Type\LargeTextContentType;
@@ -35,14 +38,15 @@ class TemplateInstall extends AbstractInstall
         $setup = new ModelCollectionSetup();
         $setup->addCollection(new TemplateCollection());
 
-        $setup = new StatusSetup();
-        $setup->addStatus(new DocumentDeleteProcessStatus());
+        //$setup = new StatusSetup();
+        //$setup->addStatus(new DocumentDeleteProcessStatus());
         //$setup->addStatus(new ReopenStatus());
 
 
         $setup = new ContentTypeSetup();
         $setup->addContentType(new LargeTextContentType());
         $setup->addContentType(new FileContentType());
+        $setup->addContentType(new FileDeleteContentType());
         $setup->addContentType(new TextContentType());
         $setup->addContentType(new VersionTextContentType());
 
@@ -52,6 +56,8 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new UserContentType());
         $setup->addContentType(new EventContentType());
         $setup->addContentType(new AddSourceContentType());
+        $setup->addContentType(new SourceRemoveContentType());
+
 
         $setup = new WikiSetup();
         $setup->addContentType(new LargeTextContentType());

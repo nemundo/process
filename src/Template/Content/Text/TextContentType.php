@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Template\Content\Text;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Template\Data\TemplateText\TemplateText;
 use Nemundo\Process\Template\Data\TemplateText\TemplateTextDelete;
@@ -26,6 +27,8 @@ class TextContentType extends AbstractTreeContentType
 
     protected function onCreate()
     {
+
+        (new Debug())->write($this->getContentId());
 
         $data = new TemplateText();
         $data->text = $this->text;

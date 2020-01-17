@@ -84,7 +84,6 @@ abstract class AbstractContentType extends AbstractType
         $this->dateTime = (new DateTime())->setNow();
         $this->userId = (new UserSessionType())->userId;
 
-
     }
 
 
@@ -100,16 +99,16 @@ abstract class AbstractContentType extends AbstractType
 
         return $this->contentId;
 
-
     }
 
 
     public function saveType()
     {
 
-
         $this->saveContent();
         $this->saveSearchIndex();
+
+        return $this->dataId;
 
     }
 
@@ -119,12 +118,32 @@ abstract class AbstractContentType extends AbstractType
 
         if ($this->createMode) {
 
+
+            /*
+            $data = new Content();
+            $data->ignoreIfExists=true;  // braucht es für onDuplicate datesets
+            $data->contentTypeId = $this->typeId;
+            $data->dateTime = $this->dateTime;
+            $data->userId = $this->userId;
+            //$data->dataId = $this->dataId;
+            //$data->subject = $this->getSubject();
+            $this->contentId = $data->save();*/
+
+            $this->saveContentBefore();
+
             $this->onCreate();
 
             if ($this->dataId ==null) {
                 $this->dataId=(new UniqueId())->getUniqueId();
             }
 
+            $update = new ContentUpdate();
+            $update->dataId = $this->dataId;
+            $update->subject = $this->getSubject();
+            $update->updateById($this->contentId);
+
+
+            /*
             $data = new Content();
             $data->ignoreIfExists=true;  // braucht es für onDuplicate datesets
             $data->contentTypeId = $this->typeId;
@@ -132,7 +151,7 @@ abstract class AbstractContentType extends AbstractType
             $data->userId = $this->userId;
             $data->dataId = $this->dataId;
             $data->subject = $this->getSubject();
-            $this->contentId = $data->save();
+            $this->contentId = $data->save();*/
 
         } else {
 
@@ -143,6 +162,29 @@ abstract class AbstractContentType extends AbstractType
             $update->updateById($this->contentId);
 
         }
+
+    }
+
+
+    protected function saveContentBefore() {
+
+        $data = new Content();
+        $data->ignoreIfExists=true;  // braucht es für onDuplicate datesets
+        $data->contentTypeId = $this->typeId;
+        $data->dateTime = $this->dateTime;
+        $data->userId = $this->userId;
+        //$data->dataId = $this->dataId;
+        //$data->subject = $this->getSubject();
+        $this->contentId = $data->save();
+
+
+    }
+
+
+    protected function saveContent2() {
+
+
+
 
     }
 

@@ -11,7 +11,7 @@ use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 abstract class AbstractStatusForm extends AbstractContentForm
 {
 
-    use StatusFormTrait;
+    //use StatusFormTrait;
 
     /**
      * @var AbstractProcessStatus

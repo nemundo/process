@@ -12,8 +12,9 @@ use Nemundo\Model\Join\ModelJoin;
 use Nemundo\Process\Content\Com\Container\AbstractParentContainer;
 use Nemundo\Process\Content\Data\Content\ContentModel;
 use Nemundo\Process\Content\Data\Tree\TreeModel;
+use Nemundo\Process\Content\Parameter\ParentParameter;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileReader;
-use Nemundo\Process\Template\Parameter\DocumentParameter;
+use Nemundo\Process\Template\Parameter\FileParameter;
 use Nemundo\Process\Template\Site\FileDeleteSite;
 use Nemundo\Process\Template\Status\DocumentProcessStatus;
 use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
@@ -87,8 +88,9 @@ class FileParentContainer extends AbstractParentContainer
 
 
                 $site = clone(FileDeleteSite::$site);
+                $site->addParameter(new ParentParameter($this->parentId));
                 //$site->addParameter(new WorkflowParameter($this->parentId));
-                $site->addParameter(new DocumentParameter($documentRow->id));
+                $site->addParameter(new FileParameter($documentRow->id));
                 $row->addIconSite($site);
 
 

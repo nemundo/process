@@ -7,7 +7,7 @@ namespace Nemundo\Process\Content\Parameter;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Web\Parameter\AbstractUrlParameter;
 
-class ContentParameter extends AbstractUrlParameter
+class ContentParameter extends AbstractContentUrlParameter
 {
 
     protected function loadParameter()
@@ -15,6 +15,7 @@ class ContentParameter extends AbstractUrlParameter
         $this->parameterName = 'content';
     }
 
+    /*
     public function getContentType()
     {
 
@@ -25,7 +26,7 @@ class ContentParameter extends AbstractUrlParameter
 
         return $contentType;
 
-    }
+    }*/
 
 
 }

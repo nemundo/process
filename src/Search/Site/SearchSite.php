@@ -6,11 +6,14 @@ namespace Nemundo\Process\Search\Site;
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\App\Search\Parameter\SearchQueryParameter;
+use Nemundo\Com\TableBuilder\TableCell;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Core\Language\LanguageCode;
+use Nemundo\Core\Text\TextBold;
 use Nemundo\Db\Sql\Field\CountField;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Paragraph\Paragraph;
+use Nemundo\Html\Table\Th;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Listing\BootstrapHyperlinkList;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
@@ -22,6 +25,7 @@ use Nemundo\Process\Search\Com\ContentSearchForm;
 use Nemundo\Process\Search\Content\Log\SearchLogContentType;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexCount;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexPaginationReader;
+use Nemundo\Process\Text\BoldText;
 use Nemundo\Web\Site\AbstractSite;
 
 class SearchSite extends AbstractSite
@@ -41,7 +45,6 @@ class SearchSite extends AbstractSite
 
         new SearchItemSite($this);
         new SearchJsonSite($this);
-
 
     }
 
@@ -94,38 +97,42 @@ class SearchSite extends AbstractSite
             $logType->saveType();
 
 
+            $bold = new TextBold();
+            $bold->addSearchQuery($form->getSearchQuery());
+
+
             $layout = new BootstrapTwoColumnLayout($page);
 
             $table = new AdminClickableTable($layout->col1);
 
             $header = new TableHeader($table);
-            $header->addText('Content Type');
-            $header->addText('Subject');
 
+            $th = new Th($header);
+            $th->content[LanguageCode::EN]='Subject';
+            $th->content[LanguageCode::DE]='Betreff';
+
+            $th = new Th($header);
+            $th->content[LanguageCode::EN]='Type';
+            $th->content[LanguageCode::DE]='Typ';
 
             foreach ($searchIndexReader->getData() as $indexRow) {
 
                 $row = new BootstrapClickableTableRow($table);
-                $row->addText($indexRow->content->contentType->contentType);
-                //$row->addText($indexRow->content->subject);
 
-                //$contentType =  $indexRow->content->contentType->getContentType();
                 $contentType = $indexRow->content->getContentType();
-
-                $row->addText($contentType->getSubject());
+                $row->addText($bold->getBoldText( $contentType->getSubject()));
+                $row->addText($indexRow->content->contentType->contentType);
 
                 if ($contentType->hasViewSite()) {
                     $site = $contentType->getViewSite();
                     $row->addClickableSite($site);
                 } else {
-                    //$site = clone(ContentItemSite::$site);
                     $site = clone(SearchItemSite::$site);
                     $site->addParameter(new ContentParameter($indexRow->contentId));
                     $row->addClickableSite($site);
                 }
 
             }
-
 
             $pagination = new BootstrapPagination($layout->col1);
             $pagination->paginationReader = $searchIndexReader;
@@ -134,7 +141,6 @@ class SearchSite extends AbstractSite
             // Alle Anzeigen
 
             $list = new BootstrapHyperlinkList($layout->col2);
-
 
             $searchIndexReader = new SearchIndexPaginationReader();
             $searchIndexReader->model->loadContent();

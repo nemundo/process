@@ -8,10 +8,16 @@ use Nemundo\Package\Bootstrap\Form\BootstrapForm;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Group\Content\Group\GroupContentType;
+use Nemundo\Process\Group\Type\AbstractGroupContentType;
 
 
 class GroupContentForm extends AbstractContentForm
 {
+
+    /**
+     * @var AbstractGroupContentType
+     */
+    public $contentType;
 
     /**
      * @var BootstrapTextBox
@@ -31,9 +37,14 @@ class GroupContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
+        $this->contentType->group= $this->group->getValue();
+        $this->contentType->saveType();
+
+
+        /*
         $item=new GroupContentType($this->dataId);  // GroupContentItem();
         $item->group = $this->group->getValue();
-        $item->saveItem();
+        $item->saveItem();*/
 
     }
 

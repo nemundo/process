@@ -25,9 +25,9 @@ class DeadlineChangeForm extends AbstractStatusForm
         $this->datum->label = 'Datum';
         $this->datum->validation = true;
 
-        $workflowItem = $this->contentType->getParentProcess();
-        if ($workflowItem->hasDeadline()) {
-            $this->datum->value = $workflowItem->getDeadline()->getShortDateLeadingZeroFormat();
+        $process = $this->contentType->getParentProcess();
+        if ($process->hasDeadline()) {
+            $this->datum->value = $process->getDeadline()->getShortDateLeadingZeroFormat();
         }
 
         return parent::getContent();

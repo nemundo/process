@@ -4,12 +4,12 @@
 namespace Nemundo\Process\Content\Site;
 
 
-use Nemundo\Com\FormBuilder\SearchForm;
-use Nemundo\Core\Debug\Debug;
+use Nemundo\Admin\Com\Table\AdminTable;
+use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
-use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
-use Nemundo\Process\Content\Com\ListBox\ContentTypeListBox;
-use Nemundo\Process\Content\Parameter\ContentTypeParameter;
+use Nemundo\Process\Content\Data\Content\ContentCount;
+use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
 use Nemundo\Web\Site\AbstractSite;
 
 class ContentTypeSite extends AbstractSite
@@ -29,6 +29,35 @@ class ContentTypeSite extends AbstractSite
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
 
+        $table = new AdminTable($page);
+
+        $header = new TableHeader($table);
+        $header->addText('Type');
+        $header->addText('Type Id');
+        $header->addText('Class');
+        $header->addText('Item Count');
+
+
+        $reader = new ContentTypeReader();
+        $reader->addOrder($reader->model->contentType);
+        foreach ($reader->getData() as $contentTypeRow) {
+
+            $row = new TableRow($table);
+
+            $row->addText($contentTypeRow->contentType);
+            $row->addText($contentTypeRow->id);
+            $row->addText($contentTypeRow->phpClass);
+
+            $count = new ContentCount();
+            $count->filter->andEqual($count->model->contentTypeId,$contentTypeRow->id);
+            $row->addText($count->getCount());
+
+
+
+        }
+
+
+        /*
         $form = new SearchForm($page);
 
         $formRow = new BootstrapFormRow($form);
@@ -57,7 +86,7 @@ class ContentTypeSite extends AbstractSite
             }
 
 
-        }
+        }*/
 
         $page->render();
 

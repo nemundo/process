@@ -1,0 +1,134 @@
+{
+    "app": "Assignment",
+    "name": "assignment",
+    "namespace": "Nemundo\\Process\\App\\Assignment",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "9d8806c5-4cd2-4b7c-9978-c2cba2b990b3",
+            "label": "Assignment",
+            "class_name": "Assignment",
+            "table_name": "process_assignment",
+            "namespace": "Nemundo\\Process\\App\\Assignment\\Data\\Assignment",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Source",
+                    "field_name": "source",
+                    "variable_name": "source",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": "external",
+                    "label": "Group",
+                    "field_name": "group",
+                    "variable_name": "group",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "c6e00009-24e0-4cef-82ee-34a89152415f"
+                },
+                {
+                    "type": "large_text",
+                    "label": "Message",
+                    "field_name": "message",
+                    "variable_name": "message",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "Status",
+                    "field_name": "status",
+                    "variable_name": "status",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "5c310b41-1d1b-4b1d-847e-0be92971574a"
+                },
+                {
+                    "type": "date",
+                    "label": "Deadline",
+                    "field_name": "deadline",
+                    "variable_name": "deadline",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "Content",
+                    "field_name": "content",
+                    "variable_name": "content",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "source",
+                    "index_type": "index",
+                    "field_name": [
+                        "source"
+                    ]
+                },
+                {
+                    "index_name": "status",
+                    "index_type": "index",
+                    "field_name": [
+                        "status"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
+            "model_id": "5c310b41-1d1b-4b1d-847e-0be92971574a",
+            "label": "AssignmentStatus",
+            "class_name": "AssignmentStatus",
+            "table_name": "process_assignment_status",
+            "namespace": "Nemundo\\Process\\App\\Assignment\\Data\\AssignmentStatus",
+            "row_class_name": "",
+            "primary_index": "number_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Status",
+                    "field_name": "status",
+                    "variable_name": "status",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "441089d8-94d3-4e23-86ec-5592dada9e64",
+            "label": "Message Assignment",
+            "class_name": "MessageAssignment",
+            "table_name": "assignment_message_assignment",
+            "namespace": "Nemundo\\Process\\App\\Assignment\\Data\\MessageAssignment",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "large_text",
+                    "label": "Message",
+                    "field_name": "message",
+                    "variable_name": "message",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        }
+    ]
+}

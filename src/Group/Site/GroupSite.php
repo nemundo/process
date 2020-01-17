@@ -4,15 +4,20 @@
 namespace Nemundo\Process\Group\Site;
 
 
+use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminTable;
+use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
+use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
+use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Group\Com\GroupListBox;
+use Nemundo\Process\Group\Com\ListBox\GroupTypeListBox;
 use Nemundo\Process\Group\Content\GroupContentForm;
 use Nemundo\Process\Group\Content\GroupUserForm;
 use Nemundo\Process\Group\Data\Group\GroupReader;
@@ -36,7 +41,7 @@ class GroupSite extends AbstractSite
         $this->url = 'group';
         GroupSite::$site=$this;
 
-        new GroupItemSite($this);
+        //new GroupItemSite($this);
 
     }
 
@@ -64,7 +69,76 @@ class GroupSite extends AbstractSite
 
 
 
+        $form=new SearchForm($layout->col1);
 
+        $formRow = new BootstrapFormRow($form);
+
+        $groupType = new GroupTypeListBox($formRow);
+        $groupType->searchMode=true;
+        $groupType->submitOnChange=true;
+
+
+        // group type (distinct)
+
+
+        $table=new AdminClickableTable($layout->col1);
+
+        $header=new TableHeader($table);
+        $header->addText('Group');
+        $header->addText('Group Type');
+
+        $groupReader=new GroupReader();
+        $groupReader->model->loadGroupType();
+
+        if ($groupType->hasValue()) {
+            $groupReader->filter->andEqual($groupReader->model->groupTypeId, $groupType->getValue());
+        }
+
+
+        $groupReader->addOrder($groupReader->model->group);
+        foreach ($groupReader->getData() as $groupRow) {
+            $row=new BootstrapClickableTableRow($table);
+            $row->addText($groupRow->group);
+            $row->addText($groupRow->groupType->contentType);
+
+            $site = clone(GroupSite::$site);
+            $site->addParameter(new GroupParameter($groupRow->id));
+            $row->addClickableSite($site);
+
+        }
+
+
+        $groupParameter=new GroupParameter();
+        if ($groupParameter->exists()) {
+
+            $groupId=$groupParameter->getValue();
+
+            $groupRow = (new GroupReader())->getRowById($groupId);
+
+            $subtitle = new AdminSubtitle($layout->col2);
+            $subtitle->content=$groupRow->group;
+
+            $table = new AdminTable($layout->col2);
+
+            $header=new TableHeader($table);
+            $header->addText('User');
+            $header->addEmpty();
+
+            $groupReader = new GroupUserReader();
+            $groupReader->model->loadUser();
+            $groupReader->filter->andEqual($groupReader->model->groupId,$groupId );
+            $groupReader->addOrder($groupReader->model->user->displayName);
+            foreach ($groupReader->getData() as $groupUserRow) {
+                $row = new TableRow($table);
+                $row->addText($groupUserRow->user->displayName);
+            }
+
+
+        }
+
+
+
+        /*
 
         $search = new SearchForm($layout->col1);
 
@@ -80,6 +154,8 @@ class GroupSite extends AbstractSite
 
 
 
+
+        /*
         $groupParameter=new GroupParameter();
         if ($groupParameter->hasValue()) {
 

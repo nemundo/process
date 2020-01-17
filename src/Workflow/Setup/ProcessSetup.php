@@ -46,8 +46,8 @@ class ProcessSetup extends AbstractBase
      private function addStatus(AbstractContentType $status)
     {
 
-        $setup = new StatusSetup();
-        $setup->addStatus($status);
+        $setup = new ContentTypeSetup();
+        $setup->addContentType($status);
 
     }
 

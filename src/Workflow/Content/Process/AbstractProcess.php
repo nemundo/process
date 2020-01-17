@@ -5,19 +5,18 @@ namespace Nemundo\Process\Workflow\Content\Process;
 
 
 use Nemundo\Core\Date\DateTimeDifference;
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Html\Container\AbstractHtmlContainer;
-use Nemundo\Process\Content\Data\Content\Content;
+use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentUpdate;
+use Nemundo\Process\App\Assignment\Status\CancelAssignmentStatus;
+use Nemundo\Process\App\Assignment\Status\OpenAssignmentStatus;
 use Nemundo\Process\Content\Data\Content\ContentUpdate;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
-use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Content\View\AbstractProcessView;
-use Nemundo\Process\Workflow\Content\Writer\WorkflowWriter;
 use Nemundo\Process\Workflow\Data\Workflow\Workflow;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowCount;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowDelete;
@@ -98,18 +97,24 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         if ($this->createMode) {
 
+            $this->saveContentBefore();
             $this->onCreate();
 
+            $update = new ContentUpdate();
+            $update->dataId = $this->dataId;
+            $update->updateById($this->contentId);
+
+
+            /*
             $data = new Content();
             $data->contentTypeId = $this->typeId;
             $data->dateTime = $this->dateTime;
             $data->userId = $this->userId;
             $data->dataId = $this->dataId;
-            $this->contentId = $data->save();
+            $this->contentId = $data->save();*/
 
 
         }
-
 
 
         $this->saveTree();
@@ -278,13 +283,32 @@ abstract class AbstractProcess extends AbstractSequenceContentType
             $update = new WorkflowUpdate();
             $update->deadline = $date;
             $update->updateById($this->dataId);
+
+            $update = new AssignmentUpdate();
+            $update->deadline = $date;
+            $update->filter->andEqual($update->model->sourceId, $this->getContentId());
+            $update->filter->andEqual($update->model->statusId, (new OpenAssignmentStatus())->id);
+            $update->update();
+
         }
 
     }
 
 
+    public function cancelAssignment()
+    {
+
+        $update = new AssignmentUpdate();
+        $update->statusId = (new CancelAssignmentStatus())->id;
+        $update->filter->andEqual($update->model->sourceId, $this->getContentId());
+        $update->update();
+
+    }
+
     public function changeSubject($subject)
     {
+
+        // change subject status
 
         $update = new WorkflowUpdate();
         $update->subject = $subject;

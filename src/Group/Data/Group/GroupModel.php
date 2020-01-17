@@ -54,6 +54,10 @@ $this->groupTypeId->aliasFieldName = "group_group_group_type";
 $this->groupTypeId->label = "Group Type";
 $this->groupTypeId->allowNullValue = false;
 
+$index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
+$index->indexName = "group_type";
+$index->addType($this->groupTypeId);
+
 }
 public function loadGroupType() {
 if ($this->groupType == null) {

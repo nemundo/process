@@ -7,7 +7,7 @@ namespace Nemundo\Process\Group\Com;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
 use Nemundo\Process\Group\Data\Group\GroupReader;
 use Nemundo\Process\Group\Parameter\GroupParameter;
-use Schleuniger\App\Org\Content\Mitarbeiter\MitarbeiterContentType;
+use Schleuniger\App\Org\Content\Mitarbeiter\MitarbeiterGroupContentType;
 
 class GroupListBox extends BootstrapListBox
 {

@@ -9,8 +9,6 @@ use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Process\Template\Data\DeadlineChange\DeadlineChange;
 use Nemundo\Process\Template\Data\DeadlineChange\DeadlineChangeReader;
 use Nemundo\Process\Template\Form\DeadlineChangeForm;
-use Nemundo\Process\Workflow\Content\Item\Process\WorkflowItem;
-use Nemundo\Process\Workflow\Content\Process\WorkflowProcess;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
 class DeadlineChangeProcessStatus extends AbstractProcessStatus
@@ -39,7 +37,8 @@ class DeadlineChangeProcessStatus extends AbstractProcessStatus
     public function onCreate()
     {
 
-        $processItem = $this->getParentProcess();
+        $process = $this->getParentProcess();
+
 
         /*
         $deadlineHasChanged = true;
@@ -53,17 +52,19 @@ class DeadlineChangeProcessStatus extends AbstractProcessStatus
 
         if ($deadlineHasChanged) {*/
 
-            $data = new DeadlineChange();
-            //$data->id = $this->dataId;
-            $data->deadline = $this->deadline;
-            $this->dataId= $data->save();
+        $data = new DeadlineChange();
+        $data->deadline = $this->deadline;
+        $this->dataId = $data->save();
 
-            //$item = new WorkflowItem($this->parentId);
-            $processItem->changeDeadline($this->deadline);
+        //$item = new WorkflowItem($this->parentId);
+        $process->changeDeadline($this->deadline);
 
-            //$this->saveWorkflowLog();
 
-            // nur hier content eintrag erstellen!!!
+
+
+        //$this->saveWorkflowLog();
+
+        // nur hier content eintrag erstellen!!!
 
         //}
     }

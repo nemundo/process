@@ -3,6 +3,7 @@
 
 namespace Nemundo\Process\Workflow\Content\Status;
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
 use Nemundo\Process\Workflow\Content\Form\StatusForm;
@@ -47,21 +48,12 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
         $this->saveSearchIndex();
         $this->onFinished();
 
-    }
-
-
-    public function getParentProcess() {
-
-
-        $contentReader = new ContentReader();
-        $contentReader->model->loadContentType();
-
-        /** @var AbstractProcess $process */
-        $process = $contentReader->getRowById($this->parentId)->getContentType();
-
-        return $process;
+        return $this->dataId;
 
     }
+
+
+
 
 
 }

@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Group\Content;
 
 
+use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Com\Html\Listing\UnorderedList;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Process\Content\View\AbstractContentView;
@@ -17,7 +18,11 @@ class GroupContentView extends AbstractContentView
         $groupRow=(new GroupReader())->getRowById($this->dataId);
 
         $p=new Paragraph($this);
-        $p->content=$groupRow->group;
+        $p->content=$groupRow->group.' ('.$this->contentType->typeLabel.')';
+
+
+        $subtitle=new AdminSubtitle($this);
+        $subtitle->content='User';
 
         $ul=new UnorderedList($this);
 
