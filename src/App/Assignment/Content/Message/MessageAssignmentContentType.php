@@ -5,10 +5,14 @@ namespace Nemundo\Process\App\Assignment\Content\Message;
 
 
 use Nemundo\Process\App\Assignment\Content\AbstractAssignmentContentType;
+use Nemundo\Process\App\Assignment\Data\MessageAssignment\MessageAssignment;
+use Nemundo\Process\Workflow\Content\Status\ProcessStatusTrait;
 
 
 class MessageAssignmentContentType extends AbstractAssignmentContentType
 {
+
+    use ProcessStatusTrait;
 
     public $message;
 
@@ -24,6 +28,11 @@ class MessageAssignmentContentType extends AbstractAssignmentContentType
     {
 
         $this->assignAssignment();
+
+        $data = new MessageAssignment();
+        $data->message = $this->message;
+       $this->dataId= $data->save();
+
 
     }
 

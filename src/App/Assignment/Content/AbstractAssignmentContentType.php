@@ -12,9 +12,10 @@ use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentUpdate;
 use Nemundo\Process\App\Assignment\Status\CancelAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\ClosedAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\OpenAssignmentStatus;
+use Nemundo\Process\Content\Type\AbstractMenuContentType;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 
-abstract class AbstractAssignmentContentType extends AbstractTreeContentType
+abstract class AbstractAssignmentContentType extends AbstractMenuContentType  // AbstractTreeContentType
 {
 
     //public $message;

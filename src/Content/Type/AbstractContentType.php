@@ -279,6 +279,14 @@ abstract class AbstractContentType extends AbstractType
     }
 
 
+
+    public function getDataReader()
+    {
+        (new LogMessage())->writeError('getDataReader not defined');
+    }
+
+
+
     public function getDataRow()
     {
         (new LogMessage())->writeError('getDataRow not defined');

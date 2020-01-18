@@ -46,10 +46,10 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     /**
      * @var int
      */
-    protected $startNumber;
+    protected $startNumber=1;
 
 
-    protected $workflowSubject;
+    public $workflowSubject;
 
     /**
      * @var Identification
@@ -74,26 +74,8 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     private $workflowRow;
 
 
-    /*
-    public function __construct($dataId = null)
-    {
-
-        $this->viewClass = ProcessView::class;
-        $this->baseViewClass = BaseWorkflowContainer::class;
-        $this->viewSite = WorkflowItemSite::$site;
-        $this->parameterClass = WorkflowParameter::class;
-        $this->assignment = new Identification();
-
-        parent::__construct($dataId);
-
-
-    }*/
-
-
     public function saveType()
     {
-
-        //$this->saveContent();
 
         if ($this->createMode) {
 
@@ -103,16 +85,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
             $update = new ContentUpdate();
             $update->dataId = $this->dataId;
             $update->updateById($this->contentId);
-
-
-            /*
-            $data = new Content();
-            $data->contentTypeId = $this->typeId;
-            $data->dateTime = $this->dateTime;
-            $data->userId = $this->userId;
-            $data->dataId = $this->dataId;
-            $this->contentId = $data->save();*/
-
 
         }
 
@@ -139,8 +111,8 @@ abstract class AbstractProcess extends AbstractSequenceContentType
             $value->field = $value->model->number;
             $value->filter->andEqual($value->model->processId, $this->typeId);
             $this->number = $value->getMaxValue();
-            if ($this->number == "") {
-                $this->number = $this->startNumber;
+            if ($this->number == '') {
+                $this->number = $this->startNumber-1;
             }
             $this->number = $this->number + 1;
             $this->workflowNumber = $this->prefixNumber . $this->number;
@@ -199,7 +171,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
     public function getWorkflowRow()
     {
-        //(new Debug())->write('getworkflow');
+
         if ($this->workflowRow == null) {
             $reader = new WorkflowReader();
             $reader->model->loadProcess();
@@ -232,8 +204,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
     public function closeWorkflow()
     {
-
-        // Assignment reset
 
         $update = new WorkflowUpdate();
         $update->workflowClosed = true;

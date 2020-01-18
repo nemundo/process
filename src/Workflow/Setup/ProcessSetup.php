@@ -5,36 +5,35 @@ namespace Nemundo\Process\Workflow\Setup;
 
 
 use Nemundo\Core\Base\AbstractBase;
+use Nemundo\Process\Content\Setup\AbstractContentTypeSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
-use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Data\Process\Process;
 
 
-class ProcessSetup extends AbstractBase
+class ProcessSetup extends AbstractContentTypeSetup  // AbstractBase
 {
 
     public function addProcess(AbstractProcess $process)
     {
 
-        $setup = new ContentTypeSetup();
-        $setup->addContentType($process);
+        $this->addContentType($process);
 
+        //$setup = new ContentTypeSetup();
+        //$setup->addContentType($process);
 
         $data = new Process();
-        $data->ignoreIfExists=true;
-        //$data->updateOnDuplicate = true;
-        //$data->process = $process->type;
+        $data->ignoreIfExists = true;
         $data->contentTypeId = $process->typeId;
         $data->save();
 
 
         foreach ($process->getProcessStatusList() as $status) {
-            $this->addStatus($status);
+            $this->addContentType($status);
 
             foreach ($status->getMenuList() as $menuStatus) {
-                $this->addStatus($menuStatus);
+                $this->addContentType($menuStatus);
             }
 
         }
@@ -42,13 +41,14 @@ class ProcessSetup extends AbstractBase
 
     }
 
-    //private function addStatus(AbstractStatus $status)
-     private function addStatus(AbstractContentType $status)
+
+    /*
+    private function addStatus(AbstractContentType $status)
     {
 
         $setup = new ContentTypeSetup();
         $setup->addContentType($status);
 
-    }
+    }*/
 
 }
