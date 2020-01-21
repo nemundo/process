@@ -117,7 +117,6 @@ class ContentSite extends AbstractSite
         $header->addText('ID');
         $header->addText('Type');
         $header->addText('Class');
-
         $header->addText('Data Id');
         $header->addText('Subject (Data)');
         $header->addText('Subject (Type)');
@@ -135,32 +134,14 @@ class ContentSite extends AbstractSite
 
 
                 $row = new BootstrapClickableTableRow($table);
-                //$row->addText($contentRow->contentType->phpClass);
                 $row->addText($contentRow->id);
                 $row->addText($contentRow->contentType->contentType);
                 $row->addText($contentType->getClassName());
-
                 $row->addText($contentRow->dataId);
-
                 $row->addText($contentRow->subject);
-
-                //$row->addText($contentRow->parentId);
-                //$row->addText($contentRow->id);
-
-                //$item = new ContentItem($contentRow->id);
-                //$item->contentType = $contentType;
-
-                //$item = $contentType->getItem($contentRow->id);
-
-                //$row->addText($contentType->getClassName());
                 $row->addText($contentType->getSubject());
-
-                //$row->addText($contentType->getSubject($contentRow->id));
-
-
                 $row->addText($contentRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
                 $row->addText($contentRow->user->login);
-
 
                 $site = clone(ContentDeleteSite::$site);
                 $site->addParameter(new ContentParameter($contentRow->id));
@@ -168,8 +149,6 @@ class ContentSite extends AbstractSite
 
                 $site = clone(ContentItemSite::$site);
                 $site->addParameter(new ContentParameter($contentRow->id));
-
-//                $site->addParameter(new DataParameter($contentRow->id));
                 $row->addClickableSite($site);
 
             } else {

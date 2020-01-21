@@ -7,7 +7,7 @@ class TemplateFileDeleteModel extends \Nemundo\Model\Definition\Model\AbstractMo
 public $id;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalIdType
 */
 public $fileId;
 
@@ -34,7 +34,7 @@ $this->id->visible->table = false;
 $this->id->visible->view = false;
 $this->id->visible->form = false;
 
-$this->fileId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->fileId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->fileId->tableName = "template_template_file_delete";
 $this->fileId->fieldName = "file";
 $this->fileId->aliasFieldName = "template_template_file_delete_file";

@@ -40,16 +40,28 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType  // Abst
         $this->formClass=GroupContentForm::class;
         $this->viewClass=GroupContentView::class;
 
+        $this->loadGroup();
+
         parent::__construct($dataId);
+
+
+
     }
 
 
 
 
+    protected function loadGroup() {
+
+    }
+
 
     protected function onCreate()
     {
         // nach saveType
+
+
+
 
         if ($this->dataId == null) {
             $this->dataId = (new UniqueId())->getUniqueId();

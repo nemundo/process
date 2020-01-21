@@ -34,21 +34,15 @@ abstract class AbstractContentType extends AbstractType
      */
     public $userId;
 
-
-    // müsste auch nach ContentItem
-    // use ViewSiteTrait;
-
     /**
      * @var string
      */
     public $typeId;
-    // typeId
 
     /**
      * @var string|string[]
      */
     public $typeLabel;
-// typeLabel
 
     public $restricted = false;
 
@@ -105,8 +99,10 @@ abstract class AbstractContentType extends AbstractType
     public function saveType()
     {
 
+        //if (!$this->ignoreMode) {
         $this->saveContent();
         $this->saveSearchIndex();
+        //}
 
         return $this->dataId;
 
@@ -117,17 +113,6 @@ abstract class AbstractContentType extends AbstractType
     {
 
         if ($this->createMode) {
-
-
-            /*
-            $data = new Content();
-            $data->ignoreIfExists=true;  // braucht es für onDuplicate datesets
-            $data->contentTypeId = $this->typeId;
-            $data->dateTime = $this->dateTime;
-            $data->userId = $this->userId;
-            //$data->dataId = $this->dataId;
-            //$data->subject = $this->getSubject();
-            $this->contentId = $data->save();*/
 
             $this->saveContentBefore();
 
@@ -141,17 +126,6 @@ abstract class AbstractContentType extends AbstractType
             $update->dataId = $this->dataId;
             $update->subject = $this->getSubject();
             $update->updateById($this->contentId);
-
-
-            /*
-            $data = new Content();
-            $data->ignoreIfExists=true;  // braucht es für onDuplicate datesets
-            $data->contentTypeId = $this->typeId;
-            $data->dateTime = $this->dateTime;
-            $data->userId = $this->userId;
-            $data->dataId = $this->dataId;
-            $data->subject = $this->getSubject();
-            $this->contentId = $data->save();*/
 
         } else {
 
@@ -169,7 +143,7 @@ abstract class AbstractContentType extends AbstractType
     protected function saveContentBefore() {
 
         $data = new Content();
-        $data->ignoreIfExists=true;  // braucht es für onDuplicate datesets
+        //$data->ignoreIfExists=true;  // braucht es für onDuplicate datesets
         $data->contentTypeId = $this->typeId;
         $data->dateTime = $this->dateTime;
         $data->userId = $this->userId;
@@ -221,7 +195,6 @@ abstract class AbstractContentType extends AbstractType
         $list = null;
 
         if ($this->listClass == null) {
-            //(new LogMessage())->writeError('No Table' . $this->getClassName());
 
             $list = new Paragraph($parent);
             $list->content = '[No List Object]';

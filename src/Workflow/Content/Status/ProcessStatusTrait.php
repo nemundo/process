@@ -39,7 +39,7 @@ trait ProcessStatusTrait
     /**
      * @var bool
      */
-    public $changeStatus = true;
+    public $changeStatus = false;
 
     /**
      * @var bool

@@ -10,6 +10,8 @@ use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentPaginationReader;
+use Nemundo\Process\Content\Parameter\ContentParameter;
+use Nemundo\Process\Content\Site\ContentDeleteSite;
 use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Workflow\Com\TrafficLight\DateTrafficLight;
 
@@ -32,12 +34,17 @@ class AssignmentSite extends AbstractSite
 
         // search form
         // source
+        // user
 
         $assignmentReader = new AssignmentPaginationReader();
         $assignmentReader->model->loadGroup();
         $assignmentReader->model->loadSource();
         $assignmentReader->model->loadStatus();
         $assignmentReader->model->loadContent();
+        $assignmentReader->model->content->loadUser();
+        $assignmentReader->model->content->loadContentType();
+
+
         $assignmentReader->model->source->loadContentType();
 
 
@@ -85,7 +92,11 @@ class AssignmentSite extends AbstractSite
             // $row->addText($contentRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
 
 
+            $row->addText($assignmentRow->content->contentType->phpClass);
+
             $row->addText($assignmentRow->content->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
+            $row->addText($assignmentRow->content->user->displayName);
+
 
             $row->addText($assignmentRow->message);
 
@@ -94,6 +105,11 @@ class AssignmentSite extends AbstractSite
 
             $row->addText($contentType->getSubject());
             $row->addText($contentType->typeLabel);*/
+
+            $site = clone(ContentDeleteSite::$site);
+            $site->addParameter(new ContentParameter($assignmentRow->contentId));
+            $row->addIconSite($site);
+
 
             $row->addClickableSite($source->getViewSite());
 

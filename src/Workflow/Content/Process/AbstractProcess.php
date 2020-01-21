@@ -5,6 +5,7 @@ namespace Nemundo\Process\Workflow\Content\Process;
 
 
 use Nemundo\Core\Date\DateTimeDifference;
+use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Db\Sql\Order\SortOrder;
@@ -25,7 +26,6 @@ use Nemundo\Process\Workflow\Data\Workflow\WorkflowRow;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowUpdate;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowValue;
 use Nemundo\User\Access\UserRestrictionTrait;
-use Nemundo\Workflow\App\Identification\Model\Identification;
 
 // AbstractWorkflowProcess
 abstract class AbstractProcess extends AbstractSequenceContentType
@@ -46,18 +46,16 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     /**
      * @var int
      */
-    protected $startNumber=1;
+    protected $startNumber = 1;
 
 
     public $workflowSubject;
 
-    /**
-     * @var Identification
-     */
-    protected $assignment;
-
     protected $groupAssignmentId;
 
+    /**
+     * @var Date
+     */
     protected $deadline;
 
 
@@ -74,8 +72,12 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     private $workflowRow;
 
 
+    protected $workflowId;
+
     public function saveType()
     {
+
+        // gibt es update bei process?
 
         if ($this->createMode) {
 
@@ -86,8 +88,9 @@ abstract class AbstractProcess extends AbstractSequenceContentType
             $update->dataId = $this->dataId;
             $update->updateById($this->contentId);
 
+        } else {
+            (new LogMessage())->writeError('process no create mode');
         }
-
 
         $this->saveTree();
         $this->saveWorkflow();
@@ -107,28 +110,32 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     {
 
         if ($this->number == null) {
+
             $value = new WorkflowValue();
+            //$value->model->loadContent();
+
+
             $value->field = $value->model->number;
-            $value->filter->andEqual($value->model->processId, $this->typeId);
+            //$value->filter->andEqual($value->model->processId, $this->typeId);
+            //$value->filter->andEqual($value->model->content->contentTypeId, $this->typeId);
+
             $this->number = $value->getMaxValue();
             if ($this->number == '') {
-                $this->number = $this->startNumber-1;
+                $this->number = $this->startNumber - 1;
             }
             $this->number = $this->number + 1;
             $this->workflowNumber = $this->prefixNumber . $this->number;
         }
 
         $data = new Workflow();
-        $data->id = $this->dataId;
-        $data->processId = $this->typeId;
+        $data->contentId = $this->getContentId();
         $data->number = $this->number;
         $data->workflowNumber = $this->workflowNumber;
         $data->statusId = $this->startContentType->typeId;
         $data->subject = $this->workflowSubject;
-        $data->assignment = $this->assignment;
-        $data->dateTime = $this->dateTime;
-        $data->userId = $this->userId;
-        $data->save();
+        $data->assignmentId = $this->groupAssignmentId;
+        $data->deadline = $this->deadline;
+        $this->workflowId = $data->save();
 
         $this->addSearchWord($this->workflowNumber);
         $this->addSearchText($this->getSubject());
@@ -149,8 +156,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public function getSubject()
     {
 
-        $workflowRow = (new WorkflowReader())->getRowById($this->dataId);
-
+        $workflowRow = $this->getWorkflowRow();
         $subject = $workflowRow->workflowNumber . ' ' . $workflowRow->subject;
         return $subject;
 
@@ -174,9 +180,11 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         if ($this->workflowRow == null) {
             $reader = new WorkflowReader();
-            $reader->model->loadProcess();
-            $reader->model->loadUser();
-            $reader->filter->andEqual($reader->model->id, $this->dataId);
+            $reader->model->loadStatus();
+            $reader->model->loadContent();
+            $reader->model->content->loadUser();
+            $reader->filter->andEqual($reader->model->content->dataId, $this->dataId);
+            $reader->filter->andEqual($reader->model->content->contentTypeId, $this->typeId);
 
             foreach ($reader->getData() as $workflowCustomRow) {
                 $this->workflowRow = $workflowCustomRow;
@@ -185,6 +193,22 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         }
 
         return $this->workflowRow;
+
+    }
+
+
+    public function getWorkflowId()
+    {
+
+        if ($this->workflowId == null) {
+
+            $workflowRow = $this->getWorkflowRow();
+            if ($workflowRow !== null) {
+                $this->workflowId = $workflowRow->id;
+            }
+        }
+
+        return $this->workflowId;
 
     }
 
@@ -207,7 +231,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $update = new WorkflowUpdate();
         $update->workflowClosed = true;
-        $update->updateById($this->dataId);
+        $update->updateById($this->getWorkflowId());
 
     }
 
@@ -216,7 +240,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $value = false;
         $count = new WorkflowCount();
-        $count->filter->andEqual($count->model->id, $this->dataId);
+        $count->filter->andEqual($count->model->id, $this->getWorkflowId());
         if ($count->getCount() == 1) {
             $value = true;
         }
@@ -252,7 +276,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         if ($date !== null) {
             $update = new WorkflowUpdate();
             $update->deadline = $date;
-            $update->updateById($this->dataId);
+            $update->updateById($this->getWorkflowId());
 
             $update = new AssignmentUpdate();
             $update->deadline = $date;
@@ -282,34 +306,24 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $update = new WorkflowUpdate();
         $update->subject = $subject;
-        $update->updateById($this->dataId);
+        $update->updateById($this->getWorkflowId());
 
     }
 
 
-    public function changeAssignment(Identification $assignment)
-    {
-
-
-        $update = new WorkflowUpdate();
-        $update->assignment = $assignment;
-        $update->updateById($this->dataId);
-
-        // Assignment reset
-    }
-
-
-    public function changeGroupAssignment($groupId = null)
+    public function changeAssignment($groupId = null)
     {
 
         if ($groupId !== null) {
             $update = new WorkflowUpdate();
-            $update->groupAssignmentId = $groupId;
-            $update->updateById($this->dataId);
+            $update->assignmentId = $groupId;
+            $update->updateById($this->getWorkflowId());
         }
 
     }
 
+
+    /*
     public function clearAssignment()
     {
 
@@ -317,7 +331,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $update->assignment->clearIdentification();
         $update->updateById($this->dataId);
 
-    }
+    }*/
 
 
     public function getStart()
@@ -351,6 +365,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $reader->model->loadChild();
         $reader->filter->andEqual($reader->model->parentId, $this->getContentId());
         $reader->addOrder($reader->model->id, $sortOrder);
+        // $dateTime = $reader->getRow()->child->dateTime;
         $dateTime = $reader->getRow()->child->dateTime;
 
         return $dateTime;
@@ -391,7 +406,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
-    public function getProcessView(AbstractHtmlContainer $parent)
+    public function getProcessView(AbstractHtmlContainer $parent = null)
     {
 
         /** @var AbstractProcessView $view */
@@ -403,7 +418,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         }
 
         return $view;
-
 
     }
 

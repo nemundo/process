@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Nemundo\Process\Group\Com;
+namespace Nemundo\Process\Group\Com\ListBox;
 
 
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
 use Nemundo\Process\Group\Data\Group\GroupReader;
 use Nemundo\Process\Group\Parameter\GroupParameter;
-use Schleuniger\App\Org\Content\Mitarbeiter\MitarbeiterGroupContentType;
+
 
 class GroupListBox extends BootstrapListBox
 {

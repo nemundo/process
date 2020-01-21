@@ -26,11 +26,28 @@ public $active;
 */
 public $file;
 
+/**
+* @var string
+*/
+public $contentId;
+
+/**
+* @var \Nemundo\Process\Content\Row\ContentCustomRow
+*/
+public $content;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
 $this->active = boolval($this->getModelValue($model->active));
 $this->file = new \Nemundo\Model\Reader\Property\File\RedirectFilenameReaderProperty($row, $model->file, $this->id);
+$this->contentId = $this->getModelValue($model->contentId);
+if ($model->content !== null) {
+$this->loadNemundoProcessContentDataContentContentcontentRow($model->content);
+}
+}
+private function loadNemundoProcessContentDataContentContentcontentRow($model) {
+$this->content = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $model);
 }
 }

@@ -23,7 +23,10 @@ class WorkflowCustomRow extends WorkflowRow
     public function getCreator()
     {
 
-        $creator = $this->user->displayName . ' ' . $this->dateTime->getShortDateTimeWithSecondLeadingZeroFormat();
+//        $creator = $this->user->displayName . ' ' . $this->dateTime->getShortDateTimeWithSecondLeadingZeroFormat();
+        $creator = $this->content->user->displayName . ' ' . $this->content->dateTime->getShortDateTimeWithSecondLeadingZeroFormat();
+
+
         return $creator;
 
 
@@ -49,8 +52,11 @@ class WorkflowCustomRow extends WorkflowRow
     public function getViewSite()
     {
 
-        $process = $this->process->getContentType($this->id);
+        $process = $this->content->getContentType();
         $site = $process->getViewSite();
+
+        //$process = $this->process->getContentType($this->id);
+        //$site = $process->getViewSite();
         //$site->title = $this->getSubject();
 
         return $site;
@@ -58,14 +64,15 @@ class WorkflowCustomRow extends WorkflowRow
     }
 
 
+    /*
     public function getProcess()
     {
 
         /** @var AbstractProcess $process */
-        $process = $this->process->getContentType($this->id);
+      /*  $process = $this->process->getContentType($this->id);
 
         return $process;
 
-    }
+    }*/
 
 }

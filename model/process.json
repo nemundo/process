@@ -125,7 +125,7 @@
             "table_name": "process_workflow",
             "namespace": "Nemundo\\Process\\Workflow\\Data\\Workflow",
             "row_class_name": "Nemundo\\Process\\Workflow\\Row\\WorkflowCustomRow",
-            "primary_index": "text_id",
+            "primary_index": "auto_increment",
             "is_deleted": false,
             "type": [
                 {
@@ -160,7 +160,7 @@
                     "field_name": "process",
                     "variable_name": "process",
                     "allow_null": false,
-                    "is_deleted": false,
+                    "is_deleted": true,
                     "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
                 },
                 {
@@ -186,7 +186,7 @@
                     "field_name": "assignment",
                     "variable_name": "assignment",
                     "allow_null": false,
-                    "is_deleted": false
+                    "is_deleted": true
                 },
                 {
                     "type": "date",
@@ -202,7 +202,7 @@
                     "field_name": "date_time",
                     "variable_name": "dateTime",
                     "allow_null": false,
-                    "is_deleted": false
+                    "is_deleted": true
                 },
                 {
                     "type": "user",
@@ -210,24 +210,33 @@
                     "field_name": "user",
                     "variable_name": "user",
                     "allow_null": false,
-                    "is_deleted": false
+                    "is_deleted": true
                 },
                 {
                     "type": "external",
-                    "label": "Zuweisung (Dev)",
-                    "field_name": "group_assignment",
-                    "variable_name": "groupAssignment",
+                    "label": "Zuweisung",
+                    "field_name": "assignment",
+                    "variable_name": "assignment",
                     "allow_null": false,
                     "is_deleted": false,
                     "external_model_id": "c6e00009-24e0-4cef-82ee-34a89152415f"
+                },
+                {
+                    "type": "external",
+                    "label": "Content",
+                    "field_name": "content",
+                    "variable_name": "content",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
                 }
             ],
             "index": [
                 {
-                    "index_name": "date_time",
+                    "index_name": "content",
                     "index_type": "index",
                     "field_name": [
-                        "date_time"
+                        "content"
                     ]
                 }
             ]

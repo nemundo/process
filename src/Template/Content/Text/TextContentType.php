@@ -28,7 +28,7 @@ class TextContentType extends AbstractTreeContentType
     protected function onCreate()
     {
 
-        (new Debug())->write($this->getContentId());
+        //(new Debug())->write($this->getContentId());
 
         $data = new TemplateText();
         $data->text = $this->text;

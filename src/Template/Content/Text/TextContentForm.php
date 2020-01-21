@@ -52,7 +52,6 @@ class TextContentForm extends AbstractContentForm
         $type->text=$this->text->getValue();
         $type->saveType();
 
-        // TODO: Implement onSubmit() method.
     }
 
 }

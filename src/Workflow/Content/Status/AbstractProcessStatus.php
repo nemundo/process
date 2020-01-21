@@ -27,6 +27,8 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
     public function saveType()
     {
 
+       $workflowId= $this->getParentProcess()->getWorkflowId();
+
         $contentRow = (new ContentReader())->getRowById($this->parentId);
 
         $this->saveContent();
@@ -36,13 +38,13 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
 
             $update = new WorkflowUpdate();
             $update->statusId = $this->typeId;
-            $update->updateById($contentRow->dataId);
+            $update->updateById( $workflowId);  //$contentRow->dataId);
         }
 
         if ($this->closeWorkflow) {
             $update = new WorkflowUpdate();
             $update->workflowClosed = true;
-            $update->updateById($contentRow->dataId);
+            $update->updateById( $workflowId);  // $contentRow->dataId);
         }
 
         $this->saveSearchIndex();

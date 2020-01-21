@@ -6,7 +6,7 @@ namespace Nemundo\Process\App\Assignment\Content\Group;
 
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapDatePicker;
-use Nemundo\Process\Group\Com\GroupListBox;
+use Nemundo\Process\Group\Com\ListBox\GroupListBox;
 use Nemundo\Process\Group\Com\ListBox\GroupTypeListBox;
 use Nemundo\Process\Workflow\Content\Form\AbstractStatusForm;
 

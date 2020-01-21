@@ -4,12 +4,13 @@
 namespace Nemundo\Process\Template\Content\File;
 
 
+use Nemundo\Package\Bootstrap\Form\BootstrapForm;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapFileUpload;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Template\Content\File\FileContentType;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFile;
 
-class FileContentForm extends AbstractContentForm
+class FileUploadForm extends BootstrapForm
 {
 
     /**
@@ -39,10 +40,11 @@ class FileContentForm extends AbstractContentForm
             $dataId = $data->save();*/
 
             $type = new FileContentType();
-            $type->parentId = $this->parentId;
-            $type->fileRequest = $fileRequest;
-           // $type->createMode=true;
+            $type->fileRequest= $fileRequest;
             $type->saveType();
+            //$type->parentId = $this->parentId;
+            //$type->createMode=true;
+            //$type->saveType();
 
         }
 

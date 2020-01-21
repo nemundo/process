@@ -24,7 +24,15 @@ abstract class AbstractType extends AbstractBaseClass
     /**
      * @var bool
      */
-    public $createMode = true;
+    protected $createMode = true;
+    // oder public
+
+    /**
+     * @var bool
+     */
+    //protected $ignoreMode = false;
+
+
 
     /**
      * @var string

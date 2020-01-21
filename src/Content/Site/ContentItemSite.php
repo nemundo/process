@@ -57,12 +57,6 @@ class ContentItemSite extends AbstractSite
         $nav = new AdminNavigation($page);
         $nav->site=ContentSite::$site;
 
-        /*$dataId = (new DataParameter())->getValue();
-
-        $reader = new ContentReader();
-        $reader->model->loadContentType();
-        $contentRow = $reader->getRowById($dataId);
-        $contentType = $contentRow->getContentType();*/
 
 
         $contentType = (new ContentParameter())->getContentType();

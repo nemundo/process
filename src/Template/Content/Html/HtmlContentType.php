@@ -7,7 +7,6 @@ namespace Nemundo\Process\Template\Content\Html;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Template\Data\LargeText\LargeText;
 use Nemundo\Process\Workflow\Content\Status\ProcessStatusTrait;
-use Nemundo\User\Access\UserRestrictionTrait;
 
 class HtmlContentType extends AbstractTreeContentType
 {
@@ -31,13 +30,9 @@ class HtmlContentType extends AbstractTreeContentType
     protected function onCreate()
     {
 
-        // getDataId (if null then createUniqueId)
-
         $data = new LargeText();
-        $data->updateOnDuplicate=true;
-        $data->id = $this->dataId;
         $data->largeText = $this->html;
-        $data->save();
+        $this->dataId = $data->save();
 
     }
 

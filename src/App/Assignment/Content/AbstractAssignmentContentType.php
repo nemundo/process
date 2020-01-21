@@ -7,15 +7,18 @@ namespace Nemundo\Process\App\Assignment\Content;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Html\Formatting\Strike;
 use Nemundo\Process\App\Assignment\Data\Assignment\Assignment;
+use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentDelete;
 use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentReader;
 use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentUpdate;
 use Nemundo\Process\App\Assignment\Status\CancelAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\ClosedAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\OpenAssignmentStatus;
 use Nemundo\Process\Content\Type\AbstractMenuContentType;
+use Nemundo\Process\Content\Type\AbstractSequenceContentType;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
+use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
-abstract class AbstractAssignmentContentType extends AbstractMenuContentType  // AbstractTreeContentType
+abstract class AbstractAssignmentContentType extends AbstractProcessStatus
 {
 
     //public $message;
@@ -38,23 +41,19 @@ abstract class AbstractAssignmentContentType extends AbstractMenuContentType  //
         parent::__construct($dataId);
     }
 
-    /*
-    protected function loadContentType()
-    {
-        $this->typeLabel = 'Group Assignment';
-        $this->typeId = 'e4368eda-9bb4-4610-9595-7ad9e86272ba';
-        $this->changeStatus = false;
-        $this->formClass = GroupAssignmentForm::class;
-
-        $this->deadline=new Date();
-
-    }*/
-
 
     protected function onCreate()
     {
 
         $this->assignAssignment();
+
+    }
+
+
+    protected function onDelete()
+    {
+
+        (new AssignmentDelete())->deleteById($this->dataId);
 
     }
 
@@ -67,9 +66,11 @@ abstract class AbstractAssignmentContentType extends AbstractMenuContentType  //
         $data->groupId = $this->groupId;
         $data->deadline = $this->deadline;
         $data->sourceId = $this->parentId;
-        $data->message = $this->getMessage();  // $this->message;
+        $data->message = $this->getMessage();
         $data->contentId = $this->getContentId();
         $this->dataId = $data->save();
+
+
 
         // send email
 
@@ -108,13 +109,29 @@ abstract class AbstractAssignmentContentType extends AbstractMenuContentType  //
     }
 
 
-    public function getSubject()
+    public function getDataRow()
     {
 
         $reader = new AssignmentReader();
         $reader->model->loadGroup();
         $reader->model->loadStatus();
         $assignmentRow = $reader->getRowById($this->dataId);
+
+        return $assignmentRow;
+
+    }
+
+
+    public function getSubject()
+    {
+
+        /*
+        $reader = new AssignmentReader();
+        $reader->model->loadGroup();
+        $reader->model->loadStatus();
+        $assignmentRow = $reader->getRowById($this->dataId);*/
+
+        $assignmentRow =$this->getDataRow();
         $subject = 'Group Assignment to : ' . $assignmentRow->group->group . ' (' . $assignmentRow->status->status . ')';
 
         if ($assignmentRow->statusId == (new CancelAssignmentStatus())->id) {

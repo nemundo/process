@@ -69,7 +69,7 @@ $this->dataId->tableName = "process_content";
 $this->dataId->fieldName = "data_id";
 $this->dataId->aliasFieldName = "process_content_data_id";
 $this->dataId->label = "Data Id";
-$this->dataId->allowNullValue = false;
+$this->dataId->allowNullValue = true;
 $this->dataId->length = 36;
 
 $this->subject = new \Nemundo\Model\Type\Text\TextType($this);

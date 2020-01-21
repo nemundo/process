@@ -9,6 +9,7 @@ use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Process\Workflow\Content\View\ProcessView;
 use Nemundo\Process\Workflow\Parameter\ProcessParameter;
+use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
 use Nemundo\Web\Site\AbstractSite;
 
 class WorkflowNewSite extends AbstractSite
@@ -44,10 +45,10 @@ class WorkflowNewSite extends AbstractSite
         $title = new AdminTitle($page);
         $title->content = $process->typeLabel;
 
-        $view = new ProcessView($page);
-        $view->process = $process;
-        $view->redirectSite = WorkflowItemSite::$site;
-        $view->appendWorkflowParameter = true;
+        $view = $process->getProcessView($page);
+        $view->redirectSite = WorkflowSite::$site;  // WorkflowItemSite::$site;
+        //$view->redirectSite->addParameter(new WorkflowParameter());
+        //$view->appendWorkflowParameter = false;
 
         $page->render();
 

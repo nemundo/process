@@ -35,40 +35,17 @@ class FileParentContainer extends AbstractParentContainer
         $header->addEmpty();
 
         $fileReader =new TemplateFileReader();
-
-        $contentModel  = new ContentModel();
-        $contentModel->loadUser();
-
-        $join=new ModelJoin($fileReader);
-        $join->externalModel=$contentModel;
-        $join->externalType=$contentModel->dataId;
-        $join->type =$fileReader->model->id;
+        $fileReader->model->loadContent();
+        $fileReader->model->content->loadUser();
 
         $treeModel  = new TreeModel();
         $join=new ModelJoin($fileReader);
         $join->externalModel=$treeModel;
         $join->externalType=$treeModel->childId;
-        $join->type = $contentModel->id;
+        $join->type = $fileReader->model->contentId;
 
         $fileReader->filter->andEqual($treeModel->parentId,$this->parentId);
 
-
-        /*
-        $externalModel = new TreeModel();
-        $externalModel->loadChild();
-        $externalModel->child->loadUser();
-
-        $join = new ModelJoin($fileReader);
-        $join->type = $fileReader->model->id;
-        $join->externalModel = $externalModel;
-        $join->externalType = $externalModel->childId;
-
-        //$fileReader->filter->andEqual($externalModel->parentId, $this->parentId);
-        //$documentReader->filter->andEqual($externalModel->child->contentTypeId, (new DocumentProcessStatus())->contentId);
-*/
-
-        $fileReader->checkExternal($contentModel);
-        $fileReader->addFieldByModel($contentModel);
 
         $fileReader->addOrder($fileReader->model->file->fileName);
         foreach ($fileReader->getData() as $documentRow) {
@@ -80,16 +57,11 @@ class FileParentContainer extends AbstractParentContainer
                 $link->filename = $documentRow->file->getFilename();
                 $link->url = $documentRow->file->getUrl();
 
-                //$row->addText($documentRow->getModelValue($contentModel->child->dateTime));
-                //$row->addText($documentRow->getModelValue($contentModel->child->user->displayName));
-
-                $row->addText($documentRow->getModelValue($contentModel->dateTime));
-                $row->addText($documentRow->getModelValue($contentModel->user->displayName));
-
+                $row->addText($documentRow->content->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
+                $row->addText($documentRow->content->user->displayName);
 
                 $site = clone(FileDeleteSite::$site);
                 $site->addParameter(new ParentParameter($this->parentId));
-                //$site->addParameter(new WorkflowParameter($this->parentId));
                 $site->addParameter(new FileParameter($documentRow->id));
                 $row->addIconSite($site);
 
