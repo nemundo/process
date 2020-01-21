@@ -13,13 +13,10 @@ use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentUpdate;
 use Nemundo\Process\App\Assignment\Status\CancelAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\ClosedAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\OpenAssignmentStatus;
-use Nemundo\Process\Content\Type\AbstractMenuContentType;
-use Nemundo\Process\Content\Type\AbstractSequenceContentType;
-use Nemundo\Process\Content\Type\AbstractTreeContentType;
-use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
-abstract class AbstractAssignmentContentType extends AbstractTreeContentType  // AbstractProcessStatus
+trait AssignmentTrait
 {
+
 
     //public $message;
 
@@ -96,15 +93,6 @@ abstract class AbstractAssignmentContentType extends AbstractTreeContentType  //
         $update->statusId = (new ClosedAssignmentStatus())->id;
         $update->filter->andEqual($update->model->sourceId, $this->parentId);
         $update->update();
-
-    }
-
-
-    public function getMessage()
-    {
-
-        $message = 'Assignment';
-        return $message;
 
     }
 

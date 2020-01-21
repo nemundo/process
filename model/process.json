@@ -118,7 +118,7 @@
             "index": []
         },
         {
-            "template": "default",
+            "template": "active_model",
             "model_id": "d9483884-4d0f-4f64-9e98-c558e0159cfe",
             "label": "Workflow",
             "class_name": "Workflow",

@@ -3,12 +3,9 @@
 
 namespace Nemundo\Process\Workflow\Content\Status;
 
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
 use Nemundo\Process\Workflow\Content\Form\StatusForm;
-use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
-use Nemundo\Process\Workflow\Content\Writer\ProcessStatusWriter;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowUpdate;
 
 // AbstractWorkflowStatus
@@ -27,9 +24,9 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
     public function saveType()
     {
 
-       $workflowId= $this->getParentProcess()->getWorkflowId();
+        $workflowId = $this->getParentProcess()->getWorkflowId();
 
-        $contentRow = (new ContentReader())->getRowById($this->parentId);
+        //$contentRow = (new ContentReader())->getRowById($this->parentId);
 
         $this->saveContent();
         $this->saveTree();
@@ -38,13 +35,13 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
 
             $update = new WorkflowUpdate();
             $update->statusId = $this->typeId;
-            $update->updateById( $workflowId);  //$contentRow->dataId);
+            $update->updateById($workflowId);
         }
 
         if ($this->closeWorkflow) {
             $update = new WorkflowUpdate();
             $update->workflowClosed = true;
-            $update->updateById( $workflowId);  // $contentRow->dataId);
+            $update->updateById($workflowId);
         }
 
         $this->saveSearchIndex();
@@ -53,9 +50,5 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
         return $this->dataId;
 
     }
-
-
-
-
 
 }

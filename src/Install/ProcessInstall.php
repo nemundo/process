@@ -34,6 +34,7 @@ use Nemundo\Process\Script\ProcessTestScript;
 use Nemundo\Process\Search\Data\SearchCollection;
 use Nemundo\Process\Search\Install\SearchInstall;
 use Nemundo\Process\Template\Install\TemplateInstall;
+use Nemundo\Process\Template\Status\SubjectChange\SubjectChangeProcessStatus;
 use Nemundo\Process\Workflow\Install\WorkflowInstall;
 use Nemundo\Project\Install\AbstractInstall;
 use Nemundo\User\Data\User\UserReader;
@@ -87,7 +88,7 @@ class ProcessInstall extends AbstractInstall
         $setup->addContentType(new ErfassungContentType());
         $setup->addContentType(new PlzContentType());
         $setup->addContentType(new MessageAssignmentContentType());
-
+        $setup->addContentType(new SubjectChangeProcessStatus());
 
         $setup = new GroupSetup();
         //$setup->addGroup(new PublicGroupContentType(), new AppUserGroupType());

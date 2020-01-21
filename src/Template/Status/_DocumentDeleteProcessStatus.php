@@ -9,6 +9,7 @@ use Nemundo\Process\Template\Data\Document\DocumentUpdate;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Template\Data\Document\DocumentReader;
 use Nemundo\Process\Template\Form\FileContentForm;
+use Nemundo\Workflow\App\WorkflowTemplate\Data\SubjectChange\SubjectChange;
 
 class DocumentDeleteProcessStatus extends AbstractProcessStatus
 {
@@ -17,6 +18,7 @@ class DocumentDeleteProcessStatus extends AbstractProcessStatus
 
     protected function loadContentType()
     {
+
 
         $this->typeLabel[LanguageCode::EN] = 'Document Delete';
         $this->typeLabel[LanguageCode::DE] = 'Dokument löschen';

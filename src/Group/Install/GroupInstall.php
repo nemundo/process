@@ -4,9 +4,11 @@
 namespace Nemundo\Process\Group\Install;
 
 
+use Nemundo\App\Script\Setup\ScriptSetup;
 use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Group\Data\GroupCollection;
+use Nemundo\Process\Group\Script\GroupCheckScript;
 use Nemundo\Process\Group\Setup\GroupSetup;
 use Nemundo\Process\Group\Type\GroupContentType;
 use Nemundo\Process\Group\Type\UsergroupGroupType;
@@ -36,7 +38,11 @@ class GroupInstall extends AbstractInstall
             ->addGroupType(new UsergroupGroupType());
 
 
-        $this->importUser();
+        $setup=new ScriptSetup();
+        $setup->addScript(new GroupCheckScript());
+
+
+        //$this->importUser();
         //$this->importUsergroup();
 
         // TODO: Implement install() method.

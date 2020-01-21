@@ -1,6 +1,6 @@
 <?php
 namespace Nemundo\Process\Workflow\Data\Workflow;
-class WorkflowModel extends \Nemundo\Model\Definition\Model\AbstractModel {
+class WorkflowModel extends \Nemundo\Model\Template\AbstractActiveModel {
 /**
 * @var \Nemundo\Model\Type\Id\IdType
 */
@@ -78,6 +78,7 @@ $this->id->visible->form = false;
 $this->id->visible->table = false;
 $this->id->visible->view = false;
 $this->id->visible->form = false;
+
 
 $this->number = new \Nemundo\Model\Type\Number\NumberType($this);
 $this->number->tableName = "process_workflow";

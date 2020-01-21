@@ -5,6 +5,7 @@ namespace Nemundo\Process\App\Wiki\Content;
 
 
 use Nemundo\Process\App\Wiki\Data\Wiki\Wiki;
+use Nemundo\Process\App\Wiki\Data\Wiki\WikiDelete;
 use Nemundo\Process\App\Wiki\Data\Wiki\WikiReader;
 use Nemundo\Process\App\Wiki\Data\Wiki\WikiUpdate;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
@@ -57,6 +58,11 @@ class WikiPageContentType extends AbstractMenuContentType
         $this->addSearchText($wikiRow->title);
 
     }
+
+protected function onDelete()
+{
+    (new WikiDelete())->deleteById($this->dataId);
+}
 
 
     public function getDataRow()

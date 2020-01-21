@@ -22,6 +22,7 @@ use Nemundo\Process\Template\Data\TemplateCollection;
 
 use Nemundo\Process\Template\Status\DocumentDeleteProcessStatus;
 
+use Nemundo\Process\Template\Status\WorkflowDelete\WorkflowDeleteStatus;
 use Nemundo\Process\Template\Type\LargeTextContentType;
 use Nemundo\Process\Template\Type\WebImageContentType;
 use Nemundo\Process\Workflow\Setup\StatusSetup;
@@ -57,6 +58,7 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new EventContentType());
         $setup->addContentType(new AddSourceContentType());
         $setup->addContentType(new SourceRemoveContentType());
+        $setup->addContentType(new WorkflowDeleteStatus());
 
 
         $setup = new WikiSetup();

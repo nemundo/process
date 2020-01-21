@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Content\Type;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Random\UniqueId;
@@ -131,9 +132,13 @@ abstract class AbstractContentType extends AbstractType
 
             $this->onUpdate();
 
+            //(new Debug())->write($this->getSubject());
+            //(new Debug())->write($this->contentId);
+            //exit;
+
             $update = new ContentUpdate();
             $update->subject = $this->getSubject();
-            $update->updateById($this->contentId);
+            $update->updateById($this->getContentId());
 
         }
 

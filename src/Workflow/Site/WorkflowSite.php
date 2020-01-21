@@ -15,6 +15,7 @@ use Nemundo\Process\Content\Com\Dropdown\ContentTypeDropdown;
 use Nemundo\Process\Workflow\Com\Form\WorkflowSearchForm;
 use Nemundo\Process\Workflow\Data\Process\ProcessReader;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowPaginationReader;
+use Nemundo\Process\Workflow\Parameter\ActiveParameter;
 use Nemundo\Process\Workflow\Parameter\ProcessParameter;
 use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
 use Nemundo\User\Parameter\UserParameter;
@@ -77,6 +78,7 @@ class WorkflowSite extends AbstractSite
         $header->addText('Content Id');
         $header->addText('Data Id');
         $header->addEmpty();
+        $header->addText('Active');
         $header->addText('Closed');
         $header->addText('Process');
         $header->addText('Workflow');
@@ -92,6 +94,23 @@ class WorkflowSite extends AbstractSite
         $workflowReader->model->content->loadUser();
         $workflowReader->model->loadStatus();
         $workflowReader->model->loadAssignment();
+
+
+        $activeParameter = new ActiveParameter();
+        if ($activeParameter->hasValue()) {
+
+            if ($activeParameter->getValue() == 1) {
+                $workflowReader->filter->andEqual($workflowReader->model->active, true);
+            }
+
+            if ($activeParameter->getValue() == 2) {
+                $workflowReader->filter->andEqual($workflowReader->model->active, false);
+            }
+
+        } else {
+            //$workflowReader->filter->andEqual($workflowReader->model->active, true);
+        }
+
 
         $processParameter = new ProcessParameter();
         if ($processParameter->hasValue()) {
@@ -119,7 +138,7 @@ class WorkflowSite extends AbstractSite
 
             $trafficLight = new DateTrafficLight($row);
             $trafficLight->date = $workflowRow->deadline;
-
+            $row->addYesNo($workflowRow->active);
             $row->addYesNo($workflowRow->workflowClosed);
             $row->addText($workflowRow->content->contentType->contentType);
 
@@ -139,12 +158,21 @@ class WorkflowSite extends AbstractSite
             $row->addText($workflowRow->content->user->displayName);
             $row->addText($workflowRow->content->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
 
-
-            $row->addSite($contentType->getViewSite());
+            if ($contentType->hasViewSite()) {
+                $row->addSite($contentType->getViewSite());
+            } else {
+                $row->addEmpty();
+            }
 
             $site = clone(WorkflowItemSite::$site);
             $site->addParameter(new WorkflowParameter($workflowRow->id));
             $row->addClickableSite($site);
+
+
+            // löschen
+
+            // Active (Restore)
+
 
         }
 

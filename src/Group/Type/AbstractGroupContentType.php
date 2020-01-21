@@ -9,6 +9,7 @@ use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Group\Content\GroupContentForm;
 use Nemundo\Process\Group\Content\GroupContentView;
 use Nemundo\Process\Group\Data\Group\Group;
+use Nemundo\Process\Group\Data\Group\GroupDelete;
 use Nemundo\Process\Group\Data\Group\GroupReader;
 use Nemundo\Process\Group\Data\GroupUser\GroupUser;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserDelete;
@@ -92,7 +93,18 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType  // Abst
     }
 
 
-   protected function getGroupLabel() {
+    protected function onDelete()
+    {
+
+       // $delete = new GroupUserDelete();
+       // $delete->
+
+        (new GroupDelete())->deleteById($this->dataId);
+
+    }
+
+
+    protected function getGroupLabel() {
         return $this->group;
     }
 

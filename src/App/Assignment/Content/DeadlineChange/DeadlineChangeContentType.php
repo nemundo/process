@@ -27,7 +27,7 @@ class DeadlineChangeProcessStatus extends AbstractProcessStatus
     {
 
         $this->typeLabel[LanguageCode::EN] = 'Deadline Change';
-        $this->typeLabel[LanguageCode::DE] = 'Termverschiebung';
+        $this->typeLabel[LanguageCode::DE] = 'Terminverschiebung';
         $this->typeId = 'cd3ade01-3ef1-452f-8a45-dce792547220';
         $this->changeStatus = false;
 

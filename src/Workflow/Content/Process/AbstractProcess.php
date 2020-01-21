@@ -16,6 +16,7 @@ use Nemundo\Process\App\Assignment\Status\OpenAssignmentStatus;
 use Nemundo\Process\Content\Data\Content\ContentUpdate;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
+use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Content\View\AbstractProcessView;
 use Nemundo\Process\Workflow\Data\Workflow\Workflow;
@@ -128,6 +129,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         }
 
         $data = new Workflow();
+        $data->active=true;
         $data->contentId = $this->getContentId();
         $data->number = $this->number;
         $data->workflowNumber = $this->workflowNumber;
@@ -147,7 +149,8 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     {
 
         parent::deleteType();
-        (new WorkflowDelete())->deleteById($this->dataId);
+        //(new WorkflowDelete())->deleteById($this->dataId);
+        (new WorkflowDelete())->deleteById($this->getWorkflowId());
         //$this->deleteChild();
 
     }
@@ -392,6 +395,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
 
     private function getProcessNextStatus(AbstractProcessStatus $status, $statusList)
+  //    private function getProcessNextStatus($status, $statusList)
     {
 
         $statusList[] = $status;

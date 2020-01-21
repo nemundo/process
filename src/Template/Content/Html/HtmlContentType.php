@@ -5,10 +5,15 @@ namespace Nemundo\Process\Template\Content\Html;
 
 
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
+use Nemundo\Process\Template\Content\LargeText\AbstractLargeTextContentType;
 use Nemundo\Process\Template\Data\LargeText\LargeText;
+use Nemundo\Process\Template\Data\LargeText\LargeTextUpdate;
 use Nemundo\Process\Workflow\Content\Status\ProcessStatusTrait;
 
-class HtmlContentType extends AbstractTreeContentType
+
+
+
+class HtmlContentType extends AbstractLargeTextContentType
 {
 
     //use UserRestrictionTrait;
@@ -23,17 +28,14 @@ class HtmlContentType extends AbstractTreeContentType
 
         $this->formClass = HtmlContentForm::class;
         $this->viewClass = HtmlContentView::class;
-        // TODO: Implement loadContentType() method.
+
     }
 
 
-    protected function onCreate()
+    public function saveType()
     {
-
-        $data = new LargeText();
-        $data->largeText = $this->html;
-        $this->dataId = $data->save();
-
+        $this->largeText = $this->html;
+        parent::saveType();
     }
 
 }

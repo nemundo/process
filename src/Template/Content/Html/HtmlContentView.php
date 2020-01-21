@@ -6,7 +6,6 @@ namespace Nemundo\Process\Template\Content\Html;
 
 use Nemundo\Html\Block\Div;
 use Nemundo\Process\Content\View\AbstractContentView;
-use Nemundo\Process\Template\Data\LargeText\LargeTextReader;
 
 class HtmlContentView extends AbstractContentView
 {
@@ -14,9 +13,11 @@ class HtmlContentView extends AbstractContentView
     public function getContent()
     {
 
+        $largeTextRow = $this->contentType->getDataRow();
+
         $div = new Div($this);
 
-        $largeTextRow = (new LargeTextReader())->getRowById($this->dataId);
+        //  $this->content (new LargeTextReader())->getRowById($this->dataId);
         $div->content = $largeTextRow->largeText;
 
         return parent::getContent();
