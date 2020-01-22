@@ -270,7 +270,9 @@ class AbstractProcessMenu extends AbstractHtmlContainer
 
                 $row = new TableRow($this->table);
                 new ArrowRightIcon($row);
-                $row->addText($status->typeLabel);
+                //$row->addText($status->typeLabel);
+                $row->addBoldText($status->typeLabel);
+
                 $row->addEmpty();
 
                 $this->menuFound = true;

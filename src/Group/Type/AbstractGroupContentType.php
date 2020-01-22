@@ -4,11 +4,13 @@
 namespace Nemundo\Process\Group\Type;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Random\UniqueId;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Group\Content\GroupContentForm;
 use Nemundo\Process\Group\Content\GroupContentView;
 use Nemundo\Process\Group\Data\Group\Group;
+use Nemundo\Process\Group\Data\Group\GroupCount;
 use Nemundo\Process\Group\Data\Group\GroupDelete;
 use Nemundo\Process\Group\Data\Group\GroupReader;
 use Nemundo\Process\Group\Data\GroupUser\GroupUser;
@@ -16,10 +18,10 @@ use Nemundo\Process\Group\Data\GroupUser\GroupUserDelete;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
 use Nemundo\User\Reader\UserCustomRow;
 
-abstract class AbstractGroupContentType extends AbstractTreeContentType  // AbstractBase
+abstract class AbstractGroupContentType extends AbstractTreeContentType
 {
 
-    public $typeId;
+    //public $typeId;
 
     public $group;
 
@@ -32,27 +34,23 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType  // Abst
     }*/
 
 
-
     public function __construct($dataId = null)
     {
 
         $this->typeLabel = 'Content Group';
         $this->typeId = '8fb75394-3e0d-4a3e-a209-1a5ebfc46220';
-        $this->formClass=GroupContentForm::class;
-        $this->viewClass=GroupContentView::class;
+        $this->formClass = GroupContentForm::class;
+        $this->viewClass = GroupContentView::class;
 
         $this->loadGroup();
 
         parent::__construct($dataId);
 
-
-
     }
 
 
-
-
-    protected function loadGroup() {
+    protected function loadGroup()
+    {
 
     }
 
@@ -60,8 +58,6 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType  // Abst
     protected function onCreate()
     {
         // nach saveType
-
-
 
 
         if ($this->dataId == null) {
@@ -75,11 +71,27 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType  // Abst
         }*/
 
         $data = new Group();
-        $data->updateOnDuplicate = true;
+        //$data->updateOnDuplicate = true;
         $data->id = $this->dataId;
         $data->group = $this->getGroupLabel();
         $data->groupTypeId = $this->typeId;  //groupType->id;
         $data->save();
+
+    }
+
+
+    public function saveType()
+    {
+
+        if ($this->dataId !== null) {
+            $count = new GroupCount();
+            $count->filter->andEqual($count->model->id, $this->dataId);
+            if ($count->getCount() == 0) {
+                parent::saveType();
+            }
+        } else {
+            parent::saveType();
+        }
 
     }
 
@@ -96,15 +108,16 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType  // Abst
     protected function onDelete()
     {
 
-       // $delete = new GroupUserDelete();
-       // $delete->
+        // $delete = new GroupUserDelete();
+        // $delete->
 
         (new GroupDelete())->deleteById($this->dataId);
 
     }
 
 
-    protected function getGroupLabel() {
+    protected function getGroupLabel()
+    {
         return $this->group;
     }
 
@@ -166,5 +179,24 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType  // Abst
         return $list;
 
     }
+
+
+    public function getUserIdList()
+    {
+
+        $list = [];
+
+        $reader = new GroupUserReader();
+        $reader->model->loadUser();
+        $reader->filter->andEqual($reader->model->groupId, $this->dataId);
+
+        foreach ($reader->getData() as $groupUserRow) {
+            $list[] = $groupUserRow->userId;
+        }
+
+        return $list;
+
+    }
+
 
 }

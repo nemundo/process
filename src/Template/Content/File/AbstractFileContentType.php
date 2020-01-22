@@ -11,6 +11,8 @@ use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFile;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileDelete;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileReader;
+use Nemundo\Process\Template\Parameter\FileParameter;
+use Nemundo\Process\Template\Site\FileItemSite;
 
 
 abstract class AbstractFileContentType extends AbstractTreeContentType
@@ -31,6 +33,8 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $this->typeLabel = 'File';
         $this->formClass = FileContentForm::class;
         $this->viewClass = FileContentView::class;
+        $this->viewSite=FileItemSite::$site;
+        $this->parameterClass=FileParameter::class;
         parent::__construct($dataId);
     }
 
@@ -39,14 +43,12 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
     protected function onCreate()
     {
 
-        //(new Debug())->write($this->getContentId());
 
-        //$this->createMode = true;
+        // check for video
+
 
         $data = new TemplateFile();
         $data->active = true;
-        //$data->file->fromFileRequest($this->fileRequest);
-
 
         if ($this->fileRequest !== null) {
             $data->file->fromFileRequest($this->fileRequest);

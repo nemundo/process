@@ -1,20 +1,18 @@
 <?php
 
 
-namespace Nemundo\Process\Template\Form;
+namespace Nemundo\Process\Template\Content\YouTube;
 
 
 use Nemundo\Core\Http\Url\Url;
 use Nemundo\Core\Http\Url\UrlBuilder;
-use Nemundo\Core\Http\Url\UrlInfo;
 use Nemundo\Core\Http\Url\UrlItem;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
 use Nemundo\Process\Content\Form\AbstractContentForm;
-use Nemundo\Process\Content\Item\ContentItem;
 use Nemundo\Process\Template\Data\Youtube\Youtube;
-use Nemundo\Process\Template\Type\YoutubeContentType;
 
-class YoutubeContentForm extends AbstractContentForm
+
+class YouTubeContentForm extends AbstractContentForm
 {
 
     /**
@@ -36,6 +34,14 @@ class YoutubeContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
+
+        $type = new YouTubeContentType();
+        $type->parentId=$this->parentId;
+        $type->youTubeUrl=$this->url->getValue();
+        $type->saveType();
+
+
+
 //        new Youtube
 
        // https://www.youtube.com/watch?v=SjYdIKI2DlA
@@ -43,6 +49,7 @@ class YoutubeContentForm extends AbstractContentForm
       //  new Url()
 
 
+        /*
         $url = $this->url->getValue();
 
         $urlItem = new UrlItem($url);
@@ -57,7 +64,7 @@ class YoutubeContentForm extends AbstractContentForm
         $item->parentId = $this->parentId;
         $item->contentType = new YoutubeContentType();
         $item->dataId = $dataId;
-        $item->saveItem();
+        $item->saveItem();*/
 
 
     }

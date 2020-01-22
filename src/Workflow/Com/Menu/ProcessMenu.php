@@ -18,7 +18,8 @@ class ProcessMenu extends AbstractProcessMenu
 
             if (!$this->workflowExist) {
 
-                if ($this->workflowStatus->typeId === $status->typeId) {
+                //if ($this->workflowStatus->typeId === $status->typeId) {
+                if ($this->process->startContentType->typeId == $status->typeId) {
                     $this->addArrowLabel($status);
                 } else {
                     $this->addLabel($status);

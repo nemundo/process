@@ -1,0 +1,71 @@
+{
+    "app": "Message",
+    "name": "message",
+    "namespace": "Nemundo\\Process\\App\\Message",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "40b8b660-de64-48f6-8e33-b20a56be688e",
+            "label": "Message",
+            "class_name": "Message",
+            "table_name": "message_message",
+            "namespace": "Nemundo\\Process\\App\\Message\\Data\\Message",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Subject",
+                    "field_name": "subject",
+                    "variable_name": "subject",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "large_text",
+                    "label": "Message",
+                    "field_name": "message",
+                    "variable_name": "message",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "221b6f51-a913-4c0c-877a-a0b318b063e0",
+            "label": "Message To",
+            "class_name": "MessageTo",
+            "table_name": "message_message_to",
+            "namespace": "Nemundo\\Process\\App\\Message\\Data\\MessageTo",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Message",
+                    "field_name": "message",
+                    "variable_name": "message",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "40b8b660-de64-48f6-8e33-b20a56be688e"
+                },
+                {
+                    "type": "external",
+                    "label": "To",
+                    "field_name": "to",
+                    "variable_name": "to",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "c6e00009-24e0-4cef-82ee-34a89152415f"
+                }
+            ],
+            "index": []
+        }
+    ]
+}

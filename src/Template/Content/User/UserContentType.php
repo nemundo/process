@@ -34,6 +34,7 @@ class UserContentType extends AbstractContentType
     }
 
 
+    // getUserGroupId
     public function getGroupId() {
 
         $groupId = null;
@@ -47,7 +48,7 @@ class UserContentType extends AbstractContentType
         }
 
         if ($groupId == null) {
-            (new LogMessage())->writeError('No Group Id for Mitarbeiter');
+            (new LogMessage())->writeError('No User Group Id');
         }
 
 
@@ -57,6 +58,7 @@ class UserContentType extends AbstractContentType
 
 
 
+    // getGroupList
     public function getGroupMembershipList()
     {
 
@@ -79,8 +81,15 @@ class UserContentType extends AbstractContentType
     public function getGroupIdList()
     {
 
-        (new Debug())->write('no function');
+        $list = [];
 
+        $reader = new GroupUserReader();
+         $reader->filter->andEqual($reader->model->userId, $this->dataId);
+        foreach ($reader->getData() as $groupUserRow) {
+            $list[] = $groupUserRow->groupId;
+        }
+
+        return $list;
     }
 
 }

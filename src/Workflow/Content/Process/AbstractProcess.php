@@ -113,12 +113,11 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         if ($this->number == null) {
 
             $value = new WorkflowValue();
-            //$value->model->loadContent();
+            $value->model->loadContent();
 
 
             $value->field = $value->model->number;
-            //$value->filter->andEqual($value->model->processId, $this->typeId);
-            //$value->filter->andEqual($value->model->content->contentTypeId, $this->typeId);
+            $value->filter->andEqual($value->model->content->contentTypeId, $this->typeId);
 
             $this->number = $value->getMaxValue();
             if ($this->number == '') {

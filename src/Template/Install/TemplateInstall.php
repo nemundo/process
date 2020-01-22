@@ -14,16 +14,19 @@ use Nemundo\Process\Template\Content\AddSource\AddSourceContentType;
 use Nemundo\Process\Template\Content\Event\EventContentType;
 use Nemundo\Process\Template\Content\File\FileContentType;
 use Nemundo\Process\Template\Content\File\FileDeleteContentType;
+use Nemundo\Process\Template\Content\LargeText\LargeTextContentType;
 use Nemundo\Process\Template\Content\SourceRemove\SourceRemoveContentType;
 use Nemundo\Process\Template\Content\Text\TextContentType;
 use Nemundo\Process\Template\Content\User\UserContentType;
 use Nemundo\Process\Template\Content\VersionText\VersionTextContentType;
+use Nemundo\Process\Template\Content\Video\VideoContentType;
+use Nemundo\Process\Template\Content\YouTube\YouTubeContentType;
 use Nemundo\Process\Template\Data\TemplateCollection;
 
 use Nemundo\Process\Template\Status\DocumentDeleteProcessStatus;
 
 use Nemundo\Process\Template\Status\WorkflowDelete\WorkflowDeleteStatus;
-use Nemundo\Process\Template\Type\LargeTextContentType;
+
 use Nemundo\Process\Template\Type\WebImageContentType;
 use Nemundo\Process\Workflow\Setup\StatusSetup;
 use Nemundo\Project\Install\AbstractInstall;
@@ -50,10 +53,12 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new FileDeleteContentType());
         $setup->addContentType(new TextContentType());
         $setup->addContentType(new VersionTextContentType());
+        $setup->addContentType(new VideoContentType());
+        $setup->addContentType(new YouTubeContentType());
 
         $setup->addContentType(new NewsContentType());
         $setup->addContentType(new WikiPageContentType());
-        $setup->addContentType(new WebImageContentType());
+        //$setup->addContentType(new WebImageContentType());
         $setup->addContentType(new UserContentType());
         $setup->addContentType(new EventContentType());
         $setup->addContentType(new AddSourceContentType());
@@ -66,6 +71,7 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new EventContentType());
         $setup->addContentType(new TextContentType());
         $setup->addContentType(new FileContentType());
+        $setup->addContentType(new YouTubeContentType());
 
         $setup= new CalendarSourceSetup();
         $setup->addSourceContentType(new WikiPageContentType());

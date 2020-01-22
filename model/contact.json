@@ -1,0 +1,6 @@
+{
+    "app": "Contact",
+    "name": "contact",
+    "namespace": "Nemundo\\Process\\App\\Contact",
+    "is_deleted": false
+}

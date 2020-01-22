@@ -35,6 +35,8 @@ class FileSite extends AbstractSite
         $this->url = 'file-template';
         // TODO: Implement loadSite() method.
         FileSite::$site = $this;
+
+        new FileItemSite($this);
     }
 
 

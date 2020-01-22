@@ -8,7 +8,7 @@ use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Core\File\FileInformation;
-use Nemundo\Core\File\FileName;
+
 use Nemundo\Core\File\FileSize;
 use Nemundo\Core\Type\File\File;
 use Nemundo\Html\Block\Div;
@@ -17,13 +17,13 @@ use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileReader;
 
 
-class FileContentView extends AbstractContentView
+class FileContentView extends AbstractFileContentView
 {
 
     /**
      * @var FileContentType
      */
-    public $contentType;
+    //public $contentType;
 
     public function getContent()
     {

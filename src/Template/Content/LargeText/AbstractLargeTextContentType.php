@@ -19,7 +19,7 @@ abstract class AbstractLargeTextContentType extends AbstractTreeContentType
 
     public function __construct($dataId = null)
     {
-        $this->formClass=LargeTextContentForm::class;
+        $this->formClass = LargeTextContentForm::class;
         parent::__construct($dataId);
     }
 
@@ -47,7 +47,7 @@ abstract class AbstractLargeTextContentType extends AbstractTreeContentType
     public function getDataRow()
     {
 
-     return (new LargeTextReader())->getRowById($this->dataId);
+        return (new LargeTextReader())->getRowById($this->dataId);
 
     }
 

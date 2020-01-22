@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Nemundo\Process\Template\View;
+namespace Nemundo\Process\Template\Content\LargeText;
 
 
 use Nemundo\Core\Type\Text\Html;

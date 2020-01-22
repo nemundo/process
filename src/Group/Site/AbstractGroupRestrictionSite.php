@@ -5,6 +5,7 @@ namespace Nemundo\Process\Group\Site;
 
 
 use Nemundo\Process\Group\Check\GroupCheck;
+use Nemundo\Process\Group\Check\GroupRestrictionTrait;
 use Nemundo\Process\Group\Type\AbstractGroupContentType;
 use Nemundo\Web\Site\AbstractSite;
 use Schleuniger\App\Verbesserung\Group\VerbesserungAdminGroup;
@@ -12,13 +13,17 @@ use Schleuniger\App\Verbesserung\Group\VerbesserungAdminGroup;
 abstract class AbstractGroupRestrictionSite extends AbstractSite
 {
 
+    use GroupRestrictionTrait;
+
+
+    /*
 
     public $groupRestriction = true;
 
     /**
      * @var AbstractGroupContentType[]
      */
-    private $restrictionGroup = [];
+  /*  private $restrictionGroup = [];
 
     public function addRestrictionGroup(AbstractGroupContentType $groupContentType)
     {
@@ -59,7 +64,7 @@ abstract class AbstractGroupRestrictionSite extends AbstractSite
         return $visible;
 
 
-    }
+    }*/
 
 
 }

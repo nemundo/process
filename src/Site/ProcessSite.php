@@ -8,6 +8,8 @@ use Nemundo\Process\App\Calendar\Site\CalendarSite;
 use Nemundo\Process\App\Document\Site\DocumentSite;
 use Nemundo\Process\App\Explorer\Site\ExplorerSite;
 use Nemundo\Process\App\Favorite\Site\FavoriteSite;
+use Nemundo\Process\App\Message\Site\MessageSite;
+use Nemundo\Process\App\Notification\Site\NotificationSite;
 use Nemundo\Process\App\Wiki\Site\WikiSite;
 use Nemundo\Process\Content\Site\ContentSite;
 use Nemundo\Process\Content\Site\ContentTypeSite;
@@ -71,8 +73,10 @@ class ProcessSite extends AbstractSite
         new ProcessTemplateSite($this);
         new FileSite($this);
 
+        new MessageSite($this);
 
         new \Nemundo\Process\App\Assignment\Site\AssignmentSite($this);
+        new NotificationSite($this);
 
     }
 

@@ -7,6 +7,7 @@ namespace Nemundo\Process\Workflow\Content\Status;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Type\MenuTrait;
+use Nemundo\Process\Group\Check\GroupRestrictionTrait;
 use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
 use Nemundo\User\Access\UserRestrictionTrait;
 
@@ -14,7 +15,8 @@ use Nemundo\User\Access\UserRestrictionTrait;
 trait ProcessStatusTrait
 {
 
-    use UserRestrictionTrait;
+    //use UserRestrictionTrait;
+    use GroupRestrictionTrait;
 
     /**
      * @var bool

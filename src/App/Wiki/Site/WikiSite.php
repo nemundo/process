@@ -56,6 +56,7 @@ class WikiSite extends AbstractSite
         $layout->col3->columnWidth = 5;
 
 
+
         $form = new WikiPageContentForm($layout->col1);
         $form->appendParameter = true;
         $form->redirectSite = WikiSite::$site;
@@ -82,11 +83,11 @@ class WikiSite extends AbstractSite
             $wikiId = $wikiParameter->getValue();
             $wikiType = new WikiPageContentType($wikiId);
 
-            $wikiType->getForm($layout->col2);
+            //$wikiType->getForm($layout->col2);
 
 
-            $title = new AdminTitle($layout->col2);
-            $title->content = $wikiType->getSubject();
+            //$title = new AdminTitle($layout->col2);
+            //$title->content = $wikiType->getSubject();
 
             $wikiRow = (new WikiReader())->getRowById($wikiId);
 

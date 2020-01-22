@@ -45,7 +45,8 @@ abstract class AbstractContentType extends AbstractType
      */
     public $typeLabel;
 
-    public $restricted = false;
+
+    //public $restricted = false;
 
 
     protected $contentId;

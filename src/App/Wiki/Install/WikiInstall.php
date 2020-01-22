@@ -28,7 +28,7 @@ class WikiInstall extends AbstractInstall
 
         $setup = new ContentTypeSetup();
         $setup->addContentType(new WikiPageContentType());
-        $setup->addContentType(new LargeTextContentType());
+        //$setup->addContentType(new LargeTextContentType());
 
         $setup=new WikiSetup();
         $setup->addContentType(new HtmlContentType());

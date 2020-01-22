@@ -11,8 +11,10 @@ use Nemundo\Process\App\Calendar\Data\CalendarCollection;
 use Nemundo\Process\App\Document\Data\DocumentCollection;
 use Nemundo\Process\App\Favorite\Install\FavoriteInstall;
 use Nemundo\Process\App\Inbox\Install\InboxInstall;
+use Nemundo\Process\App\Message\Install\MessageInstall;
 use Nemundo\Process\App\News\Data\NewsCollection;
 use Nemundo\Process\App\News\Type\NewsContentType;
+use Nemundo\Process\App\Notification\Install\NotificationInstall;
 use Nemundo\Process\App\Plz\Content\PlzContentType;
 use Nemundo\Process\App\Plz\Data\PlzCollection;
 use Nemundo\Process\App\Survey\Content\Type\ErfassungContentType;
@@ -57,7 +59,8 @@ class ProcessInstall extends AbstractInstall
         (new GroupInstall())->install();
 
         (new AssignmentInstall())->install();
-
+        (new NotificationInstall())->install();
+        (new MessageInstall())->install();
         //(new ToDoInstall())->install();
 
         //(new ChangeRequestInstall())->install();
