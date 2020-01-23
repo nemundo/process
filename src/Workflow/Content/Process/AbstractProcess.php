@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Workflow\Content\Process;
 
 
+use Nemundo\App\Performance\PerformanceStopwatch;
 use Nemundo\Core\Date\DateTimeDifference;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Time\Stopwatch;
@@ -106,7 +107,9 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         //$stopwatch->stopAndPrintOutput();
 
         //$stopwatch = new Stopwatch('saveworkflow');
+        $performance = new PerformanceStopwatch('workflow');
         $this->saveWorkflow();
+        $performance->stopStopwatch();
         //$stopwatch->stopAndPrintOutput();
 
         //$stopwatch = new Stopwatch('content update2');
@@ -130,21 +133,33 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     protected function saveWorkflow()
     {
 
+
+
+
+        //$performance = new PerformanceStopwatch('number_lookup');
         if ($this->number == null) {
 
             $value = new WorkflowValue();
-            $value->model->loadContent();
+            //$value->model->loadContent();
 
             $value->field = $value->model->number;
-            $value->filter->andEqual($value->model->content->contentTypeId, $this->typeId);
+            //$value->filter->andEqual($value->model->content->contentTypeId, $this->typeId);
 
             $this->number = $value->getMaxValue();
+
+
+
             if ($this->number == '') {
                 $this->number = $this->startNumber - 1;
             }
             $this->number = $this->number + 1;
             $this->workflowNumber = $this->prefixNumber . $this->number;
         }
+
+        //$performance->stopStopwatch();
+
+
+        //$performance = new PerformanceStopwatch('workflow_save');
 
         $data = new Workflow();
         $data->active=true;
@@ -157,8 +172,12 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $data->deadline = $this->deadline;
         $this->workflowId = $data->save();
 
+        //$performance->stopStopwatch();
+
+        //$performance = new PerformanceStopwatch('workflow_search_engine');
         $this->addSearchWord($this->workflowNumber);
         $this->addSearchText($this->getSubject());
+        //$performance->stopStopwatch();
 
     }
 

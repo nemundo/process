@@ -240,10 +240,9 @@
                     ]
                 },
                 {
-                    "index_name": "content_number",
+                    "index_name": "number",
                     "index_type": "index",
                     "field_name": [
-                        "content",
                         "number"
                     ]
                 }
