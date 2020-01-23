@@ -83,47 +83,45 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         if ($this->createMode) {
 
-            $stopwatch = new Stopwatch();
-            $stopwatch->logName = 'content before';
-            $this->saveContentBefore();
-            $stopwatch->stopAndPrintOutput();
+            //$stopwatch = new Stopwatch('content before');
+           $this->saveContentBefore();
+            //$stopwatch->stopAndPrintOutput();
 
-            $stopwatch = new Stopwatch();
-            $stopwatch->logName = 'onCreate';
-            $this->onCreate();
-            $stopwatch->stopAndPrintOutput();
+            //$stopwatch = new Stopwatch('onCreate');
+             $this->onCreate();
+            //$stopwatch->stopAndPrintOutput();
 
-            $stopwatch = new Stopwatch('content update');
+            //$stopwatch = new Stopwatch('content update');
             $update = new ContentUpdate();
             $update->dataId = $this->dataId;
             $update->updateById($this->contentId);
-            $stopwatch->stopAndPrintOutput();
+            //$stopwatch->stopAndPrintOutput();
 
         } else {
             (new LogMessage())->writeError('process no create mode');
         }
 
-        $stopwatch = new Stopwatch('savetree');
+        //$stopwatch = new Stopwatch('savetree');
         $this->saveTree();
-        $stopwatch->stopAndPrintOutput();
+        //$stopwatch->stopAndPrintOutput();
 
-        $stopwatch = new Stopwatch('saveworkflow');
+        //$stopwatch = new Stopwatch('saveworkflow');
         $this->saveWorkflow();
-        $stopwatch->stopAndPrintOutput();
+        //$stopwatch->stopAndPrintOutput();
 
-        $stopwatch = new Stopwatch('content update2');
+        //$stopwatch = new Stopwatch('content update2');
         $update = new ContentUpdate();
         $update->subject = $this->getSubject();
         $update->updateById($this->contentId);
-        $stopwatch->stopAndPrintOutput();
+        //$stopwatch->stopAndPrintOutput();
 
-        $stopwatch = new Stopwatch('search index');
+        //$stopwatch = new Stopwatch('search index');
         $this->saveSearchIndex();
-        $stopwatch->stopAndPrintOutput();
+        //$stopwatch->stopAndPrintOutput();
 
-        $stopwatch = new Stopwatch('on finish');
+        //$stopwatch = new Stopwatch('on finish');
         $this->onFinished();
-        $stopwatch->stopAndPrintOutput();
+        //$stopwatch->stopAndPrintOutput();
 
 
     }
