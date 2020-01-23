@@ -26,11 +26,16 @@ use Nemundo\Workflow\Com\TrafficLight\DateTrafficLight;
 class AssignmentSite extends AbstractSite
 {
 
+    /**
+     * @var AssignmentSite
+     */
+    public static $site;
+
     protected function loadSite()
     {
         $this->title = 'Assignment';
         $this->url = 'group-assignment';
-
+AssignmentSite::$site=$this;
     }
 
 

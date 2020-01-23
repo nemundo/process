@@ -19,6 +19,7 @@ use Nemundo\Process\Group\Com\ListBox\GroupTypeListBox;
 use Nemundo\Process\Group\Data\Group\GroupReader;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
 use Nemundo\Process\Group\Parameter\GroupParameter;
+use Nemundo\User\Parameter\UserParameter;
 use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Web\Site\Site;
 
@@ -36,6 +37,7 @@ class GroupSite extends AbstractSite
         $this->url = 'group';
         GroupSite::$site = $this;
 
+        new GroupUserDeleteSite($this);
         //new GroupItemSite($this);
 
     }
@@ -129,6 +131,12 @@ class GroupSite extends AbstractSite
             foreach ($groupReader->getData() as $groupUserRow) {
                 $row = new TableRow($table);
                 $row->addText($groupUserRow->user->displayName);
+
+                $site=clone(GroupUserDeleteSite::$site);
+                $site->addParameter(new GroupParameter());
+                $site->addParameter(new UserParameter($groupUserRow->userId));
+                $row->addIconSite($site);
+
             }
 
 

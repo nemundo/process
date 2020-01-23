@@ -328,6 +328,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
+    // clearAssignment
     public function cancelAssignment()
     {
 

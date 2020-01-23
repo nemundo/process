@@ -75,6 +75,30 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     }
 
 
+    protected function saveGroup() {
+
+        if ($this->dataId == null) {
+            $this->dataId = (new UniqueId())->getUniqueId();
+        }
+
+        /*
+
+        if ($this->group==null) {
+          $this->group=$this->getSubject();
+        }*/
+
+        $data = new Group();
+        //$data->updateOnDuplicate = true;
+        $data->id = $this->dataId;
+        $data->group = $this->getGroupLabel();
+        $data->groupTypeId = $this->typeId;  //groupType->id;
+        $data->save();
+
+
+    }
+
+
+
     public function saveType()
     {
 

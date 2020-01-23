@@ -11,6 +11,7 @@ use Nemundo\Db\Filter\Filter;
 use Nemundo\Html\Table\Th;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentPaginationReader;
+use Nemundo\Process\App\Assignment\Site\AssignmentSite;
 use Nemundo\Process\App\Assignment\Status\OpenAssignmentStatus;
 use Nemundo\Process\Template\Content\User\UserContentType;
 use Nemundo\User\Session\UserSession;
@@ -31,7 +32,8 @@ class AssignmentWidget extends AdminWidget
 
         //$this->widgetSite = AufgabenSit AssignmentSite:: NotificationSite::$site;
 
-        $this->widgetSite = AufgabeSite::$site;
+        //$this->widgetSite = AufgabeSite::$site;
+        $this->widgetSite=AssignmentSite::$site;
 
     }
 
@@ -89,7 +91,7 @@ class AssignmentWidget extends AdminWidget
         //$assignmentReader->addOrder($assignmentReader->model->sourceId, SortOrder::DESCENDING);
 
 
-        $assignmentReader->paginationLimit = SchleunigerConfig::PAGINATION_LIMIT;
+        $assignmentReader->paginationLimit =50;  // SchleunigerConfig::PAGINATION_LIMIT;
 
 
         foreach ($assignmentReader->getData() as $assignmentRow) {
