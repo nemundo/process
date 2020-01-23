@@ -6,6 +6,7 @@ namespace Nemundo\Process\Workflow\Content\Process;
 
 use Nemundo\Core\Date\DateTimeDifference;
 use Nemundo\Core\Log\LogMessage;
+use Nemundo\Core\Time\Stopwatch;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Db\Sql\Order\SortOrder;
@@ -82,26 +83,47 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         if ($this->createMode) {
 
+            $stopwatch = new Stopwatch();
+            $stopwatch->logName = 'content before';
             $this->saveContentBefore();
-            $this->onCreate();
+            $stopwatch->stopAndPrintOutput();
 
+            $stopwatch = new Stopwatch();
+            $stopwatch->logName = 'onCreate';
+            $this->onCreate();
+            $stopwatch->stopAndPrintOutput();
+
+            $stopwatch = new Stopwatch('content update');
             $update = new ContentUpdate();
             $update->dataId = $this->dataId;
             $update->updateById($this->contentId);
+            $stopwatch->stopAndPrintOutput();
 
         } else {
             (new LogMessage())->writeError('process no create mode');
         }
 
+        $stopwatch = new Stopwatch('savetree');
         $this->saveTree();
-        $this->saveWorkflow();
+        $stopwatch->stopAndPrintOutput();
 
+        $stopwatch = new Stopwatch('saveworkflow');
+        $this->saveWorkflow();
+        $stopwatch->stopAndPrintOutput();
+
+        $stopwatch = new Stopwatch('content update2');
         $update = new ContentUpdate();
         $update->subject = $this->getSubject();
         $update->updateById($this->contentId);
+        $stopwatch->stopAndPrintOutput();
 
+        $stopwatch = new Stopwatch('search index');
         $this->saveSearchIndex();
+        $stopwatch->stopAndPrintOutput();
+
+        $stopwatch = new Stopwatch('on finish');
         $this->onFinished();
+        $stopwatch->stopAndPrintOutput();
 
 
     }
