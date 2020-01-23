@@ -84,27 +84,27 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         if ($this->createMode) {
 
-            //$stopwatch = new Stopwatch('content before');
+            $stopwatch = new PerformanceStopwatch('content before');
            $this->saveContentBefore();
-            //$stopwatch->stopAndPrintOutput();
+            $stopwatch->stopStopwatch();
 
-            //$stopwatch = new Stopwatch('onCreate');
+            $stopwatch = new PerformanceStopwatch('onCreate');
              $this->onCreate();
-            //$stopwatch->stopAndPrintOutput();
+            $stopwatch->stopStopwatch();
 
-            //$stopwatch = new Stopwatch('content update');
+            $stopwatch = new PerformanceStopwatch('content update');
             $update = new ContentUpdate();
             $update->dataId = $this->dataId;
             $update->updateById($this->contentId);
-            //$stopwatch->stopAndPrintOutput();
+            $stopwatch->stopStopwatch();
 
         } else {
             (new LogMessage())->writeError('process no create mode');
         }
 
-        //$stopwatch = new Stopwatch('savetree');
+        $stopwatch = new PerformanceStopwatch('savetree');
         $this->saveTree();
-        //$stopwatch->stopAndPrintOutput();
+        $stopwatch->stopStopwatch();
 
         //$stopwatch = new Stopwatch('saveworkflow');
         $performance = new PerformanceStopwatch('workflow');
@@ -112,19 +112,19 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $performance->stopStopwatch();
         //$stopwatch->stopAndPrintOutput();
 
-        //$stopwatch = new Stopwatch('content update2');
+        $stopwatch = new PerformanceStopwatch('content update2');
         $update = new ContentUpdate();
         $update->subject = $this->getSubject();
         $update->updateById($this->contentId);
-        //$stopwatch->stopAndPrintOutput();
+        $stopwatch->stopStopwatch();
 
-        //$stopwatch = new Stopwatch('search index');
+        $stopwatch = new PerformanceStopwatch('search index');
         $this->saveSearchIndex();
-        //$stopwatch->stopAndPrintOutput();
+        $stopwatch->stopStopwatch();
 
-        //$stopwatch = new Stopwatch('on finish');
+        $stopwatch = new PerformanceStopwatch('on finish');
         $this->onFinished();
-        //$stopwatch->stopAndPrintOutput();
+        $stopwatch->stopStopwatch();
 
 
     }
@@ -136,7 +136,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
 
 
-        //$performance = new PerformanceStopwatch('number_lookup');
+        $performance = new PerformanceStopwatch('number_lookup');
         if ($this->number == null) {
 
             $value = new WorkflowValue();
@@ -156,10 +156,10 @@ abstract class AbstractProcess extends AbstractSequenceContentType
             $this->workflowNumber = $this->prefixNumber . $this->number;
         }
 
-        //$performance->stopStopwatch();
+        $performance->stopStopwatch();
 
 
-        //$performance = new PerformanceStopwatch('workflow_save');
+        $performance = new PerformanceStopwatch('workflow_save');
 
         $data = new Workflow();
         $data->active=true;
@@ -172,12 +172,12 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $data->deadline = $this->deadline;
         $this->workflowId = $data->save();
 
-        //$performance->stopStopwatch();
+        $performance->stopStopwatch();
 
-        //$performance = new PerformanceStopwatch('workflow_search_engine');
+        $performance = new PerformanceStopwatch('workflow_search_engine');
         $this->addSearchWord($this->workflowNumber);
         $this->addSearchText($this->getSubject());
-        //$performance->stopStopwatch();
+        $performance->stopStopwatch();
 
     }
 
