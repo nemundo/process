@@ -4,63 +4,37 @@
 namespace Nemundo\Process\Script;
 
 
-use App\Crawler\Event\SchuurCrawler;
+use App\App\IssueTracker\Test\IssueTestData;
 use Nemundo\App\Script\Type\AbstractConsoleScript;
 use Nemundo\Core\Structure\ForLoop;
-use Nemundo\Process\App\Plz\Import\PlzImport;
-use Nemundo\Process\Group\Content\GroupContentItem;
-use Nemundo\Process\Group\Type\PublicGroupContentType;
-use Nemundo\Process\Template\Content\Event\EventContentDelete;
-use Nemundo\Process\Template\Content\User\UserContentItem;
-use Nemundo\SwissPost\Install\SwissPostInstall;
+use Nemundo\Process\Template\Content\Text\TextContentType;
+use Nemundo\Process\Template\Test\TextTestData;
 
 class ProcessTestScript extends AbstractConsoleScript
 {
     protected function loadScript()
     {
-   $this->scriptName='process-test';
+        $this->scriptName = 'process-test';
     }
 
     public function run()
     {
 
 
-        (new EventContentDelete())->delete();
-
-
-
-        //(new PlzImport())->import();
-
-        (new SchuurCrawler())->startCrawler();
-
-
-        //(new SwissPostInstall())->install();
-        //(new \Nemundo\SwissPost\Import\PolitischeGemeindeImport())->import();
-
-
-
+        $loop = new ForLoop();
+        $loop->minNumber = 1;
+        $loop->maxNumber = 10000;
+        foreach ($loop->getData() as $number) {
+            (new TextTestData())->createTestData(1000);
+        }
 
 
         /*
-        $loop=new ForLoop();
-        $loop->minNumber = 1;
-        $loop->maxNumber=10;
-        foreach ($loop->getData() as $number){
+        $type=new TextContentType();
+        $type->text='hello world';
+        $type->saveType();
+        */
 
-
-            $email =  'c'.$number.'@test.com';
-
-            $item=new UserContentItem();
-            $item->email = $email;
-            $item->saveItem();
-            $item->addGroup(new PublicGroup());
-
-            $groupItem = new GroupContentItem();
-            $groupItem->group=$email;
-            $groupItem->saveItem();
-            $groupItem->addUser($item->dataId);
-
-        }*/
 
     }
 

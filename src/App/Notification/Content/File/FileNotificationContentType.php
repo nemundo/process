@@ -11,7 +11,7 @@ class FileNotificationContentType extends AbstractNotificationContentType
 
     protected function loadContentType()
     {
-        $this->typeLabel=' File Notification';
+        $this->typeLabel='File Notification';
         $this->typeId='f697b125-fa28-4af3-8170-692bae5fd52c';
         $this->formClass=FileNotificationContentForm::class;
         // TODO: Implement loadContentType() method.

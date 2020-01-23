@@ -7,6 +7,7 @@ namespace Nemundo\Process\Content\Site;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
+use Nemundo\Core\Type\Number\Number;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Process\Content\Data\Content\ContentCount;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
@@ -50,8 +51,7 @@ class ContentTypeSite extends AbstractSite
 
             $count = new ContentCount();
             $count->filter->andEqual($count->model->contentTypeId,$contentTypeRow->id);
-            $row->addText($count->getCount());
-
+            $row->addText((new Number( $count->getCount()))->formatNumber());
 
 
         }
