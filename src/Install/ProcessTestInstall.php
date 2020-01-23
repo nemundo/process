@@ -27,7 +27,7 @@ use Nemundo\Process\Geo\Data\GeoCollection;
 use Nemundo\Process\Group\Data\GroupCollection;
 use Nemundo\Process\Group\Install\GroupInstall;
 use Nemundo\Process\Group\Setup\GroupSetup;
-use Nemundo\Process\Group\Type\AppUserGroupType;
+use Nemundo\Process\Group\Type\AbstractAppUserGroupType;
 use Nemundo\Process\Group\Type\PublicGroupContentType;
 use Nemundo\Process\Group\Type\UserGroupType;
 use Nemundo\Process\Script\ProcessCleanScript;

@@ -4,13 +4,7 @@
 namespace Nemundo\Process\Group\Type;
 
 
-class AppUserGroupType extends AbstractGroupContentType
+class AppUserGroupType extends AbstractAppUserGroupType
 {
-    protected function loadGroupType()
-    {
-        $this->id='363eb822-83a8-4e44-83d9-17c38fc47e82';
-        $this->groupType='App Group';
-        // TODO: Implement loadGroupType() method.
-    }
 
 }

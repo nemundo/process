@@ -29,7 +29,7 @@ public $word;
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = SearchIndexModel::class;
-$this->externalTableName = "search_search_index";
+$this->externalTableName = "process_search_index";
 $this->aliasTableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id = new \Nemundo\Model\Type\Id\IdType();
 $this->id->fieldName = "id";

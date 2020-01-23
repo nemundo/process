@@ -11,6 +11,7 @@ use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Core\Log\LogMessage;
+use Nemundo\Core\Type\Number\Number;
 use Nemundo\Db\Filter\Filter;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
@@ -100,7 +101,7 @@ class ContentSite extends AbstractSite
 
 
         $p = new Paragraph($page);
-        $p->content = $contentCount . ' Content found';
+        $p->content = (new Number( $contentCount))->formatNumber() . ' Content found';
 
 
         $contentReader = new ContentPaginationReader();
@@ -127,7 +128,7 @@ class ContentSite extends AbstractSite
 
         foreach ($contentReader->getData() as $contentRow) {
 
-            if (class_exists($contentRow->contentType->phpClass)) {
+            //if (class_exists($contentRow->contentType->phpClass)) {
 
 
                 $contentType = $contentRow->getContentType();  // contentType->getContentType($contentRow->id);
@@ -151,9 +152,9 @@ class ContentSite extends AbstractSite
                 $site->addParameter(new ContentParameter($contentRow->id));
                 $row->addClickableSite($site);
 
-            } else {
+            /*} else {
                 (new LogMessage())->writeError('class does not exsits.Class:' . $contentRow->contentType->phpClass);
-            }
+            }*/
 
         }
 

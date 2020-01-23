@@ -7,6 +7,7 @@ namespace Nemundo\Process\Content\Setup;
 use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Process\Content\Data\Content\ContentDelete;
+use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentType\ContentType;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeDelete;
 use Nemundo\Process\Content\Type\AbstractContentType;
@@ -36,12 +37,15 @@ abstract class AbstractContentTypeSetup extends AbstractBase
     public function removeContent(AbstractContentType $contentType)
     {
 
+        $reader = new ContentReader();
+        $reader->model->loadContentType();
+        $reader->filter->andEqual($reader->model->contentTypeId, $contentType->typeId);
+        foreach ($reader->getData() as $contentRow) {
+            $contentType = $contentRow->getContentType();
+            $contentType->deleteType();
+        }
 
-        $delete = new ContentDelete();
-        $delete->filter->andEqual($delete->model->contentTypeId, $contentType->typeId);
-        $delete->delete();
-
-        // tree delete
+        return $this;
 
     }
 
@@ -50,17 +54,8 @@ abstract class AbstractContentTypeSetup extends AbstractBase
     {
 
         $this->removeContent($contentType);
-
         (new ContentTypeDelete())->deleteById($contentType->typeId);
 
-        /*
-         $delete = new SearchIndexDelete();
-         //$delete->model->loadContent();
-         $delete->filter->andEqual($delete->model->content->contentTypeId,  $contentType->contentId);
-         $delete->delete();*/
-
-
-        // delete content
         return $this;
     }
 

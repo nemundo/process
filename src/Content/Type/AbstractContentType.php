@@ -4,7 +4,6 @@
 namespace Nemundo\Process\Content\Type;
 
 
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Random\UniqueId;
@@ -98,6 +97,11 @@ abstract class AbstractContentType extends AbstractType
     }
 
 
+    public function existItem() {
+        return false;
+    }
+
+
     public function saveType()
     {
 
@@ -120,8 +124,8 @@ abstract class AbstractContentType extends AbstractType
 
             $this->onCreate();
 
-            if ($this->dataId ==null) {
-                $this->dataId=(new UniqueId())->getUniqueId();
+            if ($this->dataId == null) {
+                $this->dataId = (new UniqueId())->getUniqueId();
             }
 
             $update = new ContentUpdate();
@@ -146,25 +150,14 @@ abstract class AbstractContentType extends AbstractType
     }
 
 
-    protected function saveContentBefore() {
+    protected function saveContentBefore()
+    {
 
         $data = new Content();
-        //$data->ignoreIfExists=true;  // braucht es für onDuplicate datesets
         $data->contentTypeId = $this->typeId;
         $data->dateTime = $this->dateTime;
         $data->userId = $this->userId;
-        //$data->dataId = $this->dataId;
-        //$data->subject = $this->getSubject();
         $this->contentId = $data->save();
-
-
-    }
-
-
-    protected function saveContent2() {
-
-
-
 
     }
 
@@ -258,12 +251,10 @@ abstract class AbstractContentType extends AbstractType
     }
 
 
-
     public function getDataReader()
     {
         (new LogMessage())->writeError('getDataReader not defined');
     }
-
 
 
     public function getDataRow()

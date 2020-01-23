@@ -9,7 +9,9 @@ use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Group\Data\GroupCollection;
 use Nemundo\Process\Group\Script\GroupCheckScript;
+use Nemundo\Process\Group\Script\GroupTestScript;
 use Nemundo\Process\Group\Setup\GroupSetup;
+use Nemundo\Process\Group\Type\AppUserGroupType;
 use Nemundo\Process\Group\Type\GroupContentType;
 use Nemundo\Process\Group\Type\UsergroupGroupType;
 use Nemundo\Process\Group\Type\UserGroupType;
@@ -29,6 +31,7 @@ class GroupInstall extends AbstractInstall
 
         $setup=new ContentTypeSetup();
         $setup->addContentType(new GroupContentType());
+        $setup->addContentType(new AppUserGroupType());
         $setup->addContentType(new UserGroupType());
         $setup->addContentType(new UsergroupGroupType());
 
@@ -40,6 +43,9 @@ class GroupInstall extends AbstractInstall
 
         $setup=new ScriptSetup();
         $setup->addScript(new GroupCheckScript());
+        $setup->addScript(new GroupTestScript());
+
+        (new AppUserGroupType())->saveType();
 
 
         //$this->importUser();

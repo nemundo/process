@@ -4,7 +4,6 @@
 namespace Nemundo\Process\Group\Type;
 
 
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Random\UniqueId;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Group\Content\GroupContentForm;
@@ -21,17 +20,13 @@ use Nemundo\User\Reader\UserCustomRow;
 abstract class AbstractGroupContentType extends AbstractTreeContentType
 {
 
-    //public $typeId;
 
     public $group;
 
-    //abstract protected function loadGroup();
-
-    /*
-    public function __construct()
-    {
-        $this->loadGroup();
-    }*/
+    /**
+     * @var bool
+     */
+    protected $searchable = true;
 
 
     public function __construct($dataId = null)
@@ -99,8 +94,10 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     final protected function onSearchIndex()
     {
 
-        $groupRow = $this->getDataRow();
-        $this->addSearchWord($groupRow->group);
+        if ($this->searchable) {
+            $groupRow = $this->getDataRow();
+            $this->addSearchWord($groupRow->group);
+        }
 
     }
 

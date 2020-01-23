@@ -28,10 +28,11 @@ use Nemundo\Process\Geo\Data\GeoCollection;
 use Nemundo\Process\Group\Data\GroupCollection;
 use Nemundo\Process\Group\Install\GroupInstall;
 use Nemundo\Process\Group\Setup\GroupSetup;
-use Nemundo\Process\Group\Type\AppUserGroupType;
+use Nemundo\Process\Group\Type\AbstractAppUserGroupType;
 use Nemundo\Process\Group\Type\PublicGroupContentType;
 use Nemundo\Process\Group\Type\UserGroupType;
 use Nemundo\Process\Script\ProcessCleanScript;
+use Nemundo\Process\Script\ProcessReInstallScript;
 use Nemundo\Process\Script\ProcessTestScript;
 use Nemundo\Process\Search\Data\SearchCollection;
 use Nemundo\Process\Search\Install\SearchInstall;
@@ -50,9 +51,13 @@ class ProcessInstall extends AbstractInstall
 
         (new ContentInstall())->install();
         (new SearchInstall())->install();
-
         (new WorkflowInstall())->install();
-        (new InboxInstall())->install();
+
+        $setup = new ModelCollectionSetup();
+        $setup->addCollection(new DocumentCollection());
+
+
+        //(new InboxInstall())->install();
         (new WikiInstall())->install();
         (new TemplateInstall())->install();
         (new FavoriteInstall())->install();
@@ -68,21 +73,22 @@ class ProcessInstall extends AbstractInstall
 
 
         $setup = new ModelCollectionSetup();
-        $setup->addCollection(new SearchCollection());
-        $setup->addCollection(new GroupCollection());
+        //$setup->addCollection(new SearchCollection());
+        //$setup->addCollection(new GroupCollection());
         $setup->addCollection(new GeoCollection());
         $setup->addCollection(new SurveyCollection());
         $setup->addCollection(new NewsCollection());
         $setup->addCollection(new CalendarCollection());
-        $setup->addCollection(new DocumentCollection());
+        //$setup->addCollection(new DocumentCollection());
         $setup->addCollection(new PlzCollection());
 
         $setup = new ScriptSetup();
         $setup->addScript(new ProcessCleanScript());
         $setup->addScript(new ProcessTestScript());
-        $setup->addScript(new ContentUpdateScript());
+        //$setup->addScript(new ProcessReInstallScript());
 
-        $setup = new ContentTypeSetup();
+
+       /* $setup = new ContentTypeSetup();
         //$setup->addContentType(new GroupContentType());
         $setup->addContentType(new NewsContentType());
         $setup->addContentType(new SurveyContentType());
@@ -91,9 +97,9 @@ class ProcessInstall extends AbstractInstall
         $setup->addContentType(new ErfassungContentType());
         $setup->addContentType(new PlzContentType());
         $setup->addContentType(new MessageAssignmentContentType());
-        $setup->addContentType(new SubjectChangeProcessStatus());
+       // $setup->addContentType(new SubjectChangeProcessStatus());
 
-        $setup = new GroupSetup();
+        //$setup = new GroupSetup();
         //$setup->addGroup(new PublicGroupContentType(), new AppUserGroupType());
         //$setup->addGroupType(new UserGroupType());
         //$setup->addGroupType(new AppUserGroupType());

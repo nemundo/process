@@ -5,12 +5,12 @@ namespace Nemundo\Process\Group\Check;
 
 
 use Nemundo\Process\Group\Type\AbstractGroupContentType;
-use Schleuniger\App\Verbesserung\Group\VerbesserungAdminGroup;
 
 trait GroupRestrictionTrait
 {
 
 
+    //groupRestricted
     public $groupRestriction = false;
 
     /**

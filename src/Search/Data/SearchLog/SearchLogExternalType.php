@@ -19,7 +19,7 @@ public $resultCount;
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = SearchLogModel::class;
-$this->externalTableName = "search_search_log";
+$this->externalTableName = "process_search_log";
 $this->aliasTableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id = new \Nemundo\Model\Type\Id\IdType();
 $this->id->fieldName = "id";

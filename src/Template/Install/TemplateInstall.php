@@ -22,16 +22,9 @@ use Nemundo\Process\Template\Content\VersionText\VersionTextContentType;
 use Nemundo\Process\Template\Content\Video\VideoContentType;
 use Nemundo\Process\Template\Content\YouTube\YouTubeContentType;
 use Nemundo\Process\Template\Data\TemplateCollection;
-
-use Nemundo\Process\Template\Status\DocumentDeleteProcessStatus;
-
+use Nemundo\Process\Template\Status\SubjectChange\SubjectChangeProcessStatus;
 use Nemundo\Process\Template\Status\WorkflowDelete\WorkflowDeleteStatus;
-
-use Nemundo\Process\Template\Type\WebImageContentType;
-use Nemundo\Process\Workflow\Setup\StatusSetup;
 use Nemundo\Project\Install\AbstractInstall;
-use Schleuniger\App\Aufgabe\Content\Process\AufgabeProcess;
-use Schleuniger\App\ChangeRequest\Workflow\Process\EcrProcess;
 
 class TemplateInstall extends AbstractInstall
 {
@@ -41,11 +34,6 @@ class TemplateInstall extends AbstractInstall
 
         $setup = new ModelCollectionSetup();
         $setup->addCollection(new TemplateCollection());
-
-        //$setup = new StatusSetup();
-        //$setup->addStatus(new DocumentDeleteProcessStatus());
-        //$setup->addStatus(new ReopenStatus());
-
 
         $setup = new ContentTypeSetup();
         $setup->addContentType(new LargeTextContentType());
@@ -64,7 +52,7 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new AddSourceContentType());
         $setup->addContentType(new SourceRemoveContentType());
         $setup->addContentType(new WorkflowDeleteStatus());
-
+        $setup->addContentType(new SubjectChangeProcessStatus());
 
         $setup = new WikiSetup();
         $setup->addContentType(new LargeTextContentType());
@@ -73,10 +61,8 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new FileContentType());
         $setup->addContentType(new YouTubeContentType());
 
-        $setup= new CalendarSourceSetup();
+        $setup = new CalendarSourceSetup();
         $setup->addSourceContentType(new WikiPageContentType());
-        $setup->addSourceContentType(new AufgabeProcess());
-        $setup->addSourceContentType(new EcrProcess());
 
 
     }

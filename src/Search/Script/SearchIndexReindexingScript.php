@@ -6,7 +6,6 @@ namespace Nemundo\Process\Search\Script;
 
 use Nemundo\App\Script\Type\AbstractConsoleScript;
 use Nemundo\Process\Content\Data\Content\ContentReader;
-use Nemundo\Process\Content\Data\Content\ContentUpdate;
 use Nemundo\Process\Search\Install\SearchClean;
 
 class SearchIndexReindexingScript extends AbstractConsoleScript
@@ -14,7 +13,7 @@ class SearchIndexReindexingScript extends AbstractConsoleScript
 
     protected function loadScript()
     {
-   $this->scriptName='search-reindex';
+        $this->scriptName = 'search-reindex';
     }
 
 

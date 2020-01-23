@@ -4,23 +4,140 @@
 namespace Nemundo\Process\Template\Content\User;
 
 
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
+use Nemundo\Core\Random\UniqueId;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Group\Data\Group\GroupRow;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
 use Nemundo\Process\Group\Type\UserGroupType;
+use Nemundo\User\Data\User\User;
+use Nemundo\User\Data\User\UserCount;
+use Nemundo\User\Data\User\UserId;
 use Nemundo\User\Data\User\UserReader;
-use Schleuniger\App\Org\Group\MitarbeiterGroupContentType;
+use Nemundo\User\Data\User\UserUpdate;
+
 
 class UserContentType extends AbstractContentType
 {
+
+    /**
+     * @var bool
+     */
+    public $active = true;
+
+    /**
+     * @var string
+     */
+    public $login;
+
+    /**
+     * @var string
+     */
+    public $displayName;
+
+    /**
+     * @var string
+     */
+    public $email;
+
 
     protected function loadContentType()
     {
         $this->typeLabel = 'User';
         $this->typeId = '8ef8e1d2-0c15-45b0-ba10-7c306d617406';
         $this->viewClass = UserContentView::class;
+
+    }
+
+
+    public function saveType()
+    {
+
+        if ($this->existItem()) {
+            $id = new UserId();
+            $id->filter->andEqual($id->model->login, $this->login);
+            $this->dataId = $id->getId();
+
+            $this->createMode = false;
+
+        }
+
+        //if (!$this->existItem()) {
+        parent::saveType();
+        //}
+    }
+
+    protected function onCreate()
+    {
+
+        //$builder=new UserBuilder();
+
+
+        $displayName = $this->displayName;
+        if ($displayName == null) {
+            $displayName = $this->login;
+        }
+
+        /*$count = new UserCount();
+        $count->filter->andEqual($count->model->login, $this->login);
+        if ($count->getCount() == 0) {*/
+
+        $this->dataId = (new UniqueId())->getUniqueId();
+
+        $data = new User();
+        $data->id = $this->dataId;
+        // $data->ignoreIfExists = true;
+        $data->active = $this->active;
+        $data->login = $this->login;
+        $data->email = $this->email;
+        $data->displayName = $displayName;
+        $data->secureToken = (new UniqueId())->getUniqueId();
+        $data->save();
+
+
+    }
+
+
+    protected function onUpdate()
+    {
+
+        //getDataId überschreiben
+
+        $displayName = $this->displayName;
+        if ($displayName == null) {
+            $displayName = $this->login;
+        }
+
+        $update = new UserUpdate();
+        $update->active = $this->active;
+        $update->email = $this->email;
+        $update->displayName = $displayName;
+        $update->updateById($this->dataId);
+
+
+    }
+
+    // afterSaveUpdate
+    protected function onSearchIndex()
+    {
+
+        $type = new UserGroupType($this->dataId);
+        $type->addUser($this->dataId);
+        $type->saveType();
+
+    }
+
+
+    public function existItem()
+    {
+        $value = false;
+        $count = new UserCount();
+        $count->filter->andEqual($count->model->login, $this->login);
+        if ($count->getCount() == 1) {
+            $value = true;
+        }
+
+        return $value;
 
     }
 
@@ -35,14 +152,15 @@ class UserContentType extends AbstractContentType
 
 
     // getUserGroupId
-    public function getGroupId() {
+    public function getGroupId()
+    {
 
         $groupId = null;
 
         $reader = new GroupUserReader();
         $reader->model->loadGroup();
         $reader->filter->andEqual($reader->model->group->groupTypeId, (new UserGroupType())->typeId);
-        $reader->filter->andEqual($reader->model->userId,$this->dataId);
+        $reader->filter->andEqual($reader->model->userId, $this->dataId);
         foreach ($reader->getData() as $groupUserRow) {
             $groupId = $groupUserRow->groupId;
         }
@@ -55,7 +173,6 @@ class UserContentType extends AbstractContentType
         return $groupId;
 
     }
-
 
 
     // getGroupList
@@ -84,7 +201,7 @@ class UserContentType extends AbstractContentType
         $list = [];
 
         $reader = new GroupUserReader();
-         $reader->filter->andEqual($reader->model->userId, $this->dataId);
+        $reader->filter->andEqual($reader->model->userId, $this->dataId);
         foreach ($reader->getData() as $groupUserRow) {
             $list[] = $groupUserRow->groupId;
         }

@@ -115,7 +115,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
             $value = new WorkflowValue();
             $value->model->loadContent();
 
-
             $value->field = $value->model->number;
             $value->filter->andEqual($value->model->content->contentTypeId, $this->typeId);
 
@@ -148,7 +147,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     {
 
         parent::deleteType();
-        //(new WorkflowDelete())->deleteById($this->dataId);
         (new WorkflowDelete())->deleteById($this->getWorkflowId());
         //$this->deleteChild();
 

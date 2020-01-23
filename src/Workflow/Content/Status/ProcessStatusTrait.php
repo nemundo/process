@@ -4,12 +4,9 @@
 namespace Nemundo\Process\Workflow\Content\Status;
 
 
-use Nemundo\Core\Language\Translation;
 use Nemundo\Process\Content\Data\Content\ContentReader;
-use Nemundo\Process\Content\Type\MenuTrait;
 use Nemundo\Process\Group\Check\GroupRestrictionTrait;
 use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
-use Nemundo\User\Access\UserRestrictionTrait;
 
 
 trait ProcessStatusTrait
@@ -49,17 +46,14 @@ trait ProcessStatusTrait
     public $activeAfterWorkflowClosed = false;
 
 
-    public function getParentProcess() {
-
+    public function getParentProcess()
+    {
 
         $contentReader = new ContentReader();
         $contentReader->model->loadContentType();
-        //(new Debug())->write($this->parentId);
 
         /** @var AbstractProcess $process */
         $process = $contentReader->getRowById($this->parentId)->getContentType();
-
-
 
         return $process;
 

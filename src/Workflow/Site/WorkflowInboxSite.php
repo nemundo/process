@@ -23,7 +23,7 @@ use Nemundo\Process\Workflow\Data\Process\ProcessReader;
 use Nemundo\Process\Workflow\Data\Workflow\WorkflowPaginationReader;
 use Nemundo\Process\Workflow\Parameter\ProcessParameter;
 use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
-use Nemundo\Process\Template\Data\Document\Redirect\DocumentDocumentRedirectSite;
+
 use Nemundo\Process\Template\Site\FileDeleteSite;
 use Nemundo\ToDo\Workflow\Process\ToDoProcess;
 use Nemundo\User\Parameter\UserParameter;
@@ -73,10 +73,11 @@ class WorkflowInboxSite extends AbstractSite
         $header->addText('Date/Time');
 
         $workflowReader = new WorkflowPaginationReader();
-        $workflowReader->model->loadProcess();
+        $workflowReader->model->loadContent();
+        $workflowReader->model->content->loadUser();
         $workflowReader->model->loadStatus();
-        $workflowReader->model->loadGroupAssignment();
-        $workflowReader->model->loadUser();
+        $workflowReader->model->loadAssignment();
+
 
         /*
         $processParameter = new ProcessParameter();
@@ -90,18 +91,18 @@ class WorkflowInboxSite extends AbstractSite
         }*/
 
 
-        $userId = (new UserSession())->userId;
+        /*$userId = (new UserSession())->userId;
         foreach ((new IdentificationConfig())->getIdentificationList() as $identification) {
 
             foreach ($identification->getIdentificationIdFromUserId($userId) as $value) {
                 $workflowReader->filter->orEqual($workflowReader->model->assignment->identificationId, $value);
             }
 
-        }
+        }*/
 
 
 
-        $workflowReader->addOrder($workflowReader->model->dateTime, SortOrder::DESCENDING);
+        $workflowReader->addOrder($workflowReader->model->content->dateTime, SortOrder::DESCENDING);
         $workflowReader->paginationLimit = 50;
         foreach ($workflowReader->getData() as $workflowRow) {
 
@@ -111,7 +112,7 @@ class WorkflowInboxSite extends AbstractSite
             $trafficLight->date = $workflowRow->deadline;
 
             $row->addYesNo($workflowRow->workflowClosed);
-            $row->addText($workflowRow->process->contentType);
+            $row->addText($workflowRow->content->contentType);
             $row->addText($workflowRow->getSubject());
 
 
@@ -121,23 +122,22 @@ class WorkflowInboxSite extends AbstractSite
                 $row->addEmpty();
             }
 
-            $row->addText($workflowRow->assignment->getValue());
+            //$row->addText($workflowRow->assignment->getValue());
 
-            $row->addText($workflowRow->groupAssignment->group);
+            $row->addText($workflowRow->assignment->group);
 
-            if ($workflowRow->groupAssignmentId!=='') {
+            if ($workflowRow->assignmentId!=='') {
 
 //            $item=new GroupContentItem($workflowRow->groupAssignmentId);
 
-                $type=new GroupContentType($workflowRow->groupAssignmentId);
+                $type=new GroupContentType($workflowRow->assignmentId);
                 $type->getView($row);
-
 
             }
 
             $row->addText($workflowRow->status->contentType);
-            $row->addText($workflowRow->user->displayName);
-            $row->addText($workflowRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
+            $row->addText($workflowRow->content->user->displayName);
+            $row->addText($workflowRow->content->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
 
             $site = clone(WorkflowItemSite::$site);
             $site->addParameter(new WorkflowParameter($workflowRow->id));

@@ -142,6 +142,11 @@ $index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
 $index->indexName = "content";
 $index->addType($this->contentId);
 
+$index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
+$index->indexName = "content_number";
+$index->addType($this->contentId);
+$index->addType($this->number);
+
 }
 public function loadStatus() {
 if ($this->status == null) {

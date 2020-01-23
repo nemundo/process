@@ -8,7 +8,6 @@ use Nemundo\Process\Group\Check\GroupCheck;
 use Nemundo\Process\Group\Check\GroupRestrictionTrait;
 use Nemundo\Process\Group\Type\AbstractGroupContentType;
 use Nemundo\Web\Site\AbstractSite;
-use Schleuniger\App\Verbesserung\Group\VerbesserungAdminGroup;
 
 abstract class AbstractGroupRestrictionSite extends AbstractSite
 {

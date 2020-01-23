@@ -27,16 +27,16 @@ public $wordId;
 public $word;
 
 protected function loadModel() {
-$this->tableName = "search_search_index";
-$this->aliasTableName = "search_search_index";
+$this->tableName = "process_search_index";
+$this->aliasTableName = "process_search_index";
 $this->label = "Search Index";
 
 $this->primaryIndex = new \Nemundo\Db\Index\AutoIncrementIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
-$this->id->tableName = "search_search_index";
+$this->id->tableName = "process_search_index";
 $this->id->fieldName = "id";
-$this->id->aliasFieldName = "search_search_index_id";
+$this->id->aliasFieldName = "process_search_index_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
 $this->id->visible->form = false;
@@ -45,16 +45,16 @@ $this->id->visible->view = false;
 $this->id->visible->form = false;
 
 $this->contentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
-$this->contentId->tableName = "search_search_index";
+$this->contentId->tableName = "process_search_index";
 $this->contentId->fieldName = "content";
-$this->contentId->aliasFieldName = "search_search_index_content";
+$this->contentId->aliasFieldName = "process_search_index_content";
 $this->contentId->label = "Content";
 $this->contentId->allowNullValue = false;
 
 $this->wordId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
-$this->wordId->tableName = "search_search_index";
+$this->wordId->tableName = "process_search_index";
 $this->wordId->fieldName = "word";
-$this->wordId->aliasFieldName = "search_search_index_word";
+$this->wordId->aliasFieldName = "process_search_index_word";
 $this->wordId->label = "Word";
 $this->wordId->allowNullValue = false;
 
@@ -65,20 +65,20 @@ $index->addType($this->wordId);
 }
 public function loadContent() {
 if ($this->content == null) {
-$this->content = new \Nemundo\Process\Content\Data\Content\ContentExternalType($this, "search_search_index_content");
-$this->content->tableName = "search_search_index";
+$this->content = new \Nemundo\Process\Content\Data\Content\ContentExternalType($this, "process_search_index_content");
+$this->content->tableName = "process_search_index";
 $this->content->fieldName = "content";
-$this->content->aliasFieldName = "search_search_index_content";
+$this->content->aliasFieldName = "process_search_index_content";
 $this->content->label = "Content";
 }
 return $this;
 }
 public function loadWord() {
 if ($this->word == null) {
-$this->word = new \Nemundo\Process\Search\Data\Word\WordExternalType($this, "search_search_index_word");
-$this->word->tableName = "search_search_index";
+$this->word = new \Nemundo\Process\Search\Data\Word\WordExternalType($this, "process_search_index_word");
+$this->word->tableName = "process_search_index";
 $this->word->fieldName = "word";
-$this->word->aliasFieldName = "search_search_index_word";
+$this->word->aliasFieldName = "process_search_index_word";
 $this->word->label = "Word";
 }
 return $this;
