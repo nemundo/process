@@ -41,6 +41,13 @@
                     "field_name": [
                         "word"
                     ]
+                },
+                {
+                    "index_name": "content",
+                    "index_type": "index",
+                    "field_name": [
+                        "content"
+                    ]
                 }
             ]
         },

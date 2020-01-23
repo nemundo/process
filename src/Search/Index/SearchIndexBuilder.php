@@ -13,7 +13,6 @@ use Nemundo\Model\Count\ModelDataCount;
 use Nemundo\Model\Delete\ModelDelete;
 use Nemundo\Model\Id\ModelId;
 use Nemundo\Model\Reader\ModelDataReader;
-use Nemundo\Process\Content\Data\Content\ContentId;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexBulk;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexDelete;
 use Nemundo\Process\Search\Data\Word\WordBulk;
@@ -32,11 +31,11 @@ class SearchIndexBuilder extends AbstractBase
     private $indexList = [];
 
 
-    public function __construct($contentId=null)
+    public function __construct($contentId = null)
     {
 
-        if ($contentId!==null) {
-        $this->contentId=$contentId;
+        if ($contentId !== null) {
+            $this->contentId = $contentId;
         }
 
     }
@@ -94,20 +93,9 @@ class SearchIndexBuilder extends AbstractBase
     public function saveIndex()
     {
 
-
         $delete = new SearchIndexDelete();
-        $delete->filter->andEqual($delete->model->contentId,$this->contentId);
+        $delete->filter->andEqual($delete->model->contentId, $this->contentId);
         $delete->delete();
-
-        // delete existing
-
-
-
-        /*
-$id = new ContentId();
-$id->filter->andEqual($id->model->dataId,$this->dataId);
-$contentId=$id->getId();
-*/
 
         $data = new WordBulk();
         foreach ($this->wordList as $wordId => $word) {
@@ -121,11 +109,9 @@ $contentId=$id->getId();
         $data = new SearchIndexBulk();
         foreach ($this->indexList as $wordId => $relevance) {
 
-            //$data->updateOnDuplicate = true;
             $data->ignoreIfExists = true;
             $data->contentId = $this->contentId;
             $data->wordId = $wordId;
-            //$data->typeValueList->setModelValue($indexModel->relevance, $relevance);
             $data->save();
 
         }
