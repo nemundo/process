@@ -11,6 +11,7 @@ use Nemundo\Process\App\Favorite\Site\FavoriteSite;
 use Nemundo\Process\App\Message\Site\MessageSite;
 use Nemundo\Process\App\Notification\Site\NotificationSite;
 use Nemundo\Process\App\Wiki\Site\WikiSite;
+use Nemundo\Process\Content\Site\ContentLogSite;
 use Nemundo\Process\Content\Site\ContentSite;
 use Nemundo\Process\Content\Site\ContentTypeSite;
 use Nemundo\Process\Content\Site\TreeSite;
@@ -68,6 +69,7 @@ class ProcessSite extends AbstractSite
         new ExplorerSite($this);
 
         new SearchLogSite($this);
+        new ContentLogSite($this);
         new DocumentSite($this);
 
         new ProcessTemplateSite($this);
