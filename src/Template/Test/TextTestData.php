@@ -15,9 +15,8 @@ class TextTestData extends AbstractTestData
 
 
         $type=new TextContentType();
-        $type->text='hello world';
+        $type->text='hello world '.$n;
         $type->saveType();
-
 
     }
 

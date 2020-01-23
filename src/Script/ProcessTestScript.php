@@ -25,15 +25,10 @@ class ProcessTestScript extends AbstractConsoleScript
         $loop->minNumber = 1;
         $loop->maxNumber = 10000;
         foreach ($loop->getData() as $number) {
-            (new TextTestData())->createTestData(1000);
+            (new TextTestData())->createTestData(10000);
         }
 
 
-        /*
-        $type=new TextContentType();
-        $type->text='hello world';
-        $type->saveType();
-        */
 
 
     }

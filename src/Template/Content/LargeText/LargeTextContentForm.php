@@ -24,7 +24,7 @@ class LargeTextContentForm extends AbstractContentForm
     {
 
         $this->largeText = new BootstrapLargeTextBox($this);
-        $this->largeText->label = 'Large Text';
+        $this->largeText->label =$this->contentType->typeLabel;  // 'Large Text';
 
         return parent::getContent();
 

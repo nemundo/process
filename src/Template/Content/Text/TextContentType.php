@@ -4,7 +4,6 @@
 namespace Nemundo\Process\Template\Content\Text;
 
 
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Template\Data\TemplateText\TemplateText;
 use Nemundo\Process\Template\Data\TemplateText\TemplateTextDelete;
@@ -21,14 +20,12 @@ class TextContentType extends AbstractTreeContentType
         $this->typeLabel = 'Text';
         $this->typeId = '00b2fd69-59de-4e2d-b829-640c142253eb';
         $this->formClass = TextContentForm::class;
-        $this->viewClass=TextContentView::class;
+        $this->viewClass = TextContentView::class;
     }
 
 
     protected function onCreate()
     {
-
-        //(new Debug())->write($this->getContentId());
 
         $data = new TemplateText();
         $data->text = $this->text;
@@ -39,11 +36,18 @@ class TextContentType extends AbstractTreeContentType
     protected function onUpdate()
     {
 
-        $update=new TemplateTextUpdate();
-       $update->text=$this->text;
-       $update->updateById($this->dataId);
+        $update = new TemplateTextUpdate();
+        $update->text = $this->text;
+        $update->updateById($this->dataId);
 
     }
+
+    protected function onSearchIndex()
+    {
+        $textRow = $this->getDataRow();
+        $this->addSearchWord($textRow->text);
+    }
+
 
     protected function onDelete()
     {
