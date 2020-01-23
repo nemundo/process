@@ -13,9 +13,8 @@ class TextTestData extends AbstractTestData
     protected function createItem($n)
     {
 
-
-        $type=new TextContentType();
-        $type->text='hello world '.$n;
+        $type = new TextContentType();
+        $type->text = 'hello world ' . $n;
         $type->saveType();
 
     }
