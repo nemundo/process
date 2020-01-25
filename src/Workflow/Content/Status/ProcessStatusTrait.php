@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Workflow\Content\Status;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Group\Check\GroupRestrictionTrait;
 use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
@@ -54,6 +55,11 @@ trait ProcessStatusTrait
 
         /** @var AbstractProcess $process */
         $process = $contentReader->getRowById($this->parentId)->getContentType();
+
+
+        //(new Debug())->write($this->parentId);
+
+
 
         return $process;
 

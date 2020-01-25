@@ -14,6 +14,7 @@ use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Assignment\Com\ListBox\AssignmentStatusListBox;
 use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentPaginationReader;
+use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Site\ContentDeleteSite;
 use Nemundo\Process\Template\Content\User\UserContentType;
@@ -90,6 +91,8 @@ AssignmentSite::$site=$this;
         if ($status->hasValue()) {
             $assignmentReader->filter->andEqual($assignmentReader->model->statusId, $status->getValue());
         }
+
+        $assignmentReader->paginationLimit=ProcessConfig::PAGINATION_LIMIT;
 
 
         $table = new AdminClickableTable($page);

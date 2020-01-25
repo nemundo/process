@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Content\Type;
 
 
+use Nemundo\App\Performance\PerformanceStopwatch;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Random\UniqueId;
@@ -63,6 +64,9 @@ abstract class AbstractContentType extends AbstractType
      */
     protected $adminClass;
 
+
+    protected $dataRow;
+
     abstract protected function loadContentType();
 
 
@@ -120,18 +124,24 @@ abstract class AbstractContentType extends AbstractType
 
         if ($this->createMode) {
 
+            $stop=new PerformanceStopwatch('save_content_before');
             $this->saveContentBefore();
+            $stop->stopStopwatch();
 
+            $stop=new PerformanceStopwatch('onCreate');
             $this->onCreate();
+            $stop->stopStopwatch();
 
             if ($this->dataId == null) {
                 $this->dataId = (new UniqueId())->getUniqueId();
             }
 
+            $stop=new PerformanceStopwatch('save_content_update');
             $update = new ContentUpdate();
             $update->dataId = $this->dataId;
-            $update->subject = $this->getSubject();
+            //$update->subject = $this->getSubject();
             $update->updateById($this->contentId);
+            $stop->stopStopwatch();
 
         } else {
 
@@ -139,7 +149,7 @@ abstract class AbstractContentType extends AbstractType
 
             //(new Debug())->write($this->getSubject());
             //(new Debug())->write($this->contentId);
-            //exit;
+            exit;
 
             $update = new ContentUpdate();
             $update->subject = $this->getSubject();

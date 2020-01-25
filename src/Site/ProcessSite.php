@@ -48,8 +48,8 @@ class ProcessSite extends AbstractSite
         new ContentTypeSite($this);
         new ContentSite($this);
         new TreeSite($this);
-        new WorkflowSite($this);
-        new WorkflowInboxSite($this);
+        //new WorkflowSite($this);
+        //new WorkflowInboxSite($this);
 
         //new InboxSite($this);
 

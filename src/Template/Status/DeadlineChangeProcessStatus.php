@@ -9,6 +9,7 @@ use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Process\Template\Data\DeadlineChange\DeadlineChange;
 use Nemundo\Process\Template\Data\DeadlineChange\DeadlineChangeReader;
 use Nemundo\Process\Template\Form\DeadlineChangeForm;
+use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
 class DeadlineChangeProcessStatus extends AbstractProcessStatus
@@ -37,6 +38,7 @@ class DeadlineChangeProcessStatus extends AbstractProcessStatus
     public function onCreate()
     {
 
+        /** @var AbstractProcess $process */
         $process = $this->getParentProcess();
 
 

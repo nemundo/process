@@ -6,28 +6,26 @@ namespace Nemundo\Process\Workflow\Content\Process;
 
 use Nemundo\App\Performance\PerformanceStopwatch;
 use Nemundo\Core\Date\DateTimeDifference;
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
-use Nemundo\Core\Time\Stopwatch;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Html\Container\AbstractHtmlContainer;
+use Nemundo\Model\Count\ModelDataCount;
+use Nemundo\Model\Data\ModelUpdate;
+use Nemundo\Model\Value\ModelDataValue;
 use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentUpdate;
 use Nemundo\Process\App\Assignment\Status\CancelAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\OpenAssignmentStatus;
 use Nemundo\Process\Content\Data\Content\ContentUpdate;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
+use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
-use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Content\View\AbstractProcessView;
-use Nemundo\Process\Workflow\Data\Workflow\Workflow;
-use Nemundo\Process\Workflow\Data\Workflow\WorkflowCount;
-use Nemundo\Process\Workflow\Data\Workflow\WorkflowDelete;
-use Nemundo\Process\Workflow\Data\Workflow\WorkflowReader;
-use Nemundo\Process\Workflow\Data\Workflow\WorkflowRow;
-use Nemundo\Process\Workflow\Data\Workflow\WorkflowUpdate;
-use Nemundo\Process\Workflow\Data\Workflow\WorkflowValue;
+use Nemundo\Process\Workflow\Model\AbstractWorkflowModel;
+use Nemundo\ToDo\Data\ToDo\ToDoRow;
 use Nemundo\User\Access\UserRestrictionTrait;
 
 // AbstractWorkflowProcess
@@ -42,6 +40,12 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
 
     /**
+     * @var AbstractWorkflowModel
+     */
+    protected $workflowModel;
+
+
+    /**
      * @var string
      */
     protected $prefixNumber;
@@ -52,7 +56,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     protected $startNumber = 1;
 
 
-    public $workflowSubject;
+    //public $workflowSubject;
 
     protected $groupAssignmentId;
 
@@ -70,12 +74,12 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public $baseViewClass;
 
     /**
-     * @var WorkflowRow
+     * @var
      */
-    private $workflowRow;
+    //private $workflowRow;
 
 
-    protected $workflowId;
+    // protected $workflowId;
 
     public function saveType()
     {
@@ -85,11 +89,22 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         if ($this->createMode) {
 
             $stopwatch = new PerformanceStopwatch('content before');
-           $this->saveContentBefore();
+            $this->saveContentBefore();
             $stopwatch->stopStopwatch();
 
             $stopwatch = new PerformanceStopwatch('onCreate');
-             $this->onCreate();
+            $this->onCreate();
+            $stopwatch->stopStopwatch();
+
+            $stopwatch = new PerformanceStopwatch('onCreateUpdate');
+            $update = new ModelUpdate();
+            $update->model = $this->workflowModel;
+            $update->typeValueList->setModelValue($update->model->number, $this->getNumber());
+            $update->typeValueList->setModelValue($update->model->workflowNumber, $this->getWorkflowNumber());
+            $update->typeValueList->setModelValue($update->model->statusId, $this->startContentType->typeId);
+            $update->typeValueList->setModelValue($update->model->dateTime, $this->dateTime->getIsoDateTimeFormat());
+            $update->typeValueList->setModelValue($update->model->userId, $this->userId);
+            $update->updateById($this->dataId);
             $stopwatch->stopStopwatch();
 
             $stopwatch = new PerformanceStopwatch('content update');
@@ -107,9 +122,9 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $stopwatch->stopStopwatch();
 
         //$stopwatch = new Stopwatch('saveworkflow');
-        $performance = new PerformanceStopwatch('workflow');
-        $this->saveWorkflow();
-        $performance->stopStopwatch();
+        //$performance = new PerformanceStopwatch('workflow');
+        //$this->saveWorkflow();
+        //$performance->stopStopwatch();
         //$stopwatch->stopAndPrintOutput();
 
         $stopwatch = new PerformanceStopwatch('content update2');
@@ -119,17 +134,20 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $stopwatch->stopStopwatch();
 
         $stopwatch = new PerformanceStopwatch('search index');
+
+        $this->addSearchWord($this->getSubject());
         $this->saveSearchIndex();
         $stopwatch->stopStopwatch();
 
-        $stopwatch = new PerformanceStopwatch('on finish');
+        //$stopwatch = new PerformanceStopwatch('on finish');
         $this->onFinished();
-        $stopwatch->stopStopwatch();
+        //$stopwatch->stopStopwatch();
 
 
     }
 
 
+    /*
     protected function saveWorkflow()
     {
 
@@ -179,24 +197,64 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $this->addSearchText($this->getSubject());
         $performance->stopStopwatch();
 
-    }
+    }*/
 
 
-    public function deleteType()
+    protected function getNumber()
     {
 
-        parent::deleteType();
-        (new WorkflowDelete())->deleteById($this->getWorkflowId());
-        //$this->deleteChild();
+        if ($this->number == null) {
+
+            $value = new ModelDataValue();
+            $value->model = $this->workflowModel;
+            $value->field = $value->model->number;
+
+            $this->number = $value->getMaxValue();
+
+            if ($this->number == '') {
+                $this->number = $this->startNumber - 1;
+            }
+            $this->number = $this->number + 1;
+            $this->workflowNumber = $this->prefixNumber . $this->number;
+        }
+
+        return $this->number;
 
     }
+
+
+    protected function getWorkflowNumber()
+    {
+
+
+        $workflowNumber = $this->prefixNumber . $this->getNumber();
+        return $workflowNumber;
+
+    }
+
+
+    /*
+        public function deleteType()
+        {
+
+            parent::deleteType();
+            (new WorkflowDelete())->deleteById($this->getWorkflowId());
+            //$this->deleteChild();
+
+        }*/
 
 
     public function getSubject()
     {
 
-        $workflowRow = $this->getWorkflowRow();
-        $subject = $workflowRow->workflowNumber . ' ' . $workflowRow->subject;
+        //$workflowRow = $this->getWorkflowRow();
+        //$subject = $workflowRow->workflowNumber . ' ' . $workflowRow->subject;
+
+        /** @var ToDoRow $dataRow */
+        $dataRow = $this->getDataRow();
+
+
+        $subject = $dataRow->workflowNumber . ' ' . $dataRow->subject;  // '';
         return $subject;
 
     }
@@ -214,6 +272,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
+    /*
     public function getWorkflowRow()
     {
 
@@ -249,12 +308,12 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         return $this->workflowId;
 
-    }
+    }*/
 
 
     public function isWorkflowClosed()
     {
-        $workflowRow = $this->getWorkflowRow();
+        $workflowRow = $this->getDataRow();  // getWorkflowRow();
         $workflowClosed = false;
         if ($workflowRow !== null) {
             $workflowClosed = $workflowRow->workflowClosed;
@@ -268,12 +327,37 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public function closeWorkflow()
     {
 
-        $update = new WorkflowUpdate();
-        $update->workflowClosed = true;
-        $update->updateById($this->getWorkflowId());
+        $update = new ModelUpdate();
+        $update->model = $this->workflowModel;
+        $update->typeValueList->setModelValue($update->model->workflowClosed, true);
+        $update->updateById($this->dataId);
+
+        /*
+                $update = new WorkflowUpdate();
+                $update->workflowClosed = true;
+                $update->updateById($this->getWorkflowId());
+        */
 
     }
 
+
+    public function existItem()
+    {
+
+        $value = false;
+        $count = new ModelDataCount();
+        $count->model = $this->workflowModel;
+        $count->filter->andEqual($count->model->id, $this->dataId);
+        if ($count->getCount() > 0) {
+            $value = true;
+        }
+
+        return $value;
+
+    }
+
+
+    /*
     public function existWorkflow()
     {
 
@@ -285,14 +369,14 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         }
         return $value;
 
-    }
+    }*/
 
 
     public function hasDeadline()
     {
 
         $value = false;
-        $workflowRow = $this->getWorkflowRow();
+        $workflowRow = $this->getDataRow();  // $this->getWorkflowRow();
 
         if ($workflowRow->deadline !== null) {
             $value = true;
@@ -305,7 +389,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public function getDeadline()
     {
 
-        $workflowRow = $this->getWorkflowRow();
+        $workflowRow = $this->getDataRow();   // getWorkflowRow();
         return $workflowRow->deadline;
     }
 
@@ -313,9 +397,15 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     {
 
         if ($date !== null) {
-            $update = new WorkflowUpdate();
-            $update->deadline = $date;
-            $update->updateById($this->getWorkflowId());
+
+            $update = new ModelUpdate();
+            $update->model = $this->workflowModel;
+            $update->typeValueList->setModelValue($update->model->deadline, $date->getIsoDateFormat());
+            $update->updateById($this->dataId);
+
+            /*            $update = new WorkflowUpdate();
+                        $update->deadline = $date;
+                        $update->updateById($this->getWorkflowId());*/
 
             $update = new AssignmentUpdate();
             $update->deadline = $date;
@@ -339,15 +429,42 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
     }
 
+
+    public function changeStatus(AbstractContentType $status)
+    {
+
+        $update = new ModelUpdate();
+        $update->model = $this->workflowModel;
+        $update->typeValueList->setModelValue($update->model->statusId, $status->typeId);
+        $update->updateById($this->dataId);
+
+        return $this;
+
+
+    }
+
     public function changeSubject($subject)
     {
 
         // change subject status
 
-        $update = new WorkflowUpdate();
-        $update->subject = $subject;
-        $update->updateById($this->getWorkflowId());
+        $update = new ModelUpdate();
+        $update->model = $this->workflowModel;
+        $update->typeValueList->setModelValue($update->model->subject, $subject);
+        $update->updateById($this->dataId);
 
+        /*
+                $update = new WorkflowUpdate();
+                $update->subject = $subject;
+                $update->updateById($this->getWorkflowId());*/
+
+    }
+
+
+    public function changeAssignment2()
+    {
+
+        // by group type
     }
 
 
@@ -355,9 +472,19 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     {
 
         if ($groupId !== null) {
+
+            $update = new ModelUpdate();
+            $update->model = $this->workflowModel;
+            $update->typeValueList->setModelValue($update->model->assignmentId, $groupId);
+            $update->updateById($this->dataId);
+
+            //(new Debug())->write($this->dataId);
+            //exit;
+
+            /*
             $update = new WorkflowUpdate();
             $update->assignmentId = $groupId;
-            $update->updateById($this->getWorkflowId());
+            $update->updateById($this->getWorkflowId());*/
         }
 
     }
@@ -432,7 +559,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
 
     private function getProcessNextStatus(AbstractProcessStatus $status, $statusList)
-  //    private function getProcessNextStatus($status, $statusList)
+        //    private function getProcessNextStatus($status, $statusList)
     {
 
         $statusList[] = $status;

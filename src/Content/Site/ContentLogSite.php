@@ -9,7 +9,7 @@ use Nemundo\Core\Type\Number\Number;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Process\Content\Data\Content\ContentCount;
 use Nemundo\Process\Content\Data\Tree\TreeCount;
-use Nemundo\Process\Workflow\Data\Workflow\WorkflowCount;
+
 use Nemundo\Web\Site\AbstractSite;
 
 class ContentLogSite extends AbstractSite
@@ -32,7 +32,7 @@ class ContentLogSite extends AbstractSite
         $table = new AdminLabelValueTable($page);
         $table->addLabelValue('Content Item', (new Number((new ContentCount())->getCount()))->formatNumber());
         $table->addLabelValue('Tree Item', (new Number((new TreeCount())->getCount()))->formatNumber());
-        $table->addLabelValue('Workflow Item', (new Number((new WorkflowCount())->getCount()))->formatNumber());
+        //$table->addLabelValue('Workflow Item', (new Number((new WorkflowCount())->getCount()))->formatNumber());
 
 
         $page->render();

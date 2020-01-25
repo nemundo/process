@@ -74,7 +74,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
     protected $workflowClosed;
 
     /**
-     * @var WorkflowProcess
+     * @var AbstractProcess
      */
     protected $workflowItem;
 
@@ -100,9 +100,9 @@ class AbstractProcessMenu extends AbstractHtmlContainer
     protected function loadWorkflowItem()
     {
 
-        $this->workflowItem = $this->process;  // new WorkflowProcess($this->workflowId);
-        $this->workflowExist = $this->workflowItem->existWorkflow();
-        $this->workflowClosed = $this->workflowItem->isWorkflowClosed();
+        //$this->workflowItem = $this->process;  // new WorkflowProcess($this->workflowId);
+        $this->workflowExist = $this->process->existItem();  // $this->workflowItem->existWorkflow();
+        $this->workflowClosed =$this->process->isWorkflowClosed();  // $this->workflowItem->isWorkflowClosed();
         $this->nextStatus = $this->workflowStatus->getNextMenu();
 
     }

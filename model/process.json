@@ -126,7 +126,7 @@
             "namespace": "Nemundo\\Process\\Workflow\\Data\\Workflow",
             "row_class_name": "Nemundo\\Process\\Workflow\\Row\\WorkflowCustomRow",
             "primary_index": "auto_increment",
-            "is_deleted": false,
+            "is_deleted": true,
             "type": [
                 {
                     "type": "number",

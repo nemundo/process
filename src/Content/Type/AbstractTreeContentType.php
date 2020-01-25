@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Content\Type;
 
 
+use Nemundo\App\Performance\PerformanceStopwatch;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Process\Content\Data\Content\Content;
 use Nemundo\Process\Content\Data\Content\ContentUpdate;
@@ -25,10 +26,21 @@ abstract class AbstractTreeContentType extends AbstractContentType
     public function saveType()
     {
 
+        $stop=new PerformanceStopwatch('save_content');
         $this->saveContent();
+        $stop->stopStopwatch();
+
+        $stop=new PerformanceStopwatch('save_tree');
         $this->saveTree();
+        $stop->stopStopwatch();
+
+        $stop=new PerformanceStopwatch('search_index');
         $this->saveSearchIndex();
+        $stop->stopStopwatch();
+
+        $stop=new PerformanceStopwatch('finished');
         $this->onFinished();
+        $stop->stopStopwatch();
 
     }
 
