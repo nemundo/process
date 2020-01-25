@@ -9,10 +9,12 @@ use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Db\Filter\Filter;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
+use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Assignment\Com\ListBox\AssignmentStatusListBox;
+use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentCount;
 use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentPaginationReader;
 use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Process\Content\Parameter\ContentParameter;
@@ -36,7 +38,7 @@ class AssignmentSite extends AbstractSite
     {
         $this->title = 'Assignment';
         $this->url = 'group-assignment';
-AssignmentSite::$site=$this;
+        AssignmentSite::$site = $this;
     }
 
 
@@ -49,15 +51,13 @@ AssignmentSite::$site=$this;
 
         $formRow = new BootstrapFormRow($form);
 
-        $status=new AssignmentStatusListBox($formRow);
-        $status->submitOnChange=true;
-        $status->searchMode=true;
+        $status = new AssignmentStatusListBox($formRow);
+        $status->submitOnChange = true;
+        $status->searchMode = true;
 
         $user = new UserListBox($formRow);
-        $user->submitOnChange=true;
-        $user->searchMode=true;
-
-
+        $user->submitOnChange = true;
+        $user->searchMode = true;
 
 
         // search form
@@ -75,24 +75,35 @@ AssignmentSite::$site=$this;
         $assignmentReader->model->source->loadContentType();
 
 
+        $filter = new Filter();
 
         $userParameter = new UserParameter();
         if ($userParameter->hasValue()) {
 
-            $filter = new Filter();
+            $userFilter = new Filter();
             foreach ((new UserContentType((new UserSession())->userId))->getGroupIdList() as $groupId) {
-                $filter->orEqual($assignmentReader->model->groupId,$groupId);
+                $userFilter->orEqual($assignmentReader->model->groupId, $groupId);
             }
-            $assignmentReader->filter->andFilter($filter);
+            $filter->andFilter($filter);
 
         }
 
 
         if ($status->hasValue()) {
-            $assignmentReader->filter->andEqual($assignmentReader->model->statusId, $status->getValue());
+            $filter->andEqual($assignmentReader->model->statusId, $status->getValue());
         }
 
-        $assignmentReader->paginationLimit=ProcessConfig::PAGINATION_LIMIT;
+        $assignmentReader->filter = $filter;
+        $assignmentReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
+
+
+        $count = new AssignmentCount();
+        $count->filter = $filter;
+        $assignmentCount=$count->getCount();
+
+        $p=new Paragraph($page);
+        $p->content=$assignmentCount.' Assignments found';
+
 
 
         $table = new AdminClickableTable($page);

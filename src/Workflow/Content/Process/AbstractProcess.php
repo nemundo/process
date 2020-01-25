@@ -73,13 +73,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
      */
     public $baseViewClass;
 
-    /**
-     * @var
-     */
-    //private $workflowRow;
-
-
-    // protected $workflowId;
 
     public function saveType()
     {
@@ -88,15 +81,10 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         if ($this->createMode) {
 
-            $stopwatch = new PerformanceStopwatch('content before');
             $this->saveContentBefore();
-            $stopwatch->stopStopwatch();
 
-            $stopwatch = new PerformanceStopwatch('onCreate');
             $this->onCreate();
-            $stopwatch->stopStopwatch();
 
-            $stopwatch = new PerformanceStopwatch('onCreateUpdate');
             $update = new ModelUpdate();
             $update->model = $this->workflowModel;
             $update->typeValueList->setModelValue($update->model->number, $this->getNumber());
@@ -105,99 +93,29 @@ abstract class AbstractProcess extends AbstractSequenceContentType
             $update->typeValueList->setModelValue($update->model->dateTime, $this->dateTime->getIsoDateTimeFormat());
             $update->typeValueList->setModelValue($update->model->userId, $this->userId);
             $update->updateById($this->dataId);
-            $stopwatch->stopStopwatch();
 
-            $stopwatch = new PerformanceStopwatch('content update');
             $update = new ContentUpdate();
             $update->dataId = $this->dataId;
             $update->updateById($this->contentId);
-            $stopwatch->stopStopwatch();
 
         } else {
             (new LogMessage())->writeError('process no create mode');
         }
 
-        $stopwatch = new PerformanceStopwatch('savetree');
         $this->saveTree();
-        $stopwatch->stopStopwatch();
 
-        //$stopwatch = new Stopwatch('saveworkflow');
-        //$performance = new PerformanceStopwatch('workflow');
-        //$this->saveWorkflow();
-        //$performance->stopStopwatch();
-        //$stopwatch->stopAndPrintOutput();
-
-        $stopwatch = new PerformanceStopwatch('content update2');
         $update = new ContentUpdate();
         $update->subject = $this->getSubject();
         $update->updateById($this->contentId);
-        $stopwatch->stopStopwatch();
-
-        $stopwatch = new PerformanceStopwatch('search index');
 
         $this->addSearchWord($this->getSubject());
         $this->saveSearchIndex();
-        $stopwatch->stopStopwatch();
 
-        //$stopwatch = new PerformanceStopwatch('on finish');
         $this->onFinished();
-        //$stopwatch->stopStopwatch();
 
 
     }
 
-
-    /*
-    protected function saveWorkflow()
-    {
-
-
-
-
-        $performance = new PerformanceStopwatch('number_lookup');
-        if ($this->number == null) {
-
-            $value = new WorkflowValue();
-            //$value->model->loadContent();
-
-            $value->field = $value->model->number;
-            //$value->filter->andEqual($value->model->content->contentTypeId, $this->typeId);
-
-            $this->number = $value->getMaxValue();
-
-
-
-            if ($this->number == '') {
-                $this->number = $this->startNumber - 1;
-            }
-            $this->number = $this->number + 1;
-            $this->workflowNumber = $this->prefixNumber . $this->number;
-        }
-
-        $performance->stopStopwatch();
-
-
-        $performance = new PerformanceStopwatch('workflow_save');
-
-        $data = new Workflow();
-        $data->active=true;
-        $data->contentId = $this->getContentId();
-        $data->number = $this->number;
-        $data->workflowNumber = $this->workflowNumber;
-        $data->statusId = $this->startContentType->typeId;
-        $data->subject = $this->workflowSubject;
-        $data->assignmentId = $this->groupAssignmentId;
-        $data->deadline = $this->deadline;
-        $this->workflowId = $data->save();
-
-        $performance->stopStopwatch();
-
-        $performance = new PerformanceStopwatch('workflow_search_engine');
-        $this->addSearchWord($this->workflowNumber);
-        $this->addSearchText($this->getSubject());
-        $performance->stopStopwatch();
-
-    }*/
 
 
     protected function getNumber()
@@ -446,22 +364,15 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public function changeSubject($subject)
     {
 
-        // change subject status
-
         $update = new ModelUpdate();
         $update->model = $this->workflowModel;
         $update->typeValueList->setModelValue($update->model->subject, $subject);
         $update->updateById($this->dataId);
 
-        /*
-                $update = new WorkflowUpdate();
-                $update->subject = $subject;
-                $update->updateById($this->getWorkflowId());*/
-
     }
 
 
-    public function changeAssignment2()
+    public function changeAssignmentByGroup()
     {
 
         // by group type
@@ -478,13 +389,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
             $update->typeValueList->setModelValue($update->model->assignmentId, $groupId);
             $update->updateById($this->dataId);
 
-            //(new Debug())->write($this->dataId);
-            //exit;
-
-            /*
-            $update = new WorkflowUpdate();
-            $update->assignmentId = $groupId;
-            $update->updateById($this->getWorkflowId());*/
         }
 
     }
