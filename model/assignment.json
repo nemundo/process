@@ -87,6 +87,37 @@
         },
         {
             "template": "default",
+            "model_id": "89e98581-64f3-4db9-84f7-aaabdd4d626e",
+            "label": "Assignment Source",
+            "class_name": "AssignmentSource",
+            "table_name": "assignment_assignment_source",
+            "namespace": "Nemundo\\Process\\App\\Assignment\\Data\\AssignmentSource",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Source",
+                    "field_name": "source",
+                    "variable_name": "source",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "source",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "source"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
             "model_id": "5c310b41-1d1b-4b1d-847e-0be92971574a",
             "label": "AssignmentStatus",
             "class_name": "AssignmentStatus",

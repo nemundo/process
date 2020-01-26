@@ -13,6 +13,7 @@ use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
+use Nemundo\Process\App\Assignment\Com\ListBox\AssignmentSourceListBox;
 use Nemundo\Process\App\Assignment\Com\ListBox\AssignmentStatusListBox;
 use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentCount;
 use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentPaginationReader;
@@ -60,6 +61,10 @@ class AssignmentSite extends AbstractSite
         $user->searchMode = true;
 
 
+        $source=new AssignmentSourceListBox($formRow);
+        $source->submitOnChange = true;
+        $source->searchMode = true;
+
         // search form
         // source
         // user
@@ -68,11 +73,12 @@ class AssignmentSite extends AbstractSite
         $assignmentReader = new AssignmentPaginationReader();
         $assignmentReader->model->loadGroup();
         $assignmentReader->model->loadSource();
+        $assignmentReader->model->source->loadContentType();
         $assignmentReader->model->loadStatus();
         $assignmentReader->model->loadContent();
         $assignmentReader->model->content->loadUser();
         $assignmentReader->model->content->loadContentType();
-        $assignmentReader->model->source->loadContentType();
+
 
 
         $filter = new Filter();
@@ -81,10 +87,10 @@ class AssignmentSite extends AbstractSite
         if ($userParameter->hasValue()) {
 
             $userFilter = new Filter();
-            foreach ((new UserContentType((new UserSession())->userId))->getGroupIdList() as $groupId) {
+            foreach ((new UserContentType($userParameter->getValue()))->getGroupIdList() as $groupId) {
                 $userFilter->orEqual($assignmentReader->model->groupId, $groupId);
             }
-            $filter->andFilter($filter);
+            $filter->andFilter($userFilter);
 
         }
 
@@ -93,11 +99,19 @@ class AssignmentSite extends AbstractSite
             $filter->andEqual($assignmentReader->model->statusId, $status->getValue());
         }
 
+        if ($source->hasValue()) {
+            $filter->andEqual($assignmentReader->model->source->contentTypeId, $source->getValue());
+        }
+
+
+
         $assignmentReader->filter = $filter;
         $assignmentReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
 
 
         $count = new AssignmentCount();
+        $count->model->loadSource();
+        $count->model->source->loadContentType();
         $count->filter = $filter;
         $assignmentCount=$count->getCount();
 
@@ -129,7 +143,10 @@ class AssignmentSite extends AbstractSite
             $trafficLight = new DateTrafficLight($row);
             $trafficLight->date = $assignmentRow->deadline;
 
+            $row->addText($assignmentRow->source->contentType->contentType);
             $row->addText($assignmentRow->source->subject);
+
+
             $row->addText($assignmentRow->group->group);
 
             if ($assignmentRow->deadline !== null) {

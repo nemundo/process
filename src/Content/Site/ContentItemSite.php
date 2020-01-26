@@ -76,6 +76,7 @@ class ContentItemSite extends AbstractSite
         $table->addLabelYesNoValue('Has Parent', $contentType->hasParent());
         $table->addLabelValue('Child Count', $contentType->getChildCount());
         $table->addLabelValue('Parent Count', $contentType->getParentCount());
+        $table->addLabelValue('Class', $contentType->getClassName());
 
         if ($contentType->hasViewSite()) {
             $table->addLabelSite('View', $contentType->getViewSite());

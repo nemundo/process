@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Group\Type;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Random\UniqueId;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Group\Content\GroupContentForm;
@@ -21,7 +22,7 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
 {
 
 
-    public $group;
+    protected $group;
 
     /**
      * @var bool
@@ -50,27 +51,13 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     }
 
 
+
     protected function onCreate()
     {
         // nach saveType
 
 
-        if ($this->dataId == null) {
-            $this->dataId = (new UniqueId())->getUniqueId();
-        }
-
-        /*
-
-        if ($this->group==null) {
-          $this->group=$this->getSubject();
-        }*/
-
-        $data = new Group();
-        //$data->updateOnDuplicate = true;
-        $data->id = $this->dataId;
-        $data->group = $this->getGroupLabel();
-        $data->groupTypeId = $this->typeId;  //groupType->id;
-        $data->save();
+       $this->saveGroup();
 
     }
 
@@ -88,12 +75,11 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
         }*/
 
         $data = new Group();
-        //$data->updateOnDuplicate = true;
+        $data->updateOnDuplicate = true;
         $data->id = $this->dataId;
         $data->group = $this->getGroupLabel();
         $data->groupTypeId = $this->typeId;  //groupType->id;
         $data->save();
-
 
     }
 
@@ -102,15 +88,27 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     public function saveType()
     {
 
+        //$this->saveGroup();
+        //parent::saveType();
+
+     //   (new Debug())->write($this->dataId);
+
         if ($this->dataId !== null) {
             $count = new GroupCount();
             $count->filter->andEqual($count->model->id, $this->dataId);
-            if ($count->getCount() == 0) {
-                parent::saveType();
+            if ($count->getCount() == 1) {
+
+                $this->createMode=false;
+                //     parent::saveType();
             }
-        } else {
+        } /*else {
             parent::saveType();
-        }
+        }*/
+
+
+       // (new Debug())->write($this->createMode);
+
+        parent::saveType();
 
     }
 

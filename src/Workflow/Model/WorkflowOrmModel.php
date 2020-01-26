@@ -15,6 +15,7 @@ use Nemundo\Orm\Type\Number\YesNoOrmType;
 use Nemundo\Orm\Type\Text\TextOrmType;
 use Nemundo\Process\Content\Data\Content\ContentExternalType;
 use Nemundo\Process\Content\Data\Content\ContentModel;
+use Nemundo\Process\Content\Row\ContentCustomRow;
 use Nemundo\Process\Content\Row\ContentTypeCustomRow;
 use Nemundo\Process\Group\Data\Group\GroupModel;
 use Nemundo\User\Data\User\UserModel;
@@ -72,7 +73,10 @@ class WorkflowOrmModel extends AbstractOrmModel
      */
     public $user;
 
-
+    /**
+     * @var ExternalModelDesignerType
+     */
+    public $content;
 
 
     public function __construct()
@@ -117,7 +121,7 @@ class WorkflowOrmModel extends AbstractOrmModel
 
         $this->workflowClosed =new YesNoOrmType($this);
         $this->workflowClosed->label = 'Workflow Closed';
-        $this->workflowClosed->fieldName = 'workflowClosed';
+        $this->workflowClosed->fieldName = 'workflow_closed';
         $this->workflowClosed->variableName = 'workflowClosed';
         $this->workflowClosed->createModelProperty = false;
         $this->workflowClosed->isEditable = false;
@@ -130,9 +134,6 @@ class WorkflowOrmModel extends AbstractOrmModel
         $this->status->isEditable = false;
         $this->status->externalClassName ='Nemundo\Process\Content\Data\ContentType\ContentType';
         $this->status->rowClassName = ContentTypeCustomRow::class;
-
-        //// ContentTypeCustomRow
-
 
         $this->deadline =new DateOrmType($this);
         $this->deadline->label = 'Deadline';
@@ -163,7 +164,15 @@ class WorkflowOrmModel extends AbstractOrmModel
         $this->user->createModelProperty = false;
         $this->user->isEditable = false;
         $this->user->externalClassName ='Nemundo\User\Data\User\User';
-
+        
+        $this->content =new ExternalModelDesignerType($this);
+        $this->content->label = 'Content';
+        $this->content->fieldName = 'content';
+        $this->content->variableName = 'content';
+        $this->content->createModelProperty = false;
+        $this->content->isEditable = false;
+        $this->content->externalClassName ='Nemundo\Process\Content\Data\ContentType\ContentType';
+        $this->content->rowClassName = ContentCustomRow::class;
 
 
         /*$this->contentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);

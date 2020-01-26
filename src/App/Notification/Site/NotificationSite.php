@@ -68,15 +68,20 @@ class NotificationSite extends AbstractSite
         $header->addText('Date/Time');
         $header->addText('To');
 
-        $reader = new NotificationPaginationReader();
-        $reader->model->loadSubjectContent();
-        $reader->model->subjectContent->loadContentType();
-        $reader->model->loadContent();
-        $reader->model->content->loadContentType();
-        $reader->model->loadTo();
-        $reader->addOrder($reader->model->id, SortOrder::DESCENDING);
-        $reader->paginationLimit = 50;
-        foreach ($reader->getData() as $notificationRow) {
+        $notificationReader = new NotificationPaginationReader();
+        $notificationReader->model->loadSubjectContent();
+        $notificationReader->model->subjectContent->loadContentType();
+        $notificationReader->model->loadContent();
+        $notificationReader->model->content->loadContentType();
+        $notificationReader->model->loadTo();
+
+        if ($user->hasValue()) {
+            $notificationReader->filter->andEqual($notificationReader->model->toId, $user->getValue());
+        }
+
+        $notificationReader->addOrder($notificationReader->model->id, SortOrder::DESCENDING);
+        $notificationReader->paginationLimit = 50;
+        foreach ($notificationReader->getData() as $notificationRow) {
 
             $row = new BootstrapClickableTableRow($table);
             $row->addYesNo($notificationRow->archive);
@@ -92,7 +97,7 @@ class NotificationSite extends AbstractSite
         }
 
         $pagination = new BootstrapPagination($page);
-        $pagination->paginationReader = $reader;
+        $pagination->paginationReader = $notificationReader;
 
 
 

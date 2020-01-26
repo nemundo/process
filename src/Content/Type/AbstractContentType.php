@@ -124,24 +124,24 @@ abstract class AbstractContentType extends AbstractType
 
         if ($this->createMode) {
 
-            $stop=new PerformanceStopwatch('save_content_before');
+            //$stop=new PerformanceStopwatch('save_content_before');
             $this->saveContentBefore();
-            $stop->stopStopwatch();
+            //$stop->stopStopwatch();
 
-            $stop=new PerformanceStopwatch('onCreate');
+            //$stop=new PerformanceStopwatch('onCreate');
             $this->onCreate();
-            $stop->stopStopwatch();
+            //$stop->stopStopwatch();
 
             if ($this->dataId == null) {
                 $this->dataId = (new UniqueId())->getUniqueId();
             }
 
-            $stop=new PerformanceStopwatch('save_content_update');
+            //$stop=new PerformanceStopwatch('save_content_update');
             $update = new ContentUpdate();
             $update->dataId = $this->dataId;
-            //$update->subject = $this->getSubject();
+            $update->subject = $this->getSubject();
             $update->updateById($this->contentId);
-            $stop->stopStopwatch();
+            //$stop->stopStopwatch();
 
         } else {
 
@@ -149,7 +149,7 @@ abstract class AbstractContentType extends AbstractType
 
             //(new Debug())->write($this->getSubject());
             //(new Debug())->write($this->contentId);
-            exit;
+            //exit;
 
             $update = new ContentUpdate();
             $update->subject = $this->getSubject();

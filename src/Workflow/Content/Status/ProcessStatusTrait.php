@@ -14,7 +14,7 @@ trait ProcessStatusTrait
 {
 
     //use UserRestrictionTrait;
-    use GroupRestrictionTrait;
+    //use GroupRestrictionTrait;
 
     /**
      * @var bool

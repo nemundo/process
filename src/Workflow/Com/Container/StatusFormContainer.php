@@ -5,8 +5,8 @@ namespace Nemundo\Process\Workflow\Com\Container;
 
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Html\Paragraph\Paragraph;
+use Nemundo\Process\Group\Check\GroupRestrictionTrait;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
-use Nemundo\User\Access\UserRestrictionTrait;
 use Nemundo\Web\Site\AbstractSite;
 
 
@@ -21,7 +21,7 @@ class StatusFormContainer extends AbstractHtmlContainer
     /**
      * @var AbstractSite
      */
-    public $site;
+    public $redirectSite;
 
     /**
      * @var AbstractProcessStatus
@@ -34,7 +34,7 @@ class StatusFormContainer extends AbstractHtmlContainer
     public $workflowStatus;
 
 
-    public $appendWorkflowParameter = false;
+    public $appendParameter = false;
 
     public function getContent()
     {
@@ -46,19 +46,21 @@ class StatusFormContainer extends AbstractHtmlContainer
 
             $showForm = true;
 
-            if ($this->formStatus->isObjectOfTrait(UserRestrictionTrait::class)) {
-
+            //if ($this->formStatus->isObjectOfTrait(UserRestrictionTrait::class)) {
+            if ($this->formStatus->isObjectOfTrait(GroupRestrictionTrait::class)) {
                 if (!$this->formStatus->checkUserVisibility()) {
                     $showForm = false;
                 }
             }
 
+            //$showForm = false;
+
             if ($showForm) {
                 $form = $this->formStatus->getForm($this);
                 $form->contentType = $this->formStatus;
                 $form->parentId = $this->parentId;
-                $form->redirectSite = $this->site;
-                $form->appendParameter = $this->appendWorkflowParameter;
+                $form->redirectSite = $this->redirectSite;
+                $form->appendParameter = $this->appendParameter;
 
             } else {
                 $p = new Paragraph($this);

@@ -22,8 +22,10 @@ use Nemundo\Process\Content\Data\Content\ContentUpdate;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
+use Nemundo\Process\Group\Check\GroupRestrictionTrait;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Content\View\AbstractProcessView;
+use Nemundo\Process\Workflow\Content\View\ProcessView;
 use Nemundo\Process\Workflow\Model\AbstractWorkflowModel;
 use Nemundo\ToDo\Data\ToDo\ToDoRow;
 use Nemundo\User\Access\UserRestrictionTrait;
@@ -32,12 +34,14 @@ use Nemundo\User\Access\UserRestrictionTrait;
 abstract class AbstractProcess extends AbstractSequenceContentType
 {
 
-    use UserRestrictionTrait;
+    //use UserRestrictionTrait;
+
+    use GroupRestrictionTrait;
+
 
     public $number;
 
     public $workflowNumber;
-
 
     /**
      * @var AbstractWorkflowModel
@@ -53,7 +57,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     /**
      * @var int
      */
-    protected $startNumber = 1;
+    protected $startNumber = 100;
 
 
     //public $workflowSubject;
@@ -74,6 +78,15 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public $baseViewClass;
 
 
+    public function __construct($dataId = null)
+    {
+
+        $this->processViewClass= ProcessView::class;
+
+        parent::__construct($dataId);
+    }
+
+
     public function saveType()
     {
 
@@ -87,11 +100,13 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
             $update = new ModelUpdate();
             $update->model = $this->workflowModel;
+            $update->typeValueList->setModelValue($update->model->active, true);
             $update->typeValueList->setModelValue($update->model->number, $this->getNumber());
             $update->typeValueList->setModelValue($update->model->workflowNumber, $this->getWorkflowNumber());
             $update->typeValueList->setModelValue($update->model->statusId, $this->startContentType->typeId);
             $update->typeValueList->setModelValue($update->model->dateTime, $this->dateTime->getIsoDateTimeFormat());
             $update->typeValueList->setModelValue($update->model->userId, $this->userId);
+            $update->typeValueList->setModelValue($update->model->contentId, $this->contentId);
             $update->updateById($this->dataId);
 
             $update = new ContentUpdate();
@@ -129,7 +144,10 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
             $this->number = $value->getMaxValue();
 
-            if ($this->number == '') {
+            //(new Debug())->write($this->number);
+
+            //if ($this->number == '') {
+                if ($this->number == '0') {
                 $this->number = $this->startNumber - 1;
             }
             $this->number = $this->number + 1;
@@ -143,7 +161,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
     protected function getWorkflowNumber()
     {
-
 
         $workflowNumber = $this->prefixNumber . $this->getNumber();
         return $workflowNumber;
@@ -231,10 +248,14 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
     public function isWorkflowClosed()
     {
-        $workflowRow = $this->getDataRow();  // getWorkflowRow();
+
         $workflowClosed = false;
-        if ($workflowRow !== null) {
+
+        if ($this->dataId!==null) {
+        $workflowRow = $this->getDataRow();  // getWorkflowRow();
+        //if ($workflowRow !== null) {
             $workflowClosed = $workflowRow->workflowClosed;
+        //}
         }
 
         return $workflowClosed;
@@ -418,7 +439,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     {
 
         $dateTime = null;
-        if ($this->getWorkflowRow()->workflowClosed) {
+        if ($this->getDataRow()->workflowClosed) {
             $dateTime = $this->getDateTime(SortOrder::DESCENDING);
         } else {
             $dateTime = (new DateTime())->setNow();

@@ -11,6 +11,7 @@ use Nemundo\Com\FormBuilder\RedirectTrait;
 use Nemundo\Com\Html\Listing\UnorderedList;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Html\Formatting\Strike;
+use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Process\Content\Com\Table\SourceTable;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Group\Type\GroupContentType;
@@ -30,11 +31,19 @@ class ProcessView extends AbstractProcessView
     public function getContent()
     {
 
+        $p=new Paragraph($this);
+        $p->content=$this->contentType->getClassName();
+
+
         $workflowStatus = null;
         $formStatus = null;
         $workflowTitle = null;
 
         if ($this->dataId !== null) {
+
+
+            //(new Debug())->write('load');
+
 
             /** @var ToDoRow $workflowRow */
             $workflowRow = $this->contentType->getDataRow();  // $this->contentType->getWorkflowRow();
@@ -90,9 +99,9 @@ class ProcessView extends AbstractProcessView
 
         if ($this->dataId !== null) {
 
-            /*if ($this->contentType->hasView()) {
+            if ($this->contentType->hasView()) {
                 $this->contentType->getView($layout->col3);
-            }*/
+            }
 
 
             $table = new AdminLabelValueTable($layout->col3);
@@ -127,12 +136,18 @@ class ProcessView extends AbstractProcessView
 
         }
 
+
+
         $menu = new ProcessMenu($layout->col1);
         $menu->process = $this->contentType;
         $menu->workflowId = $this->dataId;
         $menu->formStatus = $formStatus;
         $menu->workflowStatus = $workflowStatus;
         $menu->site = clone($this->redirectSite);
+
+
+
+
         //$menu->site->addParameter(new EcrParameter($this->dataId));
 
 
@@ -143,7 +158,8 @@ class ProcessView extends AbstractProcessView
             $form = new StatusFormContainer($widget);
             $form->formStatus = $formStatus;
             $form->workflowStatus = $workflowStatus;
-            $form->site = clone($this->redirectSite);
+            $form->redirectSite = clone($this->redirectSite);
+            $form->appendParameter =$this->appendParameter;
             if ($this->dataId !== null) {
                 $form->parentId = $this->contentType->getContentId();
             }
@@ -151,8 +167,6 @@ class ProcessView extends AbstractProcessView
         }
 
 
-        $container = new WorkflowStreamContainer($layout->col2);
-        $container->contentType = $this->contentType;
 
 
         if ($this->dataId !== null) {
@@ -160,6 +174,11 @@ class ProcessView extends AbstractProcessView
 
             //$btn = new FavoriteButton($layout->col3);
             //$btn->contentType = $this->contentType;
+
+
+            $container = new WorkflowStreamContainer($layout->col2);
+            $container->contentType = $this->contentType;
+
 
 
             $contentId = $this->contentType->getContentId();

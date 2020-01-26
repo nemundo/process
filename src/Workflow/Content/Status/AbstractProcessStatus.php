@@ -5,6 +5,7 @@ namespace Nemundo\Process\Workflow\Content\Status;
 
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
+use Nemundo\Process\Group\Check\GroupRestrictionTrait;
 use Nemundo\Process\Workflow\Content\Form\StatusForm;
 
 
@@ -13,6 +14,7 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
 {
 
     use ProcessStatusTrait;
+    use GroupRestrictionTrait;
 
     public function __construct($dataId = null)
     {

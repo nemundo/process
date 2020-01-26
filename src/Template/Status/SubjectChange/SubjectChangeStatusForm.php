@@ -28,8 +28,7 @@ class SubjectChangeStatusForm extends AbstractContentForm
         $this->subject->label[LanguageCode::EN] = 'Subject';
         $this->subject->label[LanguageCode::DE] = 'Betreff';
 
-        $this->subject->value = $this->contentType->getParentProcess()->getWorkflowRow()->subject;
-
+        $this->subject->value = $this->contentType->getParentProcess()->getDataRow()->subject;
 
         return parent::getContent();
     }

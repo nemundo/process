@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Nemundo\Process\Template\Content\Video;
+namespace Nemundo\Process\Template\Content\Audio;
 
 
-use Nemundo\Html\Multimedia\VideoPlayer;
+use Nemundo\Html\Multimedia\AudioPlayer;
 use Nemundo\Process\Template\Content\File\AbstractFileContentView;
 
-class VideoContentView extends AbstractFileContentView
+class AudioContentView extends AbstractFileContentView
 {
 
     public function getContent()
@@ -15,9 +15,8 @@ class VideoContentView extends AbstractFileContentView
 
         $fileRow = $this->contentType->getDataRow();
 
-        $video = new VideoPlayer($this);
+        $video = new AudioPlayer($this);
         $video->src = $fileRow->file->getUrl();
-        $video->width = 800;
 
         return parent::getContent();
 

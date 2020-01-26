@@ -34,7 +34,7 @@ trait ContentFormTrait
     /**
      * @var bool
      */
-    public $appendParameter = false;
+    public $appendParameter =true;  // false;
 
     protected function loadUpdateForm()
     {

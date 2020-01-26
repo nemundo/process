@@ -10,7 +10,7 @@ use Nemundo\Process\Template\Data\TemplateText\TemplateText;
 use Nemundo\Process\Template\Data\TemplateText\TemplateTextReader;
 use Nemundo\Process\Text\BoldText;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
-use Nemundo\Process\Workflow\Data\Workflow\WorkflowUpdate;
+
 
 class SubjectChangeProcessStatus extends AbstractProcessStatus
 {
@@ -40,11 +40,14 @@ class SubjectChangeProcessStatus extends AbstractProcessStatus
         $data->text = $this->subject;
         $this->dataId = $data->save();
 
+        $this->getParentProcess()->changeSubject($this->subject);
+
+        /*
         $workflowId = $this->getParentProcess()->getWorkflowId();
 
         $update = new WorkflowUpdate();
         $update->subject = $this->subject;
-        $update->updateById($workflowId);
+        $update->updateById($workflowId);*/
 
     }
 
@@ -53,7 +56,9 @@ class SubjectChangeProcessStatus extends AbstractProcessStatus
     {
 
 
-        $workflowRow = $this->getParentProcess()->getWorkflowRow();
+        //$workflowRow = $this->getParentProcess()->getWorkflowRow();
+
+        $workflowRow = $this->getParentProcess()->getDataRow();
 
         if ($workflowRow->subject !== $this->subject) {
             parent::saveType();

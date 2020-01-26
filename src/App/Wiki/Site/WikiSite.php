@@ -116,6 +116,7 @@ class WikiSite extends AbstractSite
 
                 $form = $contentType->getForm($layout->col2);
                 $form->parentId = $wikiType->getContentId();  // $wikiId;
+                $form->appendParameter=false;
                 $form->redirectSite = WikiSite::$site;
                 $form->redirectSite->addParameter(new WikiParameter());
 

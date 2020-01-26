@@ -1,29 +1,30 @@
 <?php
 
 
-namespace Nemundo\Process\Template\Content\Video;
+namespace Nemundo\Process\Template\Content\Audio;
 
 
 use Nemundo\Html\Form\Input\AcceptFileType;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapFileUpload;
 use Nemundo\Process\Content\Form\AbstractContentForm;
+use Nemundo\Process\Template\Content\File\AbstractFileContentForm;
 
 
-class VideoContentForm extends AbstractContentForm
+class AudioContentForm extends AbstractFileContentForm  // AbstractContentForm
 {
 
     /**
      * @var BootstrapFileUpload
      */
-    private $file;
+    //private $file;
 
     public function getContent()
     {
 
-        $this->file = new BootstrapFileUpload($this);
-        $this->file->label = 'Video';
-        $this->file->acceptFileType = AcceptFileType::VIDEO;
-        $this->file->multiUpload = true;
+        //$this->file = new BootstrapFileUpload($this);
+        $this->file->label = 'Audio';
+        $this->file->acceptFileType = AcceptFileType::AUDIO;
+      //  $this->file->multiUpload = true;
 
         return parent::getContent();
     }
@@ -34,7 +35,7 @@ class VideoContentForm extends AbstractContentForm
 
         foreach ($this->file->getMultiFileRequest() as $fileRequest) {
 
-            $type = new VideoContentType();
+            $type = new AudioContentType();
             $type->parentId = $this->parentId;
             $type->fileRequest = $fileRequest;
             $type->saveType();

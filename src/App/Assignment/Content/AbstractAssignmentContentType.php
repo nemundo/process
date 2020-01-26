@@ -133,6 +133,7 @@ abstract class AbstractAssignmentContentType extends AbstractTreeContentType  //
 
         $assignmentRow =$this->getDataRow();
         $subject = 'Group Assignment to : ' . $assignmentRow->group->group . ' (' . $assignmentRow->status->status . ')';
+        $subject.= ' Deadline: '.$assignmentRow->deadline->getShortDateLeadingZeroFormat();
 
         if ($assignmentRow->statusId == (new CancelAssignmentStatus())->id) {
             $strike = new Strike();

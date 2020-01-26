@@ -11,6 +11,7 @@ use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\App\Wiki\Setup\WikiSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Template\Content\AddSource\AddSourceContentType;
+use Nemundo\Process\Template\Content\Audio\AudioContentType;
 use Nemundo\Process\Template\Content\Event\EventContentType;
 use Nemundo\Process\Template\Content\File\FileContentType;
 use Nemundo\Process\Template\Content\File\FileDeleteContentType;
@@ -19,6 +20,7 @@ use Nemundo\Process\Template\Content\SourceRemove\SourceRemoveContentType;
 use Nemundo\Process\Template\Content\Text\TextContentType;
 use Nemundo\Process\Template\Content\User\UserContentType;
 use Nemundo\Process\Template\Content\VersionText\VersionTextContentType;
+
 use Nemundo\Process\Template\Content\Video\VideoContentType;
 use Nemundo\Process\Template\Content\YouTube\YouTubeContentType;
 use Nemundo\Process\Template\Data\TemplateCollection;
@@ -42,7 +44,9 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new TextContentType());
         $setup->addContentType(new VersionTextContentType());
         $setup->addContentType(new VideoContentType());
+        $setup->addContentType(new AudioContentType());
         $setup->addContentType(new YouTubeContentType());
+
 
         $setup->addContentType(new NewsContentType());
         $setup->addContentType(new WikiPageContentType());

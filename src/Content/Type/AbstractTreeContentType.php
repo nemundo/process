@@ -26,21 +26,21 @@ abstract class AbstractTreeContentType extends AbstractContentType
     public function saveType()
     {
 
-        $stop=new PerformanceStopwatch('save_content');
+        //$stop=new PerformanceStopwatch('save_content');
         $this->saveContent();
-        $stop->stopStopwatch();
+        //$stop->stopStopwatch();
 
-        $stop=new PerformanceStopwatch('save_tree');
+        //$stop=new PerformanceStopwatch('save_tree');
         $this->saveTree();
-        $stop->stopStopwatch();
+        //$stop->stopStopwatch();
 
-        $stop=new PerformanceStopwatch('search_index');
+        //$stop=new PerformanceStopwatch('search_index');
         $this->saveSearchIndex();
-        $stop->stopStopwatch();
+        //$stop->stopStopwatch();
 
-        $stop=new PerformanceStopwatch('finished');
+        //$stop=new PerformanceStopwatch('finished');
         $this->onFinished();
-        $stop->stopStopwatch();
+        //$stop->stopStopwatch();
 
     }
 
