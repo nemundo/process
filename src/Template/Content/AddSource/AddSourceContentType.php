@@ -5,6 +5,7 @@ namespace Nemundo\Process\Template\Content\AddSource;
 
 
 use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
+use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Content\Writer\TreeWriter;
 use Nemundo\Process\Template\Data\SourceLog\SourceLog;
@@ -13,14 +14,16 @@ use Nemundo\Process\Template\Data\SourceLog\SourceLogReader;
 class AddSourceContentType extends AbstractTreeContentType
 {
 
-    public $parentId;
+    //public $parentId;
 
     public $sourceId;
 
     protected function loadContentType()
     {
 
-        $this->typeLabel = 'Add/Remove Source';
+        $this->typeLabel[LanguageCode::EN] = 'Add/Remove Source';
+        $this->typeLabel[LanguageCode::DE] = 'Quelle hinzufügen/entfernen';
+
         $this->typeId = 'e40e4360-d630-42e2-a9f9-98a28ea6156d';
         $this->formClass = AddSourceContentForm::class;
 

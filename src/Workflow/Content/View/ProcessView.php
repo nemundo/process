@@ -31,8 +31,8 @@ class ProcessView extends AbstractProcessView
     public function getContent()
     {
 
-        $p=new Paragraph($this);
-        $p->content=$this->contentType->getClassName();
+        //$p=new Paragraph($this);
+        //$p->content=$this->contentType->getClassName();
 
 
         $workflowStatus = null;
@@ -104,6 +104,7 @@ class ProcessView extends AbstractProcessView
             }
 
 
+            /*
             $table = new AdminLabelValueTable($layout->col3);
             $table->addLabelValue($workflowRow->model->workflowNumber->label, $workflowRow->workflowNumber);
             $table->addLabelValue($workflowRow->model->subject->label, $workflowRow->subject);
@@ -130,7 +131,7 @@ class ProcessView extends AbstractProcessView
 
             $table->addLabelValue($workflowRow->model->dateTime->label, $workflowRow->dateTime->getShortDateTimeLeadingZeroFormat());
             $table->addLabelValue($workflowRow->model->user->label, $workflowRow->user->displayName);
-
+*/
 
 
 

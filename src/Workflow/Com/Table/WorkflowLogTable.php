@@ -22,7 +22,7 @@ class WorkflowLogTable extends AbstractParentContainer
         $table = new AdminClickableTable($this);
 
         $header = new TableHeader($table);
-        $header->addText('Typ');
+        //$header->addText('Typ');
 
         $header->addText('History');
         $header->addText('Ersteller');
@@ -32,7 +32,7 @@ class WorkflowLogTable extends AbstractParentContainer
             $status = $contentRow->getContentType();
 
             $row = new BootstrapClickableTableRow($table);
-            $row->addText($status->typeLabel);
+            //$row->addText($status->typeLabel);
             $row->addText($status->getSubject());
             $row->addText($contentRow->user->displayName . ' ' . $contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
 

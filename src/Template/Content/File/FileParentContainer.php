@@ -78,9 +78,9 @@ class FileParentContainer extends AbstractParentContainer
 
         }
 
-        /*if ($reader->getCount() == 0) {
+        if ($fileReader->getCount() == 0) {
             $this->visible = false;
-        }*/
+        }
 
         return parent::getContent();
 

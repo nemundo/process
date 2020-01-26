@@ -5,7 +5,6 @@ namespace Nemundo\Process\Template\Status\WorkflowDelete;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
-use Nemundo\Process\Workflow\Data\Workflow\WorkflowUpdate;
 
 class WorkflowDeleteStatus extends AbstractProcessStatus
 {
@@ -22,15 +21,13 @@ class WorkflowDeleteStatus extends AbstractProcessStatus
 
         $process = $this->getParentProcess();
         $process->cancelAssignment();
-
-        $update = new WorkflowUpdate();
-        $update->active = false;
-        $update->updateById($process->getWorkflowId());
+        $process->softDelete();
 
     }
 
     public function getSubject()
     {
+
         $subject[LanguageCode::EN] = 'Workflow was deleted';
         $subject[LanguageCode::DE] = 'Workflow wurde gelöscht';
 

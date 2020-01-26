@@ -9,16 +9,11 @@ use Nemundo\App\ModelDesigner\Type\TextModelDesignerType;
 use Nemundo\Orm\Model\AbstractOrmModel;
 use Nemundo\Orm\Type\DateTime\DateOrmType;
 use Nemundo\Orm\Type\DateTime\DateTimeOrmType;
-use Nemundo\Orm\Type\External\ExternalOrmType;
 use Nemundo\Orm\Type\Number\NumberOrmType;
 use Nemundo\Orm\Type\Number\YesNoOrmType;
 use Nemundo\Orm\Type\Text\TextOrmType;
-use Nemundo\Process\Content\Data\Content\ContentExternalType;
-use Nemundo\Process\Content\Data\Content\ContentModel;
 use Nemundo\Process\Content\Row\ContentCustomRow;
 use Nemundo\Process\Content\Row\ContentTypeCustomRow;
-use Nemundo\Process\Group\Data\Group\GroupModel;
-use Nemundo\User\Data\User\UserModel;
 
 class WorkflowOrmModel extends AbstractOrmModel
 {
@@ -103,7 +98,7 @@ class WorkflowOrmModel extends AbstractOrmModel
         $this->number->createModelProperty = false;
         $this->number->isEditable = false;
 
-        $this->workflowNumber =new TextModelDesignerType($this);
+        $this->workflowNumber = new TextModelDesignerType($this);
         $this->workflowNumber->label = 'Workflow Number';
         $this->workflowNumber->fieldName = 'workflow_number';
         $this->workflowNumber->variableName = 'workflowNumber';
@@ -111,31 +106,31 @@ class WorkflowOrmModel extends AbstractOrmModel
         $this->workflowNumber->isEditable = false;
         $this->workflowNumber->length = 20;
 
-        $this->subject =new TextModelDesignerType($this);
+        $this->subject = new TextModelDesignerType($this);
         $this->subject->label = 'Subject';
         $this->subject->fieldName = 'subject';
         $this->subject->variableName = 'subject';
         $this->subject->createModelProperty = false;
         $this->subject->isEditable = false;
-        $this->subject->length=255;
+        $this->subject->length = 255;
 
-        $this->workflowClosed =new YesNoOrmType($this);
+        $this->workflowClosed = new YesNoOrmType($this);
         $this->workflowClosed->label = 'Workflow Closed';
         $this->workflowClosed->fieldName = 'workflow_closed';
         $this->workflowClosed->variableName = 'workflowClosed';
         $this->workflowClosed->createModelProperty = false;
         $this->workflowClosed->isEditable = false;
 
-        $this->status =new ExternalModelDesignerType($this);
+        $this->status = new ExternalModelDesignerType($this);
         $this->status->label = 'Status';
         $this->status->fieldName = 'status';
         $this->status->variableName = 'status';
         $this->status->createModelProperty = false;
         $this->status->isEditable = false;
-        $this->status->externalClassName ='Nemundo\Process\Content\Data\ContentType\ContentType';
+        $this->status->externalClassName = 'Nemundo\Process\Content\Data\ContentType\ContentType';
         $this->status->rowClassName = ContentTypeCustomRow::class;
 
-        $this->deadline =new DateOrmType($this);
+        $this->deadline = new DateOrmType($this);
         $this->deadline->label = 'Deadline';
         $this->deadline->fieldName = 'deadline';
         $this->deadline->variableName = 'deadline';
@@ -148,9 +143,9 @@ class WorkflowOrmModel extends AbstractOrmModel
         $this->assignment->variableName = 'assignment';
         $this->assignment->createModelProperty = false;
         $this->assignment->isEditable = false;
-        $this->assignment->externalClassName ='Nemundo\Process\Group\Data\Group\Group';
+        $this->assignment->externalClassName = 'Nemundo\Process\Group\Data\Group\Group';
 
-        $this->dateTime =new DateTimeOrmType($this);
+        $this->dateTime = new DateTimeOrmType($this);
         $this->dateTime->label = 'Date/Time';
         $this->dateTime->fieldName = 'date_time';
         $this->dateTime->variableName = 'dateTime';
@@ -163,38 +158,18 @@ class WorkflowOrmModel extends AbstractOrmModel
         $this->user->variableName = 'user';
         $this->user->createModelProperty = false;
         $this->user->isEditable = false;
-        $this->user->externalClassName ='Nemundo\User\Data\User\User';
-        
-        $this->content =new ExternalModelDesignerType($this);
+        $this->user->externalClassName = 'Nemundo\User\Data\User\User';
+
+        $this->content = new ExternalModelDesignerType($this);
         $this->content->label = 'Content';
         $this->content->fieldName = 'content';
         $this->content->variableName = 'content';
         $this->content->createModelProperty = false;
         $this->content->isEditable = false;
-        $this->content->externalClassName ='Nemundo\Process\Content\Data\ContentType\ContentType';
+        $this->content->externalClassName = 'Nemundo\Process\Content\Data\ContentType\ContentType';
         $this->content->rowClassName = ContentCustomRow::class;
 
-
-        /*$this->contentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
-        $this->contentId->label = '';
-        $this->contentId->fieldName = '';
-        $this->contentId->variableName = '';
-        $this->contentId->createModelProperty = false;
-        $this->contentId->isEditable = false;*/
-
-
-        // datetime
-        // userid
-
-
-     /*   $index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
-        $index->indexName = "number";
-        $index->addType($this->number);*/
-
-
     }
-
-
 
 
     protected function loadModel()

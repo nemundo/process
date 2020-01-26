@@ -9,7 +9,7 @@ use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Template\Content\SourceRemove\SourceRemoveContentType;
 use Nemundo\Web\Url\UrlReferer;
 
-
+// SourceRemoveSite
 class SourceDeleteSite extends AbstractDeleteIconSite
 {
 
@@ -32,7 +32,7 @@ class SourceDeleteSite extends AbstractDeleteIconSite
       //  $childId = (new ChildParameter())->getValue();
 
         $type = new SourceRemoveContentType();
-        $type->parentId = (new ContentParameter())->getValue();
+        $type->parentId = (new ChildParameter())->getValue();//(new ContentParameter())->getValue();
         $type->removeId=(new ChildParameter())->getValue();
         $type->saveType();
 

@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Workflow\Model;
 
 
+use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Model\Definition\Index\ModelIndex;
 use Nemundo\Model\Definition\Model\AbstractModel;
 use Nemundo\Model\Type\DateTime\DateTimeType;
@@ -118,7 +119,11 @@ abstract class AbstractWorkflowModel extends AbstractModel
         $this->number->tableName = $this->tableName;
 
         $this->workflowNumber = new TextType($this);
-        $this->workflowNumber->label = 'Workflow Number';
+        $this->workflowNumber->label[LanguageCode::EN] = 'Workflow Number';
+        $this->workflowNumber->label[LanguageCode::DE] = 'Nr.';
+
+
+
         $this->workflowNumber->fieldName = 'workflow_number';
         $this->workflowNumber->aliasFieldName = $this->tableName . '_workflow_number';
         $this->workflowNumber->tableName = $this->tableName;
@@ -128,7 +133,9 @@ abstract class AbstractWorkflowModel extends AbstractModel
         $this->subject->tableName = $this->tableName;
         $this->subject->fieldName = 'subject';
         $this->subject->aliasFieldName = $this->tableName . '_subject';
-        $this->subject->label = 'Betreff';
+        $this->subject->label[LanguageCode::EN] = 'Subject';
+        $this->subject->label[LanguageCode::DE] = 'Betreff';
+
         $this->subject->allowNullValue = false;
         $this->subject->length = 255;
 
@@ -150,7 +157,9 @@ abstract class AbstractWorkflowModel extends AbstractModel
         $this->deadline->tableName = $this->tableName;
         $this->deadline->fieldName = 'deadline';
         $this->deadline->aliasFieldName = $this->tableName . '_deadline';
-        $this->deadline->label = 'Deadline';
+        $this->deadline->label[LanguageCode::EN] = 'Deadline';
+        $this->deadline->label[LanguageCode::DE] = 'Erledigen bis';
+
         $this->deadline->allowNullValue = false;
 
         $this->assignmentId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);

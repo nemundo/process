@@ -271,11 +271,16 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $update->typeValueList->setModelValue($update->model->workflowClosed, true);
         $update->updateById($this->dataId);
 
-        /*
-                $update = new WorkflowUpdate();
-                $update->workflowClosed = true;
-                $update->updateById($this->getWorkflowId());
-        */
+    }
+
+
+    public function softDelete()
+    {
+
+        $update = new ModelUpdate();
+        $update->model = $this->workflowModel;
+        $update->typeValueList->setModelValue($update->model->active,false);
+        $update->updateById($this->dataId);
 
     }
 

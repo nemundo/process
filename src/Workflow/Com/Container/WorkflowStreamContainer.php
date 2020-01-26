@@ -30,16 +30,19 @@ class WorkflowStreamContainer extends AbstractParentContainer  //WorkflowContain
 
                 $div = new Div($widget);
 
-                $ul =new UnorderedList($div);
+                /*
+                $ul =new UnorderedList($div);*/
 
                 if ($status->hasViewSite()) {
-                $hyperlink = new SiteHyperlink($ul);
-                $hyperlink->site = $status->getViewSite();
+                //$hyperlink = new SiteHyperlink($ul);
+                    $hyperlink = new SiteHyperlink($div);
+                    $hyperlink->site = $status->getViewSite();
                 }
 
+                /*
                 $ul->addText('message to');
                 $ul->addText('remove');
-
+*/
 
 
                 if ($status->hasView()) {
