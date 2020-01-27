@@ -23,6 +23,7 @@ use Nemundo\Process\Workflow\Com\Menu\ProcessMenu;
 use Nemundo\Process\Workflow\Com\Table\WorkflowLogTable;
 use Nemundo\Process\Workflow\Parameter\StatusParameter;
 use Nemundo\ToDo\Data\ToDo\ToDoRow;
+use Schleuniger\App\Aufgabe\Content\Process\AufgabeParentContainer;
 
 
 class ProcessView extends AbstractProcessView
@@ -184,11 +185,16 @@ class ProcessView extends AbstractProcessView
 
             $contentId = $this->contentType->getContentId();
 
+
+            // child Container List auslagern
+
             $view = new FileParentContainer($layout->col3);
             $view->parentId = $contentId;
 
-            //$container = new AufgabeParentContainer($layout->col3);
-            //$container->parentId = $contentId;
+            $container = new AufgabeParentContainer($layout->col3);
+            $container->parentId = $contentId;
+
+
 
             $table = new SourceTable($layout->col3);
             $table->contentType = $this->contentType;

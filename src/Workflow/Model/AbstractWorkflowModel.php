@@ -6,6 +6,7 @@ namespace Nemundo\Process\Workflow\Model;
 
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Model\Definition\Index\ModelIndex;
+use Nemundo\Model\Definition\Index\ModelUniqueIndex;
 use Nemundo\Model\Definition\Model\AbstractModel;
 use Nemundo\Model\Type\DateTime\DateTimeType;
 use Nemundo\Model\Type\DateTime\DateType;
@@ -205,7 +206,7 @@ abstract class AbstractWorkflowModel extends AbstractModel
         $index->indexName = 'content';
         $index->addType($this->contentId);*/
 
-        $index = new ModelIndex($this);
+        $index = new ModelUniqueIndex($this);
         $index->indexName = 'number';
         $index->addType($this->number);
 
