@@ -125,12 +125,6 @@ abstract class AbstractAssignmentContentType extends AbstractTreeContentType  //
     public function getSubject()
     {
 
-        /*
-        $reader = new AssignmentReader();
-        $reader->model->loadGroup();
-        $reader->model->loadStatus();
-        $assignmentRow = $reader->getRowById($this->dataId);*/
-
         $assignmentRow =$this->getDataRow();
         $subject = 'Group Assignment to : ' . $assignmentRow->group->group . ' (' . $assignmentRow->status->status . ')';
         $subject.= ' Deadline: '.$assignmentRow->deadline->getShortDateLeadingZeroFormat();

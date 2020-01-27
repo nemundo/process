@@ -118,13 +118,11 @@ abstract class AbstractWorkflowModel extends AbstractModel
         $this->number->fieldName = 'number';
         $this->number->aliasFieldName = $this->tableName . '_number';
         $this->number->tableName = $this->tableName;
+        $this->number->allowNullValue=true;
 
         $this->workflowNumber = new TextType($this);
         $this->workflowNumber->label[LanguageCode::EN] = 'Workflow Number';
         $this->workflowNumber->label[LanguageCode::DE] = 'Nr.';
-
-
-
         $this->workflowNumber->fieldName = 'workflow_number';
         $this->workflowNumber->aliasFieldName = $this->tableName . '_workflow_number';
         $this->workflowNumber->tableName = $this->tableName;

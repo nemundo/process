@@ -46,6 +46,7 @@ class ContentSite extends AbstractSite
         new ContentItemSite($this);
         new ContentNewSite($this);
         new ContentDeleteSite($this);
+        new RemoveContentSite($this);
 
     }
 
@@ -91,6 +92,10 @@ class ContentSite extends AbstractSite
 
             $table = new AdminLabelValueTable($page);
             $table->addLabelValue('Class', $contentType->getClassName());
+
+            $btn = new AdminSiteButton($page);
+            $btn->site=clone(RemoveContentSite::$site);
+            $btn->site->addParameter($contentTypeParameter);
 
         }
 
