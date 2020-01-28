@@ -56,22 +56,16 @@ class ProcessInstall extends AbstractInstall
         $setup = new ModelCollectionSetup();
         $setup->addCollection(new DocumentCollection());
 
-
-        //(new InboxInstall())->install();
         (new WikiInstall())->install();
         (new TemplateInstall())->install();
         (new FavoriteInstall())->install();
         (new GroupInstall())->install();
-
         (new AssignmentInstall())->install();
         (new NotificationInstall())->install();
         (new MessageInstall())->install();
-        //(new ToDoInstall())->install();
-
-        //(new ChangeRequestInstall())->install();
-        //(new TestData())->createTestData();
 
 
+/*
         $setup = new ModelCollectionSetup();
         //$setup->addCollection(new SearchCollection());
         //$setup->addCollection(new GroupCollection());
@@ -80,7 +74,7 @@ class ProcessInstall extends AbstractInstall
         $setup->addCollection(new NewsCollection());
         $setup->addCollection(new CalendarCollection());
         //$setup->addCollection(new DocumentCollection());
-        $setup->addCollection(new PlzCollection());
+        $setup->addCollection(new PlzCollection());*/
 
         $setup = new ScriptSetup();
         $setup->addScript(new ProcessCleanScript());
@@ -88,60 +82,6 @@ class ProcessInstall extends AbstractInstall
         //$setup->addScript(new ProcessReInstallScript());
 
 
-       /* $setup = new ContentTypeSetup();
-        //$setup->addContentType(new GroupContentType());
-        $setup->addContentType(new NewsContentType());
-        $setup->addContentType(new SurveyContentType());
-        //$setup->addContentType(new OptionTextContentType());
-        //$setup->addContentType(new DescriptionContentType());
-        $setup->addContentType(new ErfassungContentType());
-        $setup->addContentType(new PlzContentType());
-        $setup->addContentType(new MessageAssignmentContentType());
-       // $setup->addContentType(new SubjectChangeProcessStatus());
-
-        //$setup = new GroupSetup();
-        //$setup->addGroup(new PublicGroupContentType(), new AppUserGroupType());
-        //$setup->addGroupType(new UserGroupType());
-        //$setup->addGroupType(new AppUserGroupType());
-
-
-        /*
-        $reader = new UserReader();
-        foreach ($reader->getData() as $userRow) {
-
-            /*
-            $group=new Group();
-            $group->id = $userRow->id;
-            $group->group = $userRow->displayName;
-
-            $item = new UserContentItem($userRow->id);
-            //$item->saveItem();
-            $item->addGroup(new PublicGroup());
-            $item->addGroup($group);
-
-            $setup=new GroupSetup();
-            $setup->addGroup($group,new UserGroupType());*/
-
-
-        //}
-
-
-        /*
-        $setup = new StatusSetup();
-        $setup->addStatus(new DocumentDeleteStatus());
-        $setup->addStatus(new ReopenStatus());
-
-
-        $setup = new ContentTypeSetup();
-        $setup->addContentType(new LargeTextContentType());
-        $setup->addContentType(new DocumentContentType());
-
-        $setup->addContentType(new NewsContentType());
-        $setup->addContentType(new WikiPageContentType());
-        $setup->addContentType(new WebImageContentType());
-
-        $setup = new ScriptSetup();
-        $setup->addScript(new ProcessCleanScript());*/
 
 
     }

@@ -12,6 +12,7 @@ use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Process\Content\Data\Content\Content;
+use Nemundo\Process\Content\Data\Content\ContentCount;
 use Nemundo\Process\Content\Data\Content\ContentDelete;
 use Nemundo\Process\Content\Data\Content\ContentId;
 use Nemundo\Process\Content\Data\Content\ContentUpdate;
@@ -100,6 +101,21 @@ abstract class AbstractContentType extends AbstractType
 
     }
 
+
+    public function existContent() {
+
+        $value = true;
+
+        $count = new ContentCount();
+        $count->filter->andEqual($count->model->contentTypeId, $this->typeId);
+        $count->filter->andEqual($count->model->dataId, $this->dataId);
+        if ($count->getCount() ==0) {
+            $value = false;
+        }
+
+        return $value;
+
+    }
 
     public function existItem() {
         return false;

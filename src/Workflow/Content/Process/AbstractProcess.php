@@ -4,7 +4,6 @@
 namespace Nemundo\Process\Workflow\Content\Process;
 
 
-use Nemundo\App\Performance\PerformanceStopwatch;
 use Nemundo\Core\Date\DateTimeDifference;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
@@ -28,7 +27,6 @@ use Nemundo\Process\Workflow\Content\View\AbstractProcessView;
 use Nemundo\Process\Workflow\Content\View\ProcessView;
 use Nemundo\Process\Workflow\Model\AbstractWorkflowModel;
 use Nemundo\ToDo\Data\ToDo\ToDoRow;
-use Nemundo\User\Access\UserRestrictionTrait;
 
 // AbstractWorkflowProcess
 abstract class AbstractProcess extends AbstractSequenceContentType
@@ -81,7 +79,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public function __construct($dataId = null)
     {
 
-        $this->processViewClass= ProcessView::class;
+        $this->processViewClass = ProcessView::class;
 
         parent::__construct($dataId);
     }
@@ -132,26 +130,41 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
-
     protected function getNumber()
     {
 
+        //exit;
+
         if ($this->number == null) {
 
-            $value = new ModelDataValue();
-            $value->model = $this->workflowModel;
-            $value->field = $value->model->number;
 
-            $this->number = $value->getMaxValue();
+            $count = new ModelDataCount();
+            $count->model = $this->workflowModel;
 
-            //(new Debug())->write($this->number);
+            //(new Debug())->write($count->getCount());
 
-            //if ($this->number == '') {
-                if ($this->number == '0') {
-                $this->number = $this->startNumber - 1;
+            $lastNumber = null;
+            if ($count->getCount() == 1) {
+                $lastNumber = $this->startNumber;  // - 1;
+            } else {
+
+                $value = new ModelDataValue();
+                $value->model = $this->workflowModel;
+                $value->field = $value->model->number;
+
+                $lastNumber = $value->getMaxValue();
+
+                //(new Debug())->write($this->number);
+
+                //if ($this->number == '') {
+                /*if ($this->number == '0') {
+                    $this->number = $this->startNumber - 1;
+                }*/
             }
-            $this->number = $this->number + 1;
+
+            $this->number = $lastNumber + 1;
             $this->workflowNumber = $this->prefixNumber . $this->number;
+
         }
 
         return $this->number;
@@ -251,11 +264,11 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $workflowClosed = false;
 
-        if ($this->dataId!==null) {
-        $workflowRow = $this->getDataRow();  // getWorkflowRow();
-        //if ($workflowRow !== null) {
+        if ($this->dataId !== null) {
+            $workflowRow = $this->getDataRow();  // getWorkflowRow();
+            //if ($workflowRow !== null) {
             $workflowClosed = $workflowRow->workflowClosed;
-        //}
+            //}
         }
 
         return $workflowClosed;
@@ -279,7 +292,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $update = new ModelUpdate();
         $update->model = $this->workflowModel;
-        $update->typeValueList->setModelValue($update->model->active,false);
+        $update->typeValueList->setModelValue($update->model->active, false);
         $update->updateById($this->dataId);
 
     }

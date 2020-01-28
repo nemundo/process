@@ -5,6 +5,7 @@ namespace Nemundo\Process\Template\Content\File;
 
 
 use Nemundo\Core\Language\LanguageCode;
+use Nemundo\Core\Language\Translation;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileUpdate;
 use Nemundo\Process\Template\Data\TemplateFileDelete\TemplateFileDelete;
@@ -47,9 +48,10 @@ class FileDeleteContentType extends AbstractTreeContentType  // AbstractProcessS
         $reader->model->loadFile();
         $row = $reader->getRowById($this->dataId);
 
- $subject = 'File ' . $row->file->file->getFilename() . ' was deleted';
+        $subject[LanguageCode::EN] = 'File ' . $row->file->file->getFilename() . ' was deleted';
+        $subject[LanguageCode::DE] = 'Dokument ' . $row->file->file->getFilename() . ' wurde gelöscht';
 
-        return $subject;
+        return (new Translation())->getText($subject);
 
     }
 

@@ -38,6 +38,7 @@ abstract class AbstractContentTypeSetup extends AbstractBase
     public function removeContent(AbstractContentType $contentType)
     {
 
+        // hier nur von content typ
         (new ContentCheckScript())->run();
 
 
