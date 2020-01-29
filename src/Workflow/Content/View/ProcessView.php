@@ -147,10 +147,13 @@ class ProcessView extends AbstractProcessView
         }
 
 
+
+        /*
+         * Problem mit Durchlaufzeit
         $log = new WebLogContentType();
         $log->parentId = $this->contentType->getContentId();
         $log->saveType();
-
+*/
 
 
         return parent::getContent();
