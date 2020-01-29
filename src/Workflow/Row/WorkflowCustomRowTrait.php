@@ -4,6 +4,10 @@
 namespace Nemundo\Process\Workflow\Row;
 
 
+use Nemundo\Html\Container\AbstractContainer;
+use Nemundo\Package\FontAwesome\Icon\CheckIcon;
+use Nemundo\Workflow\Com\TrafficLight\DateTrafficLight;
+
 trait WorkflowCustomRowTrait
 {
 
@@ -37,6 +41,27 @@ trait WorkflowCustomRowTrait
 
     }
 
+
+    public function getTrafficLight(AbstractContainer $parentContainer)
+    {
+
+
+        if ($this->workflowClosed) {
+            new CheckIcon($parentContainer);
+        } else {
+
+            $trafficLight = new DateTrafficLight($parentContainer);
+            $trafficLight->date = $this->deadline;
+        }
+
+
+    }
+
+
+
+    public function getLeaptimeText() {
+
+    }
 
 
 }

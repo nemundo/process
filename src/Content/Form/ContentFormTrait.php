@@ -5,7 +5,6 @@ namespace Nemundo\Process\Content\Form;
 
 
 use Nemundo\Core\Debug\Debug;
-use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 
 trait ContentFormTrait
@@ -34,11 +33,11 @@ trait ContentFormTrait
     /**
      * @var bool
      */
-    public $appendParameter =true;  // false;
+    public $appendParameter = false;
 
     protected function loadUpdateForm()
     {
-        (new Debug())->write('loadUpdateForm');
+        (new Debug())->write('Function loadUpdateForm not defined');
     }
 
 }

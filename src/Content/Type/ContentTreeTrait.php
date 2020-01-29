@@ -4,16 +4,13 @@
 namespace Nemundo\Process\Content\Type;
 
 
-use Nemundo\Core\Debug\Debug;
+use Nemundo\Core\Log\LogMessage;
 use Nemundo\Db\Sql\Order\SortOrder;
-use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
-use Nemundo\Process\Content\Data\Content\ContentRow;
 use Nemundo\Process\Content\Data\Tree\Tree;
 use Nemundo\Process\Content\Data\Tree\TreeCount;
 use Nemundo\Process\Content\Data\Tree\TreeDelete;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Data\Tree\TreeValue;
-use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Row\ContentCustomRow;
 
 trait ContentTreeTrait
@@ -75,7 +72,7 @@ trait ContentTreeTrait
     {
 
         $count = new TreeCount();
-         $count->filter->andEqual($count->model->parentId, $this->getContentId());
+        $count->filter->andEqual($count->model->parentId, $this->getContentId());
         return $count->getCount();
 
     }
@@ -106,7 +103,7 @@ trait ContentTreeTrait
         $doc = [];
         foreach ($reader->getData() as $treeRow) {
 
-            $treeRow->child->version = $treeRow->itemOrder+1;
+            $treeRow->child->version = $treeRow->itemOrder + 1;
 
             $doc[] = $treeRow->child;
         }
@@ -119,8 +116,8 @@ trait ContentTreeTrait
     {
 
         $delete = new TreeDelete();
-        $delete->filter->andEqual($delete->model->parentId,$this->parentId);
-         $delete->filter->orEqual($delete->model->childId, $this->getContentId());
+        $delete->filter->andEqual($delete->model->parentId, $this->parentId);
+        $delete->filter->orEqual($delete->model->childId, $this->getContentId());
         $delete->delete();
 
     }
@@ -130,31 +127,35 @@ trait ContentTreeTrait
     {
 
         $delete = new TreeDelete();
-        $delete->filter->andEqual($delete->model->parentId,$this->getContentId());
+        $delete->filter->andEqual($delete->model->parentId, $this->getContentId());
         $delete->filter->andEqual($delete->model->childId, $childId);
         $delete->delete();
 
     }
 
 
-    public function getParentId() {
+    public function getParentId()
+    {
 
-        $parentId=null;
+        if ($this->parentId == null) {
 
-        $reader = new TreeReader();
-        //$reader->model->loadParent();
-        //$reader->model->parent->loadContentType();
-        //$reader->filter->andEqual($reader->model->childId, $this->dataId);
-        $reader->filter->andEqual($reader->model->childId, $this->getContentId());
+            $parentCount=0;
 
-        foreach ($reader->getData() as $treeRow) {
-            //$doc[] = $treeRow->parent;
-$parentId = $treeRow->parentId;
+            $reader = new TreeReader();
+            $reader->filter->andEqual($reader->model->childId, $this->getContentId());
+            foreach ($reader->getData() as $treeRow) {
+                $this->parentId = $treeRow->parentId;
+            $parentCount++;
+            }
+
+
+            if ($parentCount>1) {
+                (new LogMessage())->writeError('getParentId. More than one parent. Content Id: '.$this->getContentId());
+            }
+
         }
 
-        // warning if more than one parent!!!
-
-        return $parentId;
+        return $this->parentId;
 
     }
 
@@ -167,7 +168,7 @@ $parentId = $treeRow->parentId;
         $reader = new TreeReader();
         $reader->model->loadParent();
         $reader->model->parent->loadContentType();
-         $reader->filter->andEqual($reader->model->childId, $this->getContentId());
+        $reader->filter->andEqual($reader->model->childId, $this->getContentId());
 
         /** @var ContentCustomRow[] $doc */
         $doc = [];
@@ -180,10 +181,10 @@ $parentId = $treeRow->parentId;
     }
 
 
+    public function getParentContentType()
+    {
 
-    public function getParentContentType() {
-
-       $parentContentType=null;
+        $parentContentType = null;
         foreach ($this->getParentContent() as $contentRow) {
             $parentContentType = $contentRow->getContentType();
         }

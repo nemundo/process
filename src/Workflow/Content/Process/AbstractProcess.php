@@ -483,26 +483,30 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
-    //getLeadTimeText();
-    // getLeapTime
-    public function getDurchlaufzeit()
+    public function getLeaptime()
     {
 
         $difference = new DateTimeDifference();
         $difference->dateFrom = $this->getStart();
-        //$difference->dateFrom->resetTime();
         $difference->dateUntil = $this->getEnd();
 
         $day = $difference->getDifferenceInDay();
 
         return $day;
+        
+    }
+
+
+    public function getLeaptimeText() {
+
+        $text = $this->getLeaptime().' Tage';
+        return $text;
 
 
     }
 
 
     private function getProcessNextStatus(AbstractProcessStatus $status, $statusList)
-        //    private function getProcessNextStatus($status, $statusList)
     {
 
         $statusList[] = $status;

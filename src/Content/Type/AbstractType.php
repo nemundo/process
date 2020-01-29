@@ -49,12 +49,19 @@ abstract class AbstractType extends AbstractBaseClass
     {
 
         if ($dataId !== null) {
-            $this->dataId = $dataId;
-            $this->createMode = false;
+            $this->loadFromDataId($dataId);
         }
 
         $this->onLoad();
 
+    }
+
+
+    // fromDataId
+    // fromContentId
+    public function loadFromDataId($dataId) {
+        $this->dataId = $dataId;
+        $this->createMode = false;
     }
 
 
@@ -146,10 +153,15 @@ abstract class AbstractType extends AbstractBaseClass
         $view = null;
         if ($this->hasView()) {
 
+            if (class_exists($this->viewClass)) {
+
             /** @var AbstractContentView $view */
             $view = new $this->viewClass($parent);
             $view->dataId = $this->dataId;
             $view->contentType = $this;
+            } else {
+                (new LogMessage())->writeError('No View Class. Class: ' . $this->getClassName());
+            }
 
         } else {
             //(new LogMessage())->writeError('No View Class. Class: ' . $this->getClassName());

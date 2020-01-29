@@ -20,6 +20,7 @@ use Nemundo\Process\App\Plz\Data\PlzCollection;
 use Nemundo\Process\App\Survey\Content\Type\ErfassungContentType;
 use Nemundo\Process\App\Survey\Content\Type\SurveyContentType;
 use Nemundo\Process\App\Survey\Data\SurveyCollection;
+use Nemundo\Process\App\WebLog\Content\WebLogContentType;
 use Nemundo\Process\App\Wiki\Install\WikiInstall;
 use Nemundo\Process\Content\Install\ContentInstall;
 use Nemundo\Process\Content\Script\ContentUpdateScript;
@@ -63,6 +64,10 @@ class ProcessInstall extends AbstractInstall
         (new AssignmentInstall())->install();
         (new NotificationInstall())->install();
         (new MessageInstall())->install();
+
+
+        $setup=new ContentTypeSetup();
+        $setup->addContentType(new WebLogContentType());
 
 
 /*

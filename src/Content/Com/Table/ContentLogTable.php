@@ -1,20 +1,26 @@
 <?php
 
 
-namespace Nemundo\Process\Workflow\Com\Table;
+namespace Nemundo\Process\Content\Com\Table;
 
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
+use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\Com\Container\AbstractParentContainer;
+use Nemundo\Process\Content\Type\AbstractTreeContentType;
 
 
-class WorkflowLogTable extends AbstractParentContainer
+class ContentLogTable extends AbstractHtmlContainer
 {
 
+    /**
+     * @var AbstractTreeContentType
+     */
+    public $contentType;
 
     public function getContent()
     {

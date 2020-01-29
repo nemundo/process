@@ -10,6 +10,7 @@ use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
+use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
@@ -34,7 +35,8 @@ class GroupSite extends AbstractSite
 
     protected function loadSite()
     {
-        $this->title = 'Group';
+        $this->title[LanguageCode::EN] = 'Group';
+        $this->title[LanguageCode::DE]='Gruppen';
         $this->url = 'group';
         GroupSite::$site = $this;
 

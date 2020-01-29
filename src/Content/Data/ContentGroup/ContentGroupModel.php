@@ -58,6 +58,11 @@ $this->groupId->aliasFieldName = "process_content_group_group";
 $this->groupId->label = "Group";
 $this->groupId->allowNullValue = false;
 
+$index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
+$index->indexName = "content_group";
+$index->addType($this->contentId);
+$index->addType($this->groupId);
+
 }
 public function loadContent() {
 if ($this->content == null) {

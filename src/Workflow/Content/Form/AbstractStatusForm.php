@@ -2,6 +2,7 @@
 
 namespace Nemundo\Process\Workflow\Content\Form;
 
+use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
@@ -22,7 +23,8 @@ abstract class AbstractStatusForm extends AbstractContentForm
     {
 
         parent::loadContainer();
-        $this->submitButton->label = 'Weiter';
+        $this->submitButton->label[LanguageCode::EN] = 'Next';
+        $this->submitButton->label[LanguageCode::DE] = 'Weiter';
 
     }
 

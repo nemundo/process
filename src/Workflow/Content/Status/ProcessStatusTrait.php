@@ -54,11 +54,10 @@ trait ProcessStatusTrait
         $contentReader->model->loadContentType();
 
         /** @var AbstractProcess $process */
-        $process = $contentReader->getRowById($this->parentId)->getContentType();
+//        $process = $contentReader->getRowById($this->parentId)->getContentType();
 
-
-        //(new Debug())->write($this->parentId);
-
+        /** @var AbstractProcess $process */
+        $process = $contentReader->getRowById($this->getParentId())->getContentType();
 
 
         return $process;

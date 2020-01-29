@@ -17,6 +17,7 @@ use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
+use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\Com\ListBox\ContentTypeListBox;
@@ -70,6 +71,9 @@ class ContentSite extends AbstractSite
         $listbox->submitOnChange = true;
         $listbox->searchMode = true;
 
+        $contentIdTextBox=new BootstrapTextBox($formRow);
+        $contentIdTextBox->label='Content Id';
+
         /*
         $reader = new ContentTypeReader();
         foreach ($reader->getData() as $contentTypeRow) {
@@ -99,6 +103,9 @@ class ContentSite extends AbstractSite
 
         }
 
+        if ($contentIdTextBox->hasValue()) {
+            $filter->andEqual($model->id,$contentIdTextBox->getValue());
+        }
 
         $count = new ContentCount();
         $count->filter = $filter;

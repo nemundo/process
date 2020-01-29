@@ -27,15 +27,12 @@ trait AssignmentTrait
      */
     public $deadline;
 
-    //  abstract public function getMessage();
 
-    public function __construct($dataId = null)
+
+    protected function loadContentType()
     {
-
         $this->typeLabel = 'Group Assignment';
         $this->deadline = new Date();
-
-        parent::__construct($dataId);
     }
 
 
@@ -55,7 +52,7 @@ trait AssignmentTrait
     }
 
 
-    protected function assignAssignment()
+    protected function saveAssignment()
     {
 
         $data = new Assignment();
@@ -66,7 +63,6 @@ trait AssignmentTrait
         $data->message = $this->getMessage();
         $data->contentId = $this->getContentId();
         $this->dataId = $data->save();
-
 
 
         // send email
@@ -119,7 +115,7 @@ trait AssignmentTrait
         $reader->model->loadStatus();
         $assignmentRow = $reader->getRowById($this->dataId);*/
 
-        $assignmentRow =$this->getDataRow();
+        $assignmentRow = $this->getDataRow();
         $subject = 'Group Assignment to : ' . $assignmentRow->group->group . ' (' . $assignmentRow->status->status . ')';
 
         if ($assignmentRow->statusId == (new CancelAssignmentStatus())->id) {
@@ -133,5 +129,17 @@ trait AssignmentTrait
 
     }
 
+    public function getMessage()
+    {
+
+        $message = 'Assignment';
+
+        if ($this->message !== null) {
+            $message=$this->message;
+        }
+
+        return $message;
+
+    }
 
 }

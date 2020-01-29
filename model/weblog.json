@@ -1,0 +1,20 @@
+{
+    "app": "WebLog",
+    "name": "weblog",
+    "namespace": "Nemundo\\Process\\App\\WebLog",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "aefb962f-bd40-4aed-8fe0-ab56c004359c",
+            "label": "WebLog",
+            "class_name": "WebLog",
+            "table_name": "weblog_weblog",
+            "namespace": "Nemundo\\Process\\App\\WebLog\\Data\\WebLog",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "index": []
+        }
+    ]
+}

@@ -23,6 +23,35 @@ class ContentCheckScript extends AbstractConsoleScript
     public function run()
     {
 
+        /*$reader = new ContentReader();
+        //$reader->model->loadContentType();
+        $reader->addGroup($reader->model->contentTypeId);
+        //$reader->filter->andEqual($reader->model->contentType->contentType,'');
+        foreach ($reader->getData() as $contentRow) {
+
+
+       //     (new Debug())->write('found'.$contentRow->contentType->contentType);
+
+
+
+        }
+
+        (new Debug())->write($reader->getCount());
+
+        exit;*/
+
+
+
+        // check, if content type exists
+
+        // SELECT * FROM process_content WHERE content_type=''
+
+
+        $delete = new ContentDelete();
+        $delete->filter->andEqual($delete->model->contentTypeId,'');
+        $delete->delete();
+
+
 
         // check data id
         $reader = new ContentReader();

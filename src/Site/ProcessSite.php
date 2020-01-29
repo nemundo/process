@@ -17,6 +17,7 @@ use Nemundo\Process\Content\Site\ContentTypeSite;
 use Nemundo\Process\Content\Site\TreeSite;
 use Nemundo\Process\Geo\Site\GeoSite;
 use Nemundo\Process\Group\Site\GroupSite;
+use Nemundo\Process\Group\Site\UserGroupSite;
 use Nemundo\Process\Search\Site\SearchLogSite;
 use Nemundo\Process\Search\Site\SearchSite;
 use Nemundo\Process\Template\Site\FileSite;
@@ -60,6 +61,7 @@ class ProcessSite extends AbstractSite
         new SearchSite($this);
         new FavoriteSite($this);
         new GroupSite($this);
+        new UserGroupSite($this);
 
 
         new GeoSite($this);

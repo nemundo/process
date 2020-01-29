@@ -15,6 +15,10 @@ use Nemundo\Process\Template\Content\Audio\AudioContentType;
 use Nemundo\Process\Template\Content\Event\EventContentType;
 use Nemundo\Process\Template\Content\File\FileContentType;
 use Nemundo\Process\Template\Content\File\FileDeleteContentType;
+use Nemundo\Process\Template\Content\Item\ActiveItemContentType;
+use Nemundo\Process\Template\Content\Item\CreateItemContentType;
+use Nemundo\Process\Template\Content\Item\EditItemContentType;
+use Nemundo\Process\Template\Content\Item\InactiveItemContentType;
 use Nemundo\Process\Template\Content\LargeText\LargeTextContentType;
 use Nemundo\Process\Template\Content\SourceRemove\SourceRemoveContentType;
 use Nemundo\Process\Template\Content\Text\TextContentType;
@@ -48,6 +52,7 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new YouTubeContentType());
 
 
+
         $setup->addContentType(new NewsContentType());
         $setup->addContentType(new WikiPageContentType());
         //$setup->addContentType(new WebImageContentType());
@@ -58,6 +63,11 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new WorkflowDeleteStatus());
         $setup->addContentType(new SubjectChangeProcessStatus());
 
+        $setup->addContentType(new ActiveItemContentType());
+        $setup->addContentType(new CreateItemContentType());
+        $setup->addContentType(new EditItemContentType());
+        $setup->addContentType(new InactiveItemContentType());
+
         $setup = new WikiSetup();
         $setup->addContentType(new LargeTextContentType());
         $setup->addContentType(new EventContentType());
@@ -65,8 +75,8 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new FileContentType());
         $setup->addContentType(new YouTubeContentType());
 
-        $setup = new CalendarSourceSetup();
-        $setup->addSourceContentType(new WikiPageContentType());
+        //$setup = new CalendarSourceSetup();
+        //$setup->addSourceContentType(new WikiPageContentType());
 
 
     }

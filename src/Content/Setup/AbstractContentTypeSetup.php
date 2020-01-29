@@ -39,7 +39,7 @@ abstract class AbstractContentTypeSetup extends AbstractBase
     {
 
         // hier nur von content typ
-        (new ContentCheckScript())->run();
+        //(new ContentCheckScript())->run();
 
 
         do {

@@ -28,7 +28,7 @@ class ContentCustomRow extends ContentRow
 
         } else {
 
-            (new LogMessage())->writeError('ContentCustomRow. Content Type is not registred. Class: ' . $className);
+            (new LogMessage())->writeError('ContentCustomRow. Content Type is not registred. Class: ' . $className.' Content Id: '.$this->id);
             $contentType = new TreeContentType($this->dataId);
 
         }

@@ -17,7 +17,10 @@ use Nemundo\Process\Content\Data\Content\ContentDelete;
 use Nemundo\Process\Content\Data\Content\ContentId;
 use Nemundo\Process\Content\Data\Content\ContentUpdate;
 use Nemundo\Process\Content\Form\ContentForm;
+use Nemundo\Process\Content\View\AbstractContentAdmin;
 use Nemundo\Process\Content\View\AbstractContentList;
+use Nemundo\Process\Template\Content\Item\CreateItemContentType;
+use Nemundo\Process\Template\Content\Item\EditItemContentType;
 use Nemundo\User\Type\UserSessionType;
 
 
@@ -159,17 +162,23 @@ abstract class AbstractContentType extends AbstractType
             $update->updateById($this->contentId);
             //$stop->stopStopwatch();
 
+            /*$log = new CreateItemContentType();
+            $log->parentId=$this->contentId;
+            $log->saveType();*/
+
+
         } else {
 
             $this->onUpdate();
 
-            //(new Debug())->write($this->getSubject());
-            //(new Debug())->write($this->contentId);
-            //exit;
-
             $update = new ContentUpdate();
             $update->subject = $this->getSubject();
             $update->updateById($this->getContentId());
+
+/*            $log = new EditItemContentType();
+            $log->parentId=$this->contentId;
+            $log->saveType();*/
+
 
         }
 
@@ -251,8 +260,9 @@ abstract class AbstractContentType extends AbstractType
         $admin = null;
         if ($this->hasAdmin()) {
 
-            /** @var AbstractHtmlContainer $admin */
+            /** @var AbstractContentAdmin $admin */
             $admin = new $this->adminClass($parent);
+            $admin->contentType=$this;
 
 
         } else {
