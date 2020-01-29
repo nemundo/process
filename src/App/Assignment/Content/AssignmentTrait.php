@@ -28,12 +28,12 @@ trait AssignmentTrait
     public $deadline;
 
 
-
+/*
     protected function loadContentType()
     {
         $this->typeLabel = 'Group Assignment';
         $this->deadline = new Date();
-    }
+    }*/
 
 
     protected function onCreate()

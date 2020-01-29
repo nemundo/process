@@ -7,6 +7,7 @@ namespace Nemundo\Process\App\Assignment\Install;
 use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\App\Assignment\Content\Group\AssignmentContentType;
 use Nemundo\Process\App\Assignment\Content\Message\MessageAssignmentContentType;
+use Nemundo\Process\App\Assignment\Content\Message\MessageAssignmentProcessStatus;
 use Nemundo\Process\App\Assignment\Content\ReAssignment\ReAssignmentContentType;
 use Nemundo\Process\App\Assignment\Content\ReAssignment\ReAssignmentProcessStatus;
 use Nemundo\Process\App\Assignment\Data\AssignmentCollection;
@@ -30,6 +31,7 @@ class AssignmentInstall extends AbstractInstall
         $setup=new ContentTypeSetup();
         $setup->addContentType(new AssignmentContentType());
         $setup->addContentType(new MessageAssignmentContentType());
+        $setup->addContentType(new MessageAssignmentProcessStatus());
         $setup->addContentType(new ReAssignmentContentType());
         $setup->addContentType(new ReAssignmentProcessStatus());
 
