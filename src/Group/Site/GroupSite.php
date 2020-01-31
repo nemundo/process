@@ -41,6 +41,7 @@ class GroupSite extends AbstractSite
         GroupSite::$site = $this;
 
         new GroupUserDeleteSite($this);
+        new GroupContentViewSite($this);
         //new GroupItemSite($this);
 
     }

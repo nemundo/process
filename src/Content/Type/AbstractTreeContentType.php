@@ -26,21 +26,10 @@ abstract class AbstractTreeContentType extends AbstractContentType
     public function saveType()
     {
 
-        //$stop=new PerformanceStopwatch('save_content');
         $this->saveContent();
-        //$stop->stopStopwatch();
-
-        //$stop=new PerformanceStopwatch('save_tree');
         $this->saveTree();
-        //$stop->stopStopwatch();
-
-        //$stop=new PerformanceStopwatch('search_index');
         $this->saveSearchIndex();
-        //$stop->stopStopwatch();
-
-        //$stop=new PerformanceStopwatch('finished');
         $this->onFinished();
-        //$stop->stopStopwatch();
 
     }
 
@@ -98,5 +87,18 @@ abstract class AbstractTreeContentType extends AbstractContentType
         return $text;
 
     }
+
+
+    public function exportJson() {
+
+        $data['id']=$this->dataId;
+        $data['subject']=$this->getSubject();
+
+        return $data;
+
+
+
+    }
+
 
 }

@@ -4,26 +4,24 @@
 namespace Nemundo\Process\Template\Content\Text;
 
 
-use Nemundo\Process\Content\Type\AbstractTreeContentType;
-use Nemundo\Process\Template\Data\TemplateText\TemplateText;
-use Nemundo\Process\Template\Data\TemplateText\TemplateTextDelete;
-use Nemundo\Process\Template\Data\TemplateText\TemplateTextReader;
-use Nemundo\Process\Template\Data\TemplateText\TemplateTextUpdate;
-
-class TextContentType extends AbstractTreeContentType
+class TextContentType extends AbstractTextContentType  // AbstractTreeContentType
 {
 
     public $text;
 
     protected function loadContentType()
     {
+
+        parent::loadContentType();
+
         $this->typeLabel = 'Text';
         $this->typeId = '00b2fd69-59de-4e2d-b829-640c142253eb';
-        $this->formClass = TextContentForm::class;
-        $this->viewClass = TextContentView::class;
+        //$this->formClass = TextContentForm::class;
+        //$this->viewClass = TextContentView::class;
     }
 
 
+    /*
     protected function onCreate()
     {
 
@@ -66,6 +64,6 @@ class TextContentType extends AbstractTreeContentType
     {
 
         return $this->getDataRow()->text;
-    }
+    }*/
 
 }

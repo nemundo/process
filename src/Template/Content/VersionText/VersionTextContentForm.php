@@ -74,10 +74,11 @@ class VersionTextContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        $type=new VersionTextContentType($this->dataId);
-        $type->parentId=$this->parentId;
-        $type->text=$this->text->getValue();
-        $type->saveType();
+        //$type=new VersionTextContentType($this->dataId);
+
+        $this->contentType->parentId=$this->parentId;
+        $this->contentType->text=$this->text->getValue();
+        $this->contentType->saveType();
 
         // TODO: Implement onSubmit() method.
     }

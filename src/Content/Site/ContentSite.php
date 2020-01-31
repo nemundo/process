@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Content\Site;
 
 
+use Nemundo\Admin\Com\Button\AdminSearchButton;
 use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Navigation\AdminNavigation;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
@@ -27,6 +28,7 @@ use Nemundo\Process\Content\Data\Content\ContentPaginationReader;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Parameter\DataParameter;
+use Nemundo\User\Com\ListBox\UserListBox;
 use Nemundo\Web\Site\AbstractSite;
 
 class ContentSite extends AbstractSite
@@ -73,6 +75,20 @@ class ContentSite extends AbstractSite
 
         $contentIdTextBox=new BootstrapTextBox($formRow);
         $contentIdTextBox->label='Content Id';
+        $contentIdTextBox->searchMode=true;
+
+        $dataIdTextBox=new BootstrapTextBox($formRow);
+        $dataIdTextBox->label='Data Id';
+        $dataIdTextBox->searchMode=true;
+
+
+
+        $user = new UserListBox($formRow);
+        $user->submitOnChange=true;
+        $user->searchMode=true;
+
+        new AdminSearchButton($formRow);
+
 
         /*
         $reader = new ContentTypeReader();
@@ -106,6 +122,15 @@ class ContentSite extends AbstractSite
         if ($contentIdTextBox->hasValue()) {
             $filter->andEqual($model->id,$contentIdTextBox->getValue());
         }
+
+        if ($dataIdTextBox->hasValue()) {
+            $filter->andEqual($model->dataId,$dataIdTextBox->getValue());
+        }
+
+        if ($user->hasValue()) {
+            $filter->andEqual($model->userId,$user->getValue());
+        }
+
 
         $count = new ContentCount();
         $count->filter = $filter;

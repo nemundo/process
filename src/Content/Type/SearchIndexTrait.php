@@ -29,12 +29,15 @@ trait SearchIndexTrait
 
         if ($this->searchIndex == null) {
             $this->searchIndex = new SearchIndexBuilder($this->getContentId());
+            $this->searchIndex->contentType = $this;
         }
 
         $this->searchIndex->addText($text);
 
     }
 
+
+    // onIndex
     protected function onSearchIndex()
     {
 

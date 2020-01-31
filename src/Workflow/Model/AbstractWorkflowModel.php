@@ -88,7 +88,6 @@ abstract class AbstractWorkflowModel extends AbstractModel
      */
     public $user;
 
-
     /**
      * @var \Nemundo\Model\Type\External\Id\ExternalIdType
      */
@@ -105,7 +104,6 @@ abstract class AbstractWorkflowModel extends AbstractModel
 
         parent::__construct();
 
-
         $this->active = new YesNoType($this);
         $this->active->label = 'Active';
         $this->active->fieldName = 'active';
@@ -118,7 +116,7 @@ abstract class AbstractWorkflowModel extends AbstractModel
         $this->number->fieldName = 'number';
         $this->number->aliasFieldName = $this->tableName . '_number';
         $this->number->tableName = $this->tableName;
-        $this->number->allowNullValue=true;
+        $this->number->allowNullValue = true;
 
         $this->workflowNumber = new TextType($this);
         $this->workflowNumber->label[LanguageCode::EN] = 'Workflow Number';
@@ -134,7 +132,6 @@ abstract class AbstractWorkflowModel extends AbstractModel
         $this->subject->aliasFieldName = $this->tableName . '_subject';
         $this->subject->label[LanguageCode::EN] = 'Subject';
         $this->subject->label[LanguageCode::DE] = 'Betreff';
-
         $this->subject->allowNullValue = false;
         $this->subject->length = 255;
 
@@ -152,16 +149,15 @@ abstract class AbstractWorkflowModel extends AbstractModel
         $this->statusId->label = 'Status';
         $this->statusId->allowNullValue = false;
 
-        $this->deadline = new \Nemundo\Model\Type\DateTime\DateType($this);
+        $this->deadline = new DateType($this);
         $this->deadline->tableName = $this->tableName;
         $this->deadline->fieldName = 'deadline';
         $this->deadline->aliasFieldName = $this->tableName . '_deadline';
         $this->deadline->label[LanguageCode::EN] = 'Deadline';
         $this->deadline->label[LanguageCode::DE] = 'Erledigen bis';
-
         $this->deadline->allowNullValue = false;
 
-        $this->assignmentId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+        $this->assignmentId = new ExternalUniqueIdType($this);
         $this->assignmentId->tableName = $this->tableName;
         $this->assignmentId->fieldName = 'assignment';
         $this->assignmentId->aliasFieldName = $this->tableName . '_assignment';
@@ -189,21 +185,6 @@ abstract class AbstractWorkflowModel extends AbstractModel
         $this->contentId->label = 'Content';
         $this->contentId->allowNullValue = false;
 
-        /*
-
-
-                $this->statusId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
-                $this->statusId->tableName = 'process_workflow';
-                $this->statusId->fieldName = 'status';
-                $this->statusId->aliasFieldName = 'process_workflow_status';
-                $this->statusId->label = 'Status';
-                $this->statusId->allowNullValue = false;*/
-
-
-        /*$index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
-        $index->indexName = 'content';
-        $index->addType($this->contentId);*/
-
         $index = new ModelUniqueIndex($this);
         $index->indexName = 'number';
         $index->addType($this->number);
@@ -229,7 +210,7 @@ abstract class AbstractWorkflowModel extends AbstractModel
     public function loadAssignment()
     {
         if ($this->assignment == null) {
-            $this->assignment = new \Nemundo\Process\Group\Data\Group\GroupExternalType($this, $this->tableName . '_assignment');
+            $this->assignment = new GroupExternalType($this, $this->tableName . '_assignment');
             $this->assignment->tableName = $this->tableName;
             $this->assignment->fieldName = 'assignment';
             $this->assignment->aliasFieldName = $this->tableName . '_assignment';
@@ -254,7 +235,7 @@ abstract class AbstractWorkflowModel extends AbstractModel
     public function loadContent()
     {
         if ($this->content == null) {
-            $this->content = new ContentExternalType($this, $this->tableName. '_content');
+            $this->content = new ContentExternalType($this, $this->tableName . '_content');
             $this->content->tableName = $this->tableName;
             $this->content->fieldName = 'content';
             $this->content->aliasFieldName = $this->tableName . '_content';

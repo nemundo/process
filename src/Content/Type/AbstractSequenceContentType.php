@@ -70,6 +70,8 @@ abstract class AbstractSequenceContentType extends AbstractTreeContentType
         $data->statusId=$status->typeId;
         $data->save();
 
+        return $this;
+
     }
 
     public function getStatus() {

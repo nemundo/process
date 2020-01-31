@@ -6,7 +6,6 @@ namespace Nemundo\Process\Search\Site;
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\App\Search\Parameter\SearchQueryParameter;
-use Nemundo\Com\TableBuilder\TableCell;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Text\TextBold;
@@ -20,12 +19,12 @@ use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Process\Search\Com\ContentSearchForm;
 use Nemundo\Process\Search\Content\Log\SearchLogContentType;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexCount;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexPaginationReader;
-use Nemundo\Process\Text\BoldText;
+use Nemundo\Process\Search\Site\Json\SearchContentTypeJsonSite;
+use Nemundo\Process\Search\Site\Json\SearchJsonSite;
 use Nemundo\Web\Site\AbstractSite;
 
 class SearchSite extends AbstractSite
@@ -45,6 +44,7 @@ class SearchSite extends AbstractSite
 
         new SearchItemSite($this);
         new SearchJsonSite($this);
+        new SearchContentTypeJsonSite($this);
 
     }
 
@@ -108,19 +108,19 @@ class SearchSite extends AbstractSite
             $header = new TableHeader($table);
 
             $th = new Th($header);
-            $th->content[LanguageCode::EN]='Subject';
-            $th->content[LanguageCode::DE]='Betreff';
+            $th->content[LanguageCode::EN] = 'Subject';
+            $th->content[LanguageCode::DE] = 'Betreff';
 
             $th = new Th($header);
-            $th->content[LanguageCode::EN]='Type';
-            $th->content[LanguageCode::DE]='Typ';
+            $th->content[LanguageCode::EN] = 'Type';
+            $th->content[LanguageCode::DE] = 'Typ';
 
             foreach ($searchIndexReader->getData() as $indexRow) {
 
                 $row = new BootstrapClickableTableRow($table);
 
                 $contentType = $indexRow->content->getContentType();
-                $row->addText($bold->getBoldText( $contentType->getSubject()));
+                $row->addText($bold->getBoldText($contentType->getSubject()));
                 $row->addText($indexRow->content->contentType->contentType);
 
                 if ($contentType->hasViewSite()) {

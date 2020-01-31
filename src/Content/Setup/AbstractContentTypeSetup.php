@@ -12,6 +12,7 @@ use Nemundo\Process\Content\Data\ContentType\ContentType;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeDelete;
 use Nemundo\Process\Content\Script\ContentCheckScript;
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Search\Data\WordContentType\WordContentTypeDelete;
 
 abstract class AbstractContentTypeSetup extends AbstractBase
 {
@@ -58,6 +59,14 @@ abstract class AbstractContentTypeSetup extends AbstractBase
             $contentCount = $count->getCount();
 
         } while ($contentCount > 0);
+
+
+        $delete = new WordContentTypeDelete();
+        $delete->filter->andEqual($delete->model->contentTypeId,$contentType->typeId);
+        $delete->delete();
+
+
+
 
         return $this;
 

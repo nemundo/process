@@ -5,13 +5,93 @@ namespace Nemundo\Process\Workflow\Com\Table;
 
 
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
+use Nemundo\Html\Formatting\Bold;
+use Nemundo\Process\Group\Type\GroupContentType;
+use Schleuniger\App\ChangeRequest\Row\EcrCustomRow;
 
 class WorkflowInfoTable extends AdminLabelValueTable
 {
 
+    /**
+     * @var EcrCustomRow
+     */
+    public $workflowRow;
+
+    public function addDefault()
+    {
+
+        $this->addStatus();
+        $this->addWorfklowClosed();
+        $this->addAssignment();
+        $this->addDeadline();
+        $this->addCreator();
+        $this->addSubject();
+
+    }
+
+
+    public function addSubject()
+    {
+        $this->addLabelValue($this->workflowRow->model->subject->label, $this->workflowRow->subject);
+        return $this;
+    }
+
+
+    public function addStatus()
+    {
+        $this->addLabelValue($this->workflowRow->model->status->label, $this->workflowRow->status->contentType);
+        return $this;
+    }
+
+
+    public function addWorfklowClosed()
+    {
+        $this->addLabelYesNoValue($this->workflowRow->model->workflowClosed->label, $this->workflowRow->workflowClosed);
+        return $this;
+    }
+
+
+    public function addAssignment()
+    {
+
+
+        $group = new GroupContentType($this->workflowRow->assignmentId);
+
+
+        $span = new Bold();  // new Span();
+        $span->content = $this->workflowRow->assignment->group;
+        $span->title = $group->getUserListText();
+
+        $this->addLabelCom($this->workflowRow->model->assignment->label, $span);
+
+
+        return $this;
+    }
+
+
+    public function addDeadline()
+    {
+        $this->addLabelValue($this->workflowRow->model->deadline->label, $this->workflowRow->getDeadline());
+        return $this;
+    }
+
+
+    public function addCreator()
+    {
+        $this->addLabelValue('Ersteller', $this->workflowRow->getCreator());
+        return $this;
+    }
+
+
     public function getContent()
     {
 
+
+        /*
+         *
+         *   //addAssignment()
+        // addSubject()
+         */
 
 
         /*

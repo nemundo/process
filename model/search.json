@@ -6,6 +6,47 @@
     "model": [
         {
             "template": "default",
+            "model_id": "af0e5f92-2dc8-4aa5-86e5-8312777ace7e",
+            "label": "WordContent Type",
+            "class_name": "WordContentType",
+            "table_name": "process_search_word_content_type",
+            "namespace": "Nemundo\\Process\\Search\\Data\\WordContentType",
+            "row_class_name": "",
+            "primary_index": "text_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Content Type",
+                    "field_name": "content_type",
+                    "variable_name": "contentType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                },
+                {
+                    "type": "text",
+                    "label": "Word",
+                    "field_name": "word",
+                    "variable_name": "word",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "50"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "search",
+                    "index_type": "search_index",
+                    "field_name": [
+                        "content_type",
+                        "word"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
             "model_id": "ba49b180-2274-4e8d-a545-6fbf8d382fee",
             "label": "Search Index",
             "class_name": "SearchIndex",

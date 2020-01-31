@@ -29,18 +29,14 @@ class GroupAdmin extends AbstractActionPanel
     use GroupContentTypeTrait;
 
     /**
+     * @var bool
+     */
+    public $showGroupTypeColumn = true;
+
+    /**
      * @var ActionSite
      */
     private $index;
-
-    /** @var AbstractGroupContentType[] */
-    /*  private $groupList=[];
-
-      public function addGroup(AbstractGroupContentType $groupContentType) {
-          $this->groupList[]=$groupContentType;
-          return $this;
-      }*/
-
 
     /**
      * @var ActionSite
@@ -62,73 +58,32 @@ class GroupAdmin extends AbstractActionPanel
 
             $header = new TableHeader($table);
             $header->addText('Group');
+
+            if ($this->showGroupTypeColumn) {
             $header->addText('Group Type');
+            }
 
             $groupReader = new GroupReader();
             $groupReader->model->loadGroupType();
 
-            //if ($groupType->hasValue()) {
             foreach ($this->groupContentTypeList as $groupContentType) {
                 $groupReader->filter->orEqual($groupReader->model->groupTypeId, $groupContentType->typeId);
             }
-            //}
-
 
             $groupReader->addOrder($groupReader->model->group);
             foreach ($groupReader->getData() as $groupRow) {
+
                 $row = new BootstrapClickableTableRow($table);
-
-
                 $row->addText($groupRow->group);
+            if ($this->showGroupTypeColumn) {
                 $row->addText($groupRow->groupType->contentType);
+            }
 
                 $site = clone($this->index);
                 $site->addParameter(new GroupParameter($groupRow->id));
                 $row->addClickableSite($site);
 
             }
-
-
-            /*
-            $table=new AdminClickableTable($layout->col1);
-
-            $header=new TableHeader($table);
-            $header->addText('Group');
-            $header->addText('Group Type');
-
-
-            foreach ($this->groupList as $group) {
-
-                $row=new BootstrapClickableTableRow($table);
-                $row->addText($group->typeLabel);
-
-                $site = clone(GroupSite::$site);
-                $site->addParameter(new GroupParameter($groupRow->id));
-                $row->addClickableSite($site);
-
-
-            }
-
-
-            /*
-
-            if ($t groupType->hasValue()) {
-                $groupReader->filter->andEqual($groupReader->model->groupTypeId, $groupType->getValue());
-            }
-
-
-            $groupReader->addOrder($groupReader->model->group);
-            foreach ($groupReader->getData() as $groupRow) {
-                $row=new BootstrapClickableTableRow($table);
-                $row->addText($groupRow->group);
-                $row->addText($groupRow->groupType->contentType);
-
-                $site = clone(GroupSite::$site);
-                $site->addParameter(new GroupParameter($groupRow->id));
-                $row->addClickableSite($site);
-
-            }*/
-
 
             $groupParameter = new GroupParameter();
             if ($groupParameter->exists()) {
@@ -188,6 +143,5 @@ class GroupAdmin extends AbstractActionPanel
         };
 
     }
-
 
 }

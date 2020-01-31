@@ -13,14 +13,21 @@ use Nemundo\Model\Count\ModelDataCount;
 use Nemundo\Model\Delete\ModelDelete;
 use Nemundo\Model\Id\ModelId;
 use Nemundo\Model\Reader\ModelDataReader;
+use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Search\Data\ContentTypeWord\ContentTypeWordBulk;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexBulk;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexDelete;
 use Nemundo\Process\Search\Data\Word\WordBulk;
+use Nemundo\Process\Search\Data\WordContentType\WordContentTypeBulk;
 
 
 class SearchIndexBuilder extends AbstractBase
 {
 
+    /**
+     * @var AbstractContentType
+     */
+    public $contentType;
 
     /**
      * @var string
@@ -39,9 +46,6 @@ class SearchIndexBuilder extends AbstractBase
         }
 
     }
-
-
-    //abstract protected function loadBuilder();
 
 
     public function addText($text, $relevance = 0)
@@ -68,15 +72,10 @@ class SearchIndexBuilder extends AbstractBase
     public function addWord($word, $relevance = 0)
     {
 
-        // dataId Check
-
-        //(new Debug())->write($word);
-
         if (($word !== '') && ($word !== null)) {
 
+            // crc32 statt md5 ???
             $wordId = md5(mb_strtolower($word));
-
-            //foreach ($this->searchEngineList as $searchEngine) {
 
             $this->wordList[$wordId] = $word;
             $this->indexList[$wordId] = $relevance;
@@ -105,6 +104,18 @@ class SearchIndexBuilder extends AbstractBase
             $data->save();
         }
         $data->saveBulk();
+
+
+        $data = new WordContentTypeBulk();
+        foreach ($this->wordList as $wordId => $word) {
+            $data->ignoreIfExists = true;
+            $data->id = $wordId;
+            $data->contentTypeId=$this->contentType->typeId;
+            $data->word = $word;
+            $data->save();
+        }
+        $data->saveBulk();
+
 
         $data = new SearchIndexBulk();
         foreach ($this->indexList as $wordId => $relevance) {

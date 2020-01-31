@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Group\Com\ListBox;
 
 
+use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
 use Nemundo\Process\Group\Com\GroupContentTypeTrait;
 use Nemundo\Process\Group\Data\Group\GroupReader;
@@ -17,14 +18,15 @@ class MultiGroupListBox extends BootstrapListBox
     /**
      * @var bool
      */
-    public $showGroupTypeTitle=true;
+    public $showGroupTypeTitle = true;
 
     protected function loadContainer()
     {
 
         parent::loadContainer();
 
-        $this->label = 'Group';
+        $this->label[LanguageCode::EN] = 'Group';
+        $this->label[LanguageCode::DE] = 'Gruppe';
         $this->name = (new GroupParameter())->getParameterName();
 
     }
@@ -36,7 +38,7 @@ class MultiGroupListBox extends BootstrapListBox
         foreach ($this->groupContentTypeList as $groupContentType) {
 
             if ($this->showGroupTypeTitle) {
-            $this->addItemTitle($groupContentType->typeLabel);
+                $this->addItemTitle($groupContentType->typeLabel);
             }
 
             $groupReader = new GroupReader();

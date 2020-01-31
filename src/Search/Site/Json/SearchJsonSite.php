@@ -1,6 +1,6 @@
 <?php
 
-namespace Nemundo\Process\Search\Site;
+namespace Nemundo\Process\Search\Site\Json;
 
 
 use Nemundo\Package\Bootstrap\Autocomplete\AbstractAutocompleteJsonSite;

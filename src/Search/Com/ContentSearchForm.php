@@ -10,7 +10,7 @@ use Nemundo\Html\Character\HtmlCharacter;
 use Nemundo\Package\Bootstrap\Autocomplete\BootstrapAutocompleteMultipleValueTextBox;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
-use Nemundo\Process\Search\Site\SearchJsonSite;
+use Nemundo\Process\Search\Site\Json\SearchJsonSite;
 
 
 class ContentSearchForm extends SearchForm

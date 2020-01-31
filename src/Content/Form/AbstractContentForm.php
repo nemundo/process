@@ -18,13 +18,6 @@ abstract class AbstractContentForm extends AbstractAdminForm
     public function getContent()
     {
 
-/*
-        $p = new Paragraph($this);
-        $p->content = 'parentid'.$this->parentId;
-
-        $p = new Paragraph($this);
-        $p->content = 'dataid'.$this->dataId;*/
-
         if (!$this->createMode) {
             $this->loadUpdateForm();
         }

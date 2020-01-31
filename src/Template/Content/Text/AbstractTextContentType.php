@@ -18,8 +18,9 @@ class AbstractTextContentType extends AbstractTreeContentType
 
     protected function loadContentType()
     {
-        $this->typeLabel = 'Text';
-        $this->typeId = '00b2fd69-59de-4e2d-b829-640c142253eb';
+
+        //$this->typeLabel = 'Text';
+        //$this->typeId = '00b2fd69-59de-4e2d-b829-640c142253eb';
         $this->formClass = TextContentForm::class;
         $this->viewClass=TextContentView::class;
     }

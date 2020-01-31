@@ -20,6 +20,7 @@ use Nemundo\Process\Group\Site\GroupSite;
 use Nemundo\Process\Group\Site\UserGroupSite;
 use Nemundo\Process\Search\Site\SearchLogSite;
 use Nemundo\Process\Search\Site\SearchSite;
+use Nemundo\Process\Search\Site\SearchWordSite;
 use Nemundo\Process\Template\Site\FileSite;
 use Nemundo\Process\Template\Site\ProcessTemplateSite;
 use Nemundo\Process\Workflow\Site\AssignmentSite;
@@ -59,6 +60,7 @@ class ProcessSite extends AbstractSite
 
         new ToDoSite($this);
         new SearchSite($this);
+        new SearchWordSite($this);
         new FavoriteSite($this);
         new GroupSite($this);
         new UserGroupSite($this);

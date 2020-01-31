@@ -48,20 +48,30 @@ abstract class AbstractType extends AbstractBaseClass
     public function __construct($dataId = null)
     {
 
+        $this->loadFromDataId($dataId);
+
+        /*
         if ($dataId !== null) {
             $this->loadFromDataId($dataId);
         }
 
-        $this->onLoad();
+        $this->onLoad();*/
 
     }
 
 
     // fromDataId
     // fromContentId
-    public function loadFromDataId($dataId) {
+    public function loadFromDataId($dataId=null) {
+
         $this->dataId = $dataId;
-        $this->createMode = false;
+        if ($this->dataId !== null) {
+            $this->createMode = false;
+            $this->onLoad();
+        }
+
+        //$this->onLoad();
+
     }
 
 

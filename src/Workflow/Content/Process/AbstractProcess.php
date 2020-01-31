@@ -397,7 +397,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         return $this;
 
-
     }
 
     public function changeSubject($subject)

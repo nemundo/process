@@ -5,6 +5,7 @@ namespace Nemundo\Process\Group\Type;
 
 
 use Nemundo\Core\Debug\Debug;
+use Nemundo\Core\Directory\TextDirectory;
 use Nemundo\Core\Random\UniqueId;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Group\Content\GroupContentForm;
@@ -16,6 +17,8 @@ use Nemundo\Process\Group\Data\Group\GroupReader;
 use Nemundo\Process\Group\Data\GroupUser\GroupUser;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserDelete;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
+use Nemundo\Process\Group\Parameter\GroupParameter;
+use Nemundo\Process\Group\Site\GroupContentViewSite;
 use Nemundo\User\Reader\UserCustomRow;
 
 abstract class AbstractGroupContentType extends AbstractTreeContentType
@@ -37,6 +40,8 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
         $this->typeId = '8fb75394-3e0d-4a3e-a209-1a5ebfc46220';
         $this->formClass = GroupContentForm::class;
         $this->viewClass = GroupContentView::class;
+        $this->viewSite=GroupContentViewSite::$site;
+        $this->parameterClass=GroupParameter::class;
 
         $this->loadGroup();
 
@@ -214,6 +219,19 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
         }
 
         return $list;
+
+    }
+
+
+    public function getUserListText() {
+
+        $text = new TextDirectory();
+
+        foreach ($this->getUserList() as $userRow) {
+            $text->addValue($userRow->displayName);
+        }
+
+        return $text->getTextWithSeperator();
 
     }
 
