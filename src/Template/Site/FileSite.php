@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Template\Site;
 
 
+use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Admin\Com\Title\AdminTitle;
@@ -37,6 +38,7 @@ class FileSite extends AbstractSite
         FileSite::$site = $this;
 
         new FileItemSite($this);
+        new PdfExtractSite($this);
     }
 
 
@@ -144,6 +146,12 @@ class FileSite extends AbstractSite
             $table->addLabelValue('Parent Count', $fileType->getParentCount());
 
             $fileType->getView($layout->col2);
+
+
+            $btn = new AdminSiteButton($layout->col2);
+            $btn->site= clone(PdfExtractSite::$site);
+            $btn->site->addParameter(new FileParameter());
+
 
             $table = new SourceTable($layout->col2);
             $table->contentType = $fileType;

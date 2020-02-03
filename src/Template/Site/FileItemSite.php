@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Template\Site;
 
 
+use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Process\Content\Com\Table\SourceTable;
@@ -43,6 +44,12 @@ class FileItemSite extends AbstractSite
 
         $fileType = (new FileContentType($fileId));
         $fileType->getView($layout->col1);
+
+
+        $btn = new AdminSiteButton($layout->col2);
+        $btn->site= clone(PdfExtractSite::$site);
+        $btn->site->addParameter(new FileParameter());
+
 
         $table = new SourceTable($layout->col2);
         $table->contentType = $fileType;
