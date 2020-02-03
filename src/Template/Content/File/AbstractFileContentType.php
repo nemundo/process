@@ -63,8 +63,11 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $this->dataId = $data->save();
 
 
-        //$fileType = (new FileContentType($fileId));
         $fileRow = $this->getDataRow();
+
+
+        // text file
+        // office document
 
         if ($fileRow->file->getFileExtension() == 'pdf') {
 

@@ -18,9 +18,7 @@ use Nemundo\Process\Content\Reader\ContentTreeReader;
 use Nemundo\Process\Template\Content\File\FileParentContainer;
 use Nemundo\Process\Template\Site\SourceDeleteSite;
 use Nemundo\Process\Workflow\Content\Form\AbstractStatusForm;
-use Schleuniger\App\Aufgabe\Content\Process\AufgabeProcess;
-use Schleuniger\App\ChangeRequest\Workflow\Process\EcrProcess;
-use Schleuniger\App\Prozesssteuerung\Content\Projekt\ProzesssteuerungProjektContentType;
+
 
 class AddSourceContentForm extends AbstractContentForm
 {
@@ -75,9 +73,9 @@ class AddSourceContentForm extends AbstractContentForm
         $this->source->validation=true;
 
         $treeReader = new ContentReader();
-        $treeReader->filter->orEqual($treeReader->model->contentTypeId,(new ProzesssteuerungProjektContentType())->typeId);
+        /*$treeReader->filter->orEqual($treeReader->model->contentTypeId,(new ProzesssteuerungProjektContentType())->typeId);
         $treeReader->filter->orEqual($treeReader->model->contentTypeId,(new AufgabeProcess())->typeId);
-        $treeReader->filter->orEqual($treeReader->model->contentTypeId,(new EcrProcess())->typeId);
+        $treeReader->filter->orEqual($treeReader->model->contentTypeId,(new EcrProcess())->typeId);*/
 
         $treeReader->addOrder($treeReader->model->subject);
         foreach ($treeReader->getData() as $contentRow) {
