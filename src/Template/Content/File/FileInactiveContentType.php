@@ -11,7 +11,7 @@ use Nemundo\Process\Template\Data\TemplateFile\TemplateFileUpdate;
 use Nemundo\Process\Template\Data\TemplateFileDelete\TemplateFileDelete;
 use Nemundo\Process\Template\Data\TemplateFileDelete\TemplateFileDeleteReader;
 
-class FileDeleteContentType extends AbstractTreeContentType  // AbstractProcessStatus
+class FileInactiveContentType extends AbstractTreeContentType
 {
 
     public $fileId;
@@ -19,10 +19,9 @@ class FileDeleteContentType extends AbstractTreeContentType  // AbstractProcessS
     protected function loadContentType()
     {
 
-        $this->typeLabel[LanguageCode::EN] = 'Document Delete';
-        $this->typeLabel[LanguageCode::DE] = 'Dokument löschen';
+        $this->typeLabel[LanguageCode::EN] = 'File Delete';
+        $this->typeLabel[LanguageCode::DE] = 'Datei löschen';
         $this->typeId = 'a83ea4f8-9605-40d0-9557-bb8224d41e24';
-        //$this->changeStatus=false;
 
     }
 

@@ -21,6 +21,11 @@ public $contentId;
 */
 public $content;
 
+/**
+* @var \Nemundo\Model\Type\Text\LargeTextType
+*/
+public $text;
+
 protected function loadModel() {
 $this->tableName = "template_template_file";
 $this->aliasTableName = "template_template_file";
@@ -54,6 +59,13 @@ $this->contentId->fieldName = "content";
 $this->contentId->aliasFieldName = "template_template_file_content";
 $this->contentId->label = "Content";
 $this->contentId->allowNullValue = false;
+
+$this->text = new \Nemundo\Model\Type\Text\LargeTextType($this);
+$this->text->tableName = "template_template_file";
+$this->text->fieldName = "text";
+$this->text->aliasFieldName = "template_template_file_text";
+$this->text->label = "Text";
+$this->text->allowNullValue = false;
 
 }
 public function loadContent() {

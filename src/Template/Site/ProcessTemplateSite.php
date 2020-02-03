@@ -16,7 +16,7 @@ class ProcessTemplateSite extends AbstractSite
         $this->menuActive = false;
 
         new TemplateFileFileRedirectSite($this);
-        new FileDeleteSite($this);
+        new FileInactiveSite($this);
         new SourceDeleteSite($this);
 
     }

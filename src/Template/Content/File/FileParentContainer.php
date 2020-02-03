@@ -15,7 +15,7 @@ use Nemundo\Process\Content\Data\Tree\TreeModel;
 use Nemundo\Process\Content\Parameter\ParentParameter;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileReader;
 use Nemundo\Process\Template\Parameter\FileParameter;
-use Nemundo\Process\Template\Site\FileDeleteSite;
+use Nemundo\Process\Template\Site\FileInactiveSite;
 use Nemundo\Process\Template\Status\DocumentProcessStatus;
 use Nemundo\Process\Workflow\Parameter\WorkflowParameter;
 use Nemundo\Workflow\App\WorkflowTemplate\Com\WorkflowFancyboxHyperlink;
@@ -60,7 +60,7 @@ class FileParentContainer extends AbstractParentContainer
                 $row->addText($documentRow->content->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
                 $row->addText($documentRow->content->user->displayName);
 
-                $site = clone(FileDeleteSite::$site);
+                $site = clone(FileInactiveSite::$site);
                 $site->addParameter(new ParentParameter($this->parentId));
                 $site->addParameter(new FileParameter($documentRow->id));
                 $row->addIconSite($site);

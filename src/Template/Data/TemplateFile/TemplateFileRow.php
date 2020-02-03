@@ -36,6 +36,11 @@ public $contentId;
 */
 public $content;
 
+/**
+* @var string
+*/
+public $text;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -46,6 +51,7 @@ $this->contentId = $this->getModelValue($model->contentId);
 if ($model->content !== null) {
 $this->loadNemundoProcessContentDataContentContentcontentRow($model->content);
 }
+$this->text = $this->getModelValue($model->text);
 }
 private function loadNemundoProcessContentDataContentContentcontentRow($model) {
 $this->content = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $model);

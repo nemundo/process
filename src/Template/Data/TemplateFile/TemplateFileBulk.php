@@ -21,6 +21,11 @@ public $file;
 */
 public $contentId;
 
+/**
+* @var string
+*/
+public $text;
+
 public function __construct() {
 parent::__construct();
 $this->model = new TemplateFileModel();
@@ -29,6 +34,7 @@ $this->file = new \Nemundo\Model\Data\Property\File\RedirectFilenameDataProperty
 public function save() {
 $this->typeValueList->setModelValue($this->model->active, $this->active);
 $this->typeValueList->setModelValue($this->model->contentId, $this->contentId);
+$this->typeValueList->setModelValue($this->model->text, $this->text);
 $id = parent::save();
 return $id;
 }

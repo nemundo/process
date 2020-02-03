@@ -26,6 +26,11 @@ public $contentId;
 */
 public $content;
 
+/**
+* @var \Nemundo\Model\Type\Text\LargeTextType
+*/
+public $text;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = TemplateFileModel::class;
@@ -59,6 +64,13 @@ $this->contentId->tableName = $this->parentFieldName . "_" . $this->externalTabl
 $this->contentId->aliasFieldName = $this->contentId->tableName ."_".$this->contentId->fieldName;
 $this->contentId->label = "Content";
 $this->addType($this->contentId);
+
+$this->text = new \Nemundo\Model\Type\Text\LargeTextType();
+$this->text->fieldName = "text";
+$this->text->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->text->aliasFieldName = $this->text->tableName . "_" . $this->text->fieldName;
+$this->text->label = "Text";
+$this->addType($this->text);
 
 }
 public function loadContent() {

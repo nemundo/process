@@ -14,7 +14,7 @@ class SourceDeleteSite extends AbstractDeleteIconSite
 {
 
     /**
-     * @var FileDeleteSite
+     * @var FileInactiveSite
      */
     public static $site;
 

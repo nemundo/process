@@ -15,7 +15,10 @@ use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\Com\Form\AddContentForm;
+use Nemundo\Process\Content\Com\Table\ContentLogTable;
 use Nemundo\Process\Content\Com\Table\SourceTable;
+use Nemundo\Process\Content\Parameter\ParentParameter;
+use Nemundo\Process\Template\Content\File\FileActiveContentType;
 use Nemundo\Process\Template\Content\File\FileUploadForm;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFilePaginationReader;
 use Nemundo\Process\Template\Parameter\FileParameter;
@@ -39,6 +42,8 @@ class FileSite extends AbstractSite
 
         new FileItemSite($this);
         new PdfExtractSite($this);
+        new FileDeleteSite($this);
+        new FileActiveSite($this);
     }
 
 
@@ -95,10 +100,16 @@ class FileSite extends AbstractSite
         $header->addText('Date/Time');
         $header->addText('User');
         $header->addText('Source');
+        $header->addEmpty();
 
         foreach ($fileReader->getData() as $fileRow) {
 
             $row = new BootstrapClickableTableRow($table);
+
+            if (!$fileRow->active) {
+                $row->strikeThrough = true;
+            }
+
             $row->addText($fileRow->file->getFilename());
             $row->addText($fileRow->file->getFileExtension());
             $row->addText($fileRow->file->getFileSize());
@@ -145,12 +156,37 @@ class FileSite extends AbstractSite
             $table->addLabelValue('Child Count', $fileType->getChildCount());
             $table->addLabelValue('Parent Count', $fileType->getParentCount());
 
-            $fileType->getView($layout->col2);
 
 
             $btn = new AdminSiteButton($layout->col2);
-            $btn->site= clone(PdfExtractSite::$site);
+            $btn->site = clone(PdfExtractSite::$site);
             $btn->site->addParameter(new FileParameter());
+
+            $btn = new AdminSiteButton($layout->col2);
+            $btn->site = clone(FileInactiveSite::$site);
+            $btn->site->addParameter(new FileParameter());
+            $btn->site->addParameter(new ParentParameter($fileType->getContentId()));
+
+            $btn = new AdminSiteButton($layout->col2);
+            $btn->site = clone(FileActiveSite::$site);
+            $btn->site->addParameter(new FileParameter());
+           // $btn->site->addParameter(new ParentParameter($fileType->getContentId()));
+
+
+
+            $btn = new AdminSiteButton($layout->col2);
+            $btn->site = clone(FileDeleteSite::$site);
+            $btn->site->addParameter(new FileParameter());
+
+
+            //$table = new ContentInfoTable($layout->col2);
+            //$table->c
+
+            $log = new ContentLogTable($layout->col2);
+            $log->contentType = $fileType;
+
+
+            $fileType->getView($layout->col2);
 
 
             $table = new SourceTable($layout->col2);

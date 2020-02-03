@@ -5,26 +5,27 @@ namespace Nemundo\Process\Template\Site;
 
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\Content\Parameter\ParentParameter;
+use Nemundo\Process\Template\Content\File\FileActiveContentType;
 use Nemundo\Process\Template\Content\File\FileContentType;
 use Nemundo\Process\Template\Content\File\FileInactiveContentType;
 use Nemundo\Process\Template\Parameter\FileParameter;
 use Nemundo\Web\Url\UrlReferer;
 
 
-class FileDeleteSite extends AbstractDeleteIconSite
+class FileActiveSite extends AbstractDeleteIconSite
 {
 
     /**
-     * @var FileDeleteSite
+     * @var FileActiveSite
      */
     public static $site;
 
     protected function loadSite()
     {
-        $this->title='Delete';
-        $this->url = 'delete-file';
+        $this->title='Restore File';
+        $this->url = 'restore-file';
         $this->menuActive = false;
-        FileDeleteSite::$site = $this;
+        FileActiveSite::$site = $this;
     }
 
 
@@ -33,8 +34,12 @@ class FileDeleteSite extends AbstractDeleteIconSite
 
         $fileId =  (new FileParameter())->getValue();
 
-        $status = new FileContentType($fileId);
-        $status->deleteType();
+        $fileContentType = new FileContentType($fileId);
+
+        $status = new FileActiveContentType();
+        $status->parentId =$fileContentType->getContentId();  // (new ParentParameter())->getValue();
+        $status->fileId =$fileId;
+        $status->saveType();
 
         (new UrlReferer())->redirect();
 

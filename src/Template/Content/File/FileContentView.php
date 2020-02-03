@@ -12,6 +12,7 @@ use Nemundo\Core\File\FileInformation;
 use Nemundo\Core\File\FileSize;
 use Nemundo\Core\Type\File\File;
 use Nemundo\Html\Block\Div;
+use Nemundo\Package\Bootstrap\FormElement\BootstrapLargeTextBox;
 use Nemundo\Package\Bootstrap\Image\BootstrapResponsiveImage;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileReader;
@@ -37,9 +38,15 @@ class FileContentView extends AbstractFileContentView
         $fileSize = new FileSize($fileRow->file->getFileSize());
 
         $table = new AdminLabelValueTable($this);
+
+        if (!$fileRow->active) {
+            $table->addLabelValue('Status','File is deleted');
+        }
+
         $table->addLabelValue('File Size', $fileRow->file->getFileSize());
         $table->addLabelValue('File Size',$fileSize->getText());
         $table->addLabelValue('Filename',$fileRow->file->getFullFilename());
+        $table->addLabelValue('Filename Extension',$fileRow->file->getFileExtension());
 
         // isImage
 
@@ -54,9 +61,14 @@ class FileContentView extends AbstractFileContentView
 
         }
 
-        //$fileRow->file->getFileExtension()
+
+        if ($fileInformation->isPdf()) {
+
+            $textBox = new BootstrapLargeTextBox($this);
+            $textBox->value=$fileRow->text;
 
 
+        }
 
         return parent::getContent();
 
