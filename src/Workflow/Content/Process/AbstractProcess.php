@@ -5,9 +5,11 @@ namespace Nemundo\Process\Workflow\Content\Process;
 
 
 use Nemundo\Core\Date\DateTimeDifference;
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Core\Type\DateTime\DateTime;
+use Nemundo\Db\DbConfig;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Model\Count\ModelDataCount;
@@ -134,11 +136,16 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         if ($this->number == null) {
 
+            //DbConfig::$sqlDebug=true;
+
             $count = new ModelDataCount();
             $count->model = $this->workflowModel;
+            $count->filter->andIsNotNull($count->model->number);
+
+            //(new Debug())->write($count->getCount());
 
             $lastNumber = null;
-            if ($count->getCount() == 0) {
+            if ($count->getCount() === 0) {
                 $lastNumber = $this->startNumber;
             } else {
 

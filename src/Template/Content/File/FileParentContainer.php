@@ -39,6 +39,7 @@ class FileParentContainer extends AbstractParentContainer
         $fileReader->model->content->loadUser();
 
         $treeModel  = new TreeModel();
+
         $join=new ModelJoin($fileReader);
         $join->externalModel=$treeModel;
         $join->externalType=$treeModel->childId;

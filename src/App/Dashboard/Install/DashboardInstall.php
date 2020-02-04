@@ -21,6 +21,7 @@ class DashboardInstall extends AbstractInstall
         $setup->addCollection(new DashboardCollection());
 
 
+        /*
 
         $reader = new RadioLivestreamReader();
         foreach ($reader->getData() as $livestreamRow) {
@@ -29,7 +30,7 @@ class DashboardInstall extends AbstractInstall
 
             $setup = new DashboardSetup();
             $setup->addDashboard($type);
-        }
+        }*/
 
 
 
