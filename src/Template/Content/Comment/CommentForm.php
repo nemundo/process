@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Nemundo\Process\Template\Form;
+namespace Nemundo\Process\Template\Content\Comment;
 
 
 use Nemundo\Package\Bootstrap\FormElement\BootstrapLargeTextBox;
 use Nemundo\Process\Content\Form\AbstractContentForm;
-use Nemundo\Process\Template\Item\CommentItem;
+
 use Nemundo\Process\Template\Status\CommentProcessStatus;
 
 class CommentForm extends AbstractContentForm
@@ -30,11 +30,10 @@ class CommentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        $builder = new CommentProcessStatus();  // new CommentItem();
-        //$builder->contentType = $this->contentType;
-        $builder->parentId = $this->parentId;
-        $builder->comment = $this->comment->getValue();
-        $builder->saveType();
+        $type = new CommentContentType();
+        $type->parentId = $this->parentId;
+        $type->comment = $this->comment->getValue();
+        $type->saveType();
 
     }
 

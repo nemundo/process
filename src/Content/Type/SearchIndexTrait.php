@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Content\Type;
 
 
+use Nemundo\Process\Search\Data\SearchContent\SearchContent;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexDelete;
 use Nemundo\Process\Search\Index\SearchIndexBuilder;
 
@@ -33,6 +34,21 @@ trait SearchIndexTrait
         }
 
         $this->searchIndex->addText($text);
+
+    }
+
+
+    protected function saveSearchContent($text='') {
+
+
+        $data=new SearchContent();
+        $data->updateOnDuplicate=true;
+        $data->contentId=$this->getContentId();
+        $data->title= $this->getSubject();
+        $data->text=$text;
+        $data->save();
+
+
 
     }
 

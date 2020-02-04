@@ -17,11 +17,6 @@ public $dataId;
 public $subject;
 
 /**
-* @var \Nemundo\Model\Type\Text\LargeTextType
-*/
-public $text;
-
-/**
 * @var \Nemundo\Model\Type\DateTime\DateTimeType
 */
 public $dateTime;
@@ -79,13 +74,6 @@ $this->subject->aliasFieldName = "process_content_subject";
 $this->subject->label = "Subject";
 $this->subject->allowNullValue = false;
 $this->subject->length = 255;
-
-$this->text = new \Nemundo\Model\Type\Text\LargeTextType($this);
-$this->text->tableName = "process_content";
-$this->text->fieldName = "text";
-$this->text->aliasFieldName = "process_content_text";
-$this->text->label = "Text";
-$this->text->allowNullValue = false;
 
 $this->dateTime = new \Nemundo\Model\Type\DateTime\DateTimeType($this);
 $this->dateTime->tableName = "process_content";

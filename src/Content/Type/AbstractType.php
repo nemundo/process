@@ -210,6 +210,18 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
+    public function getSubjectViewSite() {
+
+
+        $site = $this->getViewSite();
+        $site->title = $this->getSubject();
+
+        return $site;
+
+
+    }
+
+
     public function getViewSite()
     {
 
@@ -233,8 +245,7 @@ abstract class AbstractType extends AbstractBaseClass
         if ($this->viewSite !== null) {
             $site = clone($this->viewSite);
             $site->addParameter($parameter);
-            $site->title = $this->getSubject($this->dataId);
-
+            //$site->title = $this->getSubject($this->dataId);
         }
 
         return $site;

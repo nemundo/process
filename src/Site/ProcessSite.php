@@ -5,6 +5,7 @@ namespace Nemundo\Process\Site;
 
 
 use Nemundo\Process\App\Calendar\Site\CalendarSite;
+use Nemundo\Process\App\Dashboard\Site\DashboardSite;
 use Nemundo\Process\App\Document\Site\DocumentSite;
 use Nemundo\Process\App\Explorer\Site\ExplorerSite;
 use Nemundo\Process\App\Favorite\Site\FavoriteSite;
@@ -23,9 +24,6 @@ use Nemundo\Process\Search\Site\SearchSite;
 use Nemundo\Process\Search\Site\SearchWordSite;
 use Nemundo\Process\Template\Site\FileSite;
 use Nemundo\Process\Template\Site\ProcessTemplateSite;
-use Nemundo\Process\Workflow\Site\AssignmentSite;
-use Nemundo\Process\Workflow\Site\WorkflowInboxSite;
-use Nemundo\Process\Workflow\Site\WorkflowSite;
 use Nemundo\ToDo\Site\ToDoSite;
 use Nemundo\Web\Site\AbstractSite;
 
@@ -83,6 +81,8 @@ class ProcessSite extends AbstractSite
 
         new \Nemundo\Process\App\Assignment\Site\AssignmentSite($this);
         new NotificationSite($this);
+
+        new DashboardSite($this);
 
     }
 

@@ -27,11 +27,6 @@ public $dataId;
 public $subject;
 
 /**
-* @var string
-*/
-public $text;
-
-/**
 * @var \Nemundo\Core\Type\DateTime\DateTime
 */
 public $dateTime;
@@ -62,7 +57,6 @@ $this->row = $row;
 $this->id = $this->getModelValue($model->id);
 $this->dataId = $this->getModelValue($model->dataId);
 $this->subject = $this->getModelValue($model->subject);
-$this->text = $this->getModelValue($model->text);
 $this->dateTime = new \Nemundo\Core\Type\DateTime\DateTime($this->getModelValue($model->dateTime));
 $this->userId = $this->getModelValue($model->userId);
 if ($model->user !== null) {

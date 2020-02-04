@@ -14,8 +14,6 @@ $this->model = new WordContentTypeModel();
 * @return WordContentTypeRow[]
 */
 public function getData() {
-$this->addFieldByModel($this->model);
-$this->checkExternal($this->model);
 $list = [];
 foreach (parent::getData() as $dataRow) {
 $row = $this->getModelRow($dataRow);
@@ -27,8 +25,6 @@ return $list;
 * @return WordContentTypeRow
 */
 public function getRow() {
-$this->addFieldByModel($this->model);
-$this->checkExternal($this->model);
 $dataRow = parent::getRow();
 $row = $this->getModelRow($dataRow);
 return $row;

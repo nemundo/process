@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Nemundo\Process\Template\View;
+namespace Nemundo\Process\Template\Content\Comment;
 
 
 use Nemundo\Core\Debug\Debug;

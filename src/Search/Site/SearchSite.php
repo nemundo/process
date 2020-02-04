@@ -17,6 +17,7 @@ use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Listing\BootstrapHyperlinkList;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
+use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Search\Com\ContentSearchForm;
@@ -78,7 +79,7 @@ class SearchSite extends AbstractSite
                 $searchIndexReader->filter->andEqual($searchIndexReader->model->content->contentTypeId, $contentTypeParameter->getValue());
             }
 
-            $searchIndexReader->paginationLimit = 50;
+            $searchIndexReader->paginationLimit =ProcessConfig::PAGINATION_LIMIT;
 
 
             // Search Filter
@@ -107,6 +108,10 @@ class SearchSite extends AbstractSite
 
             $header = new TableHeader($table);
 
+            /*$th = new Th($header);
+            $th->content[LanguageCode::EN] = 'Source';
+            $th->content[LanguageCode::DE] = 'Quelle';*/
+
             $th = new Th($header);
             $th->content[LanguageCode::EN] = 'Subject';
             $th->content[LanguageCode::DE] = 'Betreff';
@@ -120,6 +125,15 @@ class SearchSite extends AbstractSite
                 $row = new BootstrapClickableTableRow($table);
 
                 $contentType = $indexRow->content->getContentType();
+
+                if ($contentType->hasParent()) {
+                    $parentContentType = $contentType->getParentContentType();
+                    $row->addText($parentContentType->getSubject());
+                } else {
+                    $row->addEmpty();
+                }
+
+
                 $row->addText($bold->getBoldText($contentType->getSubject()));
                 $row->addText($indexRow->content->contentType->contentType);
 

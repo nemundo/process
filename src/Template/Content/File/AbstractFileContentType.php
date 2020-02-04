@@ -36,6 +36,7 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $this->formClass = FileContentForm::class;
         $this->viewClass = FileContentView::class;
         $this->viewSite = FileItemSite::$site;
+        $this->listClass=FileContentList::class;
         $this->parameterClass = FileParameter::class;
         parent::__construct($dataId);
     }

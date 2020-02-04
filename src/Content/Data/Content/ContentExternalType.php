@@ -17,11 +17,6 @@ public $dataId;
 public $subject;
 
 /**
-* @var \Nemundo\Model\Type\Text\LargeTextType
-*/
-public $text;
-
-/**
 * @var \Nemundo\Model\Type\DateTime\DateTimeType
 */
 public $dateTime;
@@ -71,13 +66,6 @@ $this->subject->tableName = $this->parentFieldName . "_" . $this->externalTableN
 $this->subject->aliasFieldName = $this->subject->tableName . "_" . $this->subject->fieldName;
 $this->subject->label = "Subject";
 $this->addType($this->subject);
-
-$this->text = new \Nemundo\Model\Type\Text\LargeTextType();
-$this->text->fieldName = "text";
-$this->text->tableName = $this->parentFieldName . "_" . $this->externalTableName;
-$this->text->aliasFieldName = $this->text->tableName . "_" . $this->text->fieldName;
-$this->text->label = "Text";
-$this->addType($this->text);
 
 $this->dateTime = new \Nemundo\Model\Type\DateTime\DateTimeType();
 $this->dateTime->fieldName = "date_time";

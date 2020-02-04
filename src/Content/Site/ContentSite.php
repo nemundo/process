@@ -21,6 +21,7 @@ use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
+use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Process\Content\Com\ListBox\ContentTypeListBox;
 use Nemundo\Process\Content\Data\Content\ContentCount;
 use Nemundo\Process\Content\Data\Content\ContentModel;
@@ -146,8 +147,7 @@ class ContentSite extends AbstractSite
         $contentReader->model->loadUser();
         $contentReader->filter = $filter;
         $contentReader->addOrder($contentReader->model->id, SortOrder::DESCENDING);
-        $contentReader->paginationLimit = 50;
-
+        $contentReader->paginationLimit =ProcessConfig::PAGINATION_LIMIT;
 
         $table = new AdminClickableTable($page);
 
@@ -165,11 +165,7 @@ class ContentSite extends AbstractSite
 
         foreach ($contentReader->getData() as $contentRow) {
 
-            //if (class_exists($contentRow->contentType->phpClass)) {
-
-
-                $contentType = $contentRow->getContentType();  // contentType->getContentType($contentRow->id);
-
+                $contentType = $contentRow->getContentType();
 
                 $row = new BootstrapClickableTableRow($table);
                 $row->addText($contentRow->id);
@@ -188,10 +184,6 @@ class ContentSite extends AbstractSite
                 $site = clone(ContentItemSite::$site);
                 $site->addParameter(new ContentParameter($contentRow->id));
                 $row->addClickableSite($site);
-
-            /*} else {
-                (new LogMessage())->writeError('class does not exsits.Class:' . $contentRow->contentType->phpClass);
-            }*/
 
         }
 

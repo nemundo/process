@@ -5,7 +5,6 @@ namespace Nemundo\Process\Workflow\Content\Process;
 
 
 use Nemundo\Core\Date\DateTimeDifference;
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Core\Type\DateTime\DateTime;
@@ -133,19 +132,14 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     protected function getNumber()
     {
 
-        //exit;
-
         if ($this->number == null) {
-
 
             $count = new ModelDataCount();
             $count->model = $this->workflowModel;
 
-            //(new Debug())->write($count->getCount());
-
             $lastNumber = null;
-            if ($count->getCount() == 1) {
-                $lastNumber = $this->startNumber;  // - 1;
+            if ($count->getCount() == 0) {
+                $lastNumber = $this->startNumber;
             } else {
 
                 $value = new ModelDataValue();
@@ -154,12 +148,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
                 $lastNumber = $value->getMaxValue();
 
-                //(new Debug())->write($this->number);
-
-                //if ($this->number == '') {
-                /*if ($this->number == '0') {
-                    $this->number = $this->startNumber - 1;
-                }*/
             }
 
             $this->number = $lastNumber + 1;
@@ -492,13 +480,14 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $day = $difference->getDifferenceInDay();
 
         return $day;
-        
+
     }
 
 
-    public function getLeaptimeText() {
+    public function getLeaptimeText()
+    {
 
-        $text = $this->getLeaptime().' Tage';
+        $text = $this->getLeaptime() . ' Tage';
         return $text;
 
 

@@ -8,6 +8,7 @@ use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\App\Assignment\Content\Message\MessageAssignmentContentType;
 use Nemundo\Process\App\Assignment\Install\AssignmentInstall;
 use Nemundo\Process\App\Calendar\Data\CalendarCollection;
+use Nemundo\Process\App\Dashboard\Install\DashboardInstall;
 use Nemundo\Process\App\Document\Data\DocumentCollection;
 use Nemundo\Process\App\Favorite\Install\FavoriteInstall;
 use Nemundo\Process\App\Inbox\Install\InboxInstall;
@@ -26,6 +27,7 @@ use Nemundo\Process\Content\Install\ContentInstall;
 use Nemundo\Process\Content\Script\ContentUpdateScript;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Geo\Data\GeoCollection;
+use Nemundo\Process\Geo\Install\GeoInstall;
 use Nemundo\Process\Group\Data\GroupCollection;
 use Nemundo\Process\Group\Install\GroupInstall;
 use Nemundo\Process\Group\Setup\GroupSetup;
@@ -64,7 +66,8 @@ class ProcessInstall extends AbstractInstall
         (new AssignmentInstall())->install();
         (new NotificationInstall())->install();
         (new MessageInstall())->install();
-
+        (new DashboardInstall())->install();
+        (new GeoInstall())->install();
 
         $setup=new ContentTypeSetup();
         $setup->addContentType(new WebLogContentType());
