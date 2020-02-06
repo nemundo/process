@@ -1,15 +1,13 @@
 <?php
 
 
-namespace Nemundo\Process\Template\Form;
+namespace Nemundo\Process\Template\Status\Cancel;
 
 
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapLargeTextBox;
-use Nemundo\Process\Template\Item\CancelContentItem;
-use Nemundo\Process\Template\Status\CancelStatus;
 use Nemundo\Process\Workflow\Content\Form\AbstractStatusForm;
-use Nemundo\Process\Template\Item\CommentItem;
+
 
 class CancelStatusForm extends AbstractStatusForm
 {

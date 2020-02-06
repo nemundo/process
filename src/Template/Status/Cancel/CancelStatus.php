@@ -1,14 +1,13 @@
 <?php
 
 
-namespace Nemundo\Process\Template\Status;
+namespace Nemundo\Process\Template\Status\Cancel;
 
 
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Process\Template\Content\LargeText\LargeTextContentView;
 use Nemundo\Process\Template\Data\LargeText\LargeText;
-use Nemundo\Process\Template\Form\CancelStatusForm;
-use Nemundo\Process\Template\View\CommentView;
+
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
 class CancelStatus extends AbstractProcessStatus  // CommentProcessStatus
