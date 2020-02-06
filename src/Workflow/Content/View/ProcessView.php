@@ -38,7 +38,14 @@ class ProcessView extends AbstractProcessView
 
             $workflowStatus->parentId = $this->dataId;
 
-            $formStatus = (new StatusParameter())->getStatus();
+            $statusParameter=new StatusParameter();
+            //$statusParameter->addAllowedContentTypeCollection()
+
+            foreach ($workflowStatus->getMenuList() as $contentType) {
+                $statusParameter->addAllowedContentType($contentType);
+            }
+
+            $formStatus = $statusParameter->getStatus();
 
             if ($formStatus !== null) {
                 $formStatus->parentId = $this->contentType->getContentId();

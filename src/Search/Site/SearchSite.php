@@ -5,7 +5,6 @@ namespace Nemundo\Process\Search\Site;
 
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
-use Nemundo\App\Search\Parameter\SearchQueryParameter;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Text\TextBold;
@@ -24,6 +23,7 @@ use Nemundo\Process\Search\Com\ContentSearchForm;
 use Nemundo\Process\Search\Content\Log\SearchLogContentType;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexCount;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexPaginationReader;
+use Nemundo\Process\Search\Parameter\SearchQueryParameter;
 use Nemundo\Process\Search\Site\Json\SearchContentTypeJsonSite;
 use Nemundo\Process\Search\Site\Json\SearchJsonSite;
 use Nemundo\Web\Site\AbstractSite;
