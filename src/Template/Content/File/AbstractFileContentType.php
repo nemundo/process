@@ -5,8 +5,9 @@ namespace Nemundo\Process\Template\Content\File;
 
 
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
-use Nemundo\Core\File\UniqueFilename;
 use Nemundo\Core\Http\Request\File\FileRequest;
+use Nemundo\Dev\Deployment\DeploymentConfig;
+use Nemundo\Dev\Deployment\StagingEnvironment;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFile;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileDelete;
@@ -14,7 +15,6 @@ use Nemundo\Process\Template\Data\TemplateFile\TemplateFileReader;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileUpdate;
 use Nemundo\Process\Template\Parameter\FileParameter;
 use Nemundo\Process\Template\Site\FileItemSite;
-use Nemundo\Project\Path\TmpPath;
 
 
 abstract class AbstractFileContentType extends AbstractTreeContentType
@@ -36,7 +36,7 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $this->formClass = FileContentForm::class;
         $this->viewClass = FileContentView::class;
         $this->viewSite = FileItemSite::$site;
-        $this->listClass=FileContentList::class;
+        $this->listClass = FileContentList::class;
         $this->parameterClass = FileParameter::class;
         parent::__construct($dataId);
     }
@@ -70,31 +70,25 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         // text file
         // office document
 
-        if ($fileRow->file->getFileExtension() == 'pdf') {
+        if (DeploymentConfig::$stagingEnviroment !== StagingEnvironment::DEVELOPMENT) {
 
-            $filenameInput = $fileRow->file->getFullFilename();
-            $filenameOutput = (new TmpPath())
-                ->addPath((new UniqueFilename())->getUniqueFilename('txt'))
-                ->getFilename();
+            if ($fileRow->file->getFileExtension() == 'pdf') {
 
-            //(new Debug())->write($fileRow->file->getFullFilename());
+                $filenameInput = $fileRow->file->getFullFilename();
+                $command = "pdftotext $filenameInput -";
+                $output = shell_exec($command);
 
-            //$command = "pdftotext $filenameInput $filenameOutput";
-            $command = "pdftotext $filenameInput -";
+                if ($output !== null) {
+                    $update = new TemplateFileUpdate();
+                    $update->text = $output;
+                    $update->updateById($this->dataId);
+                }
 
-            //(new Debug())->write($command);
 
-            $output = shell_exec($command);
-
-            if ($output !== null) {
-                $update = new TemplateFileUpdate();
-                $update->text = $output;
-                $update->updateById($this->dataId);
             }
 
-            //(new Debug())->write($output);
 
-            //$reader = new TextFileReader();
+            // Office Doc
 
 
         }
