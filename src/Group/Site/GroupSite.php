@@ -12,11 +12,16 @@ use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
+use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
+use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
+use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Process\Group\Com\Form\GroupUserForm;
 use Nemundo\Process\Group\Com\ListBox\GroupTypeListBox;
+use Nemundo\Process\Group\Data\Group\GroupCount;
+use Nemundo\Process\Group\Data\Group\GroupPaginationReader;
 use Nemundo\Process\Group\Data\Group\GroupReader;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
 use Nemundo\Process\Group\Parameter\GroupParameter;
@@ -53,17 +58,6 @@ class GroupSite extends AbstractSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
-        /*
-        $table=new AdminTable($page);
-
-        $reader = new GroupReader();
-        $reader->model->loadGroupType();
-        foreach ($reader->getData() as $groupRow) {
-            $row=new TableRow($table);
-            $row->addText($groupRow->group);
-            $row->addText($groupRow->groupType->contentType);
-        }*/
-
 
         $layout = new BootstrapTwoColumnLayout($page);
 
@@ -77,7 +71,24 @@ class GroupSite extends AbstractSite
         $groupType->submitOnChange = true;
 
 
-        // group type (distinct)
+
+
+        $groupReader = new GroupPaginationReader();
+        $groupReader->model->loadGroupType();
+        $groupReader->paginationLimit=ProcessConfig::PAGINATION_LIMIT;
+
+        if ($groupType->hasValue()) {
+            $groupReader->filter->andEqual($groupReader->model->groupTypeId, $groupType->getValue());
+        }
+
+        $groupReader->addOrder($groupReader->model->group);
+
+
+        $groupCount = new GroupCount();
+        $groupCount->filter = $groupReader->filter;
+
+        $p=new Paragraph($layout->col1);
+        $p->content=$groupCount->getCount().' Group found';
 
 
         $table = new AdminClickableTable($layout->col1);
@@ -87,15 +98,6 @@ class GroupSite extends AbstractSite
         $header->addText('Group');
         $header->addText('Group Type');
 
-        $groupReader = new GroupReader();
-        $groupReader->model->loadGroupType();
-
-        if ($groupType->hasValue()) {
-            $groupReader->filter->andEqual($groupReader->model->groupTypeId, $groupType->getValue());
-        }
-
-
-        $groupReader->addOrder($groupReader->model->group);
         foreach ($groupReader->getData() as $groupRow) {
             $row = new BootstrapClickableTableRow($table);
             $row->addText($groupRow->id);
@@ -108,6 +110,10 @@ class GroupSite extends AbstractSite
             $row->addClickableSite($site);
 
         }
+
+        $pagination=new BootstrapPagination($layout->col1);
+        $pagination->paginationReader=$groupReader;
+
 
 
         $groupParameter = new GroupParameter();

@@ -16,6 +16,11 @@ public $groupTypeId;
 */
 public $groupType;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $setupStatus;
+
 protected function loadModel() {
 $this->tableName = "group_group_type";
 $this->aliasTableName = "group_group_type";
@@ -40,6 +45,13 @@ $this->groupTypeId->fieldName = "group_type";
 $this->groupTypeId->aliasFieldName = "group_group_type_group_type";
 $this->groupTypeId->label = "Group Type";
 $this->groupTypeId->allowNullValue = false;
+
+$this->setupStatus = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->setupStatus->tableName = "group_group_type";
+$this->setupStatus->fieldName = "setup_status";
+$this->setupStatus->aliasFieldName = "group_group_type_setup_status";
+$this->setupStatus->label = "Setup Status";
+$this->setupStatus->allowNullValue = false;
 
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "group_type";

@@ -22,7 +22,7 @@ class GroupTypeListBox extends BootstrapListBox
 
         $reader = new GroupTypeReader();
         $reader->model->loadGroupType();
-        $reader->addOrder($reader->model->groupType);
+        $reader->addOrder($reader->model->groupType->contentType);
         foreach ($reader->getData() as $groupTypeRow) {
             $this->addItem($groupTypeRow->groupTypeId, $groupTypeRow->groupType->contentType);
         }

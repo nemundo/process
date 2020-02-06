@@ -16,6 +16,11 @@ public $groupTypeId;
 */
 public $groupType;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $setupStatus;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = GroupTypeModel::class;
@@ -34,6 +39,13 @@ $this->groupTypeId->tableName = $this->parentFieldName . "_" . $this->externalTa
 $this->groupTypeId->aliasFieldName = $this->groupTypeId->tableName ."_".$this->groupTypeId->fieldName;
 $this->groupTypeId->label = "Group Type";
 $this->addType($this->groupTypeId);
+
+$this->setupStatus = new \Nemundo\Model\Type\Number\YesNoType();
+$this->setupStatus->fieldName = "setup_status";
+$this->setupStatus->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->setupStatus->aliasFieldName = $this->setupStatus->tableName . "_" . $this->setupStatus->fieldName;
+$this->setupStatus->label = "Setup Status";
+$this->addType($this->setupStatus);
 
 }
 public function loadGroupType() {

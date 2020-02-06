@@ -95,6 +95,8 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     }
 
 
+
+    /*
     public function saveType()
     {
 
@@ -115,10 +117,10 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
 
         parent::saveType();
 
-    }
+    }*/
 
 
-    final protected function onSearchIndex()
+     protected function onSearchIndex()
     {
 
         if ($this->searchable) {
@@ -171,7 +173,7 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     }
 
 
-    final public function getSubject()
+    public function getSubject()
     {
 
         return $this->getGroupDataRow()->group;
@@ -184,7 +186,7 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
 
         $data = new GroupUser();
         $data->ignoreIfExists = true;
-        $data->groupId = $this->dataId;
+        $data->groupId =$this->groupId;  // $this->dataId;
         $data->userId = $userId;
         $data->save();
 

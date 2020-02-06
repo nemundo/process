@@ -12,12 +12,18 @@ public $model;
 */
 public $groupTypeId;
 
+/**
+* @var bool
+*/
+public $setupStatus;
+
 public function __construct() {
 parent::__construct();
 $this->model = new GroupTypeModel();
 }
 public function update() {
 $this->typeValueList->setModelValue($this->model->groupTypeId, $this->groupTypeId);
+$this->typeValueList->setModelValue($this->model->setupStatus, $this->setupStatus);
 parent::update();
 }
 }
