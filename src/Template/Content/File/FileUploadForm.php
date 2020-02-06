@@ -34,17 +34,9 @@ class FileUploadForm extends BootstrapForm
 
         foreach ($this->file->getMultiFileRequest() as $fileRequest) {
 
-            /*$data = new TemplateFile();
-            $data->active = true;
-            $data->file->fromFileRequest($fileRequest);
-            $dataId = $data->save();*/
-
             $type = new FileContentType();
             $type->fileRequest= $fileRequest;
             $type->saveType();
-            //$type->parentId = $this->parentId;
-            //$type->createMode=true;
-            //$type->saveType();
 
         }
 

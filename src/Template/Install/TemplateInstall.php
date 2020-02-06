@@ -17,6 +17,7 @@ use Nemundo\Process\Template\Content\Event\EventContentType;
 use Nemundo\Process\Template\Content\File\FileActiveContentType;
 use Nemundo\Process\Template\Content\File\FileContentType;
 use Nemundo\Process\Template\Content\File\FileInactiveContentType;
+use Nemundo\Process\Template\Content\Image\ImageContentType;
 use Nemundo\Process\Template\Content\Item\ActiveItemContentType;
 use Nemundo\Process\Template\Content\Item\CreateItemContentType;
 use Nemundo\Process\Template\Content\Item\EditItemContentType;
@@ -54,6 +55,7 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new VideoContentType());
         $setup->addContentType(new AudioContentType());
         $setup->addContentType(new YouTubeContentType());
+        $setup->addContentType(new ImageContentType());
 
 
 
@@ -72,12 +74,6 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new EditItemContentType());
         $setup->addContentType(new InactiveItemContentType());
 
-        $setup = new WikiSetup();
-        $setup->addContentType(new LargeTextContentType());
-        $setup->addContentType(new EventContentType());
-        $setup->addContentType(new TextContentType());
-        $setup->addContentType(new FileContentType());
-        $setup->addContentType(new YouTubeContentType());
 
         //$setup = new CalendarSourceSetup();
         //$setup->addSourceContentType(new WikiPageContentType());

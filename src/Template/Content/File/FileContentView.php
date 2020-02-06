@@ -5,26 +5,15 @@ namespace Nemundo\Process\Template\Content\File;
 
 
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
-use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Core\File\FileInformation;
-
 use Nemundo\Core\File\FileSize;
-use Nemundo\Core\Type\File\File;
-use Nemundo\Html\Block\Div;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapLargeTextBox;
 use Nemundo\Package\Bootstrap\Image\BootstrapResponsiveImage;
-use Nemundo\Process\Content\View\AbstractContentView;
-use Nemundo\Process\Template\Data\TemplateFile\TemplateFileReader;
 
 
 class FileContentView extends AbstractFileContentView
 {
-
-    /**
-     * @var FileContentType
-     */
-    //public $contentType;
 
     public function getContent()
     {
@@ -40,13 +29,13 @@ class FileContentView extends AbstractFileContentView
         $table = new AdminLabelValueTable($this);
 
         if (!$fileRow->active) {
-            $table->addLabelValue('Status','File is deleted');
+            $table->addLabelValue('Status', 'File is deleted');
         }
 
         $table->addLabelValue('File Size', $fileRow->file->getFileSize());
-        $table->addLabelValue('File Size',$fileSize->getText());
-        $table->addLabelValue('Filename',$fileRow->file->getFullFilename());
-        $table->addLabelValue('Filename Extension',$fileRow->file->getFileExtension());
+        $table->addLabelValue('File Size', $fileSize->getText());
+        $table->addLabelValue('Filename', $fileRow->file->getFullFilename());
+        $table->addLabelValue('Filename Extension', $fileRow->file->getFileExtension());
 
         // isImage
 
@@ -56,7 +45,7 @@ class FileContentView extends AbstractFileContentView
         if ($fileInformation->isImage()) {
 
             $img = new BootstrapResponsiveImage($this);
-            $img->src=$fileRow->file->getUrl();
+            $img->src = $fileRow->file->getUrl();
             $img->width = 1200;
 
         }
@@ -65,7 +54,7 @@ class FileContentView extends AbstractFileContentView
         if ($fileInformation->isPdf()) {
 
             $textBox = new BootstrapLargeTextBox($this);
-            $textBox->value=$fileRow->text;
+            $textBox->value = $fileRow->text;
 
 
         }

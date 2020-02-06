@@ -5,7 +5,7 @@ namespace Nemundo\Process\App\Assignment\Install;
 
 
 use Nemundo\Model\Setup\ModelCollectionSetup;
-use Nemundo\Process\App\Assignment\Content\Group\AssignmentContentType;
+use Nemundo\Process\App\Assignment\Content\Assignment\AssignmentContentType;
 use Nemundo\Process\App\Assignment\Content\Message\MessageAssignmentContentType;
 use Nemundo\Process\App\Assignment\Content\Message\MessageAssignmentProcessStatus;
 use Nemundo\Process\App\Assignment\Content\ReAssignment\ReAssignmentContentType;

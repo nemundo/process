@@ -49,11 +49,9 @@ class SearchItemSite extends AbstractSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
-
-        //$dataIdParameter= new DataParameter();
-        //$contentType=$dataIdParameter->getContentType();
-
-        $contentType=(new ContentParameter())->getContentType();
+        $contentParameter=new ContentParameter();
+        $contentParameter->contentTypeCheck=false;
+        $contentType=$contentParameter->getContentType();
 
 
         if ($contentType->hasView()) {
@@ -70,8 +68,6 @@ class SearchItemSite extends AbstractSite
 
         $table->addLabelValue('Subject', $contentType->getSubject());
         //$table->addLabelSite('View', $contentType->getViewSite());
-
-
 
 
         $page->render();

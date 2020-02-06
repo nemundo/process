@@ -36,7 +36,7 @@ abstract class AbstractAssignmentContentType extends AbstractTreeContentType  //
     {
 
         $this->typeLabel = 'Group Assignment';
-        $this->deadline = new Date();
+        $this->deadline = (new Date())->setNow();
 
         parent::__construct($dataId);
     }

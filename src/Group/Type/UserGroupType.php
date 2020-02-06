@@ -8,6 +8,9 @@ use Nemundo\User\Data\User\UserReader;
 
 class UserGroupType extends AbstractGroupContentType
 {
+
+    public $groupId;
+
     protected function loadContentType()
     {
 
@@ -20,7 +23,7 @@ class UserGroupType extends AbstractGroupContentType
     protected function getGroupLabel()
     {
 
-        $userRow = (new UserReader())->getRowById($this->dataId);
+        $userRow = (new UserReader())->getRowById($this->groupId);
         return $userRow->displayName;
 
     }

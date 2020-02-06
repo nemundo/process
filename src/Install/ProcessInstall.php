@@ -9,6 +9,7 @@ use Nemundo\Process\App\Assignment\Content\Message\MessageAssignmentContentType;
 use Nemundo\Process\App\Assignment\Install\AssignmentInstall;
 use Nemundo\Process\App\Calendar\Data\CalendarCollection;
 use Nemundo\Process\App\Dashboard\Install\DashboardInstall;
+use Nemundo\Process\App\Dashboard\Setup\DashboardSetup;
 use Nemundo\Process\App\Document\Data\DocumentCollection;
 use Nemundo\Process\App\Favorite\Install\FavoriteInstall;
 use Nemundo\Process\App\Inbox\Install\InboxInstall;
@@ -19,8 +20,8 @@ use Nemundo\Process\App\Notification\Install\NotificationInstall;
 use Nemundo\Process\App\Plz\Content\PlzContentType;
 use Nemundo\Process\App\Plz\Data\PlzCollection;
 use Nemundo\Process\App\Survey\Content\Type\ErfassungContentType;
-use Nemundo\Process\App\Survey\Content\Type\SurveyContentType;
 use Nemundo\Process\App\Survey\Data\SurveyCollection;
+use Nemundo\Process\App\Survey\Install\SurveyInstall;
 use Nemundo\Process\App\WebLog\Content\WebLogContentType;
 use Nemundo\Process\App\Wiki\Install\WikiInstall;
 use Nemundo\Process\Content\Install\ContentInstall;
@@ -41,6 +42,7 @@ use Nemundo\Process\Search\Data\SearchCollection;
 use Nemundo\Process\Search\Install\SearchInstall;
 use Nemundo\Process\Template\Install\TemplateInstall;
 use Nemundo\Process\Template\Status\SubjectChange\SubjectChangeProcessStatus;
+use Nemundo\Process\Widget\UniqueId\UniqueIdContentType;
 use Nemundo\Process\Workflow\Install\WorkflowInstall;
 use Nemundo\Project\Install\AbstractInstall;
 use Nemundo\User\Data\User\UserReader;
@@ -54,7 +56,7 @@ class ProcessInstall extends AbstractInstall
 
         (new ContentInstall())->install();
         (new SearchInstall())->install();
-        (new WorkflowInstall())->install();
+        //(new WorkflowInstall())->install();
 
         $setup = new ModelCollectionSetup();
         $setup->addCollection(new DocumentCollection());
@@ -68,6 +70,7 @@ class ProcessInstall extends AbstractInstall
         (new MessageInstall())->install();
         (new DashboardInstall())->install();
         (new GeoInstall())->install();
+        (new SurveyInstall())->install();
 
         $setup=new ContentTypeSetup();
         $setup->addContentType(new WebLogContentType());
@@ -90,6 +93,9 @@ class ProcessInstall extends AbstractInstall
         //$setup->addScript(new ProcessReInstallScript());
 
 
+
+        $setup=new DashboardSetup();
+        $setup->addDashboard(new UniqueIdContentType());
 
 
     }

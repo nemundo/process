@@ -4,12 +4,13 @@ namespace Nemundo\Process\Search\Com;
 
 
 use Nemundo\Admin\Com\Button\AdminSearchButton;
-use Nemundo\App\Search\Parameter\SearchQueryParameter;
+
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Html\Character\HtmlCharacter;
 use Nemundo\Package\Bootstrap\Autocomplete\BootstrapAutocompleteMultipleValueTextBox;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
+use Nemundo\Process\Search\Parameter\SearchQueryParameter;
 use Nemundo\Process\Search\Site\Json\SearchJsonSite;
 
 

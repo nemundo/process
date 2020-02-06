@@ -32,7 +32,7 @@ class ContentLogTable extends AbstractHtmlContainer
 
         $header->addText('History');
         $header->addText('Ersteller');
-        $header->addText('Data Id');
+        //$header->addText('Data Id');
 
         foreach ($this->contentType->getChild() as $contentRow) {
 
@@ -43,7 +43,7 @@ class ContentLogTable extends AbstractHtmlContainer
             $row->addText($status->getSubject());
             $row->addText($contentRow->user->displayName . ' ' . $contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
 
-            $row->addText($contentRow->dataId);
+            //$row->addText($contentRow->dataId);
 
             $row->addClickableSite($status->getViewSite());
 

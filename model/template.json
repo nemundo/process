@@ -253,6 +253,38 @@
         },
         {
             "template": "default",
+            "model_id": "84111b71-ccfc-4e50-b830-e04e9bdf58e6",
+            "label": "Template Image",
+            "class_name": "TemplateImage",
+            "table_name": "template_template_image",
+            "namespace": "Nemundo\\Process\\Template\\Data\\TemplateImage",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "image",
+                    "label": "Image",
+                    "field_name": "image",
+                    "variable_name": "image",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "format": [
+                        {
+                            "format_type": "auto_size",
+                            "size": "400"
+                        },
+                        {
+                            "format_type": "auto_size",
+                            "size": "1200"
+                        }
+                    ]
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "ed8adf06-bcee-420f-84eb-45944ee6192f",
             "label": "Template Text",
             "class_name": "TemplateText",

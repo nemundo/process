@@ -39,7 +39,7 @@ class ContentItemSite extends AbstractSite
 
     protected function loadSite()
     {
-        //$this->title = 'Content';
+
         $this->url = 'content-item';
         $this->menuActive = false;
         ContentItemSite::$site = $this;
@@ -57,9 +57,7 @@ class ContentItemSite extends AbstractSite
         $nav = new AdminNavigation($page);
         $nav->site=ContentSite::$site;
 
-
-
-        $contentType = (new ContentParameter())->getContentType();
+        $contentType = (new ContentParameter())->getContentType(false);
 
         $title = new AdminTitle($page);
         $title->content = $contentType->getSubject();

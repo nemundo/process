@@ -12,7 +12,7 @@
             "table_name": "survey_survey",
             "namespace": "Nemundo\\Process\\App\\Survey\\Data\\Survey",
             "row_class_name": "",
-            "primary_index": "text_id",
+            "primary_index": "auto_increment",
             "is_deleted": false,
             "type": [
                 {
@@ -21,7 +21,7 @@
                     "field_name": "name",
                     "variable_name": "name",
                     "allow_null": false,
-                    "is_deleted": false,
+                    "is_deleted": true,
                     "length": "255"
                 },
                 {
@@ -30,7 +30,7 @@
                     "field_name": "vorname",
                     "variable_name": "vorname",
                     "allow_null": false,
-                    "is_deleted": false,
+                    "is_deleted": true,
                     "length": "255"
                 },
                 {
@@ -39,10 +39,67 @@
                     "field_name": "beschreibung",
                     "variable_name": "beschreibung",
                     "allow_null": false,
+                    "is_deleted": true
+                },
+                {
+                    "type": "text",
+                    "label": "Survey",
+                    "field_name": "survey",
+                    "variable_name": "survey",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "large_text",
+                    "label": "Question",
+                    "field_name": "question",
+                    "variable_name": "question",
+                    "allow_null": false,
                     "is_deleted": false
                 }
             ],
             "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "df0167ac-97e3-4d1b-ade6-739ad15127d5",
+            "label": "Survey Answer",
+            "class_name": "SurveyAnswer",
+            "table_name": "survey_survey_answer",
+            "namespace": "Nemundo\\Process\\App\\Survey\\Data\\SurveyAnswer",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Survey",
+                    "field_name": "survey",
+                    "variable_name": "survey",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "72012fa7-4257-46fd-9cb4-8a63baf17fa4"
+                },
+                {
+                    "type": "text",
+                    "label": "Answer",
+                    "field_name": "answer",
+                    "variable_name": "answer",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "survey",
+                    "index_type": "index",
+                    "field_name": [
+                        "survey"
+                    ]
+                }
+            ]
         },
         {
             "template": "default",
@@ -53,7 +110,7 @@
             "namespace": "Nemundo\\Process\\App\\Survey\\Data\\SurveyOption",
             "row_class_name": "",
             "primary_index": "auto_increment",
-            "is_deleted": false,
+            "is_deleted": true,
             "type": [
                 {
                     "type": "external",

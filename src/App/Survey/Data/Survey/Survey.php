@@ -9,33 +9,20 @@ protected $model;
 /**
 * @var string
 */
-public $id;
+public $survey;
 
 /**
 * @var string
 */
-public $name;
-
-/**
-* @var string
-*/
-public $vorname;
-
-/**
-* @var string
-*/
-public $beschreibung;
+public $question;
 
 public function __construct() {
 parent::__construct();
 $this->model = new SurveyModel();
 }
 public function save() {
-$id = $this->id;
-$this->typeValueList->setModelValue($this->model->id, $id);
-$this->typeValueList->setModelValue($this->model->name, $this->name);
-$this->typeValueList->setModelValue($this->model->vorname, $this->vorname);
-$this->typeValueList->setModelValue($this->model->beschreibung, $this->beschreibung);
+$this->typeValueList->setModelValue($this->model->survey, $this->survey);
+$this->typeValueList->setModelValue($this->model->question, $this->question);
 $id = parent::save();
 return $id;
 }

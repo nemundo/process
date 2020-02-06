@@ -5,6 +5,7 @@ namespace Nemundo\Process\App\Wiki\Site;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\FontAwesome\Site\AbstractEditIconSite;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
+use Nemundo\Process\App\Wiki\Type\WikiContentTypeCollection;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\DataParameter;
@@ -33,14 +34,11 @@ class ContentEditSite extends AbstractEditIconSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
-        /*$contentId = (new ContentParameter())->getValue();
 
-        $reader = new ContentReader();
-        $reader->model->loadContentType();
-        $contentRow = $reader->getRowById($contentId);*/
+        $contentParameter=new ContentParameter();
+        $contentParameter->addAllowedContentTypeCollection(new WikiContentTypeCollection());
 
-        //$contentType = $contentRow->contentType->getContentType();
-        $contentType = (new ContentParameter())->getContentType();  // $contentRow->getContentType();
+        $contentType = $contentParameter->getContentType();  // $contentRow->getContentType();
         $form = $contentType->getForm($page);
         //$form->dataId=$contentRow->id;
 

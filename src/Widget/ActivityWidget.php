@@ -18,7 +18,7 @@ class ActivityWidget extends AdminWidget
     public function getContent()
     {
 
-        $this->widgetTitle = 'Activiy Stream';
+        $this->widgetTitle = 'Activity Stream';
 
         $contentReader = new ContentReader();
         $contentReader->model->loadContentType();
@@ -33,6 +33,8 @@ class ActivityWidget extends AdminWidget
         $header = new TableHeader($table);
         $header->addText('Source');
         $header->addText('Subject');
+        $header->addText('Type');
+
         $header->addText('Date/Time');
 
         foreach ($contentReader->getData() as $contentRow) {
@@ -52,10 +54,12 @@ class ActivityWidget extends AdminWidget
 
             $row->addText($contentRow->subject);
             //$row->addText($contentType->getSubject());
+            $row->addText($contentRow->contentType->contentType);
+
             $row->addText($contentRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
             $row->addText($contentRow->user->login);
 
-            if ($contentType->hasView()) {
+            if ($contentType->hasViewSite()) {
                 $row->addClickableSite($contentType->getViewSite());
             }
 

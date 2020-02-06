@@ -10,26 +10,20 @@ public $model;
 /**
 * @var string
 */
-public $name;
+public $survey;
 
 /**
 * @var string
 */
-public $vorname;
-
-/**
-* @var string
-*/
-public $beschreibung;
+public $question;
 
 public function __construct() {
 parent::__construct();
 $this->model = new SurveyModel();
 }
 public function update() {
-$this->typeValueList->setModelValue($this->model->name, $this->name);
-$this->typeValueList->setModelValue($this->model->vorname, $this->vorname);
-$this->typeValueList->setModelValue($this->model->beschreibung, $this->beschreibung);
+$this->typeValueList->setModelValue($this->model->survey, $this->survey);
+$this->typeValueList->setModelValue($this->model->question, $this->question);
 parent::update();
 }
 }

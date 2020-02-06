@@ -13,6 +13,10 @@ class DashboardSetup extends AbstractContentTypeSetup
 
     public function addDashboard(AbstractContentType $contentType) {
 
+        $this->addContentType($contentType);
+
+        $contentType->saveType();
+
         $data=new Dashboard();
         $data->ignoreIfExists=true;
         $data->contentId=$contentType->getContentId();

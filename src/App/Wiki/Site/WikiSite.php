@@ -98,17 +98,23 @@ class WikiSite extends AbstractSite
             $dropdown->redirectSite = WikiSite::$site;
             $dropdown->redirectSite->addParameter(new WikiParameter());
 
+            $contentTypeParameter = new ContentTypeParameter();
+
             $wikiTypeReader = new WikiTypeReader();
             $wikiTypeReader->model->loadContentType();
             $wikiTypeReader->addOrder($wikiTypeReader->model->contentType->contentType);
             foreach ($wikiTypeReader->getData() as $wikiTypeRow) {
                 //foreach ((new WikiPageContentType())->getMenuList() as $contentType) {
                 // $dropdown->addContentType($contentType);
-                $dropdown->addContentType($wikiTypeRow->contentType->getContentType());
+
+                $contentType = $wikiTypeRow->contentType->getContentType();
+
+                $dropdown->addContentType($contentType);
+                $contentTypeParameter->addAllowedContentType($contentType);
             }
 
 
-            $contentTypeParameter = new ContentTypeParameter();
+
             if ($contentTypeParameter->exists()) {
 
                 $contentType = $contentTypeParameter->getContentType();

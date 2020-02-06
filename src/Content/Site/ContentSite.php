@@ -106,8 +106,11 @@ class ContentSite extends AbstractSite
         $model = new ContentModel();
 
         $contentTypeParameter = new ContentTypeParameter();
+        $contentTypeParameter->contentTypeCheck=false;
         if ($contentTypeParameter->hasValue()) {
+
             $filter->andEqual($model->contentTypeId, $contentTypeParameter->getValue());
+
 
             $contentType = $contentTypeParameter->getContentType();
 

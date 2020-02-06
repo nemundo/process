@@ -14,7 +14,7 @@ abstract class AbstractContentTypeCollection extends AbstractBase
     /**
      * @var AbstractContentType[]
      */
-    private $contentTypeList=[];
+    private $contentTypeList = [];
 
     public function __construct()
     {
@@ -22,12 +22,15 @@ abstract class AbstractContentTypeCollection extends AbstractBase
     }
 
 
-    protected function addContentType(AbstractContentType $contentType) {
-        $this->contentTypeList[]=$contentType;
+    protected function addContentType(AbstractContentType $contentType)
+    {
+        $this->contentTypeList[] = $contentType;
         return $this;
     }
 
-    public function getContentTypeList() {
+
+    public function getContentTypeList()
+    {
         return $this->contentTypeList;
     }
 }

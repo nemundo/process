@@ -9,6 +9,7 @@ $this->addModel(new \Nemundo\Process\Template\Data\LargeText\LargeTextModel());
 $this->addModel(new \Nemundo\Process\Template\Data\SourceLog\SourceLogModel());
 $this->addModel(new \Nemundo\Process\Template\Data\TemplateFile\TemplateFileModel());
 $this->addModel(new \Nemundo\Process\Template\Data\TemplateFileDelete\TemplateFileDeleteModel());
+$this->addModel(new \Nemundo\Process\Template\Data\TemplateImage\TemplateImageModel());
 $this->addModel(new \Nemundo\Process\Template\Data\TemplateText\TemplateTextModel());
 $this->addModel(new \Nemundo\Process\Template\Data\Youtube\YoutubeModel());
 }

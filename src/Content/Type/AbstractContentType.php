@@ -4,7 +4,6 @@
 namespace Nemundo\Process\Content\Type;
 
 
-use Nemundo\App\Performance\PerformanceStopwatch;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Random\UniqueId;
@@ -19,8 +18,6 @@ use Nemundo\Process\Content\Data\Content\ContentUpdate;
 use Nemundo\Process\Content\Form\ContentForm;
 use Nemundo\Process\Content\View\AbstractContentAdmin;
 use Nemundo\Process\Content\View\AbstractContentList;
-use Nemundo\Process\Template\Content\Item\CreateItemContentType;
-use Nemundo\Process\Template\Content\Item\EditItemContentType;
 use Nemundo\User\Type\UserSessionType;
 
 
@@ -105,14 +102,15 @@ abstract class AbstractContentType extends AbstractType
     }
 
 
-    public function existContent() {
+    public function existContent()
+    {
 
         $value = true;
 
         $count = new ContentCount();
         $count->filter->andEqual($count->model->contentTypeId, $this->typeId);
         $count->filter->andEqual($count->model->dataId, $this->dataId);
-        if ($count->getCount() ==0) {
+        if ($count->getCount() == 0) {
             $value = false;
         }
 
@@ -120,7 +118,8 @@ abstract class AbstractContentType extends AbstractType
 
     }
 
-    public function existItem() {
+    public function existItem()
+    {
         return false;
     }
 
@@ -128,10 +127,12 @@ abstract class AbstractContentType extends AbstractType
     public function saveType()
     {
 
-        //if (!$this->ignoreMode) {
+        if ($this->existItem()) {
+            $this->createMode = false;
+        }
+
         $this->saveContent();
         $this->saveSearchIndex();
-        //}
 
         return $this->dataId;
 
@@ -143,19 +144,13 @@ abstract class AbstractContentType extends AbstractType
 
         if ($this->createMode) {
 
-            //$stop=new PerformanceStopwatch('save_content_before');
             $this->saveContentBefore();
-            //$stop->stopStopwatch();
-
-            //$stop=new PerformanceStopwatch('onCreate');
             $this->onCreate();
-            //$stop->stopStopwatch();
 
             if ($this->dataId == null) {
                 $this->dataId = (new UniqueId())->getUniqueId();
             }
 
-            //$stop=new PerformanceStopwatch('save_content_update');
             $update = new ContentUpdate();
             $update->dataId = $this->dataId;
             $update->subject = $this->getSubject();
@@ -175,9 +170,9 @@ abstract class AbstractContentType extends AbstractType
             $update->subject = $this->getSubject();
             $update->updateById($this->getContentId());
 
-/*            $log = new EditItemContentType();
-            $log->parentId=$this->contentId;
-            $log->saveType();*/
+            /*            $log = new EditItemContentType();
+                        $log->parentId=$this->contentId;
+                        $log->saveType();*/
 
 
         }
@@ -262,7 +257,7 @@ abstract class AbstractContentType extends AbstractType
 
             /** @var AbstractContentAdmin $admin */
             $admin = new $this->adminClass($parent);
-            $admin->contentType=$this;
+            $admin->contentType = $this;
 
 
         } else {

@@ -126,12 +126,13 @@ class SearchSite extends AbstractSite
 
                 $contentType = $indexRow->content->getContentType();
 
+                /*
                 if ($contentType->hasParent()) {
                     $parentContentType = $contentType->getParentContentType();
                     $row->addText($parentContentType->getSubject());
                 } else {
                     $row->addEmpty();
-                }
+                }*/
 
 
                 $row->addText($bold->getBoldText($contentType->getSubject()));

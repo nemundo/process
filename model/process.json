@@ -13,7 +13,7 @@
             "namespace": "Nemundo\\Process\\Workflow\\Data\\Process",
             "row_class_name": "Nemundo\\Process\\Workflow\\Row\\ProcessCustomRow",
             "primary_index": "auto_increment",
-            "is_deleted": false,
+            "is_deleted": true,
             "type": [
                 {
                     "type": "text",

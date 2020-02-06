@@ -19,24 +19,18 @@ public $id;
 /**
 * @var string
 */
-public $name;
+public $survey;
 
 /**
 * @var string
 */
-public $vorname;
-
-/**
-* @var string
-*/
-public $beschreibung;
+public $question;
 
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
-$this->name = $this->getModelValue($model->name);
-$this->vorname = $this->getModelValue($model->vorname);
-$this->beschreibung = $this->getModelValue($model->beschreibung);
+$this->survey = $this->getModelValue($model->survey);
+$this->question = $this->getModelValue($model->question);
 }
 }

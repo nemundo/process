@@ -6,16 +6,23 @@ namespace Nemundo\Process\Geo\Type;
 
 use Nemundo\Core\Type\Geo\GeoCoordinate;
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Geo\Data\Geo\Geo;
 
-abstract class AbstractGeoContentType extends AbstractContentType
+abstract class AbstractGeoContentType extends AbstractTreeContentType
 {
 
     /**
      * @var GeoCoordinate
      */
-    public $coordinate;
+    public $geoCoordinate;
 
+
+    public function __construct($dataId = null)
+    {
+        $this->geoCoordinate=new GeoCoordinate();
+        parent::__construct($dataId);
+    }
 
 
     protected function saveGeo()
@@ -23,7 +30,7 @@ abstract class AbstractGeoContentType extends AbstractContentType
 
         $data = new Geo();
         $data->id = $this->dataId;
-        $data->coordinate = $this->coordinate;
+        $data->coordinate = $this->geoCoordinate;
         $this->dataId = $data->save();
 
 

@@ -9,25 +9,15 @@ use Nemundo\Process\Content\Setup\AbstractContentTypeSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
-use Nemundo\Process\Workflow\Data\Process\Process;
 
 
-class ProcessSetup extends AbstractContentTypeSetup  // AbstractBase
+class ProcessSetup extends AbstractContentTypeSetup
 {
 
     public function addProcess(AbstractProcess $process)
     {
 
         $this->addContentType($process);
-
-        //$setup = new ContentTypeSetup();
-        //$setup->addContentType($process);
-
-        $data = new Process();
-        $data->ignoreIfExists = true;
-        $data->contentTypeId = $process->typeId;
-        $data->save();
-
 
         foreach ($process->getProcessStatusList() as $status) {
             $this->addContentType($status);
@@ -40,15 +30,5 @@ class ProcessSetup extends AbstractContentTypeSetup  // AbstractBase
 
 
     }
-
-
-    /*
-    private function addStatus(AbstractContentType $status)
-    {
-
-        $setup = new ContentTypeSetup();
-        $setup->addContentType($status);
-
-    }*/
 
 }

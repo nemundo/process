@@ -4,7 +4,6 @@
 namespace Nemundo\Process\Group\Type;
 
 
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Directory\TextDirectory;
 use Nemundo\Core\Random\UniqueId;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
@@ -24,8 +23,9 @@ use Nemundo\User\Reader\UserCustomRow;
 abstract class AbstractGroupContentType extends AbstractTreeContentType
 {
 
-
     protected $group;
+
+    protected $groupId;
 
     /**
      * @var bool
@@ -40,8 +40,8 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
         $this->typeId = '8fb75394-3e0d-4a3e-a209-1a5ebfc46220';
         $this->formClass = GroupContentForm::class;
         $this->viewClass = GroupContentView::class;
-        $this->viewSite=GroupContentViewSite::$site;
-        $this->parameterClass=GroupParameter::class;
+        $this->viewSite = GroupContentViewSite::$site;
+        $this->parameterClass = GroupParameter::class;
 
         $this->loadGroup();
 
@@ -56,22 +56,22 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     }
 
 
-
     protected function onCreate()
     {
         // nach saveType
 
 
-       $this->saveGroup();
+        $this->saveGroup();
 
     }
 
 
-    protected function saveGroup() {
+    protected function saveGroup()
+    {
 
-        if ($this->dataId == null) {
+        /*if ($this->dataId == null) {
             $this->dataId = (new UniqueId())->getUniqueId();
-        }
+        }*/
 
         /*
 
@@ -79,15 +79,20 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
           $this->group=$this->getSubject();
         }*/
 
+
+        if ($this->groupId == null) {
+            $this->groupId = (new UniqueId())->getUniqueId();
+        }
+
+
         $data = new Group();
         $data->updateOnDuplicate = true;
-        $data->id = $this->dataId;
+        $data->id = $this->groupId;
         $data->group = $this->getGroupLabel();
         $data->groupTypeId = $this->typeId;  //groupType->id;
         $data->save();
 
     }
-
 
 
     public function saveType()
@@ -96,22 +101,17 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
         //$this->saveGroup();
         //parent::saveType();
 
-     //   (new Debug())->write($this->dataId);
+        //   (new Debug())->write($this->dataId);
 
         if ($this->dataId !== null) {
             $count = new GroupCount();
-            $count->filter->andEqual($count->model->id, $this->dataId);
+//            $count->filter->andEqual($count->model->id, $this->dataId);
+            $count->filter->andEqual($count->model->id, $this->groupId);
+
             if ($count->getCount() == 1) {
-
-                $this->createMode=false;
-                //     parent::saveType();
+                $this->createMode = false;
             }
-        } /*else {
-            parent::saveType();
-        }*/
-
-
-       // (new Debug())->write($this->createMode);
+        }
 
         parent::saveType();
 
@@ -122,7 +122,7 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     {
 
         if ($this->searchable) {
-            $groupRow = $this->getDataRow();
+            $groupRow = $this->getGroupDataRow();
             $this->addSearchWord($groupRow->group);
         }
 
@@ -142,19 +142,40 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
 
     protected function getGroupLabel()
     {
-        return $this->group;
+
+        $group = $this->group;
+        if ($group == null) {
+            $group = $this->getClassName();
+        }
+
+        return $group;
+
     }
 
 
-    final public function getDataRow()
+    public function getGroupId() {
+
+
+        if ($this->groupId == null) {
+            $this->groupId = (new UniqueId())->getUniqueId();
+        }
+
+        return $this->groupId;
+
+    }
+
+
+    public function getGroupDataRow()
     {
-        return (new GroupReader())->getRowById($this->dataId);
+        return (new GroupReader())->getRowById($this->groupId);
     }
 
 
     final public function getSubject()
     {
-        return $this->getDataRow()->group;
+
+        return $this->getGroupDataRow()->group;
+
     }
 
 
@@ -223,7 +244,8 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     }
 
 
-    public function getUserListText() {
+    public function getUserListText()
+    {
 
         $text = new TextDirectory();
 

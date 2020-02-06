@@ -35,6 +35,7 @@ class GroupSite extends AbstractSite
 
     protected function loadSite()
     {
+
         $this->title[LanguageCode::EN] = 'Group';
         $this->title[LanguageCode::DE]='Gruppen';
         $this->url = 'group';
@@ -82,6 +83,7 @@ class GroupSite extends AbstractSite
         $table = new AdminClickableTable($layout->col1);
 
         $header = new TableHeader($table);
+        $header->addText('Id');
         $header->addText('Group');
         $header->addText('Group Type');
 
@@ -96,6 +98,7 @@ class GroupSite extends AbstractSite
         $groupReader->addOrder($groupReader->model->group);
         foreach ($groupReader->getData() as $groupRow) {
             $row = new BootstrapClickableTableRow($table);
+            $row->addText($groupRow->id);
             $row->addText($groupRow->group);
             $row->addText($groupRow->groupType->contentType);
 

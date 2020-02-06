@@ -9,17 +9,12 @@ public $id;
 /**
 * @var \Nemundo\Model\Type\Text\TextType
 */
-public $name;
-
-/**
-* @var \Nemundo\Model\Type\Text\TextType
-*/
-public $vorname;
+public $survey;
 
 /**
 * @var \Nemundo\Model\Type\Text\LargeTextType
 */
-public $beschreibung;
+public $question;
 
 protected function loadExternalType() {
 parent::loadExternalType();
@@ -33,26 +28,19 @@ $this->id->aliasFieldName = $this->id->tableName . "_" . $this->id->fieldName;
 $this->id->label = "Id";
 $this->addType($this->id);
 
-$this->name = new \Nemundo\Model\Type\Text\TextType();
-$this->name->fieldName = "name";
-$this->name->tableName = $this->parentFieldName . "_" . $this->externalTableName;
-$this->name->aliasFieldName = $this->name->tableName . "_" . $this->name->fieldName;
-$this->name->label = "Name";
-$this->addType($this->name);
+$this->survey = new \Nemundo\Model\Type\Text\TextType();
+$this->survey->fieldName = "survey";
+$this->survey->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->survey->aliasFieldName = $this->survey->tableName . "_" . $this->survey->fieldName;
+$this->survey->label = "Survey";
+$this->addType($this->survey);
 
-$this->vorname = new \Nemundo\Model\Type\Text\TextType();
-$this->vorname->fieldName = "vorname";
-$this->vorname->tableName = $this->parentFieldName . "_" . $this->externalTableName;
-$this->vorname->aliasFieldName = $this->vorname->tableName . "_" . $this->vorname->fieldName;
-$this->vorname->label = "Vorname";
-$this->addType($this->vorname);
-
-$this->beschreibung = new \Nemundo\Model\Type\Text\LargeTextType();
-$this->beschreibung->fieldName = "beschreibung";
-$this->beschreibung->tableName = $this->parentFieldName . "_" . $this->externalTableName;
-$this->beschreibung->aliasFieldName = $this->beschreibung->tableName . "_" . $this->beschreibung->fieldName;
-$this->beschreibung->label = "Beschreibung";
-$this->addType($this->beschreibung);
+$this->question = new \Nemundo\Model\Type\Text\LargeTextType();
+$this->question->fieldName = "question";
+$this->question->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->question->aliasFieldName = $this->question->tableName . "_" . $this->question->fieldName;
+$this->question->label = "Question";
+$this->addType($this->question);
 
 }
 }

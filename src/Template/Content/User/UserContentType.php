@@ -117,11 +117,13 @@ class UserContentType extends AbstractContentType
 
     }
 
-    // afterSaveUpdate
+
     protected function onSearchIndex()
     {
 
-        $type = new UserGroupType($this->dataId);
+        $type = new UserGroupType();
+$type->groupId = $this->dataId;
+
         $type->addUser($this->dataId);
         $type->saveType();
 
