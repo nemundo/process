@@ -4,20 +4,10 @@
 namespace Nemundo\Process\Template\Content\AddSource;
 
 
-use Nemundo\Admin\Com\Table\AdminTable;
-use Nemundo\Com\TableBuilder\TableRow;
-use Nemundo\Model\Join\ModelJoin;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
-use Nemundo\Process\Content\Data\Content\ContentReader;
-use Nemundo\Process\Content\Data\Tree\TreeModel;
-use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Form\AbstractContentForm;
-use Nemundo\Process\Content\Parameter\ChildParameter;
-use Nemundo\Process\Content\Parameter\ContentParameter;
-use Nemundo\Process\Content\Reader\ContentTreeReader;
-use Nemundo\Process\Template\Content\File\FileParentContainer;
-use Nemundo\Process\Template\Site\SourceDeleteSite;
-use Nemundo\Process\Workflow\Content\Form\AbstractStatusForm;
+use Schleuniger\App\Aufgabe\Content\Process\AufgabeProcess;
+use Schleuniger\App\Verbesserung\Workflow\Process\VerbesserungProcess;
 
 
 class AddSourceContentForm extends AbstractContentForm
@@ -32,7 +22,19 @@ class AddSourceContentForm extends AbstractContentForm
     {
 
 
-        $table = new AdminTable($this);
+        $listbox = new BootstrapListBox($this);
+        //$listbox->submitOnChange=true;
+
+        $collection = new \Nemundo\Process\Content\Collection\ContentTypeCollection();
+        $collection->addContentType(new VerbesserungProcess());
+        $collection->addContentType(new AufgabeProcess());
+
+        foreach ($collection->getContentTypeList() as $contentType) {
+            $listbox->addItem($contentType->typeId, $contentType->typeLabel);
+        }
+
+
+        /*$table = new AdminTable($this);
 
         //$contentReader = new ContentTreeReader();
         //$contentReader->parentId=$this->parentId;
@@ -52,23 +54,22 @@ class AddSourceContentForm extends AbstractContentForm
             $site->addParameter(new ChildParameter($this->parentId));
             $row->addIconSite($site);
 
-        }
-
-
-/*
-        foreach ($this->contentType->getParentContent() as $parentContentType) {
-
-            $row=new TableRow($table);
-            $row->addSite($parentContentType->getContentType()->getViewSite());
-
-            $site = clone(SourceDeleteSite::$site);
-            $site->addParameter(new ContentParameter($parentContentType->getc))
-
         }*/
 
 
+        /*
+                foreach ($this->contentType->getParentContent() as $parentContentType) {
 
-        $this->source = new BootstrapListBox($this);
+                    $row=new TableRow($table);
+                    $row->addSite($parentContentType->getContentType()->getViewSite());
+
+                    $site = clone(SourceDeleteSite::$site);
+                    $site->addParameter(new ContentParameter($parentContentType->getc))
+
+                }*/
+
+
+        /*$this->source = new BootstrapListBox($this);
         $this->source->label='Quelle';
         $this->source->validation=true;
 
@@ -77,24 +78,23 @@ class AddSourceContentForm extends AbstractContentForm
         $treeReader->filter->orEqual($treeReader->model->contentTypeId,(new AufgabeProcess())->typeId);
         $treeReader->filter->orEqual($treeReader->model->contentTypeId,(new EcrProcess())->typeId);*/
 
-        $treeReader->addOrder($treeReader->model->subject);
-        foreach ($treeReader->getData() as $contentRow) {
-            $this->source->addItem($contentRow->id, $contentRow->subject);
-        }
+        /* $treeReader->addOrder($treeReader->model->subject);
+         foreach ($treeReader->getData() as $contentRow) {
+             $this->source->addItem($contentRow->id, $contentRow->subject);
+         }*/
 
         return parent::getContent();
 
     }
 
 
-
     protected function onSubmit()
     {
 
-        $type=new AddSourceContentType();
-        $type->parentId=$this->parentId;
-        $type->sourceId=$this->source->getValue();
-        $type->saveType();
+        /*$type = new AddSourceContentType();
+        $type->parentId = $this->parentId;
+        $type->sourceId = $this->source->getValue();
+        $type->saveType();*/
 
         // TODO: Implement onSubmit() method.
     }

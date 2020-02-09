@@ -7,7 +7,7 @@ namespace Nemundo\Process\Content\Com\Dropdown;
 use Nemundo\Package\Bootstrap\Dropdown\BootstrapSiteDropdown;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Type\AbstractContentType;
-use Nemundo\Process\Content\Type\AbstractContentTypeCollection;
+use Nemundo\Process\Content\Collection\AbstractContentTypeCollection;
 use Nemundo\Web\Site\AbstractSite;
 
 class ContentTypeCollectionDropdown extends BootstrapSiteDropdown
@@ -34,7 +34,7 @@ class ContentTypeCollectionDropdown extends BootstrapSiteDropdown
 
             $site = clone($this->redirectSite);
             $site->addParameter(new ContentTypeParameter($contentType->typeId));
-            $site->title = $contentType->typeLabel;  //getClassNameWithoutNamespace();
+            $site->title = $contentType->typeLabel;
             $this->addSite($site);
 
         }

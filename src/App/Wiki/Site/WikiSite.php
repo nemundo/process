@@ -17,6 +17,8 @@ use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\App\Wiki\Data\Wiki\WikiReader;
 use Nemundo\Process\App\Wiki\Data\WikiType\WikiTypeReader;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
+use Nemundo\Process\App\Wiki\Type\WikiContentTypeCollection;
+use Nemundo\Process\Content\Com\Dropdown\ContentTypeCollectionDropdown;
 use Nemundo\Process\Content\Com\Dropdown\ContentTypeDropdown;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
@@ -89,17 +91,20 @@ class WikiSite extends AbstractSite
             //$title = new AdminTitle($layout->col2);
             //$title->content = $wikiType->getSubject();
 
-            $wikiRow = (new WikiReader())->getRowById($wikiId);
+            //$wikiRow = (new WikiReader())->getRowById($wikiId);
 
             $title = new AdminTitle($layout->col2);
-            $title->content = $wikiRow->title;
+            $title->content = $wikiType->getSubject();  //  $wikiRow->title;
 
-            $dropdown = new ContentTypeDropdown($layout->col2);
+            $dropdown = new ContentTypeCollectionDropdown($layout->col2);  // new ContentTypeDropdown($layout->col2);
+            $dropdown->contentTypeCollection = new WikiContentTypeCollection();
             $dropdown->redirectSite = WikiSite::$site;
             $dropdown->redirectSite->addParameter(new WikiParameter());
 
             $contentTypeParameter = new ContentTypeParameter();
 
+
+/*
             $wikiTypeReader = new WikiTypeReader();
             $wikiTypeReader->model->loadContentType();
             $wikiTypeReader->addOrder($wikiTypeReader->model->contentType->contentType);
@@ -111,13 +116,15 @@ class WikiSite extends AbstractSite
 
                 $dropdown->addContentType($contentType);
                 $contentTypeParameter->addAllowedContentType($contentType);
-            }
+            }*/
 
 
 
             if ($contentTypeParameter->exists()) {
 
+                $contentTypeParameter->addAllowedContentTypeCollection(new WikiContentTypeCollection());
                 $contentType = $contentTypeParameter->getContentType();
+
                 //(new ContentTypeReader())->getRowById($contentTypeParameter->getValue())->getContentType();
 
                 $form = $contentType->getForm($layout->col2);

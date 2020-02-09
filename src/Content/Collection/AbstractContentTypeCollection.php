@@ -1,10 +1,11 @@
 <?php
 
 
-namespace Nemundo\Process\Content\Type;
+namespace Nemundo\Process\Content\Collection;
 
 
 use Nemundo\Core\Base\AbstractBase;
+use Nemundo\Process\Content\Type\AbstractContentType;
 
 abstract class AbstractContentTypeCollection extends AbstractBase
 {

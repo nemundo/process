@@ -6,7 +6,7 @@ namespace Nemundo\Process\Content\Check;
 
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Process\Content\Type\AbstractContentType;
-use Nemundo\Process\Content\Type\AbstractContentTypeCollection;
+use Nemundo\Process\Content\Collection\AbstractContentTypeCollection;
 
 trait ContentTypeCheckTrait
 {

@@ -14,8 +14,6 @@ use Nemundo\Process\Template\Data\SourceLog\SourceLogReader;
 class AddSourceContentType extends AbstractTreeContentType
 {
 
-    //public $parentId;
-
     public $sourceId;
 
     protected function loadContentType()

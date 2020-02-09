@@ -5,7 +5,8 @@ namespace Nemundo\Process\App\Wiki\Type;
 
 
 use Nemundo\Process\App\Wiki\Data\WikiType\WikiTypeReader;
-use Nemundo\Process\Content\Type\AbstractContentTypeCollection;
+use Nemundo\Process\Content\Collection\AbstractContentTypeCollection;
+
 
 class WikiContentTypeCollection extends AbstractContentTypeCollection
 {
