@@ -33,10 +33,7 @@ use Nemundo\ToDo\Data\ToDo\ToDoRow;
 abstract class AbstractProcess extends AbstractSequenceContentType
 {
 
-    //use UserRestrictionTrait;
-
     use GroupRestrictionTrait;
-
 
     public $number;
 
@@ -46,7 +43,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
      * @var AbstractWorkflowModel
      */
     protected $workflowModel;
-
 
     /**
      * @var string
@@ -58,8 +54,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
      */
     protected $startNumber = 100;
 
-
-    //public $workflowSubject;
 
     protected $groupAssignmentId;
 
@@ -190,14 +184,10 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public function getSubject()
     {
 
-        //$workflowRow = $this->getWorkflowRow();
-        //$subject = $workflowRow->workflowNumber . ' ' . $workflowRow->subject;
-
         /** @var ToDoRow $dataRow */
         $dataRow = $this->getDataRow();
 
-
-        $subject = $dataRow->workflowNumber . ' ' . $dataRow->subject;  // '';
+        $subject = $dataRow->workflowNumber . ' ' . $dataRow->subject;
         return $subject;
 
     }
@@ -215,44 +205,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
-    /*
-    public function getWorkflowRow()
-    {
-
-        if ($this->workflowRow == null) {
-            $reader = new WorkflowReader();
-            $reader->model->loadStatus();
-            $reader->model->loadContent();
-            $reader->model->content->loadUser();
-            $reader->filter->andEqual($reader->model->content->dataId, $this->dataId);
-            $reader->filter->andEqual($reader->model->content->contentTypeId, $this->typeId);
-
-            foreach ($reader->getData() as $workflowCustomRow) {
-                $this->workflowRow = $workflowCustomRow;
-            }
-
-        }
-
-        return $this->workflowRow;
-
-    }
-
-
-    public function getWorkflowId()
-    {
-
-        if ($this->workflowId == null) {
-
-            $workflowRow = $this->getWorkflowRow();
-            if ($workflowRow !== null) {
-                $this->workflowId = $workflowRow->id;
-            }
-        }
-
-        return $this->workflowId;
-
-    }*/
-
 
     public function isWorkflowClosed()
     {
@@ -260,10 +212,8 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $workflowClosed = false;
 
         if ($this->dataId !== null) {
-            $workflowRow = $this->getDataRow();  // getWorkflowRow();
-            //if ($workflowRow !== null) {
+            $workflowRow = $this->getDataRow();
             $workflowClosed = $workflowRow->workflowClosed;
-            //}
         }
 
         return $workflowClosed;
@@ -309,26 +259,11 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
-    /*
-    public function existWorkflow()
-    {
-
-        $value = false;
-        $count = new WorkflowCount();
-        $count->filter->andEqual($count->model->id, $this->getWorkflowId());
-        if ($count->getCount() == 1) {
-            $value = true;
-        }
-        return $value;
-
-    }*/
-
-
     public function hasDeadline()
     {
 
         $value = false;
-        $workflowRow = $this->getDataRow();  // $this->getWorkflowRow();
+        $workflowRow = $this->getDataRow();
 
         if ($workflowRow->deadline !== null) {
             $value = true;
@@ -341,7 +276,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public function getDeadline()
     {
 
-        $workflowRow = $this->getDataRow();   // getWorkflowRow();
+        $workflowRow = $this->getDataRow();
         return $workflowRow->deadline;
     }
 
@@ -354,10 +289,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
             $update->model = $this->workflowModel;
             $update->typeValueList->setModelValue($update->model->deadline, $date->getIsoDateFormat());
             $update->updateById($this->dataId);
-
-            /*            $update = new WorkflowUpdate();
-                        $update->deadline = $date;
-                        $update->updateById($this->getWorkflowId());*/
 
             $update = new AssignmentUpdate();
             $update->deadline = $date;
@@ -425,17 +356,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         }
 
     }
-
-
-    /*
-    public function clearAssignment()
-    {
-
-        $update = new WorkflowUpdate();
-        $update->assignment->clearIdentification();
-        $update->updateById($this->dataId);
-
-    }*/
 
 
     public function getStart()

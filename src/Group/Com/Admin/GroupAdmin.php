@@ -17,10 +17,10 @@ use Nemundo\Process\Group\Data\Group\GroupReader;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserDelete;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
 use Nemundo\Process\Group\Parameter\GroupParameter;
-use Nemundo\Process\Group\Type\AbstractGroupContentType;
 use Nemundo\User\Parameter\UserParameter;
 use Nemundo\Web\Action\AbstractActionPanel;
 use Nemundo\Web\Action\ActionSite;
+use Nemundo\Web\Site\Site;
 use Nemundo\Web\Url\UrlReferer;
 
 class GroupAdmin extends AbstractActionPanel
@@ -60,7 +60,7 @@ class GroupAdmin extends AbstractActionPanel
             $header->addText('Group');
 
             if ($this->showGroupTypeColumn) {
-            $header->addText('Group Type');
+                $header->addText('Group Type');
             }
 
             $groupReader = new GroupReader();
@@ -75,9 +75,10 @@ class GroupAdmin extends AbstractActionPanel
 
                 $row = new BootstrapClickableTableRow($table);
                 $row->addText($groupRow->group);
-            if ($this->showGroupTypeColumn) {
-                $row->addText($groupRow->groupType->contentType);
-            }
+
+                if ($this->showGroupTypeColumn) {
+                    $row->addText($groupRow->groupType->contentType);
+                }
 
                 $site = clone($this->index);
                 $site->addParameter(new GroupParameter($groupRow->id));
@@ -94,6 +95,11 @@ class GroupAdmin extends AbstractActionPanel
 
                 $subtitle = new AdminSubtitle($layout->col2);
                 $subtitle->content = $groupRow->group;
+
+                $form = new GroupUserForm($layout->col2);
+                $form->groupId = $groupId;
+                $form->redirectSite=new Site();
+
 
                 $table = new AdminTable($layout->col2);
 
@@ -116,8 +122,6 @@ class GroupAdmin extends AbstractActionPanel
 
                 }
 
-                $form = new GroupUserForm($layout->col2);
-                $form->groupId = $groupId;
 
             }
 

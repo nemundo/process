@@ -50,6 +50,15 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     }
 
 
+
+    public function fromGroupId($groupId) {
+
+
+        $this->groupId=$groupId;
+
+    }
+
+
     protected function loadGroup()
     {
 

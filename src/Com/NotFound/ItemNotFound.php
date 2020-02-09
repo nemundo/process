@@ -10,6 +10,7 @@ use Nemundo\Html\Paragraph\Paragraph;
 
 // ItemNotFoundContainer
 // ItemNotFoundDiv
+// ItemNotFoundMessage
 class ItemNotFound extends AbstractHtmlContainer
 {
 
@@ -19,8 +20,8 @@ class ItemNotFound extends AbstractHtmlContainer
         $subtitle = new AdminSubtitle($this);
         $subtitle->content = 'Oooops, da ging was schief';
 
-        $p=new Paragraph($this);
-        $p->content='Datensatz nicht gefunden';
+        $p = new Paragraph($this);
+        $p->content = 'Datensatz nicht gefunden';
 
         return parent::getContent();
     }

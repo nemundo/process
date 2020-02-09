@@ -18,6 +18,7 @@ trait GroupRestrictionTrait
      */
     private $restrictionGroup = [];
 
+    // addRestrictedGroup
     public function addRestrictionGroup(AbstractGroupContentType $groupContentType)
     {
         $this->restrictionGroup[] = $groupContentType;

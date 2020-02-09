@@ -33,7 +33,8 @@ class GroupUserForm extends BootstrapForm
     protected function onSubmit()
     {
 
-        $item = new GroupContentType($this->groupId);
+        $item = new GroupContentType();
+        $item->fromGroupId($this->groupId);
         $item->addUser($this->user->getValue());
 
 

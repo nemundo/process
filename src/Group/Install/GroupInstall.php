@@ -36,9 +36,9 @@ class GroupInstall extends AbstractInstall
         $setup->addContentType(new UsergroupGroupType());
 
         (new GroupSetup())
-            //->addGroupType(new \Nemundo\Process\Group\Content\Group\GroupContentType())
             ->addGroupType(new UserGroupType())
-            ->addGroupType(new UsergroupGroupType());
+            ->addGroupType(new UsergroupGroupType())
+            ->addGroupType(new AppUserGroupType());
 
 
         $setup=new ScriptSetup();
