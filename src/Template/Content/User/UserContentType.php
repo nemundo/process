@@ -50,6 +50,27 @@ class UserContentType extends AbstractContentType
     }
 
 
+
+    public function fromLogin($login)
+    {
+
+            $id = new UserId();
+            $id->filter->andEqual($id->model->login, $login);
+            $this->dataId = $id->getId();
+
+            /*
+            if (!$this->userId == '') {
+                $this->loadData();
+            } else {
+                // (new LogMessage())->writeError('Login not found');
+            }*/
+
+
+        return $this;
+
+    }
+
+
     public function saveType()
     {
 

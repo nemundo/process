@@ -70,6 +70,8 @@ abstract class AbstractProcess extends AbstractSequenceContentType
      */
     public $baseViewClass;
 
+    // workflowDefaultTitle
+    public $workflowTitle='New';
 
     public function __construct($dataId = null)
     {
@@ -93,6 +95,9 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
             $update = new ModelUpdate();
             $update->model = $this->workflowModel;
+
+            // deadline hier???
+
             $update->typeValueList->setModelValue($update->model->active, true);
             $update->typeValueList->setModelValue($update->model->number, $this->getNumber());
             $update->typeValueList->setModelValue($update->model->workflowNumber, $this->getWorkflowNumber());
@@ -313,6 +318,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
+    // changeProcessStatus
     public function changeStatus(AbstractContentType $status)
     {
 
@@ -397,6 +403,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
+    // Leadtime
     public function getLeaptime()
     {
 

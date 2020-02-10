@@ -76,10 +76,8 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
     protected function loadActionSite()
     {
 
-
         $subtitle = new AdminSubtitle($this);
         $subtitle->content = $this->contentType->typeLabel;
-
 
         $this->index = new ActionSite($this);
         $this->index->onAction = function () {

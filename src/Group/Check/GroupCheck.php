@@ -15,11 +15,12 @@ use Nemundo\User\Type\UserSessionType;
 class GroupCheck extends AbstractBase
 {
 
-    public function checkVisiblity() {
+
+   /* public function checkVisiblity() {
 
        // $userId = (new UserSessionType())->
 
-    }
+    }*/
 
 
     public function isMemberOfGroup(AbstractGroupContentType $groupContentType) {
@@ -28,7 +29,7 @@ class GroupCheck extends AbstractBase
 
         $count=new GroupUserCount();
         $count->filter->andEqual($count->model->userId, (new UserSessionType())->userId);
-        $count->filter->andEqual($count->model->groupId,$groupContentType->getDataId());
+        $count->filter->andEqual($count->model->groupId,$groupContentType->getGroupId());
         if ($count->getCount()>0) {
             $value=true;
         }

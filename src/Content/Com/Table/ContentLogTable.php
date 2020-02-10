@@ -36,16 +36,17 @@ class ContentLogTable extends AbstractHtmlContainer
 
         foreach ($this->contentType->getChild() as $contentRow) {
 
-            $status = $contentRow->getContentType();
+            $contentType = $contentRow->getContentType();
 
             $row = new BootstrapClickableTableRow($table);
-            //$row->addText($status->typeLabel);
-            $row->addText($status->getSubject());
-            $row->addText($contentRow->user->displayName . ' ' . $contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
+            $row->addText($contentType->typeLabel);
+            $row->addText($contentType->getSubject());
+            //$row->addText($contentRow->user->displayName . ' ' . $contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
+            $row->addText($contentRow->user->displayName . ' ' . $contentRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
 
             //$row->addText($contentRow->dataId);
 
-            $row->addClickableSite($status->getViewSite());
+            $row->addClickableSite($contentType->getViewSite());
 
         }
 

@@ -12,7 +12,7 @@ use Nemundo\Process\Group\Parameter\GroupParameter;
 class GroupListBox extends BootstrapListBox
 {
 
-    private $groupTypeList=[];
+    //private $groupTypeList=[];
 
     protected function loadContainer()
     {

@@ -6,7 +6,6 @@ namespace Nemundo\Process\Workflow\Content\View;
 
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Admin\Com\Widget\AdminWidget;
-use Nemundo\Process\App\WebLog\Content\WebLogContentType;
 use Nemundo\Process\Content\Com\Table\ContentLogTable;
 use Nemundo\Process\Content\Com\Table\SourceTable;
 use Nemundo\Process\Template\Content\File\FileParentContainer;
@@ -14,13 +13,18 @@ use Nemundo\Process\Workflow\Com\Container\StatusFormContainer;
 use Nemundo\Process\Workflow\Com\Container\WorkflowStreamContainer;
 use Nemundo\Process\Workflow\Com\Layout\WorkflowLayout;
 use Nemundo\Process\Workflow\Com\Menu\ProcessMenu;
+use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
 use Nemundo\Process\Workflow\Parameter\StatusParameter;
 use Nemundo\ToDo\Data\ToDo\ToDoRow;
-use Schleuniger\App\Aufgabe\Content\Process\AufgabeParentContainer;
 
 
 class ProcessView extends AbstractProcessView
 {
+
+    /**
+     * @var AbstractProcess
+     */
+    public $contentType;
 
     public function getContent()
     {
@@ -38,8 +42,10 @@ class ProcessView extends AbstractProcessView
 
             $workflowStatus->parentId = $this->dataId;
 
-            $statusParameter=new StatusParameter();
-            //$statusParameter->addAllowedContentTypeCollection()
+            $statusParameter = new StatusParameter();
+            if ($workflowStatus->hasNextMenu()) {
+            $statusParameter->addAllowedContentType($workflowStatus->getNextMenu());
+            }
 
             foreach ($workflowStatus->getMenuList() as $contentType) {
                 $statusParameter->addAllowedContentType($contentType);
@@ -71,7 +77,7 @@ class ProcessView extends AbstractProcessView
 
             $formStatus = $this->contentType;
             $workflowStatus = $formStatus;
-            $workflowTitle = 'Neu';
+            $workflowTitle = $this->contentType->workflowTitle;  // 'Neu';
 
         }
 
@@ -154,7 +160,6 @@ class ProcessView extends AbstractProcessView
 
 
         }
-
 
 
         /*

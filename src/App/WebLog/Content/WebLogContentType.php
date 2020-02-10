@@ -13,7 +13,7 @@ class WebLogContentType extends AbstractTreeContentType
     {
         $this->typeLabel='Web Log';
         $this->typeId='8a11756f-3380-4a3d-8e21-0c51e051c539';
-        // TODO: Implement loadContentType() method.
+
     }
 
 

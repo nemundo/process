@@ -7,12 +7,16 @@ namespace Nemundo\Process\Group\Com\Admin;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
+use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
+use Nemundo\Html\Formatting\Bold;
+use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Group\Com\Form\GroupUserForm;
 use Nemundo\Process\Group\Com\GroupContentTypeTrait;
+use Nemundo\Process\Group\Com\ListBox\GroupTypeListBox;
 use Nemundo\Process\Group\Data\Group\GroupReader;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserDelete;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
@@ -34,6 +38,12 @@ class GroupAdmin extends AbstractActionPanel
     public $showGroupTypeColumn = true;
 
     /**
+     * @var bool
+     */
+    public $filterGroupType = true;
+
+
+    /**
      * @var ActionSite
      */
     private $index;
@@ -53,6 +63,26 @@ class GroupAdmin extends AbstractActionPanel
 
             $layout = new BootstrapTwoColumnLayout($this);
 
+            $groupReader = new GroupReader();
+            $groupReader->model->loadGroupType();
+
+            if ($this->filterGroupType) {
+            $form = new SearchForm($layout->col1);
+
+            $formRow = new BootstrapFormRow($form);
+
+            $groupType = new GroupTypeListBox($formRow);
+            $groupType->searchMode = true;
+            $groupType->submitOnChange = true;
+
+                if ($groupType->hasValue()) {
+                    $groupReader->filter->andEqual($groupReader->model->groupTypeId, $groupType->getValue());
+                }
+
+            }
+
+
+
 
             $table = new AdminClickableTable($layout->col1);
 
@@ -63,8 +93,6 @@ class GroupAdmin extends AbstractActionPanel
                 $header->addText('Group Type');
             }
 
-            $groupReader = new GroupReader();
-            $groupReader->model->loadGroupType();
 
             foreach ($this->groupContentTypeList as $groupContentType) {
                 $groupReader->filter->orEqual($groupReader->model->groupTypeId, $groupContentType->typeId);
@@ -74,7 +102,17 @@ class GroupAdmin extends AbstractActionPanel
             foreach ($groupReader->getData() as $groupRow) {
 
                 $row = new BootstrapClickableTableRow($table);
-                $row->addText($groupRow->group);
+
+
+                if ((new GroupParameter())->getValue() == $groupRow->id) {
+                    $bold = new Bold($row);
+                    $bold->content= $groupRow->group;
+                } else {
+                    $row->addText($groupRow->group);
+                }
+
+
+
 
                 if ($this->showGroupTypeColumn) {
                     $row->addText($groupRow->groupType->contentType);

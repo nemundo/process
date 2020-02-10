@@ -28,6 +28,16 @@ abstract class AbstractSequenceContentType extends AbstractTreeContentType
     protected $previousMenuClass;
 
 
+    public function hasNextMenu() {
+
+        $value = false;
+        if ($this->nextMenuClass !== null) {
+            $value=true;
+        }
+        return $value;
+    }
+
+
     // getNextContentType
     public function getNextMenu()
     {

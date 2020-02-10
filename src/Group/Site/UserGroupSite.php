@@ -6,8 +6,10 @@ namespace Nemundo\Process\Group\Site;
 
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\FormBuilder\SearchForm;
+use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
+use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Process\Group\Com\Form\UserGroupForm;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
 use Nemundo\User\Com\ListBox\UserListBox;
@@ -25,10 +27,12 @@ class UserGroupSite extends AbstractSite
 
     protected function loadSite()
     {
-   $this->title = 'User Group';
-   $this->url='user-group';
+        $this->title = 'User Group';
+//        $this->title = 'User Group';
 
-   UserGroupSite::$site=$this;
+        $this->url = 'user-group';
+
+        UserGroupSite::$site = $this;
 
     }
 
@@ -38,30 +42,41 @@ class UserGroupSite extends AbstractSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
-        $form = new SearchForm($page);
+
+        $layout = new BootstrapTwoColumnLayout($page);
+
+
+        $form = new SearchForm($layout->col1);
 
         $user = new UserListBox($form);
-        $user->searchMode=true;
-        $user->submitOnChange=true;
+        $user->searchMode = true;
+        $user->submitOnChange = true;
 
         $userParameter = new UserParameter();
         if ($userParameter->exists()) {
 
             $userId = $userParameter->getValue();
 
-            $table = new AdminTable($page);
 
-            $reader = new GroupUserReader();
-            $reader->model->loadGroup();
-            $reader->filter->andEqual($reader->model->userId,$userId);
-            foreach ($reader->getData() as $groupUserRow) {
+
+
+            $groupUserReader = new GroupUserReader();
+            $groupUserReader->model->loadGroup();
+            $groupUserReader->filter->andEqual($groupUserReader->model->userId, $userId);
+
+            $table = new AdminTable($layout->col2);
+
+            $header = new TableHeader($table);
+            $header->addText($groupUserReader->model->group->label);
+
+            foreach ($groupUserReader->getData() as $groupUserRow) {
                 $row = new TableRow($table);
                 $row->addText($groupUserRow->group->group);
             }
 
-            $form = new UserGroupForm($page);
+            $form = new UserGroupForm($layout->col2);
             $form->userId = $userId;
-            $form->redirectSite =new Site();  // UserGroupSite::$site;
+            $form->redirectSite = new Site();  // UserGroupSite::$site;
 
 
         }

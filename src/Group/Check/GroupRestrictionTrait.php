@@ -38,7 +38,6 @@ trait GroupRestrictionTrait
             $visible = false;
 
             foreach ($this->restrictionGroup as $restrictionGroup) {
-                //if ((new GroupCheck())->isMemberOfGroup(new VerbesserungAdminGroup())) {
                     if ((new GroupCheck())->isMemberOfGroup($restrictionGroup)) {
                     $visible = true;
                 }

@@ -34,7 +34,6 @@ trait ContentTreeTrait
 
         $value = new TreeValue();
         $value->field = $value->model->itemOrder;
-        //$value->filter->andEqual($value->model->parentId, $this->dataId);
         $value->filter->andEqual($value->model->parentId, $this->getContentId());
         $itemOrder = $value->getMaxValue();
 
@@ -68,6 +67,12 @@ trait ContentTreeTrait
     }
 
 
+
+    //getLastOf
+    // getFirstOf
+    // getChildOf
+
+
     public function getChildCount()
     {
 
@@ -84,6 +89,68 @@ trait ContentTreeTrait
         $count = new TreeCount();
         $count->filter->andEqual($count->model->childId, $this->getContentId());
         return $count->getCount();
+
+    }
+
+
+    public function getFirst()
+    {
+
+    }
+
+
+    public function getLast()
+    {
+
+    }
+
+    public function getFirstOf(AbstractTreeContentType $contentType)
+    {
+        return $this->getChildRow($contentType, SortOrder::ASCENDING);
+
+    }
+
+
+    public function getLastOf(AbstractTreeContentType $contentType)
+    {
+
+        return $this->getChildRow($contentType, SortOrder::DESCENDING);
+
+    }
+
+
+    public function getCountOf(AbstractTreeContentType $contentType)
+    {
+
+        $treeCount = new TreeCount();
+        $treeCount->model->loadChild();
+        $treeCount->filter->andEqual($treeCount->model->parentId, $this->getContentId());
+        $treeCount->filter->andEqual($treeCount->model->child->contentTypeId, $contentType->typeId);
+
+        return $treeCount->getCount();
+
+    }
+
+
+    private function getChildRow(AbstractTreeContentType $contentType, $sortOrder)
+    {
+
+        $reader = new TreeReader();
+        $reader->model->loadChild();
+        $reader->model->child->loadContentType();
+        $reader->model->child->loadUser();
+        $reader->filter->andEqual($reader->model->parentId, $this->getContentId());
+        $reader->filter->andEqual($reader->model->child->contentTypeId, $contentType->typeId);
+        $reader->addOrder($reader->model->itemOrder, $sortOrder);
+        $reader->limit = 1;
+
+        /** @var ContentCustomRow $doc */
+        $doc = null;
+        foreach ($reader->getData() as $treeRow) {
+            $doc = $treeRow->child;
+        }
+
+        return $doc;
 
     }
 
@@ -139,18 +206,18 @@ trait ContentTreeTrait
 
         if ($this->parentId == null) {
 
-            $parentCount=0;
+            $parentCount = 0;
 
             $reader = new TreeReader();
             $reader->filter->andEqual($reader->model->childId, $this->getContentId());
             foreach ($reader->getData() as $treeRow) {
                 $this->parentId = $treeRow->parentId;
-            $parentCount++;
+                $parentCount++;
             }
 
 
-            if ($parentCount>1) {
-                (new LogMessage())->writeError('getParentId. More than one parent. Content Id: '.$this->getContentId());
+            if ($parentCount > 1) {
+                (new LogMessage())->writeError('getParentId. More than one parent. Content Id: ' . $this->getContentId());
             }
 
         }
