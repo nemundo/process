@@ -39,6 +39,7 @@ abstract class AbstractSequenceContentType extends AbstractTreeContentType
 
 
     // getNextContentType
+
     public function getNextMenu()
     {
 

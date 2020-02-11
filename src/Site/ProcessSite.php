@@ -83,6 +83,7 @@ class ProcessSite extends AbstractSite
         new NotificationSite($this);
 
         new DashboardSite($this);
+        new \Nemundo\Process\Workflow\Site\ProcessSite($this);
 
     }
 

@@ -9,6 +9,6 @@ class ProcessConfig
 
     const PAGINATION_LIMIT = 50;
 
-    public static $debugMode = false;
+    public static $debugMode = true;
 
 }

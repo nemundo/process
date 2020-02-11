@@ -6,6 +6,7 @@ namespace Nemundo\Process\Search\Com;
 use Nemundo\Admin\Com\Button\AdminSearchButton;
 
 use Nemundo\Com\FormBuilder\SearchForm;
+use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Html\Character\HtmlCharacter;
 use Nemundo\Package\Bootstrap\Autocomplete\BootstrapAutocompleteMultipleValueTextBox;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
@@ -38,7 +39,9 @@ class ContentSearchForm extends SearchForm
         $this->query->name = (new SearchQueryParameter())->parameterName;
         $this->query->seperator = ' ';
         $this->query->searchMode = true;
-        $this->query->placeholder = 'Search';
+        $this->query->placeholder[LanguageCode::EN] = 'Search';
+        $this->query->placeholder[LanguageCode::DE] = 'Suche';
+
         $this->query->label = HtmlCharacter::NON_BREAKING_SPACE;
         $this->query->sourceSite = SearchJsonSite::$site;
 

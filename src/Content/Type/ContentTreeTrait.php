@@ -119,6 +119,17 @@ trait ContentTreeTrait
     }
 
 
+    public function existsChildOf(AbstractTreeContentType $contentType) {
+
+        $value=false;
+        if ($this->getCountOf($contentType)>0) {
+            $value = true;
+        }
+        return $value;
+    }
+
+
+    // getChildCountOf
     public function getCountOf(AbstractTreeContentType $contentType)
     {
 

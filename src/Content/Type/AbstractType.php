@@ -234,23 +234,37 @@ abstract class AbstractType extends AbstractBaseClass
         }*/
 
 
-        $parameter = null;
+        //$parameter = null;
         $site = null;
 
-        if ($this->parameterClass !== null) {
+        /*if ($this->parameterClass !== null) {
             /** @var AbstractUrlParameter $parameter */
-            $parameter = new $this->parameterClass($this->dataId);
-        }
+            //$parameter = new $this->parameterClass($this->dataId);
+        //}
 
         if ($this->viewSite !== null) {
             $site = clone($this->viewSite);
-            $site->addParameter($parameter);
+//            $site->addParameter($parameter);
+            $site->addParameter($this->getParameter());
+
             //$site->title = $this->getSubject($this->dataId);
         }
 
         return $site;
 
     }
+
+
+    protected function getParameter() {
+
+        $parameter = null;
+        if ($this->parameterClass !== null) {
+            /** @var AbstractUrlParameter $parameter */
+            $parameter = new $this->parameterClass($this->dataId);
+        }
+        return $parameter;
+    }
+
 
 
     protected function onDelete()

@@ -4,11 +4,13 @@
 namespace Nemundo\Process\Content\Com\Menu;
 
 
+use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Table\AdminTable;
-use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Process\Content\Type\AbstractMenuContentType;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
+use Nemundo\Process\Workflow\Parameter\StatusParameter;
+use Nemundo\Web\Site\Site;
 
 
 // SequenceMenu
@@ -23,19 +25,36 @@ class NextMenu extends AbstractHtmlContainer
     /**
      * @var AbstractMenuContentType
      */
-    public $currentContentType;
+    //public $currentContentType;
 
 
     /**
      * @var AdminTable
      */
-    private $table;
+    //private $table;
 
     public function getContent()
     {
 
-        $this->table = new AdminTable($this);
-        $this->addNextMenu($this->contentType);
+        // $table = new AdminTable($this);
+
+        if ($this->contentType !== null) {
+
+
+            foreach ($this->contentType->getMenuList() as $menu) {
+
+                //(new Debug())->write($menu);
+
+                $btn = new AdminSiteButton($this);
+                $btn->site = new Site();
+                $btn->site->title = $menu->typeLabel;
+//            $btn->site->addParameter(new ContentTypeParameter($menu->typeId));
+                $btn->site->addParameter(new StatusParameter($menu->typeId));
+
+            }
+        }
+
+        //$this->addNextMenu($this->contentType);
 
         /*   protected function addNextStatusMenu(AbstractProcessStatus $status = null)
        {
@@ -52,6 +71,7 @@ class NextMenu extends AbstractHtmlContainer
     }
 
 
+    /*
     protected function addNextMenu(AbstractMenuContentType $status = null)
     {
 
@@ -71,7 +91,7 @@ class NextMenu extends AbstractHtmlContainer
             $this->addNextMenu($status->getNextMenu());
         }
 
-    }
+    }*/
 
 
 }

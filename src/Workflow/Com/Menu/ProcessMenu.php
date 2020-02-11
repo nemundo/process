@@ -12,13 +12,17 @@ class ProcessMenu extends AbstractProcessMenu
 
         $this->loadWorkflowItem();
 
+        /*if ($this->workflowExist) {
+            $this->addSubmenuWithoutCheck($this->workflowStatus);
+        }*/
+
+
         foreach ($this->process->getProcessStatusList() as $status) {
 
             $this->menuFound = false;
 
             if (!$this->workflowExist) {
 
-                //if ($this->workflowStatus->typeId === $status->typeId) {
                 if ($this->process->startContentType->typeId == $status->typeId) {
                     $this->addArrowLabel($status);
                 } else {
@@ -26,6 +30,7 @@ class ProcessMenu extends AbstractProcessMenu
                 }
 
             } else {
+
 
                 $this->addActiveMenu($status);
 
@@ -36,11 +41,17 @@ class ProcessMenu extends AbstractProcessMenu
                     if ($status->editable && !$this->workflowClosed) {
                         $this->addCheckSite($status);
                     } else {
-                        $this->addCheckLabel($status);
+
+                        if ($this->process->getFirstOf($status)!==null) {
+                            $this->addCheckLabel($status);
+                        } else {
+                            $this->addLabel($status);
+                        }
+
+
                     }
 
                 }
-
 
                 $this->addSubmenu($status);
 

@@ -7,6 +7,7 @@ namespace Nemundo\Process\Search\Site;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Core\Language\LanguageCode;
+use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Text\TextBold;
 use Nemundo\Db\Sql\Field\CountField;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
@@ -88,8 +89,13 @@ class SearchSite extends AbstractSite
             $count->filter->andEqual($searchIndexReader->model->wordId, $form->getWordId());
             $searchCount = $count->getCount();
 
+
+            $resultText=[];
+            $resultText[LanguageCode::EN ]= 'Results found';
+            $resultText[LanguageCode::DE]= 'Ergebnisse gefunden';
+
             $p = new Paragraph($page);
-            $p->content = $searchCount . ' Results found';
+            $p->content = $searchCount . ' '.(new Translation())->getText($resultText);  // Results found';
 
 
             $logType = new SearchLogContentType();

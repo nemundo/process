@@ -4,8 +4,12 @@
 namespace Nemundo\Process\Workflow\Content\View;
 
 
+use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Admin\Com\Widget\AdminWidget;
+use Nemundo\Com\TableBuilder\TableRow;
+use Nemundo\Package\FontAwesome\Icon\CheckIcon;
+use Nemundo\Process\Content\Com\Menu\NextMenu;
 use Nemundo\Process\Content\Com\Table\ContentLogTable;
 use Nemundo\Process\Content\Com\Table\SourceTable;
 use Nemundo\Process\Template\Content\File\FileParentContainer;
@@ -103,12 +107,31 @@ class ProcessView extends AbstractProcessView
         }
 
 
+
+        /*
+        $table = new AdminTable($layout->col1);
+        foreach ($this->contentType->getChild() as $contentRow) {
+            $row = new TableRow($table);
+            new CheckIcon($row);
+            $row->addText($contentRow->contentType->contentType);
+        }*/
+
+
+
+
+
+
         $menu = new ProcessMenu($layout->col1);
         $menu->process = $this->contentType;
         $menu->workflowId = $this->dataId;
         $menu->formStatus = $formStatus;
         $menu->workflowStatus = $workflowStatus;
         $menu->site = clone($this->redirectSite);
+
+
+        $menu=new NextMenu($layout->col1);
+        $menu->contentType= $workflowStatus;
+
 
         if ($formStatus !== null) {
             $widget = new AdminWidget($layout->col2);

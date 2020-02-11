@@ -7,15 +7,12 @@ namespace Nemundo\Process\Workflow\Com\Menu;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
 use Nemundo\Com\TableBuilder\TableRow;
-use Nemundo\Html\Block\Div;
 use Nemundo\Html\Container\AbstractContainer;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Html\Formatting\Bold;
 use Nemundo\Package\FontAwesome\Icon\ArrowRightIcon;
 use Nemundo\Package\FontAwesome\Icon\CheckIcon;
-use Nemundo\Process\Workflow\Content\Item\Process\WorkflowItem;
 use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
-use Nemundo\Process\Workflow\Content\Process\WorkflowProcess;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Parameter\StatusParameter;
 use Nemundo\Web\Site\AbstractSite;
@@ -86,12 +83,8 @@ class AbstractProcessMenu extends AbstractHtmlContainer
 
     public function __construct(AbstractContainer $parentContainer = null)
     {
+
         parent::__construct($parentContainer);
-
-       /* $div = new Div($this);
-        $div->content = $this->getClassNameWithoutNamespace();
-*/
-
         $this->table = new AdminTable($this);
 
     }
@@ -100,13 +93,11 @@ class AbstractProcessMenu extends AbstractHtmlContainer
     protected function loadWorkflowItem()
     {
 
-        //$this->workflowItem = $this->process;  // new WorkflowProcess($this->workflowId);
-        $this->workflowExist = $this->process->existItem();  // $this->workflowItem->existWorkflow();
-        $this->workflowClosed =$this->process->isWorkflowClosed();  // $this->workflowItem->isWorkflowClosed();
+        $this->workflowExist = $this->process->existItem();
+        $this->workflowClosed = $this->process->isWorkflowClosed();
         $this->nextStatus = $this->workflowStatus->getNextMenu();
 
     }
-
 
 
     protected function addSubmenu(AbstractProcessStatus $status)
@@ -167,16 +158,14 @@ class AbstractProcessMenu extends AbstractHtmlContainer
     {
 
         if ($status !== null) {
-            //$this->addStatusLabel($status);
             $this->addLabel($status);
             $this->addNextStatusMenu($status->getNextMenu());
         }
 
     }
 
-    protected function addActiveMenu(AbstractProcessStatus $status=null)
+    protected function addActiveMenu(AbstractProcessStatus $status = null)
     {
-
 
         if (!$this->menuFound && !$this->workflowClosed) {
 
@@ -270,9 +259,7 @@ class AbstractProcessMenu extends AbstractHtmlContainer
 
                 $row = new TableRow($this->table);
                 new ArrowRightIcon($row);
-                //$row->addText($status->typeLabel);
                 $row->addBoldText($status->typeLabel);
-
                 $row->addEmpty();
 
                 $this->menuFound = true;
