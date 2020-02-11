@@ -143,6 +143,7 @@ class SearchSite extends AbstractSite
 
                 $row->addText($bold->getBoldText($contentType->getSubject()));
                 $row->addText($indexRow->content->contentType->contentType);
+                $row->addText($indexRow->content->contentType->phpClass);
 
                 if ($contentType->hasViewSite()) {
                     $site = $contentType->getViewSite();

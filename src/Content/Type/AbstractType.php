@@ -33,7 +33,6 @@ abstract class AbstractType extends AbstractBaseClass
     //protected $ignoreMode = false;
 
 
-
     /**
      * @var string
      */
@@ -62,7 +61,8 @@ abstract class AbstractType extends AbstractBaseClass
 
     // fromDataId
     // fromContentId
-    public function loadFromDataId($dataId=null) {
+    public function loadFromDataId($dataId = null)
+    {
 
         $this->dataId = $dataId;
         if ($this->dataId !== null) {
@@ -163,15 +163,15 @@ abstract class AbstractType extends AbstractBaseClass
         $view = null;
         if ($this->hasView()) {
 
-            if (class_exists($this->viewClass)) {
+            //if (class_exists($this->viewClass)) {
 
-            /** @var AbstractContentView $view */
-            $view = new $this->viewClass($parent);
-            $view->dataId = $this->dataId;
-            $view->contentType = $this;
-            } else {
+                /** @var AbstractContentView $view */
+                $view = new $this->viewClass($parent);
+                $view->dataId = $this->dataId;
+                $view->contentType = $this;
+            /*} else {
                 (new LogMessage())->writeError('No View Class. Class: ' . $this->getClassName());
-            }
+            }*/
 
         } else {
             //(new LogMessage())->writeError('No View Class. Class: ' . $this->getClassName());
@@ -210,14 +210,13 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
-    public function getSubjectViewSite() {
-
+    public function getSubjectViewSite()
+    {
 
         $site = $this->getViewSite();
         $site->title = $this->getSubject();
 
         return $site;
-
 
     }
 
@@ -225,29 +224,11 @@ abstract class AbstractType extends AbstractBaseClass
     public function getViewSite()
     {
 
-        /*if ($this->viewSite == null) {
-            (new LogMessage())->writeError('No View Site'.$this->getClassName());
-        }
-
-        if ($this->parameterClass == null) {
-            (new LogMessage())->writeError('No Parameter'.$this->getClassName());
-        }*/
-
-
-        //$parameter = null;
         $site = null;
-
-        /*if ($this->parameterClass !== null) {
-            /** @var AbstractUrlParameter $parameter */
-            //$parameter = new $this->parameterClass($this->dataId);
-        //}
 
         if ($this->viewSite !== null) {
             $site = clone($this->viewSite);
-//            $site->addParameter($parameter);
             $site->addParameter($this->getParameter());
-
-            //$site->title = $this->getSubject($this->dataId);
         }
 
         return $site;
@@ -255,7 +236,8 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
-    protected function getParameter() {
+    protected function getParameter()
+    {
 
         $parameter = null;
         if ($this->parameterClass !== null) {
@@ -263,8 +245,8 @@ abstract class AbstractType extends AbstractBaseClass
             $parameter = new $this->parameterClass($this->dataId);
         }
         return $parameter;
-    }
 
+    }
 
 
     protected function onDelete()

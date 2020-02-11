@@ -23,10 +23,46 @@ abstract class AbstractLargeTextProcessStatus extends AbstractProcessStatus
     }
 
 
+    protected function onSearchIndex()
+    {
+        $largeTextRow = $this->getDataRow();
+        $this->addSearchText($largeTextRow->largeText);
+    }
+
+
     public function getDataRow()
     {
         return (new LargeTextReader())->getRowById($this->dataId);
 
     }
+
+
+    public function hasViewSite()
+    {
+        return true;
+    }
+
+    /*  public function getSubjectViewSite()
+      {
+          return $this->getParentContentType()->getSubjectViewSite();
+      }*/
+
+    public function getViewSite()
+    {
+
+        return $this->getParentContentType()->getViewSite();
+
+    }
+
+
+    /*
+    public function getViewSite()
+    {
+
+
+        return $this->getParentContentType()->getViewSite();
+
+
+    }*/
 
 }

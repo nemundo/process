@@ -4,10 +4,6 @@
 namespace Nemundo\Process\Content\Type;
 
 
-use Nemundo\App\Performance\PerformanceStopwatch;
-use Nemundo\Core\Debug\Debug;
-use Nemundo\Process\Content\Data\Content\Content;
-use Nemundo\Process\Content\Data\Content\ContentUpdate;
 use Nemundo\Process\Content\Data\Tree\TreeDelete;
 use Nemundo\Process\Content\Writer\TreeWriter;
 
@@ -38,8 +34,8 @@ abstract class AbstractTreeContentType extends AbstractContentType
     }
 
 
-
-    protected function saveTree() {
+    protected function saveTree()
+    {
 
         if ($this->parentId !== null) {
             $writer = new TreeWriter();
@@ -51,7 +47,8 @@ abstract class AbstractTreeContentType extends AbstractContentType
     }
 
 
-    protected function onFinished() {
+    protected function onFinished()
+    {
 
     }
 
@@ -93,15 +90,26 @@ abstract class AbstractTreeContentType extends AbstractContentType
     }
 
 
-    public function exportJson() {
+    public function exportJson()
+    {
 
-        $data['id']=$this->dataId;
-        $data['subject']=$this->getSubject();
+        $data['id'] = $this->dataId;
+        $data['subject'] = $this->getSubject();
 
         return $data;
 
 
+    }
 
+
+    public function setActive()
+    {
+
+    }
+
+
+    public function setInactive()
+    {
     }
 
 

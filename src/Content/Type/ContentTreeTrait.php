@@ -262,9 +262,16 @@ trait ContentTreeTrait
     public function getParentContentType()
     {
 
+        $count=0;
+
         $parentContentType = null;
         foreach ($this->getParentContent() as $contentRow) {
             $parentContentType = $contentRow->getContentType();
+        $count++;
+        }
+
+        if ($count>1) {
+            (new LogMessage())->writeError('More than one Parent');
         }
 
         return $parentContentType;

@@ -95,8 +95,9 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         $this->new->title[LanguageCode::DE] = 'Neu';
         $this->new->actionName = 'new';
         $this->new->onAction = function () {
-            $form = $this->contentType->getForm($this);
-            $form->redirectSite = $this->index;
+
+            $this->loadNew();
+
         };
 
         $this->edit = new ActionSite($this);
@@ -106,11 +107,8 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         $this->edit->onAction = function () {
 
             $dataId = (new DataIdParameter())->getValue();
+            $this->loadEdit($dataId);
 
-            $contentType = clone($this->contentType);
-            $contentType->loadFromDataId($dataId);
-            $form = $contentType->getForm($this);
-            $form->redirectSite = $this->index;
 
         };
 
@@ -181,6 +179,27 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
 
     protected function loadIndex()
     {
+
+    }
+
+
+    protected function loadNew() {
+
+        $form = $this->contentType->getForm($this);
+        $form->redirectSite = $this->index;
+
+    }
+
+
+
+    protected function loadEdit($dataId) {
+
+
+        $contentType = clone($this->contentType);
+        $contentType->loadFromDataId($dataId);
+        $form = $contentType->getForm($this);
+        $form->redirectSite = $this->index;
+
 
     }
 
