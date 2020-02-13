@@ -16,6 +16,7 @@ use Nemundo\Process\Template\Content\File\FileContentType;
 use Nemundo\Process\Template\Content\Html\HtmlContentType;
 use Nemundo\Process\Template\Content\Image\ImageContentType;
 use Nemundo\Process\Template\Content\LargeText\LargeTextContentType;
+use Nemundo\Process\Template\Content\MultiFile\MultiFileContentType;
 use Nemundo\Process\Template\Content\Text\TextContentType;
 use Nemundo\Process\Template\Content\Video\VideoContentType;
 use Nemundo\Process\Template\Content\YouTube\YouTubeContentType;
@@ -47,6 +48,11 @@ class WikiInstall extends AbstractInstall
         $setup->addContentType(new YouTubeContentType());
         $setup->addContentType(new ImageContentType());
         $setup->addContentType(new VideoContentType());
+
+        (new WikiSetup())
+        ->addContentType(new TextContentType())
+            ->addContentType(new MultiFileContentType());
+
 
 
         /*

@@ -10,13 +10,8 @@ use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Template\Content\File\AbstractFileContentForm;
 
 
-class AudioContentForm extends AbstractFileContentForm  // AbstractContentForm
+class AudioContentForm extends AbstractFileContentForm
 {
-
-    /**
-     * @var BootstrapFileUpload
-     */
-    //private $file;
 
     public function getContent()
     {

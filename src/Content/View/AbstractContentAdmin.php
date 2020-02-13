@@ -18,6 +18,7 @@ use Nemundo\Process\Content\Com\Table\ContentLogTable;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentGroup\ContentGroupReader;
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Group\Content\GroupContentForm;
 use Nemundo\Web\Action\AbstractActionPanel;
 use Nemundo\Web\Action\ActionSite;
@@ -29,7 +30,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
 {
 
     /**
-     * @var AbstractContentType
+     * @var AbstractTreeContentType
      */
     public $contentType;
 
@@ -157,6 +158,10 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         $this->view->actionName = 'view';
         $this->view->onAction = function () {
 
+            $btn = new AdminSiteButton($this);
+            $btn->content='Zurück';
+            $btn->site = $this->index;
+
             $dataId = (new DataIdParameter())->getValue();
             $this->loadView($dataId);
 
@@ -277,10 +282,13 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
 
 
     protected function loadActive($dataId) {
-
+$this->contentType->setActive();
     }
 
     protected function loadInactive($dataId) {
+
+        $this->contentType->loadFromDataId($dataId)->setInactive();
+
 
     }
 

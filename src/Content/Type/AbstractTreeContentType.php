@@ -102,6 +102,9 @@ abstract class AbstractTreeContentType extends AbstractContentType
     }
 
 
+    // onActive
+    // onInactive
+
     public function setActive()
     {
 

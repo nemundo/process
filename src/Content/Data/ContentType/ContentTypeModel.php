@@ -16,6 +16,11 @@ public $phpClass;
 */
 public $contentType;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $setupStatus;
+
 protected function loadModel() {
 $this->tableName = "process_content_type";
 $this->aliasTableName = "process_content_type";
@@ -49,6 +54,13 @@ $this->contentType->aliasFieldName = "process_content_type_content_type";
 $this->contentType->label = "Content Type";
 $this->contentType->allowNullValue = false;
 $this->contentType->length = 255;
+
+$this->setupStatus = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->setupStatus->tableName = "process_content_type";
+$this->setupStatus->fieldName = "setup_status";
+$this->setupStatus->aliasFieldName = "process_content_type_setup_status";
+$this->setupStatus->label = "Setup Status";
+$this->setupStatus->allowNullValue = false;
 
 }
 }

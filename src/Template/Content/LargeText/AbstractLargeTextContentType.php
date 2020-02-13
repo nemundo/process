@@ -12,7 +12,9 @@ use Nemundo\Process\Template\Data\LargeText\LargeTextUpdate;
 abstract class AbstractLargeTextContentType extends AbstractTreeContentType
 {
 
-    protected $largeText;
+    //protected $largeText;
+
+    public $largeText;
 
 
     protected $searchIndex = false;
@@ -20,6 +22,7 @@ abstract class AbstractLargeTextContentType extends AbstractTreeContentType
     public function __construct($dataId = null)
     {
         $this->formClass = LargeTextContentForm::class;
+        $this->viewClass=LargeTextContentView::class;
         parent::__construct($dataId);
     }
 
@@ -41,8 +44,6 @@ abstract class AbstractLargeTextContentType extends AbstractTreeContentType
         $this->addSearchText($row->largeText);
 
         $this->saveSearchContent($row->largeText);
-
-
 
 
     }

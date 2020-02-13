@@ -190,6 +190,50 @@
             "index": []
         },
         {
+            "template": "default",
+            "model_id": "567a233c-9974-4f07-864a-e958d2d62d48",
+            "label": "Template Date",
+            "class_name": "TemplateDate",
+            "table_name": "template_template_date",
+            "namespace": "Nemundo\\Process\\Template\\Data\\TemplateDate",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "date",
+                    "label": "Date",
+                    "field_name": "date",
+                    "variable_name": "date",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "52ddfb03-0031-43c5-a6f2-18ebeb08d83a",
+            "label": "Template Decimal Number",
+            "class_name": "TemplateDecimalNumber",
+            "table_name": "template_template_decimal_number",
+            "namespace": "Nemundo\\Process\\Template\\Data\\TemplateDecimalNumber",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "decimal_number",
+                    "label": "Decimal Number",
+                    "field_name": "decimal_number",
+                    "variable_name": "decimalNumber",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
             "template": "active_model",
             "model_id": "65744474-2555-49c2-8aec-ea15d7e842a1",
             "label": "Template File",
@@ -285,6 +329,67 @@
         },
         {
             "template": "default",
+            "model_id": "8e0a7b13-1875-459f-8a90-e1e7fd122cc8",
+            "label": "Template Multi File",
+            "class_name": "TemplateMultiFile",
+            "table_name": "template_template_multi_file",
+            "namespace": "Nemundo\\Process\\Template\\Data\\TemplateMultiFile",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Data Content",
+                    "field_name": "data_content",
+                    "variable_name": "dataContent",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": "redirect_filename",
+                    "label": "File",
+                    "field_name": "file",
+                    "variable_name": "file",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "content_data",
+                    "index_type": "index",
+                    "field_name": [
+                        "data_content"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
+            "model_id": "e3d47fbe-0458-45c4-8a5a-babd202e58ed",
+            "label": "Template Number",
+            "class_name": "TemplateNumber",
+            "table_name": "template_template_number",
+            "namespace": "Nemundo\\Process\\Template\\Data\\TemplateNumber",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "number",
+                    "label": "Number",
+                    "field_name": "number",
+                    "variable_name": "number",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "ed8adf06-bcee-420f-84eb-45944ee6192f",
             "label": "Template Text",
             "class_name": "TemplateText",
@@ -302,6 +407,28 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "length": "255"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "e7ae3aea-c4b1-4b5f-95ee-dea3639dc0bb",
+            "label": "Template Yes No",
+            "class_name": "TemplateYesNo",
+            "table_name": "template_template_yes_no",
+            "namespace": "Nemundo\\Process\\Template\\Data\\TemplateYesNo",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "yes_no",
+                    "label": "Yes No",
+                    "field_name": "yes_no",
+                    "variable_name": "yesNo",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": []

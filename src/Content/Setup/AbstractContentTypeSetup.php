@@ -10,7 +10,6 @@ use Nemundo\Process\Content\Data\Content\ContentCount;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentType\ContentType;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeDelete;
-use Nemundo\Process\Content\Script\ContentCheckScript;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Search\Data\WordContentType\WordContentTypeDelete;
 
@@ -30,6 +29,7 @@ abstract class AbstractContentTypeSetup extends AbstractBase
         $data->id = $contentType->typeId;
         $data->contentType = $contentLabel;
         $data->phpClass = $contentType->getClassName();
+        $data->setupStatus = true;
         $data->save();
 
         return $this;
@@ -62,10 +62,8 @@ abstract class AbstractContentTypeSetup extends AbstractBase
 
 
         $delete = new WordContentTypeDelete();
-        $delete->filter->andEqual($delete->model->contentTypeId,$contentType->typeId);
+        $delete->filter->andEqual($delete->model->contentTypeId, $contentType->typeId);
         $delete->delete();
-
-
 
 
         return $this;
@@ -81,9 +79,6 @@ abstract class AbstractContentTypeSetup extends AbstractBase
 
         return $this;
     }
-
-
-
 
 
 }

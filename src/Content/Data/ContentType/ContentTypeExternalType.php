@@ -16,6 +16,11 @@ public $phpClass;
 */
 public $contentType;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $setupStatus;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = ContentTypeModel::class;
@@ -41,6 +46,13 @@ $this->contentType->tableName = $this->parentFieldName . "_" . $this->externalTa
 $this->contentType->aliasFieldName = $this->contentType->tableName . "_" . $this->contentType->fieldName;
 $this->contentType->label = "Content Type";
 $this->addType($this->contentType);
+
+$this->setupStatus = new \Nemundo\Model\Type\Number\YesNoType();
+$this->setupStatus->fieldName = "setup_status";
+$this->setupStatus->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->setupStatus->aliasFieldName = $this->setupStatus->tableName . "_" . $this->setupStatus->fieldName;
+$this->setupStatus->label = "Setup Status";
+$this->addType($this->setupStatus);
 
 }
 }

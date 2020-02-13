@@ -70,7 +70,7 @@ abstract class AbstractType extends AbstractBaseClass
             $this->onLoad();
         }
 
-        //$this->onLoad();
+        return $this;
 
     }
 

@@ -23,6 +23,7 @@ use Nemundo\Process\Template\Content\Item\CreateItemContentType;
 use Nemundo\Process\Template\Content\Item\EditItemContentType;
 use Nemundo\Process\Template\Content\Item\InactiveItemContentType;
 use Nemundo\Process\Template\Content\LargeText\LargeTextContentType;
+use Nemundo\Process\Template\Content\MultiFile\MultiFileContentType;
 use Nemundo\Process\Template\Content\SourceRemove\SourceRemoveContentType;
 use Nemundo\Process\Template\Content\Text\TextContentType;
 use Nemundo\Process\Template\Content\User\UserContentType;
@@ -31,8 +32,8 @@ use Nemundo\Process\Template\Content\VersionText\VersionTextContentType;
 use Nemundo\Process\Template\Content\Video\VideoContentType;
 use Nemundo\Process\Template\Content\YouTube\YouTubeContentType;
 use Nemundo\Process\Template\Data\TemplateCollection;
+use Nemundo\Process\Template\MultiImage\MultiImageContentType;
 use Nemundo\Process\Template\Script\TemplateTestScript;
-use Nemundo\Process\Template\Status\DeadlineChangeProcessStatus;
 use Nemundo\Process\Template\Status\SubjectChange\SubjectChangeProcessStatus;
 use Nemundo\Process\Template\Status\WorkflowDelete\WorkflowDeleteStatus;
 use Nemundo\Project\Install\AbstractInstall;
@@ -57,6 +58,14 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new AudioContentType());
         $setup->addContentType(new YouTubeContentType());
         $setup->addContentType(new ImageContentType());
+
+
+        (new ContentTypeSetup())
+            ->addContentType(new MultiFileContentType());
+
+        //    ->addContentType(new MultiImageContentType());
+
+
 
 
 

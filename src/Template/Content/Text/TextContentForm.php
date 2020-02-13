@@ -4,7 +4,9 @@
 namespace Nemundo\Process\Template\Content\Text;
 
 
+use Nemundo\Core\Random\RandomText;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
+use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 
 class TextContentForm extends AbstractContentForm
@@ -18,13 +20,17 @@ class TextContentForm extends AbstractContentForm
     /**
      * @var BootstrapTextBox
      */
-    private $text;
+    protected $text;
 
     public function getContent()
     {
 
         $this->text = new BootstrapTextBox($this);
         $this->text->label = 'Text';
+
+        if (ProcessConfig::$debugMode) {
+            $this->text->value = (new RandomText())->getText();
+        }
 
         return parent::getContent();
 
@@ -44,7 +50,6 @@ class TextContentForm extends AbstractContentForm
     {
 
         $this->contentType->loadFromDataId($this->dataId);
-        //$type=new TextContentType($this->dataId);
         $this->contentType->parentId = $this->parentId;
         $this->contentType->text = $this->text->getValue();
         $this->contentType->saveType();

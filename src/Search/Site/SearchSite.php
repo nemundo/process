@@ -56,19 +56,8 @@ class SearchSite extends AbstractSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
-
-        //$dropdown = new ContentTypeDropdown($page);
-        //$dropdown->redirectSite = ContentNewSite::$site;
-        //$dropdown->addContentType(new ToDoProcess());
-        //$dropdown->addContentType(new WikiPageContentType());
-
-
         $form = new ContentSearchForm($page);
-
-
         if ($form->hasValue()) {
-
-            // redefine nach content type
 
             $searchIndexReader = new SearchIndexPaginationReader();
             $searchIndexReader->model->loadContent();
@@ -83,8 +72,6 @@ class SearchSite extends AbstractSite
             $searchIndexReader->paginationLimit =ProcessConfig::PAGINATION_LIMIT;
 
 
-            // Search Filter
-
             $count = new SearchIndexCount();
             $count->filter->andEqual($searchIndexReader->model->wordId, $form->getWordId());
             $searchCount = $count->getCount();
@@ -95,7 +82,7 @@ class SearchSite extends AbstractSite
             $resultText[LanguageCode::DE]= 'Ergebnisse gefunden';
 
             $p = new Paragraph($page);
-            $p->content = $searchCount . ' '.(new Translation())->getText($resultText);  // Results found';
+            $p->content = $searchCount . ' '.(new Translation())->getText($resultText);
 
 
             $logType = new SearchLogContentType();
