@@ -7,8 +7,6 @@ namespace Nemundo\Process\Template\Content\Comment;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapLargeTextBox;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 
-use Nemundo\Process\Template\Status\CommentProcessStatus;
-
 class CommentForm extends AbstractContentForm
 {
 

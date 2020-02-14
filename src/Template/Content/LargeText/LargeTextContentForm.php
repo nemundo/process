@@ -42,10 +42,11 @@ class LargeTextContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        $type = new LargeTextContentType($this->dataId);
-        $type->parentId = $this->parentId;
-        $type->largeText = $this->largeText->getValue();
-        $type->saveType();
+        //$type = new LargeTextContentType($this->dataId);
+        $this->contentType->loadFromDataId($this->dataId);
+        $this->contentType->parentId = $this->parentId;
+        $this->contentType->largeText = $this->largeText->getValue();
+        $this->contentType->saveType();
 
     }
 

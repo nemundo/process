@@ -23,9 +23,22 @@ abstract class AbstractFileContentForm extends AbstractContentForm
 
         $this->file = new BootstrapFileUpload($this);
         $this->file->label = 'File';
-        $this->file->multiUpload = true;
+        $this->file->multiUpload = false;  // true;
 
         parent::loadContainer();
+    }
+
+    protected function onSubmit()
+    {
+
+
+            //$type = new AudioContentType();
+            $this->contentType->parentId = $this->parentId;
+            $this->contentType->fileRequest = $this->file->getFileRequest();
+            $this->contentType->saveType();
+
+     //   }
+
     }
 
 }

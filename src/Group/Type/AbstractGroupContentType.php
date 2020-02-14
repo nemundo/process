@@ -10,7 +10,6 @@ use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Group\Content\GroupContentForm;
 use Nemundo\Process\Group\Content\GroupContentView;
 use Nemundo\Process\Group\Data\Group\Group;
-use Nemundo\Process\Group\Data\Group\GroupCount;
 use Nemundo\Process\Group\Data\Group\GroupDelete;
 use Nemundo\Process\Group\Data\Group\GroupReader;
 use Nemundo\Process\Group\Data\GroupUser\GroupUser;
@@ -50,11 +49,11 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     }
 
 
+    public function fromGroupId($groupId)
+    {
 
-    public function fromGroupId($groupId) {
 
-
-        $this->groupId=$groupId;
+        $this->groupId = $groupId;
 
     }
 
@@ -78,58 +77,21 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     protected function saveGroup()
     {
 
-        /*if ($this->dataId == null) {
-            $this->dataId = (new UniqueId())->getUniqueId();
-        }*/
-
-        /*
-
-        if ($this->group==null) {
-          $this->group=$this->getSubject();
-        }*/
-
-
         if ($this->groupId == null) {
             $this->groupId = (new UniqueId())->getUniqueId();
         }
-
 
         $data = new Group();
         $data->updateOnDuplicate = true;
         $data->id = $this->groupId;
         $data->group = $this->getGroupLabel();
-        $data->groupTypeId = $this->typeId;  //groupType->id;
+        $data->groupTypeId = $this->typeId;
         $data->save();
 
     }
 
 
-
-    /*
-    public function saveType()
-    {
-
-        //$this->saveGroup();
-        //parent::saveType();
-
-        //   (new Debug())->write($this->dataId);
-
-        if ($this->dataId !== null) {
-            $count = new GroupCount();
-//            $count->filter->andEqual($count->model->id, $this->dataId);
-            $count->filter->andEqual($count->model->id, $this->groupId);
-
-            if ($count->getCount() == 1) {
-                $this->createMode = false;
-            }
-        }
-
-        parent::saveType();
-
-    }*/
-
-
-     protected function onSearchIndex()
+    protected function onSearchIndex()
     {
 
         if ($this->searchable) {
@@ -142,9 +104,6 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
 
     protected function onDelete()
     {
-
-        // $delete = new GroupUserDelete();
-        // $delete->
 
         (new GroupDelete())->deleteById($this->dataId);
 
@@ -164,8 +123,8 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     }
 
 
-    public function getGroupId() {
-
+    public function getGroupId()
+    {
 
         if ($this->groupId == null) {
             $this->groupId = (new UniqueId())->getUniqueId();
@@ -195,7 +154,7 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
 
         $data = new GroupUser();
         $data->ignoreIfExists = true;
-        $data->groupId =$this->groupId;  // $this->dataId;
+        $data->groupId = $this->groupId;
         $data->userId = $userId;
         $data->save();
 

@@ -4,6 +4,7 @@
 namespace Nemundo\Process\App\Assignment\Content;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Html\Formatting\Strike;
 use Nemundo\Process\App\Assignment\Data\Assignment\Assignment;
@@ -18,10 +19,8 @@ use Nemundo\Process\Content\Type\AbstractSequenceContentType;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
-abstract class AbstractAssignmentContentType extends AbstractTreeContentType  // AbstractProcessStatus
+abstract class AbstractAssignmentContentType extends AbstractTreeContentType
 {
-
-    //public $message;
 
     public $groupId;
 
@@ -30,7 +29,6 @@ abstract class AbstractAssignmentContentType extends AbstractTreeContentType  //
      */
     public $deadline;
 
-    //  abstract public function getMessage();
 
     public function __construct($dataId = null)
     {
@@ -70,7 +68,7 @@ abstract class AbstractAssignmentContentType extends AbstractTreeContentType  //
         $data->contentId = $this->getContentId();
         $this->dataId = $data->save();
 
-
+      //  (new Debug())->write('save');
 
         // send email
 

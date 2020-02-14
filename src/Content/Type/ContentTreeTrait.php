@@ -119,10 +119,11 @@ trait ContentTreeTrait
     }
 
 
-    public function existsChildOf(AbstractTreeContentType $contentType) {
+    public function existsChildOf(AbstractTreeContentType $contentType)
+    {
 
-        $value=false;
-        if ($this->getCountOf($contentType)>0) {
+        $value = false;
+        if ($this->getCountOf($contentType) > 0) {
             $value = true;
         }
         return $value;
@@ -262,16 +263,20 @@ trait ContentTreeTrait
     public function getParentContentType()
     {
 
-        $count=0;
+        $count = 0;
 
         $parentContentType = null;
         foreach ($this->getParentContent() as $contentRow) {
             $parentContentType = $contentRow->getContentType();
-        $count++;
+            $count++;
         }
 
-        if ($count>1) {
+        if ($count > 1) {
             (new LogMessage())->writeError('More than one Parent');
+        }
+
+        if ($parentContentType == null) {
+            (new LogMessage())->writeError('No parent');
         }
 
         return $parentContentType;

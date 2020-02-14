@@ -6,6 +6,7 @@ namespace Nemundo\Process\Content\Setup;
 
 use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Core\Language\Translation;
+use Nemundo\Process\Content\Collection\AbstractContentTypeCollection;
 use Nemundo\Process\Content\Data\Content\ContentDelete;
 use Nemundo\Process\Content\Data\ContentType\ContentType;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeDelete;
@@ -19,6 +20,16 @@ class ContentTypeSetup extends AbstractContentTypeSetup
     {
          parent::addContentType($contentType);
         return $this;
+    }
+
+
+    public function addContentTypeCollection(AbstractContentTypeCollection $collection) {
+
+        foreach ($collection->getContentTypeList() as $contentType) {
+            $this->addContentType($contentType);
+        }
+
+
     }
 
 

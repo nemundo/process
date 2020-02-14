@@ -14,10 +14,11 @@ abstract class AbstractAudioContentType extends AbstractFileContentType
     public function __construct($dataId = null)
     {
         $this->formClass=AudioContentForm::class;
-        $this->viewClass=AudioContentView::class;
-
 
         parent::__construct($dataId);
+
+        $this->viewClass=AudioContentView::class;
+
     }
 
 /*
