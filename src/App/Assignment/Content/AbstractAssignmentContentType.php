@@ -68,9 +68,7 @@ abstract class AbstractAssignmentContentType extends AbstractTreeContentType
         $data->contentId = $this->getContentId();
         $this->dataId = $data->save();
 
-      //  (new Debug())->write('save');
-
-        // send email
+       // send email
 
 
     }

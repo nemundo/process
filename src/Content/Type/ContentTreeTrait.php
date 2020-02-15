@@ -6,12 +6,14 @@ namespace Nemundo\Process\Content\Type;
 
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Db\Sql\Order\SortOrder;
+use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\Tree\Tree;
 use Nemundo\Process\Content\Data\Tree\TreeCount;
 use Nemundo\Process\Content\Data\Tree\TreeDelete;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Data\Tree\TreeValue;
 use Nemundo\Process\Content\Row\ContentCustomRow;
+use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
 
 trait ContentTreeTrait
 {
@@ -263,9 +265,19 @@ trait ContentTreeTrait
     public function getParentContentType()
     {
 
-        $count = 0;
+        //$count = 0;
 
-        $parentContentType = null;
+        //$parentContentType = null;
+
+
+        $contentReader = new ContentReader();
+        $contentReader->model->loadContentType();
+
+        /** @var AbstractTreeContentType $parentContentType */
+        $parentContentType = $contentReader->getRowById($this->getParentId())->getContentType();
+
+     /*
+
         foreach ($this->getParentContent() as $contentRow) {
             $parentContentType = $contentRow->getContentType();
             $count++;
@@ -277,7 +289,7 @@ trait ContentTreeTrait
 
         if ($parentContentType == null) {
             (new LogMessage())->writeError('No parent');
-        }
+        }*/
 
         return $parentContentType;
 

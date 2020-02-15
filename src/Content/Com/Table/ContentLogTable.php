@@ -60,6 +60,7 @@ class ContentLogTable extends AbstractHtmlContainer
         $reader->model->loadChild();
         $reader->model->child->loadContentType();
         $reader->model->child->loadUser();
+
         $reader->filter->andEqual($reader->model->parentId, $this->contentType->getContentId());
 
 
@@ -76,7 +77,7 @@ class ContentLogTable extends AbstractHtmlContainer
             $reader->filter->andFilter($filter);
         }
 
-        //$reader->addOrder($reader->model->itemOrder, $sortOrder);
+        $reader->addOrder($reader->model->itemOrder);
 
         foreach ($reader->getData() as $treeRow) {
 
@@ -90,6 +91,8 @@ class ContentLogTable extends AbstractHtmlContainer
             $row->addText($contentType->typeLabel);
             $row->addText($contentType->getSubject());
             $row->addText($contentType->getText());
+
+            $contentType->getView($row);
 
             //$row->addText($contentRow->user->displayName . ' ' . $contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
             $row->addText($treeRow->child->user->displayName . ' ' .$treeRow->child->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());

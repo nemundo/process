@@ -4,7 +4,11 @@
 namespace Nemundo\Process\Content\Type;
 
 
+use Nemundo\Core\Debug\Debug;
+use Nemundo\Core\Log\LogMessage;
+use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Process\Content\Data\Tree\TreeDelete;
+use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Content\Writer\TreeWriter;
 
 
@@ -21,6 +25,9 @@ abstract class AbstractTreeContentType extends AbstractContentType
 
     public function saveType()
     {
+
+        //(new Debug())->write($this->dataId);
+        //exit;
 
         if ($this->existItem()) {
             $this->createMode = false;
@@ -107,13 +114,48 @@ abstract class AbstractTreeContentType extends AbstractContentType
 
     public function setActive()
     {
-
+$this->onActive();
     }
 
 
     public function setInactive()
     {
+        $this->onInactive();
     }
+
+
+    protected function onActive() {
+
+    }
+
+    protected function onInactive() {
+
+    }
+
+
+
+    public function getForm(AbstractHtmlContainer $parent)
+    {
+
+        if ($this->formClass == null) {
+            (new LogMessage())->writeError('No Form' . $this->getClassName());
+        }
+
+        /** @var AbstractContentForm $form */
+        $form = new $this->formClass($parent);
+
+        if (!$this->createMode) {
+            $form->dataId = $this->dataId;
+        }
+        $form->contentType = $this;
+        $form->parentId = $this->parentId;
+        $form->createMode = $this->createMode;
+
+
+        return $form;
+
+    }
+
 
 
 }

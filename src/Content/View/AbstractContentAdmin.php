@@ -17,14 +17,11 @@ use Nemundo\Process\Content\Com\Form\ContentGroupForm;
 use Nemundo\Process\Content\Com\Table\ContentLogTable;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentGroup\ContentGroupReader;
-use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
-use Nemundo\Process\Group\Content\GroupContentForm;
 use Nemundo\Web\Action\AbstractActionPanel;
 use Nemundo\Web\Action\ActionSite;
 use Nemundo\Web\Site\Site;
 use Nemundo\Web\Url\UrlReferer;
-use Nemundo\Workflow\App\Workflow\Com\Table\WorkflowLogTable;
 
 abstract class AbstractContentAdmin extends AbstractActionPanel
 {
@@ -123,7 +120,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
             $dataId = (new DataIdParameter())->getValue();
             $this->loadDelete($dataId);
             (new UrlReferer())->redirect();
-         
+
         };
 
 
@@ -159,7 +156,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         $this->view->onAction = function () {
 
             $btn = new AdminSiteButton($this);
-            $btn->content='Zurück';
+            $btn->content = 'Zurück';
             $btn->site = $this->index;
 
             $dataId = (new DataIdParameter())->getValue();
@@ -178,7 +175,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
             $this->loadAccess($dataId);
 
         };
-        
+
     }
 
 
@@ -188,7 +185,8 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
     }
 
 
-    protected function loadNew() {
+    protected function loadNew()
+    {
 
         $form = $this->contentType->getForm($this);
         $form->redirectSite = $this->index;
@@ -196,9 +194,8 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
     }
 
 
-
-    protected function loadEdit($dataId) {
-
+    protected function loadEdit($dataId)
+    {
 
         $contentType = clone($this->contentType);
         $contentType->loadFromDataId($dataId);
@@ -208,8 +205,9 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
 
     }
 
-    
-    protected function loadView($dataId) {
+
+    protected function loadView($dataId)
+    {
 
         $contentType = clone($this->contentType);
         $contentType->loadFromDataId($dataId);
@@ -235,13 +233,10 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         $table->addLabelValue($contentReader->model->dateTime->label, $contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
 
         $log = new ContentLogTable($this);
-        $log->contentType =   $contentType ;
-
-
+        $log->contentType = $contentType;
 
 
     }
-
 
 
     protected function loadAccess($dataId)
@@ -253,7 +248,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
 
         $form = new ContentGroupForm($this);
         $form->contentId = $contentType->getContentId();
-        $form->redirectSite=new Site();
+        $form->redirectSite = new Site();
 
         $table = new AdminTable($this);
 
@@ -266,7 +261,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         $contentGroupReader->filter->andEqual($contentGroupReader->model->contentId, $contentType->getContentId());
         foreach ($contentGroupReader->getData() as $contentGroupRow) {
 
-            $row=new TableRow($table);
+            $row = new TableRow($table);
             $row->addText($contentGroupRow->group->group);
 
         }
@@ -274,26 +269,25 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         // remove
 
 
-
-
     }
 
 
-
-
-    protected function loadActive($dataId) {
-$this->contentType->setActive();
+    protected function loadActive($dataId)
+    {
+        $this->contentType->loadFromDataId($dataId)->setActive();
     }
 
-    protected function loadInactive($dataId) {
+    protected function loadInactive($dataId)
+    {
 
         $this->contentType->loadFromDataId($dataId)->setInactive();
 
 
     }
 
-    protected function loadDelete($dataId) {
-
+    protected function loadDelete($dataId)
+    {
+        $this->contentType->loadFromDataId($dataId)->deleteType();
     }
 
 
@@ -354,7 +348,6 @@ $this->contentType->setActive();
         return $site;
 
     }
-
 
 
 }

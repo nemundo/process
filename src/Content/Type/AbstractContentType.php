@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Content\Type;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Random\UniqueId;
@@ -120,12 +121,21 @@ abstract class AbstractContentType extends AbstractType
 
     public function existItem()
     {
-        return false;
+        //return false;
+        $value=false;
+        if ($this->dataId !== null) {
+            $value = true;
+        }
+
+        return $value;
+
     }
 
 
     public function saveType()
     {
+
+
 
         if ($this->existItem()) {
             $this->createMode = false;
@@ -155,6 +165,8 @@ abstract class AbstractContentType extends AbstractType
             $update->dataId = $this->dataId;
             $update->subject = $this->getSubject();
             $update->updateById($this->contentId);
+
+
             //$stop->stopStopwatch();
 
             /*$log = new CreateItemContentType();
