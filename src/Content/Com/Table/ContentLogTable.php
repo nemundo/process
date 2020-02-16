@@ -90,9 +90,9 @@ class ContentLogTable extends AbstractHtmlContainer
             $row = new BootstrapClickableTableRow($table);
             $row->addText($contentType->typeLabel);
             $row->addText($contentType->getSubject());
-            $row->addText($contentType->getText());
+            //$row->addText($contentType->getText());
 
-            $contentType->getView($row);
+            //$contentType->getView($row);
 
             //$row->addText($contentRow->user->displayName . ' ' . $contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
             $row->addText($treeRow->child->user->displayName . ' ' .$treeRow->child->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());

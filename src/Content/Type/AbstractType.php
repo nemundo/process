@@ -158,24 +158,18 @@ abstract class AbstractType extends AbstractBaseClass
 
     }
 
-    public function getView(AbstractHtmlContainer $parent)
+    public function getView(AbstractHtmlContainer $parent = null)
     {
 
         $view = null;
         if ($this->hasView()) {
 
-            //if (class_exists($this->viewClass)) {
-
-                /** @var AbstractContentView $view */
-                $view = new $this->viewClass($parent);
-                $view->dataId = $this->dataId;
-                $view->contentType = $this;
-            /*} else {
-                (new LogMessage())->writeError('No View Class. Class: ' . $this->getClassName());
-            }*/
+            /** @var AbstractContentView $view */
+            $view = new $this->viewClass($parent);
+            $view->dataId = $this->dataId;
+            $view->contentType = $this;
 
         } else {
-            //(new LogMessage())->writeError('No View Class. Class: ' . $this->getClassName());
 
             $view = new Paragraph($parent);
             $view->content = '[No View]';

@@ -22,12 +22,15 @@ use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 abstract class AbstractAssignmentContentType extends AbstractTreeContentType
 {
 
+    use AssignmentTrait;
+
+    /*
     public $groupId;
 
     /**
      * @var Date
      */
-    public $deadline;
+    //public $deadline;
 
 
     public function __construct($dataId = null)
@@ -40,6 +43,7 @@ abstract class AbstractAssignmentContentType extends AbstractTreeContentType
     }
 
 
+    /*
     protected function onCreate()
     {
 
@@ -134,7 +138,7 @@ abstract class AbstractAssignmentContentType extends AbstractTreeContentType
 
         return $subject;
 
-    }
+    }*/
 
 
 }

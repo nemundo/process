@@ -4,14 +4,21 @@
 namespace Nemundo\Process\App\Notification\Content;
 
 
+use Nemundo\Core\Type\Text\Html;
+use Nemundo\Package\ResponsiveMail\ResponsiveActionMailMessage;
 use Nemundo\Process\App\Notification\Data\Notification\Notification;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationDelete;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationReader;
+use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
+use Nemundo\Process\Template\Content\User\UserContentType;
 use Nemundo\Process\Text\BoldText;
+use Nemundo\Workflow\App\Notification\Config\NotificationConfig;
+use Nemundo\Workflow\App\Notification\Config\NotificationSendMailConfig;
 
 abstract class AbstractNotificationContentType extends AbstractTreeContentType
 {
+
 
     public $subjectContentId;
 
@@ -28,6 +35,32 @@ abstract class AbstractNotificationContentType extends AbstractTreeContentType
         }
 
         $this->saveNotification();
+
+
+        if (NotificationConfig::$sendMail) {
+
+            //if ((new NotificationSendMailConfig)->getValue()) {
+            if ((new NotificationSendMailConfig)->getValueByUserId($this->userToId)) {
+
+                //$userType = new UserItemType($userId);
+
+                (new UserContentType($this->userToId))->getDataRow()->email;
+
+
+                $contentType = (new ContentReader())->getRowById($this->subjectContentId)->getContentType();
+
+                $mail = new ResponsiveActionMailMessage();
+                $mail->mailTo = (new UserContentType($this->userToId))->getDataRow()->email;
+                $mail->subject = 'Benachrichtigung: ' . $contentType->getSubject();
+                $mail->actionText = (new Html($this->message))->getValue();
+                $mail->actionLabel = 'Ansehen';
+                $mail->actionUrlSite = $contentType->getViewSite();
+                $mail->sendMail();
+
+            }
+
+        }
+
 
     }
 
@@ -75,7 +108,6 @@ abstract class AbstractNotificationContentType extends AbstractTreeContentType
     {
         return $this->message;
     }
-
 
 
 }

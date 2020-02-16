@@ -169,6 +169,11 @@ class UserContentType extends AbstractTreeContentType
     }
 
 
+    public function getDataRow()
+    {
+       return  (new UserReader())->getRowById($this->dataId);
+    }
+
     public function getSubject()
     {
 

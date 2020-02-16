@@ -20,6 +20,7 @@ use Nemundo\Process\Content\Parameter\DataIdParameter;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Web\Action\AbstractActionPanel;
 use Nemundo\Web\Action\ActionSite;
+use Nemundo\Web\Action\Site\ActiveActionSite;
 use Nemundo\Web\Action\Site\DeleteActionSite;
 use Nemundo\Web\Action\Site\EditActionSite;
 use Nemundo\Web\Site\Site;
@@ -125,7 +126,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         };
 
 
-        $this->active = new ActionSite($this);
+        $this->active = new ActiveActionSite($this);
         $this->active->title[LanguageCode::EN] = 'Active';
         $this->active->title[LanguageCode::DE] = 'Aktivieren';
         $this->active->actionName = 'active';

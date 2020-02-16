@@ -24,6 +24,7 @@ use Nemundo\Process\Group\Parameter\GroupParameter;
 use Nemundo\User\Parameter\UserParameter;
 use Nemundo\Web\Action\AbstractActionPanel;
 use Nemundo\Web\Action\ActionSite;
+use Nemundo\Web\Action\Site\DeleteActionSite;
 use Nemundo\Web\Site\Site;
 use Nemundo\Web\Url\UrlReferer;
 
@@ -156,7 +157,7 @@ class GroupAdmin extends AbstractActionPanel
                     $site = clone($this->deleteUser);
                     $site->addParameter(new GroupParameter($groupUserRow->groupId));
                     $site->addParameter(new UserParameter($groupUserRow->userId));
-                    $row->addSite($site);
+                    $row->addIconSite($site);
 
                 }
 
@@ -165,7 +166,7 @@ class GroupAdmin extends AbstractActionPanel
 
         };
 
-        $this->deleteUser = new ActionSite($this);
+        $this->deleteUser = new  DeleteActionSite($this);
         $this->deleteUser->title = 'Löschen';
         $this->deleteUser->actionName = 'delete-user';
         $this->deleteUser->onAction = function () {

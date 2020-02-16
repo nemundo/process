@@ -36,16 +36,17 @@ abstract class AbstractLargeTextProcessStatus extends AbstractProcessStatus
 
     }
 
+    public function getText()
+    {
+        return $this->getDataRow()->largeText;
+    }
+
 
     public function hasViewSite()
     {
         return true;
     }
 
-    /*  public function getSubjectViewSite()
-      {
-          return $this->getParentContentType()->getSubjectViewSite();
-      }*/
 
     public function getViewSite()
     {
@@ -53,16 +54,5 @@ abstract class AbstractLargeTextProcessStatus extends AbstractProcessStatus
         return $this->getParentContentType()->getViewSite();
 
     }
-
-
-    /*
-    public function getViewSite()
-    {
-
-
-        return $this->getParentContentType()->getViewSite();
-
-
-    }*/
 
 }

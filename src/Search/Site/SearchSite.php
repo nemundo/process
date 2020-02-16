@@ -29,6 +29,7 @@ use Nemundo\Process\Search\Parameter\SearchQueryParameter;
 use Nemundo\Process\Search\Site\Json\SearchContentTypeJsonSite;
 use Nemundo\Process\Search\Site\Json\SearchJsonSite;
 use Nemundo\Web\Site\AbstractSite;
+use Nemundo\Web\Site\Site;
 
 class SearchSite extends AbstractSite
 {
@@ -70,7 +71,7 @@ class SearchSite extends AbstractSite
                 $searchIndexReader->filter->andEqual($searchIndexReader->model->content->contentTypeId, $contentTypeParameter->getValue());
             }
 
-            $searchIndexReader->paginationLimit =ProcessConfig::PAGINATION_LIMIT;
+            $searchIndexReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
 
 
             $count = new SearchIndexCount();
@@ -78,12 +79,12 @@ class SearchSite extends AbstractSite
             $searchCount = $count->getCount();
 
 
-            $resultText=[];
-            $resultText[LanguageCode::EN ]= 'Results found';
-            $resultText[LanguageCode::DE]= 'Ergebnisse gefunden';
+            $resultText = [];
+            $resultText[LanguageCode::EN] = 'Results found';
+            $resultText[LanguageCode::DE] = 'Ergebnisse gefunden';
 
             $p = new Paragraph($page);
-            $p->content = $searchCount . ' '.(new Translation())->getText($resultText);
+            $p->content = $searchCount . ' ' . (new Translation())->getText($resultText);
 
 
             $logType = new SearchLogContentType();
@@ -97,8 +98,8 @@ class SearchSite extends AbstractSite
 
 
             $layout = new BootstrapTwoColumnLayout($page);
-            $layout->col1->columnWidth=10;
-            $layout->col2->columnWidth=2;
+            $layout->col1->columnWidth = 10;
+            $layout->col2->columnWidth = 2;
 
 
             $table = new AdminClickableTable($layout->col1);
@@ -141,15 +142,9 @@ class SearchSite extends AbstractSite
 
                 $snippet = new SnippetText();
                 $snippet->setMaxWords(30);
-                $textSnippet = $snippet->createSnippet($form->getSearchQuery(),$contentType->getText());
-                //$text = $textBold->getBoldText($text);
-
-                //new SnippetText()
+                $textSnippet = $snippet->createSnippet($form->getSearchQuery(), $contentType->getText());
                 $row->addText($bold->getBoldText($textSnippet));
 
-//                $row->addText($bold->getBoldText($contentType->getText()));
-
-                //$row->addText($indexRow->content->contentType->phpClass);
 
                 if ($contentType->hasViewSite()) {
                     $site = $contentType->getViewSite();
@@ -170,6 +165,17 @@ class SearchSite extends AbstractSite
 
             $list = new BootstrapHyperlinkList($layout->col2);
 
+            $label = 'Alle Resultate (' . $searchCount . ')';
+            if ((new ContentTypeParameter())->notExists()) {
+                $list->addActiveHyperlink($label);
+            } else {
+
+                $site = new Site();
+                $site->title = $label;
+                $site->removeParameter(new ContentTypeParameter());
+                $list->addSite($site);
+            }
+
             $searchIndexReader = new SearchIndexPaginationReader();
             $searchIndexReader->model->loadContent();
             $searchIndexReader->model->content->loadContentType();
@@ -180,11 +186,19 @@ class SearchSite extends AbstractSite
 
             foreach ($searchIndexReader->getData() as $searchIndexRow) {
 
-                $site = clone(SearchSite::$site);
-                $site->addParameter(new SearchQueryParameter());
-                $site->addParameter(new ContentTypeParameter($searchIndexRow->content->contentTypeId));
-                $site->title = $searchIndexRow->content->contentType->contentType . ' (' . $searchIndexRow->getModelValue($count) . ')';
-                $list->addSite($site);
+
+                $label = $searchIndexRow->content->contentType->contentType . ' (' . $searchIndexRow->getModelValue($count) . ')';
+
+                if ((new ContentTypeParameter())->getValue() == $searchIndexRow->content->contentTypeId) {
+                    $list->addActiveHyperlink($label);
+                } else {
+
+                    $site = clone(SearchSite::$site);
+                    $site->addParameter(new SearchQueryParameter());
+                    $site->addParameter(new ContentTypeParameter($searchIndexRow->content->contentTypeId));
+                    $site->title = $label;
+                    $list->addSite($site);
+                }
 
             }
 

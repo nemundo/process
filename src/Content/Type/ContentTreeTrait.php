@@ -264,34 +264,13 @@ trait ContentTreeTrait
     public function getParentContentType()
     {
 
-        //$count = 0;
-
-        //$parentContentType = null;
-
-
         $contentReader = new ContentReader();
         $contentReader->model->loadContentType();
 
         /** @var AbstractTreeContentType $parentContentType */
         $parentContentType = $contentReader->getRowById($this->getParentId())->getContentType();
 
-        /*
-
-           foreach ($this->getParentContent() as $contentRow) {
-               $parentContentType = $contentRow->getContentType();
-               $count++;
-           }
-
-           if ($count > 1) {
-               (new LogMessage())->writeError('More than one Parent');
-           }
-
-           if ($parentContentType == null) {
-               (new LogMessage())->writeError('No parent');
-           }*/
-
         return $parentContentType;
-
 
     }
 
