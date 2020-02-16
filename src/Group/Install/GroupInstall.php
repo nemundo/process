@@ -30,11 +30,11 @@ class GroupInstall extends AbstractInstall
         $setup = new ModelCollectionSetup();
         $setup->addCollection(new GroupCollection());
 
-        $setup=new ContentTypeSetup();
+       /* $setup=new ContentTypeSetup();
         $setup->addContentType(new GroupContentType());
-        $setup->addContentType(new AppUserGroupType());
+        //$setup->addContentType(new AppUserGroupType());
         $setup->addContentType(new UserGroupType());
-        $setup->addContentType(new UsergroupGroupType());
+        $setup->addContentType(new UsergroupGroupType());*/
 
         (new GroupSetup())
             ->addGroupType(new UserGroupType())
@@ -48,8 +48,7 @@ class GroupInstall extends AbstractInstall
         $setup->addScript(new GroupCheckScript());
         $setup->addScript(new GroupTestScript());
 
-        (new AppUserGroupType())->saveType();
-
+        //(new AppUserGroupType())->saveType();
 
         //$this->importUser();
         //$this->importUsergroup();

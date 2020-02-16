@@ -10,7 +10,7 @@ use Nemundo\Process\Template\Data\LargeText\LargeText;
 
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
-class CancelStatus extends AbstractProcessStatus  // CommentProcessStatus
+class CancelProcessStatus extends AbstractProcessStatus
 {
 
     public $comment;

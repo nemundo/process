@@ -50,9 +50,8 @@ class WikiInstall extends AbstractInstall
         $setup->addContentType(new VideoContentType());
 
         (new WikiSetup())
-        ->addContentType(new TextContentType())
+            ->addContentType(new TextContentType())
             ->addContentType(new MultiFileContentType());
-
 
 
         /*
