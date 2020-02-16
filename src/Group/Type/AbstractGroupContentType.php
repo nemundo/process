@@ -4,12 +4,14 @@
 namespace Nemundo\Process\Group\Type;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Directory\TextDirectory;
 use Nemundo\Core\Random\UniqueId;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Group\Content\GroupContentForm;
 use Nemundo\Process\Group\Content\GroupContentView;
 use Nemundo\Process\Group\Data\Group\Group;
+use Nemundo\Process\Group\Data\Group\GroupCount;
 use Nemundo\Process\Group\Data\Group\GroupDelete;
 use Nemundo\Process\Group\Data\Group\GroupReader;
 use Nemundo\Process\Group\Data\GroupUser\GroupUser;
@@ -77,13 +79,13 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     protected function saveGroup()
     {
 
-        if ($this->groupId == null) {
+       /* if ($this->groupId == null) {
             $this->groupId = (new UniqueId())->getUniqueId();
-        }
+        }*/
 
         $data = new Group();
         $data->updateOnDuplicate = true;
-        $data->id = $this->groupId;
+        $data->id = $this->getGroupId();  // $this->groupId;
         $data->group = $this->getGroupLabel();
         $data->groupTypeId = $this->typeId;
         $data->save();
@@ -102,6 +104,7 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     }
 
 
+    // nach public deleteType
     protected function onDelete()
     {
 
@@ -137,6 +140,11 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
 
     public function getGroupDataRow()
     {
+
+        if ($this->groupId == null) {
+            (new Debug())->write('no group id');
+        }
+
         return (new GroupReader())->getRowById($this->groupId);
     }
 
@@ -144,7 +152,13 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     public function getSubject()
     {
 
-        return $this->getGroupDataRow()->group;
+
+
+        return $this->getGroupLabel();
+
+        //parent::getSubject();
+
+        //return $this->getGroupDataRow()->group;
 
     }
 
@@ -185,7 +199,7 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
 
         $reader = new GroupUserReader();
         $reader->model->loadUser();
-        $reader->filter->andEqual($reader->model->groupId, $this->dataId);
+        $reader->filter->andEqual($reader->model->groupId, $this->getGroupId());
         $reader->addOrder($reader->model->user->login);
         foreach ($reader->getData() as $groupUserRow) {
             $list[] = $groupUserRow->user;
@@ -203,7 +217,7 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
 
         $reader = new GroupUserReader();
         $reader->model->loadUser();
-        $reader->filter->andEqual($reader->model->groupId, $this->dataId);
+        $reader->filter->andEqual($reader->model->groupId, $this->getGroupId());
 
         foreach ($reader->getData() as $groupUserRow) {
             $list[] = $groupUserRow->userId;
@@ -224,6 +238,29 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
         }
 
         return $text->getTextWithSeperator();
+
+    }
+
+
+
+    public function existItem()
+    {
+
+
+        $value=false;
+
+        $count = new GroupCount();
+        $count->filter->andEqual($count->model->id, $this->getGroupId());
+        if ($count->getCount() >0) {
+            $value=true;
+        }
+
+        return $value;
+
+
+
+
+
 
     }
 

@@ -8,6 +8,7 @@ use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
+use Nemundo\Core\Text\SnippetText;
 use Nemundo\Core\Text\TextBold;
 use Nemundo\Db\Sql\Field\CountField;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
@@ -96,6 +97,9 @@ class SearchSite extends AbstractSite
 
 
             $layout = new BootstrapTwoColumnLayout($page);
+            $layout->col1->columnWidth=10;
+            $layout->col2->columnWidth=2;
+
 
             $table = new AdminClickableTable($layout->col1);
 
@@ -112,6 +116,9 @@ class SearchSite extends AbstractSite
             $th = new Th($header);
             $th->content[LanguageCode::EN] = 'Type';
             $th->content[LanguageCode::DE] = 'Typ';
+
+            $th = new Th($header);
+            $th->content = 'Text';
 
             foreach ($searchIndexReader->getData() as $indexRow) {
 
@@ -130,6 +137,18 @@ class SearchSite extends AbstractSite
 
                 $row->addText($bold->getBoldText($contentType->getSubject()));
                 $row->addText($indexRow->content->contentType->contentType);
+
+
+                $snippet = new SnippetText();
+                $snippet->setMaxWords(30);
+                $textSnippet = $snippet->createSnippet($form->getSearchQuery(),$contentType->getText());
+                //$text = $textBold->getBoldText($text);
+
+                //new SnippetText()
+                $row->addText($bold->getBoldText($textSnippet));
+
+//                $row->addText($bold->getBoldText($contentType->getText()));
+
                 //$row->addText($indexRow->content->contentType->phpClass);
 
                 if ($contentType->hasViewSite()) {

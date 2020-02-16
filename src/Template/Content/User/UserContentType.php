@@ -7,6 +7,7 @@ namespace Nemundo\Process\Template\Content\User;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Random\UniqueId;
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Group\Data\Group\GroupRow;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
 use Nemundo\Process\Group\Type\UserGroupType;
@@ -17,7 +18,7 @@ use Nemundo\User\Data\User\UserReader;
 use Nemundo\User\Data\User\UserUpdate;
 
 
-class UserContentType extends AbstractContentType
+class UserContentType extends AbstractTreeContentType
 {
 
     /**
@@ -43,32 +44,35 @@ class UserContentType extends AbstractContentType
 
     protected function loadContentType()
     {
+
         $this->typeLabel = 'User';
         $this->typeId = '8ef8e1d2-0c15-45b0-ba10-7c306d617406';
         $this->viewClass = UserContentView::class;
+        $this->formClass=UserContentForm::class;
+        $this->adminClass=UserContentAdmin::class;
 
     }
-
 
 
     public function fromLogin($login)
     {
 
-            $id = new UserId();
-            $id->filter->andEqual($id->model->login, $login);
-            $this->dataId = $id->getId();
+        $id = new UserId();
+        $id->filter->andEqual($id->model->login, $login);
+        $this->dataId = $id->getId();
 
-            /*
-            if (!$this->userId == '') {
-                $this->loadData();
-            } else {
-                // (new LogMessage())->writeError('Login not found');
-            }*/
+        /*
+        if (!$this->userId == '') {
+            $this->loadData();
+        } else {
+            // (new LogMessage())->writeError('Login not found');
+        }*/
 
 
         return $this;
 
     }
+
 
 
     public function saveType()
@@ -143,7 +147,7 @@ class UserContentType extends AbstractContentType
     {
 
         $type = new UserGroupType();
-$type->groupId = $this->dataId;
+        $type->groupId = $this->dataId;
 
         $type->addUser($this->dataId);
         $type->saveType();

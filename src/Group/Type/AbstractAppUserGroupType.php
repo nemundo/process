@@ -14,6 +14,4 @@ abstract class AbstractAppUserGroupType extends AbstractGroupContentType
         $this->typeLabel='App Group';
     }
 
-
-
 }

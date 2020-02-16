@@ -24,6 +24,7 @@ use Nemundo\Process\Search\Site\SearchSite;
 use Nemundo\Process\Search\Site\SearchWordSite;
 use Nemundo\Process\Template\Site\FileSite;
 use Nemundo\Process\Template\Site\ProcessTemplateSite;
+use Nemundo\Process\Template\Site\UserSite;
 use Nemundo\ToDo\Site\ToDoSite;
 use Nemundo\Web\Site\AbstractSite;
 
@@ -83,7 +84,10 @@ class ProcessSite extends AbstractSite
         new NotificationSite($this);
 
         new DashboardSite($this);
-        new \Nemundo\Process\Workflow\Site\ProcessSite($this);
+        //new \Nemundo\Process\Workflow\Site\ProcessSite($this);
+
+        new UserSite($this);
+
 
     }
 

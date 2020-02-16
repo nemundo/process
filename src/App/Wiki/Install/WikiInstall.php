@@ -5,11 +5,15 @@ namespace Nemundo\Process\App\Wiki\Install;
 
 
 use Nemundo\Model\Setup\ModelCollectionSetup;
+use Nemundo\Process\App\Wiki\Content\TitleChange\TitleChangeContentType;
 use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\App\Wiki\Data\WikiCollection;
 use Nemundo\Process\App\Wiki\Group\WikiEditorGroup;
+use Nemundo\Process\App\Wiki\Group\WikiGroupType;
 use Nemundo\Process\App\Wiki\Setup\WikiSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
+use Nemundo\Process\Group\Setup\GroupSetup;
+use Nemundo\Process\Template\Content\Audio\AudioContentType;
 use Nemundo\Process\Template\Content\Event\EventContentType;
 use Nemundo\Process\Template\Content\EventAdd\EventAddContentType;
 use Nemundo\Process\Template\Content\File\FileContentType;
@@ -35,6 +39,10 @@ class WikiInstall extends AbstractInstall
         $setup->addContentType(new WikiPageContentType());
         //$setup->addContentType(new LargeTextContentType());
 
+        (new ContentTypeSetup())
+            ->addContentType(new TitleChangeContentType());
+
+
         $setup = new WikiSetup();
         $setup->addContentType(new HtmlContentType());
         $setup->addContentType(new EventAddContentType());
@@ -50,6 +58,7 @@ class WikiInstall extends AbstractInstall
         $setup->addContentType(new VideoContentType());
 
         (new WikiSetup())
+            ->addContentType(new AudioContentType())
             ->addContentType(new TextContentType())
             ->addContentType(new MultiFileContentType());
 
@@ -58,6 +67,9 @@ class WikiInstall extends AbstractInstall
         $setup->addContentType(new YoutubeContentType());
         $setup->addContentType(new WebImageContentType());
         $setup->addContentType(new NewsContentType());*/
+
+        (new GroupSetup())
+        ->addGroupType(new WikiGroupType());
 
         (new WikiEditorGroup())->saveType();
 

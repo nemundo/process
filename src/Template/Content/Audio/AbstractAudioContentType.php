@@ -13,6 +13,7 @@ abstract class AbstractAudioContentType extends AbstractFileContentType
 
     public function __construct($dataId = null)
     {
+
         $this->formClass=AudioContentForm::class;
 
         parent::__construct($dataId);
@@ -20,17 +21,6 @@ abstract class AbstractAudioContentType extends AbstractFileContentType
         $this->viewClass=AudioContentView::class;
 
     }
-
-/*
-    protected function loadContentType()
-    {
-        //$this->typeLabel='Audio';
-        //$this->typeId='3c544600-86ec-42e1-b2e9-aeb349d56b28';
-
-        $this->formClass=AudioContentForm::class;
-        $this->viewClass=AudioContentView::class;
-
-    }*/
 
 
     public function getSubject()

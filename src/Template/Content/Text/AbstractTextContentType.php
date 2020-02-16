@@ -13,6 +13,8 @@ use Nemundo\Process\Template\Data\TemplateText\TemplateTextUpdate;
 abstract class AbstractTextContentType extends AbstractTreeContentType
 {
 
+
+    // protected
     public $text;
 
 

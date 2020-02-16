@@ -5,6 +5,7 @@ namespace Nemundo\Process\App\Notification\Content;
 
 
 use Nemundo\Process\App\Notification\Data\Notification\Notification;
+use Nemundo\Process\App\Notification\Data\Notification\NotificationDelete;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationReader;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Text\BoldText;
@@ -31,6 +32,14 @@ abstract class AbstractNotificationContentType extends AbstractTreeContentType
     }
 
 
+    protected function onDelete()
+    {
+
+        (new NotificationDelete())->deleteById($this->dataId);
+
+    }
+
+
     protected function saveNotification()
     {
 
@@ -39,7 +48,7 @@ abstract class AbstractNotificationContentType extends AbstractTreeContentType
         $data->toId = $this->userToId;
         $data->subjectContentId = $this->subjectContentId;
         $data->contentId = $this->getContentId();
-        $data->message = $this->getMessage();  // $this->message;
+        $data->message = $this->getMessage();
         $this->dataId = $data->save();
 
     }
@@ -50,13 +59,14 @@ abstract class AbstractNotificationContentType extends AbstractTreeContentType
         $reader = new NotificationReader();
         $reader->model->loadContent();
         $reader->model->content->loadUser();
+        $reader->model->loadTo();
         $notificationRow = $reader->getRowById($this->dataId);
         return $notificationRow;
     }
 
     public function getSubject()
     {
-        $subject = 'Notification to ' . (new BoldText())->getBold($this->getDataRow()->content->user->displayName);
+        $subject = 'Notification to ' . (new BoldText())->getBold(($this->getDataRow())->to->displayName);
         return $subject;
     }
 
@@ -65,5 +75,7 @@ abstract class AbstractNotificationContentType extends AbstractTreeContentType
     {
         return $this->message;
     }
+
+
 
 }

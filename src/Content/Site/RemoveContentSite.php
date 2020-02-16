@@ -4,7 +4,6 @@
 namespace Nemundo\Process\Content\Site;
 
 
-use Nemundo\Dev\Deployment\StagingEnvironment;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Web\Site\AbstractSite;
@@ -22,10 +21,10 @@ class RemoveContentSite extends AbstractSite
     {
 
         $this->title = 'Remove Content';
-        $this->url='remove-content';
-        $this->menuActive=false;
+        $this->url = 'remove-content';
+        $this->menuActive = false;
 
-        RemoveContentSite::$site=$this;
+        RemoveContentSite::$site = $this;
 
     }
 
@@ -34,15 +33,17 @@ class RemoveContentSite extends AbstractSite
     {
         // TODO: Implement loadContent() method.
 
-       // if (Envir StagingEnvironment::PRODUCTION)
+        // if (Envir StagingEnvironment::PRODUCTION)
 
 
         // nur in Dev/Test
 
-    $contentType = (new ContentTypeParameter())->getContentType();
+        $contentTypeParameter = new ContentTypeParameter();
+        $contentTypeParameter->contentTypeCheck = false;
+        $contentType = $contentTypeParameter->getContentType();
 
-    $setup = new ContentTypeSetup();
-    $setup->removeContent($contentType);
+        $setup = new ContentTypeSetup();
+        $setup->removeContent($contentType);
 
         (new UrlReferer())->redirect();
 

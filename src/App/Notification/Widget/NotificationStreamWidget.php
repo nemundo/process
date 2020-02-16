@@ -16,15 +16,15 @@ use Nemundo\Process\App\Notification\Site\ArchiveSite;
 use Nemundo\Process\App\Notification\Site\NotificationSite;
 use Nemundo\User\Type\UserSessionType;
 
-class NotificationWidget extends AdminWidget
+class NotificationStreamWidget extends AdminWidget
 {
 
 
     protected function loadWidget()
     {
 
-        $this->widgetTitle[LanguageCode::EN] = 'Notification';
-        $this->widgetTitle[LanguageCode::DE] = 'Benachrichtigungen';
+        $this->widgetTitle[LanguageCode::EN] = 'Notification Stream';
+        $this->widgetTitle[LanguageCode::DE] = 'Benachrichtigungen Stream';
 
         $this->widgetSite = NotificationSite::$site;
 
@@ -73,6 +73,10 @@ class NotificationWidget extends AdminWidget
 
             $row->addText($notificationRow->content->dateTime->getShortDateTimeLeadingZeroFormat());
             //$row->addText($notificationRow->to->displayName);
+
+            $subjectContentType = $notificationRow->subjectContent->getContentType();
+            $subjectContentType->getView($row);
+
 
             $site = clone(ArchiveSite::$site);
             $site->addParameter(new NotificationParameter($notificationRow->id));

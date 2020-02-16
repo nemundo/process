@@ -121,7 +121,16 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $update->subject = $this->getSubject();
         $update->updateById($this->contentId);
 
+
+
+
         $this->addSearchWord($this->getSubject());
+
+        /** @var ToDoRow $dataRow */
+        $dataRow = $this->getDataRow();
+        $this->addSearchWord($dataRow->workflowNumber);
+
+
         $this->saveSearchIndex();
 
         $this->onFinished();
@@ -135,13 +144,9 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         if ($this->number == null) {
 
-            //DbConfig::$sqlDebug=true;
-
             $count = new ModelDataCount();
             $count->model = $this->workflowModel;
             $count->filter->andIsNotNull($count->model->number);
-
-            //(new Debug())->write($count->getCount());
 
             $lastNumber = null;
             if ($count->getCount() === 0) {

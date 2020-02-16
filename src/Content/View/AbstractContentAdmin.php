@@ -8,7 +8,6 @@ use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
-use Nemundo\App\Content\Parameter\DataIdParameter;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Core\Language\LanguageCode;
@@ -17,9 +16,12 @@ use Nemundo\Process\Content\Com\Form\ContentGroupForm;
 use Nemundo\Process\Content\Com\Table\ContentLogTable;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentGroup\ContentGroupReader;
+use Nemundo\Process\Content\Parameter\DataIdParameter;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Web\Action\AbstractActionPanel;
 use Nemundo\Web\Action\ActionSite;
+use Nemundo\Web\Action\Site\DeleteActionSite;
+use Nemundo\Web\Action\Site\EditActionSite;
 use Nemundo\Web\Site\Site;
 use Nemundo\Web\Url\UrlReferer;
 
@@ -98,7 +100,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
 
         };
 
-        $this->edit = new ActionSite($this);
+        $this->edit = new EditActionSite($this);
         $this->edit->title[LanguageCode::EN] = 'Edit';
         $this->edit->title[LanguageCode::DE] = 'Bearbeiten';
         $this->edit->actionName = 'edit';
@@ -107,11 +109,10 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
             $dataId = (new DataIdParameter())->getValue();
             $this->loadEdit($dataId);
 
-
         };
 
 
-        $this->delete = new ActionSite($this);
+        $this->delete = new DeleteActionSite($this);  // new ActionSite($this);
         $this->delete->title[LanguageCode::EN] = 'Delete';
         $this->delete->title[LanguageCode::DE] = 'Löschen';
         $this->delete->actionName = 'delete';
@@ -137,7 +138,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         };
 
 
-        $this->inactive = new ActionSite($this);
+        $this->inactive = new DeleteActionSite($this);  // new ActionSite($this);
         $this->inactive->title[LanguageCode::EN] = 'Inactive';
         $this->inactive->title[LanguageCode::DE] = 'Delete (Soft)';
         $this->inactive->actionName = 'inactive';

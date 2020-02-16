@@ -12,16 +12,18 @@ use Nemundo\Html\Block\Div;
 use Nemundo\Html\Block\Hr;
 use Nemundo\Package\Bootstrap\Layout\BootstrapThreeColumnLayout;
 use Nemundo\Package\Bootstrap\Listing\BootstrapHyperlinkList;
-use Nemundo\Process\App\Wiki\Content\WikiPageContentForm;
+use Nemundo\Process\App\Wiki\Com\WikiNavigation;
+use Nemundo\Process\App\Wiki\Content\TitleChange\TitleChangeContentType;
 use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\App\Wiki\Data\Wiki\WikiReader;
-use Nemundo\Process\App\Wiki\Data\WikiType\WikiTypeReader;
+use Nemundo\Process\App\Wiki\Group\WikiEditorGroup;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\App\Wiki\Type\WikiContentTypeCollection;
 use Nemundo\Process\Content\Com\Dropdown\ContentTypeCollectionDropdown;
-use Nemundo\Process\Content\Com\Dropdown\ContentTypeDropdown;
+use Nemundo\Process\Content\Com\Table\ContentLogTable;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
+use Nemundo\Process\Group\Check\GroupCheck;
 use Nemundo\Web\Site\AbstractSite;
 
 
@@ -39,6 +41,9 @@ class WikiSite extends AbstractSite
         $this->url = 'wiki';
         WikiSite::$site = $this;
 
+        new WikiNewSite($this);
+        new AdminSite($this);
+
         new WikiAddSite($this);
         new ContentDeleteSite($this);
         new ContentEditSite($this);
@@ -51,6 +56,8 @@ class WikiSite extends AbstractSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
+        new WikiNavigation($page);
+
 
         $layout = new BootstrapThreeColumnLayout($page);
         $layout->col1->columnWidth = 2;
@@ -58,11 +65,11 @@ class WikiSite extends AbstractSite
         $layout->col3->columnWidth = 5;
 
 
-
+        /*
         $form = new WikiPageContentForm($layout->col1);
         $form->appendParameter = true;
         $form->redirectSite = WikiSite::$site;
-
+*/
 
         $list = new BootstrapHyperlinkList($layout->col1);
 
@@ -85,6 +92,10 @@ class WikiSite extends AbstractSite
             $wikiId = $wikiParameter->getValue();
             $wikiType = new WikiPageContentType($wikiId);
 
+            $contentTable = new ContentLogTable($layout->col3);
+            $contentTable->contentType = $wikiType;
+
+
             //$wikiType->getForm($layout->col2);
 
 
@@ -96,27 +107,27 @@ class WikiSite extends AbstractSite
             $title = new AdminTitle($layout->col2);
             $title->content = $wikiType->getSubject();  //  $wikiRow->title;
 
-            $dropdown = new ContentTypeCollectionDropdown($layout->col2);  // new ContentTypeDropdown($layout->col2);
+
+            if ((new GroupCheck())->isMemberOfGroup(new WikiEditorGroup())) {
+
+                $type = new TitleChangeContentType();
+                $type->parentId = $wikiType->getContentId();
+                $form = $type->getForm($layout->col2);
+                //$form->parentId = $wikiType->getContentId();
+
+            }
+
+            $dropdown = new ContentTypeCollectionDropdown($layout->col2);
             $dropdown->contentTypeCollection = new WikiContentTypeCollection();
             $dropdown->redirectSite = WikiSite::$site;
             $dropdown->redirectSite->addParameter(new WikiParameter());
+            $dropdown->groupRestriction=true;
+            $dropdown->addRestrictionGroup(new WikiEditorGroup());
+            //$dropdown->visible=false;
+
+
 
             $contentTypeParameter = new ContentTypeParameter();
-
-
-/*
-            $wikiTypeReader = new WikiTypeReader();
-            $wikiTypeReader->model->loadContentType();
-            $wikiTypeReader->addOrder($wikiTypeReader->model->contentType->contentType);
-            foreach ($wikiTypeReader->getData() as $wikiTypeRow) {
-                //foreach ((new WikiPageContentType())->getMenuList() as $contentType) {
-                // $dropdown->addContentType($contentType);
-
-                $contentType = $wikiTypeRow->contentType->getContentType();
-
-                $dropdown->addContentType($contentType);
-                $contentTypeParameter->addAllowedContentType($contentType);
-            }*/
 
 
 
@@ -125,58 +136,53 @@ class WikiSite extends AbstractSite
                 $contentTypeParameter->addAllowedContentTypeCollection(new WikiContentTypeCollection());
                 $contentType = $contentTypeParameter->getContentType();
 
-                //(new ContentTypeReader())->getRowById($contentTypeParameter->getValue())->getContentType();
-
                 $form = $contentType->getForm($layout->col2);
-                $form->parentId = $wikiType->getContentId();  // $wikiId;
-                $form->appendParameter=false;
+                $form->parentId = $wikiType->getContentId();
+                $form->appendParameter = false;
                 $form->redirectSite = WikiSite::$site;
                 $form->redirectSite->addParameter(new WikiParameter());
 
             }
 
 
-            /*$form = new AddContentForm($layout->col2);
-            $form->parentId = $wikiId;
-            $form->redirectSite = WikiSite::$site;
-            $form->redirectSite->addParameter(new WikiParameter());*/
-
             foreach ($wikiType->getChild() as $contentRow) {
 
-                $contentType = $contentRow->getContentType();  // contentType->getContentType();
+                $contentType = $contentRow->getContentType();
 
                 if ($contentType !== null) {
 
-                    //$contentItem = $contentType->getItem($contentRow->id);
+                    if ($contentType->hasView()) {
 
-                    $subtitle = new AdminSubtitle($layout->col2);
-                    $subtitle->content = $contentType->getSubject() . ' - ' . $contentRow->dateTime->getShortDateTimeFormat();
+                        $subtitle = new AdminSubtitle($layout->col2);
+                        $subtitle->content = $contentType->getSubject() . ' - ' . $contentRow->dateTime->getShortDateTimeFormat();
 
-                    $btn = new AdminIconSiteButton($layout->col2);
-                    $btn->site = clone(ContentDeleteSite::$site);
-                    $btn->site->addParameter(new ContentParameter($contentRow->id));
+                        $btn = new AdminIconSiteButton($layout->col2);
+                        $btn->site = clone(ContentDeleteSite::$site);
+                        $btn->site->addParameter(new ContentParameter($contentRow->id));
 
-                    $btn = new AdminIconSiteButton($layout->col2);
-                    $btn->site = clone(ContentRemoveSite::$site);
-                    $btn->site->addParameter(new ContentParameter($contentRow->id));
-                    $btn->site->addParameter(new WikiParameter($wikiId));
+                        $btn = new AdminIconSiteButton($layout->col2);
+                        $btn->site = clone(ContentRemoveSite::$site);
+                        $btn->site->addParameter(new ContentParameter($contentRow->id));
+                        $btn->site->addParameter(new WikiParameter($wikiId));
 
-                    $btn = new AdminIconSiteButton($layout->col2);
-                    $btn->site = clone(ContentEditSite::$site);
-                    $btn->site->addParameter(new ContentParameter($contentRow->id));
-                    $btn->site->addParameter(new WikiParameter());
+                        $btn = new AdminIconSiteButton($layout->col2);
+                        $btn->site = clone(ContentEditSite::$site);
+                        $btn->site->addParameter(new ContentParameter($contentRow->id));
+                        $btn->site->addParameter(new WikiParameter());
 
 
-                    if ($contentType->hasViewSite()) {
-                        $btn = new AdminSiteButton($layout->col2);
-                        $btn->site = $contentType->getViewSite();
+                        if ($contentType->hasViewSite()) {
+                            $btn = new AdminSiteButton($layout->col2);
+                            $btn->site = $contentType->getViewSite();
+                        }
+
+                        $div = new Div($layout->col2);
+
+                        $view = $contentType->getView($div);
+
+                        (new Hr($layout->col2));
+
                     }
-
-                    $div = new Div($layout->col2);
-
-                    $view = $contentType->getView($div);
-
-                    (new Hr($layout->col2));
 
                 }
 
