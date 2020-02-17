@@ -50,7 +50,8 @@ trait AssignmentTrait
     protected function onCreate()
     {
 
-        $this->assignAssignment();
+        //$this->assignAssignment();
+$this->saveAssignment();
 
     }
 
