@@ -47,13 +47,14 @@ trait AssignmentTrait
         }*/
 
 
-    protected function onCreate()
+
+  /*  protected function onCreate()
     {
 
         //$this->assignAssignment();
 $this->saveAssignment();
 
-    }
+    }*/
 
 
     protected function onFinished() {
@@ -107,6 +108,9 @@ $this->saveAssignment();
         $data->message = $this->getMessage();
         $data->contentId = $this->getContentId();
         $this->dataId = $data->save();
+
+
+
 
 
 

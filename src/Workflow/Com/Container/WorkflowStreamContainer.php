@@ -35,8 +35,8 @@ class WorkflowStreamContainer extends AbstractParentContainer  //WorkflowContain
 
                 if ($status->hasViewSite()) {
                 //$hyperlink = new SiteHyperlink($ul);
-                    $hyperlink = new SiteHyperlink($div);
-                    $hyperlink->site = $status->getViewSite();
+                    //$hyperlink = new SiteHyperlink($div);
+                    //$hyperlink->site = $status->getViewSite();
                 }
 
                 /*

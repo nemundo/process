@@ -8,6 +8,7 @@ use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Db\Filter\Filter;
+use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
@@ -40,7 +41,7 @@ class AssignmentSite extends AbstractSite
     protected function loadSite()
     {
         $this->title = 'Assignment';
-        $this->url = 'group-assignment';
+        $this->url ='assignment';  // 'group-assignment';
         AssignmentSite::$site = $this;
 
         new AssignmentItemSite($this);
@@ -54,7 +55,7 @@ class AssignmentSite extends AbstractSite
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
 
-        $dropdown = new ContentTypeDropdown($page);
+       /* $dropdown = new ContentTypeDropdown($page);
         $dropdown->addContentType(new SurveyContentType());
 
 
@@ -70,7 +71,7 @@ class AssignmentSite extends AbstractSite
             $form->redirectSite = AssignmentSite::$site;
 
 
-        } else {
+        } else {*/
 
 
             $form = new SearchForm($page);
@@ -130,6 +131,7 @@ class AssignmentSite extends AbstractSite
 
             $assignmentReader->filter = $filter;
             $assignmentReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
+            $assignmentReader->addOrder($assignmentReader->model->id, SortOrder::DESCENDING);
 
 
             $count = new AssignmentCount();
@@ -228,7 +230,7 @@ class AssignmentSite extends AbstractSite
             $pagination->paginationReader = $assignmentReader;
 
 
-        }
+        //}
 
 
         $page->render();

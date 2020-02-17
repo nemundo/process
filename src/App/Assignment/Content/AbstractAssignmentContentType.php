@@ -43,6 +43,15 @@ abstract class AbstractAssignmentContentType extends AbstractTreeContentType
     }
 
 
+      protected function onCreate()
+  {
+
+      //$this->assignAssignment();
+$this->saveAssignment();
+
+  }
+
+
     /*
     protected function onCreate()
     {

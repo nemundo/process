@@ -242,6 +242,27 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
+    protected function onActive()
+    {
+        $update = new ModelUpdate();
+        $update->model = $this->workflowModel;
+        $update->typeValueList->setModelValue($update->model->active, true);
+        $update->updateById($this->dataId);
+
+    }
+
+
+    protected function onInactive()
+    {
+        $update = new ModelUpdate();
+        $update->model = $this->workflowModel;
+        $update->typeValueList->setModelValue($update->model->active, false);
+        $update->updateById($this->dataId);
+
+    }
+
+
+    /*
     public function softDelete()
     {
 
@@ -250,7 +271,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $update->typeValueList->setModelValue($update->model->active, false);
         $update->updateById($this->dataId);
 
-    }
+    }*/
 
 
     public function existItem()
