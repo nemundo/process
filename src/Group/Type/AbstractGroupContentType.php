@@ -79,13 +79,9 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     protected function saveGroup()
     {
 
-       /* if ($this->groupId == null) {
-            $this->groupId = (new UniqueId())->getUniqueId();
-        }*/
-
         $data = new Group();
         $data->updateOnDuplicate = true;
-        $data->id = $this->getGroupId();  // $this->groupId;
+        $data->id = $this->getGroupId();
         $data->group = $this->getGroupLabel();
         $data->groupTypeId = $this->typeId;
         $data->save();
@@ -108,7 +104,12 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     protected function onDelete()
     {
 
-        (new GroupDelete())->deleteById($this->dataId);
+        if ($this->groupId == null) {
+            (new Debug())->write('no group id');
+        }
+
+        //(new GroupDelete())->deleteById($this->dataId);
+        (new GroupDelete())->deleteById($this->groupId);
 
     }
 

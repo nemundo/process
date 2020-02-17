@@ -10,7 +10,9 @@ use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
+use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Html\Formatting\Bold;
+use Nemundo\Html\Table\Th;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
@@ -68,13 +70,13 @@ class GroupAdmin extends AbstractActionPanel
             $groupReader->model->loadGroupType();
 
             if ($this->filterGroupType) {
-            $form = new SearchForm($layout->col1);
+                $form = new SearchForm($layout->col1);
 
-            $formRow = new BootstrapFormRow($form);
+                $formRow = new BootstrapFormRow($form);
 
-            $groupType = new GroupTypeListBox($formRow);
-            $groupType->searchMode = true;
-            $groupType->submitOnChange = true;
+                $groupType = new GroupTypeListBox($formRow);
+                $groupType->searchMode = true;
+                $groupType->submitOnChange = true;
 
                 if ($groupType->hasValue()) {
                     $groupReader->filter->andEqual($groupReader->model->groupTypeId, $groupType->getValue());
@@ -83,12 +85,16 @@ class GroupAdmin extends AbstractActionPanel
             }
 
 
-
-
             $table = new AdminClickableTable($layout->col1);
 
             $header = new TableHeader($table);
-            $header->addText('Group');
+
+            $th=new Th($header);
+            $th->content[LanguageCode::EN]='Group';
+            $th->content[LanguageCode::DE]='Gruppe';
+
+
+            //$header->addText('Group');
 
             if ($this->showGroupTypeColumn) {
                 $header->addText('Group Type');
@@ -107,12 +113,10 @@ class GroupAdmin extends AbstractActionPanel
 
                 if ((new GroupParameter())->getValue() == $groupRow->id) {
                     $bold = new Bold($row);
-                    $bold->content= $groupRow->group;
+                    $bold->content = $groupRow->group;
                 } else {
                     $row->addText($groupRow->group);
                 }
-
-
 
 
                 if ($this->showGroupTypeColumn) {
@@ -137,13 +141,19 @@ class GroupAdmin extends AbstractActionPanel
 
                 $form = new GroupUserForm($layout->col2);
                 $form->groupId = $groupId;
-                $form->redirectSite=new Site();
+                $form->redirectSite = new Site();
 
 
                 $table = new AdminTable($layout->col2);
 
                 $header = new TableHeader($table);
-                $header->addText('User');
+                //$header->addText('User');
+
+                $th=new Th($header);
+                $th->content[LanguageCode::EN] = 'User';
+                $th->content[LanguageCode::DE] = 'Benutzer';
+
+
                 $header->addEmpty();
 
                 $groupReader = new GroupUserReader();

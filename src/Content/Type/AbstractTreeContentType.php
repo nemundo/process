@@ -4,7 +4,6 @@
 namespace Nemundo\Process\Content\Type;
 
 
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Process\Content\Data\Tree\TreeDelete;
@@ -25,9 +24,6 @@ abstract class AbstractTreeContentType extends AbstractContentType
 
     public function saveType()
     {
-
-        //(new Debug())->write($this->dataId);
-        //exit;
 
         if ($this->existItem()) {
             $this->createMode = false;
@@ -91,7 +87,7 @@ abstract class AbstractTreeContentType extends AbstractContentType
     public function getText()
     {
 
-        $text = '[No Text]';
+        $text = '';
         return $text;
 
     }
@@ -109,12 +105,9 @@ abstract class AbstractTreeContentType extends AbstractContentType
     }
 
 
-    // onActive
-    // onInactive
-
     public function setActive()
     {
-$this->onActive();
+        $this->onActive();
     }
 
 
@@ -124,14 +117,15 @@ $this->onActive();
     }
 
 
-    protected function onActive() {
+    protected function onActive()
+    {
 
     }
 
-    protected function onInactive() {
+    protected function onInactive()
+    {
 
     }
-
 
 
     public function getForm(AbstractHtmlContainer $parent)
@@ -155,7 +149,6 @@ $this->onActive();
         return $form;
 
     }
-
 
 
 }

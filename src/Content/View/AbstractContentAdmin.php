@@ -83,8 +83,10 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         $this->index = new ActionSite($this);
         $this->index->onAction = function () {
 
+            if ($this->contentType->hasForm()) {
             $btn = new AdminSiteButton($this);
             $btn->site = $this->new;
+            }
 
             $this->loadIndex();
 
