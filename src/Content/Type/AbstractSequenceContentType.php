@@ -43,7 +43,7 @@ abstract class AbstractSequenceContentType extends AbstractTreeContentType
     public function getNextMenu()
     {
 
-        /** @var AbstractMenuContentType $nextStatus */
+        /** @var AbstractMenuContentType|AbstractSequenceContentType $nextStatus */
         $nextStatus = null;
 
         if ($this->nextMenuClass !== null) {

@@ -29,7 +29,7 @@ class ReminderNotificationStatus extends AbstractNotificationContentType
 
 
         $userRow = (new UserReader())->getRow();
-        $this->userToId=$userRow->id;
+        $this->toUserId=$userRow->id;
 
         //$this->message = 'blieb da was liegen???';
 

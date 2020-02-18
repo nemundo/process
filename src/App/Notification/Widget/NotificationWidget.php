@@ -65,11 +65,18 @@ class NotificationWidget extends AdminWidget
         $reader->limit = 20;
         foreach ($reader->getData() as $notificationRow) {
 
+
+
+            $notificationContentType = $notificationRow->getNotificationContentType();
+
+
             $row = new BootstrapClickableTableRow($table);
             //$row->addYesNo($notificationRow->archive);
             //$row->addText($notificationRow->content->contentType->contentType);
             $row->addText($notificationRow->subjectContent->subject);
-            $row->addText($notificationRow->message);
+//            $row->addText($notificationRow->message);
+            $row->addText($notificationContentType->getMessage());
+
 
             $row->addText($notificationRow->content->dateTime->getShortDateTimeLeadingZeroFormat());
             //$row->addText($notificationRow->to->displayName);

@@ -56,7 +56,7 @@ class SurveyContentType extends AbstractSequenceContentType
 
         $notification = new MessageNotificationContentType();
         $notification->parentId = $this->getContentId();
-        $notification->userToId = (new UserSession())->userId;
+        $notification->toUserId = (new UserSession())->userId;
         $notification->saveType();
 
     }

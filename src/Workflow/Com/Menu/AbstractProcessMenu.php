@@ -105,10 +105,10 @@ class AbstractProcessMenu extends AbstractHtmlContainer
 
         if ($this->workflowExist && !$this->workflowClosed) {
 
+            if ($this->nextStatus !==null) {
             if ($this->nextStatus->typeId == $status->typeId) {
-
                 $this->addSubmenuWithoutCheck($this->workflowStatus);
-
+            }
             }
         }
 

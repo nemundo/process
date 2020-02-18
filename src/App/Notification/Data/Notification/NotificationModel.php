@@ -75,7 +75,7 @@ $this->contentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->contentId->tableName = "process_notification";
 $this->contentId->fieldName = "content";
 $this->contentId->aliasFieldName = "process_notification_content";
-$this->contentId->label = "Content";
+$this->contentId->label = "Notification Content";
 $this->contentId->allowNullValue = false;
 
 $this->message = new \Nemundo\Model\Type\Text\LargeTextType($this);
@@ -111,7 +111,7 @@ $this->content = new \Nemundo\Process\Content\Data\Content\ContentExternalType($
 $this->content->tableName = "process_notification";
 $this->content->fieldName = "content";
 $this->content->aliasFieldName = "process_notification_content";
-$this->content->label = "Content";
+$this->content->label = "Notification Content";
 }
 return $this;
 }

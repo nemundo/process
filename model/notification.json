@@ -11,7 +11,7 @@
             "class_name": "Notification",
             "table_name": "process_notification",
             "namespace": "Nemundo\\Process\\App\\Notification\\Data\\Notification",
-            "row_class_name": "",
+            "row_class_name": "Nemundo\\Process\\App\\Notification\\Row\\NotificationCustomRow",
             "primary_index": "auto_increment",
             "is_deleted": false,
             "type": [
@@ -25,7 +25,7 @@
                 },
                 {
                     "type": "external",
-                    "label": "Content",
+                    "label": "Notification Content",
                     "field_name": "content",
                     "variable_name": "content",
                     "allow_null": false,

@@ -22,6 +22,7 @@ trait WorkflowCustomRowTrait
     public function getCreator()
     {
 
+
         $creator = $this->user->login . ' ' . $this->dateTime->getShortDateLeadingZeroFormat();
         return $creator;
 

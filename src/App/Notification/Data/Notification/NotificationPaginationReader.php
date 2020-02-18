@@ -11,12 +11,12 @@ parent::__construct();
 $this->model = new NotificationModel();
 }
 /**
-* @return NotificationRow[]
+* @return \Nemundo\Process\App\Notification\Row\NotificationCustomRow[]
 */
 public function getData() {
 $list = [];
 foreach (parent::getData() as $dataRow) {
-$row = new NotificationRow($dataRow, $this->model);
+$row = new \Nemundo\Process\App\Notification\Row\NotificationCustomRow($dataRow, $this->model);
 $list[] = $row;
 }
 return $list;

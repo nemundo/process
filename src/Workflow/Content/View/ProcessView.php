@@ -4,20 +4,17 @@
 namespace Nemundo\Process\Workflow\Content\View;
 
 
-use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Admin\Com\Widget\AdminWidget;
-use Nemundo\Com\TableBuilder\TableRow;
-use Nemundo\Package\FontAwesome\Icon\CheckIcon;
-use Nemundo\Process\Content\Com\Menu\NextMenu;
 use Nemundo\Process\Content\Com\Table\ContentLogTable;
 use Nemundo\Process\Content\Com\Table\SourceTable;
 use Nemundo\Process\Template\Content\File\FileParentContainer;
 use Nemundo\Process\Workflow\Com\Container\StatusFormContainer;
 use Nemundo\Process\Workflow\Com\Container\WorkflowStreamContainer;
 use Nemundo\Process\Workflow\Com\Layout\WorkflowLayout;
-use Nemundo\Process\Workflow\Com\Menu\ProcessMenu;
+use Nemundo\Process\Workflow\Com\Menu\WorkflowLogMenu;
 use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
+use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Parameter\StatusParameter;
 use Nemundo\ToDo\Data\ToDo\ToDoRow;
 use Schleuniger\App\Aufgabe\Content\Process\AufgabeParentContainer;
@@ -49,12 +46,29 @@ class ProcessView extends AbstractProcessView
 
             $statusParameter = new StatusParameter();
             if ($workflowStatus->hasNextMenu()) {
-            $statusParameter->addAllowedContentType($workflowStatus->getNextMenu());
+                $statusParameter->addAllowedContentType($workflowStatus->getNextMenu());
             }
 
             foreach ($workflowStatus->getMenuList() as $contentType) {
                 $statusParameter->addAllowedContentType($contentType);
             }
+
+
+            foreach ($this->contentType->getChild() as $contentRow) {
+
+                /** @var AbstractProcessStatus $contentType */
+                $contentType = $contentRow->getContentType();
+
+                if ($contentType->isObjectOfClass(AbstractProcessStatus::class)) {
+
+                    if ($contentType->editable) {
+                        $statusParameter->addAllowedContentType($contentType);
+                    }
+
+                }
+
+            }
+
 
             $formStatus = $statusParameter->getStatus();
 
@@ -82,7 +96,7 @@ class ProcessView extends AbstractProcessView
 
             $formStatus = $this->contentType;
             $workflowStatus = $formStatus;
-            $workflowTitle = $this->contentType->workflowTitle;  // 'Neu';
+            $workflowTitle = $this->contentType->defaultTitle;  // 'Neu';
 
         }
 
@@ -108,7 +122,6 @@ class ProcessView extends AbstractProcessView
         }
 
 
-
         /*
         $table = new AdminTable($layout->col1);
         foreach ($this->contentType->getChild() as $contentRow) {
@@ -118,9 +131,20 @@ class ProcessView extends AbstractProcessView
         }*/
 
 
+        $menu = new WorkflowLogMenu($layout->col1);
+        $menu->process = $this->contentType;
+        $menu->formStatus = $formStatus;
+        $menu->currentStatus = $workflowStatus;
 
 
+        /*
+        (new Br($layout->col1));
+        (new Br($layout->col1));
+        (new Br($layout->col1));
 
+
+        $p=new Paragraph($layout->col1);
+        $p->content='--- old version ---';
 
         $menu = new ProcessMenu($layout->col1);
         $menu->process = $this->contentType;
@@ -131,7 +155,7 @@ class ProcessView extends AbstractProcessView
 
 
         $menu=new NextMenu($layout->col1);
-        $menu->contentType= $workflowStatus;
+        $menu->contentType= $workflowStatus;*/
 
 
         if ($formStatus !== null) {
@@ -168,10 +192,8 @@ class ProcessView extends AbstractProcessView
             $view->parentId = $contentId;
 
 
-
             $container = new AufgabeParentContainer($layout->col3);
             $container->parentId = $contentId;
-
 
 
             $table = new SourceTable($layout->col3);

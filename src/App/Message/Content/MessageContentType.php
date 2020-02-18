@@ -81,7 +81,7 @@ class MessageContentType extends AbstractTreeContentType  // AbstractNotificatio
             //(new Debug())->write($userId);
 
             $notification = new MessageNotification();
-            $notification->userToId = $userId;
+            $notification->toUserId = $userId;
             $notification->subjectContentId = $this->getContentId();
             $notification->message = $this->message;
             $notification->saveType();

@@ -69,7 +69,7 @@ $this->contentId = new \Nemundo\Model\Type\Id\IdType();
 $this->contentId->fieldName = "content";
 $this->contentId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->contentId->aliasFieldName = $this->contentId->tableName ."_".$this->contentId->fieldName;
-$this->contentId->label = "Content";
+$this->contentId->label = "Notification Content";
 $this->addType($this->contentId);
 
 $this->message = new \Nemundo\Model\Type\Text\LargeTextType();
@@ -100,7 +100,7 @@ $this->content = new \Nemundo\Process\Content\Data\Content\ContentExternalType(n
 $this->content->fieldName = "content";
 $this->content->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->content->aliasFieldName = $this->content->tableName ."_".$this->content->fieldName;
-$this->content->label = "Content";
+$this->content->label = "Notification Content";
 $this->addType($this->content);
 }
 return $this;

@@ -60,7 +60,7 @@ $this->file->label='File';
 
         $type=new FileNotificationContentType();
         $type->parentId=$parent->getContentId();
-        $type->userToId=$this->to->getValue();
+        $type->toUserId=$this->to->getValue();
         $type->message = $this->message->getValue();
         $type->saveType();
 

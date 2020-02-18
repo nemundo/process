@@ -40,6 +40,8 @@ trait ProcessStatusTrait
      * @var bool
      */
     public $changeStatus = false;
+    // changeCurrentStatus
+
 
     /**
      * @var bool

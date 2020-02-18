@@ -34,7 +34,9 @@ class NotificationSite extends AbstractSite
 
         NotificationSite::$site=$this;
 
+        new NotificationItemSite($this);
         new ArchiveSite($this);
+
 
         // TODO: Implement loadSite() method.
     }

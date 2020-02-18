@@ -71,7 +71,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public $baseViewClass;
 
     // workflowDefaultTitle
-    public $workflowTitle='New';
+    public $defaultTitle='New';
 
     public function __construct($dataId = null)
     {
