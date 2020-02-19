@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Workflow\Content\View;
 
 
+use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Admin\Com\Widget\AdminWidget;
 use Nemundo\Process\Content\Com\Table\ContentLogTable;
@@ -159,10 +160,13 @@ class ProcessView extends AbstractProcessView
 
 
         if ($formStatus !== null) {
-            $widget = new AdminWidget($layout->col2);
-            $widget->widgetTitle = $formStatus->typeLabel;
+            //$widget = new AdminWidget($layout->col2);
+            //$widget->widgetTitle = $formStatus->typeLabel;
 
-            $form = new StatusFormContainer($widget);
+            $subtitle = new AdminSubtitle($layout->col2);
+            $subtitle->content = $formStatus->typeLabel;
+
+            $form = new StatusFormContainer($layout->col2);
             $form->formStatus = $formStatus;
             $form->workflowStatus = $workflowStatus;
             $form->redirectSite = clone($this->redirectSite);

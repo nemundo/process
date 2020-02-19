@@ -23,6 +23,8 @@ use Nemundo\Process\Group\Data\Group\GroupReader;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserDelete;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
 use Nemundo\Process\Group\Parameter\GroupParameter;
+use Nemundo\Process\Group\Type\AbstractAppUserGroupType;
+use Nemundo\Process\Group\Type\AbstractGroupContentType;
 use Nemundo\User\Parameter\UserParameter;
 use Nemundo\Web\Action\AbstractActionPanel;
 use Nemundo\Web\Action\ActionSite;
@@ -44,6 +46,11 @@ class GroupAdmin extends AbstractActionPanel
      * @var bool
      */
     public $filterGroupType = true;
+
+    /**
+     * @var AbstractAppUserGroupType[]
+     */
+    private $groupList=[];
 
 
     /**
@@ -104,6 +111,12 @@ class GroupAdmin extends AbstractActionPanel
             foreach ($this->groupContentTypeList as $groupContentType) {
                 $groupReader->filter->orEqual($groupReader->model->groupTypeId, $groupContentType->typeId);
             }
+
+            foreach ($this->groupList as $group) {
+                $groupReader->filter->orEqual($groupReader->model->id,$group->group $groupContentType->typeId);
+
+            }
+
 
             $groupReader->addOrder($groupReader->model->group);
             foreach ($groupReader->getData() as $groupRow) {
