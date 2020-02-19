@@ -54,17 +54,18 @@ class WorkflowInfoTable extends AdminLabelValueTable
     public function addAssignment()
     {
 
-        if ($this->workflowRow->assignmentId !==null) {
+        //if ($this->workflowRow->assignmentId !== null) {
 
-        $group = new GroupContentType($this->workflowRow->assignmentId);
+//            $group = new GroupContentType($this->workflowRow->assignmentId);
+        $group = (new GroupContentType())->fromGroupId($this->workflowRow->assignmentId);
 
-        $span = new Bold();
-        $span->content = $this->workflowRow->assignment->group;
-        $span->title = $group->getUserListText();
+            $span = new Bold();
+            $span->content = $this->workflowRow->assignment->group;
+            $span->title =   $group->getUserListText();
 
-        $this->addLabelCom($this->workflowRow->model->assignment->label, $span);
+            $this->addLabelCom($this->workflowRow->model->assignment->label, $span);
 
-        }
+        //}
         return $this;
     }
 
@@ -86,7 +87,7 @@ class WorkflowInfoTable extends AdminLabelValueTable
     {
 
 
-       // $this->checkPropertyOnNull($this->workflowRow);
+        // $this->checkPropertyOnNull($this->workflowRow);
 
         //if ($this->workflowRow == null)
 

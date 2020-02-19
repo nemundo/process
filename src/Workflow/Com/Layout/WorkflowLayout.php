@@ -14,9 +14,9 @@ class WorkflowLayout extends BootstrapThreeColumnLayout
 
         parent::loadContainer();
 
-        $this->col1->columnWidth = 2;
+        $this->col1->columnWidth = 3;
         $this->col2->columnWidth = 5;
-        $this->col3->columnWidth = 5;
+        $this->col3->columnWidth = 4;
     
     }
 

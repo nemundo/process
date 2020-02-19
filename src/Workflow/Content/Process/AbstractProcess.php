@@ -242,6 +242,16 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
+    public function reopenWorkflow()
+    {
+
+        $update = new ModelUpdate();
+        $update->model = $this->workflowModel;
+        $update->typeValueList->setModelValue($update->model->workflowClosed, false);
+        $update->updateById($this->dataId);
+
+    }
+
     protected function onActive()
     {
         $update = new ModelUpdate();
@@ -429,8 +439,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
-    // Leadtime
-    public function getLeaptime()
+    public function getLeadTime()
     {
 
         $difference = new DateTimeDifference();
@@ -444,10 +453,10 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
-    public function getLeaptimeText()
+    public function getLeadTimeText()
     {
 
-        $text = $this->getLeaptime() . ' Tage';
+        $text = $this->getLeadTime() . ' Tage';
         return $text;
 
 

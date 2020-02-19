@@ -8,6 +8,7 @@ use Nemundo\Admin\Com\Widget\AdminWidget;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Db\Filter\Filter;
+use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Html\Table\Th;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentPaginationReader;
@@ -89,6 +90,7 @@ class AssignmentWidget extends AdminWidget
         $assignmentReader->filter->andEqual($assignmentReader->model->statusId, (new OpenAssignmentStatus())->id);
 
         //$assignmentReader->addOrder($assignmentReader->model->sourceId, SortOrder::DESCENDING);
+        $assignmentReader->addOrder($assignmentReader->model->id, SortOrder::DESCENDING);
 
 
         $assignmentReader->paginationLimit =50;  // SchleunigerConfig::PAGINATION_LIMIT;

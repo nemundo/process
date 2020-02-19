@@ -54,8 +54,8 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     public function fromGroupId($groupId)
     {
 
-
         $this->groupId = $groupId;
+return $this;
 
     }
 

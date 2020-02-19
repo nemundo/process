@@ -21,7 +21,7 @@ class WorkflowDeleteStatus extends AbstractProcessStatus
 
         $process = $this->getParentProcess();
         $process->cancelAssignment();
-        $process->softDelete();
+        $process->setInactive();
 
     }
 
