@@ -163,4 +163,10 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
 
     }
 
+
+    public function getText()
+    {
+        return $this->getDataRow()->text;
+    }
+
 }
