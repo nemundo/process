@@ -52,30 +52,36 @@ class FileParentContainer extends AbstractParentContainer
         foreach ($fileReader->getData() as $documentRow) {
 
             $row = new TableRow($table);
+            $row->strikeThrough= !$documentRow->active;
+
 
             if ($documentRow->active) {
                 $link = new WorkflowFancyboxHyperlink($row);
                 $link->filename = $documentRow->file->getFilename();
                 $link->url = $documentRow->file->getUrl();
 
-                $row->addText($documentRow->content->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
-                $row->addText($documentRow->content->user->displayName);
 
                 $site = clone(FileInactiveSite::$site);
                 $site->addParameter(new ParentParameter($this->parentId));
                 $site->addParameter(new FileParameter($documentRow->id));
                 $row->addIconSite($site);
 
+            }
 
-            } else {
+
+            /*else {
                 $stroke = new Strike($row);
                 $stroke->content = $documentRow->file->getFilename();
 
+                /*$row->addEmpty();
                 $row->addEmpty();
-                $row->addEmpty();
-                $row->addEmpty();
+                $row->addEmpty();*/
 
-            }
+            //}
+
+            $row->addText($documentRow->content->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
+            $row->addText($documentRow->content->user->displayName);
+
 
         }
 

@@ -180,7 +180,7 @@ class ProcessView extends AbstractProcessView
             //$btn->contentType = $this->contentType;
 
 
-            $container = new WorkflowStreamContainer($layout->col2);
+            $container = new WorkflowStreamContainer($layout->col3);
             $container->contentType = $this->contentType;
 
             $contentId = $this->contentType->getContentId();
@@ -190,7 +190,6 @@ class ProcessView extends AbstractProcessView
 
             $view = new FileParentContainer($layout->col3);
             $view->parentId = $contentId;
-
 
             $container = new AufgabeParentContainer($layout->col3);
             $container->parentId = $contentId;
