@@ -21,6 +21,11 @@ abstract class AbstractTreeContentType extends AbstractContentType
      */
     public $parentId;
 
+    /**
+     * @var bool
+     */
+    public $toggleView = false;
+
 
     public function saveType()
     {

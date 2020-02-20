@@ -4,6 +4,8 @@
 namespace Nemundo\Process\Workflow\Com\Container;
 
 
+use Nemundo\Admin\Com\Card\AdminCard;
+use Nemundo\Admin\Com\Card\ToggleAdminCard;
 use Nemundo\Admin\Com\Widget\AdminWidget;
 use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
 use Nemundo\Com\Html\Listing\UnorderedList;
@@ -25,8 +27,20 @@ class WorkflowStreamContainer extends AbstractParentContainer  //WorkflowContain
 
             if ($status->hasView()) {
 
-                $widget = new AdminWidget($this);
-                $widget->widgetTitle = $status->getSubject() . ' ' . $logRow->user->displayName . ' ' . $logRow->dateTime->getShortDateTimeLeadingZeroFormat();
+                //$widget = new AdminWidget($this);
+
+                $card = null;
+                if ($status->toggleView) {
+                    $widget = new ToggleAdminCard($this);
+                } else {
+                    //$card = new AdminCard($this);
+                    $widget = new AdminCard($this);
+                }
+
+                $widget->id = 'log-'.$logRow->id;
+
+
+                $widget->title = $status->getSubject() . ' ' . $logRow->user->displayName . ' ' . $logRow->dateTime->getShortDateTimeLeadingZeroFormat();
 
                 $div = new Div($widget);
 

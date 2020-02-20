@@ -28,7 +28,6 @@ use Nemundo\Process\Content\Data\Content\ContentModel;
 use Nemundo\Process\Content\Data\Content\ContentPaginationReader;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\User\Com\ListBox\UserListBox;
 use Nemundo\Web\Site\AbstractSite;
 

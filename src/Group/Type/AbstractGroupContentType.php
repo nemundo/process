@@ -14,6 +14,7 @@ use Nemundo\Process\Group\Data\Group\Group;
 use Nemundo\Process\Group\Data\Group\GroupCount;
 use Nemundo\Process\Group\Data\Group\GroupDelete;
 use Nemundo\Process\Group\Data\Group\GroupReader;
+use Nemundo\Process\Group\Data\Group\GroupUpdate;
 use Nemundo\Process\Group\Data\GroupUser\GroupUser;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserDelete;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
@@ -82,6 +83,7 @@ return $this;
         $data = new Group();
         $data->updateOnDuplicate = true;
         $data->id = $this->getGroupId();
+        $data->active=true;
         $data->group = $this->getGroupLabel();
         $data->groupTypeId = $this->typeId;
         $data->save();
@@ -110,6 +112,23 @@ return $this;
 
         //(new GroupDelete())->deleteById($this->dataId);
         (new GroupDelete())->deleteById($this->groupId);
+
+    }
+
+
+    protected function onActive()
+    {
+        $update = new GroupUpdate();
+        $update->active=true;
+        $update->updateById($this->dataId);
+    }
+
+
+    protected function onInactive()
+    {
+        $update = new GroupUpdate();
+        $update->active=false;
+        $update->updateById($this->dataId);
 
     }
 

@@ -1,6 +1,6 @@
 <?php
 namespace Nemundo\Process\Group\Data\Group;
-class GroupModel extends \Nemundo\Model\Definition\Model\AbstractModel {
+class GroupModel extends \Nemundo\Model\Template\AbstractActiveModel {
 /**
 * @var \Nemundo\Model\Type\Id\IdType
 */
@@ -38,6 +38,7 @@ $this->id->visible->form = false;
 $this->id->visible->table = false;
 $this->id->visible->view = false;
 $this->id->visible->form = false;
+
 
 $this->group = new \Nemundo\Model\Type\Text\TextType($this);
 $this->group->tableName = "group_group";

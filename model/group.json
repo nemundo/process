@@ -5,7 +5,7 @@
     "is_deleted": false,
     "model": [
         {
-            "template": "default",
+            "template": "active_model",
             "model_id": "c6e00009-24e0-4cef-82ee-34a89152415f",
             "label": "Group",
             "class_name": "Group",

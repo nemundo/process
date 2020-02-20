@@ -8,7 +8,9 @@ use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Core\Http\Request\File\FileRequest;
 use Nemundo\Dev\Deployment\DeploymentConfig;
 use Nemundo\Dev\Deployment\StagingEnvironment;
+use Nemundo\Model\Parameter\FilenameParameter;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
+use Nemundo\Process\Template\Data\TemplateFile\Redirect\TemplateFileRedirectConfig;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFile;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileDelete;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileReader;
@@ -35,9 +37,9 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $this->typeLabel = 'File';
         $this->formClass = FileContentForm::class;
         $this->viewClass = FileContentView::class;
-        $this->viewSite = FileItemSite::$site;
+        $this->viewSite = TemplateFileRedirectConfig::$redirectTemplateFileFileSite;  // FileItemSite::$site;
         $this->listClass = FileContentList::class;
-        $this->parameterClass = FileParameter::class;
+        $this->parameterClass = FilenameParameter::class;  // FileParameter::class;
         parent::__construct($dataId);
     }
 

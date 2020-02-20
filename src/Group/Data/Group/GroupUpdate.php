@@ -8,6 +8,11 @@ class GroupUpdate extends AbstractModelUpdate {
 public $model;
 
 /**
+* @var bool
+*/
+public $active;
+
+/**
 * @var string
 */
 public $group;
@@ -22,6 +27,7 @@ parent::__construct();
 $this->model = new GroupModel();
 }
 public function update() {
+$this->typeValueList->setModelValue($this->model->active, $this->active);
 $this->typeValueList->setModelValue($this->model->group, $this->group);
 $this->typeValueList->setModelValue($this->model->groupTypeId, $this->groupTypeId);
 parent::update();

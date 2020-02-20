@@ -9,23 +9,19 @@ use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Navigation\AdminNavigation;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
-use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Com\Html\Listing\UnorderedList;
 use Nemundo\Com\TableBuilder\TableHeader;
-use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Block\Div;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\Dropdown\BootstrapSiteDropdown;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
-use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentGroup\ContentGroupReader;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Process\Content\Type\MenuTrait;
 use Nemundo\Web\Site\AbstractSite;
 
@@ -52,10 +48,12 @@ class ContentItemSite extends AbstractSite
     {
 
 
+        ContentSite::$site->showMenuAsActive=true;
+
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
         $nav = new AdminNavigation($page);
-        $nav->site=ContentSite::$site;
+        $nav->site = ContentSite::$site;
 
         $contentType = (new ContentParameter())->getContentType(false);
 
@@ -65,8 +63,8 @@ class ContentItemSite extends AbstractSite
         if ($contentType->hasView()) {
             $contentType->getView($page);
         } else {
-            $p=new Paragraph($page);
-            $p->content='[No View]';
+            $p = new Paragraph($page);
+            $p->content = '[No View]';
         }
 
         $table = new AdminLabelValueTable($page);
@@ -77,7 +75,8 @@ class ContentItemSite extends AbstractSite
         $table->addLabelValue('Class', $contentType->getClassName());
 
         if ($contentType->hasViewSite()) {
-            $table->addLabelSite('View', $contentType->getViewSite());
+            $table->addLabelSite('View Site', $contentType->getViewSite());
+            $table->addLabelSite('Subject View Site', $contentType->getSubjectViewSite());
         } else {
             $table->addLabelValue('View', '[No View Site]');
         }
@@ -109,9 +108,6 @@ class ContentItemSite extends AbstractSite
         }
 
 
-
-
-
         if ($contentType->hasParent()) {
 
             $subtitle = new AdminSubtitle($page);
@@ -126,7 +122,7 @@ class ContentItemSite extends AbstractSite
 
                 $row = new BootstrapClickableTableRow($table);
 
-                $parentContentType=$contentRow->getContentType();
+                $parentContentType = $contentRow->getContentType();
                 $row->addText($parentContentType->typeLabel);
 
                 $row->addText($parentContentType->getSubject());
@@ -146,7 +142,6 @@ class ContentItemSite extends AbstractSite
         $btn = new AdminIconSiteButton($page);
         $btn->site = ContentDeleteSite::$site;
         $btn->site->addParameter(new ContentParameter());
-
 
 
         $subtitle = new AdminSubtitle($page);

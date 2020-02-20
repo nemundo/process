@@ -19,7 +19,7 @@ use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Parameter\StatusParameter;
 use Nemundo\Web\Site\Site;
 
-class WorkflowLogMenu extends AdminTable
+class WorkflowLogMenu extends LogMenu  // AdminTable
 {
 
     /**
@@ -37,7 +37,7 @@ class WorkflowLogMenu extends AdminTable
      */
     public $currentStatus;
 
-    private $subMenuCssClass = 'ml-3';
+    //private $subMenuCssClass = 'ml-3';
 
 
     public function getContent()

@@ -195,8 +195,8 @@ class ProcessView extends AbstractProcessView
             $view = new FileParentContainer($layout->col3);
             $view->parentId = $contentId;
 
-            $container = new AufgabeParentContainer($layout->col3);
-            $container->parentId = $contentId;
+            //$container = new AufgabeParentContainer($layout->col3);
+            //$container->parentId = $contentId;
 
 
             $table = new SourceTable($layout->col3);

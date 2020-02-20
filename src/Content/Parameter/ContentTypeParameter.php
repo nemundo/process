@@ -20,6 +20,7 @@ class ContentTypeParameter extends AbstractUrlParameter
     }
 
 
+    // wann braucht es da dataId???
     public function getContentType($dataId = null)
     {
 
