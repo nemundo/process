@@ -17,7 +17,7 @@ public $model;
 public $id;
 
 /**
-* @var string
+* @var int
 */
 public $contentId;
 
@@ -37,7 +37,7 @@ public $title;
 public $text;
 
 /**
-* @var string
+* @var int
 */
 public $sourceId;
 
@@ -50,13 +50,13 @@ public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
-$this->contentId = $this->getModelValue($model->contentId);
+$this->contentId = intval($this->getModelValue($model->contentId));
 if ($model->content !== null) {
 $this->loadNemundoProcessContentDataContentContentcontentRow($model->content);
 }
 $this->title = $this->getModelValue($model->title);
 $this->text = $this->getModelValue($model->text);
-$this->sourceId = $this->getModelValue($model->sourceId);
+$this->sourceId = intval($this->getModelValue($model->sourceId));
 if ($model->source !== null) {
 $this->loadNemundoProcessContentDataContentContentsourceRow($model->source);
 }

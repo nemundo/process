@@ -17,7 +17,7 @@ public $model;
 public $id;
 
 /**
-* @var string
+* @var int
 */
 public $sourceId;
 
@@ -30,7 +30,7 @@ public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
-$this->sourceId = $this->getModelValue($model->sourceId);
+$this->sourceId = intval($this->getModelValue($model->sourceId));
 if ($model->source !== null) {
 $this->loadNemundoProcessContentDataContentContentsourceRow($model->source);
 }

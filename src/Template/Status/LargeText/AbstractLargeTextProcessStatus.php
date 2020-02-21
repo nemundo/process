@@ -13,6 +13,10 @@ abstract class AbstractLargeTextProcessStatus extends AbstractProcessStatus
 
     public $largeText;
 
+    protected $largeTextLabel = 'Large Text (Orginal)';
+
+    protected $largeTextValidation=false;
+
     protected function onCreate()
     {
 
@@ -53,6 +57,15 @@ abstract class AbstractLargeTextProcessStatus extends AbstractProcessStatus
 
         return $this->getParentContentType()->getViewSite();
 
+    }
+
+
+    public function getLargeTextLabel() {
+        return $this->largeTextLabel;
+    }
+
+    public function getLargeTextValidation() {
+        return $this->largeTextValidation;
     }
 
 }

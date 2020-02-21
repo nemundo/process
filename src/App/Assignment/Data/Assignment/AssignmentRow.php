@@ -17,7 +17,7 @@ public $model;
 public $id;
 
 /**
-* @var string
+* @var int
 */
 public $sourceId;
 
@@ -42,7 +42,7 @@ public $group;
 public $message;
 
 /**
-* @var string
+* @var int
 */
 public $statusId;
 
@@ -57,7 +57,7 @@ public $status;
 public $deadline;
 
 /**
-* @var string
+* @var int
 */
 public $contentId;
 
@@ -70,7 +70,7 @@ public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
-$this->sourceId = $this->getModelValue($model->sourceId);
+$this->sourceId = intval($this->getModelValue($model->sourceId));
 if ($model->source !== null) {
 $this->loadNemundoProcessContentDataContentContentsourceRow($model->source);
 }
@@ -79,7 +79,7 @@ if ($model->group !== null) {
 $this->loadNemundoProcessGroupDataGroupGroupgroupRow($model->group);
 }
 $this->message = $this->getModelValue($model->message);
-$this->statusId = $this->getModelValue($model->statusId);
+$this->statusId = intval($this->getModelValue($model->statusId));
 if ($model->status !== null) {
 $this->loadNemundoProcessAppAssignmentDataAssignmentStatusAssignmentStatusstatusRow($model->status);
 }
@@ -87,7 +87,7 @@ $value = $this->getModelValue($model->deadline);
 if ($value !== "0000-00-00") {
 $this->deadline = new \Nemundo\Core\Type\DateTime\Date($this->getModelValue($model->deadline));
 }
-$this->contentId = $this->getModelValue($model->contentId);
+$this->contentId = intval($this->getModelValue($model->contentId));
 if ($model->content !== null) {
 $this->loadNemundoProcessContentDataContentContentcontentRow($model->content);
 }

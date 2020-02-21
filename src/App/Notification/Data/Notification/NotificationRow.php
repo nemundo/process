@@ -22,7 +22,7 @@ public $id;
 public $archive;
 
 /**
-* @var string
+* @var int
 */
 public $contentId;
 
@@ -47,7 +47,7 @@ public $toId;
 public $to;
 
 /**
-* @var string
+* @var int
 */
 public $subjectContentId;
 
@@ -61,7 +61,7 @@ parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
 $this->archive = boolval($this->getModelValue($model->archive));
-$this->contentId = $this->getModelValue($model->contentId);
+$this->contentId = intval($this->getModelValue($model->contentId));
 if ($model->content !== null) {
 $this->loadNemundoProcessContentDataContentContentcontentRow($model->content);
 }
@@ -70,7 +70,7 @@ $this->toId = $this->getModelValue($model->toId);
 if ($model->to !== null) {
 $this->loadNemundoUserDataUserUsertoRow($model->to);
 }
-$this->subjectContentId = $this->getModelValue($model->subjectContentId);
+$this->subjectContentId = intval($this->getModelValue($model->subjectContentId));
 if ($model->subjectContent !== null) {
 $this->loadNemundoProcessContentDataContentContentsubjectContentRow($model->subjectContent);
 }

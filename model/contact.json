@@ -2,5 +2,66 @@
     "app": "Contact",
     "name": "contact",
     "namespace": "Nemundo\\Process\\App\\Contact",
-    "is_deleted": false
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "7985f4eb-dff4-481b-ab15-190431b33f43",
+            "label": "Contact",
+            "class_name": "Contact",
+            "table_name": "contact_contact",
+            "namespace": "Nemundo\\Process\\App\\Contact\\Data\\Contact",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Company",
+                    "field_name": "company",
+                    "variable_name": "company",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Last Name",
+                    "field_name": "last_name",
+                    "variable_name": "lastName",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "First Name",
+                    "field_name": "first_name",
+                    "variable_name": "firstName",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Phone",
+                    "field_name": "phone",
+                    "variable_name": "phone",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "eMail",
+                    "field_name": "email",
+                    "variable_name": "email",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": []
+        }
+    ]
 }

@@ -19,12 +19,12 @@ trait ProcessStatusTrait
     /**
      * @var bool
      */
-    public $showMenu = true;
+    //public $showMenu = true;
 
     /**
      * @var bool
      */
-    public $showLog = true;
+    //public $showLog = true;
 
     /**
      * @var bool
@@ -39,14 +39,20 @@ trait ProcessStatusTrait
     /**
      * @var bool
      */
-    public $changeStatus = false;
+    protected $changeStatus = false;
     // changeCurrentStatus
 
 
     /**
      * @var bool
      */
-    public $activeAfterWorkflowClosed = false;
+    //public $activeAfterWorkflowClosed = false;
+
+
+
+    public function isStatusChangeable() {
+        return $this->changeStatus;
+    }
 
 
     public function getParentProcess()

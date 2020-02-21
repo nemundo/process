@@ -27,7 +27,7 @@ public $active;
 public $file;
 
 /**
-* @var string
+* @var int
 */
 public $contentId;
 
@@ -47,7 +47,7 @@ $this->row = $row;
 $this->id = $this->getModelValue($model->id);
 $this->active = boolval($this->getModelValue($model->active));
 $this->file = new \Nemundo\Model\Reader\Property\File\RedirectFilenameReaderProperty($row, $model->file, $this->id);
-$this->contentId = $this->getModelValue($model->contentId);
+$this->contentId = intval($this->getModelValue($model->contentId));
 if ($model->content !== null) {
 $this->loadNemundoProcessContentDataContentContentcontentRow($model->content);
 }

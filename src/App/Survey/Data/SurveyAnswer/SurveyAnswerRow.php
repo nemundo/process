@@ -17,7 +17,7 @@ public $model;
 public $id;
 
 /**
-* @var string
+* @var int
 */
 public $surveyId;
 
@@ -35,7 +35,7 @@ public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
-$this->surveyId = $this->getModelValue($model->surveyId);
+$this->surveyId = intval($this->getModelValue($model->surveyId));
 if ($model->survey !== null) {
 $this->loadNemundoProcessAppSurveyDataSurveySurveysurveyRow($model->survey);
 }

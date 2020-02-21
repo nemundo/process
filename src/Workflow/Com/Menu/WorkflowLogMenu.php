@@ -63,7 +63,7 @@ class WorkflowLogMenu extends LogMenu  // AdminTable
 
                 if ($contentType->isObjectOfClass(AbstractProcessStatus::class)) {
 
-                    if ($contentType->changeStatus) {
+                    if ($contentType->isStatusChangeable()) {
 
                         $row = new TableRow($this);
                         new CheckIcon($row);

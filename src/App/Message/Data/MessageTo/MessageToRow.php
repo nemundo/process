@@ -17,7 +17,7 @@ public $model;
 public $id;
 
 /**
-* @var string
+* @var int
 */
 public $messageId;
 
@@ -40,7 +40,7 @@ public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
-$this->messageId = $this->getModelValue($model->messageId);
+$this->messageId = intval($this->getModelValue($model->messageId));
 if ($model->message !== null) {
 $this->loadNemundoProcessAppMessageDataMessageMessagemessageRow($model->message);
 }

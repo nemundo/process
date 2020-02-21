@@ -17,7 +17,7 @@ public $model;
 public $id;
 
 /**
-* @var string
+* @var int
 */
 public $childId;
 
@@ -27,7 +27,7 @@ public $childId;
 public $child;
 
 /**
-* @var string
+* @var int
 */
 public $parentId;
 
@@ -45,11 +45,11 @@ public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
-$this->childId = $this->getModelValue($model->childId);
+$this->childId = intval($this->getModelValue($model->childId));
 if ($model->child !== null) {
 $this->loadNemundoProcessContentDataContentContentchildRow($model->child);
 }
-$this->parentId = $this->getModelValue($model->parentId);
+$this->parentId = intval($this->getModelValue($model->parentId));
 if ($model->parent !== null) {
 $this->loadNemundoProcessContentDataContentContentparentRow($model->parent);
 }

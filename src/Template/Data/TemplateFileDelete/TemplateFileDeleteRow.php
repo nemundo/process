@@ -17,7 +17,7 @@ public $model;
 public $id;
 
 /**
-* @var string
+* @var int
 */
 public $fileId;
 
@@ -30,7 +30,7 @@ public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
-$this->fileId = $this->getModelValue($model->fileId);
+$this->fileId = intval($this->getModelValue($model->fileId));
 if ($model->file !== null) {
 $this->loadNemundoProcessTemplateDataTemplateFileTemplateFilefileRow($model->file);
 }
