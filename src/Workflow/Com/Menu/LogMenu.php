@@ -31,6 +31,21 @@ class LogMenu extends AdminTable
     protected $subMenuCssClass = 'ml-3';
 
 
+    public function addSite(AbstractSite $site)
+    {
+
+        $row = new TableRow($this);
+        //new CheckIcon($row);
+$row->addEmpty();
+
+        $td = new Td($row);
+        $td->nowrap=true;
+
+        $hyperlink = new SiteHyperlink($td);
+        $hyperlink->site = $site;
+
+    }
+
 
     public function addCheckSite(AbstractSite $site)
     {
@@ -45,6 +60,23 @@ class LogMenu extends AdminTable
             $hyperlink->site = $site;
 
     }
+
+
+
+    public function addArrowSite(AbstractSite $site)
+    {
+
+        $row = new TableRow($this);
+        new ArrowRightIcon($row);
+
+        $td = new Td($row);
+        $td->nowrap=true;
+
+        $hyperlink = new SiteHyperlink($td);
+        $hyperlink->site = $site;
+
+    }
+
 
 
     public function addSubSite(AbstractSite $site) {

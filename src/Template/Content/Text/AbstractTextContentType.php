@@ -13,10 +13,7 @@ use Nemundo\Process\Template\Data\TemplateText\TemplateTextUpdate;
 abstract class AbstractTextContentType extends AbstractTreeContentType
 {
 
-
-    // protected
     public $text;
-
 
     public function __construct($dataId = null)
     {
@@ -43,6 +40,14 @@ abstract class AbstractTextContentType extends AbstractTreeContentType
         $update = new TemplateTextUpdate();
         $update->text = $this->text;
         $update->updateById($this->dataId);
+
+    }
+
+
+    protected function onSearchIndex()
+    {
+        $textRow = $this->getDataRow();
+        $this->addSearchText($textRow->text);
 
     }
 
