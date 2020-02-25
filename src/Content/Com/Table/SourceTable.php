@@ -11,12 +11,12 @@ use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\Com\Container\AbstractParentContainer;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
-use Nemundo\Process\Workflow\Content\Process\WorkflowProcess;
 
 
-// müsste nach Content
-// ParentTable
-class SourceTable extends AbstractHtmlContainer  // AbstractParentContainer
+
+
+// ParentSourceTable
+class SourceTable extends AbstractHtmlContainer
 {
 
     /**
@@ -27,24 +27,21 @@ class SourceTable extends AbstractHtmlContainer  // AbstractParentContainer
     public function getContent()
     {
 
-        //(new Debug())->write($this->parentId);
-
-        //$workflowProcess = new WorkflowProcess($this->parentId);
-
         if ($this->contentType->getParentCount() > 0) {
 
             $table = new AdminClickableTable($this);
 
             $header = new TableHeader($table);
             $header->addText('Quelle');
-            $header->addText('Type');
+            $header->addText('Typ');
 
             foreach ($this->contentType->getParentContent() as $contentRow) {
 
                 $row = new BootstrapClickableTableRow($table);
-
                 $contentType = $contentRow->getContentType();
-                $row->addText($contentType->getSubject());
+                $row->addSite($contentType->getSubjectViewSite());
+
+                //$row->addText($contentType->getSubject());
 
                 $row->addText($contentRow->contentType->contentType);
 

@@ -6,6 +6,7 @@ namespace Nemundo\Process\Workflow\Com\Table;
 
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Html\Formatting\Bold;
+use Nemundo\Process\Group\Com\Span\GroupSpan;
 use Nemundo\Process\Group\Type\GroupContentType;
 use Schleuniger\App\ChangeRequest\Row\EcrCustomRow;
 
@@ -54,18 +55,18 @@ class WorkflowInfoTable extends AdminLabelValueTable
     public function addAssignment()
     {
 
-        //if ($this->workflowRow->assignmentId !== null) {
+        /*$group = (new GroupContentType())->fromGroupId($this->workflowRow->assignmentId);
 
-//            $group = new GroupContentType($this->workflowRow->assignmentId);
-        $group = (new GroupContentType())->fromGroupId($this->workflowRow->assignmentId);
+        $span = new Bold();
+        $span->content = $this->workflowRow->assignment->group;
+        $span->title = $group->getUserListText();*/
 
-            $span = new Bold();
-            $span->content = $this->workflowRow->assignment->group;
-            $span->title =   $group->getUserListText();
+        $span = new GroupSpan();
+        $span->groupId = $this->workflowRow->assignmentId;
+        $span->content = $this->workflowRow->assignment->group;
 
-            $this->addLabelCom($this->workflowRow->model->assignment->label, $span);
+        $this->addLabelCom($this->workflowRow->model->assignment->label, $span);
 
-        //}
         return $this;
     }
 

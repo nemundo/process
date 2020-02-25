@@ -64,6 +64,14 @@ class GroupAdmin extends AbstractActionPanel
     private $deleteUser;
 
 
+    public function addGroup(AbstractGroupContentType $group) {
+
+        $this->groupList[]=$group;
+        return $this;
+
+    }
+
+
     protected function loadActionSite()
     {
 
@@ -101,9 +109,6 @@ class GroupAdmin extends AbstractActionPanel
             $th->content[LanguageCode::EN]='Group';
             $th->content[LanguageCode::DE]='Gruppe';
 
-
-            //$header->addText('Group');
-
             if ($this->showGroupTypeColumn) {
                 $header->addText('Group Type');
             }
@@ -113,10 +118,9 @@ class GroupAdmin extends AbstractActionPanel
                 $groupReader->filter->orEqual($groupReader->model->groupTypeId, $groupContentType->typeId);
             }
 
-            /*foreach ($this->groupList as $group) {
-                $groupReader->filter->orEqual($groupReader->model->id,$group->group $groupContentType->typeId);
-
-            }*/
+            foreach ($this->groupList as $group) {
+                $groupReader->filter->orEqual($groupReader->model->id,$group->getGroupId());
+            }
 
 
             $groupReader->addOrder($groupReader->model->group);

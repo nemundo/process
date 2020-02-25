@@ -58,13 +58,16 @@ class SearchSite extends AbstractSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
-        $form = new ContentSearchForm($page);
-        if ($form->hasValue()) {
+        //$form = new ContentSearchForm($page);
+
+        $queryParameter = (new SearchQueryParameter());
+
+        if ($queryParameter->hasValue()) {
 
             $searchIndexReader = new SearchIndexPaginationReader();
             $searchIndexReader->model->loadContent();
             $searchIndexReader->model->content->loadContentType();
-            $searchIndexReader->filter->andEqual($searchIndexReader->model->wordId, $form->getWordId());
+            $searchIndexReader->filter->andEqual($searchIndexReader->model->wordId, $queryParameter->getWordId());
 
             $contentTypeParameter = new ContentTypeParameter();
             if ($contentTypeParameter->hasValue()) {
@@ -75,7 +78,7 @@ class SearchSite extends AbstractSite
 
 
             $count = new SearchIndexCount();
-            $count->filter->andEqual($searchIndexReader->model->wordId, $form->getWordId());
+            $count->filter->andEqual($searchIndexReader->model->wordId, $queryParameter->getWordId());
             $searchCount = $count->getCount();
 
 
@@ -88,13 +91,13 @@ class SearchSite extends AbstractSite
 
 
             $logType = new SearchLogContentType();
-            $logType->searchQuery = $form->getSearchQuery();
+            $logType->searchQuery =(new SearchQueryParameter())->getValue();  // $queryParameter->getSearchQuery();
             $logType->resultCount = $searchCount;
             $logType->saveType();
 
 
             $bold = new TextBold();
-            $bold->addSearchQuery($form->getSearchQuery());
+            $bold->addSearchQuery((new SearchQueryParameter())->getValue());  //$form->getSearchQuery());
 
 
             $layout = new BootstrapTwoColumnLayout($page);
@@ -142,7 +145,7 @@ class SearchSite extends AbstractSite
 
                 $snippet = new SnippetText();
                 $snippet->setMaxWords(30);
-                $textSnippet = $snippet->createSnippet($form->getSearchQuery(), $contentType->getText());
+                $textSnippet = $snippet->createSnippet($queryParameter->getValue(), $contentType->getText());
                 $row->addText($bold->getBoldText($textSnippet));
 
 
@@ -179,7 +182,7 @@ class SearchSite extends AbstractSite
             $searchIndexReader = new SearchIndexPaginationReader();
             $searchIndexReader->model->loadContent();
             $searchIndexReader->model->content->loadContentType();
-            $searchIndexReader->filter->andEqual($searchIndexReader->model->wordId, $form->getWordId());
+            $searchIndexReader->filter->andEqual($searchIndexReader->model->wordId, $queryParameter->getWordId());
             $searchIndexReader->addGroup($searchIndexReader->model->content->contentTypeId);
 
             $count = new CountField($searchIndexReader);

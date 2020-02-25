@@ -26,7 +26,7 @@ class LogMenu extends AdminTable
     /**
      * @var AbstractSite
      */
-   // public $redirectSite;
+    public $redirectSite;
 
     protected $subMenuCssClass = 'ml-3';
 
@@ -97,6 +97,23 @@ $row->addEmpty();
 
     }
 
+
+    public function addSubLabel($label) {
+
+
+        $row = new TableRow($this);
+        $row->addEmpty();
+
+        $td = new Td($row);
+        $td->nowrap=true;
+      //  $td->content = $label;
+
+        $span = new Span($td);
+        $span->content = $label;
+        $span->addCssClass($this->subMenuCssClass);
+
+
+    }
 
 
 

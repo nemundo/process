@@ -16,7 +16,10 @@ use Nemundo\Model\Count\ModelDataCount;
 use Nemundo\Model\Data\ModelUpdate;
 use Nemundo\Model\Value\ModelDataValue;
 use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentUpdate;
+use Nemundo\Process\App\Assignment\Data\AssignmentIndex\AssignmentIndex;
+use Nemundo\Process\App\Assignment\Data\AssignmentIndex\AssignmentIndexUpdate;
 use Nemundo\Process\App\Assignment\Status\CancelAssignmentStatus;
+use Nemundo\Process\App\Assignment\Status\ClosedAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\OpenAssignmentStatus;
 use Nemundo\Process\Content\Data\Content\ContentUpdate;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
@@ -28,6 +31,7 @@ use Nemundo\Process\Workflow\Content\View\AbstractProcessView;
 use Nemundo\Process\Workflow\Content\View\ProcessView;
 use Nemundo\Process\Workflow\Model\AbstractWorkflowModel;
 use Nemundo\ToDo\Data\ToDo\ToDoRow;
+use Schleuniger\App\Verbesserung\Group\PruefungGroup;
 
 // AbstractWorkflowProcess
 abstract class AbstractProcess extends AbstractSequenceContentType
@@ -91,6 +95,12 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
             $this->saveContentBefore();
 
+            $data = new AssignmentIndex();
+            $data->sourceId=$this->parentId;
+            $data->contentId=$this->getContentId();
+            $data->save();
+
+
             $this->onCreate();
 
             $update = new ModelUpdate();
@@ -134,6 +144,10 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $this->saveSearchIndex();
 
         $this->onFinished();
+
+
+
+
 
 
     }
@@ -239,6 +253,12 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $update->typeValueList->setModelValue($update->model->workflowClosed, true);
         $update->updateById($this->dataId);
 
+        $update = new AssignmentIndexUpdate();
+        $update->closed=true;
+        $update->filter->andEqual($update->model->contentId,$this->getContentId());
+        $update->update();
+
+
     }
 
 
@@ -270,18 +290,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $update->updateById($this->dataId);
 
     }
-
-
-    /*
-    public function softDelete()
-    {
-
-        $update = new ModelUpdate();
-        $update->model = $this->workflowModel;
-        $update->typeValueList->setModelValue($update->model->active, false);
-        $update->updateById($this->dataId);
-
-    }*/
 
 
     public function existItem()
@@ -321,26 +329,40 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         return $workflowRow->deadline;
     }
 
-    public function changeDeadline(Date $date = null)
+    public function changeDeadline(Date $deadline = null)
     {
 
-        if ($date !== null) {
+        if ($deadline !== null) {
 
             $update = new ModelUpdate();
             $update->model = $this->workflowModel;
-            $update->typeValueList->setModelValue($update->model->deadline, $date->getIsoDateFormat());
+            $update->typeValueList->setModelValue($update->model->deadline, $deadline->getIsoDateFormat());
             $update->updateById($this->dataId);
 
             $update = new AssignmentUpdate();
-            $update->deadline = $date;
+            $update->deadline = $deadline;
             $update->filter->andEqual($update->model->sourceId, $this->getContentId());
             $update->filter->andEqual($update->model->statusId, (new OpenAssignmentStatus())->id);
             $update->update();
+
+            $update = new AssignmentIndexUpdate();
+            $update->deadline = $deadline;
+            $update->filter->andEqual($update->model->contentId, $this->getContentId());
+            $update->update();
+
 
         }
 
     }
 
+
+    public function closeAssignment()
+    {
+        $update = new AssignmentUpdate();
+        $update->statusId = (new ClosedAssignmentStatus())->id;
+        $update->filter->andEqual($update->model->sourceId, $this->getContentId());
+        $update->update();
+    }
 
     // clearAssignment
     public function cancelAssignment()

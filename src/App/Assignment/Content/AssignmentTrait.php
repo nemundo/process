@@ -12,6 +12,8 @@ use Nemundo\Process\App\Assignment\Data\Assignment\Assignment;
 use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentDelete;
 use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentReader;
 use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentUpdate;
+use Nemundo\Process\App\Assignment\Data\AssignmentIndex\AssignmentIndexUpdate;
+use Nemundo\Process\App\Assignment\Data\AssignmentLog\AssignmentLog;
 use Nemundo\Process\App\Assignment\Status\CancelAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\ClosedAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\OpenAssignmentStatus;
@@ -31,6 +33,8 @@ trait AssignmentTrait
      */
     public $group;
 
+
+    // assignmentId
     public $groupId;
 
     /**
@@ -107,11 +111,23 @@ $this->saveAssignment();
         $data->sourceId = $this->parentId;
         $data->message = $this->getMessage();
         $data->contentId = $this->getContentId();
+        //$data->save();
+        $this->dataId = $data->save();
+
+
+        // assignment log
+        $data = new AssignmentLog();
+        $data->assignmentId = $this->groupId;
         $this->dataId = $data->save();
 
 
 
 
+        $update = new AssignmentIndexUpdate();
+        $update->assignmentId = $this->groupId;
+        $update->deadline = $this->deadline;
+        $update->filter->andEqual($update->model->contentId,$this->parentId);
+        $update->update();
 
 
 

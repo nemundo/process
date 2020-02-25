@@ -7,20 +7,28 @@ namespace Nemundo\Process\Template\Content\Url;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Template\Content\Text\AbstractTextContentType;
 
-class UrlContentType extends AbstractUrlContentType
+abstract class AbstractUrlContentType extends AbstractTextContentType
 {
 
     public $url;
 
-    protected function loadContentType()
+
+    public function __construct($dataId = null)
     {
+        parent::__construct($dataId);
         $this->typeLabel='Url';
+        $this->viewClass=UrlContentView::class;
+    }
+
+   /* protected function loadContentType()
+    {
+
         $this->typeId='bffc3e3f-7a32-4d56-821d-aaf5a2a0c8b5';
 
-        $this->viewClass=UrlContentView::class;
+
 
         // TODO: Implement loadContentType() method.
-    }
+    }*/
 
 
     protected function onCreate()

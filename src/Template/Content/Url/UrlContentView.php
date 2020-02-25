@@ -21,6 +21,7 @@ class UrlContentView extends AbstractContentView
         $urlRow = $this->contentType->getDataRow();
 
         $link = new UrlHyperlink($this);
+        $link->openNewWindow=true;
         $link->url = $urlRow->text;
         $link->content= $urlRow->text;
 

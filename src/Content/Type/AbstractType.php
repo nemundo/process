@@ -60,7 +60,6 @@ abstract class AbstractType extends AbstractBaseClass
 
 
     // fromDataId
-    // fromContentId
     public function loadFromDataId($dataId = null)
     {
 

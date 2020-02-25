@@ -4,6 +4,8 @@
 namespace Nemundo\Process\Site;
 
 
+use Nemundo\Process\App\Assignment\Site\AssignmentIndexSite;
+use Nemundo\Process\App\Assignment\Site\AssignmentSite;
 use Nemundo\Process\App\Calendar\Site\CalendarSite;
 use Nemundo\Process\App\Dashboard\Site\DashboardSite;
 use Nemundo\Process\App\Document\Site\DocumentSite;
@@ -45,14 +47,9 @@ class ProcessSite extends AbstractSite
 
         ProcessSite::$site = $this;
 
-        //new DocumentSite($this);
         new ContentTypeSite($this);
         new ContentSite($this);
         new TreeSite($this);
-        //new WorkflowSite($this);
-        //new WorkflowInboxSite($this);
-
-        //new InboxSite($this);
 
         new WikiSite($this);
         new ProcessTemplateSite($this);
@@ -80,11 +77,13 @@ class ProcessSite extends AbstractSite
 
         new MessageSite($this);
 
-        new \Nemundo\Process\App\Assignment\Site\AssignmentSite($this);
+        new AssignmentSite($this);
+        new AssignmentIndexSite($this);
+
+
         new NotificationSite($this);
 
         new DashboardSite($this);
-        //new \Nemundo\Process\Workflow\Site\ProcessSite($this);
 
         new UserSite($this);
 

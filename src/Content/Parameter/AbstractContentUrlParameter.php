@@ -22,7 +22,7 @@ abstract class AbstractContentUrlParameter extends AbstractUrlParameter
         $contentType = $contentRow->getContentType();
 
         if ($checkContentType) {
-        $this->checkContentType($contentType);
+            $this->checkContentType($contentType);
         }
 
         return $contentType;

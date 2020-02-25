@@ -71,7 +71,7 @@ class ContentSearchForm extends SearchForm
 
     public function getWordId() {
 
-        $wordId = md5(mb_strtolower( $this->getSearchQuery()));
+        $wordId =(new SearchQueryParameter())->getWordId();  // md5(mb_strtolower( $this->getSearchQuery()));
         return $wordId;
     }
 

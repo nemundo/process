@@ -11,7 +11,7 @@ use Nemundo\Process\App\News\Type\NewsContentType;
 use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\App\Wiki\Setup\WikiSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
-use Nemundo\Process\Template\Content\AddSource\AddSourceContentType;
+
 use Nemundo\Process\Template\Content\Audio\AudioContentType;
 use Nemundo\Process\Template\Content\Event\EventContentType;
 use Nemundo\Process\Template\Content\File\FileActiveContentType;
@@ -24,7 +24,9 @@ use Nemundo\Process\Template\Content\Item\EditItemContentType;
 use Nemundo\Process\Template\Content\Item\InactiveItemContentType;
 use Nemundo\Process\Template\Content\LargeText\LargeTextContentType;
 use Nemundo\Process\Template\Content\MultiFile\MultiFileContentType;
-use Nemundo\Process\Template\Content\SourceRemove\SourceRemoveContentType;
+
+use Nemundo\Process\Template\Content\Source\Add\SourceAddContentType;
+use Nemundo\Process\Template\Content\Source\Remove\SourceRemoveContentType;
 use Nemundo\Process\Template\Content\Text\TextContentType;
 use Nemundo\Process\Template\Content\Url\UrlContentType;
 use Nemundo\Process\Template\Content\User\UserContentType;
@@ -76,7 +78,7 @@ class TemplateInstall extends AbstractInstall
         //$setup->addContentType(new WebImageContentType());
         $setup->addContentType(new UserContentType());
         $setup->addContentType(new EventContentType());
-        $setup->addContentType(new AddSourceContentType());
+        $setup->addContentType(new SourceAddContentType());
         $setup->addContentType(new SourceRemoveContentType());
         $setup->addContentType(new WorkflowDeleteStatus());
         $setup->addContentType(new SubjectChangeProcessStatus());

@@ -87,6 +87,95 @@
         },
         {
             "template": "default",
+            "model_id": "b6ef331f-bc65-407b-932a-7ddebe68bcab",
+            "label": "Assignment Index",
+            "class_name": "AssignmentIndex",
+            "table_name": "assignment_assignment_index",
+            "namespace": "Nemundo\\Process\\App\\Assignment\\Data\\AssignmentIndex",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Source",
+                    "field_name": "source",
+                    "variable_name": "source",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": "text",
+                    "label": "Subject",
+                    "field_name": "subject",
+                    "variable_name": "subject",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "external",
+                    "label": "Assignment",
+                    "field_name": "assignment",
+                    "variable_name": "assignment",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "c6e00009-24e0-4cef-82ee-34a89152415f"
+                },
+                {
+                    "type": "date",
+                    "label": "Deadline",
+                    "field_name": "deadline",
+                    "variable_name": "deadline",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Closed",
+                    "field_name": "closed",
+                    "variable_name": "closed",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "Task",
+                    "field_name": "content",
+                    "variable_name": "content",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "4a542586-e5d9-4430-b478-2106dabf2c2b",
+            "label": "Assignment Log",
+            "class_name": "AssignmentLog",
+            "table_name": "assignment_assignment_log",
+            "namespace": "Nemundo\\Process\\App\\Assignment\\Data\\AssignmentLog",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Assignment",
+                    "field_name": "assignment",
+                    "variable_name": "assignment",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "c6e00009-24e0-4cef-82ee-34a89152415f"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "89e98581-64f3-4db9-84f7-aaabdd4d626e",
             "label": "Assignment Source",
             "class_name": "AssignmentSource",

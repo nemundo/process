@@ -37,8 +37,6 @@ class WorkflowLogMenu extends LogMenu  // AdminTable
      */
     public $currentStatus;
 
-    //private $subMenuCssClass = 'ml-3';
-
 
     public function getContent()
     {
@@ -48,7 +46,6 @@ class WorkflowLogMenu extends LogMenu  // AdminTable
 
 
         if ($this->process->getDataId() !== null) {
-
 
             $reader = new TreeReader();
             $reader->model->loadChild();
@@ -70,7 +67,7 @@ class WorkflowLogMenu extends LogMenu  // AdminTable
 
                         if ($contentType->editable && !$this->process->isWorkflowClosed()) {
 
-                            $site = new Site();
+                            $site = clone($this->redirectSite);  // new Site();
                             $site->addParameter(new StatusParameter($contentType->typeId));
                             $site->title = $contentType->typeLabel;
 
@@ -121,7 +118,7 @@ class WorkflowLogMenu extends LogMenu  // AdminTable
 
                         $row->addEmpty();
 
-                        $site = new Site();
+                        $site = clone($this->redirectSite);  // new Site();
                         $site->addParameter(new StatusParameter($nextStatus->typeId));
                         $site->title = $nextStatus->typeLabel;
 
@@ -153,7 +150,7 @@ class WorkflowLogMenu extends LogMenu  // AdminTable
 
                         $row->addEmpty();
 
-                        $site = new Site();
+                        $site = clone($this->redirectSite);  // new Site();
                         $site->addParameter(new StatusParameter($menuStatus->typeId));
                         $site->title = $menuStatus->typeLabel;
 
