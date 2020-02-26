@@ -51,7 +51,7 @@ class ContentLogTable extends AbstractHtmlContainer
         $header = new TableHeader($table);
         //$header->addText('Typ');
 
-        $header->addText('History');
+        $header->addText('Log');  //History');
         $header->addText('Ersteller');
         //$header->addText('Data Id');
 
@@ -88,14 +88,14 @@ class ContentLogTable extends AbstractHtmlContainer
             $contentType = $treeRow->child->getContentType();
 
             $row = new BootstrapClickableTableRow($table);
-            $row->addText($contentType->typeLabel);
+            //$row->addText($contentType->typeLabel);
             $row->addText($contentType->getSubject());
             //$row->addText($contentType->getText());
 
             //$contentType->getView($row);
 
             //$row->addText($contentRow->user->displayName . ' ' . $contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
-            $row->addText($treeRow->child->user->displayName . ' ' .$treeRow->child->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
+            $row->addText($treeRow->child->user->login . ' ' .$treeRow->child->dateTime->getShortDateTimeLeadingZeroFormat());
 
             //$row->addText($contentRow->dataId);
 
