@@ -47,13 +47,13 @@ class AssignmentParentContainer extends AbstractParentContainer
 
         $header = new TableHeader($table);
         $header->addEmpty();
-        $header->addText('Aufgabe (Assignment Index)');
+        //$header->addText('Aufgabe');
 
-        /*
+
         $sorting = new UpDownSortingHyperlink($header);
         $sorting->label ='Aufgabe';  // 'Betreff';
-        $sorting->fieldType = $indexReader->model->number;
-        $sorting->checkSorting($indexReader);*/
+        $sorting->fieldType = $indexReader->model->content->subject;
+        $sorting->checkSorting($indexReader);
 
         //$header->addText('Verantwortlicher');
 

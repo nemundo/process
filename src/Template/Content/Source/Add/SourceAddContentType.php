@@ -6,6 +6,7 @@ namespace Nemundo\Process\Template\Content\Source\Add;
 
 use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
 use Nemundo\Core\Language\LanguageCode;
+use Nemundo\Core\Language\Translation;
 use Nemundo\Process\App\Assignment\Data\AssignmentIndex\AssignmentIndex;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Content\Writer\TreeWriter;
@@ -22,7 +23,7 @@ class SourceAddContentType extends AbstractSourceContentType  // AbstractTreeCon
     {
 
         $this->typeLabel[LanguageCode::EN] = 'Add Source';
-        $this->typeLabel[LanguageCode::DE] = 'Quelle hinzufügen';
+        $this->typeLabel[LanguageCode::DE] = 'Quelle';
 
         $this->typeId = 'e40e4360-d630-42e2-a9f9-98a28ea6156d';
         $this->formClass  =SourceAddContentContainer::class;  // AddSourceContentForm::class;
@@ -80,8 +81,10 @@ class SourceAddContentType extends AbstractSourceContentType  // AbstractTreeCon
         //$hyerplink->site = $this->getDataRow()->source->getContentType()->getSubjectViewSite();
 
 
-        $subject = 'Source ' . $this->getHyperlinkContent() . ' was added';  //' $this->getDataRow()->source->getContentType()->getSubject();
-        return $subject;
+        $subject[LanguageCode::EN] = 'Source ' . $this->getHyperlinkContent() . ' was added';  //' $this->getDataRow()->source->getContentType()->getSubject();
+        $subject[LanguageCode::DE] = 'Quelle ' . $this->getHyperlinkContent() . ' wurde hinzugefügt';
+
+        return (new Translation())->getText($subject);
 
     }
 

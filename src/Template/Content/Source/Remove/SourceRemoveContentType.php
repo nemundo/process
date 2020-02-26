@@ -5,6 +5,7 @@ namespace Nemundo\Process\Template\Content\Source\Remove;
 
 
 use Nemundo\Core\Language\LanguageCode;
+use Nemundo\Core\Language\Translation;
 use Nemundo\Process\Content\Data\Tree\TreeDelete;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
@@ -57,8 +58,10 @@ class SourceRemoveContentType extends AbstractSourceContentType
     public function getSubject()
     {
 
-        $subject= 'Source '.$this->getHyperlinkContent().' was removed';
-        return $subject;
+        $subject[LanguageCode::EN]= 'Source '.$this->getHyperlinkContent().' was removed';
+        $subject[LanguageCode::DE]= 'Quelle '.$this->getHyperlinkContent().' wurde entfernt';
+
+        return (new Translation())->getText($subject);
 
     }
 

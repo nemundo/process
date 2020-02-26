@@ -5,6 +5,7 @@ namespace Nemundo\Process\Template\Content\Source\Remove;
 
 
 use Nemundo\Admin\Com\Table\AdminTable;
+use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
@@ -41,6 +42,10 @@ class SourceRemoveContentPanel extends AbstractContentActionPanel
        //$contentReader->parentId=$this->parentId;*/
 
 
+            $header = new TableHeader($table);
+            $header->addText('Quelle');
+
+
             $treeReader = new TreeReader();
             $treeReader->model->loadParent();
             $treeReader->model->parent->loadContentType();
@@ -48,8 +53,12 @@ class SourceRemoveContentPanel extends AbstractContentActionPanel
             $treeReader->addOrder($treeReader->model->parent->subject);
             foreach ($treeReader->getData() as $contentRow) {
 
+
+
                 $row=new TableRow($table);
-                $row->addText($contentRow->parent->subject);
+                $row->addSite($contentRow->parent->getContentType()->getSubjectViewSite());
+
+                //$row->addText($contentRow->parent->subject);
 
                 $site = clone($this->delete);
                 $site->addParameter(new ContentParameter($contentRow->parentId));  // parentId));
