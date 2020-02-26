@@ -57,8 +57,8 @@ class StatusFormContainer extends AbstractHtmlContainer
 
             if ($showForm) {
                 $form = $this->formStatus->getForm($this);
-                $form->contentType = $this->formStatus;
-                $form->parentId = $this->parentId;
+                //$form->contentType = $this->formStatus;
+                //$form->parentId = $this->parentId;
                 $form->redirectSite = $this->redirectSite;
                 $form->appendParameter = $this->appendParameter;
 

@@ -5,7 +5,7 @@ namespace Nemundo\Process\App\Notification\Site;
 
 
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
-use Nemundo\Admin\Com\Table\AdminTable;
+use Nemundo\Core\Type\Text\Html;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Process\App\Notification\Content\AbstractNotificationContentType;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationReader;
@@ -21,24 +21,22 @@ class NotificationItemSite extends AbstractSite
 
     protected function loadSite()
     {
-        // TODO: Implement loadSite() method.
 
         $this->url = 'notification-item';
-        $this->menuActive=false;
+        $this->menuActive = false;
 
-        NotificationItemSite::$site=$this;
+        NotificationItemSite::$site = $this;
 
     }
 
 
     public function loadContent()
     {
-        // TODO: Implement loadContent() method.
 
-        $page=(new DefaultTemplateFactory())->getDefaultTemplate();
+        $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
 
-        $notificationId=(new NotificationParameter())->getValue();
+        $notificationId = (new NotificationParameter())->getValue();
 
         $notificationReader = new NotificationReader();
         $notificationReader->model->loadContent();
@@ -55,9 +53,11 @@ class NotificationItemSite extends AbstractSite
 
         $subjectType = $notificationRow->subjectContent->getContentType();
 
+        // Content View
+
         $table = new AdminLabelValueTable($page);
-        $table->addLabelValue('Subject',       $subjectType->getSubject());
-        $table->addLabelValue('Message',       $notificationType->getMessage());
+        $table->addLabelValue('Subject', $subjectType->getSubject());
+        $table->addLabelValue('Message', (new Html($notificationType->getMessage()))->getValue());
 
         $page->render();
 

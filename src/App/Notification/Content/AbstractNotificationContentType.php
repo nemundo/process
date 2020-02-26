@@ -4,6 +4,8 @@
 namespace Nemundo\Process\App\Notification\Content;
 
 
+use Nemundo\Core\Language\LanguageCode;
+use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Type\Text\Html;
 use Nemundo\Package\ResponsiveMail\ResponsiveActionMailMessage;
 use Nemundo\Process\App\Notification\Data\Notification\Notification;
@@ -98,6 +100,7 @@ abstract class AbstractNotificationContentType extends AbstractTreeContentType
         $data->toId = $this->toUserId;
         $data->subjectContentId = $this->subjectContentId;
         $data->contentId = $this->getContentId();
+        $data->message=$this->message;
        // $data->message = $this->getMessage();
         $this->dataId = $data->save();
 
@@ -118,8 +121,12 @@ abstract class AbstractNotificationContentType extends AbstractTreeContentType
 
     public function getSubject()
     {
-        $subject = 'Notification to ' . (new BoldText())->getBold(($this->getDataRow())->to->displayName);
-        return $subject;
+
+        $subject[LanguageCode::EN] = 'Notification to ' . (new BoldText())->getBold(($this->getDataRow())->to->displayName);
+        $subject[LanguageCode::DE] = 'Benachrichtigung an ' . (new BoldText())->getBold(($this->getDataRow())->to->displayName);
+
+        return  (new Translation())->getText($subject);
+
     }
 
 

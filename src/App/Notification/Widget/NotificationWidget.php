@@ -7,6 +7,7 @@ use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Widget\AdminWidget;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Core\Language\LanguageCode;
+use Nemundo\Core\Type\Text\Html;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Html\Table\Th;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
@@ -75,7 +76,7 @@ class NotificationWidget extends AdminWidget
             //$row->addText($notificationRow->content->contentType->contentType);
             $row->addText($notificationRow->subjectContent->subject);
 //            $row->addText($notificationRow->message);
-            $row->addText($notificationContentType->getMessage());
+            $row->addText((new Html( $notificationContentType->getMessage()))->getValue());
 
 
             $row->addText($notificationRow->content->dateTime->getShortDateTimeLeadingZeroFormat());

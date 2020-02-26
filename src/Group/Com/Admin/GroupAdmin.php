@@ -10,10 +10,12 @@ use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Html\Formatting\Bold;
 use Nemundo\Html\Table\Th;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
+use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Group\Com\Form\GroupUserForm;
@@ -89,11 +91,19 @@ class GroupAdmin extends AbstractActionPanel
 
                 $formRow = new BootstrapFormRow($form);
 
+//                $groupType = new BootstrapListBox($formRow);   //new GroupTypeListBox($formRow);
                 $groupType = new GroupTypeListBox($formRow);
+
                 $groupType->searchMode = true;
                 $groupType->submitOnChange = true;
 
+                foreach ($this->groupContentTypeList as $groupContentType) {
+                    $groupType->addItem($groupContentType->typeId,$groupContentType->typeLabel);
+                }
+
+
                 if ($groupType->hasValue()) {
+                    //(new Debug())->write('filter'. $groupType->getValue());
                     $groupReader->filter->andEqual($groupReader->model->groupTypeId, $groupType->getValue());
                 }
 

@@ -43,33 +43,10 @@ trait AssignmentTrait
     public $deadline;
 
 
-    /*
-        protected function loadContentType()
-        {
-            $this->typeLabel = 'Group Assignment';
-            $this->deadline = new Date();
-        }*/
-
-
-
-  /*  protected function onCreate()
-    {
-
-        //$this->assignAssignment();
-$this->saveAssignment();
-
-    }*/
-
-
     protected function onFinished() {
 
         /** @var AbstractTreeContentType $parentContentType */
         $parentContentType = $this->getParentContentType();
-
-
-        // send email
-//        foreach ($this->assignment->getUserIdListFromIdentificationId() as $userId) {
-
 
         $this->group = new GroupContentType();
         $this->group->fromGroupId($this->groupId);
@@ -78,10 +55,8 @@ $this->saveAssignment();
 
             $mail = new ResponsiveActionMailMessage();
             $mail->mailTo = (new UserContentType($userId))->getDataRow()->email;
-            $mail->subject = 'Aufgabe: ' . $parentContentType->getSubject();  // . $contentType->getSubject();
-//            $mail->actionText = (new Html($this->message))->getValue();
-            $mail->actionText = $parentContentType->getView()->getContent(); //(new Html($this->message))->getValue();
-
+            $mail->subject = 'Aufgabe: ' . $parentContentType->getSubject();
+            $mail->actionText = $parentContentType->getView()->getContent();
 
             $mail->actionLabel = 'Ansehen';
             $mail->actionUrlSite = $parentContentType->getViewSite();
@@ -118,7 +93,8 @@ $this->saveAssignment();
         // assignment log
         $data = new AssignmentLog();
         $data->assignmentId = $this->groupId;
-        $this->dataId = $data->save();
+//        $this->dataId = $data->save();
+         $data->save();
 
 
 

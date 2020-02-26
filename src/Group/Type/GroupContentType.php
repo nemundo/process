@@ -10,4 +10,15 @@ class GroupContentType extends AbstractGroupContentType
     {
         // TODO: Implement loadGroup() method.
     }
+
+    public function getGroupType()
+    {
+
+        $row = $this->getGroupDataRow();
+        $groupType = $row->groupType->getContentType();
+        return $groupType;
+
+    }
+
+
 }

@@ -56,7 +56,7 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     {
 
         $this->groupId = $groupId;
-return $this;
+        return $this;
 
     }
 
@@ -83,7 +83,7 @@ return $this;
         $data = new Group();
         $data->updateOnDuplicate = true;
         $data->id = $this->getGroupId();
-        $data->active=true;
+        $data->active = true;
         $data->group = $this->getGroupLabel();
         $data->groupTypeId = $this->typeId;
         $data->save();
@@ -119,7 +119,7 @@ return $this;
     protected function onActive()
     {
         $update = new GroupUpdate();
-        $update->active=true;
+        $update->active = true;
         $update->updateById($this->dataId);
     }
 
@@ -127,7 +127,7 @@ return $this;
     protected function onInactive()
     {
         $update = new GroupUpdate();
-        $update->active=false;
+        $update->active = false;
         $update->updateById($this->dataId);
 
     }
@@ -165,13 +165,16 @@ return $this;
             (new Debug())->write('no group id');
         }
 
-        return (new GroupReader())->getRowById($this->groupId);
+        $reader = new GroupReader();
+        $reader->model->loadGroupType();
+        $row = $reader->getRowById($this->groupId);
+
+        return $row;
     }
 
 
     public function getSubject()
     {
-
 
 
         return $this->getGroupLabel();
@@ -262,24 +265,19 @@ return $this;
     }
 
 
-
     public function existItem()
     {
 
 
-        $value=false;
+        $value = false;
 
         $count = new GroupCount();
         $count->filter->andEqual($count->model->id, $this->getGroupId());
-        if ($count->getCount() >0) {
-            $value=true;
+        if ($count->getCount() > 0) {
+            $value = true;
         }
 
         return $value;
-
-
-
-
 
 
     }

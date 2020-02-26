@@ -101,12 +101,12 @@ $span->content = $indexRow->assignment->group;
         }
 
 
-        /*
+
         if ($this->hideIfNoItems) {
             if ($indexReader->getCount() == 0) {
                 $this->visible = false;
             }
-        }*/
+        }
 
         return parent::getContent();
     }
