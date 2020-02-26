@@ -25,7 +25,9 @@ use Nemundo\Process\Template\Content\Item\InactiveItemContentType;
 use Nemundo\Process\Template\Content\LargeText\LargeTextContentType;
 use Nemundo\Process\Template\Content\MultiFile\MultiFileContentType;
 
+use Nemundo\Process\Template\Content\Source\Add\ChildAddContentType;
 use Nemundo\Process\Template\Content\Source\Add\SourceAddContentType;
+use Nemundo\Process\Template\Content\Source\Remove\ChildRemoveContentType;
 use Nemundo\Process\Template\Content\Source\Remove\SourceRemoveContentType;
 use Nemundo\Process\Template\Content\Text\TextContentType;
 use Nemundo\Process\Template\Content\Url\UrlContentType;
@@ -64,6 +66,10 @@ class TemplateInstall extends AbstractInstall
 
 
         (new ContentTypeSetup())
+            ->addContentType(new SourceAddContentType())
+            ->addContentType(new SourceRemoveContentType())
+            ->addContentType(new ChildAddContentType())
+            ->addContentType(new ChildRemoveContentType())
             ->addContentType(new MultiFileContentType())
             ->addContentType(new UrlContentType());
 

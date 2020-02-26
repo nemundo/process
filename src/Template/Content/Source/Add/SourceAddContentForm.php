@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Template\Content\Source\Add;
 
 
+use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
 use Nemundo\Process\App\Assignment\Parameter\SourceParameter;
 use Nemundo\Process\Content\Data\Content\ContentReader;
@@ -24,6 +25,9 @@ class SourceAddContentForm extends AbstractContentForm
     public function getContent()
     {
 
+
+        //$p=new Paragraph($this);
+        //$p->content= $this->contentType->getClassName();
 
 
        /* $listbox = new BootstrapListBox($this);
@@ -98,10 +102,10 @@ class SourceAddContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        $type = new SourceAddContentType();
-        $type->parentId = $this->parentId;
-        $type->sourceId = $this->content->getValue();
-        $type->saveType();
+        //$type = new SourceAddContentType();
+        //$type->parentId = $this->parentId;
+        $this->contentType->sourceId = $this->content->getValue();
+        $this->contentType->saveType();
 
         // TODO: Implement onSubmit() method.
     }

@@ -5,16 +5,23 @@ namespace Nemundo\Process\Template\Content\Source\Remove;
 
 
 use Nemundo\Admin\Com\Table\AdminTable;
+use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Core\Debug\Debug;
+use Nemundo\Package\FontAwesome\Hyperlink\IconSiteHyperlink;
+use Nemundo\Package\FontAwesome\Icon\EditIcon;
+use Nemundo\Package\FontAwesome\Icon\PlusIcon;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Form\AbstractContentActionPanel;
 use Nemundo\Process\Content\Form\AbstractContentContainer;
 use Nemundo\Process\Content\Parameter\ChildParameter;
 use Nemundo\Process\Content\Parameter\ContentParameter;
+use Nemundo\Process\Template\Content\Source\Add\SourceAddContentType;
+use Nemundo\Process\Workflow\Parameter\StatusParameter;
 use Nemundo\Web\Action\ActionSite;
 use Nemundo\Web\Action\Site\DeleteActionSite;
+use Nemundo\Web\Site\Site;
 
 class SourceRemoveContentPanel extends AbstractContentActionPanel
 {
@@ -34,6 +41,15 @@ class SourceRemoveContentPanel extends AbstractContentActionPanel
 
         $this->index=new ActionSite($this);
         $this->index->onAction=function () {
+
+
+
+            $add = new SiteHyperlink($this);
+            $add->showSiteTitle=false;
+            $add->site = new Site();
+            $add->site->addParameter(new StatusParameter((new SourceAddContentType())->typeId));
+
+            $icon = new PlusIcon($add);
 
 
             $table = new AdminTable($this);

@@ -6,12 +6,22 @@ namespace Nemundo\Process\App\Assignment\Com\Container;
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\Header\UpDownSortingHyperlink;
+use Nemundo\Admin\Com\Title\AdminSubtitle;
+use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Package\FontAwesome\Icon\CheckIcon;
+use Nemundo\Package\FontAwesome\Icon\PlusIcon;
 use Nemundo\Process\App\Assignment\Data\AssignmentIndex\AssignmentIndexReader;
 use Nemundo\Process\Content\Com\Container\AbstractParentContainer;
+use Nemundo\Process\Content\Parameter\ChildParameter;
+use Nemundo\Process\Content\Parameter\ParentParameter;
 use Nemundo\Process\Group\Com\Span\GroupSpan;
+use Nemundo\Process\Template\Content\Source\Add\ChildAddContentType;
+use Nemundo\Process\Template\Content\Source\Add\SourceAddContentType;
+use Nemundo\Process\Template\Site\ChildRemoveSite;
+use Nemundo\Process\Workflow\Parameter\StatusParameter;
+use Nemundo\Web\Site\Site;
 use Nemundo\Workflow\Com\TrafficLight\DateTrafficLight;
 use Schleuniger\App\Aufgabe\Com\Form\AufgabeParentContainerSearchForm;
 use Schleuniger\App\Aufgabe\Data\AufgabeIndex\AufgabeIndexReader;
@@ -28,6 +38,17 @@ class AssignmentParentContainer extends AbstractParentContainer
 
     public function getContent()
     {
+
+        $subtitle=new AdminSubtitle($this);
+        $subtitle->content='Aufgabenliste';
+
+        $add = new SiteHyperlink($this);
+        $add->showSiteTitle=false;
+        $add->site = new Site();
+        $add->site->addParameter(new StatusParameter((new ChildAddContentType())->typeId));
+
+        $icon = new PlusIcon($add);
+
 
         $indexReader = new AssignmentIndexReader();
         $indexReader->model->loadContent();
@@ -95,6 +116,15 @@ $span->content = $indexRow->assignment->group;
 
             $row->addText($indexRow->content->user->login.' '.$indexRow->content->dateTime->getShortDateLeadingZeroFormat());
 
+
+
+            $site = clone(ChildRemoveSite::$site);
+            $site->addParameter(new ParentParameter($this->parentId));
+            $site->addParameter(new ChildParameter($indexRow->contentId));
+
+            $row->addIconSite($site);
+
+
             //$process = new AufgabeProcess($aufgabeRow->aufgabeId);
             $row->addClickableSite($content->getViewSite());
 
@@ -102,11 +132,12 @@ $span->content = $indexRow->assignment->group;
 
 
 
+        /*
         if ($this->hideIfNoItems) {
             if ($indexReader->getCount() == 0) {
                 $this->visible = false;
             }
-        }
+        }*/
 
         return parent::getContent();
     }
