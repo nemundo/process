@@ -2,5 +2,138 @@
     "app": "Task",
     "name": "task",
     "namespace": "Nemundo\\Process\\App\\Task",
-    "is_deleted": false
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "8486b946-f2aa-4241-9f17-77d3f4eccc36",
+            "label": "Task Index",
+            "class_name": "TaskIndex",
+            "table_name": "process_task_index",
+            "namespace": "Nemundo\\Process\\App\\Task\\Data\\TaskIndex",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Source",
+                    "field_name": "source",
+                    "variable_name": "source",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": "external",
+                    "label": "Content",
+                    "field_name": "content",
+                    "variable_name": "content",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": "text",
+                    "label": "Subject",
+                    "field_name": "subject",
+                    "variable_name": "subject",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "external",
+                    "label": "Assignment",
+                    "field_name": "assignment",
+                    "variable_name": "assignment",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "c6e00009-24e0-4cef-82ee-34a89152415f"
+                },
+                {
+                    "type": "date",
+                    "label": "Deadline",
+                    "field_name": "deadline",
+                    "variable_name": "deadline",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "user",
+                    "label": "User",
+                    "field_name": "user",
+                    "variable_name": "user",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "date_time",
+                    "label": "Date Time",
+                    "field_name": "date_time",
+                    "variable_name": "dateTime",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Closed",
+                    "field_name": "closed",
+                    "variable_name": "closed",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "Task Type",
+                    "field_name": "task_type",
+                    "variable_name": "taskType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "source_content",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "source",
+                        "content"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
+            "model_id": "6e32685a-5c02-4baa-a83d-f8e95c43f5d7",
+            "label": "Task Type",
+            "class_name": "TaskType",
+            "table_name": "task_task_type",
+            "namespace": "Nemundo\\Process\\App\\Task\\Data\\TaskType",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Task Type",
+                    "field_name": "task_type",
+                    "variable_name": "taskType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "task_type",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "task_type"
+                    ]
+                }
+            ]
+        }
+    ]
 }

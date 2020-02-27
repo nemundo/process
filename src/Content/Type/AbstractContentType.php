@@ -11,6 +11,8 @@ use Nemundo\Core\Random\UniqueId;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Html\Paragraph\Paragraph;
+use Nemundo\Model\Row\AbstractModelDataRow;
+use Nemundo\Model\Row\ModelDataRow;
 use Nemundo\Process\Content\Data\Content\Content;
 use Nemundo\Process\Content\Data\Content\ContentCount;
 use Nemundo\Process\Content\Data\Content\ContentDelete;
@@ -20,6 +22,7 @@ use Nemundo\Process\Content\Form\ContentForm;
 use Nemundo\Process\Content\View\AbstractContentAdmin;
 use Nemundo\Process\Content\View\AbstractContentList;
 use Nemundo\User\Type\UserSessionType;
+use Schleuniger\App\Sitzung\Data\Sitzung\SitzungReader;
 
 
 abstract class AbstractContentType extends AbstractType
@@ -67,6 +70,9 @@ abstract class AbstractContentType extends AbstractType
     protected $adminClass;
 
 
+    /**
+     * @var ModelDataRow
+     */
     protected $dataRow;
 
     abstract protected function loadContentType();
@@ -300,9 +306,30 @@ abstract class AbstractContentType extends AbstractType
     }
 
 
+
+    public function fromDataRow(AbstractModelDataRow $dataRow) {
+
+        $this->dataRow = $dataRow;
+        $this->loadFromDataId($dataRow->getModelValue($dataRow->model->id));
+        return $this;
+
+    }
+
+
+    protected function onDataRow() {
+        //(new LogMessage())->writeError('getDataRow not defined'.$this->getClassName());
+    }
+
     public function getDataRow()
     {
-        (new LogMessage())->writeError('getDataRow not defined');
+
+        if ($this->dataRow ==null) {
+          $this->onDataRow();
+        }
+
+        return $this->dataRow;
+
+
     }
 
 

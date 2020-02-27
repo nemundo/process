@@ -8,6 +8,7 @@ use Nemundo\Core\Base\AbstractBaseClass;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Html\Paragraph\Paragraph;
+use Nemundo\Model\Row\AbstractModelDataRow;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Web\Parameter\AbstractUrlParameter;
@@ -74,6 +75,8 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
+
+
     public function getDataId()
     {
 
@@ -91,6 +94,18 @@ abstract class AbstractType extends AbstractBaseClass
     {
 
     }
+
+
+    protected function onIndex() {
+
+    }
+
+
+    public function saveIndex() {
+        $this->onIndex();
+    }
+
+
 
     protected function onUpdate()
     {

@@ -55,11 +55,11 @@ class CalendarSite extends AbstractSite
         $reader->model->content->loadContentType();
 
 
-        $distnct = new DistinctField($reader);
-        $distnct->tableName = $reader->model->tableName;
+        //$distnct = new DistinctField($reader);
+        //$distnct->tableName = $reader->model->tableName;
 
 
-        $treeModel = new TreeModel();
+        /*$treeModel = new TreeModel();
         //$treeModel->aliasTableName = 'tree2';
         $treeModel->loadParent();
 
@@ -70,15 +70,15 @@ class CalendarSite extends AbstractSite
         $join->type = $reader->model->contentId;
 
         $reader->addFieldByModel($treeModel);
-        $reader->checkExternal($treeModel);
+        $reader->checkExternal($treeModel);*/
 
       //$reader->addFieldByModel($treeModel);
       //  $reader->addFieldByModel($treeModel->parent);
 
 
-        if ($sourceType->hasValue()) {
+      /*  if ($sourceType->hasValue()) {
             $reader->filter->andEqual($treeModel->parent->contentTypeId,$sourceType->getValue());
-        }
+        }*/
 
         $table = new AdminClickableTable($page);
 
@@ -104,7 +104,7 @@ class CalendarSite extends AbstractSite
 
             $row->addText($type->typeLabel);
 
-            $row->addText($calendarIndexRow->getModelValue($treeModel->parentId));
+            //$row->addText($calendarIndexRow->getModelValue($treeModel->parentId));
 
             //$row->addText($calendarIndexRow->getModelValue($treeModel->parent->subject));
 
@@ -112,14 +112,14 @@ class CalendarSite extends AbstractSite
             //$row->addText($contentRow->subject);
 
 
-
+/*
             $ul = new UnorderedList($row);
             foreach ($type->getParentContent() as $parentContentRow) {
 
                 $parentContentType = $parentContentRow->getContentType();
                 $ul->addText($parentContentType->getSubject().' / '.$parentContentType->typeLabel);
 
-            }
+            }*/
 
 
         }

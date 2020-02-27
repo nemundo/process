@@ -21,6 +21,7 @@ use Nemundo\Process\App\Assignment\Data\AssignmentIndex\AssignmentIndexUpdate;
 use Nemundo\Process\App\Assignment\Status\CancelAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\ClosedAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\OpenAssignmentStatus;
+use Nemundo\Process\App\Task\Index\TaskIndexTrait;
 use Nemundo\Process\Content\Data\Content\ContentUpdate;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Type\AbstractContentType;
@@ -38,6 +39,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 {
 
     use GroupRestrictionTrait;
+    use TaskIndexTrait;
 
     public $number;
 
@@ -113,6 +115,14 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
+    protected function onIndex()
+    {
+        $this->saveSearchIndex();
+        $this->saveTaskIndex();
+
+    }
+
+
     public function saveType()
     {
 
@@ -167,12 +177,15 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $dataRow = $this->getDataRow();
         $this->addSearchWord($dataRow->workflowNumber);
 
-
-        $this->saveSearchIndex();
+// problem falls in onFinised subject geändert wird
+//        $this->saveSearchIndex();
 
         $this->onFinished();
 
 
+        $this->saveIndex();
+
+        //$this->saveSearchIndex();
 
 
 
@@ -242,6 +255,29 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         return $subject;
 
     }
+
+
+
+
+    public function getAssignmentId()
+    {
+        // (new Debug())->write($this->getDataRow()->assignmentId);
+
+        return $this->getDataRow()->assignmentId;
+    }
+
+
+    public function getDeadline()
+    {
+        return $this->getDataRow()->deadline;
+    }
+
+    public function isClosed()
+    {
+        return $this->getDataRow()->workflowClosed;
+        // TODO: Implement isClosed() method.
+    }
+
 
 
     /**
@@ -341,12 +377,13 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
+    /*
     public function getDeadline()
     {
 
         $workflowRow = $this->getDataRow();
         return $workflowRow->deadline;
-    }
+    }*/
 
     public function changeDeadline(Date $deadline = null)
     {

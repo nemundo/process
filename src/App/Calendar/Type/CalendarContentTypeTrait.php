@@ -14,18 +14,28 @@ trait CalendarContentTypeTrait
 
     public $title;
 
-protected function saveCalendar()
+
+    abstract function getDate();
+
+
+protected function saveCalendarIndex()
     {
 
         $data=new CalendarIndex();
         $data->updateOnDuplicate=true;
         $data->contentId=$this->getContentId();
         $data->date = $this->getDate();
-        $data->title= $this->getTitle();
+        $data->title= $this->getSubject();  //getTitle();
         $data->save();
 
     }
 
+
+    protected function deleteCalendarIndex() {
+
+
+
+    }
 
 
 }

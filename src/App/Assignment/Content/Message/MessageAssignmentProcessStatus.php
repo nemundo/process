@@ -38,6 +38,8 @@ class MessageAssignmentProcessStatus extends AbstractProcessStatus   // MessageA
 
         $this->saveAssignment();
 
+        $process->saveSearchIndex();
+
     }
 
 

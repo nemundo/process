@@ -13,6 +13,7 @@ use Nemundo\Process\App\Explorer\Site\ExplorerSite;
 use Nemundo\Process\App\Favorite\Site\FavoriteSite;
 use Nemundo\Process\App\Message\Site\MessageSite;
 use Nemundo\Process\App\Notification\Site\NotificationSite;
+use Nemundo\Process\App\Task\Site\TaskSite;
 use Nemundo\Process\App\Wiki\Site\WikiSite;
 use Nemundo\Process\Content\Site\ContentLogSite;
 use Nemundo\Process\Content\Site\ContentSite;
@@ -90,6 +91,9 @@ class ProcessSite extends AbstractSite
 
 
         new ChildRemoveSite($this);
+
+
+        new TaskSite($this);
 
     }
 
