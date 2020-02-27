@@ -31,21 +31,6 @@ public $content;
 */
 public $title;
 
-/**
-* @var string
-*/
-public $text;
-
-/**
-* @var int
-*/
-public $sourceId;
-
-/**
-* @var \Nemundo\Process\Content\Row\ContentCustomRow
-*/
-public $source;
-
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -55,16 +40,8 @@ if ($model->content !== null) {
 $this->loadNemundoProcessContentDataContentContentcontentRow($model->content);
 }
 $this->title = $this->getModelValue($model->title);
-$this->text = $this->getModelValue($model->text);
-$this->sourceId = intval($this->getModelValue($model->sourceId));
-if ($model->source !== null) {
-$this->loadNemundoProcessContentDataContentContentsourceRow($model->source);
-}
 }
 private function loadNemundoProcessContentDataContentContentcontentRow($model) {
 $this->content = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $model);
-}
-private function loadNemundoProcessContentDataContentContentsourceRow($model) {
-$this->source = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $model);
 }
 }

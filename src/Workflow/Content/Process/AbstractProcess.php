@@ -86,6 +86,33 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
+
+    protected function onReopen() {
+
+    }
+
+
+
+    public function reopenWorkflow() {
+
+        $this->onReopen();
+
+        $update = new ModelUpdate();
+        $update->model = $this->workflowModel;
+        $update->typeValueList->setModelValue($update->model->workflowClosed, false);
+        $update->updateById($this->dataId);
+
+
+        // TaskIndex
+        $update = new AssignmentIndexUpdate();
+        $update->closed=false;
+        $update->filter->andEqual($update->model->contentId,$this->getContentId());
+        $update->update();
+
+
+    }
+
+
     public function saveType()
     {
 
@@ -262,15 +289,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
-    public function reopenWorkflow()
-    {
 
-        $update = new ModelUpdate();
-        $update->model = $this->workflowModel;
-        $update->typeValueList->setModelValue($update->model->workflowClosed, false);
-        $update->updateById($this->dataId);
-
-    }
 
     protected function onActive()
     {

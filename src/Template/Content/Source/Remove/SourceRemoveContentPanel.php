@@ -43,15 +43,6 @@ class SourceRemoveContentPanel extends AbstractContentActionPanel
         $this->index->onAction=function () {
 
 
-
-            $add = new SiteHyperlink($this);
-            $add->showSiteTitle=false;
-            $add->site = new Site();
-            $add->site->addParameter(new StatusParameter((new SourceAddContentType())->typeId));
-
-            $icon = new PlusIcon($add);
-
-
             $table = new AdminTable($this);
 
        //$contentReader = new ContentTreeReader();
@@ -83,6 +74,13 @@ class SourceRemoveContentPanel extends AbstractContentActionPanel
 
 
             }
+
+
+            $add = new SiteHyperlink($this);
+            $add->showSiteTitle=false;
+            $add->site = new Site();
+            $add->site->addParameter(new StatusParameter((new SourceAddContentType())->typeId));
+           new PlusIcon($add);
 
 
             /*

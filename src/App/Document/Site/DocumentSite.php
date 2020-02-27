@@ -11,6 +11,7 @@ use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Model\Join\ModelJoin;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Document\Data\Document\DocumentModel;
+use Nemundo\Process\App\Document\Data\Document\DocumentReader;
 use Nemundo\Process\App\Document\Data\Document\DocumentRow;
 use Nemundo\Process\Search\Com\ContentSearchForm;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexPaginationReader;
@@ -31,11 +32,12 @@ class DocumentSite extends AbstractSite
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
 
+        /*
         $form = new ContentSearchForm($page);
 
 
         $bold = new TextBold();
-        $bold->addSearchQuery($form->getSearchQuery());
+        $bold->addSearchQuery($form->getSearchQuery());*/
 
         // search
         // filter
@@ -43,7 +45,7 @@ class DocumentSite extends AbstractSite
         //(new Debug())->write($form->getWordId());
 
         // $searchIndexReader = new SearchIndexReader();  // new SearchIndexPaginationReader();
-        $searchIndexReader = new SearchIndexPaginationReader();
+        /*$searchIndexReader = new SearchIndexPaginationReader();
 
         //$reader2= new SearchIndexPaginationReader();
 
@@ -65,27 +67,31 @@ class DocumentSite extends AbstractSite
         //$searchIndexReader->addJoinExternal2($externalModel);
         //$searchIndexReader->addFieldByModel($externalModel);
         //$searchIndexReader->checkExternal($externalModel);
-        //$searchIndexReader->checkExternal($externalModel->source);
+        //$searchIndexReader->checkExternal($externalModel->source);*/
 
         $table = new AdminClickableTable($page);
 
-        /*  $documentReader = new DocumentReader();
+          $documentReader = new DocumentReader();  // new DocumentReader();
           $documentReader->model->loadContent();
           $documentReader->model->content->loadContentType();
-          $documentReader->model->loadSource();
+          $documentReader->addOrder($documentReader->model->title);
+          //$documentReader->model->loadSource();
 
-          $table = new AdminClickableTable($page);*/
+          $table = new AdminClickableTable($page);
 
 
         $header = new TableHeader($table);
-        $header->addText($externalModel->source->label);
+        $header->addText($documentReader->model->title->label);
+
+
+       /* $header->addText($externalModel->source->label);
         $header->addText($externalModel->title->label);
         $header->addText($externalModel->text->label);
-        $header->addText($searchIndexReader->model->content->dateTime->label);
+        $header->addText($searchIndexReader->model->content->dateTime->label);*/
 
         //DbConfig::$sqlDebug = true;
 
-        foreach ($searchIndexReader->getData() as $indexRow) {
+        foreach ($documentReader->getData() as $documentRow) {
 
             $row = new BootstrapClickableTableRow($table);
             //$row->addText($indexRow->contentId);
@@ -97,24 +103,24 @@ class DocumentSite extends AbstractSite
             //$row->addText($indexRow->getModelValue($externalModel->text));
 
 
-            $documentRow = new DocumentRow($indexRow, $externalModel);
+            //$documentRow = new DocumentRow($indexRow, $externalModel);
 
-            $row->addText($bold->getBoldText($documentRow->source->subject));
+            /*$row->addText($bold->getBoldText($documentRow->source->subject));
             $row->addText($bold->getBoldText($documentRow->title));
             $row->addText($bold->getBoldText($documentRow->text));
 
             $row->addText($documentRow->content->dateTime->getShortDateTimeLeadingZeroFormat());
-            $row->addText($documentRow->content->contentType->contentType);
+            $row->addText($documentRow->content->contentType->contentType);*/
 
 
             //$row->addText($documentRow->source->subject);
 
             //$row->addText($documentRow->title);
 
-            /*
-            $row->addText($documentRow->source->subject);
+
+            //$row->addText($documentRow->source->subject);
             $row->addText($documentRow->title);
-            $row->addText($documentRow->text);
+          /*  $row->addText($documentRow->text);
             $row->addText($documentRow->content->contentType->contentType);
             $row->addText($documentRow->content->dateTime->getShortDateTimeLeadingZeroFormat());*/
 
@@ -130,7 +136,7 @@ class DocumentSite extends AbstractSite
             }*/
 
 
-            $contentType = $indexRow->content->getContentType();
+            $contentType = $documentRow->content->getContentType();
             $row->addClickableSite($contentType->getViewSite());
 
         }

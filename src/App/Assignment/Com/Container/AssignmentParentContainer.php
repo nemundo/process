@@ -42,13 +42,6 @@ class AssignmentParentContainer extends AbstractParentContainer
         $subtitle=new AdminSubtitle($this);
         $subtitle->content='Aufgabenliste';
 
-        $add = new SiteHyperlink($this);
-        $add->showSiteTitle=false;
-        $add->site = new Site();
-        $add->site->addParameter(new StatusParameter((new ChildAddContentType())->typeId));
-
-        $icon = new PlusIcon($add);
-
 
         $indexReader = new AssignmentIndexReader();
         $indexReader->model->loadContent();
@@ -130,6 +123,13 @@ $span->content = $indexRow->assignment->group;
 
         }
 
+
+        $add = new SiteHyperlink($this);
+        $add->showSiteTitle=false;
+        $add->site = new Site();
+        $add->site->addParameter(new StatusParameter((new ChildAddContentType())->typeId));
+
+        $icon = new PlusIcon($add);
 
 
         /*

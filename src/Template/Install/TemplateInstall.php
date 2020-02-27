@@ -39,6 +39,7 @@ use Nemundo\Process\Template\Content\YouTube\YouTubeContentType;
 use Nemundo\Process\Template\Data\TemplateCollection;
 
 use Nemundo\Process\Template\Script\TemplateTestScript;
+use Nemundo\Process\Template\Status\Reopen\ReopenWorkflowProcessStatus;
 use Nemundo\Process\Template\Status\SubjectChange\SubjectChangeProcessStatus;
 use Nemundo\Process\Template\Status\WorkflowDelete\WorkflowDeleteStatus;
 use Nemundo\Project\Install\AbstractInstall;
@@ -70,6 +71,7 @@ class TemplateInstall extends AbstractInstall
             ->addContentType(new SourceRemoveContentType())
             ->addContentType(new ChildAddContentType())
             ->addContentType(new ChildRemoveContentType())
+            ->addContentType(new ReopenWorkflowProcessStatus())
             ->addContentType(new MultiFileContentType())
             ->addContentType(new UrlContentType());
 

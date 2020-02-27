@@ -25,6 +25,7 @@ abstract class AbstractTreeContentType extends AbstractContentType
      * @var bool
      */
     public $toggleView = false;
+    // --> falscher Ort !!!
 
 
     public function saveType()
