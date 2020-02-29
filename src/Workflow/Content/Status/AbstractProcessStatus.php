@@ -39,8 +39,13 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
             $parentProcess->closeWorkflow();
         }
 
-        $this->saveSearchIndex();
+        //$this->saveSearchIndex();
         $this->onFinished();
+        $this->saveIndex();
+
+        $this->getParentProcess()->saveIndex();
+
+
 
         return $this->dataId;
 

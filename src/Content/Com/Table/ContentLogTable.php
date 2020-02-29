@@ -90,6 +90,9 @@ class ContentLogTable extends AbstractHtmlContainer
             $row = new BootstrapClickableTableRow($table);
             //$row->addText($contentType->typeLabel);
             $row->addText($contentType->getSubject());
+            //$row->addText($contentType->getSubject());
+
+
             //$row->addText($contentType->getText());
 
             //$contentType->getView($row);

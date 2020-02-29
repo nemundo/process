@@ -11,12 +11,12 @@ parent::__construct();
 $this->model = new TaskIndexModel();
 }
 /**
-* @return TaskIndexRow[]
+* @return \Nemundo\Process\App\Task\Row\TaskIndexCustomRow[]
 */
 public function getData() {
 $list = [];
 foreach (parent::getData() as $dataRow) {
-$row = new TaskIndexRow($dataRow, $this->model);
+$row = new \Nemundo\Process\App\Task\Row\TaskIndexCustomRow($dataRow, $this->model);
 $list[] = $row;
 }
 return $list;

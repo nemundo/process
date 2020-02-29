@@ -16,6 +16,11 @@ public $contentId;
 */
 public $title;
 
+/**
+* @var bool
+*/
+public $closed;
+
 public function __construct() {
 parent::__construct();
 $this->model = new DocumentModel();
@@ -23,6 +28,7 @@ $this->model = new DocumentModel();
 public function save() {
 $this->typeValueList->setModelValue($this->model->contentId, $this->contentId);
 $this->typeValueList->setModelValue($this->model->title, $this->title);
+$this->typeValueList->setModelValue($this->model->closed, $this->closed);
 $id = parent::save();
 return $id;
 }

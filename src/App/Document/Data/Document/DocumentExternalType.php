@@ -21,6 +21,11 @@ public $content;
 */
 public $title;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $closed;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = DocumentModel::class;
@@ -46,6 +51,13 @@ $this->title->tableName = $this->parentFieldName . "_" . $this->externalTableNam
 $this->title->aliasFieldName = $this->title->tableName . "_" . $this->title->fieldName;
 $this->title->label = "Title";
 $this->addType($this->title);
+
+$this->closed = new \Nemundo\Model\Type\Number\YesNoType();
+$this->closed->fieldName = "closed";
+$this->closed->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->closed->aliasFieldName = $this->closed->tableName . "_" . $this->closed->fieldName;
+$this->closed->label = "Closed";
+$this->addType($this->closed);
 
 }
 public function loadContent() {

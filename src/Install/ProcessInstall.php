@@ -36,20 +36,24 @@ class ProcessInstall extends AbstractInstall
         (new ContentInstall())->install();
         (new SearchInstall())->install();
         //(new WorkflowInstall())->install();
+        (new GroupInstall())->install();
 
         $setup = new ModelCollectionSetup();
         $setup->addCollection(new DocumentCollection());
 
+        (new AssignmentInstall())->install();
+        (new NotificationInstall())->install();
+
+
         (new WikiInstall())->install();
         (new TemplateInstall())->install();
         (new FavoriteInstall())->install();
-        (new GroupInstall())->install();
-        (new AssignmentInstall())->install();
-        (new NotificationInstall())->install();
+
+
         (new MessageInstall())->install();
         (new DashboardInstall())->install();
         (new GeoInstall())->install();
-        (new SurveyInstall())->install();
+        //(new SurveyInstall())->install();
 
         $setup = new ContentTypeSetup();
         $setup->addContentType(new WebLogContentType());

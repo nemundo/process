@@ -76,6 +76,11 @@ public $taskTypeId;
 */
 public $taskType;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $updateStatus;
+
 protected function loadModel() {
 $this->tableName = "process_task_index";
 $this->aliasTableName = "process_task_index";
@@ -112,7 +117,7 @@ $this->subject = new \Nemundo\Model\Type\Text\TextType($this);
 $this->subject->tableName = "process_task_index";
 $this->subject->fieldName = "subject";
 $this->subject->aliasFieldName = "process_task_index_subject";
-$this->subject->label = "Subject";
+$this->subject->label = "Aufgabe";
 $this->subject->allowNullValue = false;
 $this->subject->length = 255;
 
@@ -120,21 +125,21 @@ $this->assignmentId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($
 $this->assignmentId->tableName = "process_task_index";
 $this->assignmentId->fieldName = "assignment";
 $this->assignmentId->aliasFieldName = "process_task_index_assignment";
-$this->assignmentId->label = "Assignment";
+$this->assignmentId->label = "Verantwortlicher";
 $this->assignmentId->allowNullValue = false;
 
 $this->deadline = new \Nemundo\Model\Type\DateTime\DateType($this);
 $this->deadline->tableName = "process_task_index";
 $this->deadline->fieldName = "deadline";
 $this->deadline->aliasFieldName = "process_task_index_deadline";
-$this->deadline->label = "Deadline";
+$this->deadline->label = "Erledigen bis";
 $this->deadline->allowNullValue = false;
 
 $this->userId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
 $this->userId->tableName = "process_task_index";
 $this->userId->fieldName = "user";
 $this->userId->aliasFieldName = "process_task_index_user";
-$this->userId->label = "User";
+$this->userId->label = "Ersteller";
 $this->userId->allowNullValue = false;
 
 $this->dateTime = new \Nemundo\Model\Type\DateTime\DateTimeType($this);
@@ -157,6 +162,13 @@ $this->taskTypeId->fieldName = "task_type";
 $this->taskTypeId->aliasFieldName = "process_task_index_task_type";
 $this->taskTypeId->label = "Task Type";
 $this->taskTypeId->allowNullValue = false;
+
+$this->updateStatus = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->updateStatus->tableName = "process_task_index";
+$this->updateStatus->fieldName = "update_status";
+$this->updateStatus->aliasFieldName = "process_task_index_update_status";
+$this->updateStatus->label = "Update Status";
+$this->updateStatus->allowNullValue = false;
 
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "source_content";
@@ -190,7 +202,7 @@ $this->assignment = new \Nemundo\Process\Group\Data\Group\GroupExternalType($thi
 $this->assignment->tableName = "process_task_index";
 $this->assignment->fieldName = "assignment";
 $this->assignment->aliasFieldName = "process_task_index_assignment";
-$this->assignment->label = "Assignment";
+$this->assignment->label = "Verantwortlicher";
 }
 return $this;
 }
@@ -200,7 +212,7 @@ $this->user = new \Nemundo\User\Data\User\UserExternalType($this, "process_task_
 $this->user->tableName = "process_task_index";
 $this->user->fieldName = "user";
 $this->user->aliasFieldName = "process_task_index_user";
-$this->user->label = "User";
+$this->user->label = "Ersteller";
 }
 return $this;
 }

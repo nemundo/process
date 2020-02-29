@@ -4,7 +4,6 @@
 namespace Nemundo\Process\Content\Type;
 
 
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Random\UniqueId;
@@ -22,7 +21,6 @@ use Nemundo\Process\Content\Form\ContentForm;
 use Nemundo\Process\Content\View\AbstractContentAdmin;
 use Nemundo\Process\Content\View\AbstractContentList;
 use Nemundo\User\Type\UserSessionType;
-use Schleuniger\App\Sitzung\Data\Sitzung\SitzungReader;
 
 
 abstract class AbstractContentType extends AbstractType
@@ -71,7 +69,7 @@ abstract class AbstractContentType extends AbstractType
 
 
     /**
-     * @var ModelDataRow
+     * @var AbstractModelDataRow
      */
     protected $dataRow;
 
@@ -128,7 +126,7 @@ abstract class AbstractContentType extends AbstractType
     public function existItem()
     {
         //return false;
-        $value=false;
+        $value = false;
         if ($this->dataId !== null) {
             $value = true;
         }
@@ -140,7 +138,6 @@ abstract class AbstractContentType extends AbstractType
 
     public function saveType()
     {
-
 
 
         if ($this->existItem()) {
@@ -306,8 +303,8 @@ abstract class AbstractContentType extends AbstractType
     }
 
 
-
-    public function fromDataRow(AbstractModelDataRow $dataRow) {
+    public function fromDataRow(AbstractModelDataRow $dataRow)
+    {
 
         $this->dataRow = $dataRow;
         $this->loadFromDataId($dataRow->getModelValue($dataRow->model->id));
@@ -316,19 +313,19 @@ abstract class AbstractContentType extends AbstractType
     }
 
 
-    protected function onDataRow() {
+    protected function onDataRow()
+    {
         //(new LogMessage())->writeError('getDataRow not defined'.$this->getClassName());
     }
 
     public function getDataRow()
     {
 
-        if ($this->dataRow ==null) {
-          $this->onDataRow();
+        if ($this->dataRow == null) {
+            $this->onDataRow();
         }
 
         return $this->dataRow;
-
 
     }
 

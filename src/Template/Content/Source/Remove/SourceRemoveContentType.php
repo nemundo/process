@@ -50,6 +50,9 @@ class SourceRemoveContentType extends AbstractSourceContentType
         $this->dataId = $data->save();
 
 
+        $this->getParentContentType()->saveIndex();
+
+
     }
 
 

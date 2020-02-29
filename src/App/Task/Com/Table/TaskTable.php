@@ -1,41 +1,29 @@
 <?php
 
 
-namespace Nemundo\Process\App\Task\Site;
+namespace Schleuniger\App\Task\Com\Table;
 
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\Html\Listing\UnorderedList;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Db\Sql\Field\CountField;
-use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
-use Nemundo\Process\App\Task\Com\Form\TaskSearchForm;
 use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndexPaginationReader;
 use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndexReader;
 use Nemundo\Process\App\Task\Filter\TaskFilter;
 use Nemundo\Process\Config\ProcessConfig;
-use Nemundo\Web\Site\AbstractSite;
 
-
-class TaskSite extends AbstractSite
+class TaskTable extends AdminClickableTable
 {
 
-    protected function loadSite()
+    /**
+     * @var TaskIndexPaginationReader
+     */
+    public $taskReader;
+
+    public function getContent()
     {
-        $this->title = 'Task';
-        $this->url = 'task';
-        // TODO: Implement loadSite() method.
-    }
-
-
-    public function loadContent()
-    {
-
-        $page = (new DefaultTemplateFactory())->getDefaultTemplate();
-
-
-        new TaskSearchForm($page);
 
 
         $taskReader = new TaskIndexPaginationReader();
@@ -56,9 +44,7 @@ class TaskSite extends AbstractSite
 
         $taskReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
 
-        $table = new AdminClickableTable($page);
-
-        $header = new TableHeader($table);
+        $header = new TableHeader($this);
         $header->addText($taskReader->model->subject->label);
         $header->addText($taskReader->model->taskType->label);
 
@@ -76,7 +62,7 @@ class TaskSite extends AbstractSite
 
         foreach ($taskReader->getData() as $taskRow) {
 
-            $row = new BootstrapClickableTableRow($table);
+            $row = new BootstrapClickableTableRow($this);
 
             $taskRow->getTrafficLight($row);
             $row->addText($taskRow->subject);
@@ -105,38 +91,15 @@ class TaskSite extends AbstractSite
 
             $row->addText($taskRow->source->subject);
             $row->addText($taskRow->source->contentType->contentType);
-
-
             $taskRow->getAssignmentSpan($row);
-
-            /*
-            $span=new GroupSpan($row);
-            $span->groupId= $taskRow->assignmentId;
-            $span->content = $taskRow->assignment->group;*/
-
-            //$row->addText($taskRow->assignment->group);
-
-            /* if ($taskRow->deadline !==null) {
-             $row->addText($taskRow->deadline->getShortDateLeadingZeroFormat());
-             } else {
-                 $row->addEmpty();
-             }*/
-
             $row->addText($taskRow->getDeadline());
-
-            //$row->addText($taskRow->user->login);
-            $row->addText($taskRow->getCreator());  // $taskRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
-            //$row->addYesNo($taskRow->closed);
-
+            $row->addText($taskRow->getCreator());
             $row->addClickableSite($taskRow->content->getContentType()->getViewSite());
-
 
         }
 
+        return parent::getContent();
 
-        $page->render();
-
-        // TODO: Implement loadContent() method.
     }
 
 }

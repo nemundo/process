@@ -13,7 +13,7 @@
             "namespace": "Nemundo\\Process\\App\\Assignment\\Data\\Assignment",
             "row_class_name": "",
             "primary_index": "auto_increment",
-            "is_deleted": false,
+            "is_deleted": true,
             "type": [
                 {
                     "type": "external",
@@ -94,7 +94,7 @@
             "namespace": "Nemundo\\Process\\App\\Assignment\\Data\\AssignmentIndex",
             "row_class_name": "",
             "primary_index": "auto_increment",
-            "is_deleted": false,
+            "is_deleted": true,
             "type": [
                 {
                     "type": "external",
@@ -183,7 +183,7 @@
             "namespace": "Nemundo\\Process\\App\\Assignment\\Data\\AssignmentSource",
             "row_class_name": "",
             "primary_index": "auto_increment",
-            "is_deleted": false,
+            "is_deleted": true,
             "type": [
                 {
                     "type": "external",
@@ -214,7 +214,7 @@
             "namespace": "Nemundo\\Process\\App\\Assignment\\Data\\AssignmentStatus",
             "row_class_name": "",
             "primary_index": "number_id",
-            "is_deleted": false,
+            "is_deleted": true,
             "type": [
                 {
                     "type": "text",

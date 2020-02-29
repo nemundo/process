@@ -8,13 +8,14 @@ use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Process\App\Assignment\Data\AssignmentIndex\AssignmentIndex;
+use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Content\Writer\TreeWriter;
 use Nemundo\Process\Template\Content\Source\AbstractSourceContentType;
 use Nemundo\Process\Template\Data\SourceLog\SourceLog;
 use Nemundo\Process\Template\Data\SourceLog\SourceLogReader;
 
-class ChildAddContentType extends AbstractSourceContentType  // AbstractTreeContentType
+class ChildAddContentType extends AbstractSourceContentType
 {
 
     public $sourceId;
@@ -42,6 +43,17 @@ class ChildAddContentType extends AbstractSourceContentType  // AbstractTreeCont
         $writer->parentId =$this->parentId;// $this->sourceId;
         $writer->dataId =$this->sourceId; //$this->parentId;
         $writer->write();
+
+
+        $contentReader  =new ContentReader();
+           $contentReader->model->loadContentType();
+        $contentType = $contentReader->getRowById($this->sourceId)->getContentType();
+
+        //(new Debug())->write($contentType->getSubject());
+        //exit;
+
+        $contentType->saveIndex();
+
 
 
         //$parentContentType = $this->getParentContentType();

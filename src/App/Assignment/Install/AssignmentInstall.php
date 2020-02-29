@@ -11,7 +11,7 @@ use Nemundo\Process\App\Assignment\Content\Message\MessageAssignmentProcessStatu
 use Nemundo\Process\App\Assignment\Content\ReAssignment\ReAssignmentContentType;
 use Nemundo\Process\App\Assignment\Content\ReAssignment\ReAssignmentProcessStatus;
 use Nemundo\Process\App\Assignment\Data\AssignmentCollection;
-use Nemundo\Process\App\Assignment\Data\AssignmentStatus\AssignmentStatus;
+
 use Nemundo\Process\App\Assignment\Status\AbstractAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\CancelAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\ClosedAssignmentStatus;
@@ -35,14 +35,15 @@ class AssignmentInstall extends AbstractInstall
         $setup->addContentType(new ReAssignmentContentType());
         $setup->addContentType(new ReAssignmentProcessStatus());
 
-        $this->addStatus(new OpenAssignmentStatus());
+       /* $this->addStatus(new OpenAssignmentStatus());
         $this->addStatus(new ClosedAssignmentStatus());
-        $this->addStatus(new CancelAssignmentStatus());
+        $this->addStatus(new CancelAssignmentStatus());*/
 
         // TODO: Implement install() method.
     }
 
 
+    /*
     private function addStatus(AbstractAssignmentStatus $status) {
 
         $data=new AssignmentStatus();
@@ -51,6 +52,6 @@ class AssignmentInstall extends AbstractInstall
         $data->status=$status->status;
         $data->save();
 
-    }
+    }*/
 
 }

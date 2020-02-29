@@ -14,6 +14,8 @@ use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentReader;
 use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentUpdate;
 use Nemundo\Process\App\Assignment\Data\AssignmentIndex\AssignmentIndexUpdate;
 use Nemundo\Process\App\Assignment\Data\AssignmentLog\AssignmentLog;
+use Nemundo\Process\App\Assignment\Data\AssignmentLog\AssignmentLogDelete;
+use Nemundo\Process\App\Assignment\Data\AssignmentLog\AssignmentLogReader;
 use Nemundo\Process\App\Assignment\Status\CancelAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\ClosedAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\OpenAssignmentStatus;
@@ -71,7 +73,7 @@ trait AssignmentTrait
     protected function onDelete()
     {
 
-        (new AssignmentDelete())->deleteById($this->dataId);
+        (new AssignmentLogDelete())->deleteById($this->dataId);
 
     }
 
@@ -79,38 +81,39 @@ trait AssignmentTrait
     protected function saveAssignment()
     {
 
-        $data = new Assignment();
-        $data->statusId = (new OpenAssignmentStatus())->id;
-        $data->groupId = $this->groupId;
-        $data->deadline = $this->deadline;
-        $data->sourceId = $this->parentId;
-        $data->message = $this->getMessage();
-        $data->contentId = $this->getContentId();
+      /*  $data = new AssignmentLog();
+        //$data->statusId = (new OpenAssignmentStatus())->id;
+        $data->assignmentId = $this->groupId;
+        //$data->deadline = $this->deadline;
+        //$data->sourceId = $this->parentId;
+        //$data->message = $this->getMessage();
+        //$data->contentId = $this->getContentId();
         //$data->save();
-        $this->dataId = $data->save();
+        $this->dataId = $data->save();*/
 
 
         // assignment log
         $data = new AssignmentLog();
         $data->assignmentId = $this->groupId;
-//        $this->dataId = $data->save();
-         $data->save();
+        $this->dataId = $data->save();
 
 
 
-
+/*
         $update = new AssignmentIndexUpdate();
         $update->assignmentId = $this->groupId;
         $update->deadline = $this->deadline;
         $update->filter->andEqual($update->model->contentId,$this->parentId);
         $update->update();
-
+*/
 
 
 
     }
 
 
+
+    /*
     protected function cancelAssignment()
     {
 
@@ -130,16 +133,21 @@ trait AssignmentTrait
         $update->filter->andEqual($update->model->sourceId, $this->parentId);
         $update->update();
 
-    }
+    }*/
 
 
     public function getDataRow()
     {
 
-        $reader = new AssignmentReader();
+      /*  $reader = new AssignmentReader();
         $reader->model->loadGroup();
         $reader->model->loadStatus();
+        $assignmentRow = $reader->getRowById($this->dataId);*/
+
+        $reader = new AssignmentLogReader();
+        $reader->model->loadAssignment();
         $assignmentRow = $reader->getRowById($this->dataId);
+
 
         return $assignmentRow;
 

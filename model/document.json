@@ -49,6 +49,14 @@
                     "allow_null": false,
                     "is_deleted": true,
                     "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Closed",
+                    "field_name": "closed",
+                    "variable_name": "closed",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": [

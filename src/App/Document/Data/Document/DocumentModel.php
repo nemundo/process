@@ -21,6 +21,11 @@ public $content;
 */
 public $title;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $closed;
+
 protected function loadModel() {
 $this->tableName = "document_document";
 $this->aliasTableName = "document_document";
@@ -53,6 +58,13 @@ $this->title->aliasFieldName = "document_document_title";
 $this->title->label = "Title";
 $this->title->allowNullValue = false;
 $this->title->length = 255;
+
+$this->closed = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->closed->tableName = "document_document";
+$this->closed->fieldName = "closed";
+$this->closed->aliasFieldName = "document_document_closed";
+$this->closed->label = "Closed";
+$this->closed->allowNullValue = false;
 
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "content";

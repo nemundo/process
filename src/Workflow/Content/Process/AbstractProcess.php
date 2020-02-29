@@ -12,20 +12,21 @@ use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Db\DbConfig;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Html\Container\AbstractHtmlContainer;
+use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Model\Count\ModelDataCount;
 use Nemundo\Model\Data\ModelUpdate;
 use Nemundo\Model\Value\ModelDataValue;
-use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentUpdate;
-use Nemundo\Process\App\Assignment\Data\AssignmentIndex\AssignmentIndex;
-use Nemundo\Process\App\Assignment\Data\AssignmentIndex\AssignmentIndexUpdate;
+
 use Nemundo\Process\App\Assignment\Status\CancelAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\ClosedAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\OpenAssignmentStatus;
+use Nemundo\Process\App\Document\Type\DocumentIndexTrait;
 use Nemundo\Process\App\Task\Index\TaskIndexTrait;
 use Nemundo\Process\Content\Data\Content\ContentUpdate;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
+use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Group\Check\GroupRestrictionTrait;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Content\View\AbstractProcessView;
@@ -40,6 +41,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
     use GroupRestrictionTrait;
     use TaskIndexTrait;
+    use DocumentIndexTrait;
 
     public $number;
 
@@ -79,6 +81,12 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     // workflowDefaultTitle
     public $defaultTitle='New';
 
+    /**
+     * @var bool
+     */
+    public $showSource=true;
+
+
     public function __construct($dataId = null)
     {
 
@@ -106,10 +114,10 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
 
         // TaskIndex
-        $update = new AssignmentIndexUpdate();
+        /*$update = new AssignmentIndexUpdate();
         $update->closed=false;
         $update->filter->andEqual($update->model->contentId,$this->getContentId());
-        $update->update();
+        $update->update();*/
 
 
     }
@@ -132,13 +140,15 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
             $this->saveContentBefore();
 
-            $data = new AssignmentIndex();
+            /*$data = new AssignmentIndex();
             $data->sourceId=$this->parentId;
             $data->contentId=$this->getContentId();
-            $data->save();
+            $data->save();*/
 
 
             $this->onCreate();
+
+
 
             $update = new ModelUpdate();
             $update->model = $this->workflowModel;
@@ -316,10 +326,11 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $update->typeValueList->setModelValue($update->model->workflowClosed, true);
         $update->updateById($this->dataId);
 
+        /*
         $update = new AssignmentIndexUpdate();
         $update->closed=true;
         $update->filter->andEqual($update->model->contentId,$this->getContentId());
-        $update->update();
+        $update->update();*/
 
 
     }
@@ -395,7 +406,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
             $update->typeValueList->setModelValue($update->model->deadline, $deadline->getIsoDateFormat());
             $update->updateById($this->dataId);
 
-            $update = new AssignmentUpdate();
+            /*$update = new AssignmentUpdate();
             $update->deadline = $deadline;
             $update->filter->andEqual($update->model->sourceId, $this->getContentId());
             $update->filter->andEqual($update->model->statusId, (new OpenAssignmentStatus())->id);
@@ -404,7 +415,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
             $update = new AssignmentIndexUpdate();
             $update->deadline = $deadline;
             $update->filter->andEqual($update->model->contentId, $this->getContentId());
-            $update->update();
+            $update->update();*/
 
 
         }
@@ -414,20 +425,21 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
     public function closeAssignment()
     {
-        $update = new AssignmentUpdate();
+
+       /* $update = new AssignmentUpdate();
         $update->statusId = (new ClosedAssignmentStatus())->id;
         $update->filter->andEqual($update->model->sourceId, $this->getContentId());
-        $update->update();
+        $update->update();*/
     }
 
     // clearAssignment
     public function cancelAssignment()
     {
 
-        $update = new AssignmentUpdate();
+       /* $update = new AssignmentUpdate();
         $update->statusId = (new CancelAssignmentStatus())->id;
         $update->filter->andEqual($update->model->sourceId, $this->getContentId());
-        $update->update();
+        $update->update();*/
 
     }
 
@@ -570,6 +582,31 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         return $view;
 
     }
+
+
+    public function getBaseView(AbstractHtmlContainer $parent = null)
+    {
+
+        $view = null;
+
+        if ($this->baseViewClass !==null) {
+
+            /** @var AbstractContentView $view */
+            $view = new $this->baseViewClass($parent);
+            $view->dataId = $this->dataId;
+            $view->contentType = $this;
+
+        } else {
+
+            $view = new Paragraph($parent);
+            $view->content = '[No Base View]';
+
+        }
+
+        return $view;
+
+    }
+
 
 
 }

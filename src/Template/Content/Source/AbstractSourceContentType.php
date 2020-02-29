@@ -21,6 +21,7 @@ abstract class AbstractSourceContentType extends AbstractTreeContentType
         return $reader->getRowById($this->dataId);
     }
 
+
     protected function getHyperlinkContent()
     {
 
@@ -29,17 +30,5 @@ abstract class AbstractSourceContentType extends AbstractTreeContentType
         return $hyerplink->getContent();
 
     }
-
-
-    /*
-    public function getSubject()
-    {
-
-        //  $site = $this->getDataRow()->source->getContentType()->getViewSite();
-
-        $subject = 'Source ' . $this->getHyperlinkContent() . ' was added';  //' $this->getDataRow()->source->getContentType()->getSubject();
-        return $subject;
-
-    }*/
 
 }

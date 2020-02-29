@@ -6,6 +6,7 @@ namespace Nemundo\Process\Template\Content\Source\Remove;
 
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
+use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\Tree\TreeDelete;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
@@ -48,6 +49,16 @@ class ChildRemoveContentType extends AbstractSourceContentType
         $data = new SourceLog();
         $data->sourceId = $this->removeId;
         $this->dataId = $data->save();
+
+
+        $contentReader  =new ContentReader();
+        $contentReader->model->loadContentType();
+        $contentType = $contentReader->getRowById($this->removeId)->getContentType();
+
+        //(new Debug())->write($contentType->getSubject());
+        //exit;
+
+        $contentType->saveIndex();
 
 
     }

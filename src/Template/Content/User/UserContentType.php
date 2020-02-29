@@ -9,7 +9,9 @@ use Nemundo\Core\Random\UniqueId;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Group\Data\Group\GroupRow;
+use Nemundo\Process\Group\Data\GroupUser\GroupUser;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
+use Nemundo\Process\Group\Type\AbstractGroupContentType;
 use Nemundo\Process\Group\Type\UserGroupType;
 use Nemundo\User\Data\User\User;
 use Nemundo\User\Data\User\UserCount;
@@ -239,6 +241,19 @@ class UserContentType extends AbstractTreeContentType
         }
 
         return $list;
+    }
+
+
+    public function addGroup(AbstractGroupContentType $group) {
+
+        $data = new GroupUser();
+        $data->ignoreIfExists = true;
+        $data->groupId = $group->getGroupId();
+        $data->userId = $this->dataId;
+        $data->save();
+
+        return $this;
+
     }
 
 }

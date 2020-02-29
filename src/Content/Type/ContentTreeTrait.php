@@ -242,6 +242,9 @@ trait ContentTreeTrait
 
     // getParentContentRow
 
+    /**
+     * @return ContentCustomRow[]
+     */
     public function getParentContent()
     {
 
@@ -253,7 +256,9 @@ trait ContentTreeTrait
         /** @var ContentCustomRow[] $doc */
         $doc = [];
         foreach ($reader->getData() as $treeRow) {
+
             $doc[] = $treeRow->parent;
+
         }
 
         return $doc;

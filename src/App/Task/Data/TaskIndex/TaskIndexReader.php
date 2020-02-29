@@ -11,7 +11,7 @@ parent::__construct();
 $this->model = new TaskIndexModel();
 }
 /**
-* @return TaskIndexRow[]
+* @return \Nemundo\Process\App\Task\Row\TaskIndexCustomRow[]
 */
 public function getData() {
 $list = [];
@@ -22,7 +22,7 @@ $list[] = $row;
 return $list;
 }
 /**
-* @return TaskIndexRow
+* @return \Nemundo\Process\App\Task\Row\TaskIndexCustomRow
 */
 public function getRow() {
 $dataRow = parent::getRow();
@@ -30,13 +30,13 @@ $row = $this->getModelRow($dataRow);
 return $row;
 }
 /**
-* @return TaskIndexRow
+* @return \Nemundo\Process\App\Task\Row\TaskIndexCustomRow
 */
 public function getRowById($id) {
 return parent::getRowById($id);
 }
 private function getModelRow($dataRow) {
-$row = new TaskIndexRow($dataRow, $this->model);
+$row = new \Nemundo\Process\App\Task\Row\TaskIndexCustomRow($dataRow, $this->model);
 $row->model = $this->model;
 return $row;
 }

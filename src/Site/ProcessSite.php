@@ -27,6 +27,7 @@ use Nemundo\Process\Search\Site\SearchSite;
 use Nemundo\Process\Search\Site\SearchWordSite;
 use Nemundo\Process\Template\Site\ChildRemoveSite;
 use Nemundo\Process\Template\Site\FileSite;
+use Nemundo\Process\Template\Site\ImageSite;
 use Nemundo\Process\Template\Site\ProcessTemplateSite;
 use Nemundo\Process\Template\Site\UserSite;
 use Nemundo\ToDo\Site\ToDoSite;
@@ -76,6 +77,7 @@ class ProcessSite extends AbstractSite
 
         new ProcessTemplateSite($this);
         new FileSite($this);
+        new ImageSite($this);
 
         new MessageSite($this);
 

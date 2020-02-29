@@ -51,6 +51,11 @@ public $closed;
 */
 public $taskTypeId;
 
+/**
+* @var bool
+*/
+public $updateStatus;
+
 public function __construct() {
 parent::__construct();
 $this->model = new TaskIndexModel();
@@ -69,6 +74,7 @@ $property = new \Nemundo\Model\Data\Property\DateTime\DateTimeDataProperty($this
 $property->setValue($this->dateTime);
 $this->typeValueList->setModelValue($this->model->closed, $this->closed);
 $this->typeValueList->setModelValue($this->model->taskTypeId, $this->taskTypeId);
+$this->typeValueList->setModelValue($this->model->updateStatus, $this->updateStatus);
 $id = parent::save();
 return $id;
 }

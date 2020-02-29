@@ -76,6 +76,11 @@ public $taskTypeId;
 */
 public $taskType;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $updateStatus;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = TaskIndexModel::class;
@@ -106,28 +111,28 @@ $this->subject = new \Nemundo\Model\Type\Text\TextType();
 $this->subject->fieldName = "subject";
 $this->subject->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->subject->aliasFieldName = $this->subject->tableName . "_" . $this->subject->fieldName;
-$this->subject->label = "Subject";
+$this->subject->label = "Aufgabe";
 $this->addType($this->subject);
 
 $this->assignmentId = new \Nemundo\Model\Type\Id\IdType();
 $this->assignmentId->fieldName = "assignment";
 $this->assignmentId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->assignmentId->aliasFieldName = $this->assignmentId->tableName ."_".$this->assignmentId->fieldName;
-$this->assignmentId->label = "Assignment";
+$this->assignmentId->label = "Verantwortlicher";
 $this->addType($this->assignmentId);
 
 $this->deadline = new \Nemundo\Model\Type\DateTime\DateType();
 $this->deadline->fieldName = "deadline";
 $this->deadline->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->deadline->aliasFieldName = $this->deadline->tableName . "_" . $this->deadline->fieldName;
-$this->deadline->label = "Deadline";
+$this->deadline->label = "Erledigen bis";
 $this->addType($this->deadline);
 
 $this->userId = new \Nemundo\Model\Type\Id\IdType();
 $this->userId->fieldName = "user";
 $this->userId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->userId->aliasFieldName = $this->userId->tableName ."_".$this->userId->fieldName;
-$this->userId->label = "User";
+$this->userId->label = "Ersteller";
 $this->addType($this->userId);
 
 $this->dateTime = new \Nemundo\Model\Type\DateTime\DateTimeType();
@@ -150,6 +155,13 @@ $this->taskTypeId->tableName = $this->parentFieldName . "_" . $this->externalTab
 $this->taskTypeId->aliasFieldName = $this->taskTypeId->tableName ."_".$this->taskTypeId->fieldName;
 $this->taskTypeId->label = "Task Type";
 $this->addType($this->taskTypeId);
+
+$this->updateStatus = new \Nemundo\Model\Type\Number\YesNoType();
+$this->updateStatus->fieldName = "update_status";
+$this->updateStatus->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->updateStatus->aliasFieldName = $this->updateStatus->tableName . "_" . $this->updateStatus->fieldName;
+$this->updateStatus->label = "Update Status";
+$this->addType($this->updateStatus);
 
 }
 public function loadSource() {
@@ -180,7 +192,7 @@ $this->assignment = new \Nemundo\Process\Group\Data\Group\GroupExternalType(null
 $this->assignment->fieldName = "assignment";
 $this->assignment->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->assignment->aliasFieldName = $this->assignment->tableName ."_".$this->assignment->fieldName;
-$this->assignment->label = "Assignment";
+$this->assignment->label = "Verantwortlicher";
 $this->addType($this->assignment);
 }
 return $this;
@@ -191,7 +203,7 @@ $this->user = new \Nemundo\User\Data\User\UserExternalType(null, $this->parentFi
 $this->user->fieldName = "user";
 $this->user->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->user->aliasFieldName = $this->user->tableName ."_".$this->user->fieldName;
-$this->user->label = "User";
+$this->user->label = "Ersteller";
 $this->addType($this->user);
 }
 return $this;

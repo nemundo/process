@@ -10,6 +10,7 @@ use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Content\Collection\AbstractContentTypeCollection;
 use Nemundo\Process\Group\Check\GroupRestrictionTrait;
 use Nemundo\Web\Site\AbstractSite;
+use Nemundo\Web\Site\Site;
 
 class ContentTypeCollectionDropdown extends BootstrapSiteDropdown
 {
@@ -29,6 +30,11 @@ class ContentTypeCollectionDropdown extends BootstrapSiteDropdown
 
     public function getContent()
     {
+
+        if ($this->redirectSite == null) {
+            $this->redirectSite=new Site();
+        }
+
 
         foreach ($this->contentTypeCollection->getContentTypeList() as $contentType) {
 
