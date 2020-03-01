@@ -6,7 +6,7 @@ namespace Nemundo\Process\Template\Content\Source\Child;
 
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
-use Nemundo\Process\App\Assignment\Data\AssignmentIndex\AssignmentIndex;
+
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Writer\TreeWriter;
 use Nemundo\Process\Template\Content\Source\AbstractSourceContentType;

@@ -22,6 +22,11 @@ public $title;
 */
 public $closed;
 
+/**
+* @var string
+*/
+public $documentTypeId;
+
 public function __construct() {
 parent::__construct();
 $this->model = new DocumentModel();
@@ -30,6 +35,7 @@ public function update() {
 $this->typeValueList->setModelValue($this->model->contentId, $this->contentId);
 $this->typeValueList->setModelValue($this->model->title, $this->title);
 $this->typeValueList->setModelValue($this->model->closed, $this->closed);
+$this->typeValueList->setModelValue($this->model->documentTypeId, $this->documentTypeId);
 parent::update();
 }
 }

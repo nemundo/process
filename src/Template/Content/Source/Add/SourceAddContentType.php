@@ -8,7 +8,7 @@ use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
-use Nemundo\Process\App\Assignment\Data\AssignmentIndex\AssignmentIndex;
+
 use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndex;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
@@ -47,16 +47,6 @@ class SourceAddContentType extends AbstractSourceContentType
         $writer->write();
 
        $this->getParentContentType()->saveIndex();
-
-
-      /*  $data = new AssignmentIndex();
-        $data->sourceId =  $this->sourceId;
-        $data->contentId = $this->getParentId();*/
-
-
-
-        $data->save();
-
 
     }
 

@@ -20,7 +20,7 @@ use Nemundo\Model\Value\ModelDataValue;
 use Nemundo\Process\App\Assignment\Status\CancelAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\ClosedAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\OpenAssignmentStatus;
-use Nemundo\Process\App\Document\Type\DocumentIndexTrait;
+use Nemundo\Process\App\Document\Index\DocumentIndexTrait;
 use Nemundo\Process\App\Task\Index\TaskIndexTrait;
 use Nemundo\Process\Content\Data\Content\ContentUpdate;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
@@ -125,8 +125,10 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
     protected function onIndex()
     {
+
         $this->saveSearchIndex();
         $this->saveTaskIndex();
+        $this->saveDocumentIndex();
 
     }
 

@@ -16,6 +16,11 @@ public $contentTypeId;
 */
 public $contentType;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $setupStatus;
+
 protected function loadModel() {
 $this->tableName = "document_document_type";
 $this->aliasTableName = "document_document_type";
@@ -40,6 +45,13 @@ $this->contentTypeId->fieldName = "content_type";
 $this->contentTypeId->aliasFieldName = "document_document_type_content_type";
 $this->contentTypeId->label = "Content Type";
 $this->contentTypeId->allowNullValue = false;
+
+$this->setupStatus = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->setupStatus->tableName = "document_document_type";
+$this->setupStatus->fieldName = "setup_status";
+$this->setupStatus->aliasFieldName = "document_document_type_setup_status";
+$this->setupStatus->label = "Setup Status";
+$this->setupStatus->allowNullValue = false;
 
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "content_type";

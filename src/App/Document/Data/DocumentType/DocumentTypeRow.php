@@ -26,6 +26,11 @@ public $contentTypeId;
 */
 public $contentType;
 
+/**
+* @var bool
+*/
+public $setupStatus;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -34,6 +39,7 @@ $this->contentTypeId = $this->getModelValue($model->contentTypeId);
 if ($model->contentType !== null) {
 $this->loadNemundoProcessContentDataContentTypeContentTypecontentTypeRow($model->contentType);
 }
+$this->setupStatus = boolval($this->getModelValue($model->setupStatus));
 }
 private function loadNemundoProcessContentDataContentTypeContentTypecontentTypeRow($model) {
 $this->contentType = new \Nemundo\Process\Content\Row\ContentTypeCustomRow($this->row, $model);

@@ -27,8 +27,8 @@ class MessageInstall extends AbstractInstall
         $setup->addContentType(new MessageContentType());
         $setup->addContentType(new MessageNotification());
 
-        $setup=new DocumentSetup();
-        $setup->addContentType(new MessageContentType());
+        //$setup=new DocumentSetup();
+        //$setup->addContentType(new MessageContentType());
 
 
     }

@@ -26,6 +26,16 @@ public $title;
 */
 public $closed;
 
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $documentTypeId;
+
+/**
+* @var \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType
+*/
+public $documentType;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = DocumentModel::class;
@@ -59,6 +69,13 @@ $this->closed->aliasFieldName = $this->closed->tableName . "_" . $this->closed->
 $this->closed->label = "Closed";
 $this->addType($this->closed);
 
+$this->documentTypeId = new \Nemundo\Model\Type\Id\IdType();
+$this->documentTypeId->fieldName = "document_type";
+$this->documentTypeId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->documentTypeId->aliasFieldName = $this->documentTypeId->tableName ."_".$this->documentTypeId->fieldName;
+$this->documentTypeId->label = "Document Type";
+$this->addType($this->documentTypeId);
+
 }
 public function loadContent() {
 if ($this->content == null) {
@@ -68,6 +85,17 @@ $this->content->tableName = $this->parentFieldName . "_" . $this->externalTableN
 $this->content->aliasFieldName = $this->content->tableName ."_".$this->content->fieldName;
 $this->content->label = "Content";
 $this->addType($this->content);
+}
+return $this;
+}
+public function loadDocumentType() {
+if ($this->documentType == null) {
+$this->documentType = new \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType(null, $this->parentFieldName . "_document_type");
+$this->documentType->fieldName = "document_type";
+$this->documentType->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->documentType->aliasFieldName = $this->documentType->tableName ."_".$this->documentType->fieldName;
+$this->documentType->label = "Document Type";
+$this->addType($this->documentType);
 }
 return $this;
 }

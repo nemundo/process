@@ -16,6 +16,11 @@ public $contentTypeId;
 */
 public $contentType;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $setupStatus;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = DocumentTypeModel::class;
@@ -34,6 +39,13 @@ $this->contentTypeId->tableName = $this->parentFieldName . "_" . $this->external
 $this->contentTypeId->aliasFieldName = $this->contentTypeId->tableName ."_".$this->contentTypeId->fieldName;
 $this->contentTypeId->label = "Content Type";
 $this->addType($this->contentTypeId);
+
+$this->setupStatus = new \Nemundo\Model\Type\Number\YesNoType();
+$this->setupStatus->fieldName = "setup_status";
+$this->setupStatus->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->setupStatus->aliasFieldName = $this->setupStatus->tableName . "_" . $this->setupStatus->fieldName;
+$this->setupStatus->label = "Setup Status";
+$this->addType($this->setupStatus);
 
 }
 public function loadContentType() {

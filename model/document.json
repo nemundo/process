@@ -57,6 +57,15 @@
                     "variable_name": "closed",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "Document Type",
+                    "field_name": "document_type",
+                    "variable_name": "documentType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
                 }
             ],
             "index": [
@@ -88,6 +97,14 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Setup Status",
+                    "field_name": "setup_status",
+                    "variable_name": "setupStatus",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": [

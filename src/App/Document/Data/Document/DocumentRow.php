@@ -36,6 +36,16 @@ public $title;
 */
 public $closed;
 
+/**
+* @var string
+*/
+public $documentTypeId;
+
+/**
+* @var \Nemundo\Process\Content\Row\ContentTypeCustomRow
+*/
+public $documentType;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -46,8 +56,15 @@ $this->loadNemundoProcessContentDataContentContentcontentRow($model->content);
 }
 $this->title = $this->getModelValue($model->title);
 $this->closed = boolval($this->getModelValue($model->closed));
+$this->documentTypeId = $this->getModelValue($model->documentTypeId);
+if ($model->documentType !== null) {
+$this->loadNemundoProcessContentDataContentTypeContentTypedocumentTypeRow($model->documentType);
+}
 }
 private function loadNemundoProcessContentDataContentContentcontentRow($model) {
 $this->content = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $model);
+}
+private function loadNemundoProcessContentDataContentTypeContentTypedocumentTypeRow($model) {
+$this->documentType = new \Nemundo\Process\Content\Row\ContentTypeCustomRow($this->row, $model);
 }
 }

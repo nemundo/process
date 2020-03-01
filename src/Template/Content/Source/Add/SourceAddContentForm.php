@@ -65,7 +65,9 @@ class SourceAddContentForm extends AbstractContentForm
 
         //$type = new SourceAddContentType();
         //$type->parentId = $this->parentId;
-        $this->contentType->childId = $this->content->getValue();
+//        $this->contentType->childId = $this->content->getValue();
+        $this->contentType->sourceId = $this->content->getValue();
+
         $this->contentType->saveType();
 
         // TODO: Implement onSubmit() method.
