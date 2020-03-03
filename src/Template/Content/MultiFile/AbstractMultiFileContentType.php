@@ -11,7 +11,6 @@ use Nemundo\Process\Template\Data\TemplateMultiFile\TemplateMultiFile;
 abstract class AbstractMultiFileContentType extends AbstractTreeContentType
 {
 
-
     public function __construct($dataId = null)
     {
 
@@ -21,25 +20,21 @@ abstract class AbstractMultiFileContentType extends AbstractTreeContentType
         parent::__construct($dataId);
     }
 
-
-
-
+/*
     protected function onCreate()
     {
 
 
 
-    }
+    }*/
 
 
     public function addFileRequest(FileRequest $fileRequest) {
-
 
         $data = new TemplateMultiFile();
         $data->dataContentId = $this->getContentId();
         $data->file->fromFileRequest($fileRequest);
         $data->save();
-
 
     }
 

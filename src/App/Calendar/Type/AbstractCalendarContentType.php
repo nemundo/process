@@ -11,6 +11,8 @@ use Nemundo\Process\Content\Type\AbstractTreeContentType;
 abstract class AbstractCalendarContentType extends AbstractTreeContentType
 {
 
+    use CalendarIndexTrait;
+
     abstract protected function getDate();
     abstract protected function getTitle();
 

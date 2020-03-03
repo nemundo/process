@@ -207,6 +207,15 @@ abstract class AbstractContentType extends AbstractType
     }
 
 
+    protected function saveContentIndex() {
+
+        $update = new ContentUpdate();
+        $update->subject = $this->getSubject();
+        $update->updateById($this->getContentId());
+
+    }
+
+
     public function getSubject()
     {
 

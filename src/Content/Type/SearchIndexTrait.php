@@ -62,7 +62,7 @@ trait SearchIndexTrait
 
     }
 
-    // saveIndex
+
     public function saveSearchIndex()
     {
 

@@ -6,15 +6,21 @@ namespace Nemundo\Process\Template\Content\Image;
 use Nemundo\Html\Form\Input\AcceptFileType;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapFileUpload;
 use Nemundo\Process\Content\Form\AbstractContentForm;
+use Nemundo\Process\Template\Content\File\AbstractFileContentForm;
 
-abstract class AbstractImageContentForm extends AbstractContentForm
+abstract class AbstractImageContentForm extends AbstractFileContentForm
 {
 
-    /**
-     * @var BootstrapFileUpload
-     */
-   protected $image;
+    protected function loadContainer()
+    {
 
+        parent::loadContainer();
+        $this->file->acceptFileType = AcceptFileType::IMAGE;
+
+    }
+
+
+    /*
     public function getContent()
     {
 
@@ -24,9 +30,10 @@ abstract class AbstractImageContentForm extends AbstractContentForm
         $this->image->acceptFileType = AcceptFileType::IMAGE;
 
         return parent::getContent();
-    }
+    }*/
 
 
+    /*
     protected function onSubmit()
     {
 
@@ -40,6 +47,6 @@ abstract class AbstractImageContentForm extends AbstractContentForm
         //}
 
 
-    }
+    }*/
 
 }

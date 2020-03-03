@@ -30,6 +30,9 @@ class TaskParentContainer extends AbstractParentContainer
 
     public $showSearchForm = false;
 
+    public $showAddButton=true;
+
+
     /**
      * @var bool
      */
@@ -95,6 +98,7 @@ class TaskParentContainer extends AbstractParentContainer
 
         $header->addText($taskReader->model->deadline->label);
         $header->addText($taskReader->model->user->label);
+$header->addEmpty();
         //$header->addText($taskReader->model->dateTime->label);
         //$header->addText($taskReader->model->closed->label);
 
@@ -221,13 +225,13 @@ $span->content = $indexRow->assignment->group;
         }*/
 
 
+        if ($this->showAddButton) {
         $add = new SiteHyperlink($this);
         $add->showSiteTitle = false;
         $add->site = new Site();
         $add->site->addParameter(new StatusParameter((new ChildAddContentType())->typeId));
-
-        $icon = new PlusIcon($add);
-
+         new PlusIcon($add);
+        }
 
         /*
         if ($this->hideIfNoItems) {

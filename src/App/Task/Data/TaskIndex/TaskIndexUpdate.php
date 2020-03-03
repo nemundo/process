@@ -57,6 +57,16 @@ public $taskTypeId;
 */
 public $updateStatus;
 
+/**
+* @var string
+*/
+public $message;
+
+/**
+* @var bool
+*/
+public $hasSource;
+
 public function __construct() {
 parent::__construct();
 $this->model = new TaskIndexModel();
@@ -76,6 +86,8 @@ $property->setValue($this->dateTime);
 $this->typeValueList->setModelValue($this->model->closed, $this->closed);
 $this->typeValueList->setModelValue($this->model->taskTypeId, $this->taskTypeId);
 $this->typeValueList->setModelValue($this->model->updateStatus, $this->updateStatus);
+$this->typeValueList->setModelValue($this->model->message, $this->message);
+$this->typeValueList->setModelValue($this->model->hasSource, $this->hasSource);
 parent::update();
 }
 }

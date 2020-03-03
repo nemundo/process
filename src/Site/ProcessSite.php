@@ -25,6 +25,7 @@ use Nemundo\Process\Group\Site\UserGroupSite;
 use Nemundo\Process\Search\Site\SearchLogSite;
 use Nemundo\Process\Search\Site\SearchSite;
 use Nemundo\Process\Search\Site\SearchWordSite;
+use Nemundo\Process\Template\Data\TemplateMultiFile\Redirect\TemplateMultiFileFileRedirectSite;
 use Nemundo\Process\Template\Site\ChildRemoveSite;
 use Nemundo\Process\Template\Site\FileSite;
 use Nemundo\Process\Template\Site\ImageSite;
@@ -96,6 +97,8 @@ class ProcessSite extends AbstractSite
 
 
         new TaskSite($this);
+
+        new TemplateMultiFileFileRedirectSite($this);
 
     }
 

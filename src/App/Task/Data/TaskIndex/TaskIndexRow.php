@@ -91,6 +91,16 @@ public $taskType;
 */
 public $updateStatus;
 
+/**
+* @var string
+*/
+public $message;
+
+/**
+* @var bool
+*/
+public $hasSource;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -123,6 +133,8 @@ if ($model->taskType !== null) {
 $this->loadNemundoProcessContentDataContentTypeContentTypetaskTypeRow($model->taskType);
 }
 $this->updateStatus = boolval($this->getModelValue($model->updateStatus));
+$this->message = $this->getModelValue($model->message);
+$this->hasSource = boolval($this->getModelValue($model->hasSource));
 }
 private function loadNemundoProcessContentDataContentContentsourceRow($model) {
 $this->source = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $model);

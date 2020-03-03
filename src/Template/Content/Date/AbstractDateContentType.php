@@ -22,6 +22,7 @@ abstract class AbstractDateContentType extends AbstractTreeContentType
     {
         $this->typeLabel='Datum';
         $this->viewClass=DateContentView::class;
+        $this->date=new Date();
         parent::__construct($dataId);
 
     }

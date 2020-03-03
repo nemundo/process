@@ -10,12 +10,10 @@ use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Html\Formatting\Bold;
 use Nemundo\Html\Table\Th;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
-use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Group\Com\Form\GroupUserForm;
@@ -52,7 +50,7 @@ class GroupAdmin extends AbstractActionPanel
     /**
      * @var AbstractAppUserGroupType[]
      */
-    private $groupList=[];
+    private $groupList = [];
 
 
     /**
@@ -66,9 +64,10 @@ class GroupAdmin extends AbstractActionPanel
     private $deleteUser;
 
 
-    public function addGroup(AbstractGroupContentType $group) {
+    public function addGroup(AbstractGroupContentType $group)
+    {
 
-        $this->groupList[]=$group;
+        $this->groupList[] = $group;
         return $this;
 
     }
@@ -76,7 +75,6 @@ class GroupAdmin extends AbstractActionPanel
 
     protected function loadActionSite()
     {
-
 
         $this->index = new ActionSite($this);
         $this->index->onAction = function () {
@@ -91,19 +89,15 @@ class GroupAdmin extends AbstractActionPanel
 
                 $formRow = new BootstrapFormRow($form);
 
-//                $groupType = new BootstrapListBox($formRow);   //new GroupTypeListBox($formRow);
                 $groupType = new GroupTypeListBox($formRow);
-
                 $groupType->searchMode = true;
                 $groupType->submitOnChange = true;
 
                 foreach ($this->groupContentTypeList as $groupContentType) {
-                    $groupType->addItem($groupContentType->typeId,$groupContentType->typeLabel);
+                    $groupType->addItem($groupContentType->typeId, $groupContentType->typeLabel);
                 }
 
-
                 if ($groupType->hasValue()) {
-                    //(new Debug())->write('filter'. $groupType->getValue());
                     $groupReader->filter->andEqual($groupReader->model->groupTypeId, $groupType->getValue());
                 }
 
@@ -115,9 +109,9 @@ class GroupAdmin extends AbstractActionPanel
             $header = new TableHeader($table);
             $header->addText($groupReader->model->active->label);
 
-            $th=new Th($header);
-            $th->content[LanguageCode::EN]='Group';
-            $th->content[LanguageCode::DE]='Gruppe';
+            $th = new Th($header);
+            $th->content[LanguageCode::EN] = 'Group';
+            $th->content[LanguageCode::DE] = 'Gruppe';
 
             if ($this->showGroupTypeColumn) {
                 $header->addText('Group Type');
@@ -129,7 +123,7 @@ class GroupAdmin extends AbstractActionPanel
             }
 
             foreach ($this->groupList as $group) {
-                $groupReader->filter->orEqual($groupReader->model->id,$group->getGroupId());
+                $groupReader->filter->orEqual($groupReader->model->id, $group->getGroupId());
             }
 
 
@@ -177,9 +171,7 @@ class GroupAdmin extends AbstractActionPanel
 
                 $header = new TableHeader($table);
 
-                //$header->addText('User');
-
-                $th=new Th($header);
+                $th = new Th($header);
                 $th->content[LanguageCode::EN] = 'User';
                 $th->content[LanguageCode::DE] = 'Benutzer';
 

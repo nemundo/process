@@ -30,6 +30,7 @@ class TaskWidget extends AdminWidget
         $this->widgetSite=AufgabeSite::$site;
 
 
+        /*
 
         $taskReader = new TaskIndexReader();
         $taskReader->model->loadContent();
@@ -86,7 +87,7 @@ class TaskWidget extends AdminWidget
             $row->addClickableSite($taskRow->content->getContentType()->getViewSite());
 
 
-        }
+        }*/
 
 
 

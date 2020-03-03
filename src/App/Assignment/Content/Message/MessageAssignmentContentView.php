@@ -21,11 +21,11 @@ class MessageAssignmentContentView extends AbstractContentView
         $assignmentRow = $this->contentType->getDataRow();
 
         $div =new Div($this);
-        $div->content=   $assignmentRow->message;
+        //$div->content=   $assignmentRow->message;
 
         $table = new AdminLabelValueTable($this);
-        $table->addLabelValue('Zuweisung', $assignmentRow->group->group);
-        $table->addLabelValue('Erledigen bis', $assignmentRow->deadline->getShortDateLeadingZeroFormat());
+        $table->addLabelValue('Zuweisung', $assignmentRow->assignment->group);
+        //$table->addLabelValue('Erledigen bis', $assignmentRow->deadline->getShortDateLeadingZeroFormat());
 
 
 

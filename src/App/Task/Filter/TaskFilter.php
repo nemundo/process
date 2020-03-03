@@ -12,6 +12,7 @@ use Nemundo\Process\App\Task\Parameter\TaskTypeParameter;
 use Nemundo\Workflow\App\Workflow\Com\ListBox\Item\ClosedListBoxItem;
 use Nemundo\Workflow\App\Workflow\Com\ListBox\Item\OpenListBoxItem;
 use Nemundo\Workflow\App\Workflow\Parameter\WorkflowStatusParameter;
+use Schleuniger\App\Org\Parameter\ErstellerParameter;
 use Schleuniger\App\Org\Parameter\VerantwortlicherParameter;
 
 class TaskFilter extends AbstractFilter
@@ -25,6 +26,11 @@ class TaskFilter extends AbstractFilter
         $parameter=new TaskTypeParameter();
         if ($parameter->hasValue()) {
         $this->andEqual($model->taskTypeId,$parameter->getValue());
+        }
+
+        $parameter=new ErstellerParameter();
+        if ($parameter->hasValue()) {
+            $this->andEqual($model->userId,$parameter->getValue());
         }
 
         $parameter=new VerantwortlicherParameter();
@@ -43,6 +49,11 @@ class TaskFilter extends AbstractFilter
                 $this->andEqual($model->closed, true);
             }
         }
+
+
+
+
+
 
         // TODO: Implement loadFilter() method.
     }

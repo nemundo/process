@@ -4,20 +4,9 @@
 namespace Nemundo\Process\App\Assignment\Content;
 
 
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Type\DateTime\Date;
-use Nemundo\Html\Formatting\Strike;
-use Nemundo\Process\App\Assignment\Data\Assignment\Assignment;
-use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentDelete;
-use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentReader;
-use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentUpdate;
-use Nemundo\Process\App\Assignment\Status\CancelAssignmentStatus;
-use Nemundo\Process\App\Assignment\Status\ClosedAssignmentStatus;
-use Nemundo\Process\App\Assignment\Status\OpenAssignmentStatus;
-use Nemundo\Process\Content\Type\AbstractMenuContentType;
-use Nemundo\Process\Content\Type\AbstractSequenceContentType;
+use Nemundo\Process\App\Assignment\Data\AssignmentLog\AssignmentLogReader;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
-use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
 abstract class AbstractAssignmentContentType extends AbstractTreeContentType
 {
@@ -43,13 +32,24 @@ abstract class AbstractAssignmentContentType extends AbstractTreeContentType
     }
 
 
-      protected function onCreate()
-  {
+    protected function onCreate()
+    {
 
-      //$this->assignAssignment();
-$this->saveAssignment();
+        $this->saveAssignment();
 
-  }
+    }
+
+
+/*
+    protected function onDataRow()
+    {
+
+        $reader = new AssignmentLogReader();
+        $reader->model->loadAssignment();
+        $this->dataRow = $reader->getRowById($this->dataId);
+
+
+    }*/
 
 
     /*

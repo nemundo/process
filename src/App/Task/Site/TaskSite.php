@@ -5,12 +5,16 @@ namespace Nemundo\Process\App\Task\Site;
 
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
+use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\Html\Listing\UnorderedList;
 use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Db\Sql\Field\CountField;
+use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Task\Com\Form\TaskSearchForm;
+use Nemundo\Process\App\Task\Data\Task\TaskReader;
 use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndexPaginationReader;
 use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndexReader;
 use Nemundo\Process\App\Task\Filter\TaskFilter;
@@ -35,6 +39,45 @@ class TaskSite extends AbstractSite
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
 
+/*
+        $reader = new TaskReader();
+        $reader->model->loadSource();
+        $reader->model->source->loadContentType();
+        //$reader->model->loadTask();
+        $reader->model->loadAssignment();
+
+
+        $table=new AdminClickableTable($page);
+
+        $row=new TableHeader($table);
+        $row->addText('Source/Quelle');
+        $row->addText('Task/Aufgabe');
+        $row->addText('Assignment');
+        $row->addText('Deadline');
+
+        foreach ($reader->getData() as $taskRow) {
+
+            $row=new BootstrapClickableTableRow($table);
+            $row->addText($taskRow->source->subject);
+            $row->addText($taskRow->task);
+$row->addText($taskRow->assignment->group);
+$row->addText($taskRow->deadline->getShortDateLeadingZeroFormat());
+
+$row->addClickableSite($taskRow->source->getContentType()->getViewSite());
+
+
+        }*/
+
+
+
+
+
+
+
+
+
+
+
         new TaskSearchForm($page);
 
 
@@ -48,7 +91,9 @@ class TaskSite extends AbstractSite
         $taskReader->model->source->loadContentType();
 
         $taskReader->filter = new TaskFilter();
-        $taskReader->addOrder($taskReader->model->deadline);
+//        $taskReader->addOrder($taskReader->model->deadline);
+        $taskReader->addOrder($taskReader->model->dateTime,SortOrder::DESCENDING);
+
 
         $taskReader->addGroup($taskReader->model->contentId);
 
@@ -67,7 +112,7 @@ class TaskSite extends AbstractSite
         $header->addText($taskReader->model->source->label);
         $header->addText('Source Type');
 
-
+        $header->addText($taskReader->model->message->label);
         $header->addText($taskReader->model->assignment->label);
         $header->addText($taskReader->model->deadline->label);
         $header->addText($taskReader->model->user->label);
@@ -122,10 +167,17 @@ class TaskSite extends AbstractSite
                  $row->addEmpty();
              }*/
 
+            $row->addText($taskRow->message);
             $row->addText($taskRow->getDeadline());
 
             //$row->addText($taskRow->user->login);
             $row->addText($taskRow->getCreator());  // $taskRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
+
+
+            $row->addText( $taskRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
+
+
+
             //$row->addYesNo($taskRow->closed);
 
             $row->addClickableSite($taskRow->content->getContentType()->getViewSite());

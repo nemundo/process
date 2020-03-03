@@ -6,6 +6,72 @@
     "model": [
         {
             "template": "default",
+            "model_id": "1677f788-ee33-45c4-9f51-64400f270544",
+            "label": "Task",
+            "class_name": "Task",
+            "table_name": "process_task",
+            "namespace": "Nemundo\\Process\\App\\Task\\Data\\Task",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Source",
+                    "field_name": "source",
+                    "variable_name": "source",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": "external",
+                    "label": "Task",
+                    "field_name": "task",
+                    "variable_name": "task",
+                    "allow_null": false,
+                    "is_deleted": true,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": "external",
+                    "label": "Assignment",
+                    "field_name": "assignment",
+                    "variable_name": "assignment",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "c6e00009-24e0-4cef-82ee-34a89152415f"
+                },
+                {
+                    "type": "date",
+                    "label": "Deadline",
+                    "field_name": "deadline",
+                    "variable_name": "deadline",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "text",
+                    "label": "Task",
+                    "field_name": "task",
+                    "variable_name": "task",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Closed",
+                    "field_name": "closed",
+                    "variable_name": "closed",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "8486b946-f2aa-4241-9f17-77d3f4eccc36",
             "label": "Task Index",
             "class_name": "TaskIndex",
@@ -97,6 +163,23 @@
                     "label": "Update Status",
                     "field_name": "update_status",
                     "variable_name": "updateStatus",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "text",
+                    "label": "Message",
+                    "field_name": "message",
+                    "variable_name": "message",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Has Source",
+                    "field_name": "has_source",
+                    "variable_name": "hasSource",
                     "allow_null": false,
                     "is_deleted": false
                 }

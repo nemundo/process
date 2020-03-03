@@ -8,17 +8,13 @@ use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Core\Type\Text\Html;
 use Nemundo\Html\Formatting\Strike;
 use Nemundo\Package\ResponsiveMail\ResponsiveActionMailMessage;
-use Nemundo\Process\App\Assignment\Data\Assignment\Assignment;
-use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentDelete;
-use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentReader;
-use Nemundo\Process\App\Assignment\Data\Assignment\AssignmentUpdate;
-use Nemundo\Process\App\Assignment\Data\AssignmentIndex\AssignmentIndexUpdate;
 use Nemundo\Process\App\Assignment\Data\AssignmentLog\AssignmentLog;
 use Nemundo\Process\App\Assignment\Data\AssignmentLog\AssignmentLogDelete;
 use Nemundo\Process\App\Assignment\Data\AssignmentLog\AssignmentLogReader;
 use Nemundo\Process\App\Assignment\Status\CancelAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\ClosedAssignmentStatus;
 use Nemundo\Process\App\Assignment\Status\OpenAssignmentStatus;
+use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndex;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Group\Type\AbstractGroupContentType;
 use Nemundo\Process\Group\Type\GroupContentType;
@@ -98,6 +94,16 @@ trait AssignmentTrait
         $this->dataId = $data->save();
 
 
+        /*
+        $data = new TaskIndex();
+        $data->updateOnDuplicate = true;
+        $data->contentId = $this->getParentId();
+        $data->assignmentId = $this->groupId;
+        $data->deadline = $this->deadline;
+        $data->message=$this->getSubject();
+        $data->save();
+*/
+
 
 /*
         $update = new AssignmentIndexUpdate();
@@ -107,6 +113,18 @@ trait AssignmentTrait
         $update->update();
 */
 
+
+
+    }
+
+
+
+    protected function onDataRow()
+    {
+
+        $reader = new AssignmentLogReader();
+        $reader->model->loadAssignment();
+        $this->dataRow = $reader->getRowById($this->dataId);
 
 
     }
@@ -136,7 +154,10 @@ trait AssignmentTrait
     }*/
 
 
-    public function getDataRow()
+    //public function getDataRow()
+
+    /*
+    protected function onDataRow()
     {
 
       /*  $reader = new AssignmentReader();
@@ -144,14 +165,13 @@ trait AssignmentTrait
         $reader->model->loadStatus();
         $assignmentRow = $reader->getRowById($this->dataId);*/
 
-        $reader = new AssignmentLogReader();
+      /*  $reader = new AssignmentLogReader();
         $reader->model->loadAssignment();
-        $assignmentRow = $reader->getRowById($this->dataId);
+        $this->dataRow = $reader->getRowById($this->dataId);
 
+        //return $assignmentRow;
 
-        return $assignmentRow;
-
-    }
+    }*/
 
 
     public function getSubject()
@@ -164,14 +184,16 @@ trait AssignmentTrait
         $assignmentRow = $reader->getRowById($this->dataId);*/
 
         $assignmentRow = $this->getDataRow();
-        $subject = 'Group Assignment to : ' . $assignmentRow->group->group . ' (' . $assignmentRow->status->status . ')';
+        $subject = 'Group Assignment to : ' . $assignmentRow->assignment->group;  // . ' (' . $assignmentRow->status->status . ')';
 
+
+        /*
         if ($assignmentRow->statusId == (new CancelAssignmentStatus())->id) {
             $strike = new Strike();
             $strike->content = $subject;
 
             $subject = $strike->getContent();
-        }
+        }*/
 
         return $subject;
 

@@ -13,7 +13,7 @@
             "namespace": "Nemundo\\Process\\App\\Assignment\\Data\\Assignment",
             "row_class_name": "",
             "primary_index": "auto_increment",
-            "is_deleted": true,
+            "is_deleted": false,
             "type": [
                 {
                     "type": "external",
@@ -94,7 +94,7 @@
             "namespace": "Nemundo\\Process\\App\\Assignment\\Data\\AssignmentIndex",
             "row_class_name": "",
             "primary_index": "auto_increment",
-            "is_deleted": true,
+            "is_deleted": false,
             "type": [
                 {
                     "type": "external",

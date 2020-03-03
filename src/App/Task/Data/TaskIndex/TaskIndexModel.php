@@ -81,6 +81,16 @@ public $taskType;
 */
 public $updateStatus;
 
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $message;
+
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $hasSource;
+
 protected function loadModel() {
 $this->tableName = "process_task_index";
 $this->aliasTableName = "process_task_index";
@@ -169,6 +179,21 @@ $this->updateStatus->fieldName = "update_status";
 $this->updateStatus->aliasFieldName = "process_task_index_update_status";
 $this->updateStatus->label = "Update Status";
 $this->updateStatus->allowNullValue = false;
+
+$this->message = new \Nemundo\Model\Type\Text\TextType($this);
+$this->message->tableName = "process_task_index";
+$this->message->fieldName = "message";
+$this->message->aliasFieldName = "process_task_index_message";
+$this->message->label = "Message";
+$this->message->allowNullValue = false;
+$this->message->length = 255;
+
+$this->hasSource = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->hasSource->tableName = "process_task_index";
+$this->hasSource->fieldName = "has_source";
+$this->hasSource->aliasFieldName = "process_task_index_has_source";
+$this->hasSource->label = "Has Source";
+$this->hasSource->allowNullValue = false;
 
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "source_content";

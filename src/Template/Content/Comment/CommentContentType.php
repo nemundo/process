@@ -13,7 +13,7 @@ use Nemundo\Process\Template\Content\LargeText\AbstractLargeTextContentType;
 class CommentContentType extends AbstractLargeTextContentType
 {
 
-    use DocumentIndexTrait;
+    //use DocumentIndexTrait;
 
     public $comment;
 
@@ -48,7 +48,8 @@ class CommentContentType extends AbstractLargeTextContentType
         $row = $this->getDataRow();
         $this->addSearchText($row->largeText);
 
-        $this->saveDocumentIndex($row->largeText);
+        //$this->saveDocumentIndex($row->largeText);
+
 
         /*
         $data = new Document();
