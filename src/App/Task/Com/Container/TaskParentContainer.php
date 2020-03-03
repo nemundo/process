@@ -28,9 +28,12 @@ use Nemundo\Workflow\Com\TrafficLight\DateTrafficLight;
 class TaskParentContainer extends AbstractParentContainer
 {
 
+
     public $showSearchForm = false;
 
-    public $showAddButton=true;
+    //editable
+    // showAddRemoveButton
+    public $showAddButton = true;
 
 
     /**
@@ -63,7 +66,7 @@ class TaskParentContainer extends AbstractParentContainer
 
 //        $reader->filter = new TaskFilter();
         if ((new SortingParameter())->notExists()) {
-        $taskReader->addOrder($taskReader->model->deadline);
+            $taskReader->addOrder($taskReader->model->deadline);
             $taskReader->addOrder($taskReader->model->subject);
         }
 
@@ -97,8 +100,11 @@ class TaskParentContainer extends AbstractParentContainer
 
 
         $header->addText($taskReader->model->deadline->label);
-        $header->addText($taskReader->model->user->label);
-$header->addEmpty();
+        $header->addText('Absender');  //$taskReader->model->user->label);
+
+        if ($this->showAddButton) {
+            $header->addEmpty();
+        }
         //$header->addText($taskReader->model->dateTime->label);
         //$header->addText($taskReader->model->closed->label);
 
@@ -129,12 +135,12 @@ $header->addEmpty();
             //$row->addText($taskRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
             //$row->addYesNo($taskRow->closed);
 
-            $site = clone(ChildRemoveSite::$site);
-            $site->addParameter(new ParentParameter($this->parentId));
-            $site->addParameter(new ChildParameter($taskRow->contentId));
-
-            $row->addIconSite($site);
-
+            if ($this->showAddButton) {
+                $site = clone(ChildRemoveSite::$site);
+                $site->addParameter(new ParentParameter($this->parentId));
+                $site->addParameter(new ChildParameter($taskRow->contentId));
+                $row->addIconSite($site);
+            }
 
             $row->addClickableSite($taskRow->content->getContentType()->getViewSite());
 
@@ -226,11 +232,11 @@ $span->content = $indexRow->assignment->group;
 
 
         if ($this->showAddButton) {
-        $add = new SiteHyperlink($this);
-        $add->showSiteTitle = false;
-        $add->site = new Site();
-        $add->site->addParameter(new StatusParameter((new ChildAddContentType())->typeId));
-         new PlusIcon($add);
+            $add = new SiteHyperlink($this);
+            $add->showSiteTitle = false;
+            $add->site = new Site();
+            $add->site->addParameter(new StatusParameter((new ChildAddContentType())->typeId));
+            new PlusIcon($add);
         }
 
         /*

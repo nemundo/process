@@ -53,7 +53,7 @@ trait TaskIndexTrait
         if ($this->getParentCount() == 0) {
 
 
-            $dataRow = $this->getDataRow();
+            //$dataRow = $this->getDataRow();
 
             $data = new TaskIndex();
             $data->updateOnDuplicate = true;
@@ -66,8 +66,8 @@ trait TaskIndexTrait
             $data->message = $message;
 
             // nicht überschreiben !!!
-            $data->userId = $dataRow->userId;  // $this->userId;
-            $data->dateTime = $dataRow->dateTime;  // $this->dateTime;
+            //$data->userId = $dataRow->userId;  // $this->userId;
+            //$data->dateTime = $dataRow->dateTime;  // $this->dateTime;
 
             $data->closed = $this->isClosed();
             $data->taskTypeId = $this->typeId;

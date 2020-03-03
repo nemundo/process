@@ -15,9 +15,9 @@ use Nemundo\Process\Template\Data\SourceLog\SourceLog;
 class SourceRemoveContentType extends AbstractSourceContentType
 {
 
-
    public $removeId;
 
+   public $editable=true;
 
     protected function loadContentType()
     {

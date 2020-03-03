@@ -27,6 +27,11 @@ class SourceRemoveContentPanel extends AbstractContentActionPanel
 {
 
     /**
+     * @var SourceRemoveContentType
+     */
+    public $contentType;
+
+    /**
      * @var ActionSite
      */
     private $index;
@@ -51,6 +56,9 @@ class SourceRemoveContentPanel extends AbstractContentActionPanel
 
             $header = new TableHeader($table);
             $header->addText('Quelle');
+            if ($this->contentType->editable) {
+                $header->addEmpty();
+            }
 
 
             $treeReader = new TreeReader();
@@ -67,21 +75,24 @@ class SourceRemoveContentPanel extends AbstractContentActionPanel
 
                 //$row->addText($contentRow->parent->subject);
 
-                $site = clone($this->delete);
-                $site->addParameter(new ContentParameter($contentRow->parentId));  // parentId));
-                //$site->addParameter(new ChildParameter($this->parentId));
-                $row->addIconSite($site);
+                if ($this->contentType->editable) {
+                    $site = clone($this->delete);
+                    $site->addParameter(new ContentParameter($contentRow->parentId));  // parentId));
+                    //$site->addParameter(new ChildParameter($this->parentId));
+                    $row->addIconSite($site);
+                }
 
 
             }
 
 
+            if ($this->contentType->editable) {
             $add = new SiteHyperlink($this);
             $add->showSiteTitle=false;
             $add->site = new Site();
             $add->site->addParameter(new StatusParameter((new SourceAddContentType())->typeId));
            new PlusIcon($add);
-
+            }
 
             /*
                     foreach ($this->contentType->getParentContent() as $parentContentType) {

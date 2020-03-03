@@ -88,6 +88,8 @@ abstract class AbstractProcess extends AbstractSequenceContentType
      */
     public $showSource=true;
 
+    public $showReopenButton=false;
+
 
     public function __construct($dataId = null)
     {
@@ -323,6 +325,9 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
+    public function isWorkflowOpen() {
+        return !$this->isWorkflowClosed();
+    }
 
     public function isWorkflowClosed()
     {
