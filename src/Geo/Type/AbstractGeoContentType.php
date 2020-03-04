@@ -9,6 +9,8 @@ use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Geo\Data\Geo\Geo;
 
+// GeoIndexTrait
+
 abstract class AbstractGeoContentType extends AbstractTreeContentType
 {
 

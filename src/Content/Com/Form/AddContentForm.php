@@ -53,7 +53,6 @@ class AddContentForm extends BootstrapForm  // AbstractContentForm
     protected function onSubmit()
     {
 
-
         $writer = new TreeWriter();
         $writer->parentId = $this->content->getValue();  // $this->parentId;
         $writer->dataId = $this->contentType->getContentId();  // $this->contentId;

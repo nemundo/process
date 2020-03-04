@@ -5,7 +5,8 @@ namespace Nemundo\Process\App\Dashboard\Type;
 
 
 use Nemundo\Process\App\Dashboard\Data\Dashboard\DashboardReader;
-use Nemundo\Process\Content\Type\AbstractContentTypeCollection;
+use Nemundo\Process\Content\Collection\AbstractContentTypeCollection;
+
 
 class DashboardContentTypeCollection extends AbstractContentTypeCollection
 {
@@ -25,7 +26,6 @@ class DashboardContentTypeCollection extends AbstractContentTypeCollection
 
         }
 
-        // TODO: Implement loadCollection() method.
     }
 
 }

@@ -41,14 +41,6 @@ class TreeSite extends AbstractSite
         $header->addText('Child Id');
         $header->addText('Item Order');
 
-/*
-        $header->addText('Subject (Db Content)');
-        $header->addText('Subject (Item)');
-        $header->addText('Date/Time');
-        $header->addText('User');
-        $header->addEmpty();*/
-
-
         $treeReader = new TreePaginationReader();
         $treeReader->model->loadParent();
         $treeReader->model->parent->loadContentType();
@@ -74,21 +66,15 @@ class TreeSite extends AbstractSite
             $contentType = $treeRow->child->getContentType();
             $row->addText($contentType->getSubject());
             $row->addText($treeRow->childId);
-
-
             $row->addText($treeRow->itemOrder);
 
         }
 
-
         $pagination = new BootstrapPagination($page);
         $pagination->paginationReader = $treeReader;
 
-
         $page->render();
 
-
     }
-
 
 }

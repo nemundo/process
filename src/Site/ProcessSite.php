@@ -9,10 +9,9 @@ use Nemundo\Process\App\Assignment\Site\AssignmentSite;
 use Nemundo\Process\App\Calendar\Site\CalendarSite;
 use Nemundo\Process\App\Dashboard\Site\DashboardSite;
 use Nemundo\Process\App\Document\Site\DocumentSite;
-use Nemundo\Process\App\Explorer\Site\ExplorerSite;
 use Nemundo\Process\App\Favorite\Site\FavoriteSite;
-use Nemundo\Process\App\Message\Site\MessageSite;
-use Nemundo\Process\App\Notification\Site\NotificationSite;
+
+use Nemundo\Process\App\Notification\Site\NotificationAdminSite;
 use Nemundo\Process\App\Task\Site\TaskSite;
 use Nemundo\Process\App\Wiki\Site\WikiSite;
 use Nemundo\Process\Content\Site\ContentLogSite;
@@ -70,7 +69,7 @@ class ProcessSite extends AbstractSite
         new CalendarSite($this);
 
 
-        new ExplorerSite($this);
+        //new ExplorerSite($this);
 
         new SearchLogSite($this);
         new ContentLogSite($this);
@@ -80,25 +79,24 @@ class ProcessSite extends AbstractSite
         new FileSite($this);
         new ImageSite($this);
 
-        new MessageSite($this);
+        //new MessageSite($this);
 
         new AssignmentSite($this);
         new AssignmentIndexSite($this);
 
 
-        new NotificationSite($this);
+        new NotificationAdminSite($this);
 
         new DashboardSite($this);
 
         new UserSite($this);
 
 
-        new ChildRemoveSite($this);
 
 
         new TaskSite($this);
 
-        new TemplateMultiFileFileRedirectSite($this);
+
 
     }
 

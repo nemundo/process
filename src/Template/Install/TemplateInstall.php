@@ -7,7 +7,7 @@ namespace Nemundo\Process\Template\Install;
 use Nemundo\App\Script\Setup\ScriptSetup;
 use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\App\Calendar\Setup\CalendarSourceSetup;
-use Nemundo\Process\App\News\Type\NewsContentType;
+
 use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\App\Wiki\Setup\WikiSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
@@ -79,13 +79,10 @@ class TemplateInstall extends AbstractInstall
 
 
 
-
-
-        $setup->addContentType(new NewsContentType());
-        $setup->addContentType(new WikiPageContentType());
+//        $setup->addContentType(new WikiPageContentType());
         //$setup->addContentType(new WebImageContentType());
         $setup->addContentType(new UserContentType());
-        $setup->addContentType(new EventContentType());
+  //      $setup->addContentType(new EventContentType());
         $setup->addContentType(new SourceAddContentType());
         $setup->addContentType(new SourceRemoveContentType());
         $setup->addContentType(new WorkflowDeleteStatus());

@@ -14,9 +14,7 @@ use Nemundo\Process\Content\Install\ContentUninstall;
 use Nemundo\Process\Geo\Data\GeoCollection;
 use Nemundo\Process\Group\Data\GroupCollection;
 use Nemundo\Process\Search\Data\SearchCollection;
-use Nemundo\Process\Workflow\Install\WorkflowUninstall;
 use Nemundo\Project\Install\AbstractUninstall;
-use Nemundo\ToDo\Install\ToDoUninstall;
 
 
 class ProcessUninstall extends AbstractUninstall
@@ -27,15 +25,11 @@ class ProcessUninstall extends AbstractUninstall
 
 
         (new ContentUninstall())->uninstall();
-        (new WorkflowUninstall())->uninstall();
         (new InboxUninstall())->uninstall();
         (new WikiUninstall())->uninstall();
-
-        //(new ChangeRequestUninstall())->uninstall();
-        (new ToDoUninstall())->uninstall();
         (new AssignmentUninstall())->uninstall();
 
-        $setup=new ModelCollectionSetup();
+        $setup = new ModelCollectionSetup();
         $setup->removeCollection(new SearchCollection());
         $setup->removeCollection(new FavoriteCollection());
         $setup->removeCollection(new GroupCollection());

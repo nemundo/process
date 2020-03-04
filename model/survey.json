@@ -2,7 +2,7 @@
     "app": "Survey",
     "name": "survey",
     "namespace": "Nemundo\\Process\\App\\Survey",
-    "is_deleted": false,
+    "is_deleted": true,
     "model": [
         {
             "template": "default",

@@ -20,7 +20,6 @@ class ContentViewContainer extends AbstractHtmlContainer
     public function getContent()
     {
 
-
         foreach ($this->contentType->getChild() as $logRow) {
 
             /** @var AbstractProcessStatus $status */
@@ -28,11 +27,7 @@ class ContentViewContainer extends AbstractHtmlContainer
 
             if ($status->hasView()) {
 
-                //$widget = new AdminWidget($this);
-                //$widget->widgetTitle = $status->getSubject() . ' ' . $logRow->user->displayName . ' ' . $logRow->dateTime->getShortDateTimeLeadingZeroFormat();
-
                 $div = new Div($this);
-
                 if ($status->hasView()) {
                     $view = $status->getView($div);
                     $view->dataId = $logRow->dataId;

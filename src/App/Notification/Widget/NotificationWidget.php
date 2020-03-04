@@ -16,7 +16,7 @@ use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationReader;
 use Nemundo\Process\App\Notification\Parameter\NotificationParameter;
 use Nemundo\Process\App\Notification\Site\ArchiveSite;
-use Nemundo\Process\App\Notification\Site\NotificationSite;
+use Nemundo\Process\App\Notification\Site\NotificationAdminSite;
 use Nemundo\Process\App\Notification\Site\UserNotificationDeleteSite;
 use Nemundo\User\Type\UserSessionType;
 
@@ -30,7 +30,7 @@ class NotificationWidget extends AdminWidget
         $this->widgetTitle[LanguageCode::EN] = 'Notification';
         $this->widgetTitle[LanguageCode::DE] = 'Benachrichtigungen';
 
-        $this->widgetSite = NotificationSite::$site;
+        $this->widgetSite = NotificationAdminSite::$site;
 
     }
 

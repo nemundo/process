@@ -22,7 +22,7 @@ use Nemundo\Process\Content\Data\ContentGroup\ContentGroupReader;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Content\Parameter\DataParameter;
+
 use Nemundo\Process\Content\Type\MenuTrait;
 use Nemundo\Web\Site\AbstractSite;
 

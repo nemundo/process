@@ -2,7 +2,7 @@
     "app": "Workflow",
     "name": "process",
     "namespace": "Nemundo\\Process\\Workflow",
-    "is_deleted": false,
+    "is_deleted": true,
     "model": [
         {
             "template": "default",

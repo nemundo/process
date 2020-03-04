@@ -10,9 +10,8 @@ use Nemundo\Process\App\Dashboard\Install\DashboardInstall;
 use Nemundo\Process\App\Dashboard\Setup\DashboardSetup;
 use Nemundo\Process\App\Document\Data\DocumentCollection;
 use Nemundo\Process\App\Favorite\Install\FavoriteInstall;
-use Nemundo\Process\App\Message\Install\MessageInstall;
 use Nemundo\Process\App\Notification\Install\NotificationInstall;
-use Nemundo\Process\App\Survey\Install\SurveyInstall;
+
 use Nemundo\Process\App\WebLog\Content\WebLogContentType;
 use Nemundo\Process\App\Wiki\Install\WikiInstall;
 use Nemundo\Process\Content\Install\ContentInstall;
@@ -45,12 +44,12 @@ class ProcessInstall extends AbstractInstall
         (new NotificationInstall())->install();
 
 
-        (new WikiInstall())->install();
+        //(new WikiInstall())->install();
         (new TemplateInstall())->install();
         (new FavoriteInstall())->install();
 
 
-        (new MessageInstall())->install();
+        //(new MessageInstall())->install();
         (new DashboardInstall())->install();
         (new GeoInstall())->install();
         //(new SurveyInstall())->install();

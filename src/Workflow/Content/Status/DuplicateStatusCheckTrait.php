@@ -10,9 +10,7 @@ trait DuplicateStatusCheckTrait
     public function isStatusChangeable()
     {
 
-
         $count = 0;
-        //$found = false;
         foreach ($this->getParentContentType()->getChild() as $logRow) {
             if ($logRow->contentType->getContentType()->getClassName() == $this->getClassName()) {
 
@@ -23,19 +21,11 @@ trait DuplicateStatusCheckTrait
                     }
                 }
 
-                //      $found = true;
                 $count++;
 
-
-
             }
+
         }
-
-        //(new Debug())->write($count);
-
-        /* if ($found) {
-             $this->changeStatus = false;
-         }*/
 
         return parent::isStatusChangeable();
 

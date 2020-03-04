@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Content\Site;
 
 
+use Nemundo\Admin\Com\Navigation\AdminNavigation;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
@@ -29,6 +30,8 @@ class ContentTypeSite extends AbstractSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
+        $nav = new AdminNavigation($page);
+        $nav->site=ContentSite::$site;
 
         $table = new AdminTable($page);
 

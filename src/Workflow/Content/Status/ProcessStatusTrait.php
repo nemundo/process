@@ -4,27 +4,12 @@
 namespace Nemundo\Process\Workflow\Content\Status;
 
 
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Process\Content\Data\Content\ContentReader;
-use Nemundo\Process\Group\Check\GroupRestrictionTrait;
 use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
 
 
 trait ProcessStatusTrait
 {
-
-    //use UserRestrictionTrait;
-    //use GroupRestrictionTrait;
-
-    /**
-     * @var bool
-     */
-    //public $showMenu = true;
-
-    /**
-     * @var bool
-     */
-    //public $showLog = true;
 
     /**
      * @var bool
@@ -40,17 +25,10 @@ trait ProcessStatusTrait
      * @var bool
      */
     protected $changeStatus = false;
-    // changeCurrentStatus
 
 
-    /**
-     * @var bool
-     */
-    //public $activeAfterWorkflowClosed = false;
-
-
-
-    public function isStatusChangeable() {
+    public function isStatusChangeable()
+    {
         return $this->changeStatus;
     }
 

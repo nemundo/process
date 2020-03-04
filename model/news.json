@@ -2,7 +2,7 @@
     "app": "News",
     "name": "news",
     "namespace": "Nemundo\\Process\\App\\News",
-    "is_deleted": false,
+    "is_deleted": true,
     "model": [
         {
             "template": "default",

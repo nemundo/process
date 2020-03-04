@@ -5,6 +5,7 @@ namespace Nemundo\Process\Template\Site;
 
 
 use Nemundo\Process\Template\Data\TemplateFile\Redirect\TemplateFileFileRedirectSite;
+use Nemundo\Process\Template\Data\TemplateMultiFile\Redirect\TemplateMultiFileFileRedirectSite;
 use Nemundo\Web\Site\AbstractSite;
 
 class ProcessTemplateSite extends AbstractSite
@@ -16,8 +17,11 @@ class ProcessTemplateSite extends AbstractSite
         $this->menuActive = false;
 
         new TemplateFileFileRedirectSite($this);
+        new TemplateMultiFileFileRedirectSite($this);
         new FileInactiveSite($this);
         new SourceDeleteSite($this);
+        new ChildRemoveSite($this);
+
 
     }
 

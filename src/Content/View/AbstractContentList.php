@@ -6,7 +6,6 @@ namespace Nemundo\Process\Content\View;
 
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Html\Container\AbstractHtmlContainer;
-use Nemundo\Process\Content\Parameter\DataParameter;
 use Nemundo\Web\Parameter\AbstractUrlParameter;
 use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Web\Site\Site;
@@ -31,8 +30,8 @@ class AbstractContentList extends AbstractHtmlContainer
     {
 
         if ($this->redirectSite == null) {
-$this->redirectSite=new Site();
-$this->redirectParameter=new DataParameter();
+            $this->redirectSite = new Site();
+            $this->redirectParameter = new DataParameter();
         }
 
         $site = null;

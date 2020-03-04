@@ -13,7 +13,7 @@ use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationReader;
 use Nemundo\Process\App\Notification\Parameter\NotificationParameter;
 use Nemundo\Process\App\Notification\Site\ArchiveSite;
-use Nemundo\Process\App\Notification\Site\NotificationSite;
+use Nemundo\Process\App\Notification\Site\NotificationAdminSite;
 use Nemundo\User\Type\UserSessionType;
 
 class NotificationStreamWidget extends AdminWidget
@@ -26,7 +26,7 @@ class NotificationStreamWidget extends AdminWidget
         $this->widgetTitle[LanguageCode::EN] = 'Notification Stream';
         $this->widgetTitle[LanguageCode::DE] = 'Benachrichtigungen Stream';
 
-        $this->widgetSite = NotificationSite::$site;
+        $this->widgetSite = NotificationAdminSite::$site;
 
     }
 
