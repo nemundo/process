@@ -29,12 +29,12 @@ abstract class AbstractTaskType extends AbstractTreeContentType
 
     abstract public function getDeadline();*/
 
-    protected function loadContentType()
+    /*protected function loadContentType()
     {
 
         $this->typeLabel='Task';
         // TODO: Implement loadContentType() method.
-    }
+    }*/
 
 
     protected function onCreate()

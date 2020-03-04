@@ -9,7 +9,7 @@ use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Type\TreeContentType;
 use Nemundo\Process\Content\Writer\TreeContentWriter;
 use Nemundo\Web\Url\UrlReferer;
-use Schleuniger\Content\Abschluss\AbschlussWorkflowStatus;
+use Schleuniger\Content\Abschluss\AbschlussProcessStatus;
 
 class ContentRemoveSite extends AbstractDeleteIconSite
 {

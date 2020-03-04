@@ -312,6 +312,19 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
+    public function getCreatedUserId()
+    {
+        return $this->getDataRow()->userId;
+        // TODO: Implement getCreatedUserId() method.
+    }
+
+
+    public function getCreatedDateTime()
+    {
+        return $this->getDataRow()->dateTime;
+        // TODO: Implement getCreatedDateTime() method.
+    }
+
 
     /**
      * @return AbstractProcessStatus[]

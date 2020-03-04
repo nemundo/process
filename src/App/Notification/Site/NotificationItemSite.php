@@ -39,6 +39,7 @@ class NotificationItemSite extends AbstractSite
         $notificationId = (new NotificationParameter())->getValue();
 
         $notificationReader = new NotificationReader();
+        $notificationReader->model->loadTo();
         $notificationReader->model->loadContent();
         $notificationReader->model->content->loadContentType();
         $notificationReader->model->loadSubjectContent();
@@ -56,6 +57,7 @@ class NotificationItemSite extends AbstractSite
         // Content View
 
         $table = new AdminLabelValueTable($page);
+        $table->addLabelValue('To', $notificationRow->to->displayName);
         $table->addLabelValue('Subject', $subjectType->getSubject());
         $table->addLabelValue('Message', (new Html($notificationType->getMessage()))->getValue());
 

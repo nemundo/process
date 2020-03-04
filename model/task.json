@@ -192,6 +192,13 @@
                         "source",
                         "content"
                     ]
+                },
+                {
+                    "index_name": "content",
+                    "index_type": "index",
+                    "field_name": [
+                        "content"
+                    ]
                 }
             ]
         },
@@ -200,7 +207,7 @@
             "model_id": "6e32685a-5c02-4baa-a83d-f8e95c43f5d7",
             "label": "Task Type",
             "class_name": "TaskType",
-            "table_name": "task_task_type",
+            "table_name": "process_task_type",
             "namespace": "Nemundo\\Process\\App\\Task\\Data\\TaskType",
             "row_class_name": "",
             "primary_index": "auto_increment",

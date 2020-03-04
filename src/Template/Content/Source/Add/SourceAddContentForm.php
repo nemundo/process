@@ -41,6 +41,7 @@ class SourceAddContentForm extends AbstractContentForm
         $taskReader = new TaskIndexReader();
         $taskReader->filter->andEqual($taskReader->model->taskTypeId,$sourceId);
         $taskReader->filter->andEqual($taskReader->model->closed,false);
+        $taskReader->addGroup($taskReader->model->contentId);
         $taskReader->addOrder($taskReader->model->subject);
         foreach ($taskReader->getData() as $taskRow) {
             $this->content->addItem($taskRow->contentId, $taskRow->subject);

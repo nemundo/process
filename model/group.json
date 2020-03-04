@@ -11,7 +11,7 @@
             "class_name": "Group",
             "table_name": "group_group",
             "namespace": "Nemundo\\Process\\Group\\Data\\Group",
-            "row_class_name": "",
+            "row_class_name": "Nemundo\\Process\\Group\\Row\\GroupCustomRow",
             "primary_index": "text_id",
             "is_deleted": false,
             "type": [

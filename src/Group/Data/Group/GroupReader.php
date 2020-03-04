@@ -11,7 +11,7 @@ parent::__construct();
 $this->model = new GroupModel();
 }
 /**
-* @return GroupRow[]
+* @return \Nemundo\Process\Group\Row\GroupCustomRow[]
 */
 public function getData() {
 $list = [];
@@ -22,7 +22,7 @@ $list[] = $row;
 return $list;
 }
 /**
-* @return GroupRow
+* @return \Nemundo\Process\Group\Row\GroupCustomRow
 */
 public function getRow() {
 $dataRow = parent::getRow();
@@ -30,13 +30,13 @@ $row = $this->getModelRow($dataRow);
 return $row;
 }
 /**
-* @return GroupRow
+* @return \Nemundo\Process\Group\Row\GroupCustomRow
 */
 public function getRowById($id) {
 return parent::getRowById($id);
 }
 private function getModelRow($dataRow) {
-$row = new GroupRow($dataRow, $this->model);
+$row = new \Nemundo\Process\Group\Row\GroupCustomRow($dataRow, $this->model);
 $row->model = $this->model;
 return $row;
 }

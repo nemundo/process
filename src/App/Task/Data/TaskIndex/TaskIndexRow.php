@@ -47,7 +47,7 @@ public $subject;
 public $assignmentId;
 
 /**
-* @var \Nemundo\Process\Group\Data\Group\GroupRow
+* @var \Nemundo\Process\Group\Row\GroupCustomRow
 */
 public $assignment;
 
@@ -143,7 +143,7 @@ private function loadNemundoProcessContentDataContentContentcontentRow($model) {
 $this->content = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $model);
 }
 private function loadNemundoProcessGroupDataGroupGroupassignmentRow($model) {
-$this->assignment = new \Nemundo\Process\Group\Data\Group\GroupRow($this->row, $model);
+$this->assignment = new \Nemundo\Process\Group\Row\GroupCustomRow($this->row, $model);
 }
 private function loadNemundoUserDataUserUseruserRow($model) {
 $this->user = new \Nemundo\User\Data\User\UserRow($this->row, $model);

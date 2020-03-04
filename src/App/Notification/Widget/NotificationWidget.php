@@ -3,6 +3,8 @@
 namespace Nemundo\Process\App\Notification\Widget;
 
 
+use Nemundo\Admin\Com\Button\AdminIconSiteButton;
+use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Widget\AdminWidget;
 use Nemundo\Com\TableBuilder\TableHeader;
@@ -15,6 +17,7 @@ use Nemundo\Process\App\Notification\Data\Notification\NotificationReader;
 use Nemundo\Process\App\Notification\Parameter\NotificationParameter;
 use Nemundo\Process\App\Notification\Site\ArchiveSite;
 use Nemundo\Process\App\Notification\Site\NotificationSite;
+use Nemundo\Process\App\Notification\Site\UserNotificationDeleteSite;
 use Nemundo\User\Type\UserSessionType;
 
 class NotificationWidget extends AdminWidget
@@ -90,6 +93,15 @@ class NotificationWidget extends AdminWidget
             $row->addClickableSite($notificationRow->subjectContent->getContentType()->getViewSite());
 
         }
+
+        $btn=new AdminIconSiteButton($this);
+        $btn->site = UserNotificationDeleteSite::$site;
+
+        //$btn=new AdminSiteButton($this);
+        //$btn->site = UserNotificationDeleteSite::$site;
+
+
+
 
         //$pagination = new BootstrapPagination($page);
         //$pagination->paginationReader = $reader;

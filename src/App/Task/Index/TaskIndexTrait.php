@@ -21,6 +21,10 @@ trait TaskIndexTrait
 
     abstract protected function isClosed();
 
+    abstract protected function getCreatedDateTime();
+
+    abstract protected function getCreatedUserId();
+
 
     protected function saveTaskIndex()
     {
@@ -68,6 +72,9 @@ trait TaskIndexTrait
             // nicht überschreiben !!!
             //$data->userId = $dataRow->userId;  // $this->userId;
             //$data->dateTime = $dataRow->dateTime;  // $this->dateTime;
+
+            $data->userId = $this->getCreatedUserId();
+            $data->dateTime = $this->getCreatedDateTime();
 
             $data->closed = $this->isClosed();
             $data->taskTypeId = $this->typeId;

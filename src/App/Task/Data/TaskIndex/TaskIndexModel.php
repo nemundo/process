@@ -200,6 +200,10 @@ $index->indexName = "source_content";
 $index->addType($this->sourceId);
 $index->addType($this->contentId);
 
+$index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
+$index->indexName = "content";
+$index->addType($this->contentId);
+
 }
 public function loadSource() {
 if ($this->source == null) {

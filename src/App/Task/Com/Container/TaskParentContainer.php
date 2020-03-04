@@ -44,8 +44,8 @@ class TaskParentContainer extends AbstractParentContainer
     public function getContent()
     {
 
-        $subtitle = new AdminSubtitle($this);
-        $subtitle->content = 'Aufgabenliste';
+        //$subtitle = new AdminSubtitle($this);
+        //$subtitle->content = 'Aufgabenliste';
 
 
         if ($this->showSearchForm) {

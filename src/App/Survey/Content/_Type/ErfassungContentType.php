@@ -10,7 +10,7 @@ use Nemundo\Process\Content\Data\ContentStatus\ContentStatus;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Content\Type\AbstractMenuContentType;
 use Nemundo\Process\Template\Type\LargeTextContentType;
-use Schleuniger\Content\Abschluss\AbschlussWorkflowStatus;
+use Schleuniger\Content\Abschluss\AbschlussProcessStatus;
 
 class ErfassungContentType extends AbstractMenuContentType
 {
@@ -27,7 +27,7 @@ class ErfassungContentType extends AbstractMenuContentType
 
 //$this->men nextCMenuClass= OptionTextContentType::class;
 
-        $this->addMenuClass(AbschlussWorkflowStatus::class);
+        $this->addMenuClass(AbschlussProcessStatus::class);
         $this->addMenuClass(LargeTextContentType::class);
 
     }
