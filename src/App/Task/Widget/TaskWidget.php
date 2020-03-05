@@ -30,8 +30,6 @@ class TaskWidget extends AdminWidget
         $this->widgetSite=AufgabeSite::$site;
 
 
-        /*
-
         $taskReader = new TaskIndexReader();
         $taskReader->model->loadContent();
         $taskReader->model->content->loadContentType();
@@ -52,10 +50,9 @@ class TaskWidget extends AdminWidget
 
         $taskReader->addOrder($taskReader->model->deadline);
         $taskReader->addOrder($taskReader->model->subject);
-
         $taskReader->addGroup($taskReader->model->contentId);
 
-        $count = new CountField($taskReader);
+        //$count = new CountField($taskReader);
 
         $taskReader->limit= 20;
 
@@ -63,7 +60,7 @@ class TaskWidget extends AdminWidget
 
         $header = new TableHeader($table);
         $header->addEmpty();
-        $header->addText($taskReader->model->taskType->label);
+        //$header->addText($taskReader->model->taskType->label);
         $header->addText($taskReader->model->subject->label);
         $header->addText($taskReader->model->assignment->label);
         $header->addText($taskReader->model->deadline->label);
@@ -74,7 +71,7 @@ class TaskWidget extends AdminWidget
 
             $taskRow->getTrafficLight($row);
 
-            $row->addText($taskRow->taskType->contentType);
+            //$row->addText($taskRow->taskType->contentType);
             $row->addText($taskRow->subject);
 
             //$row->addText($taskRow->source->subject);
@@ -87,7 +84,7 @@ class TaskWidget extends AdminWidget
             $row->addClickableSite($taskRow->content->getContentType()->getViewSite());
 
 
-        }*/
+        }
 
 
 

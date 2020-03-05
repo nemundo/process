@@ -9,6 +9,7 @@ use Nemundo\App\Search\Model\WordModel;
 use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Text\KeywordList;
+use Nemundo\Core\Type\Text\Text;
 use Nemundo\Model\Count\ModelDataCount;
 use Nemundo\Model\Delete\ModelDelete;
 use Nemundo\Model\Id\ModelId;
@@ -57,6 +58,7 @@ class SearchIndexBuilder extends AbstractBase
         // Hyperlink
         // Doppel s
 
+        $text = (new Text($text))->removeHtmlTags()->getValue();
 
         $keywordList = new KeywordList();
         $keywordList->hashAsId = true;

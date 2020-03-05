@@ -25,6 +25,7 @@ class TaskCleanScript extends AbstractConsoleScript
         (new TaskIndexDelete())->delete();
 
 
+        /*
         $reader = new AufgabeReader();
         foreach ($reader->getData() as $aufgabeRow) {
 
@@ -32,7 +33,7 @@ class TaskCleanScript extends AbstractConsoleScript
             $type->saveIndex();
             (new Debug())->write($type->getSubject());
 
-        }
+        }*/
 
 
 

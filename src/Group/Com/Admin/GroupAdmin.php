@@ -48,7 +48,7 @@ class GroupAdmin extends AbstractActionPanel
     public $filterGroupType = true;
 
     /**
-     * @var AbstractAppUserGroupType[]
+     * @var AbstractGroupContentType[]
      */
     private $groupList = [];
 

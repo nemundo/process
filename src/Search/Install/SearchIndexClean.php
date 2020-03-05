@@ -8,7 +8,7 @@ use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\Search\Data\SearchCollection;
 use Nemundo\Project\Install\AbstractClean;
 
-class SearchClean extends AbstractClean
+class SearchIndexClean extends AbstractClean
 {
 
     public function cleanData()

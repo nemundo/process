@@ -18,6 +18,7 @@ use Nemundo\Process\App\Notification\Parameter\NotificationParameter;
 use Nemundo\Process\App\Notification\Site\ArchiveSite;
 use Nemundo\Process\App\Notification\Site\NotificationAdminSite;
 use Nemundo\Process\App\Notification\Site\UserNotificationDeleteSite;
+use Nemundo\Process\App\Notification\Site\UserNotificationSite;
 use Nemundo\User\Type\UserSessionType;
 
 class NotificationWidget extends AdminWidget
@@ -30,7 +31,7 @@ class NotificationWidget extends AdminWidget
         $this->widgetTitle[LanguageCode::EN] = 'Notification';
         $this->widgetTitle[LanguageCode::DE] = 'Benachrichtigungen';
 
-        $this->widgetSite = NotificationAdminSite::$site;
+        $this->widgetSite = UserNotificationSite::$site;
 
     }
 
@@ -55,7 +56,6 @@ class NotificationWidget extends AdminWidget
         $th->content[LanguageCode::DE] = 'Datum';
 
         $header->addEmpty();
-
 
         $reader = new NotificationReader();
         $reader->model->loadSubjectContent();

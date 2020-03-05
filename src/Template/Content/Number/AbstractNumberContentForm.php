@@ -44,7 +44,7 @@ abstract class AbstractNumberContentForm extends AbstractContentForm
     {
 
         $textRow = $this->contentType->getDataRow();
-        $this->number->value = $textRow->text;
+        $this->number->value = (int)$textRow->text;
 
     }
 
@@ -54,7 +54,7 @@ abstract class AbstractNumberContentForm extends AbstractContentForm
 
         $this->contentType->loadFromDataId($this->dataId);
         $this->contentType->parentId = $this->parentId;
-        $this->contentType->number = $this->number->getValue();
+        $this->contentType->number = (int)$this->number->getValue();
         $this->contentType->saveType();
 
     }

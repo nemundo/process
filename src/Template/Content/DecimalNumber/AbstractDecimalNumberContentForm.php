@@ -44,8 +44,8 @@ abstract class AbstractDecimalNumberContentForm extends AbstractContentForm
     protected function loadUpdateForm()
     {
 
-        $textRow = $this->contentType->getDataRow();
-        $this->number->value = $textRow->text;
+        $dataRow = $this->contentType->getDataRow();
+        $this->number->value = $dataRow->decimalNumber;
 
     }
 
@@ -55,7 +55,7 @@ abstract class AbstractDecimalNumberContentForm extends AbstractContentForm
 
         $this->contentType->loadFromDataId($this->dataId);
         $this->contentType->parentId = $this->parentId;
-        $this->contentType->decimalNumber = $this->number->getValue();
+        $this->contentType->decimalNumber = (float)$this->number->getValue();
         $this->contentType->saveType();
 
     }

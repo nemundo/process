@@ -17,7 +17,7 @@ abstract class AbstractAudioContentForm extends AbstractFileContentForm
     {
         parent::loadContainer();
 
-        $this->file->label = 'Audio';
+        //$this->file->label = 'Audio';
         $this->file->acceptFileType = AcceptFileType::AUDIO;
 
     }

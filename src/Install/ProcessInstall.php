@@ -18,6 +18,7 @@ use Nemundo\Process\Content\Install\ContentInstall;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Geo\Install\GeoInstall;
 use Nemundo\Process\Group\Install\GroupInstall;
+use Nemundo\Process\Index\Install\IndexInstall;
 use Nemundo\Process\Script\ProcessCleanScript;
 use Nemundo\Process\Script\ProcessTestScript;
 use Nemundo\Process\Search\Install\SearchInstall;
@@ -42,7 +43,7 @@ class ProcessInstall extends AbstractInstall
 
         (new AssignmentInstall())->install();
         (new NotificationInstall())->install();
-
+        (new IndexInstall())->install();
 
         //(new WikiInstall())->install();
         (new TemplateInstall())->install();

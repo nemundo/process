@@ -22,8 +22,8 @@ class DocumentSite extends AbstractSite
 
     protected function loadSite()
     {
-        $this->title = 'Document';
-        $this->url = 'document';
+        $this->title = 'Document Index';
+        $this->url = 'document-index';
     }
 
 
@@ -46,7 +46,6 @@ class DocumentSite extends AbstractSite
         foreach ($reader->getData() as $documentTypeRow) {
             $listbox->addItem($documentTypeRow->contentTypeId, $documentTypeRow->contentType->contentType);
         }
-
 
         $documentReader = new DocumentPaginationReader();
         $documentReader->model->loadDocumentType();

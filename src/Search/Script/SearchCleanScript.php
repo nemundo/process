@@ -6,7 +6,7 @@ namespace Nemundo\Process\Search\Script;
 
 use Nemundo\App\Script\Type\AbstractConsoleScript;
 use Nemundo\Process\Content\Data\Content\ContentReader;
-use Nemundo\Process\Search\Install\SearchClean;
+use Nemundo\Process\Search\Install\SearchIndexClean;
 
 class SearchCleanScript extends AbstractConsoleScript
 {
@@ -20,7 +20,7 @@ class SearchCleanScript extends AbstractConsoleScript
     public function run()
     {
 
-        (new SearchClean())->cleanData();
+        (new SearchIndexClean())->cleanData();
 
     }
 
