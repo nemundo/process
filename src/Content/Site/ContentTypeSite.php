@@ -5,13 +5,16 @@ namespace Nemundo\Process\Content\Site;
 
 
 use Nemundo\Admin\Com\Navigation\AdminNavigation;
+use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Core\Type\Number\Number;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
+use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\Data\Content\ContentCount;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
+use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Web\Site\AbstractSite;
 
 class ContentTypeSite extends AbstractSite
@@ -33,12 +36,13 @@ class ContentTypeSite extends AbstractSite
         $nav = new AdminNavigation($page);
         $nav->site=ContentSite::$site;
 
-        $table = new AdminTable($page);
+        $table = new AdminClickableTable($page);
 
         $header = new TableHeader($table);
         $header->addText('Type');
-        $header->addText('Type Id');
         $header->addText('Class');
+        $header->addText('Type Id');
+
         $header->addText('Item Count');
 
 
@@ -46,15 +50,19 @@ class ContentTypeSite extends AbstractSite
         $reader->addOrder($reader->model->contentType);
         foreach ($reader->getData() as $contentTypeRow) {
 
-            $row = new TableRow($table);
+            $row = new BootstrapClickableTableRow($table);
 
             $row->addText($contentTypeRow->contentType);
-            $row->addText($contentTypeRow->id);
             $row->addText($contentTypeRow->phpClass);
+            $row->addText($contentTypeRow->id);
 
             $count = new ContentCount();
             $count->filter->andEqual($count->model->contentTypeId,$contentTypeRow->id);
             $row->addText((new Number( $count->getCount()))->formatNumber());
+
+            $site = clone(ContentSite::$site);
+            $site->addParameter(new ContentTypeParameter($contentTypeRow->id));
+            $row->addClickableSite($site);
 
 
         }
