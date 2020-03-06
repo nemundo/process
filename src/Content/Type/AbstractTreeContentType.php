@@ -38,10 +38,7 @@ abstract class AbstractTreeContentType extends AbstractContentType
         $this->saveContent();
         $this->saveTree();
         $this->onFinished();
-
-        $this->onDataRow();
         $this->saveIndex();
-        $this->saveSearchIndex();
 
     }
 
@@ -63,6 +60,26 @@ abstract class AbstractTreeContentType extends AbstractContentType
     {
 
     }
+
+
+
+
+    protected function onIndex()
+    {
+
+    }
+
+
+    public function saveIndex()
+    {
+
+        $this->onDataRow();
+        $this->onIndex();
+        $this->saveContentIndex();
+        $this->saveSearchIndex();
+
+    }
+
 
 
     public function deleteType()

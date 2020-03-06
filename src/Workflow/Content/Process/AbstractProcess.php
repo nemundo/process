@@ -9,17 +9,12 @@ use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Core\Type\DateTime\DateTime;
-use Nemundo\Db\DbConfig;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Model\Count\ModelDataCount;
 use Nemundo\Model\Data\ModelUpdate;
 use Nemundo\Model\Value\ModelDataValue;
-
-use Nemundo\Process\App\Assignment\Status\CancelAssignmentStatus;
-use Nemundo\Process\App\Assignment\Status\ClosedAssignmentStatus;
-use Nemundo\Process\App\Assignment\Status\OpenAssignmentStatus;
 use Nemundo\Process\App\Calendar\Type\CalendarIndexTrait;
 use Nemundo\Process\App\Document\Index\DocumentIndexTrait;
 use Nemundo\Process\App\Task\Index\TaskIndexTrait;
@@ -34,7 +29,6 @@ use Nemundo\Process\Workflow\Content\View\AbstractProcessView;
 use Nemundo\Process\Workflow\Content\View\ProcessView;
 use Nemundo\Process\Workflow\Model\AbstractWorkflowModel;
 use Nemundo\ToDo\Data\ToDo\ToDoRow;
-use Schleuniger\App\Verbesserung\Group\PruefungGroup;
 
 // AbstractWorkflowProcess
 abstract class AbstractProcess extends AbstractSequenceContentType
@@ -81,14 +75,14 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public $baseViewClass;
 
     // workflowDefaultTitle
-    public $defaultTitle='New';
+    public $defaultTitle = 'New';
 
     /**
      * @var bool
      */
-    public $showSource=true;
+    public $showSource = true;
 
-    public $showReopenButton=false;
+    public $showReopenButton = false;
 
 
     public function __construct($dataId = null)
@@ -100,14 +94,14 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
-
-    protected function onReopen() {
+    protected function onReopen()
+    {
 
     }
 
 
-
-    public function reopenWorkflow() {
+    public function reopenWorkflow()
+    {
 
         $this->onReopen();
 
@@ -116,13 +110,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $update->typeValueList->setModelValue($update->model->workflowClosed, false);
         $update->updateById($this->dataId);
 
-
-        // TaskIndex
-        /*$update = new AssignmentIndexUpdate();
-        $update->closed=false;
-        $update->filter->andEqual($update->model->contentId,$this->getContentId());
-        $update->update();*/
-
+        $this->saveIndex();
 
     }
 
@@ -131,7 +119,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     {
 
         $this->saveContentIndex();
-        //$this->saveSearchIndex();
         $this->saveTaskIndex();
         $this->saveDocumentIndex();
         $this->saveCalendarIndex();
@@ -193,7 +180,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $this->addSearchWord($dataRow->workflowNumber);
 
         $this->saveIndex();
-        $this->saveSearchIndex();
+        //$this->saveSearchIndex();
 
 
     }
@@ -272,7 +259,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
-
     public function getDate()
     {
         // TODO: Implement getDate() method.
@@ -326,7 +312,8 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
-    public function isWorkflowOpen() {
+    public function isWorkflowOpen()
+    {
         return !$this->isWorkflowClosed();
     }
 
@@ -361,8 +348,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
 
     }
-
-
 
 
     protected function onActive()
@@ -433,6 +418,8 @@ abstract class AbstractProcess extends AbstractSequenceContentType
             $update->typeValueList->setModelValue($update->model->deadline, $deadline->getIsoDateFormat());
             $update->updateById($this->dataId);
 
+            $this->saveIndex();
+
             /*$update = new AssignmentUpdate();
             $update->deadline = $deadline;
             $update->filter->andEqual($update->model->sourceId, $this->getContentId());
@@ -453,20 +440,30 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public function closeAssignment()
     {
 
-       /* $update = new AssignmentUpdate();
-        $update->statusId = (new ClosedAssignmentStatus())->id;
-        $update->filter->andEqual($update->model->sourceId, $this->getContentId());
-        $update->update();*/
+
+        $update = new ModelUpdate();
+        $update->model = $this->workflowModel;
+        $update->typeValueList->setModelValue($update->model->assignmentId,0);
+        $update->updateById($this->dataId);
+
+        $this->saveIndex();
+
+        /* $update = new AssignmentUpdate();
+         $update->statusId = (new ClosedAssignmentStatus())->id;
+         $update->filter->andEqual($update->model->sourceId, $this->getContentId());
+         $update->update();*/
     }
 
     // clearAssignment
     public function cancelAssignment()
     {
 
-       /* $update = new AssignmentUpdate();
-        $update->statusId = (new CancelAssignmentStatus())->id;
-        $update->filter->andEqual($update->model->sourceId, $this->getContentId());
-        $update->update();*/
+        (new Debug())->write('cancel Assignment');
+
+        /* $update = new AssignmentUpdate();
+         $update->statusId = (new CancelAssignmentStatus())->id;
+         $update->filter->andEqual($update->model->sourceId, $this->getContentId());
+         $update->update();*/
 
     }
 
@@ -620,7 +617,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $view = null;
 
-        if ($this->baseViewClass !==null) {
+        if ($this->baseViewClass !== null) {
 
             /** @var AbstractContentView $view */
             $view = new $this->baseViewClass($parent);
@@ -637,7 +634,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         return $view;
 
     }
-
 
 
 }

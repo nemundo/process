@@ -94,18 +94,7 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
-    protected function onIndex()
-    {
 
-    }
-
-
-    public function saveIndex()
-    {
-        //(new Debug())->write('save index');
-        $this->onIndex();
-
-    }
 
 
     protected function onUpdate()

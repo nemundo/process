@@ -35,11 +35,19 @@ abstract class AbstractLargeTextProcessStatus extends AbstractProcessStatus
     }
 
 
+    protected function onDataRow()
+    {
+        $this->dataRow= (new LargeTextReader())->getRowById($this->dataId);
+
+    }
+
+
+    /*
     public function getDataRow()
     {
         return (new LargeTextReader())->getRowById($this->dataId);
 
-    }
+    }*/
 
     public function getText()
     {
