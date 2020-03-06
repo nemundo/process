@@ -4,7 +4,6 @@
 namespace Nemundo\Process\Group\Check;
 
 
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Process\Group\Type\AbstractGroupContentType;
 
 trait GroupRestrictionTrait
@@ -30,22 +29,19 @@ trait GroupRestrictionTrait
     public function checkUserVisibility()
     {
 
-       // (new Debug())->write('check');
-
-        //$visible = parent::checkUserVisibility();
         $visible = true;
-
 
         if ($this->groupRestriction) {
 
             $visible = false;
 
             foreach ($this->restrictionGroup as $restrictionGroup) {
-                    if ((new GroupCheck())->isMemberOfGroup($restrictionGroup)) {
+                if ((new GroupCheck())->isMemberOfGroup($restrictionGroup)) {
                     $visible = true;
                 }
 
             }
+
         }
 
         return $visible;

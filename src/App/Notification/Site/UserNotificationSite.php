@@ -10,16 +10,14 @@ use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
+use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
-use Nemundo\Process\App\Assignment\Com\ListBox\AssignmentStatusListBox;
-use Nemundo\Process\App\Notification\Content\File\FileNotificationContentType;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationPaginationReader;
+use Nemundo\Process\App\Notification\Parameter\NotificationParameter;
 use Nemundo\Process\Config\ProcessConfig;
-use Nemundo\User\Com\ListBox\UserListBox;
 use Nemundo\User\Type\UserSessionType;
 use Nemundo\Web\Site\AbstractSite;
-use Nemundo\Web\Site\Site;
 
 class UserNotificationSite extends AbstractSite
 {
@@ -34,7 +32,7 @@ class UserNotificationSite extends AbstractSite
         $this->title = 'Notification';
         $this->url = 'notification';
 
-       UserNotificationSite::$site=$this;
+        UserNotificationSite::$site = $this;
 
         new NotificationItemSite($this);
         new ArchiveSite($this);
@@ -50,11 +48,20 @@ class UserNotificationSite extends AbstractSite
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
 
+        $form=new SearchForm($page);
+
+        $formRow = new BootstrapFormRow($form);
+
+        $listbox = new BootstrapListBox($formRow);
+        $listbox->addItem(0,'Offene');
+        $listbox->addItem(0,'Gelöschte/Archivierte');
+
+
         $table = new AdminClickableTable($page);
 
         $header = new TableHeader($table);
         $header->addText('Archive');
-        $header->addText('Type');
+        $header->addText('Notification Type');
         $header->addText('Subject');
         $header->addText('Message');
         $header->addText('Date/Time');
@@ -67,7 +74,7 @@ class UserNotificationSite extends AbstractSite
         $notificationReader->model->content->loadContentType();
         $notificationReader->model->loadTo();
 
-            $notificationReader->filter->andEqual($notificationReader->model->toId, (new UserSessionType())->userId);
+        $notificationReader->filter->andEqual($notificationReader->model->toId, (new UserSessionType())->userId);
 
         $notificationReader->addOrder($notificationReader->model->id, SortOrder::DESCENDING);
         $notificationReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
@@ -81,6 +88,11 @@ class UserNotificationSite extends AbstractSite
 
             $row->addText($notificationRow->content->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
             $row->addText($notificationRow->to->displayName);
+
+            $site = clone(ArchiveSite::$site);
+            $site->addParameter(new NotificationParameter($notificationRow->id));
+            $row->addIconSite($site);
+
 
             $row->addClickableSite($notificationRow->subjectContent->getContentType()->getViewSite());
 

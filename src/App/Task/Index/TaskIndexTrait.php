@@ -56,26 +56,16 @@ trait TaskIndexTrait
 
         if ($this->getParentCount() == 0) {
 
-
-            //$dataRow = $this->getDataRow();
-
             $data = new TaskIndex();
             $data->updateOnDuplicate = true;
             $data->hasSource=false;
-            //$data->sourceId= $parentContentRow->id;  //contentRow-> ->getparentId;  //  $this->getParentId();
             $data->contentId = $this->getContentId();
             $data->subject = $this->getSubject();
             $data->assignmentId = $this->getAssignmentId();
             $data->deadline = $this->getDeadline();
             $data->message = $message;
-
-            // nicht überschreiben !!!
-            //$data->userId = $dataRow->userId;  // $this->userId;
-            //$data->dateTime = $dataRow->dateTime;  // $this->dateTime;
-
             $data->userId = $this->getCreatedUserId();
             $data->dateTime = $this->getCreatedDateTime();
-
             $data->closed = $this->isClosed();
             $data->taskTypeId = $this->typeId;
             $data->updateStatus = true;
@@ -86,13 +76,10 @@ trait TaskIndexTrait
 
             foreach ($this->getParentContent() as $parentContentRow) {
 
-
-                //(new Debug())->write($parentContentRow->id);
-
                 $data = new TaskIndex();
                 $data->updateOnDuplicate = true;
                 $data->hasSource=true;
-                $data->sourceId = $parentContentRow->id;  //contentRow-> ->getparentId;  //  $this->getParentId();
+                $data->sourceId = $parentContentRow->id;
                 $data->contentId = $this->getContentId();
                 $data->subject = $this->getSubject();
                 $data->assignmentId = $this->getAssignmentId();
@@ -114,10 +101,22 @@ trait TaskIndexTrait
 
 
         $delete=new TaskIndexDelete();
-        $delete->filter->andEqual($update->model->contentId,$this->getContentId());
-        $delete->filter->andEqual($update->model->updateStatus,false);
+        $delete->filter->andEqual($delete->model->contentId,$this->getContentId());
+        $delete->filter->andEqual($delete->model->updateStatus,false);
         $delete->delete();
 
     }
+
+
+
+    protected function deleteTaskIndex() {
+
+        $delete=new TaskIndexDelete();
+        $delete->filter->andEqual($delete->model->contentId,$this->getContentId());
+        $delete->delete();
+
+    }
+
+
 
 }
