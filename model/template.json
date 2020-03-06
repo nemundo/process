@@ -328,7 +328,7 @@
             "index": []
         },
         {
-            "template": "default",
+            "template": "active_model",
             "model_id": "8e0a7b13-1875-459f-8a90-e1e7fd122cc8",
             "label": "Template Multi File",
             "class_name": "TemplateMultiFile",
@@ -359,6 +359,55 @@
             "index": [
                 {
                     "index_name": "content_data",
+                    "index_type": "index",
+                    "field_name": [
+                        "data_content"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "active_model",
+            "model_id": "2e3d65d6-9a04-489a-9a6a-3e7f3239307b",
+            "label": "Template Multi Image",
+            "class_name": "TemplateMultiImage",
+            "table_name": "template_template_multi_image",
+            "namespace": "Nemundo\\Process\\Template\\Data\\TemplateMultiImage",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "image",
+                    "label": "Image",
+                    "field_name": "image",
+                    "variable_name": "image",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "format": [
+                        {
+                            "format_type": "auto_size",
+                            "size": "400"
+                        },
+                        {
+                            "format_type": "auto_size",
+                            "size": "1200"
+                        }
+                    ]
+                },
+                {
+                    "type": "external",
+                    "label": "Data Content",
+                    "field_name": "data_content",
+                    "variable_name": "dataContent",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "content",
                     "index_type": "index",
                     "field_name": [
                         "data_content"

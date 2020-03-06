@@ -87,6 +87,10 @@ $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "content";
 $index->addType($this->contentId);
 
+$index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
+$index->indexName = "content_type";
+$index->addType($this->documentTypeId);
+
 }
 public function loadContent() {
 if ($this->content == null) {

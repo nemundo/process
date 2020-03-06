@@ -4,7 +4,9 @@
 namespace Nemundo\Process\App\Wiki\Group;
 
 
-class WikiEditorGroup extends WikiGroupType // AbstractAppUserGroupType
+use Nemundo\Process\App\Wiki\Group\Type\WikiGroupType;
+
+class WikiEditorGroup extends WikiGroupType
 {
 
     protected function loadGroup()

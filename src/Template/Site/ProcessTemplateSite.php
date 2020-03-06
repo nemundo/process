@@ -21,6 +21,7 @@ class ProcessTemplateSite extends AbstractSite
         new FileInactiveSite($this);
         new SourceDeleteSite($this);
         new ChildRemoveSite($this);
+        new MultiFileDeleteSite($this);
 
 
     }

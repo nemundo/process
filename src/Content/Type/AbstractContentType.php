@@ -316,7 +316,7 @@ abstract class AbstractContentType extends AbstractType
     {
 
         $this->dataRow = $dataRow;
-        $this->loadFromDataId($dataRow->getModelValue($dataRow->model->id));
+        $this->fromDataId($dataRow->getModelValue($dataRow->model->id));
         return $this;
 
     }

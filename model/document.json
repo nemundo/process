@@ -75,6 +75,13 @@
                     "field_name": [
                         "content"
                     ]
+                },
+                {
+                    "index_name": "content_type",
+                    "index_type": "index",
+                    "field_name": [
+                        "document_type"
+                    ]
                 }
             ]
         },

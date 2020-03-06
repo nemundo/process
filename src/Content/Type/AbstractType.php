@@ -5,10 +5,10 @@ namespace Nemundo\Process\Content\Type;
 
 
 use Nemundo\Core\Base\AbstractBaseClass;
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Html\Paragraph\Paragraph;
-use Nemundo\Model\Row\AbstractModelDataRow;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Web\Parameter\AbstractUrlParameter;
@@ -48,7 +48,7 @@ abstract class AbstractType extends AbstractBaseClass
     public function __construct($dataId = null)
     {
 
-        $this->loadFromDataId($dataId);
+        $this->fromDataId($dataId);
 
         /*
         if ($dataId !== null) {
@@ -61,7 +61,7 @@ abstract class AbstractType extends AbstractBaseClass
 
 
     // fromDataId
-    public function loadFromDataId($dataId = null)
+    public function fromDataId($dataId = null)
     {
 
         $this->dataId = $dataId;
@@ -73,8 +73,6 @@ abstract class AbstractType extends AbstractBaseClass
         return $this;
 
     }
-
-
 
 
     public function getDataId()
@@ -96,15 +94,18 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
-    protected function onIndex() {
+    protected function onIndex()
+    {
 
     }
 
 
-    public function saveIndex() {
+    public function saveIndex()
+    {
+        //(new Debug())->write('save index');
         $this->onIndex();
-    }
 
+    }
 
 
     protected function onUpdate()

@@ -131,7 +131,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     {
 
         $this->saveContentIndex();
-        $this->saveSearchIndex();
+        //$this->saveSearchIndex();
         $this->saveTaskIndex();
         $this->saveDocumentIndex();
         $this->saveCalendarIndex();
@@ -147,15 +147,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         if ($this->createMode) {
 
             $this->saveContentBefore();
-
-            /*$data = new AssignmentIndex();
-            $data->sourceId=$this->parentId;
-            $data->contentId=$this->getContentId();
-            $data->save();*/
-
-
             $this->onCreate();
-
 
 
             $update = new ModelUpdate();
@@ -186,26 +178,22 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $update->subject = $this->getSubject();
         $update->updateById($this->contentId);
 
-
-
-
         $this->addSearchWord($this->getSubject());
 
-        /** @var ToDoRow $dataRow */
-        $dataRow = $this->getDataRow();
-        $this->addSearchWord($dataRow->workflowNumber);
 
 // problem falls in onFinised subject geändert wird
 //        $this->saveSearchIndex();
 
         $this->onFinished();
 
+        $this->onDataRow();
+
+        /** @var ToDoRow $dataRow */
+        $dataRow = $this->getDataRow();
+        $this->addSearchWord($dataRow->workflowNumber);
 
         $this->saveIndex();
-
-        //$this->saveSearchIndex();
-
-
+        $this->saveSearchIndex();
 
 
     }
@@ -505,7 +493,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $update->updateById($this->dataId);
 
 
-        $this->onIndex();
+        $this->saveIndex();  //onIndex();
 
 
     }

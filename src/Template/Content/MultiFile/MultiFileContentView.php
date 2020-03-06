@@ -17,6 +17,7 @@ class MultiFileContentView extends AbstractContentView
 
         $reader = new TemplateMultiFileReader();
         $reader->filter->andEqual($reader->model->dataContentId, $this->contentType->getContentId());
+        $reader->filter->andEqual($reader->model->active,true);
 
         $list = new UnorderedList($this);
         $list->addCssClass('list-unstyled');

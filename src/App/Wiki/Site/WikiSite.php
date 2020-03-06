@@ -108,6 +108,7 @@ class WikiSite extends AbstractSite
             $title->content = $wikiType->getSubject();  //  $wikiRow->title;
 
 
+            /*
             if ((new GroupCheck())->isMemberOfGroup(new WikiEditorGroup())) {
 
                 $type = new TitleChangeContentType();
@@ -115,10 +116,11 @@ class WikiSite extends AbstractSite
                 $form = $type->getForm($layout->col2);
                 //$form->parentId = $wikiType->getContentId();
 
-            }
+            }*/
 
             $dropdown = new ContentTypeCollectionDropdown($layout->col2);
             $dropdown->contentTypeCollection = new WikiContentTypeCollection();
+
             $dropdown->redirectSite = WikiSite::$site;
             $dropdown->redirectSite->addParameter(new WikiParameter());
             $dropdown->groupRestriction=true;

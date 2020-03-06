@@ -13,6 +13,7 @@ $this->addModel(new \Nemundo\Process\Template\Data\TemplateFile\TemplateFileMode
 $this->addModel(new \Nemundo\Process\Template\Data\TemplateFileDelete\TemplateFileDeleteModel());
 $this->addModel(new \Nemundo\Process\Template\Data\TemplateImage\TemplateImageModel());
 $this->addModel(new \Nemundo\Process\Template\Data\TemplateMultiFile\TemplateMultiFileModel());
+$this->addModel(new \Nemundo\Process\Template\Data\TemplateMultiImage\TemplateMultiImageModel());
 $this->addModel(new \Nemundo\Process\Template\Data\TemplateNumber\TemplateNumberModel());
 $this->addModel(new \Nemundo\Process\Template\Data\TemplateText\TemplateTextModel());
 $this->addModel(new \Nemundo\Process\Template\Data\TemplateYesNo\TemplateYesNoModel());

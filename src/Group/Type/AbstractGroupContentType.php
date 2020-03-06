@@ -95,7 +95,7 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     }
 
 
-    protected function onSearchIndex()
+    protected function onIndex()
     {
 
         if ($this->searchable) {

@@ -42,7 +42,7 @@ class CommentContentType extends AbstractLargeTextContentType
 
 
 
-    protected function onSearchIndex()
+    protected function onIndex()
     {
 
         $row = $this->getDataRow();

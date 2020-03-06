@@ -7,6 +7,11 @@ class TemplateMultiFileBulk extends \Nemundo\Model\Data\AbstractModelDataBulk {
 protected $model;
 
 /**
+* @var bool
+*/
+public $active;
+
+/**
 * @var string
 */
 public $dataContentId;
@@ -22,6 +27,7 @@ $this->model = new TemplateMultiFileModel();
 $this->file = new \Nemundo\Model\Data\Property\File\RedirectFilenameDataProperty($this->model->file, $this->typeValueList);
 }
 public function save() {
+$this->typeValueList->setModelValue($this->model->active, $this->active);
 $this->typeValueList->setModelValue($this->model->dataContentId, $this->dataContentId);
 $id = parent::save();
 return $id;

@@ -38,48 +38,7 @@ class TaskSite extends AbstractSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
-
-/*
-        $reader = new TaskReader();
-        $reader->model->loadSource();
-        $reader->model->source->loadContentType();
-        //$reader->model->loadTask();
-        $reader->model->loadAssignment();
-
-
-        $table=new AdminClickableTable($page);
-
-        $row=new TableHeader($table);
-        $row->addText('Source/Quelle');
-        $row->addText('Task/Aufgabe');
-        $row->addText('Assignment');
-        $row->addText('Deadline');
-
-        foreach ($reader->getData() as $taskRow) {
-
-            $row=new BootstrapClickableTableRow($table);
-            $row->addText($taskRow->source->subject);
-            $row->addText($taskRow->task);
-$row->addText($taskRow->assignment->group);
-$row->addText($taskRow->deadline->getShortDateLeadingZeroFormat());
-
-$row->addClickableSite($taskRow->source->getContentType()->getViewSite());
-
-
-        }*/
-
-
-
-
-
-
-
-
-
-
-
         new TaskSearchForm($page);
-
 
         $taskReader = new TaskIndexPaginationReader();
         $taskReader->model->loadContent();
@@ -154,31 +113,10 @@ $row->addClickableSite($taskRow->source->getContentType()->getViewSite());
 
             $taskRow->getAssignmentSpan($row);
 
-            /*
-            $span=new GroupSpan($row);
-            $span->groupId= $taskRow->assignmentId;
-            $span->content = $taskRow->assignment->group;*/
-
-            //$row->addText($taskRow->assignment->group);
-
-            /* if ($taskRow->deadline !==null) {
-             $row->addText($taskRow->deadline->getShortDateLeadingZeroFormat());
-             } else {
-                 $row->addEmpty();
-             }*/
-
             $row->addText($taskRow->message);
             $row->addText($taskRow->getDeadline());
-
-            //$row->addText($taskRow->user->login);
-            $row->addText($taskRow->getCreator());  // $taskRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
-
-
+            $row->addText($taskRow->getCreator());
             $row->addText( $taskRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
-
-
-
-            //$row->addYesNo($taskRow->closed);
 
             $row->addClickableSite($taskRow->content->getContentType()->getViewSite());
 
@@ -188,7 +126,6 @@ $row->addClickableSite($taskRow->source->getContentType()->getViewSite());
 
         $page->render();
 
-        // TODO: Implement loadContent() method.
     }
 
 }

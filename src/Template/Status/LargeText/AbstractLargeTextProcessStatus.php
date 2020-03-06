@@ -27,7 +27,7 @@ abstract class AbstractLargeTextProcessStatus extends AbstractProcessStatus
     }
 
 
-    protected function onSearchIndex()
+    protected function onIndex()
     {
 
         $largeTextRow = $this->getDataRow();

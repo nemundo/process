@@ -8,6 +8,11 @@ class TemplateMultiFileUpdate extends AbstractModelUpdate {
 public $model;
 
 /**
+* @var bool
+*/
+public $active;
+
+/**
 * @var string
 */
 public $dataContentId;
@@ -23,6 +28,7 @@ $this->model = new TemplateMultiFileModel();
 $this->file = new \Nemundo\Model\Data\Property\File\RedirectFilenameDataProperty($this->model->file, $this->typeValueList);
 }
 public function update() {
+$this->typeValueList->setModelValue($this->model->active, $this->active);
 $this->typeValueList->setModelValue($this->model->dataContentId, $this->dataContentId);
 parent::update();
 }

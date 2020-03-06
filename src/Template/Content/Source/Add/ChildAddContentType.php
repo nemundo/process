@@ -4,16 +4,12 @@
 namespace Nemundo\Process\Template\Content\Source\Add;
 
 
-use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
-
 use Nemundo\Process\Content\Data\Content\ContentReader;
-use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Content\Writer\TreeWriter;
 use Nemundo\Process\Template\Content\Source\AbstractSourceContentType;
 use Nemundo\Process\Template\Data\SourceLog\SourceLog;
-use Nemundo\Process\Template\Data\SourceLog\SourceLogReader;
 
 class ChildAddContentType extends AbstractSourceContentType
 {
@@ -27,7 +23,7 @@ class ChildAddContentType extends AbstractSourceContentType
         $this->typeLabel[LanguageCode::DE] = 'Add Child (Aufgabe hinzufügen)';
 
         $this->typeId = 'bba22817-9b78-40f8-b1fc-2d20372ac891';
-        $this->formClass  =SourceAddContentContainer::class;
+        $this->formClass = ChildAddContentContainer::class;
 
     }
 
@@ -40,54 +36,37 @@ class ChildAddContentType extends AbstractSourceContentType
         $this->dataId = $data->save();
 
         $writer = new TreeWriter();
-        $writer->parentId =$this->parentId;// $this->sourceId;
-        $writer->dataId =$this->sourceId; //$this->parentId;
+        $writer->parentId = $this->parentId;
+        $writer->dataId = $this->sourceId;
         $writer->write();
 
-
-        $contentReader  =new ContentReader();
-           $contentReader->model->loadContentType();
+        $contentReader = new ContentReader();
+        $contentReader->model->loadContentType();
         $contentType = $contentReader->getRowById($this->sourceId)->getContentType();
 
-        //(new Debug())->write($contentType->getSubject());
-        //exit;
-
         $contentType->saveIndex();
-
-
-
-        //$parentContentType = $this->getParentContentType();
-
-
-
-
-
 
     }
 
 
-    /*
-    public function getDataRow()
+    public function saveType()
     {
 
-        $reader = new SourceLogReader();
-        $reader->model->loadSource();
-        $reader->model->source->loadContentType();
-        return $reader->getRowById($this->dataId);
-    }*/
+        $writer = new TreeWriter();
+        $writer->parentId = $this->parentId;
+        $writer->dataId = $this->sourceId;
+        if (!$writer->exist()) {
+            parent::saveType();
+        }
+
+    }
 
 
     public function getSubject()
     {
 
-        //  $site = $this->getDataRow()->source->getContentType()->getViewSite();
-
-        //$hyerplink = new SiteHyperlink();
-        //$hyerplink->site = $this->getDataRow()->source->getContentType()->getSubjectViewSite();
-
-
-        $subject[LanguageCode::EN] = 'Source ' . $this->getHyperlinkContent() . ' was added';  //' $this->getDataRow()->source->getContentType()->getSubject();
-        $subject[LanguageCode::DE] = 'Aufgabe (Child) ' . $this->getHyperlinkContent() . ' wurde hinzugefügt';
+        $subject[LanguageCode::EN] = 'Source ' . $this->getHyperlinkContent() . ' was added';
+        $subject[LanguageCode::DE] = 'Aufgabe ' . $this->getHyperlinkContent() . ' wurde hinzugefügt';
 
         return (new Translation())->getText($subject);
 

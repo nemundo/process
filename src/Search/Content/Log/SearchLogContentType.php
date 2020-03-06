@@ -45,15 +45,15 @@ class SearchLogContentType extends AbstractTreeContentType  // AbstractContentTy
     }
 
 
-    public function getDataRow()
+    protected function onDataRow()
     {
-        return (new SearchLogReader())->getRowById($this->dataId);
+      $this->dataRow= (new SearchLogReader())->getRowById($this->dataId);
     }
+
 
     public function getSubject()
     {
 
-        //$logRow = (new SearchLogReader())->getRowById($this->dataId);
         $logRow = $this->getDataRow();
         $subject= 'Gesucht nach '.$logRow->searchQuery;
         return $subject;

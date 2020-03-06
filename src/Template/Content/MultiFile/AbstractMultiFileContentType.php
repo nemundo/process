@@ -32,6 +32,7 @@ abstract class AbstractMultiFileContentType extends AbstractTreeContentType
     public function addFileRequest(FileRequest $fileRequest) {
 
         $data = new TemplateMultiFile();
+        $data->active=true;
         $data->dataContentId = $this->getContentId();
         $data->file->fromFileRequest($fileRequest);
         $data->save();

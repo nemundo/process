@@ -4,18 +4,11 @@
 namespace Nemundo\Process\Template\Content\Source\Add;
 
 
-use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
-
-use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndex;
-use Nemundo\Process\Content\Data\Content\ContentReader;
-use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Content\Writer\TreeWriter;
 use Nemundo\Process\Template\Content\Source\AbstractSourceContentType;
 use Nemundo\Process\Template\Data\SourceLog\SourceLog;
-use Nemundo\Process\Template\Data\SourceLog\SourceLogReader;
 
 class SourceAddContentType extends AbstractSourceContentType
 {
@@ -29,7 +22,7 @@ class SourceAddContentType extends AbstractSourceContentType
         $this->typeLabel[LanguageCode::DE] = 'Quelle';
 
         $this->typeId = 'e40e4360-d630-42e2-a9f9-98a28ea6156d';
-        $this->formClass  =SourceAddContentContainer::class;
+        $this->formClass = SourceAddContentContainer::class;
 
     }
 
@@ -46,7 +39,20 @@ class SourceAddContentType extends AbstractSourceContentType
         $writer->dataId = $this->parentId;
         $writer->write();
 
-       $this->getParentContentType()->saveIndex();
+        $this->getParentContentType()->saveIndex();
+
+    }
+
+
+    public function saveType()
+    {
+
+        $writer = new TreeWriter();
+        $writer->parentId = $this->sourceId;
+        $writer->dataId = $this->parentId;
+        if (!$writer->exist()) {
+            parent::saveType();
+        }
 
     }
 

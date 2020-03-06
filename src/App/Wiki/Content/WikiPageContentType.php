@@ -51,7 +51,7 @@ class WikiPageContentType extends AbstractMenuContentType
     }
 
 
-    protected function onSearchIndex()
+    protected function onIndex()
     {
 
         $wikiRow = $this->getDataRow();

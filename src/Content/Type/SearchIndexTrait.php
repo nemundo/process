@@ -55,22 +55,20 @@ trait SearchIndexTrait
 
 
 
-
-    // onIndex
     protected function onIndex()
     {
 
     }
 
 
-    public function saveSearchIndex()
+    protected function saveSearchIndex()
     {
 
         $this->onDataRow();
-        $this->onIndex();
+        //$this->onIndex();
 
         if ($this->searchIndex !== null) {
-            $this->searchIndex->saveIndex();
+            $this->searchIndex->saveSearchIndex();
         }
     }
 

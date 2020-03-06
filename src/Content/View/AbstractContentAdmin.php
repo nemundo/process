@@ -202,7 +202,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
     {
 
         $contentType = clone($this->contentType);
-        $contentType->loadFromDataId($dataId);
+        $contentType->fromDataId($dataId);
         $form = $contentType->getForm($this);
         $form->redirectSite = $this->index;
 
@@ -214,7 +214,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
     {
 
         $contentType = clone($this->contentType);
-        $contentType->loadFromDataId($dataId);
+        $contentType->fromDataId($dataId);
 
         if ($contentType->hasView()) {
             $contentType->getView($this);
@@ -247,7 +247,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
     {
 
         $contentType = clone($this->contentType);
-        $contentType->loadFromDataId($dataId);
+        $contentType->fromDataId($dataId);
 
 
         $form = new ContentGroupForm($this);
@@ -278,20 +278,20 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
 
     protected function loadActive($dataId)
     {
-        $this->contentType->loadFromDataId($dataId)->setActive();
+        $this->contentType->fromDataId($dataId)->setActive();
     }
 
     protected function loadInactive($dataId)
     {
 
-        $this->contentType->loadFromDataId($dataId)->setInactive();
+        $this->contentType->fromDataId($dataId)->setInactive();
 
 
     }
 
     protected function loadDelete($dataId)
     {
-        $this->contentType->loadFromDataId($dataId)->deleteType();
+        $this->contentType->fromDataId($dataId)->deleteType();
     }
 
 

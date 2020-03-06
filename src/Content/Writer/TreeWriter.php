@@ -6,6 +6,7 @@ namespace Nemundo\Process\Content\Writer;
 
 use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Process\Content\Data\Tree\Tree;
+use Nemundo\Process\Content\Data\Tree\TreeCount;
 use Nemundo\Process\Content\Data\Tree\TreeValue;
 
 class TreeWriter extends AbstractBase
@@ -36,5 +37,23 @@ class TreeWriter extends AbstractBase
 
 
     }
+
+
+    public function exist() {
+
+
+        $value = false;
+
+        $count=new TreeCount();
+        $count->filter->andEqual($count->model->parentId,$this->parentId);
+        $count->filter->andEqual($count->model->childId,$this->dataId);
+        if ($count->getCount()>0) {
+            $value = true;
+        }
+
+        return $value;
+
+    }
+
 
 }

@@ -52,7 +52,7 @@ abstract class AbstractNumberContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        $this->contentType->loadFromDataId($this->dataId);
+        $this->contentType->fromDataId($this->dataId);
         $this->contentType->parentId = $this->parentId;
         $this->contentType->number = (int)$this->number->getValue();
         $this->contentType->saveType();

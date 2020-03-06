@@ -7,6 +7,11 @@ class TemplateMultiFileExternalType extends \Nemundo\Model\Type\External\Externa
 public $id;
 
 /**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $active;
+
+/**
 * @var \Nemundo\Model\Type\Id\IdType
 */
 public $dataContentId;
@@ -32,6 +37,13 @@ $this->id->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id->aliasFieldName = $this->id->tableName . "_" . $this->id->fieldName;
 $this->id->label = "Id";
 $this->addType($this->id);
+
+$this->active = new \Nemundo\Model\Type\Number\YesNoType();
+$this->active->fieldName = "active";
+$this->active->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->active->aliasFieldName = $this->active->tableName . "_" . $this->active->fieldName;
+$this->active->label = "Active";
+$this->addType($this->active);
 
 $this->dataContentId = new \Nemundo\Model\Type\Id\IdType();
 $this->dataContentId->fieldName = "data_content";

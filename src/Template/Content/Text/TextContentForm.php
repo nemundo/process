@@ -49,7 +49,7 @@ class TextContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        $this->contentType->loadFromDataId($this->dataId);
+        $this->contentType->fromDataId($this->dataId);
         $this->contentType->parentId = $this->parentId;
         $this->contentType->text = $this->text->getValue();
         $this->contentType->saveType();

@@ -17,6 +17,11 @@ public $model;
 public $id;
 
 /**
+* @var bool
+*/
+public $active;
+
+/**
 * @var int
 */
 public $dataContentId;
@@ -35,6 +40,7 @@ public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
+$this->active = boolval($this->getModelValue($model->active));
 $this->dataContentId = intval($this->getModelValue($model->dataContentId));
 if ($model->dataContent !== null) {
 $this->loadNemundoProcessContentDataContentContentdataContentRow($model->dataContent);

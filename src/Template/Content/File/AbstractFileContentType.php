@@ -99,7 +99,7 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
     }
 
 
-    protected function onSearchIndex()
+    protected function onIndex()
     {
 
         $fileRow = $this->getDataRow();

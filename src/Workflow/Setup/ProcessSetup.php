@@ -5,6 +5,7 @@ namespace Nemundo\Process\Workflow\Setup;
 
 
 use Nemundo\Core\Base\AbstractBase;
+use Nemundo\Process\App\Document\Setup\DocumentSetup;
 use Nemundo\Process\App\Task\Setup\TaskSetup;
 use Nemundo\Process\Content\Setup\AbstractContentTypeSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
@@ -30,6 +31,7 @@ class ProcessSetup extends AbstractContentTypeSetup
         }
 
         (new TaskSetup())->addTaskType($process);
+        (new DocumentSetup())->addContentType($process);
 
     }
 

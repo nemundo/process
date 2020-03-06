@@ -1,6 +1,6 @@
 <?php
 namespace Nemundo\Process\Template\Data\TemplateMultiFile;
-class TemplateMultiFileModel extends \Nemundo\Model\Definition\Model\AbstractModel {
+class TemplateMultiFileModel extends \Nemundo\Model\Template\AbstractActiveModel {
 /**
 * @var \Nemundo\Model\Type\Id\IdType
 */
@@ -38,6 +38,7 @@ $this->id->visible->form = false;
 $this->id->visible->table = false;
 $this->id->visible->view = false;
 $this->id->visible->form = false;
+
 
 $this->dataContentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->dataContentId->tableName = "template_template_multi_file";

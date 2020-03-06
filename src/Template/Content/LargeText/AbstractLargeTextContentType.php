@@ -37,7 +37,7 @@ abstract class AbstractLargeTextContentType extends AbstractTreeContentType
     }
 
 
-    protected function onSearchIndex()
+    protected function onIndex()
     {
 
         $row = $this->getDataRow();

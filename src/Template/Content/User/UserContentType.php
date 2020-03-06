@@ -145,7 +145,7 @@ class UserContentType extends AbstractTreeContentType
     }
 
 
-    protected function onSearchIndex()
+    protected function onIndex()
     {
 
         $type = new UserGroupType();

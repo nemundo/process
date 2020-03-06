@@ -91,7 +91,7 @@ class SearchIndexBuilder extends AbstractBase
     }
 
 
-    public function saveIndex()
+    public function saveSearchIndex()
     {
 
         $delete = new SearchIndexDelete();
