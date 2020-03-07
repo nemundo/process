@@ -5,6 +5,7 @@ namespace Nemundo\Process\Workflow\Content\Status;
 
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
+use Nemundo\Process\Content\Writer\TreeWriter;
 use Nemundo\Process\Group\Check\GroupRestrictionTrait;
 use Nemundo\Process\Workflow\Content\Form\StatusForm;
 
@@ -29,7 +30,22 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
         $parentProcess = $this->getParentProcess();
 
         $this->saveContent();
-        $this->saveTree();
+
+
+
+        if ($this->parentId !== null) {
+            $writer = new TreeWriter();
+            $writer->parentId = $this->parentId;
+            $writer->dataId = $this->contentId;
+            if (!$writer->exist()) {
+                $this->saveTree();
+            }
+            //$writer->write();
+        }
+
+        //$this->saveTree();
+
+
 
         if ($this->changeStatus) {
             $parentProcess->changeStatus($this);

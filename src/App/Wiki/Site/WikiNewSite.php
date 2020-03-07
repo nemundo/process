@@ -19,8 +19,8 @@ class WikiNewSite extends AbstractGroupRestrictionSite
     {
         $this->title = 'New';
         $this->url = 'new';
-        $this->groupRestriction=true;
-        $this->addRestrictionGroup(new WikiEditorGroup());
+        $this->restrictedGroup=true;
+        $this->addRestrictedGroup(new WikiEditorGroup());
     }
 
     public function loadContent()

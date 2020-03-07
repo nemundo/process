@@ -25,22 +25,21 @@ class ContentCheckScript extends AbstractConsoleScript
     public function run()
     {
 
-        /*$reader = new ContentReader();
+        $reader = new ContentReader();
         //$reader->model->loadContentType();
-        $reader->addGroup($reader->model->contentTypeId);
-        //$reader->filter->andEqual($reader->model->contentType->contentType,'');
+        //$reader->addGroup($reader->model->contentTypeId);
+        $reader->filter->andEqual($reader->model->contentTypeId,'');
         foreach ($reader->getData() as $contentRow) {
 
 
-       //     (new Debug())->write('found'.$contentRow->contentType->contentType);
-
+            //(new Debug())->write('found'.$contentRow->contentType->contentType);
 
 
         }
 
         (new Debug())->write($reader->getCount());
 
-        exit;*/
+        //exit;
 
 
 

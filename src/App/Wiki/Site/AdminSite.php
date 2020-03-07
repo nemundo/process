@@ -17,8 +17,8 @@ class AdminSite extends AbstractGroupRestrictionSite
     {
   $this->title = 'Administration';
   $this->url = 'admin';
-        $this->groupRestriction=true;
-        $this->addRestrictionGroup(new WikiEditorGroup());
+        $this->restrictedGroup=true;
+        $this->addRestrictedGroup(new WikiEditorGroup());
     }
 
     public function loadContent()

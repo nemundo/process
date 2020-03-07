@@ -123,8 +123,8 @@ class WikiSite extends AbstractSite
 
             $dropdown->redirectSite = WikiSite::$site;
             $dropdown->redirectSite->addParameter(new WikiParameter());
-            $dropdown->groupRestriction=true;
-            $dropdown->addRestrictionGroup(new WikiEditorGroup());
+            $dropdown->restrictedGroup=true;
+            $dropdown->addRestrictedGroup(new WikiEditorGroup());
             //$dropdown->visible=false;
 
 

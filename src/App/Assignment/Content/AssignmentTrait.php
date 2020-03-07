@@ -77,46 +77,11 @@ trait AssignmentTrait
     protected function saveAssignment()
     {
 
-      /*  $data = new AssignmentLog();
-        //$data->statusId = (new OpenAssignmentStatus())->id;
-        $data->assignmentId = $this->groupId;
-        //$data->deadline = $this->deadline;
-        //$data->sourceId = $this->parentId;
-        //$data->message = $this->getMessage();
-        //$data->contentId = $this->getContentId();
-        //$data->save();
-        $this->dataId = $data->save();*/
-
-
-        // assignment log
         $data = new AssignmentLog();
         $data->assignmentId = $this->groupId;
         $this->dataId = $data->save();
 
-
-        /*
-        $data = new TaskIndex();
-        $data->updateOnDuplicate = true;
-        $data->contentId = $this->getParentId();
-        $data->assignmentId = $this->groupId;
-        $data->deadline = $this->deadline;
-        $data->message=$this->getSubject();
-        $data->save();
-*/
-
-
-/*
-        $update = new AssignmentIndexUpdate();
-        $update->assignmentId = $this->groupId;
-        $update->deadline = $this->deadline;
-        $update->filter->andEqual($update->model->contentId,$this->parentId);
-        $update->update();
-*/
-
-
-
     }
-
 
 
     protected function onDataRow()
@@ -126,74 +91,14 @@ trait AssignmentTrait
         $reader->model->loadAssignment();
         $this->dataRow = $reader->getRowById($this->dataId);
 
-
     }
-
-
-
-    /*
-    protected function cancelAssignment()
-    {
-
-        $update = new AssignmentUpdate();
-        $update->statusId = (new CancelAssignmentStatus())->id;
-        $update->filter->andEqual($update->model->sourceId, $this->parentId);
-        $update->update();
-
-    }
-
-
-    protected function closeAssignment()
-    {
-
-        $update = new AssignmentUpdate();
-        $update->statusId = (new ClosedAssignmentStatus())->id;
-        $update->filter->andEqual($update->model->sourceId, $this->parentId);
-        $update->update();
-
-    }*/
-
-
-    //public function getDataRow()
-
-    /*
-    protected function onDataRow()
-    {
-
-      /*  $reader = new AssignmentReader();
-        $reader->model->loadGroup();
-        $reader->model->loadStatus();
-        $assignmentRow = $reader->getRowById($this->dataId);*/
-
-      /*  $reader = new AssignmentLogReader();
-        $reader->model->loadAssignment();
-        $this->dataRow = $reader->getRowById($this->dataId);
-
-        //return $assignmentRow;
-
-    }*/
 
 
     public function getSubject()
     {
 
-        /*
-        $reader = new AssignmentReader();
-        $reader->model->loadGroup();
-        $reader->model->loadStatus();
-        $assignmentRow = $reader->getRowById($this->dataId);*/
-
         $assignmentRow = $this->getDataRow();
-        $subject = 'Group Assignment to : ' . $assignmentRow->assignment->group;  // . ' (' . $assignmentRow->status->status . ')';
-
-
-        /*
-        if ($assignmentRow->statusId == (new CancelAssignmentStatus())->id) {
-            $strike = new Strike();
-            $strike->content = $subject;
-
-            $subject = $strike->getContent();
-        }*/
+        $subject = 'Group Assignment to : ' . $assignmentRow->assignment->group;
 
         return $subject;
 

@@ -5,20 +5,14 @@ namespace Nemundo\Process\Content\Site;
 
 
 use Nemundo\Admin\Com\Navigation\AdminNavigation;
-use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
-use Nemundo\Core\Debug\Debug;
-use Nemundo\Core\Type\Number\Number;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
-use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\Data\Content\ContentCount;
 use Nemundo\Process\Content\Data\Content\ContentReader;
-use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
-use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Web\Site\AbstractSite;
 
 class ContentCheckSite extends AbstractSite
@@ -38,7 +32,29 @@ class ContentCheckSite extends AbstractSite
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
         $nav = new AdminNavigation($page);
-        $nav->site=ContentSite::$site;
+        $nav->site = ContentSite::$site;
+
+
+        $subtitle = new AdminSubtitle($page);
+        $subtitle->content = 'Empty Content Type Id';
+
+        $table = new AdminTable($page);
+
+        $header = new TableHeader($table);
+        $header->addText('Content Id');
+
+        $reader = new ContentReader();
+        //$reader->model->loadContentType();
+        //$reader->addGroup($reader->model->contentTypeId);
+        $reader->filter->andEqual($reader->model->contentTypeId, '');
+        foreach ($reader->getData() as $contentRow) {
+
+            $row = new TableRow($table);
+            $row->addText($contentRow->id);
+            //(new Debug())->write('found'.$contentRow->contentType->contentType);
+
+
+        }
 
 
         $subtitle = new AdminSubtitle($page);
@@ -46,17 +62,16 @@ class ContentCheckSite extends AbstractSite
 
         $table = new AdminTable($page);
 
-        $header=new TableHeader($table);
+        $header = new TableHeader($table);
         $header->addText('Content Id');
 
         $reader = new ContentReader();
         $reader->filter->andIsNull($reader->model->dataId);
         foreach ($reader->getData() as $contentRow) {
-        //    (new Debug())->write('Data Id is Null. Content Id ' . $contentRow->id);
-        $row= new TableRow($table);
-        $row->addText($contentRow->id);
+            //    (new Debug())->write('Data Id is Null. Content Id ' . $contentRow->id);
+            $row = new TableRow($table);
+            $row->addText($contentRow->id);
         }
-
 
 
         $subtitle = new AdminSubtitle($page);
@@ -64,7 +79,7 @@ class ContentCheckSite extends AbstractSite
 
         $table = new AdminTable($page);
 
-        $header=new TableHeader($table);
+        $header = new TableHeader($table);
 
         $header->addText('Tree Id');
         $header->addText('Child Id');
@@ -102,8 +117,6 @@ class ContentCheckSite extends AbstractSite
 
 
         }
-
-
 
 
         $page->render();

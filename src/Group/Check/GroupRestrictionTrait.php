@@ -11,7 +11,7 @@ trait GroupRestrictionTrait
 
 
     //groupRestricted
-    public $groupRestriction = false;
+    public $restrictedGroup = false;
 
     /**
      * @var AbstractGroupContentType[]
@@ -19,7 +19,7 @@ trait GroupRestrictionTrait
     private $restrictionGroup = [];
 
     // addRestrictedGroup
-    public function addRestrictionGroup(AbstractGroupContentType $groupContentType)
+    public function addRestrictedGroup(AbstractGroupContentType $groupContentType)
     {
         $this->restrictionGroup[] = $groupContentType;
         return $this;
@@ -31,7 +31,7 @@ trait GroupRestrictionTrait
 
         $visible = true;
 
-        if ($this->groupRestriction) {
+        if ($this->restrictedGroup) {
 
             $visible = false;
 
