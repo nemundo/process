@@ -5,7 +5,6 @@ namespace Nemundo\Process\Workflow\Content\Process;
 
 
 use Nemundo\Core\Date\DateTimeDifference;
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Core\Type\DateTime\DateTime;
@@ -119,12 +118,9 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     protected function onIndex()
     {
 
-//        (new Debug())->write('pr');
-
         $this->addSearchWord($this->getSubject());
+        $this->addSearchWord($this->workflowNumber);
 
-
-        //$this->saveContentIndex();
         $this->saveTaskIndex();
         $this->saveDocumentIndex();
         $this->saveCalendarIndex();
@@ -282,7 +278,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
-   protected function getAssignmentId()
+    protected function getAssignmentId()
     {
         return $this->getDataRow()->assignmentId;
     }
@@ -305,7 +301,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
-  protected function getCreatedDateTime()
+    protected function getCreatedDateTime()
     {
         return $this->getDataRow()->dateTime;
     }
@@ -454,7 +450,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $update = new ModelUpdate();
         $update->model = $this->workflowModel;
-        $update->typeValueList->setModelValue($update->model->assignmentId,0);
+        $update->typeValueList->setModelValue($update->model->assignmentId, 0);
         $update->updateById($this->dataId);
 
         $this->saveIndex();
