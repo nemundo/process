@@ -48,12 +48,14 @@ class ContentItemSite extends AbstractSite
     {
 
 
-        ContentSite::$site->showMenuAsActive=true;
-
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
+
 
         $nav = new AdminNavigation($page);
         $nav->site = ContentSite::$site;
+
+        ContentSite::$site->showMenuAsActive=true;
+
 
         $contentType = (new ContentParameter())->getContentType(false);
 

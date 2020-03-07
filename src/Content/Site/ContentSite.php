@@ -90,6 +90,12 @@ class ContentSite extends AbstractSite
         $user->submitOnChange=true;
         $user->searchMode=true;
 
+
+        $subject = new BootstrapTextBox($formRow);
+        $subject->label='Subject';
+        $subject->searchMode=true;
+
+
         new AdminSearchButton($formRow);
 
 
@@ -135,6 +141,10 @@ class ContentSite extends AbstractSite
 
         if ($user->hasValue()) {
             $filter->andEqual($model->userId,$user->getValue());
+        }
+
+        if ($subject->hasValue()) {
+            $filter->andEqual($model->subject,$subject->getValue());
         }
 
 

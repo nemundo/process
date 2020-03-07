@@ -55,7 +55,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     /**
      * @var int
      */
-    protected $startNumber = 100;
+    protected $startNumber = 1;
 
 
     protected $groupAssignmentId;
@@ -119,7 +119,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     {
 
         $this->addSearchWord($this->getSubject());
-        $this->addSearchWord($this->workflowNumber);
+        $this->addSearchWord($this->getDataRow()->workflowNumber);
 
         $this->saveTaskIndex();
         $this->saveDocumentIndex();
