@@ -47,6 +47,7 @@ class ContentSite extends AbstractSite
         ContentSite::$site=$this;
 
         new ContentTypeSite($this);
+        new ContentCheckSite($this);
 
         new ContentItemSite($this);
         new ContentNewSite($this);

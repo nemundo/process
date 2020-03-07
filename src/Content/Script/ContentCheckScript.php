@@ -9,7 +9,9 @@ use Nemundo\Core\Debug\Debug;
 use Nemundo\Process\Content\Data\Content\ContentCount;
 use Nemundo\Process\Content\Data\Content\ContentDelete;
 use Nemundo\Process\Content\Data\Content\ContentReader;
+use Nemundo\Process\Content\Data\Tree\TreeDelete;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
+use Nemundo\Process\Content\Delete\TreeContentDelete;
 
 class ContentCheckScript extends AbstractConsoleScript
 {
@@ -72,10 +74,18 @@ class ContentCheckScript extends AbstractConsoleScript
 
             if (!$this->checkContent($treeRow->parentId)) {
                 (new Debug())->write('Parent is missing. Tree Id: ' . $treeRow->id);
+
+                //$delete = new TreeContentDelete();
+                //$delete->deleteContent();  // deleteById($treeRow->parentId);
+
+                //(new TreeDelete())->deleteById($treeRow->id);
             }
 
             if (!$this->checkContent($treeRow->childId)) {
                 (new Debug())->write('Child is missing. Tree Id: ' . $treeRow->id);
+
+                //(new TreeDelete())->deleteById($treeRow->id);
+
             }
 
 

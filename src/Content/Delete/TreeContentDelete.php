@@ -19,6 +19,9 @@ class TreeContentDelete extends AbstractBase
     }
 
 
+    // delete by contentId
+
+
     public function removeFromParent()
     {
 

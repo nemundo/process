@@ -89,6 +89,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     {
 
         $this->processViewClass = ProcessView::class;
+        $this->deadline = new Date();
 
         parent::__construct($dataId);
     }
