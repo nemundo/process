@@ -60,7 +60,7 @@ class VersionTextContentForm extends AbstractContentForm
 
           $row=new TableRow($table);
           $row->addText($versionContentType->getSubject());
-          $row->addText($customRow->version);
+          $row->addText($customRow->itemOrder);
 
 
         }

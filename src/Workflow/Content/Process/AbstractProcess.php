@@ -118,7 +118,12 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     protected function onIndex()
     {
 
-        $this->saveContentIndex();
+//        (new Debug())->write('pr');
+
+        $this->addSearchWord($this->getSubject());
+
+
+        //$this->saveContentIndex();
         $this->saveTaskIndex();
         $this->saveDocumentIndex();
         $this->saveCalendarIndex();
@@ -176,7 +181,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $update->subject = $this->getSubject();
         $update->updateById($this->contentId);
 
-        $this->addSearchWord($this->getSubject());
+//        $this->addSearchWord($this->getSubject());
 
 
 // problem falls in onFinised subject geändert wird

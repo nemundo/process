@@ -11,7 +11,6 @@ use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\Collection\AbstractContentTypeCollection;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
-use Nemundo\Process\Content\Row\ContentCustomRow;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 
 
@@ -49,12 +48,8 @@ class ContentLogTable extends AbstractHtmlContainer
         $table = new AdminClickableTable($this);
 
         $header = new TableHeader($table);
-        //$header->addText('Typ');
-
-        $header->addText('Log');  //History');
+        $header->addText('Log');
         $header->addText('Ersteller');
-        //$header->addText('Data Id');
-
 
         $reader = new TreeReader();
         $reader->model->loadChild();
@@ -81,27 +76,11 @@ class ContentLogTable extends AbstractHtmlContainer
 
         foreach ($reader->getData() as $treeRow) {
 
-
-
-        //foreach ($this->contentType->getChild() as $contentRow) {
-
             $contentType = $treeRow->child->getContentType();
 
             $row = new BootstrapClickableTableRow($table);
-            //$row->addText($contentType->typeLabel);
             $row->addText($contentType->getSubject());
-            //$row->addText($contentType->getSubject());
-
-
-            //$row->addText($contentType->getText());
-
-            //$contentType->getView($row);
-
-            //$row->addText($contentRow->user->displayName . ' ' . $contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
-            $row->addText($treeRow->child->user->login . ' ' .$treeRow->child->dateTime->getShortDateTimeLeadingZeroFormat());
-
-            //$row->addText($contentRow->dataId);
-
+            $row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeLeadingZeroFormat(), true);
             $row->addClickableSite($contentType->getViewSite());
 
         }

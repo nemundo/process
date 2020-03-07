@@ -102,7 +102,13 @@ class ContentItemSite extends AbstractSite
 
         $header = new TableHeader($table);
         $header->addText('Content Type');
-        $header->addText('Subject');
+        $header->addText('Subject (Data)');
+        $header->addText('Subject (Type)');
+        $header->addText('Item Order');
+        $header->addText('Class');
+
+        $header->addText('Date/Time');
+
 
         foreach ($contentType->getChild() as $contentRow) {
 
@@ -112,6 +118,11 @@ class ContentItemSite extends AbstractSite
             $row->addText($contentRow->contentType->contentType);
             $row->addText($contentRow->subject);
             $row->addText($childContentType->getSubject());
+            $row->addText($contentRow->itemOrder);
+            $row->addText($childContentType->getClassName());
+
+            $row->addText($contentRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
+
 
             $site = clone(ContentItemSite::$site);
             $site->addParameter(new ContentParameter($contentRow->id));

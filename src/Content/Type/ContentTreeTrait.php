@@ -183,7 +183,7 @@ trait ContentTreeTrait
         $doc = [];
         foreach ($reader->getData() as $treeRow) {
 
-            $treeRow->child->version = $treeRow->itemOrder + 1;
+            $treeRow->child->itemOrder = $treeRow->itemOrder;// + 1;
 
             $doc[] = $treeRow->child;
         }

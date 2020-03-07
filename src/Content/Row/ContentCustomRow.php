@@ -13,7 +13,7 @@ use Nemundo\Process\Content\Type\TreeContentType;
 class ContentCustomRow extends ContentRow
 {
 
-    public $version;
+    public $itemOrder;
 
     public function getContentType()
     {
