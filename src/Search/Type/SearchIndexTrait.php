@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Nemundo\Process\Content\Type;
+namespace Nemundo\Process\Search\Type;
 
 
 use Nemundo\Process\Search\Data\SearchContent\SearchContent;
@@ -11,6 +11,7 @@ use Nemundo\Process\Search\Index\SearchIndexBuilder;
 trait SearchIndexTrait
 {
 
+    abstract public function getText();
 
     /**
      * @var SearchIndexBuilder

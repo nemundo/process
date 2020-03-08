@@ -26,7 +26,7 @@ use Nemundo\User\Type\UserSessionType;
 abstract class AbstractContentType extends AbstractType
 {
 
-    use SearchIndexTrait;
+    //use SearchIndexTrait;
 
     /**
      * @var DateTime
@@ -41,12 +41,12 @@ abstract class AbstractContentType extends AbstractType
     /**
      * @var string
      */
-    public $typeId;
+    //public $typeId;
 
     /**
      * @var string|string[]
      */
-    public $typeLabel;
+    //public $typeLabel;
 
 
     //public $restricted = false;
@@ -145,9 +145,26 @@ abstract class AbstractContentType extends AbstractType
         }
 
         $this->saveContent();
-        $this->saveSearchIndex();
+        //$this->saveSearchIndex();
 
         return $this->dataId;
+
+    }
+
+
+    protected function saveContentIndex2() {
+
+        $data = new Content();
+        $data->updateOnDuplicate=true;
+        $data->contentTypeId = $this->typeId;
+        $data->dataId = $this->dataId;
+        $data->subject = $this->getSubject();
+        $data->dateTime = $this->dateTime;
+        $data->userId = $this->userId;
+        $data->save();
+
+
+
 
     }
 
@@ -169,14 +186,6 @@ abstract class AbstractContentType extends AbstractType
             $update->subject = $this->getSubject();
             $update->updateById($this->contentId);
 
-
-            //$stop->stopStopwatch();
-
-            /*$log = new CreateItemContentType();
-            $log->parentId=$this->contentId;
-            $log->saveType();*/
-
-
         } else {
 
             $this->onUpdate();
@@ -184,11 +193,6 @@ abstract class AbstractContentType extends AbstractType
             $update = new ContentUpdate();
             $update->subject = $this->getSubject();
             $update->updateById($this->getContentId());
-
-            /*            $log = new EditItemContentType();
-                        $log->parentId=$this->contentId;
-                        $log->saveType();*/
-
 
         }
 
@@ -312,6 +316,8 @@ abstract class AbstractContentType extends AbstractType
     }
 
 
+    /*
+
     public function fromDataRow(AbstractModelDataRow $dataRow)
     {
 
@@ -336,7 +342,7 @@ abstract class AbstractContentType extends AbstractType
 
         return $this->dataRow;
 
-    }
+    }*/
 
 
     public function deleteType()

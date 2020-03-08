@@ -58,7 +58,7 @@ class SearchSite extends AbstractSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
-        //$form = new ContentSearchForm($page);
+        $form = new ContentSearchForm($page);
 
         $queryParameter = (new SearchQueryParameter());
 
@@ -90,10 +90,10 @@ class SearchSite extends AbstractSite
             $p->content = $searchCount . ' ' . (new Translation())->getText($resultText);
 
 
-            $logType = new SearchLogContentType();
+            /*$logType = new SearchLogContentType();
             $logType->searchQuery =(new SearchQueryParameter())->getValue();  // $queryParameter->getSearchQuery();
             $logType->resultCount = $searchCount;
-            $logType->saveType();
+            $logType->saveType();*/
 
 
             $bold = new TextBold();

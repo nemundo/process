@@ -46,8 +46,8 @@ class ProcessSite extends AbstractSite
     protected function loadSite()
     {
 
-        $this->title = 'Process2';
-        $this->url = 'process2';
+        $this->title = 'Process';
+        $this->url = 'process';
 
         //ProcessSite::$site = $this;
 
@@ -55,14 +55,14 @@ class ProcessSite extends AbstractSite
 
 
 
-        new ContentTypeSite($this);
+        //new ContentTypeSite($this);
         new ContentSite($this);
         new TreeSite($this);
 
         new WikiSite($this);
         new ProcessTemplateSite($this);
 
-        new ToDoSite($this);
+        //new ToDoSite($this);
         new SearchSite($this);
         new SearchWordSite($this);
         new FavoriteSite($this);

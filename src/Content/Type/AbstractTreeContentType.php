@@ -9,17 +9,21 @@ use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Process\Content\Data\Tree\TreeDelete;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Content\Writer\TreeWriter;
+use Nemundo\Process\Search\Type\SearchIndexTrait;
+use Nemundo\Process\Tree\Type\TreeTypeTrait;
 
 
 abstract class AbstractTreeContentType extends AbstractContentType
 {
 
-    use ContentTreeTrait;
+    //use ContentTreeTrait;
+    use TreeTypeTrait;
+    use SearchIndexTrait;
 
     /**
      * @var string
      */
-    public $parentId;
+   // public $parentId;
 
     /**
      * @var bool
@@ -42,7 +46,7 @@ abstract class AbstractTreeContentType extends AbstractContentType
 
     }
 
-
+/*
     protected function saveTree()
     {
 
@@ -53,7 +57,7 @@ abstract class AbstractTreeContentType extends AbstractContentType
             $writer->write();
         }
 
-    }
+    }*/
 
 
     protected function onFinished()
@@ -87,16 +91,20 @@ abstract class AbstractTreeContentType extends AbstractContentType
 
         parent::deleteType();
 
+        $this->deleteTree();
+
+        /*
         $delete = new TreeDelete();
         $delete->filter->orEqual($delete->model->parentId, $this->getContentId());
         $delete->filter->orEqual($delete->model->childId, $this->getContentId());
-        $delete->delete();
+        $delete->delete();*/
 
         $this->deleteSearchIndex();
 
     }
 
 
+    /*
     protected function deleteChild()
     {
 
@@ -107,7 +115,7 @@ abstract class AbstractTreeContentType extends AbstractContentType
 
         }
 
-    }
+    }*/
 
 
     public function getText()

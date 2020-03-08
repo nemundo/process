@@ -1,0 +1,49 @@
+{
+    "app": "Relation",
+    "name": "relation",
+    "namespace": "Nemundo\\Process\\Relation",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "93156f7b-0f40-461b-92a8-e40735156da7",
+            "label": "Relation",
+            "class_name": "Relation",
+            "table_name": "process_relation",
+            "namespace": "Nemundo\\Process\\Relation\\Data\\Relation",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "From",
+                    "field_name": "from",
+                    "variable_name": "from",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": "external",
+                    "label": "To",
+                    "field_name": "to",
+                    "variable_name": "to",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "from_to",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "from",
+                        "to"
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -9,13 +9,25 @@ use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Html\Paragraph\Paragraph;
+use Nemundo\Model\Row\AbstractModelDataRow;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Web\Parameter\AbstractUrlParameter;
 use Nemundo\Web\Site\AbstractSite;
 
+// AbstractContentType
 abstract class AbstractType extends AbstractBaseClass
 {
+
+    /**
+     * @var string
+     */
+    public $typeId;
+
+    /**
+     * @var string|string[]
+     */
+    public $typeLabel;
 
     /**
      * @var string
@@ -79,6 +91,35 @@ abstract class AbstractType extends AbstractBaseClass
     {
 
         return $this->dataId;
+
+    }
+
+
+
+
+    public function fromDataRow(AbstractModelDataRow $dataRow)
+    {
+
+        $this->dataRow = $dataRow;
+        $this->fromDataId($dataRow->getModelValue($dataRow->model->id));
+        return $this;
+
+    }
+
+
+    protected function onDataRow()
+    {
+        //(new LogMessage())->writeError('getDataRow not defined'.$this->getClassName());
+    }
+
+    public function getDataRow()
+    {
+
+        if ($this->dataRow == null) {
+            $this->onDataRow();
+        }
+
+        return $this->dataRow;
 
     }
 

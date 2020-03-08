@@ -23,6 +23,7 @@ use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Type\MenuTrait;
+use Nemundo\Process\Tree\Type\TreeTypeTrait;
 use Nemundo\Web\Site\AbstractSite;
 
 class ContentItemSite extends AbstractSite
@@ -71,9 +72,13 @@ class ContentItemSite extends AbstractSite
 
         $table = new AdminLabelValueTable($page);
         $table->addLabelValue('Subject', $contentType->getSubject());
+
+        if ($contentType->isObjectOfTrait(TreeTypeTrait::class)) {
         $table->addLabelYesNoValue('Has Parent', $contentType->hasParent());
         $table->addLabelValue('Child Count', $contentType->getChildCount());
         $table->addLabelValue('Parent Count', $contentType->getParentCount());
+        }
+
         $table->addLabelValue('Content Type Class', $contentType->getClassName());
 
         $table->addLabelValue('Content Id', $contentType->getContentId());
@@ -97,6 +102,9 @@ class ContentItemSite extends AbstractSite
             $table->addLabelValue('View Site', '[No View Site]');
         }
 
+
+
+        /*
         $subtitle = new AdminSubtitle($page);
         $subtitle->content = 'Child';
 
@@ -160,7 +168,7 @@ class ContentItemSite extends AbstractSite
 
             }
 
-        }
+        }*/
 
         $btn = new AdminIconSiteButton($page);
         $btn->site = ContentEditSite::$site;
@@ -222,12 +230,13 @@ class ContentItemSite extends AbstractSite
         }
 
 
+        /*
         foreach ($contentType->getChild() as $contentRow) {
 
             $subtitle = new AdminSubtitle($page);
             $subtitle->content = $contentRow->dateTime->getShortDateTimeFormat();
 
-            $contentType = $contentRow->getContentType();  // contentType->getContentType();
+            $contentType = $contentRow->getContentType();
 
             if ($contentType->hasView()) {
                 $div = new Div($page);
@@ -242,7 +251,7 @@ class ContentItemSite extends AbstractSite
             $btn->site->addParameter(new ContentParameter($contentRow->id));
             $btn->site->title = 'View';
 
-        }
+        }*/
 
         $page->render();
 

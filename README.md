@@ -21,4 +21,8 @@ php bin/cmd.php content-check
 ```
 
 
+### ReIndexing
 
+```
+php bin/cmd.php index-reindex
+```

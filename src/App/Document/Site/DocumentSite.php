@@ -4,6 +4,7 @@
 namespace Nemundo\Process\App\Document\Site;
 
 
+use Nemundo\Admin\Com\Navigation\AdminNavigation;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
@@ -12,18 +13,34 @@ use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
+use Nemundo\Package\Bootstrap\Tabs\BootstrapTabs;
+use Nemundo\Package\Bootstrap\Tabs\BootstrapSiteTabsDropdown;
+use Nemundo\Package\Bootstrap\Tabs\BootstrapTabsDropdown;
+use Nemundo\Package\Bootstrap\Tabs\BootstrapTabsItem;
+use Nemundo\Process\App\Document\Com\DocumentTabs;
 use Nemundo\Process\App\Document\Data\Document\DocumentPaginationReader;
 use Nemundo\Process\App\Document\Data\DocumentType\DocumentTypeReader;
 use Nemundo\Process\Config\ProcessConfig;
+use Nemundo\Process\Content\Site\ContentSite;
 use Nemundo\Web\Site\AbstractSite;
 
 class DocumentSite extends AbstractSite
 {
 
+    /**
+     * @var DocumentSite
+     */
+    public static $site;
+
     protected function loadSite()
     {
         $this->title = 'Document Index';
         $this->url = 'document-index';
+
+    DocumentSite::$site=$this;
+
+    new DocumentNewSite($this);
+
     }
 
 
@@ -31,6 +48,53 @@ class DocumentSite extends AbstractSite
     {
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
+
+        new DocumentTabs($page);
+
+
+        /*
+        $tabs = new BootstrapTabs($page);
+
+
+
+        $item=new BootstrapTabsItem($tabs);
+        $item->site = DocumentSite::$site;
+
+        //$item=new BootstrapTabsItem($tabs);
+        //$item->site = DocumentNewSite::$site;
+
+
+        $dropdown = new BootstrapTabsDropdown($tabs);
+        $dropdown->dropdownLabel='New';
+
+
+        $reader = new DocumentTypeReader();
+        $reader->model->loadContentType();
+
+        foreach ($reader->getData() as $documentTypeRow) {
+
+        $site = clone(DocumentNewSite::$site);
+        $site->title= $documentTypeRow->contentType->contentType;  //  'Issue';
+        $dropdown->addSite($site);
+
+        }
+
+       // new AdminNavigation()
+
+        //$item->content = 'Bla';
+
+        //$item=new BootstrapTabsItem($tabs);
+        //$item->content = 'Bla';
+
+
+
+        //$nav = new AdminNavigation($page);
+        //$nav->site= DocumentSite::$site;
+
+        //$li = new BootstrapTabsDropdown($nav);*/
+
+
+
 
 
         $form = new SearchForm($page);

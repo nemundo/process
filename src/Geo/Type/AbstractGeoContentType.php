@@ -14,10 +14,13 @@ use Nemundo\Process\Geo\Data\Geo\Geo;
 abstract class AbstractGeoContentType extends AbstractTreeContentType
 {
 
+    use GeoContentTypeTrait;
+
+
     /**
      * @var GeoCoordinate
      */
-    public $geoCoordinate;
+   /* public $geoCoordinate;
 
 
     public function __construct($dataId = null)
@@ -36,6 +39,6 @@ abstract class AbstractGeoContentType extends AbstractTreeContentType
         $this->dataId = $data->save();
 
 
-    }
+    }*/
 
 }

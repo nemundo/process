@@ -193,7 +193,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $this->addSearchWord($dataRow->workflowNumber);
 
         $this->saveIndex();
-        //$this->saveSearchIndex();
+        $this->saveSearchIndex();
 
 
     }
