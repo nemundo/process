@@ -26,17 +26,19 @@ use Nemundo\User\Type\UserSessionType;
 abstract class AbstractContentType extends AbstractType
 {
 
+    use ContentIndexTrait;
+
     //use SearchIndexTrait;
 
     /**
      * @var DateTime
      */
-    public $dateTime;
+    //public $dateTime;
 
     /**
      * @var string
      */
-    public $userId;
+   // public $userId;
 
     /**
      * @var string
@@ -52,7 +54,7 @@ abstract class AbstractContentType extends AbstractType
     //public $restricted = false;
 
 
-    protected $contentId;
+   // protected $contentId;
 
     /**
      * @var string
@@ -68,30 +70,28 @@ abstract class AbstractContentType extends AbstractType
     protected $adminClass;
 
 
-    /**
-     * @var AbstractModelDataRow
-     */
-    protected $dataRow;
 
-    abstract protected function loadContentType();
+    //abstract protected function loadContentType();
 
 
     public function __construct($dataId = null)
     {
         parent::__construct($dataId);
 
-        $this->loadContentType();
+        //$this->loadContentType();
 
         if ($this->formClass == null) {
             $this->formClass = ContentForm::class;
         }
 
-        $this->dateTime = (new DateTime())->setNow();
-        $this->userId = (new UserSessionType())->userId;
+        $this->loadUserDateTime();
+
+        //$this->dateTime = (new DateTime())->setNow();
+        //$this->userId = (new UserSessionType())->userId;
 
     }
 
-
+/*
     public function getContentId()
     {
 
@@ -121,7 +121,7 @@ abstract class AbstractContentType extends AbstractType
 
         return $value;
 
-    }
+    }*/
 
     public function existItem()
     {
@@ -140,18 +140,27 @@ abstract class AbstractContentType extends AbstractType
     {
 
 
+        /*
         if ($this->existItem()) {
             $this->createMode = false;
-        }
+        }*/
 
+
+        parent::saveType();
         $this->saveContent();
+
+        $this->saveIndex();
+
         //$this->saveSearchIndex();
 
-        return $this->dataId;
+        //return $this->dataId;
+
+
 
     }
 
 
+    /*
     protected function saveContentIndex2() {
 
         $data = new Content();
@@ -217,7 +226,7 @@ abstract class AbstractContentType extends AbstractType
         $update->subject = $this->getSubject();
         $update->updateById($this->getContentId());
 
-    }
+    }*/
 
 
     public function getSubject()
@@ -349,7 +358,10 @@ abstract class AbstractContentType extends AbstractType
     {
 
         parent::deleteType();
-        (new ContentDelete())->deleteById($this->getContentId());
+
+        $this->deleteContent();
+
+        //(new ContentDelete())->deleteById($this->getContentId());
 
     }
 

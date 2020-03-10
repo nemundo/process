@@ -12,12 +12,13 @@ use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentType\ContentType;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeDelete;
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Content\Type\AbstractType;
 use Nemundo\Process\Search\Data\WordContentType\WordContentTypeDelete;
 
 abstract class AbstractContentTypeSetup extends AbstractBase
 {
 
-    protected function addContentType(AbstractContentType $contentType)
+    protected function addContentType(AbstractType $contentType)
     {
 
         $contentLabel = (new Translation())->getText($contentType->typeLabel);

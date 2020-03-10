@@ -35,14 +35,18 @@ abstract class AbstractTreeContentType extends AbstractContentType
     public function saveType()
     {
 
+        parent::saveType();
+
+        /*
         if ($this->existItem()) {
             $this->createMode = false;
-        }
+        }*/
 
-        $this->saveContent();
+        //$this->saveContent();
         $this->saveTree();
-        $this->onFinished();
-        $this->saveIndex();
+
+        //$this->onFinished();
+        //$this->saveIndex();
 
     }
 
@@ -68,19 +72,22 @@ abstract class AbstractTreeContentType extends AbstractContentType
 
 
 
-    protected function onIndex()
+   /* protected function onIndex()
     {
 
-    }
+    }*/
 
 
     public function saveIndex()
     {
 
-        $this->onDataRow();
-        $this->onIndex();
-        $this->saveContentIndex();
-        $this->saveSearchIndex();
+        //$this->onDataRow();
+        //$this->onIndex();
+
+        parent::saveIndex();
+
+        //$this->saveContentIndex();
+        //$this->saveSearchIndex();
 
     }
 
@@ -99,7 +106,7 @@ abstract class AbstractTreeContentType extends AbstractContentType
         $delete->filter->orEqual($delete->model->childId, $this->getContentId());
         $delete->delete();*/
 
-        $this->deleteSearchIndex();
+        //$this->deleteSearchIndex();
 
     }
 
@@ -127,6 +134,8 @@ abstract class AbstractTreeContentType extends AbstractContentType
     }
 
 
+
+    // JsonExportTrait
     public function exportJson()
     {
 

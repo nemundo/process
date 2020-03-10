@@ -98,10 +98,10 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     protected function onIndex()
     {
 
-        if ($this->searchable) {
+        /*if ($this->searchable) {
             $groupRow = $this->getGroupDataRow();
             $this->addSearchWord($groupRow->group);
-        }
+        }*/
 
     }
 

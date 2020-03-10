@@ -57,8 +57,13 @@ abstract class AbstractType extends AbstractBaseClass
     protected $viewClass;
 
 
+    abstract protected function loadContentType();
+
+
     public function __construct($dataId = null)
     {
+
+        $this->loadContentType();
 
         $this->fromDataId($dataId);
 
@@ -95,6 +100,10 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
+    /**
+     * @var AbstractModelDataRow
+     */
+    protected $dataRow;
 
 
     public function fromDataRow(AbstractModelDataRow $dataRow)
@@ -107,10 +116,12 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
+    // loadDataRow
     protected function onDataRow()
     {
         //(new LogMessage())->writeError('getDataRow not defined'.$this->getClassName());
     }
+
 
     public function getDataRow()
     {
@@ -135,13 +146,27 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
-
-
-
     protected function onUpdate()
     {
 
         $this->onCreate();
+
+    }
+
+
+    protected function onIndex()
+    {
+
+    }
+
+
+    public function saveIndex()
+    {
+
+        $this->onDataRow();
+        $this->onIndex();
+        //$this->saveContentIndex();
+        //$this->saveSearchIndex();
 
     }
 
@@ -154,6 +179,9 @@ abstract class AbstractType extends AbstractBaseClass
         } else {
             $this->onUpdate();
         }
+
+        // muss am Schluss sein
+//        $this->saveIndex();
 
     }
 

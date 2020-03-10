@@ -8,15 +8,24 @@ use Nemundo\Process\Content\Collection\AbstractContentTypeCollection;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeDelete;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeUpdate;
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Content\Type\AbstractType;
 
 class ContentTypeSetup extends AbstractContentTypeSetup
 {
 
-    public function addContentType(AbstractContentType $contentType)
+    /*public function addContentType(AbstractContentType $contentType)
+    {
+        parent::addContentType($contentType);
+        return $this;
+    }*/
+
+
+    public function addContentType(AbstractType $contentType)
     {
         parent::addContentType($contentType);
         return $this;
     }
+
 
 
     public function addContentTypeCollection(AbstractContentTypeCollection $collection)
@@ -41,7 +50,7 @@ class ContentTypeSetup extends AbstractContentTypeSetup
     }
 
 
-    public function deleteSetupStatus()
+    public function deleteUnusedSetupStatus()
     {
 
         $delete = new ContentTypeDelete();

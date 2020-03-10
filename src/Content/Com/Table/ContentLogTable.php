@@ -14,6 +14,7 @@ use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 
 
+// ChildTable
 class ContentLogTable extends AbstractHtmlContainer
 {
 

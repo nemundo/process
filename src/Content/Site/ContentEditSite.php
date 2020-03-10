@@ -8,7 +8,7 @@ use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\FontAwesome\Site\AbstractEditIconSite;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Parameter\ContentParameter;
-use Nemundo\Process\Content\Parameter\DataParameter;
+
 
 class ContentEditSite extends AbstractEditIconSite
 {
@@ -20,7 +20,6 @@ class ContentEditSite extends AbstractEditIconSite
 
     protected function loadSite()
     {
-        //$this->title = 'Content';
         $this->url = 'content-edit';
         ContentEditSite::$site = $this;
     }
@@ -37,7 +36,9 @@ class ContentEditSite extends AbstractEditIconSite
         $contentRow = $reader->getRowById($dataId);
         $contentType = $contentRow->getContentType();*/
 
-        $contentType = (new ContentParameter())->getContentType();
+        $contentParameter=new ContentParameter();
+        $contentParameter->contentTypeCheck=false;
+        $contentType = $contentParameter->getContentType();
 
         $form = $contentType->getForm($page);
         $form->redirectSite = ContentItemSite::$site;

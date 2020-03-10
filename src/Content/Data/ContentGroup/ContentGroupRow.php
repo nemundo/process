@@ -32,7 +32,7 @@ public $content;
 public $groupId;
 
 /**
-* @var \Nemundo\Process\Group\Data\Group\GroupRow
+* @var \Nemundo\Process\Group\Row\GroupCustomRow
 */
 public $group;
 
@@ -53,6 +53,6 @@ private function loadNemundoProcessContentDataContentContentcontentRow($model) {
 $this->content = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $model);
 }
 private function loadNemundoProcessGroupDataGroupGroupgroupRow($model) {
-$this->group = new \Nemundo\Process\Group\Data\Group\GroupRow($this->row, $model);
+$this->group = new \Nemundo\Process\Group\Row\GroupCustomRow($this->row, $model);
 }
 }

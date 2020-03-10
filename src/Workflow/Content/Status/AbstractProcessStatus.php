@@ -27,12 +27,16 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
     public function saveType()
     {
 
+
+        parent::saveType();
+
+        //$this->saveContent();
+        //$this->saveTree();
+
         $parentProcess = $this->getParentProcess();
 
-        $this->saveContent();
 
-
-
+        /*
         if ($this->parentId !== null) {
             $writer = new TreeWriter();
             $writer->parentId = $this->parentId;
@@ -41,7 +45,7 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
                 $this->saveTree();
             }
             //$writer->write();
-        }
+        }*/
 
         //$this->saveTree();
 

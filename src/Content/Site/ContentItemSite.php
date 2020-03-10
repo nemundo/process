@@ -5,24 +5,26 @@ namespace Nemundo\Process\Content\Site;
 
 
 use Nemundo\Admin\Com\Button\AdminIconSiteButton;
-use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Navigation\AdminNavigation;
-use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
+use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Com\Html\Listing\UnorderedList;
 use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
-use Nemundo\Html\Block\Div;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\Dropdown\BootstrapSiteDropdown;
-use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
+use Nemundo\Process\Content\Data\Content\ContentModel;
+use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentGroup\ContentGroupReader;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Type\MenuTrait;
+use Nemundo\Process\Search\Data\SearchIndex\SearchIndexReader;
+use Nemundo\Process\Search\Type\SearchIndexTrait;
 use Nemundo\Process\Tree\Type\TreeTypeTrait;
 use Nemundo\Web\Site\AbstractSite;
 
@@ -55,10 +57,14 @@ class ContentItemSite extends AbstractSite
         $nav = new AdminNavigation($page);
         $nav->site = ContentSite::$site;
 
-        ContentSite::$site->showMenuAsActive=true;
+        ContentSite::$site->showMenuAsActive = true;
 
 
         $contentType = (new ContentParameter())->getContentType(false);
+
+        $contentReader = new ContentReader();
+        $contentReader->model->loadUser();
+        $contentRow = $contentReader->getRowById($contentType->getContentId());
 
         $title = new AdminTitle($page);
         $title->content = $contentType->getSubject();
@@ -74,22 +80,29 @@ class ContentItemSite extends AbstractSite
         $table->addLabelValue('Subject', $contentType->getSubject());
 
         if ($contentType->isObjectOfTrait(TreeTypeTrait::class)) {
-        $table->addLabelYesNoValue('Has Parent', $contentType->hasParent());
-        $table->addLabelValue('Child Count', $contentType->getChildCount());
-        $table->addLabelValue('Parent Count', $contentType->getParentCount());
+            $table->addLabelYesNoValue('Has Parent', $contentType->hasParent());
+            $table->addLabelValue('Child Count', $contentType->getChildCount());
+            $table->addLabelValue('Parent Count', $contentType->getParentCount());
         }
 
         $table->addLabelValue('Content Type Class', $contentType->getClassName());
+
+
+        //$model = new ContentModel();
 
         $table->addLabelValue('Content Id', $contentType->getContentId());
         $table->addLabelValue('Data Id', $contentType->getDataId());
 
 
+        $table->addLabelValue($contentReader->model->dateTime->label, $contentRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
+        $table->addLabelValue($contentReader->model->user->label, $contentRow->user->displayName);
+
+
 
         if ($contentType->hasView()) {
             $view = $contentType->getView();
-            $table->addLabelValue('View Class',$view->getClassName());
-            $table->addLabelCom('View',$view );
+            $table->addLabelValue('View Class', $view->getClassName());
+            $table->addLabelCom('View', $view);
         } else {
             $table->addLabelValue('View', '[No View]');
         }
@@ -101,7 +114,6 @@ class ContentItemSite extends AbstractSite
         } else {
             $table->addLabelValue('View Site', '[No View Site]');
         }
-
 
 
         /*
@@ -194,6 +206,33 @@ class ContentItemSite extends AbstractSite
 
         //$btn = new FavoriteButton($page);
         //$btn->dataId = $dataId;
+
+
+        if ($contentType->isObjectOfTrait(SearchIndexTrait::class)) {
+
+            $table->addLabelValue('Search', 'yes');
+
+            $table = new AdminTable($page);
+
+            $header = new TableHeader($table);
+            $header->addText('Search Word');
+
+            $reader = new SearchIndexReader();
+            $reader->model->loadWord();
+            $reader->filter->andEqual($reader->model->contentId, $contentType->getContentId());
+            foreach ($reader->getData() as $searchIndexRow) {
+
+                $row = new TableRow($table);
+                $row->addText($searchIndexRow->word->word);
+
+            }
+
+
+        } else {
+
+            $table->addLabelValue('Search', 'no');
+
+        }
 
 
         if ($contentType->isObjectOfTrait(MenuTrait::class)) {

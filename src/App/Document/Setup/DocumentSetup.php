@@ -11,12 +11,19 @@ use Nemundo\Process\Content\Data\ContentType\ContentTypeDelete;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeUpdate;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Content\Type\AbstractType;
 
 
 class DocumentSetup extends ContentTypeSetup
 {
 
-    public function addContentType(AbstractContentType $contentType)
+
+    public function addDocumentType() {
+
+    }
+
+    //public function addContentType(AbstractContentType $contentType)
+     public function addContentType(AbstractType $contentType)
     {
 
         parent::addContentType($contentType);
@@ -43,7 +50,7 @@ class DocumentSetup extends ContentTypeSetup
     }
 
 
-    public function deleteSetupStatus()
+    public function deleteUnusedSetupStatus()
     {
 
         $delete = new DocumentTypeDelete();

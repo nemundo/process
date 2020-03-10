@@ -20,18 +20,6 @@ abstract class AbstractContentView extends AbstractHtmlContainer
     /**
      * @var string
      */
-    public $dataId;
-
-
-    public function getContent()
-    {
-
-        /*$log=new WebLogContentType();
-        $log->parentId=$this->contentType->getContentId();
-        $log->saveType();*/
-
-        return parent::getContent();
-    }
-
+    //public $dataId;
 
 }
