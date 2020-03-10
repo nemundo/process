@@ -37,10 +37,10 @@ class SubjectChangeStatusForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        $type = new SubjectChangeProcessStatus();
-        $type->parentId = $this->parentId;
-        $type->subject = $this->subject->getValue();
-        $type->saveType();
+        //$type = new SubjectChangeProcessStatus();
+        //$type->parentId = $this->parentId;
+        $this->contentType->subject = $this->subject->getValue();
+        $this->contentType->saveType();
 
     }
 

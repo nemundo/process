@@ -25,9 +25,14 @@ class DeadlineChangeForm extends AbstractStatusForm
         $this->datum->label = 'Datum';
         $this->datum->validation = true;
 
+        //(new Debug())->write($this->contentType->getParentId());
+
         $process = $this->contentType->getParentProcess();
+
+
         if ($process->hasDeadline()) {
-            $this->datum->value = $process->getDeadline()->getShortDateLeadingZeroFormat();
+            //$this->datum->value = $process->getDeadline()->getShortDateLeadingZeroFormat();
+            $this->datum->value = $process->getDataRow()->deadline->getShortDateLeadingZeroFormat();
         }
 
         return parent::getContent();
@@ -37,10 +42,10 @@ class DeadlineChangeForm extends AbstractStatusForm
     protected function onSubmit()
     {
 
-        $status = new DeadlineChangeProcessStatus();
-        $status->parentId = $this->parentId;
-        $status->deadline = (new Date())->fromGermanFormat($this->datum->getValue());
-        $status->saveType();
+        //$status = new DeadlineChangeProcessStatus();
+        //$status->parentId = $this->parentId;
+        $this->contentType->deadline = (new Date())->fromGermanFormat($this->datum->getValue());
+        $this->contentType->saveType();
 
     }
 

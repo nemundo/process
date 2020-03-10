@@ -4,6 +4,7 @@
 namespace Nemundo\Process\App\Notification\Site;
 
 
+use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
@@ -55,6 +56,12 @@ class UserNotificationSite extends AbstractSite
         $listbox = new BootstrapListBox($formRow);
         $listbox->addItem(0,'Offene');
         $listbox->addItem(0,'Gelöschte/Archivierte');
+
+
+        $btn=new AdminSiteButton($page);
+        $btn->site = UserNotificationDeleteSite::$site;
+
+
 
 
         $table = new AdminClickableTable($page);

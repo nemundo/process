@@ -189,6 +189,8 @@ abstract class AbstractType extends AbstractBaseClass
     public function getForm(AbstractHtmlContainer $parent)
     {
 
+       // (new Debug())->write('getform');
+
         if ($this->formClass == null) {
             (new LogMessage())->writeError('No Form' . $this->getClassName());
         }
@@ -197,7 +199,7 @@ abstract class AbstractType extends AbstractBaseClass
         $form = new $this->formClass($parent);
 
         if (!$this->createMode) {
-            $form->dataId = $this->dataId;
+         //   $form->dataId = $this->dataId;
         }
         $form->contentType = $this;
         //$form->parentId = $this->
@@ -239,7 +241,7 @@ abstract class AbstractType extends AbstractBaseClass
 
             /** @var AbstractContentView $view */
             $view = new $this->viewClass($parent);
-            $view->dataId = $this->dataId;
+            //$view->dataId = $this->dataId;
             $view->contentType = $this;
 
         } else {

@@ -6,6 +6,7 @@ namespace Nemundo\Process\Content\Site;
 
 use Nemundo\Admin\Com\Button\AdminIconSiteButton;
 use Nemundo\Admin\Com\Navigation\AdminNavigation;
+use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
@@ -16,10 +17,9 @@ use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\Dropdown\BootstrapSiteDropdown;
-use Nemundo\Process\Content\Data\Content\ContentModel;
+use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\ContentGroup\ContentGroupReader;
-use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Type\MenuTrait;
@@ -76,111 +76,113 @@ class ContentItemSite extends AbstractSite
             $p->content = '[No View]';
         }
 
-        $table = new AdminLabelValueTable($page);
-        $table->addLabelValue('Subject', $contentType->getSubject());
+        $table1 = new AdminLabelValueTable($page);
+        $table1->addLabelValue('Subject', $contentType->getSubject());
 
         if ($contentType->isObjectOfTrait(TreeTypeTrait::class)) {
-            $table->addLabelYesNoValue('Has Parent', $contentType->hasParent());
-            $table->addLabelValue('Child Count', $contentType->getChildCount());
-            $table->addLabelValue('Parent Count', $contentType->getParentCount());
+            $table1->addLabelYesNoValue('Has Parent', $contentType->hasParent());
+            $table1->addLabelValue('Child Count', $contentType->getChildCount());
+            $table1->addLabelValue('Parent Count', $contentType->getParentCount());
         }
 
-        $table->addLabelValue('Content Type Class', $contentType->getClassName());
+        $table1->addLabelValue('Content Type Class', $contentType->getClassName());
 
 
         //$model = new ContentModel();
 
-        $table->addLabelValue('Content Id', $contentType->getContentId());
-        $table->addLabelValue('Data Id', $contentType->getDataId());
+        $table1->addLabelValue('Content Id', $contentType->getContentId());
+        $table1->addLabelValue('Data Id', $contentType->getDataId());
 
 
-        $table->addLabelValue($contentReader->model->dateTime->label, $contentRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
-        $table->addLabelValue($contentReader->model->user->label, $contentRow->user->displayName);
-
+        $table1->addLabelValue($contentReader->model->dateTime->label, $contentRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
+        $table1->addLabelValue($contentReader->model->user->label, $contentRow->user->displayName);
 
 
         if ($contentType->hasView()) {
             $view = $contentType->getView();
-            $table->addLabelValue('View Class', $view->getClassName());
-            $table->addLabelCom('View', $view);
+            $table1->addLabelValue('View Class', $view->getClassName());
+            $table1->addLabelCom('View', $view);
         } else {
-            $table->addLabelValue('View', '[No View]');
+            $table1->addLabelValue('View', '[No View]');
         }
 
 
         if ($contentType->hasViewSite()) {
-            $table->addLabelSite('View Site', $contentType->getViewSite());
-            $table->addLabelSite('Subject View Site', $contentType->getSubjectViewSite());
+            $table1->addLabelSite('View Site', $contentType->getViewSite());
+            $table1->addLabelSite('Subject View Site', $contentType->getSubjectViewSite());
         } else {
-            $table->addLabelValue('View Site', '[No View Site]');
+            $table1->addLabelValue('View Site', '[No View Site]');
         }
 
 
-        /*
-        $subtitle = new AdminSubtitle($page);
-        $subtitle->content = 'Child';
-
-        $table = new AdminClickableTable($page);
-
-        $header = new TableHeader($table);
-        $header->addText('Content Type');
-        $header->addText('Subject (Data)');
-        $header->addText('Subject (Type)');
-        $header->addText('Item Order');
-        $header->addText('Class');
-
-        $header->addText('Date/Time');
-
-
-        foreach ($contentType->getChild() as $contentRow) {
-
-            $childContentType = $contentRow->getContentType();
-
-            $row = new BootstrapClickableTableRow($table);
-            $row->addText($contentRow->contentType->contentType);
-            $row->addText($contentRow->subject);
-            $row->addText($childContentType->getSubject());
-            $row->addText($contentRow->itemOrder);
-            $row->addText($childContentType->getClassName());
-
-            $row->addText($contentRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
-
-
-            $site = clone(ContentItemSite::$site);
-            $site->addParameter(new ContentParameter($contentRow->id));
-            //$site->title =$parentContentType->getSubject();  // $contentRow->subject;
-            $row->addClickableSite($site);
-
-
-        }
-
-
-        if ($contentType->hasParent()) {
+        if ($contentType->isObjectOfTrait(TreeTypeTrait::class)) {
 
             $subtitle = new AdminSubtitle($page);
-            $subtitle->content = 'Parent Type';
+            $subtitle->content = 'Child';
 
             $table = new AdminClickableTable($page);
 
+            $header = new TableHeader($table);
             $header->addText('Content Type');
-            $header->addText('Subject');
+            $header->addText('Subject (Data)');
+            $header->addText('Subject (Type)');
+            $header->addText('Item Order');
+            $header->addText('Class');
 
-            foreach ($contentType->getParentContent() as $contentRow) {
+            $header->addText('Date/Time');
+
+
+            foreach ($contentType->getChild() as $contentRow) {
+
+                $childContentType = $contentRow->getContentType();
 
                 $row = new BootstrapClickableTableRow($table);
+                $row->addText($contentRow->contentType->contentType);
+                $row->addText($contentRow->subject);
+                $row->addText($childContentType->getSubject());
+                $row->addText($contentRow->itemOrder);
+                $row->addText($childContentType->getClassName());
 
-                $parentContentType = $contentRow->getContentType();
-                $row->addText($parentContentType->typeLabel);
+                $row->addText($contentRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
 
-                $row->addText($parentContentType->getSubject());
+
                 $site = clone(ContentItemSite::$site);
                 $site->addParameter(new ContentParameter($contentRow->id));
                 //$site->title =$parentContentType->getSubject();  // $contentRow->subject;
                 $row->addClickableSite($site);
 
+
             }
 
-        }*/
+
+            if ($contentType->hasParent()) {
+
+                $subtitle = new AdminSubtitle($page);
+                $subtitle->content = 'Parent Type';
+
+                $table = new AdminClickableTable($page);
+
+                $header->addText('Content Type');
+                $header->addText('Subject');
+
+                foreach ($contentType->getParentContent() as $contentRow) {
+
+                    $row = new BootstrapClickableTableRow($table);
+
+                    $parentContentType = $contentRow->getContentType();
+                    $row->addText($parentContentType->typeLabel);
+
+                    $row->addText($parentContentType->getSubject());
+                    $site = clone(ContentItemSite::$site);
+                    $site->addParameter(new ContentParameter($contentRow->id));
+                    //$site->title =$parentContentType->getSubject();  // $contentRow->subject;
+                    $row->addClickableSite($site);
+
+                }
+
+            }
+
+        }
 
         $btn = new AdminIconSiteButton($page);
         $btn->site = ContentEditSite::$site;
@@ -210,7 +212,7 @@ class ContentItemSite extends AbstractSite
 
         if ($contentType->isObjectOfTrait(SearchIndexTrait::class)) {
 
-            $table->addLabelValue('Search', 'yes');
+            $table1->addLabelValue('Search', 'yes');
 
             $table = new AdminTable($page);
 
@@ -230,7 +232,7 @@ class ContentItemSite extends AbstractSite
 
         } else {
 
-            $table->addLabelValue('Search', 'no');
+            $table1->addLabelValue('Search', 'no');
 
         }
 
@@ -256,17 +258,18 @@ class ContentItemSite extends AbstractSite
         }
 
 
-        $contentTypeParameter = new ContentTypeParameter();
+        /* $contentTypeParameter = new ContentTypeParameter();
         if ($contentTypeParameter->exists()) {
 
             $contentType = (new ContentTypeReader())->getRowById($contentTypeParameter->getValue())->getContentType();
+
 
             $form = $contentType->getForm($page);
             $form->parentId = $dataId;
             $form->redirectSite = ContentItemSite::$site;
             $form->redirectSite->addParameter(new DataParameter());
 
-        }
+        }*/
 
 
         /*

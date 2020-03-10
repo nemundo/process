@@ -18,12 +18,12 @@ trait ContentFormTrait
     /**
      * @var string
      */
-    public $dataId;
+ //   public $dataId;
 
     /**
      * @var string
      */
-    public $parentId;
+ //   public $parentId;
 
     /**
      * @var bool

@@ -8,11 +8,12 @@ use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Process\App\Wiki\Data\WikiType\WikiType;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Content\Type\AbstractType;
 
 class WikiSetup extends ContentTypeSetup
 {
 
-    public function addContentType(AbstractContentType $contentType) {
+    public function addContentType(AbstractType $contentType) {
 
         parent::addContentType($contentType);
 

@@ -34,7 +34,8 @@ class FileContentForm extends AbstractContentForm
         foreach ($this->file->getMultiFileRequest() as $fileRequest) {
 
             $type = new FileContentType();
-            $type->parentId = $this->parentId;
+            $type->parentId = $this->contentType->getParentId();
+            //$type->parentId = $this->parentId;
             $type->fileRequest = $fileRequest;
             $type->saveType();
 

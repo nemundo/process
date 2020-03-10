@@ -632,7 +632,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $view->contentType = $this;
 
         if (!$this->createMode) {
-            $view->dataId = $this->dataId;
+            //$view->dataId = $this->dataId;
         }
 
         return $view;
@@ -649,7 +649,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
             /** @var AbstractContentView $view */
             $view = new $this->baseViewClass($parent);
-            $view->dataId = $this->dataId;
+            //$view->dataId = $this->dataId;
             $view->contentType = $this;
 
         } else {

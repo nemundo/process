@@ -53,7 +53,7 @@ abstract class AbstractNumberContentForm extends AbstractContentForm
     {
 
         $this->contentType->fromDataId($this->dataId);
-        $this->contentType->parentId = $this->parentId;
+        //$this->contentType->parentId = $this->parentId;
         $this->contentType->number = (int)$this->number->getValue();
         $this->contentType->saveType();
 

@@ -5,6 +5,7 @@ namespace Nemundo\Process\Template\Status\SubjectChange;
 
 
 use Nemundo\Core\Language\LanguageCode;
+use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Text\TextBold;
 use Nemundo\Process\Template\Data\TemplateText\TemplateText;
 use Nemundo\Process\Template\Data\TemplateText\TemplateTextReader;
@@ -62,12 +63,12 @@ class SubjectChangeProcessStatus extends AbstractProcessStatus
         //$this->typeLabel[LanguageCode::EN] = 'Subject Change';
         //$this->typeLabel[LanguageCode::DE] = 'Betreff Ändern';
 
+        $subjectNew =  (new BoldText())->getBold((new TemplateTextReader())->getRowById($this->dataId)->text);
 
-        $subject = 'Subject was changed to ' . (new BoldText())->getBold((new TemplateTextReader())->getRowById($this->dataId)->text);
+        $subject[LanguageCode::EN] = 'Subject was changed to ' .$subjectNew;
+        $subject[LanguageCode::DE] = 'Betreff wurde geändert  zu ' .$subjectNew;
 
-
-
-        return $subject;
+        return (new Translation())->getText( $subject);
 
     }
 

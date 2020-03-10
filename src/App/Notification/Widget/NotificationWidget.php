@@ -79,7 +79,7 @@ class NotificationWidget extends AdminWidget
             //$row->addText($notificationRow->content->contentType->contentType);
             $row->addText($notificationRow->subjectContent->subject);
 //            $row->addText($notificationRow->message);
-            $row->addText((new Html( $notificationContentType->getMessage()))->getValue());
+            //$row->addText((new Html( $notificationContentType->getMessage()))->getValue());
 
 
             $row->addText($notificationRow->content->dateTime->getShortDateTimeLeadingZeroFormat());
@@ -94,8 +94,9 @@ class NotificationWidget extends AdminWidget
 
         }
 
-        $btn=new AdminIconSiteButton($this);
-        $btn->site = UserNotificationDeleteSite::$site;
+        //$btn=new AdminIconSiteButton($this);
+        //$btn->site = UserNotificationDeleteSite::$site;
+
 
         //$btn=new AdminSiteButton($this);
         //$btn->site = UserNotificationDeleteSite::$site;

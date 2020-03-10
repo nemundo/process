@@ -52,7 +52,7 @@ class AbstractAddContentContainer extends AbstractContentContainer
 
             $form = new SourceAddContentForm($this);
             $form->contentType = $this->contentType;
-            $form->parentId = $this->parentId;
+            //$form->parentId = $this->parentId;
             $form->redirectSite = $this->redirectSite;
 
         }

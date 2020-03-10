@@ -8,14 +8,9 @@ use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
-use Nemundo\Core\Debug\Debug;
-use Nemundo\Package\FontAwesome\Hyperlink\IconSiteHyperlink;
-use Nemundo\Package\FontAwesome\Icon\EditIcon;
 use Nemundo\Package\FontAwesome\Icon\PlusIcon;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Form\AbstractContentActionPanel;
-use Nemundo\Process\Content\Form\AbstractContentContainer;
-use Nemundo\Process\Content\Parameter\ChildParameter;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Template\Content\Source\Add\SourceAddContentType;
 use Nemundo\Process\Workflow\Parameter\StatusParameter;
@@ -44,14 +39,14 @@ class SourceRemoveContentPanel extends AbstractContentActionPanel
     protected function loadActionSite()
     {
 
-        $this->index=new ActionSite($this);
-        $this->index->onAction=function () {
+        $this->index = new ActionSite($this);
+        $this->index->onAction = function () {
 
 
             $table = new AdminTable($this);
 
-       //$contentReader = new ContentTreeReader();
-       //$contentReader->parentId=$this->parentId;*/
+            //$contentReader = new ContentTreeReader();
+            //$contentReader->parentId=$this->parentId;*/
 
 
             $header = new TableHeader($table);
@@ -64,13 +59,14 @@ class SourceRemoveContentPanel extends AbstractContentActionPanel
             $treeReader = new TreeReader();
             $treeReader->model->loadParent();
             $treeReader->model->parent->loadContentType();
-            $treeReader->filter->andEqual($treeReader->model->childId, $this->parentId);
+//            $treeReader->filter->andEqual($treeReader->model->childId, $this->parentId);
+            $treeReader->filter->andEqual($treeReader->model->childId, $this->contentType->getParentId());
+
             $treeReader->addOrder($treeReader->model->parent->subject);
             foreach ($treeReader->getData() as $contentRow) {
 
 
-
-                $row=new TableRow($table);
+                $row = new TableRow($table);
                 $row->addSite($contentRow->parent->getContentType()->getSubjectViewSite());
 
                 //$row->addText($contentRow->parent->subject);
@@ -87,11 +83,11 @@ class SourceRemoveContentPanel extends AbstractContentActionPanel
 
 
             if ($this->contentType->editable) {
-            $add = new SiteHyperlink($this);
-            $add->showSiteTitle=false;
-            $add->site = new Site();
-            $add->site->addParameter(new StatusParameter((new SourceAddContentType())->typeId));
-           new PlusIcon($add);
+                $add = new SiteHyperlink($this);
+                $add->showSiteTitle = false;
+                $add->site = new Site();
+                $add->site->addParameter(new StatusParameter((new SourceAddContentType())->typeId));
+                new PlusIcon($add);
             }
 
             /*
@@ -109,15 +105,16 @@ class SourceRemoveContentPanel extends AbstractContentActionPanel
         };
 
 
-        $this->delete=new DeleteActionSite($this);
-        $this->delete->title='Quelle entfernen';
-        $this->delete->onAction=function () {
+        $this->delete = new DeleteActionSite($this);
+        $this->delete->title = 'Quelle entfernen';
+        $this->delete->onAction = function () {
 
             //(new Debug())->write($this->parentId);
             //(new Debug())->write('delete');
 
-            $type=new SourceRemoveContentType();
-            $type->parentId=$this->parentId;
+            $type = new SourceRemoveContentType();
+            //$type->parentId = $this->parentId;
+            $type->parentId = $this->contentType->getParentId();
             $type->removeId = (new ContentParameter())->getValue();
             $type->saveType();
 

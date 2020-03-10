@@ -18,7 +18,7 @@ class CommentView extends AbstractContentView
 
         //(new Debug())->write($this->dataId);
 
-        $row = (new LargeTextReader())->getRowById($this->dataId);
+        $row = $this->contentType->getDataRow();   // (new LargeTextReader())->getRowById($this->dataId);
 
         $p = new Paragraph($this);
         $p->content = (new Html($row->largeText))->getValue();

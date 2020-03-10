@@ -171,6 +171,7 @@ abstract class AbstractTreeContentType extends AbstractContentType
     }
 
 
+    /*
     public function getForm(AbstractHtmlContainer $parent)
     {
 
@@ -179,19 +180,19 @@ abstract class AbstractTreeContentType extends AbstractContentType
         }
 
         /** @var AbstractContentForm $form */
-        $form = new $this->formClass($parent);
+     /*   $form = new $this->formClass($parent);
 
         if (!$this->createMode) {
-            $form->dataId = $this->dataId;
+            //$form->dataId = $this->dataId;
         }
         $form->contentType = $this;
-        $form->parentId = $this->parentId;
+        //$form->parentId = $this->parentId;
         $form->createMode = $this->createMode;
 
 
         return $form;
 
-    }
+    }*/
 
 
 }

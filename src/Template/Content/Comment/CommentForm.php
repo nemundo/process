@@ -11,6 +11,11 @@ class CommentForm extends AbstractContentForm
 {
 
     /**
+     * @var CommentContentType
+     */
+    public $contentType;
+
+    /**
      * @var BootstrapLargeTextBox
      */
     private $comment;
@@ -28,10 +33,10 @@ class CommentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        $type = new CommentContentType();
-        $type->parentId = $this->parentId;
-        $type->comment = $this->comment->getValue();
-        $type->saveType();
+        //$type = new CommentContentType();
+        //$type->parentId = $this->parentId;
+        $this->contentType->comment = $this->comment->getValue();
+        $this->contentType->saveType();
 
     }
 

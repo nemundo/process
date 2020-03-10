@@ -51,7 +51,7 @@ abstract class AbstractTextContentForm extends AbstractContentForm
     {
 
         $this->contentType->fromDataId($this->dataId);
-        $this->contentType->parentId = $this->parentId;
+        //$this->contentType->parentId = $this->parentId;
         $this->contentType->text = $this->text->getValue();
         $this->contentType->saveType();
 

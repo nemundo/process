@@ -29,10 +29,10 @@ class UserContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        $type  = new UserContentType($this->dataId);
-        $type->login = $this->login->getValue();
-        $type->email = $this->login->getValue();
-        $type->saveType();
+        //$type  = new UserContentType($this->dataId);
+        $this->contentType->login = $this->login->getValue();
+        $this->contentType->email = $this->login->getValue();
+        $this->contentType->saveType();
 
 
     }

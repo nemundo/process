@@ -29,7 +29,7 @@ class ContentForm extends AbstractContentForm
     {
 
 
-        $this->contentType->parentId=$this->parentId;
+        //$this->contentType->parentId=$this->parentId;
         $this->contentType->saveType();
 
 

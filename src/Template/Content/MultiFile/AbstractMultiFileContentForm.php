@@ -106,7 +106,7 @@ abstract class AbstractMultiFileContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        $this->contentType->parentId = $this->parentId;
+        //$this->contentType->parentId = $this->parentId;
         $this->contentType->saveType();
 
         foreach ($this->file->getMultiFileRequest() as $fileRequest) {

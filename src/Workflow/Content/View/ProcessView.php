@@ -32,8 +32,11 @@ class ProcessView extends AbstractProcessView
     public function getContent()
     {
 
-        //$title=new AdminTitle($this);
-        //$title->content='ORGINAK';
+
+
+
+        $title=new AdminTitle($this);
+        $title->content='ORGINAK';
 
         $workflowStatus = null;
         $formStatus = null;

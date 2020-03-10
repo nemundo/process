@@ -16,7 +16,7 @@ class StatusFormContainer extends AbstractHtmlContainer
     /**
      * @var string
      */
-    public $parentId;
+    //public $parentId;
 
     /**
      * @var AbstractSite
