@@ -86,7 +86,7 @@ trait ContentIndexTrait
         $data->updateOnDuplicate = true;
         $data->contentTypeId = $this->typeId;
         $data->dataId = $this->dataId;
-        $data->subject = '[subject]';  // $this->getSubject();
+        $data->subject =$this->getSubject();  // '[subject]';  // $this->getSubject();
         $data->dateTime = $this->dateTime;
         $data->userId = $this->userId;
         $data->save();

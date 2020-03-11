@@ -6,6 +6,7 @@ namespace Nemundo\Process\Template\Status\LargeText;
 
 use Nemundo\Process\Template\Data\LargeText\LargeText;
 use Nemundo\Process\Template\Data\LargeText\LargeTextReader;
+use Nemundo\Process\Template\Data\LargeText\LargeTextRow;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
 abstract class AbstractLargeTextProcessStatus extends AbstractProcessStatus
@@ -15,7 +16,7 @@ abstract class AbstractLargeTextProcessStatus extends AbstractProcessStatus
 
     protected $largeTextLabel = 'Large Text (Orginal)';
 
-    protected $largeTextValidation=false;
+    protected $largeTextValidation = false;
 
     protected function onCreate()
     {
@@ -37,17 +38,19 @@ abstract class AbstractLargeTextProcessStatus extends AbstractProcessStatus
 
     protected function onDataRow()
     {
-        $this->dataRow= (new LargeTextReader())->getRowById($this->dataId);
+        $this->dataRow = (new LargeTextReader())->getRowById($this->dataId);
 
     }
 
 
-    /*
+    /**
+     * @return \Nemundo\Model\Row\AbstractModelDataRow|LargeTextRow
+     */
     public function getDataRow()
     {
-        return (new LargeTextReader())->getRowById($this->dataId);
+        return parent::getDataRow();
+    }
 
-    }*/
 
     public function getText()
     {
@@ -69,11 +72,14 @@ abstract class AbstractLargeTextProcessStatus extends AbstractProcessStatus
     }
 
 
-    public function getLargeTextLabel() {
+    public function getLargeTextLabel()
+    {
         return $this->largeTextLabel;
     }
 
-    public function getLargeTextValidation() {
+
+    public function getLargeTextValidation()
+    {
         return $this->largeTextValidation;
     }
 

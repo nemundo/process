@@ -17,6 +17,13 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
     use ProcessStatusTrait;
     use GroupRestrictionTrait;
 
+    /**
+     * @var bool
+     */
+    public $toggleView = false;
+
+
+
     public function __construct($dataId = null)
     {
         $this->formClass = StatusForm::class;

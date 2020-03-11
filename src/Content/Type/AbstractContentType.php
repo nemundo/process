@@ -27,42 +27,12 @@ abstract class AbstractContentType extends AbstractType
 {
 
     use ContentIndexTrait;
-
     //use SearchIndexTrait;
-
-    /**
-     * @var DateTime
-     */
-    //public $dateTime;
-
-    /**
-     * @var string
-     */
-   // public $userId;
-
-    /**
-     * @var string
-     */
-    //public $typeId;
-
-    /**
-     * @var string|string[]
-     */
-    //public $typeLabel;
-
-
-    //public $restricted = false;
-
-
-   // protected $contentId;
 
     /**
      * @var string
      */
     protected $listClass;
-
-    // parentContainerListClass
-
 
     /**
      * @var string
@@ -70,15 +40,10 @@ abstract class AbstractContentType extends AbstractType
     protected $adminClass;
 
 
-
-    //abstract protected function loadContentType();
-
-
     public function __construct($dataId = null)
     {
-        parent::__construct($dataId);
 
-        //$this->loadContentType();
+        parent::__construct($dataId);
 
         if ($this->formClass == null) {
             $this->formClass = ContentForm::class;
@@ -86,76 +51,15 @@ abstract class AbstractContentType extends AbstractType
 
         $this->loadUserDateTime();
 
-        //$this->dateTime = (new DateTime())->setNow();
-        //$this->userId = (new UserSessionType())->userId;
-
-    }
-
-/*
-    public function getContentId()
-    {
-
-        if ($this->contentId == null) {
-            $id = new ContentId();
-            $id->filter->andEqual($id->model->contentTypeId, $this->typeId);
-            $id->filter->andEqual($id->model->dataId, $this->dataId);
-            $this->contentId = $id->getId();
-        }
-
-        return $this->contentId;
-
-    }
-
-
-    public function existContent()
-    {
-
-        $value = true;
-
-        $count = new ContentCount();
-        $count->filter->andEqual($count->model->contentTypeId, $this->typeId);
-        $count->filter->andEqual($count->model->dataId, $this->dataId);
-        if ($count->getCount() == 0) {
-            $value = false;
-        }
-
-        return $value;
-
-    }*/
-
-    public function existItem()
-    {
-        //return false;
-        $value = false;
-        if ($this->dataId !== null) {
-            $value = true;
-        }
-
-        return $value;
-
     }
 
 
     public function saveType()
     {
 
-
-        /*
-        if ($this->existItem()) {
-            $this->createMode = false;
-        }*/
-
-
         parent::saveType();
         $this->saveContent();
-
         $this->saveIndex();
-
-        //$this->saveSearchIndex();
-
-        //return $this->dataId;
-
-
 
     }
 

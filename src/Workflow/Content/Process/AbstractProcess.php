@@ -144,41 +144,48 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public function saveType()
     {
 
+
+        //parent::saveType();
+
         // gibt es update bei process?
 
-        if ($this->createMode) {
+        //if ($this->createMode) {
 
             //$this->saveContentBefore();
 
             $this->onCreate();
 
-
             $update = new ModelUpdate();
             $update->model = $this->workflowModel;
-
-            $this->saveContent();
-
-
-            // deadline hier???
-
             $update->typeValueList->setModelValue($update->model->active, true);
             $update->typeValueList->setModelValue($update->model->number, $this->getNumber());
             $update->typeValueList->setModelValue($update->model->workflowNumber, $this->getWorkflowNumber());
             $update->typeValueList->setModelValue($update->model->statusId, $this->startContentType->typeId);
             $update->typeValueList->setModelValue($update->model->dateTime, $this->dateTime->getIsoDateTimeFormat());
             $update->typeValueList->setModelValue($update->model->userId, $this->userId);
-            $update->typeValueList->setModelValue($update->model->contentId, $this->getContentId());
-
+            //$update->typeValueList->setModelValue($update->model->contentId, $this->getContentId());
             //$update->typeValueList->setModelValue($update->model->contentId, $this->contentId);
             $update->updateById($this->dataId);
 
 
+        $this->saveContent();
+$this->saveTree();
 
-            /*
-            $update = new ModelUpdate();
-            $update->model = $this->workflowModel;
-            $update->typeValueList->setModelValue($update->model->contentId, $this->getContentId());
-            $update->updateById($this->dataId);
+        $update = new ModelUpdate();
+        $update->model = $this->workflowModel;
+        $update->typeValueList->setModelValue($update->model->contentId, $this->getContentId());
+        $update->updateById($this->dataId);
+
+
+
+
+
+
+        /*
+        $update = new ModelUpdate();
+        $update->model = $this->workflowModel;
+        $update->typeValueList->setModelValue($update->model->contentId, $this->getContentId());
+        $update->updateById($this->dataId);
 */
 
 
@@ -187,15 +194,16 @@ abstract class AbstractProcess extends AbstractSequenceContentType
             $update->dataId = $this->dataId;
             $update->updateById($this->contentId);*/
 
-        } else {
+        /*} else {
             (new LogMessage())->writeError('process no create mode');
-        }
+        }*/
 
-        $this->saveTree();
+        //$this->saveTree();
+        $this->saveContentIndex();
 
-        $update = new ContentUpdate();
+       /* $update = new ContentUpdate();
         $update->subject = $this->getSubject();
-        $update->updateById($this->contentId);
+        $update->updateById($this->contentId);*/
 
 //        $this->addSearchWord($this->getSubject());
 
@@ -631,9 +639,9 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $view = new $this->processViewClass($parent);
         $view->contentType = $this;
 
-        if (!$this->createMode) {
+        //if (!$this->createMode) {
             //$view->dataId = $this->dataId;
-        }
+        //}
 
         return $view;
 

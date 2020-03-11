@@ -237,6 +237,8 @@ class ContentItemSite extends AbstractSite
         }
 
 
+
+        /*
         if ($contentType->isObjectOfTrait(MenuTrait::class)) {
 
             $dropdown = new BootstrapSiteDropdown($page);
@@ -255,7 +257,7 @@ class ContentItemSite extends AbstractSite
 
             }
 
-        }
+        }*/
 
 
         /* $contentTypeParameter = new ContentTypeParameter();

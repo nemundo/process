@@ -37,7 +37,7 @@ abstract class AbstractType extends AbstractBaseClass
     /**
      * @var bool
      */
-    protected $createMode = true;
+    private $createMode = true;
     // oder public
 
     /**
@@ -64,27 +64,20 @@ abstract class AbstractType extends AbstractBaseClass
     {
 
         $this->loadContentType();
-
         $this->fromDataId($dataId);
 
-        /*
-        if ($dataId !== null) {
-            $this->loadFromDataId($dataId);
-        }
-
-        $this->onLoad();*/
+        //$this->onLoad();*/
 
     }
 
 
-    // fromDataId
     public function fromDataId($dataId = null)
     {
 
         $this->dataId = $dataId;
         if ($this->dataId !== null) {
             $this->createMode = false;
-            $this->onLoad();
+            //$this->onLoad();
         }
 
         return $this;
@@ -135,10 +128,11 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
+    /*
     protected function onLoad()
     {
 
-    }
+    }*/
 
     protected function onCreate()
     {
@@ -174,7 +168,8 @@ abstract class AbstractType extends AbstractBaseClass
     public function saveType()
     {
 
-        if ($this->createMode) {
+        //if ($this->createMode) {
+        if (!$this->existItem()) {
             $this->onCreate();
         } else {
             $this->onUpdate();
@@ -331,5 +326,20 @@ abstract class AbstractType extends AbstractBaseClass
         $this->onDelete();
 
     }
+
+
+
+    public function existItem()
+    {
+        //return false;
+        /*$value = false;
+        if ($this->dataId !== null) {
+            $value = true;
+        }*/
+
+        return !$this->createMode;  // $value;
+
+    }
+
 
 }

@@ -23,7 +23,7 @@ abstract class AbstractTreeContentType extends AbstractContentType
     /**
      * @var bool
      */
-    public $toggleView = false;
+    //public $toggleView = false;
     // --> falscher Ort !!!
 
 
@@ -45,18 +45,11 @@ abstract class AbstractTreeContentType extends AbstractContentType
 
 
 
+    // afterContentSave
     protected function onFinished()
     {
 
     }
-
-
-
-
-   /* protected function onIndex()
-    {
-
-    }*/
 
 
     public function saveIndex()
@@ -78,32 +71,11 @@ abstract class AbstractTreeContentType extends AbstractContentType
     {
 
         parent::deleteType();
-
         $this->deleteTree();
-
-        /*
-        $delete = new TreeDelete();
-        $delete->filter->orEqual($delete->model->parentId, $this->getContentId());
-        $delete->filter->orEqual($delete->model->childId, $this->getContentId());
-        $delete->delete();*/
 
         //$this->deleteSearchIndex();
 
     }
-
-
-    /*
-    protected function deleteChild()
-    {
-
-        foreach ($this->getChild() as $customRow) {
-
-            $type = $customRow->getContentType();
-            $type->deleteType();
-
-        }
-
-    }*/
 
 
     public function getText()
@@ -111,20 +83,6 @@ abstract class AbstractTreeContentType extends AbstractContentType
 
         $text = '';
         return $text;
-
-    }
-
-
-
-    // JsonExportTrait
-    public function exportJson()
-    {
-
-        $data['id'] = $this->dataId;
-        $data['subject'] = $this->getSubject();
-
-        return $data;
-
 
     }
 
@@ -150,30 +108,5 @@ abstract class AbstractTreeContentType extends AbstractContentType
     {
 
     }
-
-
-    /*
-    public function getForm(AbstractHtmlContainer $parent)
-    {
-
-        if ($this->formClass == null) {
-            (new LogMessage())->writeError('No Form' . $this->getClassName());
-        }
-
-        /** @var AbstractContentForm $form */
-     /*   $form = new $this->formClass($parent);
-
-        if (!$this->createMode) {
-            //$form->dataId = $this->dataId;
-        }
-        $form->contentType = $this;
-        //$form->parentId = $this->parentId;
-        $form->createMode = $this->createMode;
-
-
-        return $form;
-
-    }*/
-
 
 }
