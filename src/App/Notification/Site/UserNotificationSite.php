@@ -14,6 +14,7 @@ use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
+use Nemundo\Process\App\Notification\Content\Message\MessageNotificationContentType;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationPaginationReader;
 use Nemundo\Process\App\Notification\Parameter\NotificationParameter;
 use Nemundo\Process\Config\ProcessConfig;
@@ -49,13 +50,19 @@ class UserNotificationSite extends AbstractSite
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
 
+        $type = new MessageNotificationContentType();
+        $type->getForm($page);
+
+
+
+
         $form=new SearchForm($page);
 
         $formRow = new BootstrapFormRow($form);
 
         $listbox = new BootstrapListBox($formRow);
         $listbox->addItem(0,'Offene');
-        $listbox->addItem(0,'Gelöschte/Archivierte');
+        $listbox->addItem(1,'Gelöschte/Archivierte');
 
 
         $btn=new AdminSiteButton($page);
@@ -82,6 +89,7 @@ class UserNotificationSite extends AbstractSite
         $notificationReader->model->loadTo();
 
         $notificationReader->filter->andEqual($notificationReader->model->toId, (new UserSessionType())->userId);
+        $notificationReader->filter->andEqual($notificationReader->model->archive,false);
 
         $notificationReader->addOrder($notificationReader->model->id, SortOrder::DESCENDING);
         $notificationReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;

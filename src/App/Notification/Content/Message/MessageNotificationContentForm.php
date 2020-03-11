@@ -56,7 +56,7 @@ class MessageNotificationContentForm extends AbstractContentForm
     {
 
         //$type=new MessageNotificationContentType();
-        $this->contentType->parentId = $this->parentId;
+        //$this->contentType->parentId = $this->parentId;
         $this->contentType->toUserId = $this->to->getValue();
         $this->contentType->message = $this->message->getValue();
         $this->contentType->saveType();
