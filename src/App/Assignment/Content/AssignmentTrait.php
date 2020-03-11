@@ -31,8 +31,6 @@ trait AssignmentTrait
      */
     public $group;
 
-
-    // assignmentId
     public $groupId;
 
     /**
@@ -92,6 +90,9 @@ trait AssignmentTrait
         $this->dataRow = $reader->getRowById($this->dataId);
 
     }
+
+
+
 
 
     public function getSubject()

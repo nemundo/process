@@ -51,17 +51,16 @@ class FileParentContainer extends AbstractParentContainer
             $row = new TableRow($table);
             $row->strikeThrough = !$documentRow->active;
 
-
             if ($documentRow->active) {
                 $link = new WorkflowFancyboxHyperlink($row);
                 $link->filename = $documentRow->file->getFilename();
                 $link->url = $documentRow->file->getUrl();
+            } else {
+                $row->addText($documentRow->file->getFilename());
             }
 
-            $ersteller = $documentRow->content->user->login.' '.$documentRow->content->dateTime->getShortDateTimeWithSecondLeadingZeroFormat();
+            $ersteller = $documentRow->content->user->login . ' ' . $documentRow->content->dateTime->getShortDateLeadingZeroFormat();
             $row->addText($ersteller);
-
-
 
             if ($documentRow->active) {
                 $site = clone(FileInactiveSite::$site);
@@ -83,8 +82,6 @@ class FileParentContainer extends AbstractParentContainer
             //}
 
 
-
-
             //$row->addText($documentRow->content->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
             //$row->addText($documentRow->content->user->displayName);
 
@@ -92,7 +89,7 @@ class FileParentContainer extends AbstractParentContainer
         }
 
         if ($fileReader->getCount() == 0) {
-         //   $this->visible = false;
+            $this->visible = false;
         }
 
         return parent::getContent();

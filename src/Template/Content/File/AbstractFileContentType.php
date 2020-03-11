@@ -62,7 +62,7 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
             $data->file->fromFilename($this->filename);
         }
 
-        $data->contentId = $this->getContentId();
+        //$data->contentId = $this->getContentId();
         $this->dataId = $data->save();
 
 
@@ -95,6 +95,16 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
 
         }
 
+
+    }
+
+
+    protected function onFinished()
+    {
+
+        $update = new TemplateFileUpdate();
+        $update->contentId = $this->getContentId();
+        $update->updateById($this->dataId);
 
     }
 

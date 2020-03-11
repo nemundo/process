@@ -16,14 +16,9 @@ use Nemundo\Process\Tree\Type\TreeTypeTrait;
 abstract class AbstractTreeContentType extends AbstractContentType
 {
 
-    //use ContentTreeTrait;
     use TreeTypeTrait;
     use SearchIndexTrait;
 
-    /**
-     * @var string
-     */
-   // public $parentId;
 
     /**
      * @var bool
@@ -42,26 +37,12 @@ abstract class AbstractTreeContentType extends AbstractContentType
             $this->createMode = false;
         }*/
 
-        //$this->saveContent();
         $this->saveTree();
-
-        //$this->onFinished();
+        $this->onFinished();
         //$this->saveIndex();
 
     }
 
-/*
-    protected function saveTree()
-    {
-
-        if ($this->parentId !== null) {
-            $writer = new TreeWriter();
-            $writer->parentId = $this->parentId;
-            $writer->dataId = $this->contentId;
-            $writer->write();
-        }
-
-    }*/
 
 
     protected function onFinished()

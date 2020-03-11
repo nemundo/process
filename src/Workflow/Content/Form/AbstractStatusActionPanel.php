@@ -15,6 +15,6 @@ abstract class AbstractStatusActionPanel extends AbstractContentActionPanel
 
     //use RedirectTrait;
     //use ContentFormTrait;
-    use StatusFormTrait;
+    //use StatusFormTrait;
 
 }

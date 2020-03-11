@@ -53,8 +53,8 @@ abstract class AbstractDecimalNumberContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        $this->contentType->fromDataId($this->dataId);
-        $this->contentType->parentId = $this->parentId;
+        //$this->contentType->fromDataId($this->dataId);
+        //$this->contentType->parentId = $this->parentId;
         $this->contentType->decimalNumber = (float)$this->number->getValue();
         $this->contentType->saveType();
 

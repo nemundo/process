@@ -11,6 +11,11 @@ abstract class AbstractFileContentForm extends AbstractContentForm
 {
 
     /**
+     * @var AbstractFileContentType
+     */
+    public $contentType;
+
+    /**
      * @var BootstrapFileUpload
      */
     protected $file;

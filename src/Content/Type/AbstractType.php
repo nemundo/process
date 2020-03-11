@@ -203,7 +203,7 @@ abstract class AbstractType extends AbstractBaseClass
         }
         $form->contentType = $this;
         //$form->parentId = $this->
-        $form->createMode = $this->createMode;
+        //$form->createMode = $this->createMode;
 
 
         return $form;

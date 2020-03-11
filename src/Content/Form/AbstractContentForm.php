@@ -16,9 +16,14 @@ abstract class AbstractContentForm extends AbstractAdminForm
     public function getContent()
     {
 
-        if (!$this->createMode) {
+        if ($this->contentType->existItem()) {
             $this->loadUpdateForm();
         }
+
+        /*
+        if (!$this->createMode) {
+            $this->loadUpdateForm();
+        }*/
 
         return parent::getContent();
 

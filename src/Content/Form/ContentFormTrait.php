@@ -28,7 +28,7 @@ trait ContentFormTrait
     /**
      * @var bool
      */
-    public $createMode = true;
+    //public $createMode = true;
 
     /**
      * @var bool

@@ -39,7 +39,7 @@ trait TreeTypeTrait
         if ($this->parentId !== null) {
             $writer = new TreeWriter();
             $writer->parentId = $this->parentId;
-            $writer->dataId =$this->getContentId();  // $this->contentId;
+            $writer->dataId =$this->getContentId();
             $writer->write();
         }
 
