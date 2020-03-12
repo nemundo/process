@@ -58,11 +58,11 @@ class NotificationWidget extends AdminWidget
         $header->addEmpty();
 
         $reader = new NotificationReader();
-        $reader->model->loadSubjectContent();
-        $reader->model->subjectContent->loadContentType();
+        //$reader->model->loadSubjectContent();
+        //$reader->model->subjectContent->loadContentType();
         $reader->model->loadContent();
         $reader->model->content->loadContentType();
-        $reader->model->loadTo();
+        //$reader->model->loadTo();
         $reader->filter->andEqual($reader->model->toId, (new UserSessionType())->userId);
         $reader->filter->andEqual($reader->model->archive, false);
         $reader->addOrder($reader->model->id, SortOrder::DESCENDING);
@@ -70,14 +70,12 @@ class NotificationWidget extends AdminWidget
         foreach ($reader->getData() as $notificationRow) {
 
 
-
             $notificationContentType = $notificationRow->getNotificationContentType();
-
 
             $row = new BootstrapClickableTableRow($table);
             //$row->addYesNo($notificationRow->archive);
             //$row->addText($notificationRow->content->contentType->contentType);
-            $row->addText($notificationRow->subjectContent->subject);
+            $row->addText($notificationRow->subject);  // subjectContent->subject);
 //            $row->addText($notificationRow->message);
 //            $row->addText((new Html( $notificationContentType->getMessage()))->getValue());
             $row->addText($notificationContentType->getMessage());
@@ -91,9 +89,14 @@ class NotificationWidget extends AdminWidget
             $row->addIconSite($site);
 
 
-            $row->addClickableSite($notificationRow->subjectContent->getContentType()->getViewSite());
+//            $row->addClickableSite($notificationRow->subjectContent->getContentType()->getViewSite());
+
+            $row->addClickableSite($notificationRow->content->getContentType()->getViewSite());
+
+
 
         }
+
 
         //$btn=new AdminIconSiteButton($this);
         //$btn->site = UserNotificationDeleteSite::$site;

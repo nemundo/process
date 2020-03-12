@@ -38,13 +38,6 @@ abstract class AbstractType extends AbstractBaseClass
      * @var bool
      */
     private $createMode = true;
-    // oder public
-
-    /**
-     * @var bool
-     */
-    //protected $ignoreMode = false;
-
 
     /**
      * @var string
@@ -66,8 +59,6 @@ abstract class AbstractType extends AbstractBaseClass
         $this->loadContentType();
         $this->fromDataId($dataId);
 
-        //$this->onLoad();*/
-
     }
 
 
@@ -77,7 +68,6 @@ abstract class AbstractType extends AbstractBaseClass
         $this->dataId = $dataId;
         if ($this->dataId !== null) {
             $this->createMode = false;
-            //$this->onLoad();
         }
 
         return $this;
@@ -128,12 +118,6 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
-    /*
-    protected function onLoad()
-    {
-
-    }*/
-
     protected function onCreate()
     {
 
@@ -159,8 +143,19 @@ abstract class AbstractType extends AbstractBaseClass
 
         $this->onDataRow();
         $this->onIndex();
-        //$this->saveContentIndex();
-        //$this->saveSearchIndex();
+
+    }
+
+
+
+    protected function saveData() {
+
+        if (!$this->existItem()) {
+            $this->onCreate();
+        } else {
+            $this->onUpdate();
+        }
+
 
     }
 
@@ -168,12 +163,7 @@ abstract class AbstractType extends AbstractBaseClass
     public function saveType()
     {
 
-        //if ($this->createMode) {
-        if (!$this->existItem()) {
-            $this->onCreate();
-        } else {
-            $this->onUpdate();
-        }
+        $this->saveData();
 
         // muss am Schluss sein
 //        $this->saveIndex();
@@ -184,22 +174,13 @@ abstract class AbstractType extends AbstractBaseClass
     public function getForm(AbstractHtmlContainer $parent)
     {
 
-       // (new Debug())->write('getform');
-
         if ($this->formClass == null) {
             (new LogMessage())->writeError('No Form' . $this->getClassName());
         }
 
         /** @var AbstractContentForm $form */
         $form = new $this->formClass($parent);
-
-        if (!$this->createMode) {
-         //   $form->dataId = $this->dataId;
-        }
         $form->contentType = $this;
-        //$form->parentId = $this->
-        //$form->createMode = $this->createMode;
-
 
         return $form;
 
@@ -236,7 +217,6 @@ abstract class AbstractType extends AbstractBaseClass
 
             /** @var AbstractContentView $view */
             $view = new $this->viewClass($parent);
-            //$view->dataId = $this->dataId;
             $view->contentType = $this;
 
         } else {

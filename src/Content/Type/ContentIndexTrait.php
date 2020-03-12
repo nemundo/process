@@ -78,17 +78,24 @@ trait ContentIndexTrait
     protected function saveContent()
     {
 
-        if ($this->dataId == null) {
+        //if ($this->dataId == null) {
+
+        // wann braucht's das???
+
+            if ($this->getDataId() == null) {
             $this->dataId = (new UniqueId())->getUniqueId();
         }
 
         $data = new Content();
-        $data->updateOnDuplicate = true;
+        $data->ignoreIfExists=true;
+        //$data->updateOnDuplicate = true;
         $data->contentTypeId = $this->typeId;
-        $data->dataId = $this->dataId;
-        $data->subject =$this->getSubject();  // '[subject]';  // $this->getSubject();
+        $data->dataId =$this->getDataId();  //  $this->dataId;
+        //$data->subject =$this->getSubject();
+
         $data->dateTime = $this->dateTime;
         $data->userId = $this->userId;
+
         $data->save();
 
     }

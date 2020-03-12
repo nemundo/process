@@ -16,8 +16,7 @@ use Nemundo\Process\Workflow\Content\Status\ProcessStatusTrait;
 class HtmlContentType extends AbstractLargeTextContentType
 {
 
-    //use UserRestrictionTrait;
-    use ProcessStatusTrait;
+    //use ProcessStatusTrait;
 
     public $html;
 

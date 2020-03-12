@@ -5,6 +5,7 @@ namespace Nemundo\Process\App\Calendar\Type;
 
 
 use Nemundo\Process\App\Calendar\Data\CalendarIndex\CalendarIndex;
+use Nemundo\Process\App\Calendar\Data\CalendarIndex\CalendarIndexDelete;
 
 trait CalendarIndexTrait
 {
@@ -34,6 +35,9 @@ trait CalendarIndexTrait
     protected function deleteCalendarIndex()
     {
 
+        $delete= new CalendarIndexDelete();
+        $delete->filter->andEqual($delete->model->contentId,$this->getContentId());
+        $delete->delete();
 
     }
 

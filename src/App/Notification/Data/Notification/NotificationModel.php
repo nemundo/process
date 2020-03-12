@@ -12,16 +12,6 @@ public $id;
 public $archive;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalIdType
-*/
-public $contentId;
-
-/**
-* @var \Nemundo\Process\Content\Data\Content\ContentExternalType
-*/
-public $content;
-
-/**
 * @var \Nemundo\Model\Type\Text\LargeTextType
 */
 public $message;
@@ -39,12 +29,17 @@ public $to;
 /**
 * @var \Nemundo\Model\Type\External\Id\ExternalIdType
 */
-public $subjectContentId;
+public $contentId;
 
 /**
 * @var \Nemundo\Process\Content\Data\Content\ContentExternalType
 */
-public $subjectContent;
+public $content;
+
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $subject;
 
 protected function loadModel() {
 $this->tableName = "process_notification";
@@ -71,13 +66,6 @@ $this->archive->aliasFieldName = "process_notification_archive";
 $this->archive->label = "Archive";
 $this->archive->allowNullValue = false;
 
-$this->contentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
-$this->contentId->tableName = "process_notification";
-$this->contentId->fieldName = "content";
-$this->contentId->aliasFieldName = "process_notification_content";
-$this->contentId->label = "Notification Content";
-$this->contentId->allowNullValue = false;
-
 $this->message = new \Nemundo\Model\Type\Text\LargeTextType($this);
 $this->message->tableName = "process_notification";
 $this->message->fieldName = "message";
@@ -92,28 +80,31 @@ $this->toId->aliasFieldName = "process_notification_to";
 $this->toId->label = "To";
 $this->toId->allowNullValue = false;
 
-$this->subjectContentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
-$this->subjectContentId->tableName = "process_notification";
-$this->subjectContentId->fieldName = "subject_content";
-$this->subjectContentId->aliasFieldName = "process_notification_subject_content";
-$this->subjectContentId->label = "Subject Content";
-$this->subjectContentId->allowNullValue = false;
+$this->contentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
+$this->contentId->tableName = "process_notification";
+$this->contentId->fieldName = "content";
+$this->contentId->aliasFieldName = "process_notification_content";
+$this->contentId->label = "Content";
+$this->contentId->allowNullValue = false;
+
+$this->subject = new \Nemundo\Model\Type\Text\TextType($this);
+$this->subject->tableName = "process_notification";
+$this->subject->fieldName = "subject";
+$this->subject->aliasFieldName = "process_notification_subject";
+$this->subject->label = "Subject";
+$this->subject->allowNullValue = false;
+$this->subject->length = 255;
 
 $index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
 $index->indexName = "user_archive";
 $index->addType($this->toId);
 $index->addType($this->archive);
 
-}
-public function loadContent() {
-if ($this->content == null) {
-$this->content = new \Nemundo\Process\Content\Data\Content\ContentExternalType($this, "process_notification_content");
-$this->content->tableName = "process_notification";
-$this->content->fieldName = "content";
-$this->content->aliasFieldName = "process_notification_content";
-$this->content->label = "Notification Content";
-}
-return $this;
+$index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
+$index->indexName = "to_content";
+$index->addType($this->toId);
+$index->addType($this->contentId);
+
 }
 public function loadTo() {
 if ($this->to == null) {
@@ -125,13 +116,13 @@ $this->to->label = "To";
 }
 return $this;
 }
-public function loadSubjectContent() {
-if ($this->subjectContent == null) {
-$this->subjectContent = new \Nemundo\Process\Content\Data\Content\ContentExternalType($this, "process_notification_subject_content");
-$this->subjectContent->tableName = "process_notification";
-$this->subjectContent->fieldName = "subject_content";
-$this->subjectContent->aliasFieldName = "process_notification_subject_content";
-$this->subjectContent->label = "Subject Content";
+public function loadContent() {
+if ($this->content == null) {
+$this->content = new \Nemundo\Process\Content\Data\Content\ContentExternalType($this, "process_notification_content");
+$this->content->tableName = "process_notification";
+$this->content->fieldName = "content";
+$this->content->aliasFieldName = "process_notification_content";
+$this->content->label = "Content";
 }
 return $this;
 }

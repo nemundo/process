@@ -58,8 +58,16 @@ abstract class AbstractContentType extends AbstractType
     {
 
         parent::saveType();
+
+
+        //if (!$this->existItem()) {
         $this->saveContent();
-        $this->saveIndex();
+        //}
+
+
+
+        // später???
+        //$this->saveIndex();
 
     }
 

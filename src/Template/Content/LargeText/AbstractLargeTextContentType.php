@@ -45,7 +45,6 @@ abstract class AbstractLargeTextContentType extends AbstractTreeContentType
 
         $this->saveSearchContent($row->largeText);
 
-
     }
 
 

@@ -20,9 +20,7 @@ abstract class AbstractYesNoContentType extends AbstractTreeContentType
     {
 
         $this->viewClass = YesNoContentView::class;
-
         parent::__construct($dataId);
-
 
     }
 

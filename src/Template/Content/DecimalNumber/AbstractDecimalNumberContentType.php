@@ -18,7 +18,7 @@ abstract class AbstractDecimalNumberContentType extends AbstractTreeContentType
     {
 
         parent::__construct($dataId);
-        $this->viewClass=DecimalNumberContentView::class;
+        $this->viewClass = DecimalNumberContentView::class;
 
     }
 
@@ -26,9 +26,9 @@ abstract class AbstractDecimalNumberContentType extends AbstractTreeContentType
     protected function onCreate()
     {
 
-        $data=new TemplateDecimalNumber();
-        $data->decimalNumber=$this->decimalNumber;
-        $this->dataId=$data->save();
+        $data = new TemplateDecimalNumber();
+        $data->decimalNumber = $this->decimalNumber;
+        $this->dataId = $data->save();
 
     }
 
@@ -36,6 +36,5 @@ abstract class AbstractDecimalNumberContentType extends AbstractTreeContentType
     {
         return (new TemplateDecimalNumberReader())->getRowById($this->dataId);
     }
-
 
 }

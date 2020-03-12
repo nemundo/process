@@ -19,27 +19,16 @@ abstract class AbstractTreeContentType extends AbstractContentType
     use TreeTypeTrait;
     use SearchIndexTrait;
 
-
-    /**
-     * @var bool
-     */
-    //public $toggleView = false;
-    // --> falscher Ort !!!
-
-
     public function saveType()
     {
 
-        parent::saveType();
+        //parent::saveType();
 
-        /*
-        if ($this->existItem()) {
-            $this->createMode = false;
-        }*/
-
+        $this->saveData();
+        $this->saveContent();
         $this->saveTree();
         $this->onFinished();
-        //$this->saveIndex();
+        $this->saveIndex();
 
     }
 

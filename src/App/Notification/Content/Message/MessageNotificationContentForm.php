@@ -6,16 +6,18 @@ namespace Nemundo\Process\App\Notification\Content\Message;
 
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapLargeTextBox;
+use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
 use Nemundo\Process\App\Notification\Content\AbstractNotificationContentType;
 use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\User\Com\ListBox\UserListBox;
+use Nemundo\User\Type\UserSessionType;
 
 class MessageNotificationContentForm extends AbstractContentForm
 {
 
     /**
-     * @var AbstractNotificationContentType
+     * @var MessageNotificationContentType|AbstractNotificationContentType
      */
     public $contentType;
 
@@ -23,6 +25,11 @@ class MessageNotificationContentForm extends AbstractContentForm
      * @var UserListBox
      */
     private $to;
+
+    /**
+     * @var BootstrapTextBox
+     */
+    private $subject;
 
     /**
      * @var BootstrapLargeTextBox
@@ -37,13 +44,18 @@ class MessageNotificationContentForm extends AbstractContentForm
         $this->to->label = 'To';
         $this->to->validation = true;
 
+        $this->subject=new BootstrapTextBox($this);
+        $this->subject->label='Subject';
+
+
         $this->message = new BootstrapLargeTextBox($this);
         $this->message->label[LanguageCode::EN] = 'Message';
         $this->message->label[LanguageCode::DE] = 'Nachricht';
 
 
         if (ProcessConfig::$debugMode) {
-            $this->to->emptyValueAsDefault = false;
+            //$this->to->emptyValueAsDefault = false;
+            $this->to->value=(new UserSessionType())->userId;
             $this->message->value = '123123123';
         }
 
@@ -58,6 +70,7 @@ class MessageNotificationContentForm extends AbstractContentForm
         //$type=new MessageNotificationContentType();
         //$this->contentType->parentId = $this->parentId;
         $this->contentType->toUserId = $this->to->getValue();
+        $this->contentType->subject=$this->subject->getValue();
         $this->contentType->message = $this->message->getValue();
         $this->contentType->saveType();
 

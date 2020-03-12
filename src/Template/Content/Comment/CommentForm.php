@@ -33,8 +33,6 @@ class CommentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        //$type = new CommentContentType();
-        //$type->parentId = $this->parentId;
         $this->contentType->comment = $this->comment->getValue();
         $this->contentType->saveType();
 

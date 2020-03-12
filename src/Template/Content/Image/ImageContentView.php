@@ -20,7 +20,6 @@ class ImageContentView extends AbstractContentView
 
         $imageeRow = $this->contentType->getDataRow();
 
-
         $img = new BootstrapResponsiveImage($this);
         $img->src = $imageeRow->image->getImageUrl($imageeRow->model->imageAutoSize1200);
 

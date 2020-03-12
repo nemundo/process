@@ -36,8 +36,6 @@ class HtmlContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        //$type = new HtmlContentType($this->dataId);
-        //$type->parentId = $this->parentId;
         $this->contentType->html = $this->html->getValue();
         $this->contentType->saveType();
 

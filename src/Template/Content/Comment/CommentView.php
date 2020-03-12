@@ -4,11 +4,9 @@
 namespace Nemundo\Process\Template\Content\Comment;
 
 
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Type\Text\Html;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Process\Content\View\AbstractContentView;
-use Nemundo\Process\Template\Data\LargeText\LargeTextReader;
 
 class CommentView extends AbstractContentView
 {
@@ -16,9 +14,7 @@ class CommentView extends AbstractContentView
     public function getContent()
     {
 
-        //(new Debug())->write($this->dataId);
-
-        $row = $this->contentType->getDataRow();   // (new LargeTextReader())->getRowById($this->dataId);
+        $row = $this->contentType->getDataRow();
 
         $p = new Paragraph($this);
         $p->content = (new Html($row->largeText))->getValue();

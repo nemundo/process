@@ -26,9 +26,9 @@ abstract class AbstractNumberContentType extends AbstractTreeContentType
     protected function onCreate()
     {
 
-        $data=new TemplateNumber();
-        $data->number=$this->number;
-        $this->dataId=$data->save();
+        $data = new TemplateNumber();
+        $data->number = $this->number;
+        $this->dataId = $data->save();
 
     }
 
@@ -39,6 +39,5 @@ abstract class AbstractNumberContentType extends AbstractTreeContentType
         return (new TemplateNumberReader())->getRowById($this->dataId);
 
     }
-
 
 }

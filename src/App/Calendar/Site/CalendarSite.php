@@ -75,10 +75,14 @@ class CalendarSite extends AbstractSite
             $row->addText($calendarIndexRow->title);
 
 
+            $row->addText($calendarIndexRow->content->contentType->contentType);
+
             $type = $calendarIndexRow->content->getContentType();
             $type->getView($row);
 
             $row->addText($type->typeLabel);
+
+            $row->addClickableSite($type->getViewSite());
 
         }
 

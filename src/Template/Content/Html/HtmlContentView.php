@@ -16,8 +16,6 @@ class HtmlContentView extends AbstractContentView
         $largeTextRow = $this->contentType->getDataRow();
 
         $div = new Div($this);
-
-        //  $this->content (new LargeTextReader())->getRowById($this->dataId);
         $div->content = $largeTextRow->largeText;
 
         return parent::getContent();

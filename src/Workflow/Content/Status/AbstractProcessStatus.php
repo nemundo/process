@@ -34,29 +34,14 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
     public function saveType()
     {
 
+        //parent::saveType();
 
-        parent::saveType();
+        $this->saveData();
+        $this->saveContent();
+        $this->saveTree();
 
-        //$this->saveContent();
-        //$this->saveTree();
 
         $parentProcess = $this->getParentProcess();
-
-
-        /*
-        if ($this->parentId !== null) {
-            $writer = new TreeWriter();
-            $writer->parentId = $this->parentId;
-            $writer->dataId = $this->contentId;
-            if (!$writer->exist()) {
-                $this->saveTree();
-            }
-            //$writer->write();
-        }*/
-
-        //$this->saveTree();
-
-
 
         if ($this->changeStatus) {
             $parentProcess->changeStatus($this);
@@ -65,6 +50,7 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
         if ($this->closeWorkflow) {
             $parentProcess->closeWorkflow();
         }
+
 
         $this->onFinished();
         $this->saveIndex();

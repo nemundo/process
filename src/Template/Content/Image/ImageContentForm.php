@@ -33,12 +33,11 @@ class ImageContentForm extends AbstractContentForm
         foreach ($this->image->getMultiFileRequest() as $fileRequest) {
 
             $type = new ImageContentType();
-            $type->parentId =$this->contentType->getParentId();  // $this->parentId;
+            $type->parentId =$this->contentType->getParentId();
             $type->fileRequest = $fileRequest;
             $type->saveType();
 
         }
-
 
     }
 

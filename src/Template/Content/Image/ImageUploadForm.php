@@ -6,9 +6,6 @@ namespace Nemundo\Process\Template\Content\Image;
 
 use Nemundo\Package\Bootstrap\Form\BootstrapForm;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapFileUpload;
-use Nemundo\Process\Content\Form\AbstractContentForm;
-use Nemundo\Process\Template\Content\File\FileContentType;
-use Nemundo\Process\Template\Data\TemplateFile\TemplateFile;
 
 class ImageUploadForm extends BootstrapForm
 {
@@ -35,11 +32,10 @@ class ImageUploadForm extends BootstrapForm
         foreach ($this->file->getMultiFileRequest() as $fileRequest) {
 
             $type = new ImageContentType();
-            $type->fileRequest= $fileRequest;
+            $type->fileRequest = $fileRequest;
             $type->saveType();
 
         }
-
 
     }
 

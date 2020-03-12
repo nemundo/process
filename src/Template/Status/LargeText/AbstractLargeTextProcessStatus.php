@@ -7,6 +7,7 @@ namespace Nemundo\Process\Template\Status\LargeText;
 use Nemundo\Process\Template\Data\LargeText\LargeText;
 use Nemundo\Process\Template\Data\LargeText\LargeTextReader;
 use Nemundo\Process\Template\Data\LargeText\LargeTextRow;
+use Nemundo\Process\Template\Data\LargeText\LargeTextUpdate;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
 abstract class AbstractLargeTextProcessStatus extends AbstractProcessStatus
@@ -24,6 +25,16 @@ abstract class AbstractLargeTextProcessStatus extends AbstractProcessStatus
         $data = new LargeText();
         $data->largeText = $this->largeText;
         $this->dataId = $data->save();
+
+    }
+
+
+    protected function onUpdate()
+    {
+
+        $update = new LargeTextUpdate();
+        $update->largeText = $this->largeText;
+        $update->updateById($this->dataId);
 
     }
 

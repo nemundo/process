@@ -24,31 +24,12 @@ abstract class AbstractImageContentType extends AbstractTreeContentType
         $this->typeLabel[LanguageCode::EN] = 'Image';
         $this->typeLabel[LanguageCode::DE] = 'Bild';
 
-        //$this->typeId = '8be6b7e8-532c-4138-9f60-0ecd1b498648';
-
         $this->formClass = ImageContentForm::class;
         $this->viewClass = ImageContentView::class;
-
 
         parent::__construct($dataId);
+
     }
-
-
-
-/*
-    protected function loadContentType()
-    {
-
-        $this->typeLabel[LanguageCode::EN] = 'Image';
-        $this->typeLabel[LanguageCode::DE] = 'Bild';
-
-        //$this->typeId = '8be6b7e8-532c-4138-9f60-0ecd1b498648';
-
-        $this->formClass = ImageContentForm::class;
-        $this->viewClass = ImageContentView::class;
-
-
-    }*/
 
 
     protected function onCreate()

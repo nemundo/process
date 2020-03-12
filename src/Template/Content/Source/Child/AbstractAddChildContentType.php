@@ -23,7 +23,6 @@ class AbstractAddChildContentType extends AbstractSourceContentType
         $this->typeLabel[LanguageCode::EN] = 'Add Child';
         $this->typeLabel[LanguageCode::DE] = 'Add Child ';
 
-
     }
 
 
@@ -49,7 +48,6 @@ class AbstractAddChildContentType extends AbstractSourceContentType
 
     public function getSubject()
     {
-
 
         $subject[LanguageCode::EN] = 'Item ' . $this->getHyperlinkContent() . ' was added';
         $subject[LanguageCode::DE] = 'Element ' . $this->getHyperlinkContent() . ' wurde hinzugefügt';

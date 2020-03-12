@@ -58,12 +58,12 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     protected $startNumber = 1;
 
 
-    protected $groupAssignmentId;
+    //protected $groupAssignmentId;
 
     /**
      * @var Date
      */
-    protected $deadline;
+    //protected $deadline;
 
 
     public $processViewClass;
@@ -88,7 +88,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     {
 
         $this->processViewClass = ProcessView::class;
-        $this->deadline = new Date();
+        //$this->deadline = new Date();
 
         parent::__construct($dataId);
     }

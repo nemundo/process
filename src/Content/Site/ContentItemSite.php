@@ -69,12 +69,12 @@ class ContentItemSite extends AbstractSite
         $title = new AdminTitle($page);
         $title->content = $contentType->getSubject();
 
-        if ($contentType->hasView()) {
+        /*if ($contentType->hasView()) {
             $contentType->getView($page);
         } else {
             $p = new Paragraph($page);
             $p->content = '[No View]';
-        }
+        }*/
 
         $table1 = new AdminLabelValueTable($page);
         $table1->addLabelValue('Subject', $contentType->getSubject());

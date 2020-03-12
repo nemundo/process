@@ -10,7 +10,6 @@ use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
 use Nemundo\Process\App\Assignment\Parameter\SourceParameter;
 use Nemundo\Process\Content\Collection\AbstractContentTypeCollection;
 use Nemundo\Process\Content\Form\AbstractContentContainer;
-use Nemundo\Process\Template\Content\Source\Collection\SourceContentTypeCollection;
 
 
 class AbstractAddContentContainer extends AbstractContentContainer
@@ -33,18 +32,15 @@ class AbstractAddContentContainer extends AbstractContentContainer
         $form->addUrlAsHiddenInput = true;
         $form->addInputName((new SourceParameter())->getParameterName());
 
-
         $listbox = new BootstrapListBox($form);
-        $listbox->label = $this->listboxLabel;  // 'Quelle';
+        $listbox->label = $this->listboxLabel;
         $listbox->submitOnChange = true;
         $listbox->searchMode = true;
         $listbox->name = (new SourceParameter())->getParameterName();
         $listbox->value = (new PostRequest((new SourceParameter())->getParameterName()))->getValue();
 
-        //$collection = new SourceContentTypeCollection();
-        //foreach ($collection->getContentTypeList() as $contentType) {
-            foreach ($this->contentTypeCollection->getContentTypeList() as $contentType) {
-                $listbox->addItem($contentType->typeId, $contentType->typeLabel);
+        foreach ($this->contentTypeCollection->getContentTypeList() as $contentType) {
+            $listbox->addItem($contentType->typeId, $contentType->typeLabel);
         }
 
 
@@ -52,7 +48,6 @@ class AbstractAddContentContainer extends AbstractContentContainer
 
             $form = new SourceAddContentForm($this);
             $form->contentType = $this->contentType;
-            //$form->parentId = $this->parentId;
             $form->redirectSite = $this->redirectSite;
 
         }

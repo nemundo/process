@@ -22,7 +22,6 @@ class ChildRemoveContentType extends AbstractSourceContentType
 
     protected function loadContentType()
     {
-        //$this->typeLabel = 'Source Remove';
 
         $this->typeLabel[LanguageCode::EN] = 'Remove Child';
         $this->typeLabel[LanguageCode::DE] = 'Aufgabe entfernen';
@@ -30,20 +29,15 @@ class ChildRemoveContentType extends AbstractSourceContentType
 
         $this->formClass=SourceRemoveContentPanel::class;
 
-
-
     }
 
     protected function onCreate()
     {
 
-        //$contentType =$this->getParentContentType();  // (new ContentParameter())->getContentType();
-        //$contentType->removeChild($this->removeId);
-
 
         $delete = new TreeDelete();
-        $delete->filter->andEqual($delete->model->parentId, $this->parentId);  //$this->removeId);
-        $delete->filter->andEqual($delete->model->childId, $this->removeId);  //$this->parentId);
+        $delete->filter->andEqual($delete->model->parentId, $this->parentId);
+        $delete->filter->andEqual($delete->model->childId, $this->removeId); 
         $delete->delete();
 
         $data = new SourceLog();

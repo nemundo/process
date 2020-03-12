@@ -11,6 +11,10 @@ use Nemundo\Process\App\Document\Data\Document\DocumentDelete;
 trait DocumentIndexTrait
 {
 
+    // auflistung unter new
+    public $showNewButton=true;
+
+
     abstract protected function isClosed();
 
     protected function saveDocumentIndex()

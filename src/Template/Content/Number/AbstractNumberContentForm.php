@@ -5,11 +5,9 @@ namespace Nemundo\Process\Template\Content\Number;
 
 
 use Nemundo\Core\Random\RandomNumber;
-use Nemundo\Core\Random\RandomText;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
 use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Process\Content\Form\AbstractContentForm;
-use Nemundo\Process\Template\Content\Number\AbstractNumberContentType;
 
 abstract class AbstractNumberContentForm extends AbstractContentForm
 {
@@ -49,9 +47,7 @@ abstract class AbstractNumberContentForm extends AbstractContentForm
 
     protected function onSubmit()
     {
-
-        //$this->contentType->fromDataId($this->dataId);
-        //$this->contentType->parentId = $this->parentId;
+        
         $this->contentType->number = (int)$this->number->getValue();
         $this->contentType->saveType();
 

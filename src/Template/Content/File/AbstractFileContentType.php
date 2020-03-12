@@ -37,9 +37,9 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $this->typeLabel = 'File';
         $this->formClass = FileContentForm::class;
         $this->viewClass = FileContentView::class;
-        $this->viewSite = TemplateFileRedirectConfig::$redirectTemplateFileFileSite;  // FileItemSite::$site;
+        $this->viewSite = TemplateFileRedirectConfig::$redirectTemplateFileFileSite;
         $this->listClass = FileContentList::class;
-        $this->parameterClass = FilenameParameter::class;  // FileParameter::class;
+        $this->parameterClass = FilenameParameter::class;
         parent::__construct($dataId);
     }
 
@@ -62,9 +62,7 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
             $data->file->fromFilename($this->filename);
         }
 
-        //$data->contentId = $this->getContentId();
         $this->dataId = $data->save();
-
 
         $fileRow = $this->getDataRow();
 

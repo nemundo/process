@@ -15,11 +15,6 @@ public $archive;
 /**
 * @var string
 */
-public $contentId;
-
-/**
-* @var string
-*/
 public $message;
 
 /**
@@ -30,7 +25,12 @@ public $toId;
 /**
 * @var string
 */
-public $subjectContentId;
+public $contentId;
+
+/**
+* @var string
+*/
+public $subject;
 
 public function __construct() {
 parent::__construct();
@@ -38,10 +38,10 @@ $this->model = new NotificationModel();
 }
 public function update() {
 $this->typeValueList->setModelValue($this->model->archive, $this->archive);
-$this->typeValueList->setModelValue($this->model->contentId, $this->contentId);
 $this->typeValueList->setModelValue($this->model->message, $this->message);
 $this->typeValueList->setModelValue($this->model->toId, $this->toId);
-$this->typeValueList->setModelValue($this->model->subjectContentId, $this->subjectContentId);
+$this->typeValueList->setModelValue($this->model->contentId, $this->contentId);
+$this->typeValueList->setModelValue($this->model->subject, $this->subject);
 parent::update();
 }
 }

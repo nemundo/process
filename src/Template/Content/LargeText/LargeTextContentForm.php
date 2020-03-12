@@ -24,7 +24,7 @@ class LargeTextContentForm extends AbstractContentForm
     {
 
         $this->largeText = new BootstrapLargeTextBox($this);
-        $this->largeText->label =$this->contentType->typeLabel;  // 'Large Text';
+        $this->largeText->label =$this->contentType->typeLabel;
 
         return parent::getContent();
 
@@ -42,9 +42,7 @@ class LargeTextContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        //$type = new LargeTextContentType($this->dataId);
         $this->contentType->fromDataId($this->dataId);
-        //$this->contentType->parentId = $this->parentId;
         $this->contentType->largeText = $this->largeText->getValue();
         $this->contentType->saveType();
 

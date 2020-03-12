@@ -14,8 +14,8 @@ class NotificationClean extends AbstractClean
     {
 
 
-  //      (new NotificationUninstall())->uninstall();
-  //      (new NotificationInstall())->install();
+        (new NotificationUninstall())->uninstall();
+        (new NotificationInstall())->install();
 
 
         $reader = new NotificationReader();

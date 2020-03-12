@@ -5,11 +5,11 @@ namespace Nemundo\Process\Template\Content\Text;
 
 
 use Nemundo\Html\Block\Div;
-use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Process\Content\View\AbstractContentView;
 
 class TextContentView extends AbstractContentView
 {
+
     /**
      * @var TextContentType
      */
@@ -18,13 +18,13 @@ class TextContentView extends AbstractContentView
     public function getContent()
     {
 
-        $textRow=$this->contentType->getDataRow();
+        $textRow = $this->contentType->getDataRow();
 
-        $p=new Div($this);
-        $p->content=$textRow->text;
+        $p = new Div($this);
+        $p->content = $textRow->text;
 
         return parent::getContent();
-        
+
     }
 
 }

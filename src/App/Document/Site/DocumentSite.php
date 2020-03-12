@@ -4,25 +4,23 @@
 namespace Nemundo\Process\App\Document\Site;
 
 
-use Nemundo\Admin\Com\Navigation\AdminNavigation;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
+use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
+use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
-use Nemundo\Package\Bootstrap\Tabs\BootstrapTabs;
-use Nemundo\Package\Bootstrap\Tabs\BootstrapSiteTabsDropdown;
-use Nemundo\Package\Bootstrap\Tabs\BootstrapTabsDropdown;
-use Nemundo\Package\Bootstrap\Tabs\BootstrapTabsItem;
 use Nemundo\Process\App\Document\Com\DocumentTabs;
 use Nemundo\Process\App\Document\Data\Document\DocumentPaginationReader;
 use Nemundo\Process\App\Document\Data\DocumentType\DocumentTypeReader;
 use Nemundo\Process\Config\ProcessConfig;
-use Nemundo\Process\Content\Site\ContentSite;
+use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Web\Site\AbstractSite;
+use Nemundo\Web\Site\Site;
 
 class DocumentSite extends AbstractSite
 {
@@ -34,12 +32,13 @@ class DocumentSite extends AbstractSite
 
     protected function loadSite()
     {
-        $this->title = 'Document Index';
-        $this->url = 'document-index';
 
-    DocumentSite::$site=$this;
+        $this->title = 'Document';
+        $this->url = 'document';
 
-    new DocumentNewSite($this);
+        DocumentSite::$site = $this;
+
+        new DocumentNewSite($this);
 
     }
 
@@ -52,50 +51,6 @@ class DocumentSite extends AbstractSite
         new DocumentTabs($page);
 
 
-        /*
-        $tabs = new BootstrapTabs($page);
-
-
-
-        $item=new BootstrapTabsItem($tabs);
-        $item->site = DocumentSite::$site;
-
-        //$item=new BootstrapTabsItem($tabs);
-        //$item->site = DocumentNewSite::$site;
-
-
-        $dropdown = new BootstrapTabsDropdown($tabs);
-        $dropdown->dropdownLabel='New';
-
-
-        $reader = new DocumentTypeReader();
-        $reader->model->loadContentType();
-
-        foreach ($reader->getData() as $documentTypeRow) {
-
-        $site = clone(DocumentNewSite::$site);
-        $site->title= $documentTypeRow->contentType->contentType;  //  'Issue';
-        $dropdown->addSite($site);
-
-        }
-
-       // new AdminNavigation()
-
-        //$item->content = 'Bla';
-
-        //$item=new BootstrapTabsItem($tabs);
-        //$item->content = 'Bla';
-
-
-
-        //$nav = new AdminNavigation($page);
-        //$nav->site= DocumentSite::$site;
-
-        //$li = new BootstrapTabsDropdown($nav);*/
-
-
-
-
 
         $form = new SearchForm($page);
 
@@ -103,13 +58,18 @@ class DocumentSite extends AbstractSite
 
         $listbox = new BootstrapListBox($formRow);
         $listbox->submitOnChange = true;
-        $listbox->searchMode=true;
+        $listbox->searchMode = true;
 
         $reader = new DocumentTypeReader();
         $reader->model->loadContentType();
         foreach ($reader->getData() as $documentTypeRow) {
             $listbox->addItem($documentTypeRow->contentTypeId, $documentTypeRow->contentType->contentType);
         }
+
+
+        $layout=new BootstrapTwoColumnLayout($page);
+
+
 
         $documentReader = new DocumentPaginationReader();
         $documentReader->model->loadDocumentType();
@@ -123,9 +83,9 @@ class DocumentSite extends AbstractSite
 
 
         $documentReader->addOrder($documentReader->model->title);
-        $documentReader->paginationLimit=ProcessConfig::PAGINATION_LIMIT;
+        $documentReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
 
-        $table = new AdminClickableTable($page);
+        $table = new AdminClickableTable($layout->col1);
 
         $header = new TableHeader($table);
         $header->addText($documentReader->model->title->label);
@@ -136,18 +96,42 @@ class DocumentSite extends AbstractSite
 
             $row = new BootstrapClickableTableRow($table);
 
+            if ($documentRow->contentId == (new ContentParameter())->getValue()) {
+                $row->addCssClass('table-active');
+            }
+
             $row->addText($documentRow->title);
             $row->addYesNo($documentRow->closed);
             $row->addText($documentRow->documentType->contentType);
             //$row->addText($documentRow->content->dateTime->getShortDateTimeLeadingZeroFormat());*/
 
-            $contentType = $documentRow->content->getContentType();
-            $row->addClickableSite($contentType->getViewSite());
+            //$contentType = $documentRow->content->getContentType();
+
+            $site =new Site();  // clone(DocumentSite::$site);
+            $site->addParameter(new ContentParameter($documentRow->contentId));
+            $row->addClickableSite($site);
+            //$row->addClickableSite($contentType->getViewSite());
 
         }
 
-        $pagination=new BootstrapPagination($page);
-        $pagination->paginationReader=$documentReader;
+        $pagination = new BootstrapPagination($page);
+        $pagination->paginationReader = $documentReader;
+
+
+        $contentParameter=new ContentParameter();
+        $contentParameter->contentTypeCheck=false;
+        if ($contentParameter->exists()) {
+
+            $contentType= $contentParameter->getContentType();
+
+            $subtitle=new AdminSubtitle($layout->col2);
+            $subtitle->content = $contentType->getSubject();
+
+            $contentType->getView($layout->col2);
+
+        }
+
+
 
 
         $page->render();

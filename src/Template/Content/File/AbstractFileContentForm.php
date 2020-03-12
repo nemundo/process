@@ -29,6 +29,7 @@ abstract class AbstractFileContentForm extends AbstractContentForm
         $this->file->multiUpload = false;
 
         parent::loadContainer();
+
     }
 
     protected function onSubmit()

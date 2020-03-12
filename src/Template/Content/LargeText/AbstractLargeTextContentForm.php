@@ -27,7 +27,6 @@ abstract class AbstractLargeTextContentForm extends AbstractContentForm
         parent::loadContainer();
         $this->largeText = new BootstrapLargeTextBox($this);
 
-
     }
 
 
@@ -42,9 +41,6 @@ abstract class AbstractLargeTextContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        //$type = new LargeTextContentType($this->dataId);
-        //$this->contentType->fromDataId($this->dataId);
-        //$this->contentType->parentId = $this->parentId;
         $this->contentType->largeText = $this->largeText->getValue();
         $this->contentType->saveType();
 
