@@ -88,8 +88,8 @@ class ProcessInstall extends AbstractInstall
         (new ContentTypeSetup())
             ->addContentType(new ApplicationContentType());
 
-        (new NewsAppContentType())
-            ->saveType();
+        //(new NewsAppContentType())
+        //    ->saveType();
 
 
     }

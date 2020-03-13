@@ -18,7 +18,6 @@ use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Parameter\StatusParameter;
 use Nemundo\ToDo\Data\ToDo\ToDoRow;
-use Schleuniger\App\Aufgabe\Content\Process\AufgabeParentContainer;
 
 
 class ProcessView extends AbstractProcessView
@@ -32,24 +31,18 @@ class ProcessView extends AbstractProcessView
     public function getContent()
     {
 
-
-
-
-        $title=new AdminTitle($this);
-        $title->content='ORGINAK';
-
         $workflowStatus = null;
         $formStatus = null;
         $workflowTitle = null;
 
-        if ($this->dataId !== null) {
+        if ($this->contentType->getDataId() !== null) {
 
             /** @var ToDoRow $workflowRow */
             $workflowRow = $this->contentType->getDataRow();
 
             $workflowStatus = $workflowRow->status->getContentType();
 
-            $workflowStatus->parentId = $this->dataId;
+            $workflowStatus->parentId = $this->contentType->getDataId();
 
             $statusParameter = new StatusParameter();
             if ($workflowStatus->hasNextMenu()) {
@@ -120,7 +113,7 @@ class ProcessView extends AbstractProcessView
 
         $layout = new WorkflowLayout($this);
 
-        if ($this->dataId !== null) {
+        if ($this->contentType->getDataId() !== null) {
 
             if ($this->contentType->hasView()) {
                 $this->contentType->getView($layout->col3);
@@ -128,47 +121,13 @@ class ProcessView extends AbstractProcessView
 
         }
 
-
-        /*
-        $table = new AdminTable($layout->col1);
-        foreach ($this->contentType->getChild() as $contentRow) {
-            $row = new TableRow($table);
-            new CheckIcon($row);
-            $row->addText($contentRow->contentType->contentType);
-        }*/
-
-
         $menu = new WorkflowLogMenu($layout->col1);
         $menu->process = $this->contentType;
         $menu->formStatus = $formStatus;
         $menu->currentStatus = $workflowStatus;
         $menu->redirectSite=$this->redirectSite;
 
-
-        /*
-        (new Br($layout->col1));
-        (new Br($layout->col1));
-        (new Br($layout->col1));
-
-
-        $p=new Paragraph($layout->col1);
-        $p->content='--- old version ---';
-
-        $menu = new ProcessMenu($layout->col1);
-        $menu->process = $this->contentType;
-        $menu->workflowId = $this->dataId;
-        $menu->formStatus = $formStatus;
-        $menu->workflowStatus = $workflowStatus;
-        $menu->site = clone($this->redirectSite);
-
-
-        $menu=new NextMenu($layout->col1);
-        $menu->contentType= $workflowStatus;*/
-
-
         if ($formStatus !== null) {
-            //$widget = new AdminWidget($layout->col2);
-            //$widget->widgetTitle = $formStatus->typeLabel;
 
             $subtitle = new AdminSubtitle($layout->col2);
             $subtitle->content = $formStatus->typeLabel;
@@ -178,13 +137,11 @@ class ProcessView extends AbstractProcessView
             $form->workflowStatus = $workflowStatus;
             $form->redirectSite = clone($this->redirectSite);
             $form->appendParameter = $this->appendParameter;
-            if ($this->dataId !== null) {
-                $form->parentId = $this->contentType->getContentId();
-            }
+
         }
 
 
-        if ($this->dataId !== null) {
+        if ($this->contentType->getDataId() !== null) {
 
 
             //$btn = new FavoriteButton($layout->col3);
@@ -202,15 +159,10 @@ class ProcessView extends AbstractProcessView
             $view = new FileParentContainer($layout->col3);
             $view->parentId = $contentId;
 
-            //$container = new AufgabeParentContainer($layout->col3);
-            //$container->parentId = $contentId;
-
 
             $table = new SourceTable($layout->col3);
             $table->contentType = $this->contentType;
 
-            //$btn = new AdminEventButton($layout->col3);
-            //$btn->content = 'History anzeigen (Toggle)';
 
             $table = new ContentLogTable($layout->col3);
             $table->contentType = $this->contentType;
@@ -219,12 +171,7 @@ class ProcessView extends AbstractProcessView
         }
 
 
-        /*
-         * Problem mit Durchlaufzeit
-        $log = new WebLogContentType();
-        $log->parentId = $this->contentType->getContentId();
-        $log->saveType();
-*/
+
 
 
         return parent::getContent();

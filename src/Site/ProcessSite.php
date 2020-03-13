@@ -4,20 +4,17 @@
 namespace Nemundo\Process\Site;
 
 
-use Nemundo\Process\App\Assignment\Site\AssignmentIndexSite;
-use Nemundo\Process\App\Assignment\Site\AssignmentSite;
 use Nemundo\Process\App\Calendar\Site\CalendarSite;
 use Nemundo\Process\App\Dashboard\Site\DashboardSite;
 use Nemundo\Process\App\Document\Site\DocumentSite;
 use Nemundo\Process\App\Favorite\Site\FavoriteSite;
-
 use Nemundo\Process\App\Notification\Site\NotificationAdminSite;
+use Nemundo\Process\App\Notification\Site\UserNotificationSite;
 use Nemundo\Process\App\Task\Site\TaskIndexSite;
 use Nemundo\Process\App\Task\Site\TaskSite;
 use Nemundo\Process\App\Wiki\Site\WikiSite;
 use Nemundo\Process\Content\Site\ContentLogSite;
 use Nemundo\Process\Content\Site\ContentSite;
-use Nemundo\Process\Content\Site\ContentTypeSite;
 use Nemundo\Process\Content\Site\TreeSite;
 use Nemundo\Process\Geo\Site\GeoSite;
 use Nemundo\Process\Group\Site\GroupSite;
@@ -25,13 +22,10 @@ use Nemundo\Process\Group\Site\UserGroupSite;
 use Nemundo\Process\Search\Site\SearchLogSite;
 use Nemundo\Process\Search\Site\SearchSite;
 use Nemundo\Process\Search\Site\SearchWordSite;
-use Nemundo\Process\Template\Data\TemplateMultiFile\Redirect\TemplateMultiFileFileRedirectSite;
-use Nemundo\Process\Template\Site\ChildRemoveSite;
 use Nemundo\Process\Template\Site\FileSite;
 use Nemundo\Process\Template\Site\ImageSite;
 use Nemundo\Process\Template\Site\ProcessTemplateSite;
 use Nemundo\Process\Template\Site\UserSite;
-use Nemundo\ToDo\Site\ToDoSite;
 use Nemundo\Web\Site\AbstractSite;
 
 
@@ -50,9 +44,6 @@ class ProcessSite extends AbstractSite
         $this->url = 'process';
 
         //ProcessSite::$site = $this;
-
-
-
 
 
         //new ContentTypeSite($this);
@@ -90,6 +81,7 @@ class ProcessSite extends AbstractSite
         //new AssignmentIndexSite($this);
 
 
+        new UserNotificationSite($this);
         new NotificationAdminSite($this);
 
         new DashboardSite($this);
@@ -97,11 +89,8 @@ class ProcessSite extends AbstractSite
         new UserSite($this);
 
 
-
-
         new TaskSite($this);
         new TaskIndexSite($this);
-
 
 
     }
