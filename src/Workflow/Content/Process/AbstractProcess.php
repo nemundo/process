@@ -281,7 +281,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         return $this->getDataRow()->deadline;
     }
 
-    protected function isClosed()
+    protected function isTaskClosed()
     {
         return $this->getDataRow()->workflowClosed;
     }

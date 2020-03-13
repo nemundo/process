@@ -19,7 +19,7 @@ trait TaskIndexTrait
 
     abstract protected function getDeadline();
 
-    abstract protected function isClosed();
+    abstract protected function isTaskClosed();
 
     abstract protected function getCreatedDateTime();
 
@@ -66,7 +66,7 @@ trait TaskIndexTrait
             $data->message = $message;
             $data->userId = $this->getCreatedUserId();
             $data->dateTime = $this->getCreatedDateTime();
-            $data->closed = $this->isClosed();
+            $data->closed = $this->isTaskClosed();
             $data->taskTypeId = $this->typeId;
             $data->updateStatus = true;
             $data->save();
@@ -89,7 +89,7 @@ trait TaskIndexTrait
                 $data->userId = $this->userId;
                 $data->dateTime = $this->dateTime;
 
-                $data->closed = $this->isClosed();
+                $data->closed = $this->isTaskClosed();
                 $data->taskTypeId = $this->typeId;
                 $data->updateStatus = true;
                 $data->save();

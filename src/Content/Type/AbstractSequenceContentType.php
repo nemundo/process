@@ -99,7 +99,6 @@ abstract class AbstractSequenceContentType extends AbstractTreeContentType
 
         return $status;
 
-
     }
 
 

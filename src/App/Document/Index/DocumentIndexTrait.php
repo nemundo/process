@@ -15,7 +15,7 @@ trait DocumentIndexTrait
     public $showNewButton=true;
 
 
-    abstract protected function isClosed();
+    abstract protected function isTaskClosed();
 
     protected function saveDocumentIndex()
     {
@@ -25,7 +25,7 @@ trait DocumentIndexTrait
         $data->documentTypeId = $this->typeId;
         $data->contentId = $this->getContentId();
         $data->title = $this->getSubject();
-        $data->closed = $this->isClosed();
+        $data->closed = $this->isTaskClosed();
         $data->save();
 
     }
