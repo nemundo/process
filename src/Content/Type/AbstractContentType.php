@@ -3,31 +3,19 @@
 
 namespace Nemundo\Process\Content\Type;
 
-
 use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Log\LogMessage;
-use Nemundo\Core\Random\UniqueId;
-use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Html\Paragraph\Paragraph;
-use Nemundo\Model\Row\AbstractModelDataRow;
-use Nemundo\Model\Row\ModelDataRow;
-use Nemundo\Process\Content\Data\Content\Content;
-use Nemundo\Process\Content\Data\Content\ContentCount;
-use Nemundo\Process\Content\Data\Content\ContentDelete;
-use Nemundo\Process\Content\Data\Content\ContentId;
-use Nemundo\Process\Content\Data\Content\ContentUpdate;
 use Nemundo\Process\Content\Form\ContentForm;
 use Nemundo\Process\Content\View\AbstractContentAdmin;
 use Nemundo\Process\Content\View\AbstractContentList;
-use Nemundo\User\Type\UserSessionType;
 
 
 abstract class AbstractContentType extends AbstractType
 {
 
     use ContentIndexTrait;
-    //use SearchIndexTrait;
 
     /**
      * @var string
@@ -59,7 +47,6 @@ abstract class AbstractContentType extends AbstractType
 
         $this->saveData();
         $this->saveContent();
-        //$this->onFinished();
         $this->saveIndex();
 
     }
