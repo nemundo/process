@@ -5,7 +5,6 @@ namespace Nemundo\Process\App\Task\Com\Container;
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\Header\UpDownSortingHyperlink;
-use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Admin\Parameter\SortingParameter;
 use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
 use Nemundo\Com\TableBuilder\TableHeader;
@@ -15,10 +14,8 @@ use Nemundo\Package\FontAwesome\Icon\CheckIcon;
 use Nemundo\Package\FontAwesome\Icon\PlusIcon;
 use Nemundo\Process\App\Task\Com\Form\TaskSearchForm;
 use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndexCount;
-use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndexPaginationReader;
 use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndexReader;
 use Nemundo\Process\App\Task\Filter\TaskFilter;
-use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Process\Content\Com\Container\AbstractParentContainer;
 use Nemundo\Process\Content\Parameter\ChildParameter;
 use Nemundo\Process\Content\Parameter\ParentParameter;
@@ -76,10 +73,10 @@ class TaskParentContainer extends AbstractParentContainer
         }
 
         $count = new TaskIndexCount();
-        $count->filter=$taskFilter;
+        $count->filter = $taskFilter;
 
-        $p=new Paragraph($this);
-        $p->content = $count->getFormatCount().' Aufgaben gefunden';
+        $p = new Paragraph($this);
+        $p->content = $count->getFormatCount() . ' Aufgaben gefunden';
 
 
         //$taskReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
@@ -119,7 +116,9 @@ class TaskParentContainer extends AbstractParentContainer
 
             $row->addText($taskRow->subject);
             $row->addText($taskRow->assignment->group);
-            $row->addText($taskRow->deadline->getShortDateLeadingZeroFormat());
+            if ($taskRow->deadline !== null) {
+                $row->addText($taskRow->deadline->getShortDateLeadingZeroFormat());
+            }
             $ersteller = $taskRow->user->login . ' ' . $taskRow->dateTime->getShortDateLeadingZeroFormat();
             $row->addText($ersteller);
 
@@ -143,12 +142,12 @@ class TaskParentContainer extends AbstractParentContainer
             new PlusIcon($add);
         }
 
-        /*
+
         if ($this->hideIfNoItems) {
-            if ($indexReader->getCount() == 0) {
+            if ($taskReader->getCount() == 0) {
                 $this->visible = false;
             }
-        }*/
+        }
 
         return parent::getContent();
     }

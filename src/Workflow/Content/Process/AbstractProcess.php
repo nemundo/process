@@ -5,7 +5,6 @@ namespace Nemundo\Process\Workflow\Content\Process;
 
 
 use Nemundo\Core\Date\DateTimeDifference;
-use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Db\Sql\Order\SortOrder;
@@ -17,7 +16,6 @@ use Nemundo\Model\Value\ModelDataValue;
 use Nemundo\Process\App\Calendar\Type\CalendarIndexTrait;
 use Nemundo\Process\App\Document\Index\DocumentIndexTrait;
 use Nemundo\Process\App\Task\Index\TaskIndexTrait;
-use Nemundo\Process\Content\Data\Content\ContentUpdate;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
@@ -154,66 +152,30 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         //if ($this->createMode) {
 
-            //$this->saveContentBefore();
+        //$this->saveContentBefore();
 
-            $this->onCreate();
+        $this->onCreate();
 
-            $update = new ModelUpdate();
-            $update->model = $this->workflowModel;
-            $update->typeValueList->setModelValue($update->model->active, true);
-            $update->typeValueList->setModelValue($update->model->number, $this->getNumber());
-            $update->typeValueList->setModelValue($update->model->workflowNumber, $this->getWorkflowNumber());
-            $update->typeValueList->setModelValue($update->model->statusId, $this->startContentType->typeId);
-            $update->typeValueList->setModelValue($update->model->dateTime, $this->dateTime->getIsoDateTimeFormat());
-            $update->typeValueList->setModelValue($update->model->userId, $this->userId);
-            //$update->typeValueList->setModelValue($update->model->contentId, $this->getContentId());
-            //$update->typeValueList->setModelValue($update->model->contentId, $this->contentId);
-            $update->updateById($this->dataId);
+        $update = new ModelUpdate();
+        $update->model = $this->workflowModel;
+        $update->typeValueList->setModelValue($update->model->active, true);
+        $update->typeValueList->setModelValue($update->model->number, $this->getNumber());
+        $update->typeValueList->setModelValue($update->model->workflowNumber, $this->getWorkflowNumber());
+        $update->typeValueList->setModelValue($update->model->statusId, $this->startContentType->typeId);
+        $update->typeValueList->setModelValue($update->model->dateTime, $this->dateTime->getIsoDateTimeFormat());
+        $update->typeValueList->setModelValue($update->model->userId, $this->userId);
+        $update->updateById($this->dataId);
 
 
         $this->saveContent();
-$this->saveTree();
+        $this->saveTree();
 
         $update = new ModelUpdate();
         $update->model = $this->workflowModel;
         $update->typeValueList->setModelValue($update->model->contentId, $this->getContentId());
         $update->updateById($this->dataId);
 
-
-
-
-
-
-        /*
-        $update = new ModelUpdate();
-        $update->model = $this->workflowModel;
-        $update->typeValueList->setModelValue($update->model->contentId, $this->getContentId());
-        $update->updateById($this->dataId);
-*/
-
-
-            /*
-            $update = new ContentUpdate();
-            $update->dataId = $this->dataId;
-            $update->updateById($this->contentId);*/
-
-        /*} else {
-            (new LogMessage())->writeError('process no create mode');
-        }*/
-
-        //$this->saveTree();
         $this->saveContentIndex();
-
-       /* $update = new ContentUpdate();
-        $update->subject = $this->getSubject();
-        $update->updateById($this->contentId);*/
-
-//        $this->addSearchWord($this->getSubject());
-
-
-// problem falls in onFinised subject geändert wird
-//        $this->saveSearchIndex();
-
         $this->onFinished();
 
         $this->onDataRow();
@@ -643,7 +605,7 @@ $this->saveTree();
         $view->contentType = $this;
 
         //if (!$this->createMode) {
-            //$view->dataId = $this->dataId;
+        //$view->dataId = $this->dataId;
         //}
 
         return $view;
