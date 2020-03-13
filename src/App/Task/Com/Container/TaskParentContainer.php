@@ -118,7 +118,11 @@ class TaskParentContainer extends AbstractParentContainer
             $row->addText($taskRow->assignment->group);
             if ($taskRow->deadline !== null) {
                 $row->addText($taskRow->deadline->getShortDateLeadingZeroFormat());
+            } else {
+                $row->addEmpty();
             }
+
+
             $ersteller = $taskRow->user->login . ' ' . $taskRow->dateTime->getShortDateLeadingZeroFormat();
             $row->addText($ersteller);
 
