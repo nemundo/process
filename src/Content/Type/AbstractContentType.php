@@ -57,17 +57,10 @@ abstract class AbstractContentType extends AbstractType
     public function saveType()
     {
 
-        parent::saveType();
-
-
-        //if (!$this->existItem()) {
+        $this->saveData();
         $this->saveContent();
-        //}
-
-
-
-        // später???
-        //$this->saveIndex();
+        //$this->onFinished();
+        $this->saveIndex();
 
     }
 
@@ -237,43 +230,11 @@ abstract class AbstractContentType extends AbstractType
     }
 
 
-    /*
-
-    public function fromDataRow(AbstractModelDataRow $dataRow)
-    {
-
-        $this->dataRow = $dataRow;
-        $this->fromDataId($dataRow->getModelValue($dataRow->model->id));
-        return $this;
-
-    }
-
-
-    protected function onDataRow()
-    {
-        //(new LogMessage())->writeError('getDataRow not defined'.$this->getClassName());
-    }
-
-    public function getDataRow()
-    {
-
-        if ($this->dataRow == null) {
-            $this->onDataRow();
-        }
-
-        return $this->dataRow;
-
-    }*/
-
-
     public function deleteType()
     {
 
         parent::deleteType();
-
         $this->deleteContent();
-
-        //(new ContentDelete())->deleteById($this->getContentId());
 
     }
 

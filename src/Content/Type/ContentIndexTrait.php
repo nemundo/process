@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Content\Type;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Random\UniqueId;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Process\Content\Data\Content\Content;
@@ -49,7 +50,8 @@ trait ContentIndexTrait
         if ($this->contentId == null) {
             $id = new ContentId();
             $id->filter->andEqual($id->model->contentTypeId, $this->typeId);
-            $id->filter->andEqual($id->model->dataId, $this->dataId);
+            //$id->filter->andEqual($id->model->dataId, $this->dataId);
+            $id->filter->andEqual($id->model->dataId, $this->getDataId());
             $this->contentId = $id->getId();
         }
 
@@ -78,19 +80,21 @@ trait ContentIndexTrait
     protected function saveContent()
     {
 
+        //(new Debug())->write($this->getDataId());
+
         //if ($this->dataId == null) {
 
         // wann braucht's das???
 
-            if ($this->getDataId() == null) {
+        if ($this->getDataId() == null) {
             $this->dataId = (new UniqueId())->getUniqueId();
         }
 
         $data = new Content();
-        $data->ignoreIfExists=true;
+        $data->ignoreIfExists = true;
         //$data->updateOnDuplicate = true;
         $data->contentTypeId = $this->typeId;
-        $data->dataId =$this->getDataId();  //  $this->dataId;
+        $data->dataId = $this->getDataId();  //  $this->dataId;
         //$data->subject =$this->getSubject();
 
         $data->dateTime = $this->dateTime;

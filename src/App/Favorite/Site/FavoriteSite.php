@@ -65,11 +65,11 @@ class FavoriteSite extends AbstractSite
             // contentId =
 
 
-
+/*
             $parentContentType=$contentType->getParentContentType();
             $row->addText($parentContentType->getSubject());
 
-            $row->addClickableSite($parentContentType->getViewSite());
+            $row->addClickableSite($parentContentType->getViewSite());*/
 
 
         }

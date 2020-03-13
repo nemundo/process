@@ -5,7 +5,7 @@ namespace Nemundo\Process\App\Favorite\Site;
 use Nemundo\Process\App\Favorite\Content\FavoriteContentType;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Content\Parameter\DataParameter;
+
 use Nemundo\User\Type\UserSessionType;
 use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Web\Url\UrlReferer;

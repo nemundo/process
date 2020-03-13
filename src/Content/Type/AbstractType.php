@@ -5,7 +5,6 @@ namespace Nemundo\Process\Content\Type;
 
 
 use Nemundo\Core\Base\AbstractBaseClass;
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Html\Paragraph\Paragraph;
@@ -65,8 +64,8 @@ abstract class AbstractType extends AbstractBaseClass
     public function fromDataId($dataId = null)
     {
 
-        $this->dataId = $dataId;
-        if ($this->dataId !== null) {
+        if ($dataId !== null) {
+            $this->dataId = $dataId;
             $this->createMode = false;
         }
 
@@ -147,8 +146,8 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
-
-    protected function saveData() {
+    protected function saveData()
+    {
 
         if (!$this->existItem()) {
             $this->onCreate();
@@ -287,7 +286,8 @@ abstract class AbstractType extends AbstractBaseClass
         $parameter = null;
         if ($this->parameterClass !== null) {
             /** @var AbstractUrlParameter $parameter */
-            $parameter = new $this->parameterClass($this->dataId);
+            $parameter = new $this->parameterClass($this->getDataId());
+            //$parameter = new $this->parameterClass($this->dataId);
         }
         return $parameter;
 
@@ -306,7 +306,6 @@ abstract class AbstractType extends AbstractBaseClass
         $this->onDelete();
 
     }
-
 
 
     public function existItem()
