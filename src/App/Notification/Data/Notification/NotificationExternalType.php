@@ -41,6 +41,21 @@ public $content;
 */
 public $subject;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $read;
+
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $contentTypeId;
+
+/**
+* @var \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType
+*/
+public $contentType;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = NotificationModel::class;
@@ -88,6 +103,20 @@ $this->subject->aliasFieldName = $this->subject->tableName . "_" . $this->subjec
 $this->subject->label = "Subject";
 $this->addType($this->subject);
 
+$this->read = new \Nemundo\Model\Type\Number\YesNoType();
+$this->read->fieldName = "read";
+$this->read->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->read->aliasFieldName = $this->read->tableName . "_" . $this->read->fieldName;
+$this->read->label = "Read";
+$this->addType($this->read);
+
+$this->contentTypeId = new \Nemundo\Model\Type\Id\IdType();
+$this->contentTypeId->fieldName = "content_type";
+$this->contentTypeId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->contentTypeId->aliasFieldName = $this->contentTypeId->tableName ."_".$this->contentTypeId->fieldName;
+$this->contentTypeId->label = "Content Type";
+$this->addType($this->contentTypeId);
+
 }
 public function loadTo() {
 if ($this->to == null) {
@@ -108,6 +137,17 @@ $this->content->tableName = $this->parentFieldName . "_" . $this->externalTableN
 $this->content->aliasFieldName = $this->content->tableName ."_".$this->content->fieldName;
 $this->content->label = "Content";
 $this->addType($this->content);
+}
+return $this;
+}
+public function loadContentType() {
+if ($this->contentType == null) {
+$this->contentType = new \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType(null, $this->parentFieldName . "_content_type");
+$this->contentType->fieldName = "content_type";
+$this->contentType->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->contentType->aliasFieldName = $this->contentType->tableName ."_".$this->contentType->fieldName;
+$this->contentType->label = "Content Type";
+$this->addType($this->contentType);
 }
 return $this;
 }

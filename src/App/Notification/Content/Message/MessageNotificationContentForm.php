@@ -5,6 +5,7 @@ namespace Nemundo\Process\App\Notification\Content\Message;
 
 
 use Nemundo\Core\Language\LanguageCode;
+use Nemundo\Core\Random\RandomText;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapLargeTextBox;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
 use Nemundo\Process\App\Notification\Content\AbstractNotificationContentType;
@@ -56,6 +57,7 @@ class MessageNotificationContentForm extends AbstractContentForm
         if (ProcessConfig::$debugMode) {
             //$this->to->emptyValueAsDefault = false;
             $this->to->value=(new UserSessionType())->userId;
+            $this->subject->value=(new RandomText())->getText();
             $this->message->value = '123123123';
         }
 

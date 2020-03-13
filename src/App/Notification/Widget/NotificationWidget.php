@@ -13,6 +13,7 @@ use Nemundo\Core\Type\Text\Html;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Html\Table\Th;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
+use Nemundo\Process\App\Notification\Com\Table\UserNotificationTable;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationReader;
 use Nemundo\Process\App\Notification\Parameter\NotificationParameter;
 use Nemundo\Process\App\Notification\Site\ArchiveSite;
@@ -38,6 +39,12 @@ class NotificationWidget extends AdminWidget
     public function getContent()
     {
 
+
+        new UserNotificationTable($this);
+
+
+
+        /*
 
         $table = new AdminClickableTable($this);
 
@@ -70,7 +77,7 @@ class NotificationWidget extends AdminWidget
         foreach ($reader->getData() as $notificationRow) {
 
 
-            $notificationContentType = $notificationRow->getNotificationContentType();
+            $notificationContentType = $notificationRow->getContentType();
 
             $row = new BootstrapClickableTableRow($table);
             //$row->addYesNo($notificationRow->archive);
@@ -95,7 +102,7 @@ class NotificationWidget extends AdminWidget
 
 
 
-        }
+        }*/
 
 
         //$btn=new AdminIconSiteButton($this);

@@ -129,6 +129,11 @@ class DocumentSite extends AbstractSite
 
             $contentType->getView($layout->col2);
 
+            // share
+            // favorite
+            // open
+
+
         }
 
 

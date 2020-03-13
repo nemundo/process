@@ -22,8 +22,6 @@ abstract class AbstractTreeContentType extends AbstractContentType
     public function saveType()
     {
 
-        //parent::saveType();
-
         $this->saveData();
         $this->saveContent();
         $this->saveTree();

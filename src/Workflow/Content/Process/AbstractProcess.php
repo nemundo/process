@@ -120,8 +120,11 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         parent::onIndex();
 
+        $this->saveContentIndex();
+
         $this->addSearchWord($this->getSubject());
         $this->addSearchWord($this->getDataRow()->workflowNumber);
+        $this->saveSearchIndex();
 
         $this->saveTaskIndex();
         $this->saveDocumentIndex();

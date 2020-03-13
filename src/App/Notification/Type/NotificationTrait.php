@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Nemundo\Process\App\Notification\Type;
 
 
@@ -30,7 +29,10 @@ trait NotificationTrait
     {
 
         $data = new Notification();
+        $data->read=false;
+        $data->archive=false;
         $data->toId = $userId;
+        $data->contentTypeId=$this->typeId;
         $data->contentId = $this->getContentId();
         $data->subject = $this->getSubject();
         $data->message = $this->getMessage();

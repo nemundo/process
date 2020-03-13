@@ -32,6 +32,16 @@ public $contentId;
 */
 public $subject;
 
+/**
+* @var bool
+*/
+public $read;
+
+/**
+* @var string
+*/
+public $contentTypeId;
+
 public function __construct() {
 parent::__construct();
 $this->model = new NotificationModel();
@@ -42,6 +52,8 @@ $this->typeValueList->setModelValue($this->model->message, $this->message);
 $this->typeValueList->setModelValue($this->model->toId, $this->toId);
 $this->typeValueList->setModelValue($this->model->contentId, $this->contentId);
 $this->typeValueList->setModelValue($this->model->subject, $this->subject);
+$this->typeValueList->setModelValue($this->model->read, $this->read);
+$this->typeValueList->setModelValue($this->model->contentTypeId, $this->contentTypeId);
 parent::update();
 }
 }

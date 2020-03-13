@@ -41,6 +41,21 @@ public $content;
 */
 public $subject;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $read;
+
+/**
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+*/
+public $contentTypeId;
+
+/**
+* @var \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType
+*/
+public $contentType;
+
 protected function loadModel() {
 $this->tableName = "process_notification";
 $this->aliasTableName = "process_notification";
@@ -95,6 +110,20 @@ $this->subject->label = "Subject";
 $this->subject->allowNullValue = false;
 $this->subject->length = 255;
 
+$this->read = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->read->tableName = "process_notification";
+$this->read->fieldName = "read";
+$this->read->aliasFieldName = "process_notification_read";
+$this->read->label = "Read";
+$this->read->allowNullValue = false;
+
+$this->contentTypeId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->contentTypeId->tableName = "process_notification";
+$this->contentTypeId->fieldName = "content_type";
+$this->contentTypeId->aliasFieldName = "process_notification_content_type";
+$this->contentTypeId->label = "Content Type";
+$this->contentTypeId->allowNullValue = false;
+
 $index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
 $index->indexName = "user_archive";
 $index->addType($this->toId);
@@ -123,6 +152,16 @@ $this->content->tableName = "process_notification";
 $this->content->fieldName = "content";
 $this->content->aliasFieldName = "process_notification_content";
 $this->content->label = "Content";
+}
+return $this;
+}
+public function loadContentType() {
+if ($this->contentType == null) {
+$this->contentType = new \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType($this, "process_notification_content_type");
+$this->contentType->tableName = "process_notification";
+$this->contentType->fieldName = "content_type";
+$this->contentType->aliasFieldName = "process_notification_content_type";
+$this->contentType->label = "Content Type";
 }
 return $this;
 }

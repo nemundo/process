@@ -34,8 +34,6 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
     public function saveType()
     {
 
-        //parent::saveType();
-
         $this->saveData();
         $this->saveContent();
         $this->saveTree();
@@ -53,6 +51,7 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
 
 
         $this->onFinished();
+
         $this->saveIndex();
 
         $this->getParentProcess()->saveIndex();
@@ -60,5 +59,17 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
         return $this->dataId;
 
     }
+
+
+    public function saveIndex()
+    {
+
+        $this->onDataRow();
+
+        $this->saveContentIndex();
+        $this->onIndex();
+
+    }
+
 
 }

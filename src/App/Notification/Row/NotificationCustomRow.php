@@ -10,7 +10,9 @@ use Nemundo\Process\App\Notification\Data\Notification\NotificationRow;
 class NotificationCustomRow extends NotificationRow
 {
 
-    public function getNotificationContentType() {
+
+
+    public function getContentType() {
 
         /** @var AbstractNotificationContentType $notificationContentType */
         $notificationContentType = $this->content->getContentType();
@@ -20,9 +22,20 @@ class NotificationCustomRow extends NotificationRow
     }
 
 
-    public function getSubjectContentType() {
+    /*
+    public function getNotificationContentType() {
+
+        /** @var AbstractNotificationContentType $notificationContentType */
+    /*    $notificationContentType = $this->content->getContentType();
+
+        return $notificationContentType;
 
     }
+
+
+    public function getSubjectContentType() {
+
+    }*/
 
 
 }
