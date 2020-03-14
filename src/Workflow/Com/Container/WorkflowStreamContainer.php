@@ -27,10 +27,17 @@ class WorkflowStreamContainer extends AbstractParentContainer  //WorkflowContain
 
             if ($status->hasView()) {
 
-                //$widget = new AdminWidget($this);
+
+                $toggle = false;
+
+                if ($status->isObjectOfClass(AbstractProcessStatus::class)) {
+                    if ($status->toggleView) {
+                        $toggle = true;  //widget = new ToggleAdminCard($this);
+                    }
+                }
 
                 $card = null;
-                if ($status->toggleView) {
+                if ($toggle) {  // ($status->toggleView) {
                     $widget = new ToggleAdminCard($this);
                 } else {
                     //$card = new AdminCard($this);
@@ -42,16 +49,16 @@ class WorkflowStreamContainer extends AbstractParentContainer  //WorkflowContain
 
                 $widget->title = $status->getSubject() . ' ' . $logRow->user->displayName . ' ' . $logRow->dateTime->getShortDateTimeLeadingZeroFormat();
 
-                $div = new Div($widget);
+                //$div = new Div($widget);
 
                 /*
                 $ul =new UnorderedList($div);*/
 
-                if ($status->hasViewSite()) {
+                //if ($status->hasViewSite()) {
                 //$hyperlink = new SiteHyperlink($ul);
                     //$hyperlink = new SiteHyperlink($div);
                     //$hyperlink->site = $status->getViewSite();
-                }
+                //}
 
                 /*
                 $ul->addText('message to');
@@ -61,7 +68,7 @@ class WorkflowStreamContainer extends AbstractParentContainer  //WorkflowContain
 
                 if ($status->hasView()) {
                     $view = $status->getView($widget);
-                    $view->dataId = $logRow->dataId;
+                    //$view->dataId = $logRow->dataId;
                 }
             }
 

@@ -25,10 +25,10 @@ class ContentTreeReader extends ContentReader
         $join->externalType = $treeModel->parentId;
         $join->type = $this->model->id;
 
-        (new Debug())->write($this->parentId);
+        //(new Debug())->write($this->parentId);
 
         if ($this->parentId !== null) {
-            (new Debug())->write($this->parentId);
+            //(new Debug())->write($this->parentId);
             $this->filter->andEqual($treeModel->childId, $this->parentId);
         }
 

@@ -12,6 +12,6 @@ class AbstractProcessView extends AbstractContentView
 
     use RedirectTrait;
 
-    public $appendParameter=false;
+    public $appendParameter = false;
 
 }

@@ -6,7 +6,6 @@ namespace Nemundo\Process\Workflow\Content\View;
 
 use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Admin\Com\Title\AdminTitle;
-use Nemundo\Admin\Com\Widget\AdminWidget;
 use Nemundo\Process\Content\Com\Table\ContentLogTable;
 use Nemundo\Process\Content\Com\Table\SourceTable;
 use Nemundo\Process\Template\Content\File\FileParentContainer;
@@ -89,7 +88,7 @@ class ProcessView extends AbstractProcessView
             }*/
 
 
-            $workflowTitle = $workflowRow->workflowNumber . ' ' . $workflowRow->subject;  // getSubject();
+            $workflowTitle = $this->contentType->getSubject();  // $workflowRow->workflowNumber . ' ' . $workflowRow->subject;  // getSubject();
 
 
         } else {
@@ -125,7 +124,7 @@ class ProcessView extends AbstractProcessView
         $menu->process = $this->contentType;
         $menu->formStatus = $formStatus;
         $menu->currentStatus = $workflowStatus;
-        $menu->redirectSite=$this->redirectSite;
+        $menu->redirectSite = $this->redirectSite;
 
         if ($formStatus !== null) {
 
@@ -169,9 +168,6 @@ class ProcessView extends AbstractProcessView
 
 
         }
-
-
-
 
 
         return parent::getContent();
