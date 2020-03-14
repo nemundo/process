@@ -7,11 +7,6 @@ class Geo extends \Nemundo\Model\Data\AbstractModelData {
 protected $model;
 
 /**
-* @var string
-*/
-public $id;
-
-/**
 * @var \Nemundo\Core\Type\Geo\GeoCoordinate
 */
 public $coordinate;
@@ -27,8 +22,6 @@ $this->model = new GeoModel();
 $this->coordinate = new \Nemundo\Core\Type\Geo\GeoCoordinate();
 }
 public function save() {
-$id = $this->id;
-$this->typeValueList->setModelValue($this->model->id, $id);
 $property = new \Nemundo\Model\Data\Property\Geo\GeoCoordinateDataProperty($this->model->coordinate, $this->typeValueList);
 $property->setValue($this->coordinate);
 $this->typeValueList->setModelValue($this->model->place, $this->place);

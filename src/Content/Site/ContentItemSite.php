@@ -50,9 +50,7 @@ class ContentItemSite extends AbstractSite
     public function loadContent()
     {
 
-
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
-
 
         $nav = new AdminNavigation($page);
         $nav->site = ContentSite::$site;

@@ -21,7 +21,7 @@ $this->tableName = "geo_geo";
 $this->aliasTableName = "geo_geo";
 $this->label = "Geo";
 
-$this->primaryIndex = new \Nemundo\Db\Index\TextIdPrimaryIndex();
+$this->primaryIndex = new \Nemundo\Db\Index\AutoIncrementIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
 $this->id->tableName = "geo_geo";

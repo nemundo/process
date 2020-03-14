@@ -12,7 +12,7 @@
             "table_name": "geo_geo",
             "namespace": "Nemundo\\Process\\Geo\\Data\\Geo",
             "row_class_name": "",
-            "primary_index": "text_id",
+            "primary_index": "auto_increment",
             "is_deleted": false,
             "type": [
                 {

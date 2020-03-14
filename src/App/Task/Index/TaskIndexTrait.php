@@ -14,7 +14,6 @@ use Nemundo\Process\Content\Row\ContentCustomRow;
 trait TaskIndexTrait
 {
 
-
     abstract protected function getAssignmentId();
 
     abstract protected function getDeadline();

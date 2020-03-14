@@ -16,8 +16,8 @@ trait GeoContentTypeTrait
     {
 
         $data = new Geo();
-        $data->id = $this->dataId;
-        $data->coordinate = $this->geoCoordinate;
+        //$data->id = $this->dataId;
+        //$data->coordinate = $this->geoCoordinate;
         $data->save();
 
 

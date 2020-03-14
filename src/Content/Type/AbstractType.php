@@ -211,6 +211,7 @@ abstract class AbstractType extends AbstractBaseClass
     public function getView(AbstractHtmlContainer $parent = null)
     {
 
+        /** @var AbstractContentView $view */
         $view = null;
         if ($this->hasView()) {
 

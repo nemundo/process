@@ -47,11 +47,14 @@ trait ContentIndexTrait
     {
 
         if ($this->contentId == null) {
+
+//            $this->saveContent();
+
             $id = new ContentId();
             $id->filter->andEqual($id->model->contentTypeId, $this->typeId);
-            //$id->filter->andEqual($id->model->dataId, $this->dataId);
             $id->filter->andEqual($id->model->dataId, $this->getDataId());
             $this->contentId = $id->getId();
+
         }
 
         return $this->contentId;

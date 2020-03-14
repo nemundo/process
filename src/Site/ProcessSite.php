@@ -48,7 +48,7 @@ class ProcessSite extends AbstractSite
 
         //new ContentTypeSite($this);
         new ContentSite($this);
-        new TreeSite($this);
+        //new TreeSite($this);
 
         new WikiSite($this);
         new ProcessTemplateSite($this);

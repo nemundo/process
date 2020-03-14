@@ -6,19 +6,13 @@ namespace Nemundo\Process\App\Task\Widget;
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Widget\AdminWidget;
-use Nemundo\Com\Html\Listing\UnorderedList;
 use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Db\Filter\Filter;
-use Nemundo\Db\Sql\Field\CountField;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
-use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndexPaginationReader;
 use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndexReader;
-use Nemundo\Process\App\Task\Filter\TaskFilter;
-use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Process\Template\Content\User\UserContentType;
 use Nemundo\User\Session\UserSession;
-use Schleuniger\App\Aufgabe\Site\AufgabeSite;
-use Schleuniger\App\Task\Com\Table\TaskTable;
 
 class TaskWidget extends AdminWidget
 {
@@ -26,8 +20,11 @@ class TaskWidget extends AdminWidget
     public function getContent()
     {
 
-        $this->widgetTitle='Aufgaben';
-        $this->widgetSite=AufgabeSite::$site;
+        $this->widgetTitle[LanguageCode::EN] = 'Task';
+        $this->widgetTitle[LanguageCode::DE] = 'Aufgaben';
+
+
+        //$this->widgetSite=AufgabeSite::$site;
 
 
         $taskReader = new TaskIndexReader();
@@ -54,7 +51,7 @@ class TaskWidget extends AdminWidget
 
         //$count = new CountField($taskReader);
 
-        $taskReader->limit= 20;
+        $taskReader->limit = 20;
 
         $table = new AdminClickableTable($this);
 
@@ -85,7 +82,6 @@ class TaskWidget extends AdminWidget
 
 
         }
-
 
 
         return parent::getContent();
