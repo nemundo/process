@@ -15,6 +15,7 @@ use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
+use Nemundo\Package\Bootstrap\Layout\BootstrapThreeColumnLayout;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Listing\BootstrapHyperlinkList;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
@@ -83,9 +84,10 @@ class UserNotificationSite extends AbstractSite
         $listbox->searchMode = true;
 
 
-        $layout = new BootstrapTwoColumnLayout($page);
+        $layout = new BootstrapThreeColumnLayout($page);
         $layout->col1->columnWidth= 2;
-        $layout->col2->columnWidth= 10;
+        $layout->col2->columnWidth= 5;
+        $layout->col3->columnWidth= 5;
 
         $list=new BootstrapHyperlinkList($layout->col1);
 

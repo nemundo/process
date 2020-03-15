@@ -32,10 +32,10 @@ class CancelStatusForm extends AbstractStatusForm
     protected function onSubmit()
     {
 
-        $item = new CancelProcessStatus();
-        $item->parentId = $this->parentId;
-        $item->comment = $this->comment->getValue();
-        $item->saveType();
+        //$item = new CancelProcessStatus();
+        //$item->parentId = $this->parentId;
+        $this->contentType->largeText = $this->comment->getValue();
+        $this->contentType->saveType();
 
     }
 

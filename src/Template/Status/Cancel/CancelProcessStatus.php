@@ -8,12 +8,13 @@ use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Process\Template\Content\LargeText\LargeTextContentView;
 use Nemundo\Process\Template\Data\LargeText\LargeText;
 
+use Nemundo\Process\Template\Status\LargeText\AbstractLargeTextProcessStatus;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
-class CancelProcessStatus extends AbstractProcessStatus
+class CancelProcessStatus extends AbstractLargeTextProcessStatus  // AbstractProcessStatus
 {
 
-    public $comment;
+    //public $comment;
 
     protected function loadContentType()
     {
@@ -36,7 +37,7 @@ class CancelProcessStatus extends AbstractProcessStatus
     {
 
         $data = new LargeText();
-        $data->largeText = $this->comment;
+        $data->largeText = $this->largeText;
         $this->dataId = $data->save();
 
 
@@ -44,5 +45,8 @@ class CancelProcessStatus extends AbstractProcessStatus
 
 
     }
+
+
+
 
 }

@@ -4,6 +4,7 @@
 namespace Nemundo\Process\App\Document\Site;
 
 
+use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Com\FormBuilder\SearchForm;
@@ -18,7 +19,9 @@ use Nemundo\Process\App\Document\Com\DocumentTabs;
 use Nemundo\Process\App\Document\Data\Document\DocumentPaginationReader;
 use Nemundo\Process\App\Document\Data\DocumentType\DocumentTypeReader;
 use Nemundo\Process\Config\ProcessConfig;
+use Nemundo\Process\Content\Com\Container\ContentChildContainer;
 use Nemundo\Process\Content\Parameter\ContentParameter;
+use Nemundo\Process\Workflow\Com\Container\WorkflowStreamContainer;
 use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Web\Site\Site;
 
@@ -128,6 +131,17 @@ class DocumentSite extends AbstractSite
             $subtitle->content = $contentType->getSubject();
 
             $contentType->getView($layout->col2);
+
+
+
+
+            $table = new ContentChildContainer($layout->col2);
+            $table->contentType=$contentType;
+
+
+            $btn = new AdminSiteButton($layout->col2);
+            $btn->site = $contentType->getSubjectViewSite();
+
 
             // share
             // favorite

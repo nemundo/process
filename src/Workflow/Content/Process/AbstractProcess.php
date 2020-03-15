@@ -126,7 +126,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $this->saveTaskIndex();
         $this->saveDocumentIndex();
-        $this->saveCalendarIndex();
+        //$this->saveCalendarIndex();
 
     }
 

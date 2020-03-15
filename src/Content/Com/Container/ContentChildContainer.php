@@ -9,7 +9,8 @@ use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
-class ContentViewContainer extends AbstractHtmlContainer
+// ContentChildContainer
+class ContentChildContainer extends AbstractHtmlContainer
 {
 
     /**
