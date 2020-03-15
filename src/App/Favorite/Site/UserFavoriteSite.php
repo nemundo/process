@@ -16,8 +16,9 @@ use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Process\App\Favorite\Data\Favorite\FavoriteReader;
 use Nemundo\Process\App\Favorite\Parameter\FavoriteParameter;
 
-class FavoriteSite extends AbstractSite
+class UserFavoriteSite extends AbstractSite
 {
+
     protected function loadSite()
     {
         $this->title = 'Favorite';
@@ -45,31 +46,33 @@ class FavoriteSite extends AbstractSite
         $table = new AdminClickableTable($page);
 
         $header = new TableHeader($table);
-        $header->addText('Content Type');
+        //$header->addText('Content Type');
         $header->addText('Subject');
         $header->addEmpty();
 
-        $reader = new ContentReader();
-        $reader->model->loadContentType();
-        $reader->filter->andEqual($reader->model->contentTypeId,(new FavoriteContentType())->typeId);
+        //$reader = new ContentReader();
+        //$reader->model->loadContentType();
+
+        $reader = new FavoriteReader();
+        $reader->model->loadContent();
+        $reader->model->content->loadContentType();
+        //$reader->filter->andEqual($reader->model->contentId,  (new FavoriteContentType())->typeId);
         $reader->filter->andEqual($reader->model->userId, (new UserSessionType())->userId);
 
         foreach ($reader->getData() as $contentRow ) {
 
-            $contentType= $contentRow->getContentType();
+            $contentType= $contentRow->content->getContentType();
 
             $row=new BootstrapClickableTableRow($table);
             $row->addText($contentType->getSubject());
 
-
             // contentId =
-
 
 /*
             $parentContentType=$contentType->getParentContentType();
-            $row->addText($parentContentType->getSubject());
+            $row->addText($parentContentType->getSubject());*/
 
-            $row->addClickableSite($parentContentType->getViewSite());*/
+            $row->addClickableSite($contentType->getViewSite());
 
 
         }

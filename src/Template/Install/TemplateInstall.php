@@ -17,6 +17,7 @@ use Nemundo\Process\Template\Content\Event\EventContentType;
 use Nemundo\Process\Template\Content\File\FileActiveContentType;
 use Nemundo\Process\Template\Content\File\FileContentType;
 use Nemundo\Process\Template\Content\File\FileInactiveContentType;
+use Nemundo\Process\Template\Content\FileList\FileListContentType;
 use Nemundo\Process\Template\Content\Image\ImageContentType;
 use Nemundo\Process\Template\Content\Item\ActiveItemContentType;
 use Nemundo\Process\Template\Content\Item\CreateItemContentType;
@@ -72,7 +73,8 @@ class TemplateInstall extends AbstractInstall
             ->addContentType(new ChildAddContentType())
             ->addContentType(new ChildRemoveContentType())
             ->addContentType(new ReopenWorkflowProcessStatus())
-            ->addContentType(new MultiFileContentType())
+            //->addContentType(new MultiFileContentType())
+            ->addContentType(new FileListContentType())
             ->addContentType(new UrlContentType());
 
         //    ->addContentType(new MultiImageContentType());

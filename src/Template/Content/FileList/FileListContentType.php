@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Nemundo\Process\Template\Content\MultiFile;
+namespace Nemundo\Process\Template\Content\FileList;
 
 
 use Nemundo\Core\Http\Request\File\FileRequest;
@@ -9,7 +9,7 @@ use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Template\Data\TemplateMultiFile\TemplateMultiFile;
 
 // FileListContentType
-class MultiFileContentType extends AbstractMultiFileContentType
+class FileListContentType extends AbstractFileListContentType
 {
 
     protected function loadContentType()

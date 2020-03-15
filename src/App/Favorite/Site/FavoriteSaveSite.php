@@ -26,11 +26,7 @@ class FavoriteSaveSite extends AbstractSite
         $this->menuActive = false;
 
         new FavoriteDeleteSite($this);
-    }
 
-
-    protected function registerSite()
-    {
         FavoriteSaveSite::$site = $this;
     }
 
@@ -38,8 +34,19 @@ class FavoriteSaveSite extends AbstractSite
     public function loadContent()
     {
 
-        $contentType = (new ContentParameter())->getContentType();
+        //$parameter=new ContentParameter();
+        //$parameter->contentTypeCheck=false;
+        //$contentType = $parameter->getContentType();
 
+
+        $data = new Favorite();
+        $data->contentId = (new ContentParameter())->getValue();
+        $data->userId = (new UserSessionType())->userId;
+        $data->save();
+
+
+
+        /*
         $type=new FavoriteContentType();
         $type->parentId = $contentType->getContentId();
         $type->saveType();

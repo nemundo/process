@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Nemundo\Process\Template\Content\MultiFile;
+namespace Nemundo\Process\Template\Content\FileList;
 
 
 use Nemundo\Admin\Com\Table\AdminTable;
@@ -11,16 +11,17 @@ use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapFileUpload;
 use Nemundo\Process\Content\Form\AbstractContentForm;
+use Nemundo\Process\Template\Content\File\FileContentType;
 use Nemundo\Process\Template\Data\TemplateMultiFile\TemplateMultiFile;
 use Nemundo\Process\Template\Data\TemplateMultiFile\TemplateMultiFileReader;
 use Nemundo\Process\Template\Parameter\FileParameter;
 use Nemundo\Process\Template\Site\MultiFileDeleteSite;
 
-abstract class AbstractMultiFileContentForm extends AbstractContentForm
+abstract class AbstractFileListContentForm extends AbstractContentForm
 {
 
     /**
-     * @var AbstractMultiFileContentType
+     * @var AbstractFileListContentType
      */
     public $contentType;
 
@@ -48,8 +49,28 @@ abstract class AbstractMultiFileContentForm extends AbstractContentForm
     public function getContent()
     {
 
-        $contentId =$this->getContentId();
 
+        $this->contentType->getView($this);
+
+
+        /*
+        $table= new AdminTable($this);
+
+        foreach ($this->contentType->getChild() as $child) {
+
+            $row=new TableRow($table);
+            $row->addText('File');
+            $row->addText($child->subject);
+
+        }*/
+
+
+
+
+        //$contentId =$this->getContentId();
+
+
+        /*
         $reader = new TemplateMultiFileReader();
         $reader->filter->andEqual($reader->model->dataContentId, $contentId);
 
@@ -76,7 +97,7 @@ abstract class AbstractMultiFileContentForm extends AbstractContentForm
                 $row->addEmpty();
             }
 
-        }
+        }*/
 
 
         $this->file->label = 'File';
@@ -96,11 +117,12 @@ abstract class AbstractMultiFileContentForm extends AbstractContentForm
     }
 
 
+    /*
     protected function getContentId() {
 
        return $this->contentType->getContentId();
 
-    }
+    }*/
 
 
     protected function onSubmit()
@@ -109,14 +131,21 @@ abstract class AbstractMultiFileContentForm extends AbstractContentForm
         //$this->contentType->parentId = $this->parentId;
         $this->contentType->saveType();
 
+
         foreach ($this->file->getMultiFileRequest() as $fileRequest) {
-            $this->contentType->addFileRequest($fileRequest);
+            //$this->contentType->addFileRequest($fileRequest);
 
             /*$data = new TemplateMultiFile();
             $data->active=true;
             $data->dataContentId =$contentId;  // $this->getContentId();
             $data->file->fromFileRequest($fileRequest);
             $data->save();*/
+
+            $type = new FileContentType();
+            $type->parentId = $this->contentType->getContentId();
+            $type->fileRequest = $fileRequest;
+            $type->saveType();
+
 
         }
 

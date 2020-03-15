@@ -28,6 +28,8 @@ abstract class AbstractTreeContentType extends AbstractContentType
         $this->onFinished();
         $this->saveIndex();
 
+        $this->saveContentIndex();
+
     }
 
 

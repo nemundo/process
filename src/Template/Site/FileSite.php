@@ -14,6 +14,7 @@ use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
+use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Process\Content\Com\Form\AddContentForm;
 use Nemundo\Process\Content\Com\Table\ContentLogTable;
 use Nemundo\Process\Content\Com\Table\SourceTable;
@@ -64,7 +65,7 @@ class FileSite extends AbstractSite
         $fileReader->model->loadContent();
         $fileReader->model->content->loadContentType();
         $fileReader->model->content->loadUser();
-        $fileReader->paginationLimit = 50;
+        $fileReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
 
 
         // Virtual

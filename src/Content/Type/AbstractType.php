@@ -273,7 +273,10 @@ abstract class AbstractType extends AbstractBaseClass
 
         if ($this->viewSite !== null) {
             $site = clone($this->viewSite);
+
+            if ($this->parameterClass !==null) {
             $site->addParameter($this->getParameter());
+            }
         }
 
         return $site;
