@@ -48,13 +48,13 @@ class UserNotificationSite extends AbstractSite
 
         UserNotificationSite::$site = $this;
 
-        new NotificationNewSite($this);
+        //new NotificationNewSite($this);
         new NotificationItemSite($this);
         new ArchiveSite($this);
         new RedirectSite($this);
         new UserNotificationDeleteSite($this);
 
-        new UserNotificationInboxSite($this);
+        //new UserNotificationInboxSite($this);
 
     }
 
@@ -84,8 +84,8 @@ class UserNotificationSite extends AbstractSite
 
         $layout = new BootstrapThreeColumnLayout($page);
         $layout->col1->columnWidth= 2;
-        $layout->col2->columnWidth= 5;
-        $layout->col3->columnWidth= 5;
+        $layout->col2->columnWidth= 10;
+        $layout->col3->columnWidth= 0;
 
         $list=new BootstrapHyperlinkList($layout->col1);
 

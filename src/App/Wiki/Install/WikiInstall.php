@@ -14,15 +14,12 @@ use Nemundo\Process\App\Wiki\Setup\WikiSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Group\Setup\GroupSetup;
 use Nemundo\Process\Template\Content\Audio\AudioContentType;
-use Nemundo\Process\Template\Content\Event\EventContentType;
-use Nemundo\Process\Template\Content\EventAdd\EventAddContentType;
 use Nemundo\Process\Template\Content\File\FileContentType;
+use Nemundo\Process\Template\Content\FileList\FileListContentType;
 use Nemundo\Process\Template\Content\Html\HtmlContentType;
 use Nemundo\Process\Template\Content\Image\ImageContentType;
 use Nemundo\Process\Template\Content\ImageList\ImageListContentType;
 use Nemundo\Process\Template\Content\LargeText\LargeTextContentType;
-use Nemundo\Process\Template\Content\MultiFile\MultiFileContentType;
-
 use Nemundo\Process\Template\Content\Text\TextContentType;
 use Nemundo\Process\Template\Content\Video\VideoContentType;
 use Nemundo\Process\Template\Content\YouTube\YouTubeContentType;
@@ -65,7 +62,7 @@ class WikiInstall extends AbstractInstall
             ->addContentType(new AudioContentType())
             ->addContentType(new TextContentType())
             ->addContentType(new ImageListContentType())
-            ->addContentType(new MultiFileContentType());
+            ->addContentType(new FileListContentType());
 
 
         /*
