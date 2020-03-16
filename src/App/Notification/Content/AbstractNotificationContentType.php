@@ -32,6 +32,18 @@ abstract class AbstractNotificationContentType extends AbstractTreeContentType
 
 
 
+    protected function onDataRow()
+    {
+
+        $reader = new NotificationReader();
+        $reader->model->loadContent();
+        //$reader->model->loadSubjectContent();
+        //$reader->model->subjectContent->loadContentType();
+        $reader->model->content->loadUser();
+        $reader->model->loadTo();
+        $this->dataRow = $reader->getRowById($this->dataId);
+
+    }
 
 
     /**

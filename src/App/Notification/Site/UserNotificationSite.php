@@ -54,6 +54,8 @@ class UserNotificationSite extends AbstractSite
         new RedirectSite($this);
         new UserNotificationDeleteSite($this);
 
+        new UserNotificationInboxSite($this);
+
     }
 
     public function loadContent()
@@ -64,10 +66,6 @@ class UserNotificationSite extends AbstractSite
 
         $nav = new AdminNavigation($page);
         $nav->site = UserNotificationSite::$site;
-
-
-        //$type = new MessageNotificationContentType();
-        //$type->getForm($page);
 
 
         $form = new SearchForm($page);
@@ -111,96 +109,12 @@ class UserNotificationSite extends AbstractSite
 
         }
 
-
-
-
         $btn = new AdminSiteButton($layout->col2);
         $btn->site = UserNotificationDeleteSite::$site;
 
 
         new UserNotificationTable($layout->col2);
 
-
-
-        /*
-        $table = new AdminClickableTable($layout->col2);
-
-        $header = new TableHeader($table);
-        //$header->addText('Archive');
-        $header->addText('Notification Type');
-        $header->addText('Subject');
-        $header->addText('Message');
-        $header->addText('Date/Time');
-        //$header->addText('To');
-$header->addEmpty();
-
-
-        $notificationReader = new NotificationPaginationReader();
-        //$notificationReader->model->loadSubjectContent();
-        //$notificationReader->model->subjectContent->loadContentType();
-        $notificationReader->model->loadContent();
-        $notificationReader->model->content->loadContentType();
-        //$notificationReader->model->loadTo();
-
-        $notificationReader->filter = new UserNotificationFilter();
-
-        //$notificationReader->filter->andEqual($notificationReader->model->toId, (new UserSessionType())->userId);
-
-        /*
-        if ($listbox->hasValue()) {
-
-        if ($listbox->getValue() =='0') {
-               $notificationReader->filter->andEqual($notificationReader->model->archive,false);
-        } else {
-            $notificationReader->filter->andEqual($notificationReader->model->archive,true);
-        }
-
-        } else {
-
-        }*/
-
-
-        /*
-        $notificationReader->addOrder($notificationReader->model->id, SortOrder::DESCENDING);
-        $notificationReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
-        foreach ($notificationReader->getData() as $notificationRow) {
-
-            $row = new BootstrapClickableTableRow($table);
-            //$row->addYesNo($notificationRow->archive);
-            $row->addText($notificationRow->content->contentType->contentType);
-
-            if ($notificationRow->read) {
-                $row->addText($notificationRow->subject);
-                $row->addText($notificationRow->message);
-                $row->addText($notificationRow->content->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
-            } else {
-                $row->addBoldText($notificationRow->subject);
-                $row->addBoldText($notificationRow->message);
-                $row->addBoldText($notificationRow->content->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
-            }
-
-
-            //$contentType = $notificationRow->content->getContentType();
-            //  $row->addText($contentType->getSubject());
-            //  $row->addText($contentType->getMessage());*/
-
-
-            //  $row->addText($notificationRow->to->displayName);
-
-         /*   $site = clone(ArchiveSite::$site);
-            $site->addParameter(new NotificationParameter($notificationRow->id));
-            $row->addIconSite($site);
-
-            $site = clone(RedirectSite::$site);
-            $site->addParameter(new NotificationParameter($notificationRow->id));
-            $row->addClickableSite($site);
-
-            //$row->addClickableSite($contentType->getViewSite());
-
-        }
-
-        $pagination = new BootstrapPagination($page);
-        $pagination->paginationReader = $notificationReader;*/
 
         $page->render();
 

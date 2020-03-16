@@ -30,7 +30,7 @@ trait NotificationTrait
     }
 
 
-    protected function sendUserNotification($userId)
+   public function sendUserNotification($userId)
     {
 
 
