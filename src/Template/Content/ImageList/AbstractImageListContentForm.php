@@ -12,7 +12,8 @@ use Nemundo\Html\Form\Input\AcceptFileType;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapFileUpload;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Template\Content\Image\AbstractImageContentForm;
-use Nemundo\Process\Template\Content\MultiFile\AbstractMultiFileContentType;
+use Nemundo\Process\Template\Content\Image\ImageContentType;
+
 use Nemundo\Process\Template\Data\TemplateMultiFile\TemplateMultiFileReader;
 use Nemundo\Process\Template\Data\TemplateMultiImage\TemplateMultiImageReader;
 use Nemundo\Process\Template\Parameter\FileParameter;
@@ -34,14 +35,15 @@ abstract class AbstractImageListContentForm extends AbstractContentForm
     /**
      * @var AdminTable
      */
-    private $table;
+    //private $table;
+
 
 
     protected function loadContainer()
     {
         parent::loadContainer();
 
-        $this->table = new AdminTable($this);
+        //$this->table = new AdminTable($this);
         $this->file = new BootstrapFileUpload($this);
 
     }
@@ -50,8 +52,10 @@ abstract class AbstractImageListContentForm extends AbstractContentForm
     public function getContent()
     {
 
-        $contentId =$this->getContentId();
+        //$contentId =$this->getContentId();
 
+
+        /*
         $reader = new TemplateMultiImageReader();  // new TemplateMultiFileReader();
         $reader->filter->andEqual($reader->model->dataContentId, $contentId);
 
@@ -78,7 +82,7 @@ abstract class AbstractImageListContentForm extends AbstractContentForm
                 $row->addEmpty();
             }
 
-        }
+        }*/
 
 
         $this->file->label = 'Image';
@@ -99,21 +103,29 @@ abstract class AbstractImageListContentForm extends AbstractContentForm
     }
 
 
+    /*
     protected function getContentId() {
 
         return $this->contentType->getContentId();
 
-    }
+    }*/
 
 
     protected function onSubmit()
     {
 
-        $this->contentType->parentId = $this->parentId;
+        //$this->contentType->parentId = $this->parentId;
         $this->contentType->saveType();
 
         foreach ($this->file->getMultiFileRequest() as $fileRequest) {
-            $this->contentType->addFileRequest($fileRequest);
+
+            //$this->contentType->addFileRequest($fileRequest);
+
+
+            $type = new ImageContentType();
+            $type->parentId = $this->contentType->getContentId();
+            $type->fileRequest = $fileRequest;
+            $type->saveType();
 
             /*$data = new TemplateMultiFile();
             $data->active=true;

@@ -8,8 +8,8 @@ use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\App\Wiki\Content\TitleChange\TitleChangeContentType;
 use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\App\Wiki\Data\WikiCollection;
-use Nemundo\Process\App\Wiki\Group\WikiEditorGroup;
 use Nemundo\Process\App\Wiki\Group\Type\WikiGroupType;
+use Nemundo\Process\App\Wiki\Group\WikiEditorGroup;
 use Nemundo\Process\App\Wiki\Setup\WikiSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Group\Setup\GroupSetup;
@@ -62,7 +62,8 @@ class WikiInstall extends AbstractInstall
             ->addContentType(new AudioContentType())
             ->addContentType(new TextContentType())
             ->addContentType(new ImageListContentType())
-            ->addContentType(new FileListContentType());
+            ->addContentType(new FileListContentType())
+            ->addContentType(new ImageListContentType());
 
 
         /*
@@ -71,7 +72,7 @@ class WikiInstall extends AbstractInstall
         $setup->addContentType(new NewsContentType());*/
 
         (new GroupSetup())
-        ->addGroupType(new WikiGroupType());
+            ->addGroupType(new WikiGroupType());
 
         (new WikiEditorGroup())->saveType();
 
