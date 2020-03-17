@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Nemundo\Process\Content\Com\Table;
+namespace Nemundo\Process\Workflow\Com\Table;
 
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
@@ -14,8 +14,7 @@ use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 
 
-// ChildTable
-class ContentLogTable extends AbstractHtmlContainer
+class WorkflowLogTable extends AbstractHtmlContainer
 {
 
     /**

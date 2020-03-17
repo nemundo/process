@@ -17,7 +17,7 @@ use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Process\Content\Com\Form\AddContentForm;
-use Nemundo\Process\Content\Com\Table\ContentLogTable;
+use Nemundo\Process\Content\Com\Table\ContentSubjectTable;
 use Nemundo\Process\Content\Com\Table\SourceTable;
 use Nemundo\Process\Content\Parameter\ParentParameter;
 use Nemundo\Process\Template\Content\File\FileActiveContentType;

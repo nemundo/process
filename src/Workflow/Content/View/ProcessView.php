@@ -14,6 +14,7 @@ use Nemundo\Process\Workflow\Com\Container\StatusFormContainer;
 use Nemundo\Process\Workflow\Com\Container\WorkflowStreamContainer;
 use Nemundo\Process\Workflow\Com\Layout\WorkflowLayout;
 use Nemundo\Process\Workflow\Com\Menu\WorkflowLogMenu;
+use Nemundo\Process\Workflow\Com\Table\WorkflowLogTable;
 use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Parameter\StatusParameter;
@@ -168,7 +169,7 @@ class ProcessView extends AbstractProcessView
             $table->contentType = $this->contentType;
 
 
-            $table = new ContentLogTable($layout->col3);
+            $table = new WorkflowLogTable($layout->col3);
             $table->contentType = $this->contentType;
 
 
