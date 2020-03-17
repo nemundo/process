@@ -28,7 +28,7 @@ class FileListContentView extends AbstractContentView
     public function getContent()
     {
 
-        $contentId = $this->contentType->getContentId();
+        //$contentId = $this->contentType->getContentId();
 
         //(new Debug())->write($contentId);
 
