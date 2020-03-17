@@ -13,7 +13,6 @@ use Nemundo\Html\Block\Hr;
 use Nemundo\Package\Bootstrap\Layout\BootstrapThreeColumnLayout;
 use Nemundo\Package\Bootstrap\Listing\BootstrapHyperlinkList;
 use Nemundo\Process\App\Wiki\Com\WikiNavigation;
-use Nemundo\Process\App\Wiki\Content\TitleChange\TitleChangeContentType;
 use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\App\Wiki\Data\Wiki\WikiReader;
 use Nemundo\Process\App\Wiki\Group\WikiEditorGroup;
@@ -23,7 +22,6 @@ use Nemundo\Process\Content\Com\Dropdown\ContentTypeCollectionDropdown;
 use Nemundo\Process\Content\Com\Table\ContentLogTable;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Group\Check\GroupCheck;
 use Nemundo\Web\Site\AbstractSite;
 
 
@@ -95,17 +93,8 @@ class WikiSite extends AbstractSite
             $contentTable = new ContentLogTable($layout->col3);
             $contentTable->contentType = $wikiType;
 
-
-            //$wikiType->getForm($layout->col2);
-
-
-            //$title = new AdminTitle($layout->col2);
-            //$title->content = $wikiType->getSubject();
-
-            //$wikiRow = (new WikiReader())->getRowById($wikiId);
-
             $title = new AdminTitle($layout->col2);
-            $title->content = $wikiType->getSubject();  //  $wikiRow->title;
+            $title->content = $wikiType->getSubject();
 
 
             /*
@@ -123,24 +112,20 @@ class WikiSite extends AbstractSite
 
             $dropdown->redirectSite = WikiSite::$site;
             $dropdown->redirectSite->addParameter(new WikiParameter());
-            $dropdown->restrictedGroup=true;
+            $dropdown->restrictedGroup = true;
             $dropdown->addRestrictedGroup(new WikiEditorGroup());
             //$dropdown->visible=false;
 
 
-
             $contentTypeParameter = new ContentTypeParameter();
-
-
-
             if ($contentTypeParameter->exists()) {
 
                 $contentTypeParameter->addAllowedContentTypeCollection(new WikiContentTypeCollection());
                 $contentType = $contentTypeParameter->getContentType();
+                $contentType->parentId = $wikiType->getContentId();
 
                 $form = $contentType->getForm($layout->col2);
-                $form->parentId = $wikiType->getContentId();
-                $form->appendParameter = false;
+                           $form->appendParameter = false;
                 $form->redirectSite = WikiSite::$site;
                 $form->redirectSite->addParameter(new WikiParameter());
 
@@ -156,7 +141,7 @@ class WikiSite extends AbstractSite
                     if ($contentType->hasView()) {
 
                         $subtitle = new AdminSubtitle($layout->col2);
-                        $subtitle->content = $contentType->getSubject() . ' - ' . $contentRow->dateTime->getShortDateTimeFormat();
+                        $subtitle->content = $contentType->getSubject() . ' - ' . $contentRow->dateTime->getShortDateTimeLeadingZeroFormat();
 
                         $btn = new AdminIconSiteButton($layout->col2);
                         $btn->site = clone(ContentDeleteSite::$site);
@@ -172,15 +157,13 @@ class WikiSite extends AbstractSite
                         $btn->site->addParameter(new ContentParameter($contentRow->id));
                         $btn->site->addParameter(new WikiParameter());
 
-
                         if ($contentType->hasViewSite()) {
                             $btn = new AdminSiteButton($layout->col2);
                             $btn->site = $contentType->getViewSite();
                         }
 
                         $div = new Div($layout->col2);
-
-                        $view = $contentType->getView($div);
+                        $contentType->getView($div);
 
                         (new Hr($layout->col2));
 

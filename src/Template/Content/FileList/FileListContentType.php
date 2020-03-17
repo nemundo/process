@@ -8,7 +8,7 @@ use Nemundo\Core\Http\Request\File\FileRequest;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Template\Data\TemplateMultiFile\TemplateMultiFile;
 
-// FileListContentType
+
 class FileListContentType extends AbstractFileListContentType
 {
 

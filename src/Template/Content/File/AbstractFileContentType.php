@@ -167,7 +167,11 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $hyperlink->content = $fileRow->file->getFilename();
         $hyperlink->url = $fileRow->file->getUrl();
 
-        $subject = 'File ' . $hyperlink->getContent() . ' was uploaded';
+        $subject = 'File ' . $hyperlink->getContent() . ' was uploaded 2';
+
+        if (!        $fileRow->active) {
+            $subject .= ' deleted file';
+        }
 
         return $subject;
 

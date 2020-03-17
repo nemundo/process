@@ -31,6 +31,19 @@ abstract class AbstractFileListContentType extends AbstractTreeContentType
     }
 
 
+
+    protected function onUpdate()
+    {
+
+    }
+
+
+    public function existItem()
+    {
+        return parent::existContent();
+    }
+
+
     public function addFileRequest(FileRequest $fileRequest) {
 
         $data = new TemplateMultiFile();

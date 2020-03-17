@@ -51,13 +51,13 @@ class FileContentView extends AbstractFileContentView
         }
 
 
+        /*
         if ($fileInformation->isPdf()) {
 
             $textBox = new BootstrapLargeTextBox($this);
             $textBox->value = $fileRow->text;
 
-
-        }
+        }*/
 
         return parent::getContent();
 

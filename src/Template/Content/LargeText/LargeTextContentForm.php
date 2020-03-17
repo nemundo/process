@@ -7,19 +7,20 @@ namespace Nemundo\Process\Template\Content\LargeText;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapLargeTextBox;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 
-class LargeTextContentForm extends AbstractContentForm
+class LargeTextContentForm extends AbstractLargeTextContentForm  // AbstractContentForm
 {
 
     /**
      * @var AbstractLargeTextContentType
      */
-    public $contentType;
+    //public $contentType;
 
     /**
      * @var BootstrapLargeTextBox
      */
-    private $largeText;
+    //private $largeText;
 
+    /*
     public function getContent()
     {
 
@@ -28,17 +29,19 @@ class LargeTextContentForm extends AbstractContentForm
 
         return parent::getContent();
 
-    }
+    }*/
 
 
+    /*
     protected function loadUpdateForm()
     {
 
         $this->largeText->value = $this->contentType->getDataRow()->largeText;
 
-    }
+    }*/
 
 
+    /*
     protected function onSubmit()
     {
 
@@ -46,6 +49,6 @@ class LargeTextContentForm extends AbstractContentForm
         $this->contentType->largeText = $this->largeText->getValue();
         $this->contentType->saveType();
 
-    }
+    }*/
 
 }

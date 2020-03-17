@@ -39,7 +39,6 @@ trait ContentIndexTrait
         $this->dateTime = (new DateTime())->setNow();
         $this->userId = (new UserSessionType())->userId;
 
-
     }
 
 

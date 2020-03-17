@@ -9,10 +9,13 @@ use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Com\Html\Listing\UnorderedList;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Template\Content\File\FileContentType;
 use Nemundo\Process\Template\Data\TemplateMultiFile\TemplateMultiFileReader;
+use Nemundo\Process\Template\Parameter\FileParameter;
+use Nemundo\Process\Template\Site\FileInactiveSite;
 
 class FileListContentView extends AbstractContentView
 {
@@ -24,6 +27,10 @@ class FileListContentView extends AbstractContentView
 
     public function getContent()
     {
+
+        $contentId = $this->contentType->getContentId();
+
+        //(new Debug())->write($contentId);
 
 
         $p=new Paragraph($this);
@@ -43,9 +50,19 @@ class FileListContentView extends AbstractContentView
 
         foreach ($this->contentType->getChild() as $child) {
 
+            $contentType = $child->getContentType();
+
             $row=new TableRow($table);
             $row->addText('File');
             $row->addText($child->subject);
+            $row->addText($contentType->getSubject());
+
+
+
+            $site = clone(FileInactiveSite::$site);
+            $site->addParameter(new FileParameter($child->dataId));
+            $row->addIconSite($site);
+
 
         }
 
