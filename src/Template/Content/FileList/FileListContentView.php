@@ -33,19 +33,20 @@ class FileListContentView extends AbstractContentView
         //(new Debug())->write($contentId);
 
 
-        $p=new Paragraph($this);
+       /* $p=new Paragraph($this);
         $p->content ='Content Id: '. $this->contentType->getContentId();
 
         $p=new Paragraph($this);
-        $p->content ='Data Id: '. $this->contentType->getContentId();
+        $p->content ='Data Id: '. $this->contentType->getContentId();*/
 
 
 
         $table= new AdminTable($this);
 
         $header = new TableHeader($table);
-        $header->addText('');
+        //$header->addText('');
         $header->addText('File');
+        $header->addEmpty();
 
 
         foreach ($this->contentType->getChild() as $child) {
@@ -53,16 +54,13 @@ class FileListContentView extends AbstractContentView
             $contentType = $child->getContentType();
 
             $row=new TableRow($table);
-            $row->addText('File');
-            $row->addText($child->subject);
+            //$row->addText('File');
+            //$row->addText($child->subject);
             $row->addText($contentType->getSubject());
-
-
 
             $site = clone(FileInactiveSite::$site);
             $site->addParameter(new FileParameter($child->dataId));
             $row->addIconSite($site);
-
 
         }
 

@@ -421,18 +421,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
             $this->saveIndex();
 
-            /*$update = new AssignmentUpdate();
-            $update->deadline = $deadline;
-            $update->filter->andEqual($update->model->sourceId, $this->getContentId());
-            $update->filter->andEqual($update->model->statusId, (new OpenAssignmentStatus())->id);
-            $update->update();
-
-            $update = new AssignmentIndexUpdate();
-            $update->deadline = $deadline;
-            $update->filter->andEqual($update->model->contentId, $this->getContentId());
-            $update->update();*/
-
-
         }
 
     }

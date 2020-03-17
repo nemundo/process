@@ -15,7 +15,10 @@ abstract class AbstractAssignmentProcessStatus extends AbstractProcessStatus
 
     public function __construct($dataId = null)
     {
-        $this->deadline=new Date();
+
+        // darf kein Wert haben, da sonst null nicht gültig ist
+        //$this->deadline=new Date();
+
         parent::__construct($dataId);
     }
 

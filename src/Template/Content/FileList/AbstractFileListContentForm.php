@@ -53,52 +53,6 @@ abstract class AbstractFileListContentForm extends AbstractContentForm
         $this->contentType->getView($this);
 
 
-        /*
-        $table= new AdminTable($this);
-
-        foreach ($this->contentType->getChild() as $child) {
-
-            $row=new TableRow($table);
-            $row->addText('File');
-            $row->addText($child->subject);
-
-        }*/
-
-
-
-
-        //$contentId =$this->getContentId();
-
-
-        /*
-        $reader = new TemplateMultiFileReader();
-        $reader->filter->andEqual($reader->model->dataContentId, $contentId);
-
-        $header = new TableHeader($this->table);
-        $header->addText('Filename');
-        $header->addEmpty();
-
-        foreach ($reader->getData() as $fileRow) {
-
-            $row = new TableRow($this->table);
-            $row->strikeThrough = !$fileRow->active;
-
-            if ($fileRow->active) {
-
-                $link = new UrlHyperlink($row);
-                $link->url = $fileRow->file->getUrl();
-                $link->content = $fileRow->file->getFilename();
-
-                $site = clone(MultiFileDeleteSite::$site);
-                $site->addParameter(new FileParameter($fileRow->id));
-                $row->addIconSite($site);
-            } else {
-                $row->addText( $fileRow->file->getFilename());
-                $row->addEmpty();
-            }
-
-        }*/
-
 
         $this->file->label = 'File';
         $this->file->multiUpload = true;
@@ -128,24 +82,14 @@ abstract class AbstractFileListContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        //$this->contentType->parentId = $this->parentId;
         $this->contentType->saveType();
 
-
         foreach ($this->file->getMultiFileRequest() as $fileRequest) {
-            //$this->contentType->addFileRequest($fileRequest);
-
-            /*$data = new TemplateMultiFile();
-            $data->active=true;
-            $data->dataContentId =$contentId;  // $this->getContentId();
-            $data->file->fromFileRequest($fileRequest);
-            $data->save();*/
 
             $type = new FileContentType();
             $type->parentId = $this->contentType->getContentId();
             $type->fileRequest = $fileRequest;
             $type->saveType();
-
 
         }
 

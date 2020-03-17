@@ -8,6 +8,7 @@ use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Core\Http\Request\File\FileRequest;
 use Nemundo\Dev\Deployment\DeploymentConfig;
 use Nemundo\Dev\Deployment\StagingEnvironment;
+use Nemundo\Html\Formatting\Strike;
 use Nemundo\Model\Parameter\FilenameParameter;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Template\Data\TemplateFile\Redirect\TemplateFileRedirectConfig;
@@ -15,8 +16,6 @@ use Nemundo\Process\Template\Data\TemplateFile\TemplateFile;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileDelete;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileReader;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileUpdate;
-use Nemundo\Process\Template\Parameter\FileParameter;
-use Nemundo\Process\Template\Site\FileItemSite;
 
 
 abstract class AbstractFileContentType extends AbstractTreeContentType
@@ -158,6 +157,7 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         return $fileRow;
     }
 
+
     public function getSubject()
     {
 
@@ -167,9 +167,38 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $hyperlink->content = $fileRow->file->getFilename();
         $hyperlink->url = $fileRow->file->getUrl();
 
-        $subject = 'File ' . $hyperlink->getContent() . ' was uploaded 2';
+        $text = $hyperlink->getContent();
 
-        if (!        $fileRow->active) {
+        if (!$fileRow->active) {
+            //$subject .= ' deleted file';
+
+            $strike = new Strike();
+            $strike->content = $hyperlink->getContent();
+
+            $text = $strike->getContent();
+
+        }
+
+        //$text = $hyperlink->getContent();  // . ' wurde hochgeladen';
+
+        return $text;
+
+    }
+
+
+    public function getLog()
+    {
+
+        $fileRow = $this->getDataRow();
+
+        $hyperlink = new UrlHyperlink();
+        $hyperlink->content = $fileRow->file->getFilename();
+        $hyperlink->url = $fileRow->file->getUrl();
+
+        $text = 'Dokument ' . $hyperlink->getContent() . ' wurde hochgeladen';
+        $subject = 'File ' . $hyperlink->getContent() . ' was uploaded';
+
+        if (!$fileRow->active) {
             $subject .= ' deleted file';
         }
 

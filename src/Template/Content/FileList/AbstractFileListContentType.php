@@ -44,6 +44,7 @@ abstract class AbstractFileListContentType extends AbstractTreeContentType
     }
 
 
+    /*
     public function addFileRequest(FileRequest $fileRequest) {
 
         $data = new TemplateMultiFile();
@@ -63,7 +64,7 @@ abstract class AbstractFileListContentType extends AbstractTreeContentType
         $data->file->fromFilename($filename);
         $data->save();
 
-    }
+    }*/
 
 
 }

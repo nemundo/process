@@ -6,14 +6,12 @@ namespace Nemundo\Process\Tree\Type;
 
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Db\Sql\Order\SortOrder;
-use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\Tree\Tree;
 use Nemundo\Process\Content\Data\Tree\TreeCount;
 use Nemundo\Process\Content\Data\Tree\TreeDelete;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Data\Tree\TreeValue;
-use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Content\Row\ContentCustomRow;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Content\Writer\TreeWriter;
@@ -32,23 +30,20 @@ trait TreeTypeTrait
     public $parentId;
 
 
-
     protected function saveTree()
     {
 
         if ($this->parentId !== null) {
             $writer = new TreeWriter();
             $writer->parentId = $this->parentId;
-            $writer->dataId =$this->getContentId();
+            $writer->dataId = $this->getContentId();
             $writer->write();
         }
 
     }
 
 
-
-
-  protected function deleteTree()
+    protected function deleteTree()
     {
 
         $delete = new TreeDelete();
@@ -70,8 +65,6 @@ trait TreeTypeTrait
         }
 
     }
-
-
 
 
     public function hasParent()
@@ -152,18 +145,19 @@ trait TreeTypeTrait
 
     public function getFirst()
     {
-
+        return $this->getChildRow(SortOrder::ASCENDING);
     }
 
 
     public function getLast()
     {
-
+        return $this->getChildRow(SortOrder::DESCENDING);
     }
+
 
     public function getFirstOf(AbstractTreeContentType $contentType)
     {
-        return $this->getChildRow($contentType, SortOrder::ASCENDING);
+        return $this->getFilterChildRow($contentType, SortOrder::ASCENDING);
 
     }
 
@@ -171,7 +165,7 @@ trait TreeTypeTrait
     public function getLastOf(AbstractTreeContentType $contentType)
     {
 
-        return $this->getChildRow($contentType, SortOrder::DESCENDING);
+        return $this->getFilterChildRow($contentType, SortOrder::DESCENDING);
 
     }
 
@@ -201,7 +195,7 @@ trait TreeTypeTrait
     }
 
 
-    private function getChildRow(AbstractTreeContentType $contentType, $sortOrder)
+    private function getChildRow($sortOrder)
     {
 
         $reader = new TreeReader();
@@ -209,7 +203,30 @@ trait TreeTypeTrait
         $reader->model->child->loadContentType();
         $reader->model->child->loadUser();
         $reader->filter->andEqual($reader->model->parentId, $this->getContentId());
-        $reader->filter->andEqual($reader->model->child->contentTypeId, $contentType->typeId);
+        //$reader->filter->andEqual($reader->model->child->contentTypeId, $filterContentType->typeId);
+        $reader->addOrder($reader->model->itemOrder, $sortOrder);
+        $reader->limit = 1;
+
+        /** @var ContentCustomRow $doc */
+        $doc = null;
+        foreach ($reader->getData() as $treeRow) {
+            $doc = $treeRow->child;
+        }
+
+        return $doc;
+
+    }
+
+
+    private function getFilterChildRow(AbstractTreeContentType $filterContentType, $sortOrder)
+    {
+
+        $reader = new TreeReader();
+        $reader->model->loadChild();
+        $reader->model->child->loadContentType();
+        $reader->model->child->loadUser();
+        $reader->filter->andEqual($reader->model->parentId, $this->getContentId());
+        $reader->filter->andEqual($reader->model->child->contentTypeId, $filterContentType->typeId);
         $reader->addOrder($reader->model->itemOrder, $sortOrder);
         $reader->limit = 1;
 
@@ -347,7 +364,6 @@ trait TreeTypeTrait
 
 
     }
-
 
 
 }

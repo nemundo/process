@@ -4,6 +4,8 @@
 namespace Nemundo\Process\App\Assignment\Content;
 
 
+use Nemundo\Core\Language\LanguageCode;
+use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Core\Type\Text\Html;
 use Nemundo\Html\Formatting\Strike;
@@ -99,9 +101,10 @@ trait AssignmentTrait
     {
 
         $assignmentRow = $this->getDataRow();
-        $subject = 'Group Assignment to : ' . $assignmentRow->assignment->group;
+        $subject[LanguageCode::EN] = 'Group Assignment to : ' . $assignmentRow->assignment->group;
+        $subject[LanguageCode::DE] = 'Zuweisung an ' . $assignmentRow->assignment->group;
 
-        return $subject;
+        return (new Translation())->getText($subject);
 
     }
 

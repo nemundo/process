@@ -40,11 +40,14 @@ trait TaskIndexTrait
 
         $message = '';
         foreach ($reader->getData() as $treeRow) {
-
             $message = $treeRow->child->subject;
-
         }
 
+
+
+        //$message = $this->getLast()->getContentType()->getMessage();
+
+        //$message = '[no message]';
 
 
         $update = new TaskIndexUpdate();
