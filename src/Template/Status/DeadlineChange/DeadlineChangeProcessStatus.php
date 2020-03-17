@@ -15,7 +15,6 @@ use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 class DeadlineChangeProcessStatus extends AbstractProcessStatus
 {
 
-
     /**
      * @var Date
      */
@@ -41,34 +40,12 @@ class DeadlineChangeProcessStatus extends AbstractProcessStatus
         /** @var AbstractProcess $process */
         $process = $this->getParentProcess();
 
-
-        /*
-        $deadlineHasChanged = true;
-
-        $processItem = $this->getParentProcess();  // new WorkflowProcess($this->parentId);
-        if ($processItem->hasDeadline()) {
-            if ($this->deadline->getIsoDateFormat() == $processItem->getDeadline()->getIsoDateFormat()) {
-                $deadlineHasChanged = false;
-            }
-        }
-
-        if ($deadlineHasChanged) {*/
-
         $data = new DeadlineChange();
         $data->deadline = $this->deadline;
         $this->dataId = $data->save();
 
-        //$item = new WorkflowItem($this->parentId);
         $process->changeDeadline($this->deadline);
 
-
-
-
-        //$this->saveWorkflowLog();
-
-        // nur hier content eintrag erstellen!!!
-
-        //}
     }
 
 

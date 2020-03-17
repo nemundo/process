@@ -213,6 +213,36 @@
         },
         {
             "template": "default",
+            "model_id": "ac243103-3bfd-43fa-af31-e317fd2e67b4",
+            "label": "Template Date Log",
+            "class_name": "TemplateDateLog",
+            "table_name": "template_template_date_log",
+            "namespace": "Nemundo\\Process\\Template\\Data\\TemplateDateLog",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "date",
+                    "label": "Date From",
+                    "field_name": "date_from",
+                    "variable_name": "dateFrom",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "date",
+                    "label": "Date To",
+                    "field_name": "date_to",
+                    "variable_name": "dateTo",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "52ddfb03-0031-43c5-a6f2-18ebeb08d83a",
             "label": "Template Decimal Number",
             "class_name": "TemplateDecimalNumber",
@@ -453,6 +483,38 @@
                     "label": "Text",
                     "field_name": "text",
                     "variable_name": "text",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "20f72118-5192-4791-8779-d021abc79872",
+            "label": "Template Text Log",
+            "class_name": "TemplateTextLog",
+            "table_name": "template_template_text_log",
+            "namespace": "Nemundo\\Process\\Template\\Data\\TemplateTextLog",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Text From",
+                    "field_name": "text_from",
+                    "variable_name": "textFrom",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Text To",
+                    "field_name": "text_to",
+                    "variable_name": "textTo",
                     "allow_null": false,
                     "is_deleted": false,
                     "length": "255"

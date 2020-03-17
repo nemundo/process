@@ -80,7 +80,9 @@ class ContentLogTable extends AbstractHtmlContainer
             $contentType = $treeRow->child->getContentType();
 
             $row = new BootstrapClickableTableRow($table);
-            $row->addText($contentType->getSubject());
+            //$row->addText($contentType->getSubject());
+            $row->addText($contentType->getLog());
+
             $row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeLeadingZeroFormat(), true);
             $row->addClickableSite($contentType->getViewSite());
 

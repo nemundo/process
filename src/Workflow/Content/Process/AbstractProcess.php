@@ -21,6 +21,7 @@ use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Group\Check\GroupRestrictionTrait;
+use Nemundo\Process\Log\Type\LogTrait;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Content\View\AbstractProcessView;
 use Nemundo\Process\Workflow\Content\View\ProcessView;
@@ -35,6 +36,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     use TaskIndexTrait;
     use DocumentIndexTrait;
     use CalendarIndexTrait;
+    use LogTrait;
 
     public $number;
 

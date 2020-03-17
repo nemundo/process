@@ -7,6 +7,7 @@ use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
 use Nemundo\Process\Content\Writer\TreeWriter;
 use Nemundo\Process\Group\Check\GroupRestrictionTrait;
+use Nemundo\Process\Log\Type\LogTrait;
 use Nemundo\Process\Workflow\Content\Form\StatusForm;
 
 
@@ -15,6 +16,7 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
 {
 
     use ProcessStatusTrait;
+    use LogTrait;
     use GroupRestrictionTrait;
 
     /**
