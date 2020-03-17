@@ -28,23 +28,9 @@ class FileListContentView extends AbstractContentView
     public function getContent()
     {
 
-        //$contentId = $this->contentType->getContentId();
-
-        //(new Debug())->write($contentId);
-
-
-       /* $p=new Paragraph($this);
-        $p->content ='Content Id: '. $this->contentType->getContentId();
-
-        $p=new Paragraph($this);
-        $p->content ='Data Id: '. $this->contentType->getContentId();*/
-
-
-
         $table= new AdminTable($this);
 
         $header = new TableHeader($table);
-        //$header->addText('');
         $header->addText('File');
         $header->addEmpty();
 
@@ -54,8 +40,6 @@ class FileListContentView extends AbstractContentView
             $contentType = $child->getContentType();
 
             $row=new TableRow($table);
-            //$row->addText('File');
-            //$row->addText($child->subject);
             $row->addText($contentType->getSubject());
 
             $site = clone(FileInactiveSite::$site);
@@ -63,22 +47,6 @@ class FileListContentView extends AbstractContentView
             $row->addIconSite($site);
 
         }
-
-
-        /*
-        $reader = new TemplateMultiFileReader();
-        $reader->filter->andEqual($reader->model->dataContentId, $this->contentType->getContentId());
-        $reader->filter->andEqual($reader->model->active,true);
-
-        $list = new UnorderedList($this);
-        $list->addCssClass('list-unstyled');
-
-        foreach ($reader->getData() as $row) {
-
-            $link = new UrlHyperlink($list);
-            $link->url = $row->file->getUrl();
-            $link->content = $row->file->getFilename();
-        }*/
 
         return parent::getContent();
 

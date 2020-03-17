@@ -9,9 +9,7 @@ use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Template\Content\File\FileContentType;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFile;
 
-class FileListContentForm extends AbstractFileListContentForm  // AbstractMultiFileContentForm
+class FileListContentForm extends AbstractFileListContentForm
 {
-
-
 
 }

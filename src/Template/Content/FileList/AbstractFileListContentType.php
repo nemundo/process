@@ -15,8 +15,8 @@ abstract class AbstractFileListContentType extends AbstractTreeContentType
     public function __construct($dataId = null)
     {
 
-        $this->formClass= FileListContentForm::class;  // MultiFileContentForm::class;
-        $this->viewClass= FileListContentView::class;  // MultiFileContentView::class;
+        $this->formClass= FileListContentForm::class;
+        $this->viewClass= FileListContentView::class;
 
         parent::__construct($dataId);
     }

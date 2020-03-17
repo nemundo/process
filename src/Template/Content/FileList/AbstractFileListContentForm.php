@@ -49,10 +49,7 @@ abstract class AbstractFileListContentForm extends AbstractContentForm
     public function getContent()
     {
 
-
         $this->contentType->getView($this);
-
-
 
         $this->file->label = 'File';
         $this->file->multiUpload = true;
@@ -66,17 +63,7 @@ abstract class AbstractFileListContentForm extends AbstractContentForm
     protected function loadUpdateForm()
     {
 
-       //return $this->contentType->getContentId();
-
     }
-
-
-    /*
-    protected function getContentId() {
-
-       return $this->contentType->getContentId();
-
-    }*/
 
 
     protected function onSubmit()
