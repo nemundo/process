@@ -8,11 +8,10 @@ use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Process\App\Assignment\Content\AssignmentTrait;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
-class MessageAssignmentProcessStatus extends AbstractProcessStatus   // MessageAssignmentContentType
+class MessageAssignmentProcessStatus extends AbstractProcessStatus
 {
 
     use AssignmentTrait;
-    //use ProcessStatusTrait;
 
     public $message;
 
@@ -41,19 +40,5 @@ class MessageAssignmentProcessStatus extends AbstractProcessStatus   // MessageA
         $process->saveSearchIndex();
 
     }
-
-
-    /*
-    protected function assignAssignment()
-    {
-
-        $this->saveAssignment();
-        $process = $this->getParentProcess();
-
-        $process->changeAssignment($this->groupId);
-        $process->changeDeadline($this->deadline);
-
-    }*/
-
 
 }

@@ -37,7 +37,12 @@ trait ContentIndexTrait
     {
 
         $this->dateTime = (new DateTime())->setNow();
-        $this->userId = (new UserSessionType())->userId;
+
+        if ((new UserSessionType())->isUserLogged()) {
+            $this->userId = (new UserSessionType())->userId;
+        } else {
+            $this->userId = '';
+        }
 
     }
 
@@ -51,10 +56,10 @@ trait ContentIndexTrait
 
             if ($this->existContent()) {
 
-            $id = new ContentId();
-            $id->filter->andEqual($id->model->contentTypeId, $this->typeId);
-            $id->filter->andEqual($id->model->dataId, $this->getDataId());
-            $this->contentId = $id->getId();
+                $id = new ContentId();
+                $id->filter->andEqual($id->model->contentTypeId, $this->typeId);
+                $id->filter->andEqual($id->model->dataId, $this->getDataId());
+                $this->contentId = $id->getId();
             }
 
         }

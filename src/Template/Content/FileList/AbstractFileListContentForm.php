@@ -4,18 +4,10 @@
 namespace Nemundo\Process\Template\Content\FileList;
 
 
-use Nemundo\Admin\Com\Table\AdminTable;
-use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
-use Nemundo\Com\TableBuilder\TableHeader;
-use Nemundo\Com\TableBuilder\TableRow;
-use Nemundo\Html\Paragraph\Paragraph;
+use Nemundo\Html\Block\Div;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapFileUpload;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Template\Content\File\FileContentType;
-use Nemundo\Process\Template\Data\TemplateMultiFile\TemplateMultiFile;
-use Nemundo\Process\Template\Data\TemplateMultiFile\TemplateMultiFileReader;
-use Nemundo\Process\Template\Parameter\FileParameter;
-use Nemundo\Process\Template\Site\MultiFileDeleteSite;
 
 abstract class AbstractFileListContentForm extends AbstractContentForm
 {
@@ -31,16 +23,16 @@ abstract class AbstractFileListContentForm extends AbstractContentForm
     protected $file;
 
     /**
-     * @var AdminTable
+     * @var Div
      */
-    private $table;
+    private $listDiv;
 
 
     protected function loadContainer()
     {
         parent::loadContainer();
 
-        //$this->table = new AdminTable($this);
+        $this->listDiv = new Div($this);
         $this->file = new BootstrapFileUpload($this);
 
     }
@@ -49,13 +41,12 @@ abstract class AbstractFileListContentForm extends AbstractContentForm
     public function getContent()
     {
 
-        $this->contentType->getView($this);
+        $this->contentType->getView($this->listDiv);
 
         $this->file->label = 'File';
         $this->file->multiUpload = true;
 
         return parent::getContent();
-
 
     }
 

@@ -83,6 +83,7 @@ trait TreeTypeTrait
     }
 
 
+    // braucht es diese Function???
     public function addChild($childId)
     {
 
@@ -248,8 +249,6 @@ trait TreeTypeTrait
     private function getChildContent($sortOrder = SortOrder::DESCENDING)
     {
 
-        //(new Debug())->write($this->getContentId());
-
         $contentId = $this->getContentId();
 
         /** @var ContentCustomRow[] $childList */
@@ -372,8 +371,6 @@ trait TreeTypeTrait
 
         return $dataId;
 
-
     }
-
 
 }

@@ -44,18 +44,13 @@ class TaskParentContainer extends AbstractParentContainer
     public function getContent()
     {
 
-        //$subtitle = new AdminSubtitle($this);
-        //$subtitle->content = 'Aufgabenliste';
-
-
         if ($this->showSearchForm) {
             new TaskSearchForm($this);
         }
 
-
         $taskFilter = new TaskFilter();
 
-        $taskReader = new TaskIndexReader();  // new TaskIndexPaginationReader();
+        $taskReader = new TaskIndexReader();
         $taskReader->model->loadContent();
         $taskReader->model->content->loadContentType();
         $taskReader->model->loadAssignment();
@@ -65,7 +60,6 @@ class TaskParentContainer extends AbstractParentContainer
         $taskReader->model->source->loadContentType();
         $taskReader->filter = $taskFilter;
         $taskReader->filter->andEqual($taskReader->model->sourceId, $this->parentId);
-
 
         if ((new SortingParameter())->notExists()) {
             $taskReader->addOrder($taskReader->model->deadline);
@@ -77,9 +71,6 @@ class TaskParentContainer extends AbstractParentContainer
 
         $p = new Paragraph($this);
         $p->content = $count->getFormatCount() . ' Aufgaben gefunden';
-
-
-        //$taskReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
 
         $table = new AdminClickableTable($this);
 
@@ -122,7 +113,6 @@ class TaskParentContainer extends AbstractParentContainer
                 $row->addEmpty();
             }
 
-
             $ersteller = $taskRow->user->login . ' ' . $taskRow->dateTime->getShortDateLeadingZeroFormat();
             $row->addText($ersteller);
 
@@ -137,7 +127,6 @@ class TaskParentContainer extends AbstractParentContainer
 
         }
 
-
         if ($this->showAddButton) {
             $add = new SiteHyperlink($this);
             $add->showSiteTitle = false;
@@ -146,7 +135,6 @@ class TaskParentContainer extends AbstractParentContainer
             new PlusIcon($add);
         }
 
-
         if ($this->hideIfNoItems) {
             if ($taskReader->getCount() == 0) {
                 $this->visible = false;
@@ -154,6 +142,7 @@ class TaskParentContainer extends AbstractParentContainer
         }
 
         return parent::getContent();
+
     }
 
 }
