@@ -16,13 +16,14 @@ use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Process\Content\Com\Form\AddContentForm;
-use Nemundo\Process\Content\Com\Table\ContentLogTable;
+
 use Nemundo\Process\Content\Com\Table\SourceTable;
 use Nemundo\Process\Content\Parameter\ParentParameter;
 use Nemundo\Process\Template\Content\File\FileActiveContentType;
 use Nemundo\Process\Template\Content\File\FileUploadForm;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFilePaginationReader;
 use Nemundo\Process\Template\Parameter\FileParameter;
+use Nemundo\Process\Template\Site\Image\ImageInactiveSite;
 use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Web\Site\Site;
 
@@ -45,6 +46,11 @@ class FileSite extends AbstractSite
         new PdfExtractSite($this);
         new FileDeleteSite($this);
         new FileActiveSite($this);
+
+        new ImageInactiveSite($this);
+
+
+
     }
 
 

@@ -10,14 +10,13 @@ use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Html\Form\Input\AcceptFileType;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapFileUpload;
+use Nemundo\Package\Bootstrap\Image\BootstrapResponsiveImage;
 use Nemundo\Process\Content\Form\AbstractContentForm;
-use Nemundo\Process\Template\Content\Image\AbstractImageContentForm;
 use Nemundo\Process\Template\Content\Image\ImageContentType;
-
-use Nemundo\Process\Template\Data\TemplateMultiFile\TemplateMultiFileReader;
-use Nemundo\Process\Template\Data\TemplateMultiImage\TemplateMultiImageReader;
+use Nemundo\Process\Template\Data\TemplateImageIndex\TemplateImageIndexReader;
 use Nemundo\Process\Template\Parameter\FileParameter;
-use Nemundo\Process\Template\Site\MultiFileDeleteSite;
+use Nemundo\Process\Template\Parameter\ImageParameter;
+use Nemundo\Process\Template\Site\Image\ImageInactiveSite;
 
 abstract class AbstractImageListContentForm extends AbstractContentForm
 {
@@ -35,15 +34,14 @@ abstract class AbstractImageListContentForm extends AbstractContentForm
     /**
      * @var AdminTable
      */
-    //private $table;
-
+    private $table;
 
 
     protected function loadContainer()
     {
         parent::loadContainer();
 
-        //$this->table = new AdminTable($this);
+        $this->table = new AdminTable($this);
         $this->file = new BootstrapFileUpload($this);
 
     }
@@ -52,20 +50,33 @@ abstract class AbstractImageListContentForm extends AbstractContentForm
     public function getContent()
     {
 
-        //$contentId =$this->getContentId();
+        $contentId =$this->contentType->getContentId();
 
-
-        /*
-        $reader = new TemplateMultiImageReader();  // new TemplateMultiFileReader();
-        $reader->filter->andEqual($reader->model->dataContentId, $contentId);
+        $reader = new TemplateImageIndexReader();
+      $reader->model->loadContent();
+        $reader->filter->andEqual($reader->model->parentId, $contentId);
 
         $header = new TableHeader($this->table);
-        $header->addText('Filename');
+        $header->addText('Image');
         $header->addEmpty();
 
         foreach ($reader->getData() as $fileRow) {
 
+
             $row = new TableRow($this->table);
+
+            $img = new BootstrapResponsiveImage($row);
+            $img->src = $fileRow->urlSmall;
+
+            //$row->addText($fileRow->urlSmall);
+
+
+            $site = clone(ImageInactiveSite::$site);
+            $site->addParameter(new ImageParameter($fileRow->content->dataId));
+            $row->addIconSite($site);
+
+
+            /*
             $row->strikeThrough = !$fileRow->active;
 
             if ($fileRow->active) {
@@ -80,14 +91,13 @@ abstract class AbstractImageListContentForm extends AbstractContentForm
             } else {
                 $row->addText( $fileRow->image->getFilename());
                 $row->addEmpty();
-            }
+            }*/
 
-        }*/
-
+        }
 
         $this->file->label = 'Image';
         $this->file->multiUpload = true;
-        $this->file->acceptFileType=AcceptFileType::IMAGE;
+        $this->file->acceptFileType = AcceptFileType::IMAGE;
 
         return parent::getContent();
 
@@ -98,43 +108,22 @@ abstract class AbstractImageListContentForm extends AbstractContentForm
     protected function loadUpdateForm()
     {
 
-        //return $this->contentType->getContentId();
-
     }
-
-
-    /*
-    protected function getContentId() {
-
-        return $this->contentType->getContentId();
-
-    }*/
 
 
     protected function onSubmit()
     {
 
-        //$this->contentType->parentId = $this->parentId;
         $this->contentType->saveType();
 
         foreach ($this->file->getMultiFileRequest() as $fileRequest) {
-
-            //$this->contentType->addFileRequest($fileRequest);
-
 
             $type = new ImageContentType();
             $type->parentId = $this->contentType->getContentId();
             $type->fileRequest = $fileRequest;
             $type->saveType();
 
-            /*$data = new TemplateMultiFile();
-            $data->active=true;
-            $data->dataContentId =$contentId;  // $this->getContentId();
-            $data->file->fromFileRequest($fileRequest);
-            $data->save();*/
-
         }
-
 
     }
 

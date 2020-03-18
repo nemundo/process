@@ -11,6 +11,7 @@ use Nemundo\Dev\Deployment\StagingEnvironment;
 use Nemundo\Html\Formatting\Strike;
 use Nemundo\Model\Parameter\FilenameParameter;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
+use Nemundo\Process\Log\Type\LogTrait;
 use Nemundo\Process\Template\Data\TemplateFile\Redirect\TemplateFileRedirectConfig;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFile;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileDelete;
@@ -20,6 +21,8 @@ use Nemundo\Process\Template\Data\TemplateFile\TemplateFileUpdate;
 
 abstract class AbstractFileContentType extends AbstractTreeContentType
 {
+
+    use LogTrait;
 
     /**
      * @var FileRequest

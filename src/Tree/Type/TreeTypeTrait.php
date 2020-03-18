@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Tree\Type;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Process\Content\Data\Content\ContentReader;
@@ -32,6 +33,10 @@ trait TreeTypeTrait
 
     protected function saveTree()
     {
+
+        (new Debug())->write($this->parentId);
+        (new Debug())->write($this->getParentId());
+
 
         if ($this->parentId !== null) {
             $writer = new TreeWriter();

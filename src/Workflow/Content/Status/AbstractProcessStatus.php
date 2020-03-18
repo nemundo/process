@@ -58,7 +58,7 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
 
         $this->getParentProcess()->saveIndex();
 
-        return $this->dataId;
+        //return $this->dataId;
 
     }
 

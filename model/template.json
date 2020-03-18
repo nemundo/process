@@ -358,6 +358,73 @@
             "index": []
         },
         {
+            "template": "default",
+            "model_id": "72125aba-7adc-4131-918c-6dafdbe5d216",
+            "label": "Template Image Index",
+            "class_name": "TemplateImageIndex",
+            "table_name": "template_template_image_index",
+            "namespace": "Nemundo\\Process\\Template\\Data\\TemplateImageIndex",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Parent",
+                    "field_name": "parent",
+                    "variable_name": "parent",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": "external",
+                    "label": "Content",
+                    "field_name": "content",
+                    "variable_name": "content",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": "text",
+                    "label": "Url Small",
+                    "field_name": "url_small",
+                    "variable_name": "urlSmall",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Url Large",
+                    "field_name": "url_large",
+                    "variable_name": "urlLarge",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "number",
+                    "label": "Item Order",
+                    "field_name": "item_order",
+                    "variable_name": "itemOrder",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "parent_content",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "parent",
+                        "content"
+                    ]
+                }
+            ]
+        },
+        {
             "template": "active_model",
             "model_id": "8e0a7b13-1875-459f-8a90-e1e7fd122cc8",
             "label": "Template Multi File",

@@ -7,12 +7,15 @@ namespace Nemundo\Process\Template\Content\File;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
+use Nemundo\Process\Log\Type\LogTrait;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileUpdate;
 use Nemundo\Process\Template\Data\TemplateFileDelete\TemplateFileDelete;
 use Nemundo\Process\Template\Data\TemplateFileDelete\TemplateFileDeleteReader;
 
 class FileInactiveContentType extends AbstractTreeContentType
 {
+
+    use LogTrait;
 
     public $fileId;
 
