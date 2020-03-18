@@ -34,8 +34,8 @@ trait TreeTypeTrait
     protected function saveTree()
     {
 
-        (new Debug())->write($this->parentId);
-        (new Debug())->write($this->getParentId());
+        //(new Debug())->write($this->parentId);
+        //(new Debug())->write($this->getParentId());
 
 
         if ($this->parentId !== null) {
