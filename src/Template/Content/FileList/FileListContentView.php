@@ -28,6 +28,9 @@ class FileListContentView extends AbstractContentView
     public function getContent()
     {
 
+
+
+
         $table= new AdminTable($this);
 
         $header = new TableHeader($table);

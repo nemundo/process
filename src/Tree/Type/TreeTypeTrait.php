@@ -4,7 +4,6 @@
 namespace Nemundo\Process\Tree\Type;
 
 
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Process\Content\Data\Content\ContentReader;
@@ -249,26 +248,32 @@ trait TreeTypeTrait
     private function getChildContent($sortOrder = SortOrder::DESCENDING)
     {
 
-        $reader = new TreeReader();
-        $reader->model->loadChild();
-        $reader->model->child->loadContentType();
-        $reader->model->child->loadUser();
-        $reader->filter->andEqual($reader->model->parentId, $this->getContentId());
+        //(new Debug())->write($this->getContentId());
 
-        $reader->addOrder($reader->model->itemOrder, $sortOrder);
+        $contentId = $this->getContentId();
 
-        /** @var ContentCustomRow[] $doc */
-        $doc = [];
-        foreach ($reader->getData() as $treeRow) {
+        /** @var ContentCustomRow[] $childList */
+        $childList = [];
 
-            $treeRow->child->itemOrder = $treeRow->itemOrder;// + 1;
+        if ($contentId !== null) {
 
-            $doc[] = $treeRow->child;
+            $reader = new TreeReader();
+            $reader->model->loadChild();
+            $reader->model->child->loadContentType();
+            $reader->model->child->loadUser();
+            $reader->filter->andEqual($reader->model->parentId, $contentId);
+            $reader->addOrder($reader->model->itemOrder, $sortOrder);
+            foreach ($reader->getData() as $treeRow) {
+                $treeRow->child->itemOrder = $treeRow->itemOrder;
+                $childList[] = $treeRow->child;
+            }
+
         }
 
-        return $doc;
+        return $childList;
 
     }
+
 
     public function removeFromParent()
     {

@@ -40,7 +40,7 @@ abstract class AbstractFileListContentForm extends AbstractContentForm
     {
         parent::loadContainer();
 
-        $this->table = new AdminTable($this);
+        //$this->table = new AdminTable($this);
         $this->file = new BootstrapFileUpload($this);
 
     }
