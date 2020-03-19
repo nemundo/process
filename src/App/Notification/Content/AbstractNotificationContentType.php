@@ -18,6 +18,7 @@ use Nemundo\Process\App\Notification\Site\NotificationItemSite;
 use Nemundo\Process\App\Notification\Type\NotificationTrait;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
+use Nemundo\Process\Log\Type\LogTrait;
 use Nemundo\Process\Template\Content\User\UserContentType;
 use Nemundo\Process\Text\BoldText;
 use Nemundo\Workflow\App\Notification\Config\NotificationConfig;
@@ -27,6 +28,7 @@ abstract class AbstractNotificationContentType extends AbstractTreeContentType
 {
 
     use NotificationTrait;
+    use LogTrait;
 
 
 
@@ -77,6 +79,14 @@ abstract class AbstractNotificationContentType extends AbstractTreeContentType
         $subject[LanguageCode::DE] = 'Benachrichtigung an ';  // . (new BoldText())->getBold(($this->getDataRow())->to->displayName);
 
         return  (new Translation())->getText($subject);
+
+    }
+
+
+    public function getLog()
+    {
+
+        return $this->getSubject();
 
     }
 

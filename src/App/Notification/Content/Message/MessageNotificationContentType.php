@@ -27,7 +27,7 @@ class MessageNotificationContentType extends AbstractNotificationContentType
         $this->typeId = 'b0649289-6c54-4d6d-acf1-2666b9b34901';
 
         $this->formClass = MessageNotificationContentForm::class;
-        $this->viewClass=MessageNotificationContentView::class;
+        //$this->viewClass=MessageNotificationContentView::class;
 
 
     }

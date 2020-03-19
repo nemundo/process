@@ -26,9 +26,6 @@ class WorkflowInfoTable extends AdminLabelValueTable
         $this->addCreator();
         $this->addSubject();
 
-
-
-
     }
 
 
