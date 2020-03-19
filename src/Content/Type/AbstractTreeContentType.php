@@ -41,6 +41,7 @@ abstract class AbstractTreeContentType extends AbstractContentType
     }
 
 
+    /*
     public function saveIndex()
     {
 
@@ -52,7 +53,7 @@ abstract class AbstractTreeContentType extends AbstractContentType
         //$this->saveContentIndex();
         //$this->saveSearchIndex();
 
-    }
+    }*/
 
 
 

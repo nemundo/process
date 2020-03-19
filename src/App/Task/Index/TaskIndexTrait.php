@@ -88,8 +88,8 @@ trait TaskIndexTrait
                 $data->deadline = $this->getDeadline();
                 $data->message = $message;
                 // nicht überschreiben !!!
-                $data->userId = $this->userId;
-                $data->dateTime = $this->dateTime;
+                $data->userId = $this->getCreatedUserId();
+                $data->dateTime = $this->getCreatedDateTime();
 
                 $data->closed = $this->isTaskClosed();
                 $data->taskTypeId = $this->typeId;
