@@ -41,7 +41,9 @@ abstract class AbstractFileListContentForm extends AbstractContentForm
     public function getContent()
     {
 
-        $this->contentType->getView($this->listDiv);
+        /** @var FileListContentView $view */
+        $view = $this->contentType->getView($this->listDiv);
+        $view->showDeleteButton = true;
 
         $this->file->label = 'File';
         $this->file->multiUpload = true;

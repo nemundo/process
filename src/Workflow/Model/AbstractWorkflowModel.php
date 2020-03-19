@@ -89,12 +89,12 @@ abstract class AbstractWorkflowModel extends AbstractModel
     public $user;
 
     /**
-     * @var \Nemundo\Model\Type\External\Id\ExternalIdType
+     * @var ExternalIdType
      */
     public $contentId;
 
     /**
-     * @var \Nemundo\Process\Content\Data\Content\ContentExternalType
+     * @var ContentExternalType
      */
     public $content;
 

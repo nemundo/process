@@ -138,7 +138,7 @@ class WorkflowOrmModel extends AbstractOrmModel
         $this->deadline->isEditable = false;
 
         $this->assignment = new ExternalModelDesignerType($this);
-        $this->assignment->label = 'assignment';
+        $this->assignment->label = 'Assignment';
         $this->assignment->fieldName = 'assignment';
         $this->assignment->variableName = 'assignment';
         $this->assignment->createModelProperty = false;

@@ -5,7 +5,6 @@ namespace Nemundo\Process\Template\Content\FileList;
 
 
 use Nemundo\Admin\Com\Table\AdminTable;
-use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Template\Parameter\FileParameter;
@@ -19,14 +18,17 @@ class FileListContentView extends AbstractContentView
      */
     public $contentType;
 
+
+    public $showDeleteButton = false;
+
     public function getContent()
     {
 
         $table = new AdminTable($this);
 
-        $header = new TableHeader($table);
+        /*$header = new TableHeader($table);
         $header->addText('File');
-        $header->addEmpty();
+        $header->addEmpty();*/
 
         foreach ($this->contentType->getChild() as $child) {
 
@@ -35,9 +37,11 @@ class FileListContentView extends AbstractContentView
             $row = new TableRow($table);
             $row->addText($contentType->getSubject());
 
-            $site = clone(FileInactiveSite::$site);
-            $site->addParameter(new FileParameter($child->dataId));
-            $row->addIconSite($site);
+            if ($this->showDeleteButton) {
+                $site = clone(FileInactiveSite::$site);
+                $site->addParameter(new FileParameter($child->dataId));
+                $row->addIconSite($site);
+            }
 
         }
 
