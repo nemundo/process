@@ -1,7 +1,5 @@
 <?php
 namespace Nemundo\Process\Template\Data\TemplateFile;
-use Nemundo\Core\Debug\Debug;
-
 class TemplateFile extends \Nemundo\Model\Data\AbstractModelData {
 /**
 * @var TemplateFileModel
@@ -31,12 +29,7 @@ public $text;
 public function __construct() {
 parent::__construct();
 $this->model = new TemplateFileModel();
-    //(new Debug())->write($this->model->file->getDataPath());
-
 $this->file = new \Nemundo\Model\Data\Property\File\RedirectFilenameDataProperty($this->model->file, $this->typeValueList);
-    //(new Debug())->write($this->model->file->getDataPath());
-
-
 }
 public function save() {
 $this->typeValueList->setModelValue($this->model->active, $this->active);

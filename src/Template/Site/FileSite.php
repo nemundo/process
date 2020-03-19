@@ -8,6 +8,7 @@ use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Admin\Com\Title\AdminTitle;
+use Nemundo\App\Content\Com\Table\ContentLogTable;
 use Nemundo\Com\Html\Listing\UnorderedList;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
@@ -185,11 +186,7 @@ class FileSite extends AbstractSite
             $btn->site = clone(FileDeleteSite::$site);
             $btn->site->addParameter(new FileParameter());
 
-
-            //$table = new ContentInfoTable($layout->col2);
-            //$table->c
-
-            $log = new ContentLogTable($layout->col2);
+            $log =new ContentLogTable($layout->col2);
             $log->contentType = $fileType;
 
 
