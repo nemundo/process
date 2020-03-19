@@ -6,11 +6,13 @@ namespace Nemundo\Process\Template\Content\Source;
 
 use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
+use Nemundo\Process\Log\Type\LogTrait;
 use Nemundo\Process\Template\Data\SourceLog\SourceLogReader;
 
 abstract class AbstractSourceContentType extends AbstractTreeContentType
 {
 
+    use LogTrait;
 
     public function getDataRow()
     {

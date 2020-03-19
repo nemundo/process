@@ -67,4 +67,12 @@ class SourceAddContentType extends AbstractSourceContentType
 
     }
 
+
+    public function getLog()
+    {
+
+        return $this->getSubject();
+
+    }
+
 }

@@ -42,13 +42,6 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
         $this->typeId = '8fb75394-3e0d-4a3e-a209-1a5ebfc46220';
         $this->formClass = GroupContentForm::class;
 
-
-        //$this->viewClass = GroupContentView::class;
-
-
-        //$this->viewSite = GroupContentViewSite::$site;
-        //$this->parameterClass = GroupParameter::class;
-
         $this->loadGroup();
 
         parent::__construct($dataId);

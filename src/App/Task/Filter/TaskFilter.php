@@ -19,19 +19,21 @@ use Schleuniger\App\Org\Parameter\VerantwortlicherParameter;
 class TaskFilter extends AbstractFilter
 {
 
+    protected $model;
+
     protected function loadFilter()
     {
 
-        $model=new TaskIndexModel();
+        $this->model=new TaskIndexModel();
 
         $parameter=new TaskTypeParameter();
         if ($parameter->hasValue()) {
-        $this->andEqual($model->taskTypeId,$parameter->getValue());
+        $this->andEqual($this->model->taskTypeId,$parameter->getValue());
         }
 
         $parameter= new UserParameter();  // new ErstellerParameter();
         if ($parameter->hasValue()) {
-            $this->andEqual($model->userId,$parameter->getValue());
+            $this->andEqual($this->model->userId,$parameter->getValue());
         }
 
         /*
@@ -44,20 +46,15 @@ class TaskFilter extends AbstractFilter
         if ($statusParameter->hasValue()) {
 
             if ($statusParameter->getValue() == (new OpenListBoxItem())->id) {
-                $this->andEqual($model->closed, false);
+                $this->andEqual($this->model->closed, false);
             }
 
             if ($statusParameter->getValue() == (new ClosedListBoxItem())->id) {
-                $this->andEqual($model->closed, true);
+                $this->andEqual($this->model->closed, true);
             }
         }
 
 
-
-
-
-
-        // TODO: Implement loadFilter() method.
     }
 
 }

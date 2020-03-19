@@ -15,7 +15,7 @@ use Nemundo\Workflow\App\Workflow\Parameter\WorkflowStatusParameter;
 use Schleuniger\App\Org\Parameter\ErstellerParameter;
 use Schleuniger\App\Org\Parameter\VerantwortlicherParameter;
 
-class TaskFilter extends AbstractFilter
+class _SchleunigerTaskFilterTaskFilter extends AbstractFilter
 {
 
     protected function loadFilter()

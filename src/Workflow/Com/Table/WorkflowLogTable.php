@@ -80,6 +80,8 @@ class WorkflowLogTable extends AbstractHtmlContainer
 
             $row = new BootstrapClickableTableRow($table);
             //$row->addText($contentType->getSubject());
+            //$row->addText($contentType->getClassName());
+
             $row->addText($contentType->getLog());
 
             $row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeLeadingZeroFormat(), true);

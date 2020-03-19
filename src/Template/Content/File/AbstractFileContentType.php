@@ -6,6 +6,8 @@ namespace Nemundo\Process\Template\Content\File;
 
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Core\Http\Request\File\FileRequest;
+use Nemundo\Core\Language\LanguageCode;
+use Nemundo\Core\Language\Translation;
 use Nemundo\Dev\Deployment\DeploymentConfig;
 use Nemundo\Dev\Deployment\StagingEnvironment;
 use Nemundo\Html\Formatting\Strike;
@@ -198,14 +200,14 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $hyperlink->content = $fileRow->file->getFilename();
         $hyperlink->url = $fileRow->file->getUrl();
 
-        $text = 'Dokument ' . $hyperlink->getContent() . ' wurde hochgeladen';
-        $subject = 'File ' . $hyperlink->getContent() . ' was uploaded';
+        $subject[LanguageCode::EN] = 'File ' . $hyperlink->getContent() . ' was uploaded';
+        $subject[LanguageCode::DE] = 'Dokument ' . $hyperlink->getContent() . ' wurde hochgeladen';
 
         if (!$fileRow->active) {
             $subject .= ' deleted file';
         }
 
-        return $subject;
+        return (new Translation())->getText(  $subject);
 
     }
 
