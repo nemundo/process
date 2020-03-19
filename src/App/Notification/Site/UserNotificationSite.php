@@ -48,7 +48,7 @@ class UserNotificationSite extends AbstractSite
 
         UserNotificationSite::$site = $this;
 
-        //new NotificationNewSite($this);
+        new NotificationNewSite($this);
         new NotificationItemSite($this);
         new ArchiveSite($this);
         new RedirectSite($this);

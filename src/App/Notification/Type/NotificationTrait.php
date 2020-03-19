@@ -33,7 +33,6 @@ trait NotificationTrait
    public function sendUserNotification($userId)
     {
 
-
         $data = new Notification();
         $data->read=false;
         $data->archive=false;
@@ -53,17 +52,12 @@ trait NotificationTrait
         $mail->mailTo = $userRow->email;
         $mail->subject = $this->getSubject();
         $mail->actionText =$this->getLog();
-
         //$mail->actionText =$this->getView()->getContent();  //get (new Html($this->getMessage()))->getValue();
-
 
         //$mail->actionLabel[LanguageCode::EN] = 'ViewAnsehen';
         $mail->actionLabel = 'Ansehen';
         $mail->actionUrlSite = $this->getViewSite();
         $mail->sendMail();
-
-
-
 
     }
 
