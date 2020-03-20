@@ -21,6 +21,7 @@ use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Group\Type\AbstractGroupContentType;
 use Nemundo\Process\Group\Type\GroupContentType;
 use Nemundo\Process\Template\Content\User\UserContentType;
+use Nemundo\Workflow\App\Assignment\Config\AssignmentSendMailConfig;
 
 trait AssignmentTrait
 {
@@ -51,14 +52,18 @@ trait AssignmentTrait
 
         foreach ($this->group->getUserIdList() as $userId) {
 
-            $mail = new ResponsiveActionMailMessage();
-            $mail->mailTo = (new UserContentType($userId))->getDataRow()->email;
-            $mail->subject = 'Aufgabe: ' . $parentContentType->getSubject();
-            $mail->actionText = $parentContentType->getView()->getContent();
+            if ((new AssignmentSendMailConfig())->getValueByUserId($userId)) {
 
-            $mail->actionLabel = 'Ansehen';
-            $mail->actionUrlSite = $parentContentType->getViewSite();
-            $mail->sendMail();
+                $mail = new ResponsiveActionMailMessage();
+                $mail->mailTo = (new UserContentType($userId))->getDataRow()->email;
+                $mail->subject = 'Aufgabe: ' . $parentContentType->getSubject();
+                $mail->actionText = $parentContentType->getView()->getContent();
+
+                $mail->actionLabel = 'Ansehen';
+                $mail->actionUrlSite = $parentContentType->getViewSite();
+                $mail->sendMail();
+
+            }
 
         }
 

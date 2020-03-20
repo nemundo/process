@@ -11,6 +11,7 @@ use Nemundo\Process\App\Notification\Data\Notification\NotificationDelete;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationUpdate;
 use Nemundo\Process\Group\Type\GroupContentType;
 use Nemundo\Process\Template\Content\User\UserContentType;
+use Nemundo\Workflow\App\Notification\Config\NotificationSendMailConfig;
 
 trait NotificationTrait
 {
@@ -44,20 +45,24 @@ trait NotificationTrait
         $data->save();
 
 
-        $userType = new UserContentType($userId);
-        $userRow = $userType->getDataRow();
+        if ((new NotificationSendMailConfig)->getValueByUserId($userId)) {
+
+            $userType = new UserContentType($userId);
+            $userRow = $userType->getDataRow();
 
 
-        $mail = new ResponsiveActionMailMessage();
-        $mail->mailTo = $userRow->email;
-        $mail->subject = $this->getSubject();
-        $mail->actionText =$this->getLog();
-        //$mail->actionText =$this->getView()->getContent();  //get (new Html($this->getMessage()))->getValue();
+            $mail = new ResponsiveActionMailMessage();
+            $mail->mailTo = $userRow->email;
+            $mail->subject = 'Benachrichtigung: ' . $this->getSubject();
+            $mail->actionText = $this->getLog();
+            //$mail->actionText =$this->getView()->getContent();  //get (new Html($this->getMessage()))->getValue();
 
-        //$mail->actionLabel[LanguageCode::EN] = 'ViewAnsehen';
-        $mail->actionLabel = 'Ansehen';
-        $mail->actionUrlSite = $this->getViewSite();
-        $mail->sendMail();
+            //$mail->actionLabel[LanguageCode::EN] = 'ViewAnsehen';
+            $mail->actionLabel = 'Ansehen';
+            $mail->actionUrlSite = $this->getViewSite();
+            $mail->sendMail();
+
+        }
 
     }
 
