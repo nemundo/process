@@ -52,7 +52,9 @@ trait NotificationTrait
             $mail = new ResponsiveActionMailMessage();
             $mail->mailTo = $userRow->email;
             $mail->subject = 'Benachrichtigung: ' . $this->getSubject();
-            $mail->actionText = $this->getLog();
+            //$mail->actionText = $this->getLog();
+            $mail->actionText = $this->getMessage();
+
             //$mail->actionText =$this->getView()->getContent();  //get (new Html($this->getMessage()))->getValue();
 
             //$mail->actionLabel[LanguageCode::EN] = 'ViewAnsehen';

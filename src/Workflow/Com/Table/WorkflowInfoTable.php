@@ -4,15 +4,17 @@
 namespace Nemundo\Process\Workflow\Com\Table;
 
 
+use App\App\IssueTracker\Data\Issue\IssueRow;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Process\Group\Com\Span\GroupSpan;
-use Schleuniger\App\ChangeRequest\Row\EcrCustomRow;
+use Nemundo\Process\Workflow\Row\WorkflowCustomRowTrait;
+
 
 class WorkflowInfoTable extends AdminLabelValueTable
 {
 
     /**
-     * @var EcrCustomRow
+     * @var WorkflowCustomRowTrait
      */
     public $workflowRow;
 
@@ -65,7 +67,9 @@ class WorkflowInfoTable extends AdminLabelValueTable
 
     public function addDeadline()
     {
+
         $this->addLabelValue($this->workflowRow->model->deadline->label, $this->workflowRow->getDeadline());
+
         return $this;
     }
 

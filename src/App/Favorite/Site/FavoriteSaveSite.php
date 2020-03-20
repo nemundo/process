@@ -2,16 +2,14 @@
 
 namespace Nemundo\Process\App\Favorite\Site;
 
-use Nemundo\Process\App\Favorite\Content\FavoriteContentType;
-use Nemundo\Process\Content\Parameter\ContentParameter;
-use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-
-use Nemundo\User\Type\UserSessionType;
-use Nemundo\Web\Site\AbstractSite;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Package\FontAwesome\Site\AbstractIconSite;
 use Nemundo\Process\App\Favorite\Data\Favorite\Favorite;
+use Nemundo\Process\App\Favorite\Icon\EmptyFavoriteIcon;
+use Nemundo\Process\Content\Parameter\ContentParameter;
+use Nemundo\User\Type\UserSessionType;
+use Nemundo\Web\Url\UrlReferer;
 
-class FavoriteSaveSite extends AbstractSite
+class FavoriteSaveSite extends AbstractIconSite
 {
 
     /**
@@ -21,43 +19,26 @@ class FavoriteSaveSite extends AbstractSite
 
     protected function loadSite()
     {
+
         $this->title = 'Favorite';
         $this->url = 'favorite-save';
         $this->menuActive = false;
+        $this->icon = new EmptyFavoriteIcon();
 
         new FavoriteDeleteSite($this);
 
         FavoriteSaveSite::$site = $this;
+
     }
 
 
     public function loadContent()
     {
 
-        //$parameter=new ContentParameter();
-        //$parameter->contentTypeCheck=false;
-        //$contentType = $parameter->getContentType();
-
-
         $data = new Favorite();
         $data->contentId = (new ContentParameter())->getValue();
         $data->userId = (new UserSessionType())->userId;
         $data->save();
-
-
-
-        /*
-        $type=new FavoriteContentType();
-        $type->parentId = $contentType->getContentId();
-        $type->saveType();
-
-        /*
-        $data = new Favorite();
-        $data->contentId = (new DataParameter())->getValue();
-
-        //$data->dataId = (new DataIdParameter())->getValue();
-        $data->userId = (new UserSessionType())->userId;
-        $data->save();*/
 
         (new UrlReferer())->redirect();
 
