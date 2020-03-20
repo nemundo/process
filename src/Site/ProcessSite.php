@@ -8,6 +8,7 @@ use Nemundo\Process\App\Calendar\Site\CalendarSite;
 use Nemundo\Process\App\Dashboard\Site\DashboardSite;
 use Nemundo\Process\App\Document\Site\DocumentSite;
 use Nemundo\Process\App\Favorite\Site\UserFavoriteSite;
+use Nemundo\Process\App\Inbox\Site\InboxSite;
 use Nemundo\Process\App\Notification\Site\NotificationAdminSite;
 use Nemundo\Process\App\Notification\Site\UserNotificationSite;
 use Nemundo\Process\App\Task\Site\TaskIndexSite;
@@ -63,6 +64,8 @@ class ProcessSite extends AbstractSite
 
         new GeoSite($this);
         new CalendarSite($this);
+        new InboxSite($this);
+
 
 
         //new ExplorerSite($this);

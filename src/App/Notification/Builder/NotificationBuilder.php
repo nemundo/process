@@ -12,11 +12,33 @@ use Nemundo\Process\Template\Content\User\UserContentType;
 class NotificationBuilder extends AbstractBase
 {
 
+    public $subject;
 
-    protected function sendUserNotification($userId)
+    public $message;
+
+
+    //public $contentId;
+
+
+   public function sendUserNotification($userId)
     {
 
 
+        $data = new Notification();
+        $data->read=false;
+        $data->archive=false;
+        $data->toId = $userId;
+        //$data->contentTypeId=$this->typeId;
+        $data->contentId = $this->contentId;  // $this->getContentId();
+        $data->subject =$this->subject;  //$this->getSubject();
+        $data->message = $this->message;  // $this->getMessage();
+        $data->save();
+
+
+
+
+
+        /*
         $data = new Notification();
         $data->read=false;
         $data->archive=false;
@@ -39,7 +61,7 @@ class NotificationBuilder extends AbstractBase
         //$mail->actionLabel[LanguageCode::EN] = 'ViewAnsehen';
         $mail->actionLabel = 'Ansehen';
         $mail->actionUrlSite = $this->getViewSite();
-        $mail->sendMail();
+        $mail->sendMail();*/
 
 
 

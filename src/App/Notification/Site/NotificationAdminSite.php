@@ -15,6 +15,7 @@ use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Assignment\Com\ListBox\AssignmentStatusListBox;
 use Nemundo\Process\App\Notification\Content\File\FileNotificationContentType;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationPaginationReader;
+use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\User\Com\ListBox\UserListBox;
 use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Web\Site\Site;
@@ -29,18 +30,12 @@ class NotificationAdminSite extends AbstractSite
 
     protected function loadSite()
     {
-        $this->title = 'Notification';
-        $this->url = 'notification';
+        $this->title = 'Notification Admin';
+        $this->url = 'notification-admin';
 
         NotificationAdminSite::$site=$this;
 
-        /*
-        new NotificationItemSite($this);
-        new ArchiveSite($this);
-        new UserNotificationDeleteSite($this);
-*/
 
-        // TODO: Implement loadSite() method.
     }
 
     public function loadContent()
@@ -73,8 +68,8 @@ class NotificationAdminSite extends AbstractSite
         $header->addText('To');
 
         $notificationReader = new NotificationPaginationReader();
-        $notificationReader->model->loadSubjectContent();
-        $notificationReader->model->subjectContent->loadContentType();
+        //$notificationReader->model->loadSubjectContent();
+        //$notificationReader->model->subjectContent->loadContentType();
         $notificationReader->model->loadContent();
         $notificationReader->model->content->loadContentType();
         $notificationReader->model->loadTo();
@@ -84,19 +79,19 @@ class NotificationAdminSite extends AbstractSite
         }
 
         $notificationReader->addOrder($notificationReader->model->id, SortOrder::DESCENDING);
-        $notificationReader->paginationLimit = 50;
+        $notificationReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
         foreach ($notificationReader->getData() as $notificationRow) {
 
             $row = new BootstrapClickableTableRow($table);
             $row->addYesNo($notificationRow->archive);
             $row->addText($notificationRow->content->contentType->contentType);
-            $row->addText($notificationRow->subjectContent->subject);
+            $row->addText($notificationRow->subject);
             $row->addText($notificationRow->message);
 
             $row->addText($notificationRow->content->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
             $row->addText($notificationRow->to->displayName);
 
-            $row->addClickableSite($notificationRow->subjectContent->getContentType()->getViewSite());
+            $row->addClickableSite($notificationRow->content->getContentType()->getViewSite());
 
         }
 
@@ -109,7 +104,7 @@ class NotificationAdminSite extends AbstractSite
 
         $page->render();
 
-        // TODO: Implement loadContent() method.
+
     }
 
 

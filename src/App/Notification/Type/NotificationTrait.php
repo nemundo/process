@@ -3,8 +3,6 @@
 namespace Nemundo\Process\App\Notification\Type;
 
 
-use Nemundo\Core\Language\LanguageCode;
-use Nemundo\Core\Type\Text\Html;
 use Nemundo\Package\ResponsiveMail\ResponsiveActionMailMessage;
 use Nemundo\Process\App\Notification\Data\Notification\Notification;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationDelete;
@@ -31,18 +29,18 @@ trait NotificationTrait
     }
 
 
-   public function sendUserNotification($userId)
+    public function sendUserNotification($userId)
     {
 
         $data = new Notification();
-        $data->read=false;
-        $data->archive=false;
+        $data->read = false;
+        $data->archive = false;
         $data->toId = $userId;
-        $data->contentTypeId=$this->typeId;
+        $data->contentTypeId = $this->typeId;
         $data->contentId = $this->getContentId();
         $data->subject = $this->getSubject();
         $data->message = $this->getMessage();
-        $data->save();
+        $dataId = $data->save();
 
 
         if ((new NotificationSendMailConfig)->getValueByUserId($userId)) {
@@ -64,6 +62,8 @@ trait NotificationTrait
 
         }
 
+        return $dataId;
+
     }
 
 
@@ -79,7 +79,8 @@ trait NotificationTrait
     }
 
 
-    public function deleteNotification() {
+    public function deleteNotification()
+    {
 
         $delete = new NotificationDelete();
         $delete->filter->andEqual($delete->model->contentId, $this->getContentId());

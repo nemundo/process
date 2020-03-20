@@ -2,7 +2,7 @@
     "app": "Message",
     "name": "message",
     "namespace": "Nemundo\\Process\\App\\Message",
-    "is_deleted": true,
+    "is_deleted": false,
     "model": [
         {
             "template": "default",
@@ -31,6 +31,15 @@
                     "variable_name": "message",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "To",
+                    "field_name": "to",
+                    "variable_name": "to",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "23f00db8-b303-40e4-ab45-32054a954434"
                 }
             ],
             "index": []
@@ -44,7 +53,7 @@
             "namespace": "Nemundo\\Process\\App\\Message\\Data\\MessageTo",
             "row_class_name": "",
             "primary_index": "auto_increment",
-            "is_deleted": false,
+            "is_deleted": true,
             "type": [
                 {
                     "type": "external",
