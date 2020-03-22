@@ -85,7 +85,7 @@ class UserContentType extends AbstractTreeContentType
             $id->filter->andEqual($id->model->login, $this->login);
             $this->dataId = $id->getId();
 
-            $this->createMode = false;
+            //$this->createMode = false;
 
         }
 

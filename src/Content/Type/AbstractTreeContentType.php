@@ -4,11 +4,6 @@
 namespace Nemundo\Process\Content\Type;
 
 
-use Nemundo\Core\Log\LogMessage;
-use Nemundo\Html\Container\AbstractHtmlContainer;
-use Nemundo\Process\Content\Data\Tree\TreeDelete;
-use Nemundo\Process\Content\Form\AbstractContentForm;
-use Nemundo\Process\Content\Writer\TreeWriter;
 use Nemundo\Process\Search\Type\SearchIndexTrait;
 use Nemundo\Process\Tree\Type\TreeTypeTrait;
 
@@ -33,7 +28,6 @@ abstract class AbstractTreeContentType extends AbstractContentType
     }
 
 
-
     // afterContentSave
     protected function onFinished()
     {
@@ -54,7 +48,6 @@ abstract class AbstractTreeContentType extends AbstractContentType
         //$this->saveSearchIndex();
 
     }*/
-
 
 
     public function deleteType()

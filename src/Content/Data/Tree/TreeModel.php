@@ -78,6 +78,11 @@ $index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
 $index->indexName = "child";
 $index->addType($this->childId);
 
+$index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
+$index->indexName = "parent_child";
+$index->addType($this->parentId);
+$index->addType($this->childId);
+
 }
 public function loadChild() {
 if ($this->child == null) {

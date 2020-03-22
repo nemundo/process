@@ -19,35 +19,37 @@ class TreeWriter extends AbstractBase
     public function write()
     {
 
-            $value = new TreeValue();
-            $value->field = $value->model->itemOrder;
-            $value->filter->andEqual($value->model->parentId, $this->parentId);
-            $itemOrder = $value->getMaxValue();
+        $value = new TreeValue();
+        $value->field = $value->model->itemOrder;
+        $value->filter->andEqual($value->model->parentId, $this->parentId);
+        $itemOrder = $value->getMaxValue();
 
-            if ($itemOrder == '') {
-                $itemOrder = -1;
-            }
-            $itemOrder++;
+        if ($itemOrder == '') {
+            $itemOrder = -1;
+        }
+        $itemOrder++;
 
-            $data = new Tree();
-            $data->parentId = $this->parentId;
-            $data->childId = $this->dataId;
-            $data->itemOrder = $itemOrder;
-            $data->save();
+        $data = new Tree();
+        $data->ignoreIfExists = true;
+        $data->parentId = $this->parentId;
+        $data->childId = $this->dataId;
+        $data->itemOrder = $itemOrder;
+        $data->save();
 
 
     }
 
 
-    public function exist() {
+    public function exist()
+    {
 
 
         $value = false;
 
-        $count=new TreeCount();
-        $count->filter->andEqual($count->model->parentId,$this->parentId);
-        $count->filter->andEqual($count->model->childId,$this->dataId);
-        if ($count->getCount()>0) {
+        $count = new TreeCount();
+        $count->filter->andEqual($count->model->parentId, $this->parentId);
+        $count->filter->andEqual($count->model->childId, $this->dataId);
+        if ($count->getCount() > 0) {
             $value = true;
         }
 

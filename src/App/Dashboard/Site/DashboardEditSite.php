@@ -1,44 +1,68 @@
 <?php
 
+
 namespace Nemundo\Process\App\Dashboard\Site;
+
 
 use Nemundo\Admin\Com\Button\AdminIconSiteButton;
 use Nemundo\Admin\Com\Widget\AdminWidget;
-use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
-use Nemundo\Process\App\Dashboard\Com\Container\DashboardContainer;
-use Nemundo\Process\App\Dashboard\Type\DashboardContentTypeCollection;
-use Nemundo\Process\Content\Com\ListBox\ContentTypeCollectionListBox;
-use Nemundo\Process\Content\Parameter\ContentParameter;
-use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Web\Site\AbstractSite;
+use Nemundo\Package\FontAwesome\Site\AbstractEditIconSite;
+use Nemundo\Process\App\Dashboard\Com\Form\DashboardForm;
+use Nemundo\Process\App\Dashboard\Data\UserDashboard\UserDashboardReader;
+use Nemundo\Process\App\Dashboard\Parameter\DashboardParameter;
+use Nemundo\User\Type\UserSessionType;
 
-class DashboardSite extends AbstractSite
+class DashboardEditSite extends AbstractEditIconSite
 {
+
+    /**
+     * @var DashboardEditSite
+     */
+    public static $site;
+
     protected function loadSite()
     {
-        $this->title = 'Dashboard';
-        $this->url = 'dashboard';
 
-        new DashboardEditSite($this);
-        new DashboardDeleteSite($this);
+        $this->title = 'Dashboard Edit';
+        $this->url = 'dashboard-edit';
+        $this->menuActive = false;
+
+        DashboardEditSite::$site = $this;
 
     }
+
 
     public function loadContent()
     {
 
+
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
 
-        new DashboardContainer($page);
+        $form = new DashboardForm($page);
+        $form->redirectSite = DashboardEditSite::$site;
+
+        $reader = new UserDashboardReader();
+        $reader->model->loadDashboard();
+        //$reader->model->dashboard->loadContent();
+        $reader->model->dashboard->loadContentType();
+        $reader->filter->andEqual($reader->model->userId, (new UserSessionType())->userId);
+        foreach ($reader->getData() as $userDashboardRow) {
+
+            $contentType = $userDashboardRow->dashboard->getContentType();
+
+            $widget = new AdminWidget($page);
+            $widget->widgetTitle = $contentType->getSubject();
+            $contentType->getView($widget);
 
 
-//        $btn=new AdminIconSiteButton($page);
-//        $btn->site=DashboardEditSite::$site;
+            $btn = new AdminIconSiteButton($widget);
+            $btn->site = clone(DashboardDeleteSite::$site);
+            $btn->site->addParameter(new DashboardParameter($userDashboardRow->id));
 
 
-
+        }
 
 
         /*
@@ -74,8 +98,8 @@ class DashboardSite extends AbstractSite
         //}
 
 
-
         /*
+
         $contentTypeParameter = new ContentTypeParameter();
         $contentTypeParameter->addAllowedContentTypeCollection( new DashboardContentTypeCollection());
 
@@ -113,5 +137,7 @@ class DashboardSite extends AbstractSite
 
         $page->render();
 
+
     }
+
 }

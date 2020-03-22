@@ -6,9 +6,11 @@ namespace Nemundo\Process\App\Notification\Install;
 
 use Nemundo\App\Script\Setup\ScriptSetup;
 use Nemundo\Model\Setup\ModelCollectionSetup;
+use Nemundo\Process\App\Dashboard\Setup\DashboardSetup;
 use Nemundo\Process\App\Notification\Content\File\FileNotificationContentType;
 use Nemundo\Process\App\Notification\Content\Message\MessageNotificationContentType;
 use Nemundo\Process\App\Notification\Content\Reminder\ReminderNotificationStatus;
+use Nemundo\Process\App\Notification\Content\Widget\NotificationWidgetContentType;
 use Nemundo\Process\App\Notification\Data\NotificationCollection;
 use Nemundo\Process\App\Notification\Script\NotificationUpdateScript;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
@@ -31,6 +33,9 @@ class NotificationInstall extends AbstractInstall
 
         $setup = new ScriptSetup();
         $setup->addScript(new NotificationUpdateScript());
+
+        (new DashboardSetup())
+            ->addDashboard(new NotificationWidgetContentType());
 
         (new NotificationTestInstall())->install();
 

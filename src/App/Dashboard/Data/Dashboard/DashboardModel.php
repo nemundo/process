@@ -16,6 +16,11 @@ public $contentId;
 */
 public $content;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $setupStatus;
+
 protected function loadModel() {
 $this->tableName = "dashboard_dashboard";
 $this->aliasTableName = "dashboard_dashboard";
@@ -40,6 +45,13 @@ $this->contentId->fieldName = "content";
 $this->contentId->aliasFieldName = "dashboard_dashboard_content";
 $this->contentId->label = "Content";
 $this->contentId->allowNullValue = false;
+
+$this->setupStatus = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->setupStatus->tableName = "dashboard_dashboard";
+$this->setupStatus->fieldName = "setup_status";
+$this->setupStatus->aliasFieldName = "dashboard_dashboard_setup_status";
+$this->setupStatus->label = "Setup Status";
+$this->setupStatus->allowNullValue = false;
 
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "content";

@@ -23,6 +23,14 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Setup Status",
+                    "field_name": "setup_status",
+                    "variable_name": "setupStatus",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": [
@@ -31,6 +39,62 @@
                     "index_type": "unique_index",
                     "field_name": [
                         "content"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
+            "model_id": "86839dd8-8b1a-49dc-bcf2-6c6571345d0a",
+            "label": "User Dashboard",
+            "class_name": "UserDashboard",
+            "table_name": "dashboard_user_dashboard",
+            "namespace": "Nemundo\\Process\\App\\Dashboard\\Data\\UserDashboard",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "user",
+                    "label": "User",
+                    "field_name": "user",
+                    "variable_name": "user",
+                    "allow_null": false,
+                    "is_deleted": true
+                },
+                {
+                    "type": "external",
+                    "label": "User",
+                    "field_name": "user",
+                    "variable_name": "user",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "23f00db8-b303-40e4-ab45-32054a954434"
+                },
+                {
+                    "type": "external",
+                    "label": "Dashboard",
+                    "field_name": "dashboard",
+                    "variable_name": "dashboard",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": "number",
+                    "label": "Item Order",
+                    "field_name": "item_order",
+                    "variable_name": "itemOrder",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "user",
+                    "index_type": "index",
+                    "field_name": [
+                        "user"
                     ]
                 }
             ]
