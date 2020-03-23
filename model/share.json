@@ -1,0 +1,39 @@
+{
+    "app": "Share",
+    "name": "share",
+    "namespace": "Nemundo\\Process\\App\\Share",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "6c30f92a-9766-450f-b255-27d52328f37c",
+            "label": "Share",
+            "class_name": "Share",
+            "table_name": "process_share",
+            "namespace": "Nemundo\\Process\\App\\Share\\Data\\Share",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "To",
+                    "field_name": "to",
+                    "variable_name": "to",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "23f00db8-b303-40e4-ab45-32054a954434"
+                },
+                {
+                    "type": "large_text",
+                    "label": "Message",
+                    "field_name": "message",
+                    "variable_name": "message",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        }
+    ]
+}

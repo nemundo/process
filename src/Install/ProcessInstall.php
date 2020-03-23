@@ -12,6 +12,7 @@ use Nemundo\Process\App\Dashboard\Install\DashboardInstall;
 use Nemundo\Process\App\Document\Data\DocumentCollection;
 use Nemundo\Process\App\Favorite\Install\FavoriteInstall;
 use Nemundo\Process\App\Notification\Install\NotificationInstall;
+use Nemundo\Process\App\Share\Install\ShareInstall;
 use Nemundo\Process\App\Task\Install\TaskInstall;
 use Nemundo\Process\App\WebLog\Content\WebLogContentType;
 use Nemundo\Process\Content\Install\ContentInstall;
@@ -53,6 +54,7 @@ class ProcessInstall extends AbstractInstall
         //(new WikiInstall())->install();
         (new TemplateInstall())->install();
         (new FavoriteInstall())->install();
+        (new ShareInstall())->install();
 
 
         //(new MessageInstall())->install();

@@ -35,21 +35,6 @@ abstract class AbstractTreeContentType extends AbstractContentType
     }
 
 
-    /*
-    public function saveIndex()
-    {
-
-        //$this->onDataRow();
-        //$this->onIndex();
-
-        parent::saveIndex();
-
-        //$this->saveContentIndex();
-        //$this->saveSearchIndex();
-
-    }*/
-
-
     public function deleteType()
     {
 
