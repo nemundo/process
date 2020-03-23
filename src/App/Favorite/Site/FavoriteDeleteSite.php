@@ -21,6 +21,7 @@ class FavoriteDeleteSite extends AbstractIconSite
     protected function loadSite()
     {
         $this->icon = new DeleteIcon();
+        $this->title = 'Favorit entfernen';
         $this->url = 'favorite-delete';
         $this->menuActive = false;
         $this->icon = new FavoriteIcon();
