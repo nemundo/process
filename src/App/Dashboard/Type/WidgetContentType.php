@@ -9,6 +9,10 @@ use Nemundo\Process\Content\Type\AbstractTreeContentType;
 class WidgetContentType extends AbstractTreeContentType
 {
 
+    // public $widgetName
+    // abstract protected function loadWidget
+
+
     protected function loadContentType()
     {
 
