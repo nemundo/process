@@ -10,6 +10,7 @@ use Nemundo\Package\Bootstrap\Listing\BootstrapHyperlinkList;
 use Nemundo\Process\App\Inbox\Parameter\InboxParameter;
 use Nemundo\Process\App\Inbox\Type\AbstractInboxType;
 use Nemundo\Process\App\Inbox\Type\AufgabeNewType;
+use Nemundo\Process\App\Inbox\Type\CalendarInboxType;
 use Nemundo\Process\App\Inbox\Type\NotificationInboxType;
 use Nemundo\Process\App\Inbox\Type\TaskInboxType;
 use Nemundo\Process\App\Notification\Com\Container\UserNotificationContainer;
@@ -50,6 +51,7 @@ class InboxSite extends AbstractSite
         $inboxList = [];
         $inboxList[] = new NotificationInboxType();
         $inboxList[] = new TaskInboxType();
+        $inboxList[]=new CalendarInboxType();
         $inboxList[] = new AufgabeNewType();
 
         $inboxId = (new InboxParameter())->getValue();

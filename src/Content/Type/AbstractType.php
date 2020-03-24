@@ -92,7 +92,9 @@ abstract class AbstractType extends AbstractBaseClass
     {
 
         $this->dataRow = $dataRow;
-        $this->fromDataId($dataRow->getModelValue($dataRow->model->id));
+//        $this->fromDataId($dataRow->getModelValue($dataRow->model->id));
+        $this->fromDataId($dataRow->id);
+
         return $this;
 
     }

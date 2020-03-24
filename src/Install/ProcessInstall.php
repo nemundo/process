@@ -26,7 +26,7 @@ use Nemundo\Process\Script\ProcessTestScript;
 use Nemundo\Process\Search\Install\SearchInstall;
 use Nemundo\Process\Template\Install\TemplateInstall;
 use Nemundo\Project\Install\AbstractInstall;
-use Schleuniger\App\News\Content\App\NewsAppContentType;
+use Schleuniger\App\News\Content\App\NewsSubscribtionContentType;
 
 class ProcessInstall extends AbstractInstall
 {
