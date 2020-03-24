@@ -12,6 +12,7 @@ use Nemundo\Process\App\Notification\Content\Message\MessageNotificationContentT
 use Nemundo\Process\App\Notification\Content\Reminder\ReminderNotificationStatus;
 use Nemundo\Process\App\Notification\Content\Widget\NotificationWidgetContentType;
 use Nemundo\Process\App\Notification\Data\NotificationCollection;
+use Nemundo\Process\App\Notification\Script\NotificationIndexScript;
 use Nemundo\Process\App\Notification\Script\NotificationUpdateScript;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Project\Install\AbstractInstall;
@@ -33,6 +34,9 @@ class NotificationInstall extends AbstractInstall
 
         $setup = new ScriptSetup();
         $setup->addScript(new NotificationUpdateScript());
+
+        (new ScriptSetup())
+            ->addScript(new NotificationIndexScript());
 
         (new DashboardSetup())
             ->addDashboard(new NotificationWidgetContentType());

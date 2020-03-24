@@ -12,6 +12,7 @@ class NotificationCustomRow extends NotificationRow
 
 
 
+    // getNotificationContentType
     public function getContentType() {
 
         /** @var AbstractNotificationContentType $notificationContentType */
