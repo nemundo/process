@@ -24,6 +24,7 @@ use Nemundo\Process\Text\BoldText;
 use Nemundo\Workflow\App\Notification\Config\NotificationConfig;
 use Nemundo\Workflow\App\Notification\Config\NotificationSendMailConfig;
 
+// braucht es das noch???
 abstract class AbstractNotificationContentType extends AbstractTreeContentType
 {
 
