@@ -6,7 +6,7 @@ namespace Nemundo\Process\Workflow\Content\Status;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
 use Nemundo\Process\Content\Writer\TreeWriter;
-use Nemundo\Process\Group\Check\GroupRestrictionTrait;
+use Nemundo\Process\Group\Check\GroupRestrictedTrait;
 use Nemundo\Process\Log\Type\LogTrait;
 use Nemundo\Process\Workflow\Content\Form\StatusForm;
 
@@ -17,12 +17,12 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
 
     use ProcessStatusTrait;
     use LogTrait;
-    use GroupRestrictionTrait;
+    use GroupRestrictedTrait;
 
     /**
      * @var bool
      */
-    public $toggleView = false;
+    //public $toggleView = false;
 
 
 
@@ -40,7 +40,6 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
         $this->saveContent();
         $this->saveTree();
 
-
         $parentProcess = $this->getParentProcess();
 
         if ($this->changeStatus) {
@@ -51,14 +50,9 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
             $parentProcess->closeWorkflow();
         }
 
-
         $this->onFinished();
-
         $this->saveIndex();
-
         $this->getParentProcess()->saveIndex();
-
-        //return $this->dataId;
 
     }
 
@@ -67,7 +61,6 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
     {
 
         $this->onDataRow();
-
         $this->saveContentIndex();
         $this->onIndex();
 

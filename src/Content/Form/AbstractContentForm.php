@@ -6,8 +6,6 @@ namespace Nemundo\Process\Content\Form;
 
 use Nemundo\Admin\Com\Form\AbstractAdminForm;
 
-
-// AbstractTreeContentForm
 abstract class AbstractContentForm extends AbstractAdminForm
 {
 
@@ -19,11 +17,6 @@ abstract class AbstractContentForm extends AbstractAdminForm
         if ($this->contentType->existItem()) {
             $this->loadUpdateForm();
         }
-
-        /*
-        if (!$this->createMode) {
-            $this->loadUpdateForm();
-        }*/
 
         return parent::getContent();
 

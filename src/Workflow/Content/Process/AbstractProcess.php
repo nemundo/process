@@ -5,6 +5,7 @@ namespace Nemundo\Process\Workflow\Content\Process;
 
 
 use Nemundo\Core\Date\DateTimeDifference;
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Db\Sql\Order\SortOrder;
@@ -20,7 +21,7 @@ use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
 use Nemundo\Process\Content\View\AbstractContentView;
-use Nemundo\Process\Group\Check\GroupRestrictionTrait;
+use Nemundo\Process\Group\Check\GroupRestrictedTrait;
 use Nemundo\Process\Log\Type\LogTrait;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Content\View\AbstractProcessView;
@@ -32,7 +33,7 @@ use Nemundo\ToDo\Data\ToDo\ToDoRow;
 abstract class AbstractProcess extends AbstractSequenceContentType
 {
 
-    use GroupRestrictionTrait;
+    use GroupRestrictedTrait;
     use TaskIndexTrait;
     use DocumentIndexTrait;
     use CalendarIndexTrait;
@@ -437,15 +438,15 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $this->saveIndex();
 
-        /* $update = new AssignmentUpdate();
-         $update->statusId = (new ClosedAssignmentStatus())->id;
-         $update->filter->andEqual($update->model->sourceId, $this->getContentId());
-         $update->update();*/
     }
 
     // clearAssignment
     public function cancelAssignment()
     {
+
+        // z.B. bei Verbesserung
+
+        //(new Debug())->write('cancel assignment');
 
         // bei Absenz Abbruch
 
@@ -465,7 +466,10 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $update = new ModelUpdate();
         $update->model = $this->workflowModel;
-        $update->typeValueList->setModelValue($update->model->statusId, $status->typeId);
+        //$update->typeValueList->setModelValue($update->model->statusId, $status->typeId);
+        $update->typeValueList->setModelValue($update->model->statusId, $status->getContentId());
+
+        // data id
         $update->updateById($this->dataId);
 
         return $this;

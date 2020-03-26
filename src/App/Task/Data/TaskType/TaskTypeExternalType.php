@@ -16,6 +16,11 @@ public $taskTypeId;
 */
 public $taskType;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $setupStatus;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = TaskTypeModel::class;
@@ -34,6 +39,13 @@ $this->taskTypeId->tableName = $this->parentFieldName . "_" . $this->externalTab
 $this->taskTypeId->aliasFieldName = $this->taskTypeId->tableName ."_".$this->taskTypeId->fieldName;
 $this->taskTypeId->label = "Task Type";
 $this->addType($this->taskTypeId);
+
+$this->setupStatus = new \Nemundo\Model\Type\Number\YesNoType();
+$this->setupStatus->fieldName = "setup_status";
+$this->setupStatus->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->setupStatus->aliasFieldName = $this->setupStatus->tableName . "_" . $this->setupStatus->fieldName;
+$this->setupStatus->label = "Setup Status";
+$this->addType($this->setupStatus);
 
 }
 public function loadTaskType() {

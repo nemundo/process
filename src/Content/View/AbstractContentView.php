@@ -4,22 +4,16 @@
 namespace Nemundo\Process\Content\View;
 
 
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Html\Container\AbstractHtmlContainer;
-use Nemundo\Process\App\WebLog\Content\WebLogContentType;
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Content\Type\AbstractTreeContentType;
 
 abstract class AbstractContentView extends AbstractHtmlContainer
 {
 
     /**
-     * @var AbstractContentType
+     * @var AbstractContentType|AbstractTreeContentType
      */
     public $contentType;
-
-    /**
-     * @var string
-     */
-    //public $dataId;
 
 }

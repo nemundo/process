@@ -73,6 +73,7 @@ abstract class AbstractSequenceContentType extends AbstractTreeContentType
     }
 
 
+    /*
     public function changeStatus(AbstractContentType $status) {
 
         $data=new ContentStatus();
@@ -99,7 +100,7 @@ abstract class AbstractSequenceContentType extends AbstractTreeContentType
 
         return $status;
 
-    }
+    }*/
 
 
 }

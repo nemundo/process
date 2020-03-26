@@ -21,7 +21,7 @@ class GroupSetup extends AbstractContentTypeSetup
         $data = new GroupType();
         $data->updateOnDuplicate = true;
         $data->groupTypeId = $groupType->typeId;
-       $data->setupStatus=true;
+        $data->setupStatus = true;
         $data->save();
 
         return $this;
@@ -29,13 +29,24 @@ class GroupSetup extends AbstractContentTypeSetup
     }
 
 
-    public function removeGroupContent(AbstractGroupContentType $groupType) {
-
+    public function removeGroupContent(AbstractGroupContentType $groupType)
+    {
 
         $delete = new GroupDelete();
-        $delete->filter->andEqual($delete->model->groupTypeId,$groupType->typeId);
+        $delete->filter->andEqual($delete->model->groupTypeId, $groupType->typeId);
         $delete->delete();
 
+        return $this;
+
+    }
+
+
+    public function addGroup(AbstractGroupContentType $group)
+    {
+
+        $group->saveType();
+
+        return $this;
 
     }
 

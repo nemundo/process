@@ -205,7 +205,7 @@
             "namespace": "Nemundo\\Process\\Content\\Data\\ContentGroup",
             "row_class_name": "",
             "primary_index": "auto_increment",
-            "is_deleted": false,
+            "is_deleted": true,
             "type": [
                 {
                     "type": "external",
@@ -246,7 +246,7 @@
             "namespace": "Nemundo\\Process\\Content\\Data\\ContentStatus",
             "row_class_name": "",
             "primary_index": "auto_increment",
-            "is_deleted": false,
+            "is_deleted": true,
             "type": [
                 {
                     "type": "external",

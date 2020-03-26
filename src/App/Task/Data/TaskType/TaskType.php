@@ -11,12 +11,18 @@ protected $model;
 */
 public $taskTypeId;
 
+/**
+* @var bool
+*/
+public $setupStatus;
+
 public function __construct() {
 parent::__construct();
 $this->model = new TaskTypeModel();
 }
 public function save() {
 $this->typeValueList->setModelValue($this->model->taskTypeId, $this->taskTypeId);
+$this->typeValueList->setModelValue($this->model->setupStatus, $this->setupStatus);
 $id = parent::save();
 return $id;
 }

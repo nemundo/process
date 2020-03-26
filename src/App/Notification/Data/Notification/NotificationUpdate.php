@@ -42,6 +42,16 @@ public $read;
 */
 public $contentTypeId;
 
+/**
+* @var string
+*/
+public $sourceId;
+
+/**
+* @var string
+*/
+public $categoryId;
+
 public function __construct() {
 parent::__construct();
 $this->model = new NotificationModel();
@@ -54,6 +64,8 @@ $this->typeValueList->setModelValue($this->model->contentId, $this->contentId);
 $this->typeValueList->setModelValue($this->model->subject, $this->subject);
 $this->typeValueList->setModelValue($this->model->read, $this->read);
 $this->typeValueList->setModelValue($this->model->contentTypeId, $this->contentTypeId);
+$this->typeValueList->setModelValue($this->model->sourceId, $this->sourceId);
+$this->typeValueList->setModelValue($this->model->categoryId, $this->categoryId);
 parent::update();
 }
 }

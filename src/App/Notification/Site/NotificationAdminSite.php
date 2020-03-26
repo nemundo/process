@@ -57,17 +57,9 @@ class NotificationAdminSite extends AbstractSite
         $user->searchMode=true;
 
 
-        $table = new AdminClickableTable($page);
-
-        $header = new TableHeader($table);
-        $header->addText('Archive');
-        $header->addText('Type');
-        $header->addText('Subject');
-        $header->addText('Message');
-        $header->addText('Date/Time');
-        $header->addText('To');
 
         $notificationReader = new NotificationPaginationReader();
+        $notificationReader->model->loadCategory();
         //$notificationReader->model->loadSubjectContent();
         //$notificationReader->model->subjectContent->loadContentType();
         $notificationReader->model->loadContent();
@@ -80,10 +72,28 @@ class NotificationAdminSite extends AbstractSite
 
         $notificationReader->addOrder($notificationReader->model->id, SortOrder::DESCENDING);
         $notificationReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
+
+
+        $table = new AdminClickableTable($page);
+
+        $header = new TableHeader($table);
+        $header->addText($notificationReader->model->archive->label); //'Archive');
+        $header->addText($notificationReader->model->category->label);
+
+
+        $header->addText('Type');
+        $header->addText('Subject');
+        $header->addText('Message');
+        $header->addText('Date/Time');
+        $header->addText('To');
+
+
         foreach ($notificationReader->getData() as $notificationRow) {
 
             $row = new BootstrapClickableTableRow($table);
             $row->addYesNo($notificationRow->archive);
+            $row->addText($notificationRow->category->category);
+
             $row->addText($notificationRow->content->contentType->contentType);
             $row->addText($notificationRow->subject);
             $row->addText($notificationRow->message);

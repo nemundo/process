@@ -53,8 +53,10 @@ abstract class AbstractWorkflowModel extends AbstractModel
      */
     public $statusId;
 
+
+    // ContentTypeExternalType
     /**
-     * @var ContentTypeExternalType
+     * @var ContentExternalType
      */
     public $status;
 
@@ -198,11 +200,15 @@ abstract class AbstractWorkflowModel extends AbstractModel
     public function loadStatus()
     {
         if ($this->status == null) {
-            $this->status = new ContentTypeExternalType($this, $this->tableName . '_status');
+            //$this->status = new ContentTypeExternalType($this, $this->tableName . '_status');
+            $this->status = new ContentExternalType($this, $this->tableName . '_status');
             $this->status->tableName = $this->tableName;
             $this->status->fieldName = 'status';
             $this->status->aliasFieldName = $this->tableName . '_status';
             $this->status->label = 'Status';
+
+            $this->status->loadContentType();
+
         }
         return $this;
     }

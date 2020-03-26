@@ -56,6 +56,26 @@ public $contentTypeId;
 */
 public $contentType;
 
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $sourceId;
+
+/**
+* @var \Nemundo\Process\Content\Data\Content\ContentExternalType
+*/
+public $source;
+
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $categoryId;
+
+/**
+* @var \Nemundo\Process\App\Notification\Data\Category\CategoryExternalType
+*/
+public $category;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = NotificationModel::class;
@@ -117,6 +137,20 @@ $this->contentTypeId->aliasFieldName = $this->contentTypeId->tableName ."_".$thi
 $this->contentTypeId->label = "Content Type";
 $this->addType($this->contentTypeId);
 
+$this->sourceId = new \Nemundo\Model\Type\Id\IdType();
+$this->sourceId->fieldName = "source";
+$this->sourceId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->sourceId->aliasFieldName = $this->sourceId->tableName ."_".$this->sourceId->fieldName;
+$this->sourceId->label = "Source";
+$this->addType($this->sourceId);
+
+$this->categoryId = new \Nemundo\Model\Type\Id\IdType();
+$this->categoryId->fieldName = "category";
+$this->categoryId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->categoryId->aliasFieldName = $this->categoryId->tableName ."_".$this->categoryId->fieldName;
+$this->categoryId->label = "Category";
+$this->addType($this->categoryId);
+
 }
 public function loadTo() {
 if ($this->to == null) {
@@ -148,6 +182,28 @@ $this->contentType->tableName = $this->parentFieldName . "_" . $this->externalTa
 $this->contentType->aliasFieldName = $this->contentType->tableName ."_".$this->contentType->fieldName;
 $this->contentType->label = "Content Type";
 $this->addType($this->contentType);
+}
+return $this;
+}
+public function loadSource() {
+if ($this->source == null) {
+$this->source = new \Nemundo\Process\Content\Data\Content\ContentExternalType(null, $this->parentFieldName . "_source");
+$this->source->fieldName = "source";
+$this->source->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->source->aliasFieldName = $this->source->tableName ."_".$this->source->fieldName;
+$this->source->label = "Source";
+$this->addType($this->source);
+}
+return $this;
+}
+public function loadCategory() {
+if ($this->category == null) {
+$this->category = new \Nemundo\Process\App\Notification\Data\Category\CategoryExternalType(null, $this->parentFieldName . "_category");
+$this->category->fieldName = "category";
+$this->category->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->category->aliasFieldName = $this->category->tableName ."_".$this->category->fieldName;
+$this->category->label = "Category";
+$this->addType($this->category);
 }
 return $this;
 }

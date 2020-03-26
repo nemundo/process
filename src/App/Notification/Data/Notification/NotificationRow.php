@@ -66,6 +66,26 @@ public $contentTypeId;
 */
 public $contentType;
 
+/**
+* @var int
+*/
+public $sourceId;
+
+/**
+* @var \Nemundo\Process\Content\Row\ContentCustomRow
+*/
+public $source;
+
+/**
+* @var int
+*/
+public $categoryId;
+
+/**
+* @var \Nemundo\Process\App\Notification\Data\Category\CategoryRow
+*/
+public $category;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -86,6 +106,14 @@ $this->contentTypeId = $this->getModelValue($model->contentTypeId);
 if ($model->contentType !== null) {
 $this->loadNemundoProcessContentDataContentTypeContentTypecontentTypeRow($model->contentType);
 }
+$this->sourceId = intval($this->getModelValue($model->sourceId));
+if ($model->source !== null) {
+$this->loadNemundoProcessContentDataContentContentsourceRow($model->source);
+}
+$this->categoryId = intval($this->getModelValue($model->categoryId));
+if ($model->category !== null) {
+$this->loadNemundoProcessAppNotificationDataCategoryCategorycategoryRow($model->category);
+}
 }
 private function loadNemundoUserDataUserUsertoRow($model) {
 $this->to = new \Nemundo\User\Data\User\UserRow($this->row, $model);
@@ -95,5 +123,11 @@ $this->content = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $
 }
 private function loadNemundoProcessContentDataContentTypeContentTypecontentTypeRow($model) {
 $this->contentType = new \Nemundo\Process\Content\Row\ContentTypeCustomRow($this->row, $model);
+}
+private function loadNemundoProcessContentDataContentContentsourceRow($model) {
+$this->source = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $model);
+}
+private function loadNemundoProcessAppNotificationDataCategoryCategorycategoryRow($model) {
+$this->category = new \Nemundo\Process\App\Notification\Data\Category\CategoryRow($this->row, $model);
 }
 }

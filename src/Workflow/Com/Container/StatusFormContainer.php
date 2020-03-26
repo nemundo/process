@@ -5,7 +5,7 @@ namespace Nemundo\Process\Workflow\Com\Container;
 
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Html\Paragraph\Paragraph;
-use Nemundo\Process\Group\Check\GroupRestrictionTrait;
+use Nemundo\Process\Group\Check\GroupRestrictedTrait;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Web\Site\AbstractSite;
 
@@ -38,7 +38,7 @@ class StatusFormContainer extends AbstractHtmlContainer
 
             $showForm = true;
 
-            if ($this->formStatus->isObjectOfTrait(GroupRestrictionTrait::class)) {
+            if ($this->formStatus->isObjectOfTrait(GroupRestrictedTrait::class)) {
                 if (!$this->formStatus->checkUserVisibility()) {
                     $showForm = false;
                 }

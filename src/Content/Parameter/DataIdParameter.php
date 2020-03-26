@@ -14,7 +14,7 @@ class DataIdParameter extends AbstractUrlParameter
 
     protected function loadParameter()
     {
-        $this->parameterName='data';
+        $this->parameterName='data-id';
     }
 
 

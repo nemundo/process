@@ -16,6 +16,11 @@ public $taskTypeId;
 */
 public $taskType;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $setupStatus;
+
 protected function loadModel() {
 $this->tableName = "process_task_type";
 $this->aliasTableName = "process_task_type";
@@ -40,6 +45,13 @@ $this->taskTypeId->fieldName = "task_type";
 $this->taskTypeId->aliasFieldName = "process_task_type_task_type";
 $this->taskTypeId->label = "Task Type";
 $this->taskTypeId->allowNullValue = false;
+
+$this->setupStatus = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->setupStatus->tableName = "process_task_type";
+$this->setupStatus->fieldName = "setup_status";
+$this->setupStatus->aliasFieldName = "process_task_type_setup_status";
+$this->setupStatus->label = "Setup Status";
+$this->setupStatus->allowNullValue = false;
 
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "task_type";

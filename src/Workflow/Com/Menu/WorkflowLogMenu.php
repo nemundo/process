@@ -13,6 +13,7 @@ use Nemundo\Html\Table\Td;
 use Nemundo\Package\FontAwesome\Icon\ArrowRightIcon;
 use Nemundo\Package\FontAwesome\Icon\CheckIcon;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
+use Nemundo\Process\Content\Parameter\DataIdParameter;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
 use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
@@ -69,6 +70,11 @@ class WorkflowLogMenu extends LogMenu  // AdminTable
 
                             $site = clone($this->redirectSite);  // new Site();
                             $site->addParameter(new StatusParameter($contentType->typeId));
+
+                            if ($contentType->appendDataIdParameter) {
+                                $site->addParameter(new DataIdParameter($contentType->getDataId()));
+                            }
+
                             $site->title = $contentType->typeLabel;
 
                             $td = new Td($row);

@@ -5,16 +5,14 @@ namespace Nemundo\Process\Group\Site;
 
 
 use Nemundo\Process\Group\Check\GroupCheck;
-use Nemundo\Process\Group\Check\GroupRestrictionTrait;
+use Nemundo\Process\Group\Check\GroupRestrictedTrait;
 use Nemundo\Process\Group\Type\AbstractGroupContentType;
 use Nemundo\Web\Site\AbstractSite;
 
 
-
-// GroupRestrictedSite
-abstract class AbstractGroupRestrictionSite extends AbstractSite
+abstract class AbstractGroupRestrictedSite extends AbstractSite
 {
 
-    use GroupRestrictionTrait;
+    use GroupRestrictedTrait;
 
 }

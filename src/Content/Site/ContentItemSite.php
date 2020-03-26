@@ -191,6 +191,7 @@ class ContentItemSite extends AbstractSite
         $btn->site->addParameter(new ContentParameter());
 
 
+        /*
         $subtitle = new AdminSubtitle($page);
         $subtitle->content = 'Content User';
 
@@ -201,7 +202,7 @@ class ContentItemSite extends AbstractSite
         $reader->filter->andEqual($reader->model->contentId, $contentType->getContentId());
         foreach ($reader->getData() as $contentGroupRow) {
             $list->addText($contentGroupRow->group->group);
-        }
+        }*/
 
 
         //$btn = new FavoriteButton($page);

@@ -6,6 +6,29 @@
     "model": [
         {
             "template": "default",
+            "model_id": "da2231a9-63d6-49d5-96b7-346d62d5e9e4",
+            "label": "Category",
+            "class_name": "Category",
+            "table_name": "notification_category",
+            "namespace": "Nemundo\\Process\\App\\Notification\\Data\\Category",
+            "row_class_name": "",
+            "primary_index": "number_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Category",
+                    "field_name": "category",
+                    "variable_name": "category",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "50"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "13f6a48d-2cb0-4ea2-8b91-fc9ebea51b5b",
             "label": "Notification",
             "class_name": "Notification",
@@ -91,6 +114,24 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                },
+                {
+                    "type": "external",
+                    "label": "Source",
+                    "field_name": "source",
+                    "variable_name": "source",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                },
+                {
+                    "type": "external",
+                    "label": "Category",
+                    "field_name": "category",
+                    "variable_name": "category",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "da2231a9-63d6-49d5-96b7-346d62d5e9e4"
                 }
             ],
             "index": [

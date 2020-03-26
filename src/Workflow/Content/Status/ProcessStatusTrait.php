@@ -24,7 +24,23 @@ trait ProcessStatusTrait
     /**
      * @var bool
      */
+    //public $editable2 = false;
+
+
+    /**
+     * @var bool
+     */
+    public $appendDataIdParameter = false;
+
+    /**
+     * @var bool
+     */
     protected $changeStatus = false;
+
+    /**
+     * @var bool
+     */
+    public $toggleView = false;
 
 
     public function isStatusChangeable()

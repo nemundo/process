@@ -127,8 +127,10 @@ class WorkflowOrmModel extends AbstractOrmModel
         $this->status->variableName = 'status';
         $this->status->createModelProperty = false;
         $this->status->isEditable = false;
-        $this->status->externalClassName = 'Nemundo\Process\Content\Data\ContentType\ContentType';
-        $this->status->rowClassName = ContentTypeCustomRow::class;
+        //$this->status->externalClassName = 'Nemundo\Process\Content\Data\ContentType\ContentType';
+        $this->status->externalClassName = 'Nemundo\Process\Content\Data\Content\Content';
+        //$this->status->rowClassName = ContentTypeCustomRow::class;
+        $this->status->rowClassName = ContentCustomRow::class;
 
         $this->deadline = new DateOrmType($this);
         $this->deadline->label = 'Deadline';

@@ -1,17 +1,17 @@
 <?php
-namespace Nemundo\Process\Content\Data\ContentStatus;
-class ContentStatusReader extends \Nemundo\Model\Reader\ModelDataReader {
+namespace Nemundo\Process\App\Notification\Data\Category;
+class CategoryReader extends \Nemundo\Model\Reader\ModelDataReader {
 /**
-* @var ContentStatusModel
+* @var CategoryModel
 */
 public $model;
 
 public function __construct() {
 parent::__construct();
-$this->model = new ContentStatusModel();
+$this->model = new CategoryModel();
 }
 /**
-* @return ContentStatusRow[]
+* @return CategoryRow[]
 */
 public function getData() {
 $list = [];
@@ -22,7 +22,7 @@ $list[] = $row;
 return $list;
 }
 /**
-* @return ContentStatusRow
+* @return CategoryRow
 */
 public function getRow() {
 $dataRow = parent::getRow();
@@ -30,13 +30,13 @@ $row = $this->getModelRow($dataRow);
 return $row;
 }
 /**
-* @return ContentStatusRow
+* @return CategoryRow
 */
 public function getRowById($id) {
 return parent::getRowById($id);
 }
 private function getModelRow($dataRow) {
-$row = new ContentStatusRow($dataRow, $this->model);
+$row = new CategoryRow($dataRow, $this->model);
 $row->model = $this->model;
 return $row;
 }

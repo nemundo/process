@@ -6,17 +6,18 @@ namespace Nemundo\Process\Group\Check;
 
 use Nemundo\Process\Group\Type\AbstractGroupContentType;
 
-trait GroupRestrictionTrait
+trait GroupRestrictedTrait
 {
 
 
     //groupRestricted
-    public $restrictedGroup = false;
+    public $groupRestricted = false;
 
     /**
      * @var AbstractGroupContentType[]
      */
     private $restrictionGroup = [];
+// groupRestrictedList
 
     // addRestrictedGroup
     public function addRestrictedGroup(AbstractGroupContentType $groupContentType)
@@ -31,7 +32,7 @@ trait GroupRestrictionTrait
 
         $visible = true;
 
-        if ($this->restrictedGroup) {
+        if ($this->groupRestricted) {
 
             $visible = false;
 

@@ -5,11 +5,13 @@ namespace Nemundo\Process\App\Task\Index;
 
 
 use Nemundo\Db\Sql\Order\SortOrder;
+use Nemundo\Process\App\Notification\Category\TaskCategory;
 use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndex;
 use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndexDelete;
 use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndexUpdate;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Row\ContentCustomRow;
+use Nemundo\Process\Group\Type\GroupContentType;
 
 trait TaskIndexTrait
 {
@@ -23,6 +25,20 @@ trait TaskIndexTrait
     abstract protected function getCreatedDateTime();
 
     abstract protected function getCreatedUserId();
+
+
+    protected function sendTaskNotification() {
+
+        $this->onDataRow();
+
+        $group = new GroupContentType();
+        $group->fromGroupId($this->getAssignmentId());
+        foreach ($group->getUserIdList() as $userId) {
+            $this->sendUserNotification($userId, new TaskCategory());
+        }
+
+    }
+
 
 
     protected function saveTaskIndex()

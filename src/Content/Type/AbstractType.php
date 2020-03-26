@@ -31,6 +31,7 @@ abstract class AbstractType extends AbstractBaseClass
     /**
      * @var string
      */
+    //private $dataId;
     protected $dataId;
 
     /**

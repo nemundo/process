@@ -8,14 +8,14 @@ use Nemundo\Package\Bootstrap\Dropdown\BootstrapSiteDropdown;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Content\Collection\AbstractContentTypeCollection;
-use Nemundo\Process\Group\Check\GroupRestrictionTrait;
+use Nemundo\Process\Group\Check\GroupRestrictedTrait;
 use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Web\Site\Site;
 
 class ContentTypeCollectionDropdown extends BootstrapSiteDropdown
 {
 
-    use GroupRestrictionTrait;
+    use GroupRestrictedTrait;
 
     /**
      * @var AbstractSite

@@ -40,7 +40,7 @@ class WorkflowInfoTable extends AdminLabelValueTable
 
     public function addStatus()
     {
-        $this->addLabelValue($this->workflowRow->model->status->label, $this->workflowRow->status->contentType);
+        $this->addLabelValue($this->workflowRow->model->status->label, $this->workflowRow->status->contentType->contentType);
         return $this;
     }
 
@@ -68,7 +68,9 @@ class WorkflowInfoTable extends AdminLabelValueTable
     public function addDeadline()
     {
 
-        $this->addLabelValue($this->workflowRow->model->deadline->label, $this->workflowRow->getDeadline());
+        $text = $this->workflowRow->getDeadline();
+
+        //$this->addLabelValue($this->workflowRow->model->deadline->label, $this->workflowRow->getDeadline());
 
         return $this;
     }

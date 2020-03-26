@@ -26,6 +26,11 @@ public $taskTypeId;
 */
 public $taskType;
 
+/**
+* @var bool
+*/
+public $setupStatus;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -34,6 +39,7 @@ $this->taskTypeId = $this->getModelValue($model->taskTypeId);
 if ($model->taskType !== null) {
 $this->loadNemundoProcessContentDataContentTypeContentTypetaskTypeRow($model->taskType);
 }
+$this->setupStatus = boolval($this->getModelValue($model->setupStatus));
 }
 private function loadNemundoProcessContentDataContentTypeContentTypetaskTypeRow($model) {
 $this->taskType = new \Nemundo\Process\Content\Row\ContentTypeCustomRow($this->row, $model);
