@@ -5,27 +5,33 @@ namespace Nemundo\Process\App\Favorite\Site;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Com\TableBuilder\TableHeader;
-use Nemundo\Com\TableBuilder\TableRow;
+use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
-use Nemundo\Process\App\Favorite\Com\FavoriteContainer;
-use Nemundo\Process\App\Favorite\Content\FavoriteContentType;
-use Nemundo\Process\Content\Data\Content\ContentReader;
+use Nemundo\Process\App\Favorite\Data\Favorite\FavoriteReader;
 use Nemundo\User\Type\UserSessionType;
 use Nemundo\Web\Site\AbstractSite;
-use Nemundo\Process\App\Favorite\Data\Favorite\FavoriteReader;
-use Nemundo\Process\App\Favorite\Parameter\FavoriteParameter;
 
 class UserFavoriteSite extends AbstractSite
 {
 
+    /**
+     * @var UserFavoriteSite
+     */
+    public static $site;
+
     protected function loadSite()
     {
-        $this->title = 'Favorite';
+
+        $this->title[LanguageCode::EN] = 'My Favorite';
+        $this->title[LanguageCode::DE] = 'Meine Favoriten';
+
         $this->url = 'my-favorite';
 
         new FavoriteSaveSite($this);
         new FavoriteDeleteSite($this);
+
+        UserFavoriteSite::$site = $this;
 
     }
 
@@ -36,8 +42,6 @@ class UserFavoriteSite extends AbstractSite
 
         $title = new AdminTitle($page);
         $title->content = $this->title;
-
-
 
 
         //new FavoriteContainer($page);
@@ -59,30 +63,23 @@ class UserFavoriteSite extends AbstractSite
         //$reader->filter->andEqual($reader->model->contentId,  (new FavoriteContentType())->typeId);
         $reader->filter->andEqual($reader->model->userId, (new UserSessionType())->userId);
 
-        foreach ($reader->getData() as $contentRow ) {
+        foreach ($reader->getData() as $contentRow) {
 
-            $contentType= $contentRow->content->getContentType();
+            $contentType = $contentRow->content->getContentType();
 
-            $row=new BootstrapClickableTableRow($table);
+            $row = new BootstrapClickableTableRow($table);
             $row->addText($contentType->getSubject());
 
             // contentId =
 
-/*
-            $parentContentType=$contentType->getParentContentType();
-            $row->addText($parentContentType->getSubject());*/
+            /*
+                        $parentContentType=$contentType->getParentContentType();
+                        $row->addText($parentContentType->getSubject());*/
 
             $row->addClickableSite($contentType->getViewSite());
 
 
         }
-
-
-
-
-
-
-
 
 
         // löschen
@@ -112,9 +109,9 @@ class UserFavoriteSite extends AbstractSite
             /*if ($favoriteRow->dataId !== '0') {
                 $subject = $contentType->getSubject($favoriteRow->dataId);
             }*/
-            //$row->addText($subject);
+        //$row->addText($subject);
 
-            //$row->addText($favoriteRow->user->displayName);
+        //$row->addText($favoriteRow->user->displayName);
 
         /*    $site = clone(FavoriteDeleteSite::$site);
             $site->addParameter(new FavoriteParameter($favoriteRow->id));
