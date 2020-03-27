@@ -18,6 +18,9 @@ use Nemundo\User\Data\User\UserCount;
 use Nemundo\User\Data\User\UserId;
 use Nemundo\User\Data\User\UserReader;
 use Nemundo\User\Data\User\UserUpdate;
+use Nemundo\User\Data\Usergroup\UsergroupCount;
+use Nemundo\User\Data\UserUsergroup\UserUsergroup;
+use Nemundo\User\Usergroup\AbstractUsergroup;
 
 
 class UserContentType extends AbstractTreeContentType
@@ -241,6 +244,20 @@ class UserContentType extends AbstractTreeContentType
         }
 
         return $list;
+    }
+
+
+    public function addUsergroup(AbstractUsergroup $usergroup)
+    {
+
+            $data = new UserUsergroup();
+            $data->ignoreIfExists = true;
+            $data->userId = $this->userId;
+            $data->usergroupId = $usergroup->usergroupId;
+            $data->save();
+
+        return $this;
+
     }
 
 
