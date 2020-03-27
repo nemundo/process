@@ -118,6 +118,22 @@ trait TreeTypeTrait
     }
 
 
+    public function getChildContentTypeList() {
+
+        /** @var AbstractTreeContentType[] $list */
+        $list = [];
+
+        foreach ($this->getChild() as $contentCustomRow) {
+          $list[] = $contentCustomRow->getContentType();
+        }
+
+        return $list;
+
+
+    }
+
+
+
 
     //getLastOf
     // getFirstOf
