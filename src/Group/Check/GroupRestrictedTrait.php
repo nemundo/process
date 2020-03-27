@@ -9,8 +9,9 @@ use Nemundo\Process\Group\Type\AbstractGroupContentType;
 trait GroupRestrictedTrait
 {
 
-
-    //groupRestricted
+    /**
+     * @var bool
+     */
     public $groupRestricted = false;
 
     /**
@@ -19,7 +20,7 @@ trait GroupRestrictedTrait
     private $restrictionGroup = [];
 // groupRestrictedList
 
-    // addRestrictedGroup
+
     public function addRestrictedGroup(AbstractGroupContentType $groupContentType)
     {
         $this->restrictionGroup[] = $groupContentType;
@@ -35,7 +36,6 @@ trait GroupRestrictedTrait
         if ($this->groupRestricted) {
 
             $visible = false;
-
             foreach ($this->restrictionGroup as $restrictionGroup) {
                 if ((new GroupCheck())->isMemberOfGroup($restrictionGroup)) {
                     $visible = true;
