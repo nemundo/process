@@ -31,11 +31,11 @@ class NotificationInstall extends AbstractInstall
         $setup = new ModelCollectionSetup();
         $setup->addCollection(new NotificationCollection());
 
-        $setup = new ContentTypeSetup();
+        //$setup = new ContentTypeSetup();
         //$setup->addContentType(new NotificationContentType());
-        $setup->addContentType(new MessageNotificationContentType());
-        $setup->addContentType(new FileNotificationContentType());
-        $setup->addContentType(new ReminderNotificationStatus());
+        //$setup->addContentType(new MessageNotificationContentType());
+        //$setup->addContentType(new FileNotificationContentType());
+        //$setup->addContentType(new ReminderNotificationStatus());
 
 
         $this->addCategory(new InformationCategory());

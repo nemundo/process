@@ -15,7 +15,7 @@ use Nemundo\Process\Template\Data\TemplateFileDelete\TemplateFileDeleteReader;
 class FileInactiveContentType extends AbstractTreeContentType
 {
 
-    use LogTrait;
+    //use LogTrait;
 
     public $fileId;
 
