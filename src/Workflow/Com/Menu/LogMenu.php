@@ -12,13 +12,7 @@ use Nemundo\Html\Inline\Span;
 use Nemundo\Html\Table\Td;
 use Nemundo\Package\FontAwesome\Icon\ArrowRightIcon;
 use Nemundo\Package\FontAwesome\Icon\CheckIcon;
-use Nemundo\Process\Content\Data\Tree\TreeReader;
-use Nemundo\Process\Content\Type\AbstractSequenceContentType;
-use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
-use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
-use Nemundo\Process\Workflow\Parameter\StatusParameter;
 use Nemundo\Web\Site\AbstractSite;
-use Nemundo\Web\Site\Site;
 
 class LogMenu extends AdminTable
 {
@@ -35,11 +29,10 @@ class LogMenu extends AdminTable
     {
 
         $row = new TableRow($this);
-        //new CheckIcon($row);
-$row->addEmpty();
+        $row->addEmpty();
 
         $td = new Td($row);
-        $td->nowrap=true;
+        $td->nowrap = true;
 
         $hyperlink = new SiteHyperlink($td);
         $hyperlink->site = $site;
@@ -53,14 +46,13 @@ $row->addEmpty();
         $row = new TableRow($this);
         new CheckIcon($row);
 
-            $td = new Td($row);
-            $td->nowrap=true;
+        $td = new Td($row);
+        $td->nowrap = true;
 
-            $hyperlink = new SiteHyperlink($td);
-            $hyperlink->site = $site;
+        $hyperlink = new SiteHyperlink($td);
+        $hyperlink->site = $site;
 
     }
-
 
 
     public function addArrowSite(AbstractSite $site)
@@ -70,7 +62,7 @@ $row->addEmpty();
         new ArrowRightIcon($row);
 
         $td = new Td($row);
-        $td->nowrap=true;
+        $td->nowrap = true;
 
         $hyperlink = new SiteHyperlink($td);
         $hyperlink->site = $site;
@@ -78,78 +70,65 @@ $row->addEmpty();
     }
 
 
-
-    public function addSubSite(AbstractSite $site) {
-
+    public function addSubSite(AbstractSite $site)
+    {
 
         $row = new TableRow($this);
         $row->addEmpty();
 
-        //new CheckIcon($row);
-
         $td = new Td($row);
-        $td->nowrap=true;
+        $td->nowrap = true;
 
         $hyperlink = new SiteHyperlink($td);
         $hyperlink->site = clone($site);
         $hyperlink->addCssClass($this->subMenuCssClass);
 
-
     }
 
 
-    public function addSubLabel($label) {
-
+    public function addSubLabel($label)
+    {
 
         $row = new TableRow($this);
         $row->addEmpty();
 
         $td = new Td($row);
-        $td->nowrap=true;
-      //  $td->content = $label;
+        $td->nowrap = true;
 
         $span = new Span($td);
         $span->content = $label;
         $span->addCssClass($this->subMenuCssClass);
 
-
     }
 
 
-
-    public function addLabel($label) {
-
+    public function addLabel($label)
+    {
 
         $row = new TableRow($this);
         new CheckIcon($row);
 
         $td = new Td($row);
-        $td->nowrap=true;
-        $td->content=$label;
-
+        $td->nowrap = true;
+        $td->content = $label;
 
     }
 
 
-
-    public function addArrowLabel($label) {
-
+    public function addArrowLabel($label)
+    {
 
         $row = new TableRow($this);
         new ArrowRightIcon($row);
 
         $td = new Td($row);
-        $td->nowrap=true;
+        $td->nowrap = true;
 
         $bold = new Bold($td);
-        $bold->content=$label;
+        $bold->content = $label;
 
 
     }
-
-
-
-
 
 
 }

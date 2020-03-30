@@ -17,6 +17,9 @@ class ReopenWorkflowProcessStatus extends AbstractProcessStatus
         $this->typeLabel[LanguageCode::DE]='Wiedereröffnung';
         $this->typeId='b983dbd1-70cc-427f-b8e1-b38035ba9524';
 
+        // soll im Menü dargestellt werden
+        //$this->changeStatus=true;
+
     }
 
 
@@ -24,6 +27,20 @@ class ReopenWorkflowProcessStatus extends AbstractProcessStatus
     {
 
         $this->getParentProcess()->reopenWorkflow();
+
+    }
+
+
+    public function isStatusChangeable()
+    {
+        return true;
+    }
+
+    public function getMessage()
+    {
+
+        $message = 'Wiedereröffnung';
+        return $message;
 
     }
 

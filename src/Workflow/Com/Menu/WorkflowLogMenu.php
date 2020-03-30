@@ -4,7 +4,6 @@
 namespace Nemundo\Process\Workflow\Com\Menu;
 
 
-use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Html\Formatting\Bold;
@@ -18,9 +17,8 @@ use Nemundo\Process\Content\Type\AbstractSequenceContentType;
 use Nemundo\Process\Workflow\Content\Process\AbstractProcess;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Parameter\StatusParameter;
-use Nemundo\Web\Site\Site;
 
-class WorkflowLogMenu extends LogMenu  // AdminTable
+class WorkflowLogMenu extends LogMenu
 {
 
     /**
@@ -45,7 +43,6 @@ class WorkflowLogMenu extends LogMenu  // AdminTable
 
         $startMenu = $this->process->startContentType;
 
-
         if ($this->process->getDataId() !== null) {
 
             $reader = new TreeReader();
@@ -64,39 +61,47 @@ class WorkflowLogMenu extends LogMenu  // AdminTable
                     if ($contentType->isStatusChangeable()) {
 
                         $row = new TableRow($this);
-                        new CheckIcon($row);
 
-                        if ($contentType->editable && !$this->process->isWorkflowClosed()) {
+                        if ($contentType->isDraft()) {
+                            new ArrowRightIcon($row);
 
-                            $site = clone($this->redirectSite);  // new Site();
-                            $site->addParameter(new StatusParameter($contentType->typeId));
-
-                            if ($contentType->appendDataIdParameter) {
-                                $site->addParameter(new DataIdParameter($contentType->getDataId()));
-                            }
-
-                            $site->title = $contentType->typeLabel;
-
-                            $td = new Td($row);
-                            $td->nowrap=true;
-
-                            $hyperlink = new SiteHyperlink($td);
-                            $hyperlink->site = $site;
-
+                            $bold = new Bold($row);
+                            $bold->content = $contentType->typeLabel;
 
                         } else {
+                            new CheckIcon($row);
 
-                        $row->addText($contentType->typeLabel,true);
+                            if ($contentType->editable && !$this->process->isWorkflowClosed()) {
+
+                                $site = clone($this->redirectSite);
+                                $site->addParameter(new StatusParameter($contentType->typeId));
+
+                                if ($contentType->appendDataIdParameter) {
+                                    $site->addParameter(new DataIdParameter($contentType->getDataId()));
+                                }
+
+                                $site->title = $contentType->typeLabel;
+
+                                $td = new Td($row);
+                                $td->nowrap = true;
+
+                                $hyperlink = new SiteHyperlink($td);
+                                $hyperlink->site = $site;
+
+
+                            } else {
+
+                                $row->addText($contentType->typeLabel, true);
+                            }
+
                         }
 
                         $td = new Td($row);
-                        $td->nowrap=true;
+                        $td->nowrap = true;
 
                         $span = new Span($td);
                         $span->title = $treeRow->child->user->displayName;
-                        $span->content=$treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateLeadingZeroFormat();
-
-                        //$row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateLeadingZeroFormat());
+                        $span->content = $treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateLeadingZeroFormat();
 
                     }
 
@@ -105,6 +110,10 @@ class WorkflowLogMenu extends LogMenu  // AdminTable
             }
 
             if ($this->currentStatus !== null) {
+
+                if ($this->currentStatus->isDraft()) {
+                    $this->addNextMenu();
+                }
 
                 /** @var AbstractProcessStatus $nextStatus */
                 $nextStatus = $this->currentStatus->getNextMenu();
@@ -124,15 +133,30 @@ class WorkflowLogMenu extends LogMenu  // AdminTable
 
                         $row->addEmpty();
 
-                        $site = clone($this->redirectSite);  // new Site();
-                        $site->addParameter(new StatusParameter($nextStatus->typeId));
-                        $site->title = $nextStatus->typeLabel;
+                        if ($this->currentStatus->isDraft()) {
 
-                        $td = new Td($row);
-                        $td->nowrap=true;
+                            //$this->addMenu($nextStatus);
 
-                        $hyperlink = new SiteHyperlink($td);
-                        $hyperlink->site = $site;
+
+                            $row->addText($nextStatus->typeLabel, true);
+                            //$row->addEmpty();
+
+
+                        } else {
+
+                            //$row->addEmpty();
+
+                            $site = clone($this->redirectSite);
+                            $site->addParameter(new StatusParameter($nextStatus->typeId));
+                            $site->title = $nextStatus->typeLabel;
+
+                            $td = new Td($row);
+                            $td->nowrap = true;
+
+                            $hyperlink = new SiteHyperlink($td);
+                            $hyperlink->site = $site;
+
+                        }
 
                     }
 
@@ -140,38 +164,49 @@ class WorkflowLogMenu extends LogMenu  // AdminTable
 
                 }
 
-                foreach ($this->currentStatus->getMenuList() as $menuStatus) {
+                if (!$this->currentStatus->isDraft()) {
+                    $this->addNextMenu();
+                }
 
-                    $row = new TableRow($this);
+                //(new Debug())->write($this->currentStatus->getClassName());
 
-                    if ((new StatusParameter())->getValue() == $menuStatus->typeId) {
+                /*if (!$this->process->isWorkflowClosed()) {
 
-                        new ArrowRightIcon($row);
+                    foreach ($this->currentStatus->getMenuList() as $menuStatus) {
 
-                        $bold = new Bold($row);
-                        $bold->content = $menuStatus->typeLabel;
-                        $bold->addCssClass($this->subMenuCssClass);
+                        $row = new TableRow($this);
 
-                    } else {
+                        if ((new StatusParameter())->getValue() == $menuStatus->typeId) {
+
+                            new ArrowRightIcon($row);
+
+                            $bold = new Bold($row);
+                            $bold->content = $menuStatus->typeLabel;
+                            $bold->addCssClass($this->subMenuCssClass);
+
+                        } else {
+
+                            $row->addEmpty();
+
+                            $site = clone($this->redirectSite);
+                            $site->addParameter(new StatusParameter($menuStatus->typeId));
+                            $site->title = $menuStatus->typeLabel;
+
+                            $td = new Td($row);
+                            $td->nowrap = true;
+
+                            $hyperlink = new SiteHyperlink($td);
+                            $hyperlink->site = $site;
+                            $hyperlink->addCssClass($this->subMenuCssClass);
+
+                        }
 
                         $row->addEmpty();
 
-                        $site = clone($this->redirectSite);  // new Site();
-                        $site->addParameter(new StatusParameter($menuStatus->typeId));
-                        $site->title = $menuStatus->typeLabel;
-
-                        $td = new Td($row);
-                        $td->nowrap=true;
-
-                        $hyperlink = new SiteHyperlink($td);
-                        $hyperlink->site = $site;
-                        $hyperlink->addCssClass($this->subMenuCssClass);
-
                     }
+                }*/
 
-                    $row->addEmpty();
 
-                }
 
             }
 
@@ -198,6 +233,51 @@ class WorkflowLogMenu extends LogMenu  // AdminTable
     }
 
 
+
+    private function addNextMenu() {
+
+
+        if (!$this->process->isWorkflowClosed()) {
+
+            foreach ($this->currentStatus->getMenuList() as $menuStatus) {
+
+                $row = new TableRow($this);
+
+                if ((new StatusParameter())->getValue() == $menuStatus->typeId) {
+
+                    new ArrowRightIcon($row);
+
+                    $bold = new Bold($row);
+                    $bold->content = $menuStatus->typeLabel;
+                    $bold->addCssClass($this->subMenuCssClass);
+
+                } else {
+
+                    $row->addEmpty();
+
+                    $site = clone($this->redirectSite);
+                    $site->addParameter(new StatusParameter($menuStatus->typeId));
+                    $site->title = $menuStatus->typeLabel;
+
+                    $td = new Td($row);
+                    $td->nowrap = true;
+
+                    $hyperlink = new SiteHyperlink($td);
+                    $hyperlink->site = $site;
+                    $hyperlink->addCssClass($this->subMenuCssClass);
+
+                }
+
+                $row->addEmpty();
+
+            }
+        }
+
+
+
+    }
+
+
     private function addMenu(AbstractSequenceContentType $status = null)
     {
 
@@ -205,7 +285,7 @@ class WorkflowLogMenu extends LogMenu  // AdminTable
 
             $row = new TableRow($this);
             $row->addEmpty();
-            $row->addText($status->typeLabel,true);
+            $row->addText($status->typeLabel, true);
             $row->addEmpty();
 
             $this->addMenu($status->getNextMenu());

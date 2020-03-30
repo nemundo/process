@@ -49,6 +49,11 @@ trait ProcessStatusTrait
     }
 
 
+    public function isDraft() {
+        return false;
+    }
+
+
     public function getParentProcess()
     {
 
