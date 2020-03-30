@@ -38,7 +38,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     use TaskIndexTrait;
     use DocumentIndexTrait;
     use CalendarIndexTrait;
-    use LogTrait;
+    //use LogTrait;
     use FavoriteIndexTrait;
 
     public $number;

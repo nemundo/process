@@ -70,4 +70,12 @@ class ChildRemoveContentType extends AbstractSourceContentType
 
     }
 
+
+    /*
+    public function getMessage()
+    {
+     return $this->getSubject();   // TODO: Implement getMessage() method.
+    }*/
+
+
 }

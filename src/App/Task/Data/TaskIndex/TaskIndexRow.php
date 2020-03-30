@@ -92,11 +92,6 @@ public $taskType;
 public $updateStatus;
 
 /**
-* @var string
-*/
-public $message;
-
-/**
 * @var bool
 */
 public $hasSource;
@@ -133,7 +128,6 @@ if ($model->taskType !== null) {
 $this->loadNemundoProcessContentDataContentTypeContentTypetaskTypeRow($model->taskType);
 }
 $this->updateStatus = boolval($this->getModelValue($model->updateStatus));
-$this->message = $this->getModelValue($model->message);
 $this->hasSource = boolval($this->getModelValue($model->hasSource));
 }
 private function loadNemundoProcessContentDataContentContentsourceRow($model) {

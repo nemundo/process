@@ -208,7 +208,7 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
     }
 
 
-    public function getLog()
+    public function getMessage()
     {
 
         $fileRow = $this->getDataRow();

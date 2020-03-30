@@ -17,7 +17,7 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
 {
 
     use ProcessStatusTrait;
-    use LogTrait;
+    //use LogTrait;
     use GroupRestrictedTrait;
     use NotificationTrait;
 

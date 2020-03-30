@@ -47,7 +47,7 @@ trait TaskIndexTrait
 
         // getCount
 
-        $reader = new TreeReader();
+        /*$reader = new TreeReader();
         $reader->model->loadChild();
         $reader->model->child->loadContentType();
         $reader->model->child->loadUser();
@@ -57,7 +57,7 @@ trait TaskIndexTrait
         $message = '';
         foreach ($reader->getData() as $treeRow) {
             $message = $treeRow->child->subject;
-        }
+        }*/
 
 
 
@@ -81,7 +81,7 @@ trait TaskIndexTrait
             $data->subject = $this->getSubject();
             $data->assignmentId = $this->getAssignmentId();
             $data->deadline = $this->getDeadline();
-            $data->message = $message;
+            //$data->message = $message;
             $data->userId = $this->getCreatedUserId();
             $data->dateTime = $this->getCreatedDateTime();
             $data->closed = $this->isTaskClosed();
@@ -102,7 +102,7 @@ trait TaskIndexTrait
                 $data->subject = $this->getSubject();
                 $data->assignmentId = $this->getAssignmentId();
                 $data->deadline = $this->getDeadline();
-                $data->message = $message;
+                //$data->message = $message;
                 // nicht überschreiben !!!
                 $data->userId = $this->getCreatedUserId();
                 $data->dateTime = $this->getCreatedDateTime();

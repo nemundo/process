@@ -7,7 +7,7 @@ namespace Nemundo\Process\Workflow\Content\View;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Process\App\Favorite\Com\FavoriteButton;
-use Nemundo\Process\Content\Com\Table\ContentLogTable;
+
 use Nemundo\Process\Content\Com\Table\SourceTable;
 use Nemundo\Process\Template\Content\File\FileParentContainer;
 use Nemundo\Process\Workflow\Com\Container\StatusFormContainer;

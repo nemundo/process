@@ -82,11 +82,6 @@ public $taskType;
 public $updateStatus;
 
 /**
-* @var \Nemundo\Model\Type\Text\TextType
-*/
-public $message;
-
-/**
 * @var \Nemundo\Model\Type\Number\YesNoType
 */
 public $hasSource;
@@ -179,14 +174,6 @@ $this->updateStatus->fieldName = "update_status";
 $this->updateStatus->aliasFieldName = "process_task_index_update_status";
 $this->updateStatus->label = "Update Status";
 $this->updateStatus->allowNullValue = false;
-
-$this->message = new \Nemundo\Model\Type\Text\TextType($this);
-$this->message->tableName = "process_task_index";
-$this->message->fieldName = "message";
-$this->message->aliasFieldName = "process_task_index_message";
-$this->message->label = "Message";
-$this->message->allowNullValue = false;
-$this->message->length = 255;
 
 $this->hasSource = new \Nemundo\Model\Type\Number\YesNoType($this);
 $this->hasSource->tableName = "process_task_index";

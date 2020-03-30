@@ -30,7 +30,6 @@ trait NotificationTrait
             $this->sendUserNotification($userId);
         }
 
-
     }
 
 
@@ -40,7 +39,6 @@ trait NotificationTrait
         if ($category == null) {
             $category = new InformationCategory();
         }
-
 
         $data = new Notification();
         $data->ignoreIfExists=true;

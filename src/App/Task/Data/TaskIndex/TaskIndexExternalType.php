@@ -82,11 +82,6 @@ public $taskType;
 public $updateStatus;
 
 /**
-* @var \Nemundo\Model\Type\Text\TextType
-*/
-public $message;
-
-/**
 * @var \Nemundo\Model\Type\Number\YesNoType
 */
 public $hasSource;
@@ -172,13 +167,6 @@ $this->updateStatus->tableName = $this->parentFieldName . "_" . $this->externalT
 $this->updateStatus->aliasFieldName = $this->updateStatus->tableName . "_" . $this->updateStatus->fieldName;
 $this->updateStatus->label = "Update Status";
 $this->addType($this->updateStatus);
-
-$this->message = new \Nemundo\Model\Type\Text\TextType();
-$this->message->fieldName = "message";
-$this->message->tableName = $this->parentFieldName . "_" . $this->externalTableName;
-$this->message->aliasFieldName = $this->message->tableName . "_" . $this->message->fieldName;
-$this->message->label = "Message";
-$this->addType($this->message);
 
 $this->hasSource = new \Nemundo\Model\Type\Number\YesNoType();
 $this->hasSource->fieldName = "has_source";

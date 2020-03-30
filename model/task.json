@@ -172,7 +172,7 @@
                     "field_name": "message",
                     "variable_name": "message",
                     "allow_null": false,
-                    "is_deleted": false,
+                    "is_deleted": true,
                     "length": "255"
                 },
                 {

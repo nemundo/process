@@ -17,7 +17,7 @@ class ShareContentType extends AbstractTreeContentType
 {
 
     use NotificationTrait;
-    use LogTrait;
+    //use LogTrait;
 
     public $toId;
 

@@ -57,11 +57,6 @@ public $taskTypeId;
 public $updateStatus;
 
 /**
-* @var string
-*/
-public $message;
-
-/**
 * @var bool
 */
 public $hasSource;
@@ -85,7 +80,6 @@ $property->setValue($this->dateTime);
 $this->typeValueList->setModelValue($this->model->closed, $this->closed);
 $this->typeValueList->setModelValue($this->model->taskTypeId, $this->taskTypeId);
 $this->typeValueList->setModelValue($this->model->updateStatus, $this->updateStatus);
-$this->typeValueList->setModelValue($this->model->message, $this->message);
 $this->typeValueList->setModelValue($this->model->hasSource, $this->hasSource);
 $id = parent::save();
 return $id;

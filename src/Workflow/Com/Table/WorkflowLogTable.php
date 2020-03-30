@@ -12,6 +12,7 @@ use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\Collection\AbstractContentTypeCollection;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
+use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
 
 class WorkflowLogTable extends AbstractHtmlContainer
@@ -76,13 +77,16 @@ class WorkflowLogTable extends AbstractHtmlContainer
 
         foreach ($reader->getData() as $treeRow) {
 
+            /** @var AbstractProcessStatus $contentType */
             $contentType = $treeRow->child->getContentType();
 
             $row = new BootstrapClickableTableRow($table);
             //$row->addText($contentType->getSubject());
             //$row->addText($contentType->getClassName());
 
-            $row->addText($contentType->getLog());
+            //$row->addText($contentType->getLog());
+
+            $row->addText($contentType->getMessage());
 
             $row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeLeadingZeroFormat(), true);
             $row->addClickableSite($contentType->getViewSite());
