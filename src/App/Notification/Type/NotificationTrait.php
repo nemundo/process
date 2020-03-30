@@ -5,11 +5,13 @@ namespace Nemundo\Process\App\Notification\Type;
 
 use Nemundo\Core\Language\Translation;
 use Nemundo\Package\ResponsiveMail\ResponsiveActionMailMessage;
+use Nemundo\Process\App\Favorite\Reader\FavoriteUserReader;
 use Nemundo\Process\App\Notification\Category\AbstractCategory;
 use Nemundo\Process\App\Notification\Category\InformationCategory;
 use Nemundo\Process\App\Notification\Data\Notification\Notification;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationDelete;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationUpdate;
+use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Group\Type\GroupContentType;
 use Nemundo\Process\Template\Content\User\UserContentType;
 use Nemundo\Workflow\App\Notification\Config\NotificationSendMailConfig;
@@ -41,6 +43,7 @@ trait NotificationTrait
 
 
         $data = new Notification();
+        $data->ignoreIfExists=true;
         $data->read = false;
         $data->archive = false;
         $data->categoryId = $category->id;
@@ -57,7 +60,6 @@ trait NotificationTrait
             $userType = new UserContentType($userId);
             $userRow = $userType->getDataRow();
 
-
             $mail = new ResponsiveActionMailMessage();
             $mail->mailTo = $userRow->email;
             $mail->subject = (new Translation())->getText($category->category) . ': ' . $this->getSubject();
@@ -66,7 +68,6 @@ trait NotificationTrait
             $mail->actionText = $this->getMessage();
 
             //$mail->actionText =$this->getView()->getContent();  //get (new Html($this->getMessage()))->getValue();
-
             //$mail->actionLabel[LanguageCode::EN] = 'ViewAnsehen';
             $mail->actionLabel = 'Ansehen';
             $mail->actionUrlSite = $this->getViewSite();
@@ -99,6 +100,19 @@ trait NotificationTrait
         $delete->delete();
 
     }
+
+
+
+    public function sendFavoriteNotification(AbstractContentType $contentType) {
+
+
+        foreach ((new FavoriteUserReader($contentType))->getUserList() as $userId) {
+            $this->sendUserNotification($userId);
+        }
+
+
+    }
+
 
 
 }

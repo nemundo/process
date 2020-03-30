@@ -16,6 +16,7 @@ use Nemundo\Model\Data\ModelUpdate;
 use Nemundo\Model\Value\ModelDataValue;
 use Nemundo\Process\App\Calendar\Type\CalendarIndexTrait;
 use Nemundo\Process\App\Document\Index\DocumentIndexTrait;
+use Nemundo\Process\App\Favorite\Type\FavoriteIndexTrait;
 use Nemundo\Process\App\Task\Index\TaskIndexTrait;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Type\AbstractContentType;
@@ -38,6 +39,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     use DocumentIndexTrait;
     use CalendarIndexTrait;
     use LogTrait;
+    use FavoriteIndexTrait;
 
     public $number;
 
@@ -122,6 +124,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         parent::onIndex();
 
         $this->saveContentIndex();
+        $this->saveFavoriteIndex();
 
         $this->addSearchWord($this->getSubject());
         $this->addSearchWord($this->getDataRow()->workflowNumber);

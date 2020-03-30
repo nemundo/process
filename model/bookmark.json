@@ -1,0 +1,48 @@
+{
+    "app": "Bookmark",
+    "name": "bookmark",
+    "namespace": "Nemundo\\Process\\App\\Bookmark",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "7e0d4cee-900e-4b15-950b-d3849b1997b2",
+            "label": "Bookmark",
+            "class_name": "Bookmark",
+            "table_name": "bookmark_bookmark",
+            "namespace": "Nemundo\\Process\\App\\Bookmark\\Data\\Bookmark",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Url",
+                    "field_name": "url",
+                    "variable_name": "url",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Title",
+                    "field_name": "title",
+                    "variable_name": "title",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "large_text",
+                    "label": "Description",
+                    "field_name": "description",
+                    "variable_name": "description",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        }
+    ]
+}

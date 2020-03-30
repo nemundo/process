@@ -47,6 +47,7 @@ class SubjectChangeProcessStatus extends AbstractProcessStatus
         $this->dataId = $data->save();
 
         $this->getParentProcess()->changeSubject($this->subject);
+        $this->getParentProcess()->saveIndex();
 
     }
 

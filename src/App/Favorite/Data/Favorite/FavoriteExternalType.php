@@ -26,6 +26,11 @@ public $userId;
 */
 public $user;
 
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $subject;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = FavoriteModel::class;
@@ -51,6 +56,13 @@ $this->userId->tableName = $this->parentFieldName . "_" . $this->externalTableNa
 $this->userId->aliasFieldName = $this->userId->tableName ."_".$this->userId->fieldName;
 $this->userId->label = "User";
 $this->addType($this->userId);
+
+$this->subject = new \Nemundo\Model\Type\Text\TextType();
+$this->subject->fieldName = "subject";
+$this->subject->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->subject->aliasFieldName = $this->subject->tableName . "_" . $this->subject->fieldName;
+$this->subject->label = "Subject";
+$this->addType($this->subject);
 
 }
 public function loadContent() {

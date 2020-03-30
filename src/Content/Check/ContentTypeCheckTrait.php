@@ -12,6 +12,7 @@ trait ContentTypeCheckTrait
 {
 
 
+    // checkContentType
     public $contentTypeCheck=true;
 
 

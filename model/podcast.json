@@ -1,0 +1,71 @@
+{
+    "app": "Podcast",
+    "name": "podcast",
+    "namespace": "Nemundo\\Process\\App\\Podcast",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "725670e8-bcc9-4a1c-9ada-ac538f6dc08a",
+            "label": "Episode",
+            "class_name": "Episode",
+            "table_name": "podcast_episode",
+            "namespace": "Nemundo\\Process\\App\\Podcast\\Data\\Episode",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Podcast",
+                    "field_name": "podcast",
+                    "variable_name": "podcast",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "9e6cf531-9e61-45e3-9b77-0c78b6ebcce8"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "9e6cf531-9e61-45e3-9b77-0c78b6ebcce8",
+            "label": "Feed",
+            "class_name": "Feed",
+            "table_name": "podcast_feed",
+            "namespace": "Nemundo\\Process\\App\\Podcast\\Data\\Feed",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Rss Url",
+                    "field_name": "rss_url",
+                    "variable_name": "rssUrl",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Title",
+                    "field_name": "title",
+                    "variable_name": "title",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "rss_url",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "rss_url"
+                    ]
+                }
+            ]
+        }
+    ]
+}

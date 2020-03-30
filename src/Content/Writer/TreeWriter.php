@@ -9,12 +9,13 @@ use Nemundo\Process\Content\Data\Tree\Tree;
 use Nemundo\Process\Content\Data\Tree\TreeCount;
 use Nemundo\Process\Content\Data\Tree\TreeValue;
 
+// TreeBuilder
 class TreeWriter extends AbstractBase
 {
 
     public $parentId;
 
-    public $dataId;
+    public $childId;
 
     public function write()
     {
@@ -32,7 +33,7 @@ class TreeWriter extends AbstractBase
         $data = new Tree();
         $data->ignoreIfExists = true;
         $data->parentId = $this->parentId;
-        $data->childId = $this->dataId;
+        $data->childId = $this->childId;
         $data->itemOrder = $itemOrder;
         $data->save();
 
@@ -48,7 +49,7 @@ class TreeWriter extends AbstractBase
 
         $count = new TreeCount();
         $count->filter->andEqual($count->model->parentId, $this->parentId);
-        $count->filter->andEqual($count->model->childId, $this->dataId);
+        $count->filter->andEqual($count->model->childId, $this->childId);
         if ($count->getCount() > 0) {
             $value = true;
         }

@@ -11,6 +11,7 @@ use Nemundo\Core\Language\Translation;
 use Nemundo\Dev\Deployment\DeploymentConfig;
 use Nemundo\Dev\Deployment\StagingEnvironment;
 use Nemundo\Html\Formatting\Strike;
+use Nemundo\Model\Data\Property\File\FileProperty;
 use Nemundo\Model\Parameter\FilenameParameter;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Log\Type\LogTrait;
@@ -29,12 +30,17 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
     /**
      * @var FileRequest
      */
-    public $fileRequest;
+    //public $fileRequest;
 
     /**
      * @var string
      */
-    public $filename;
+    //public $filename;
+
+    /**
+     * @var FileProperty
+     */
+    public $file;
 
     public function __construct($dataId = null)
     {
@@ -45,6 +51,9 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $this->listClass = FileContentList::class;
         $this->parameterClass = FilenameParameter::class;
         parent::__construct($dataId);
+
+        $this->file = new FileProperty();
+
     }
 
 
@@ -53,18 +62,26 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
 
 
         // check for video
+        // in FileUploadForm
 
 
         $data = new TemplateFile();
         $data->active = true;
 
+        $data->file->fromFileProperty($this->file);
+
+
+        //$this->file->fromUrl()
+
+
+        /*
         if ($this->fileRequest !== null) {
             $data->file->fromFileRequest($this->fileRequest);
         }
 
         if ($this->filename !== null) {
             $data->file->fromFilename($this->filename);
-        }
+        }*/
 
         $this->dataId = $data->save();
 
@@ -207,7 +224,7 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
             $subject .= ' deleted file';
         }
 
-        return (new Translation())->getText(  $subject);
+        return (new Translation())->getText($subject);
 
     }
 

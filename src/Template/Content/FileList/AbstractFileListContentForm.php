@@ -68,11 +68,10 @@ abstract class AbstractFileListContentForm extends AbstractContentForm
 
             $type = new FileContentType();
             $type->parentId = $this->contentType->getContentId();
-            $type->fileRequest = $fileRequest;
+            $type->file->fromFileRequest($fileRequest);
             $type->saveType();
 
         }
-
 
     }
 

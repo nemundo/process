@@ -22,6 +22,7 @@ class FavoriteUserReader extends AbstractBase
     }
 
 
+    // getUserList(AbstractContentType $contentType)
     public function getUserList()
     {
 

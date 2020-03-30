@@ -42,10 +42,11 @@ trait AssignmentTrait
     public $deadline;
 
 
+    /*
     protected function onFinished() {
 
         /** @var AbstractTreeContentType $parentContentType */
-        $parentContentType = $this->getParentContentType();
+    /*    $parentContentType = $this->getParentContentType();
 
         $this->group = new GroupContentType();
         $this->group->fromGroupId($this->groupId);
@@ -67,7 +68,7 @@ trait AssignmentTrait
 
         }
 
-    }
+    }*/
 
 
 

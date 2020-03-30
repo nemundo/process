@@ -31,6 +31,10 @@ class FileUploadForm extends BootstrapForm
 
         foreach ($this->file->getMultiFileRequest() as $fileRequest) {
 
+
+            // Check for Video etc.
+
+
             $type = new FileContentType();
             $type->fileRequest = $fileRequest;
             $type->saveType();

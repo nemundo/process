@@ -27,9 +27,7 @@ abstract class AbstractFileListContentType extends AbstractTreeContentType
 
         $this->dataId = (new UniqueId())->getUniqueId();
 
-
     }
-
 
 
     protected function onUpdate()

@@ -26,6 +26,11 @@ public $userId;
 */
 public $user;
 
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $subject;
+
 protected function loadModel() {
 $this->tableName = "favorite_favorite";
 $this->aliasTableName = "favorite_favorite";
@@ -57,6 +62,23 @@ $this->userId->fieldName = "user";
 $this->userId->aliasFieldName = "favorite_favorite_user";
 $this->userId->label = "User";
 $this->userId->allowNullValue = false;
+
+$this->subject = new \Nemundo\Model\Type\Text\TextType($this);
+$this->subject->tableName = "favorite_favorite";
+$this->subject->fieldName = "subject";
+$this->subject->aliasFieldName = "favorite_favorite_subject";
+$this->subject->label = "Subject";
+$this->subject->allowNullValue = false;
+$this->subject->length = 255;
+
+$index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
+$index->indexName = "user_subject";
+$index->addType($this->userId);
+$index->addType($this->subject);
+
+$index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
+$index->indexName = "content";
+$index->addType($this->contentId);
 
 }
 public function loadContent() {

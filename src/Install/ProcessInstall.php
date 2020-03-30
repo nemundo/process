@@ -7,14 +7,17 @@ use Nemundo\App\Script\Setup\ScriptSetup;
 use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\App\Application\Content\ApplicationContentType;
 use Nemundo\Process\App\Assignment\Install\AssignmentInstall;
+use Nemundo\Process\App\Bookmark\Install\BookmarkInstall;
 use Nemundo\Process\App\Calendar\Install\CalendarInstall;
 use Nemundo\Process\App\Dashboard\Install\DashboardInstall;
 use Nemundo\Process\App\Document\Data\DocumentCollection;
 use Nemundo\Process\App\Favorite\Install\FavoriteInstall;
 use Nemundo\Process\App\Notification\Install\NotificationInstall;
+use Nemundo\Process\App\Podcast\Install\PodcastInstall;
 use Nemundo\Process\App\Share\Install\ShareInstall;
 use Nemundo\Process\App\Task\Install\TaskInstall;
 use Nemundo\Process\App\WebLog\Content\WebLogContentType;
+use Nemundo\Process\App\Wiki\Install\WikiInstall;
 use Nemundo\Process\Content\Install\ContentInstall;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Geo\Install\GeoInstall;
@@ -26,7 +29,7 @@ use Nemundo\Process\Script\ProcessTestScript;
 use Nemundo\Process\Search\Install\SearchInstall;
 use Nemundo\Process\Template\Install\TemplateInstall;
 use Nemundo\Project\Install\AbstractInstall;
-use Schleuniger\App\News\Content\App\NewsSubscribtionContentType;
+
 
 class ProcessInstall extends AbstractInstall
 {
@@ -51,11 +54,14 @@ class ProcessInstall extends AbstractInstall
 
         (new RelationInstall())->install();
 
-        //(new WikiInstall())->install();
+        (new WikiInstall())->install();
+        (new PodcastInstall())->install();
+
+
         (new TemplateInstall())->install();
         (new FavoriteInstall())->install();
         (new ShareInstall())->install();
-
+        (new BookmarkInstall())->install();
 
         //(new MessageInstall())->install();
         (new DashboardInstall())->install();

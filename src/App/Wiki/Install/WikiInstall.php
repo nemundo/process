@@ -5,6 +5,8 @@ namespace Nemundo\Process\App\Wiki\Install;
 
 
 use Nemundo\Model\Setup\ModelCollectionSetup;
+use Nemundo\Process\App\Bookmark\Content\BookmarkContentType;
+use Nemundo\Process\App\Podcast\Content\Feed\FeedContentType;
 use Nemundo\Process\App\Wiki\Content\TitleChange\TitleChangeContentType;
 use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\App\Wiki\Data\WikiCollection;
@@ -59,6 +61,8 @@ class WikiInstall extends AbstractInstall
         $setup->addContentType(new VideoContentType());
 
         (new WikiSetup())
+            ->addContentType(new BookmarkContentType())
+            ->addContentType(new FeedContentType())
             ->addContentType(new AudioContentType())
             ->addContentType(new TextContentType())
             ->addContentType(new ImageListContentType())

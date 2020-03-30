@@ -33,7 +33,7 @@ class FileContentForm extends AbstractContentForm
 
             $type = new FileContentType();
             $type->parentId = $this->contentType->getParentId();
-            $type->fileRequest = $fileRequest;
+            $type->file->fromFileRequest($fileRequest);
             $type->saveType();
 
         }

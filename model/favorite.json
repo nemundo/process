@@ -31,9 +31,34 @@
                     "variable_name": "user",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "text",
+                    "label": "Subject",
+                    "field_name": "subject",
+                    "variable_name": "subject",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
                 }
             ],
-            "index": []
+            "index": [
+                {
+                    "index_name": "user_subject",
+                    "index_type": "index",
+                    "field_name": [
+                        "user",
+                        "subject"
+                    ]
+                },
+                {
+                    "index_name": "content",
+                    "index_type": "index",
+                    "field_name": [
+                        "content"
+                    ]
+                }
+            ]
         }
     ]
 }

@@ -35,10 +35,21 @@ class FavoriteSaveSite extends AbstractIconSite
     public function loadContent()
     {
 
+        $contentParameter = new ContentParameter();
+        $contentParameter->contentTypeCheck = false;
+        $contentType = $contentParameter->getContentType();
+
         $data = new Favorite();
         $data->contentId = (new ContentParameter())->getValue();
         $data->userId = (new UserSessionType())->userId;
+        $data->subject = '[No Subject]';
         $data->save();
+
+        $contentType->saveIndex();
+
+
+
+
 
         (new UrlReferer())->redirect();
 

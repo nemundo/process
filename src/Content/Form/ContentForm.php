@@ -12,12 +12,15 @@ class ContentForm extends AbstractContentForm
     public function getContent()
     {
 
+        /*
         $p = new Paragraph($this);
         $p->content = 'Content Form';
 
 
         $p = new Paragraph($this);
-        $p->content = 'Content Type ' . $this->contentType->typeLabel;
+        $p->content = 'Run Action: ' . $this->contentType->typeLabel;*/
+
+        $this->submitButton->label =  $this->contentType->typeLabel;
 
         return parent::getContent();
 

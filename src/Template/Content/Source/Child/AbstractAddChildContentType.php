@@ -35,7 +35,7 @@ class AbstractAddChildContentType extends AbstractSourceContentType
 
         $writer = new TreeWriter();
         $writer->parentId = $this->parentId;
-        $writer->dataId = $this->childId;
+        $writer->childId = $this->childId;
         $writer->write();
 
         $contentReader = new ContentReader();

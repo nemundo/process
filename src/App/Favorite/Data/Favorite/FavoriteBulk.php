@@ -16,6 +16,11 @@ public $contentId;
 */
 public $userId;
 
+/**
+* @var string
+*/
+public $subject;
+
 public function __construct() {
 parent::__construct();
 $this->model = new FavoriteModel();
@@ -23,6 +28,7 @@ $this->model = new FavoriteModel();
 public function save() {
 $this->typeValueList->setModelValue($this->model->contentId, $this->contentId);
 $this->typeValueList->setModelValue($this->model->userId, $this->userId);
+$this->typeValueList->setModelValue($this->model->subject, $this->subject);
 $id = parent::save();
 return $id;
 }

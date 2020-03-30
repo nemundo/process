@@ -3,6 +3,7 @@
 
 namespace Nemundo\Process\Workflow\Content\Status;
 
+use Nemundo\Process\App\Notification\Type\NotificationTrait;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
 use Nemundo\Process\Content\Writer\TreeWriter;
@@ -18,6 +19,7 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
     use ProcessStatusTrait;
     use LogTrait;
     use GroupRestrictedTrait;
+    use NotificationTrait;
 
     /**
      * @var bool
@@ -30,6 +32,15 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
     {
         $this->formClass = StatusForm::class;
         parent::__construct($dataId);
+    }
+
+
+    protected function onFinished()
+    {
+
+        parent::onFinished();
+        $this->sendFavoriteNotification($this->getParentProcess());
+
     }
 
 
@@ -65,6 +76,40 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
         $this->onIndex();
 
     }
+
+
+
+
+    public function getSubject()
+    {
+        return $this->getParentContentType()->getSubject();
+    }
+
+
+    public function hasViewSite()
+    {
+        return true;
+    }
+
+
+    public function getViewSite()
+    {
+
+        return $this->getParentContentType()->getViewSite();
+
+    }
+
+
+
+
+    public function getMessage()
+    {
+        return $this->getSubject();
+        // TODO: Implement getMessage() method.
+    }
+
+
+
 
 
 }

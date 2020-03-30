@@ -55,7 +55,7 @@ class AddContentForm extends BootstrapForm  // AbstractContentForm
 
         $writer = new TreeWriter();
         $writer->parentId = $this->content->getValue();  // $this->parentId;
-        $writer->dataId = $this->contentType->getContentId();  // $this->contentId;
+        $writer->childId = $this->contentType->getContentId();  // $this->contentId;
         $writer->write();
 
      /*   $builder=new TreeItem();

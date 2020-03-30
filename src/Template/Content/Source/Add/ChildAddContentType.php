@@ -37,7 +37,7 @@ class ChildAddContentType extends AbstractSourceContentType
 
         $writer = new TreeWriter();
         $writer->parentId = $this->parentId;
-        $writer->dataId = $this->sourceId;
+        $writer->childId = $this->sourceId;
         $writer->write();
 
         $contentReader = new ContentReader();
@@ -54,7 +54,7 @@ class ChildAddContentType extends AbstractSourceContentType
 
         $writer = new TreeWriter();
         $writer->parentId = $this->parentId;
-        $writer->dataId = $this->sourceId;
+        $writer->childId = $this->sourceId;
         if (!$writer->exist()) {
             parent::saveType();
         }
