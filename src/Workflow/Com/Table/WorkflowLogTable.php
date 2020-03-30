@@ -23,7 +23,6 @@ class WorkflowLogTable extends AbstractHtmlContainer
      */
     public $contentType;
 
-
     /**
      * @var AbstractContentTypeCollection[]
      */
@@ -38,7 +37,6 @@ class WorkflowLogTable extends AbstractHtmlContainer
 
     public function addContentTypeFilter(AbstractTreeContentType $contentType)
     {
-
 
     }
 
@@ -58,7 +56,6 @@ class WorkflowLogTable extends AbstractHtmlContainer
         $reader->model->child->loadUser();
 
         $reader->filter->andEqual($reader->model->parentId, $this->contentType->getContentId());
-
 
         $filter = new Filter();
         foreach ($this->collectionFilterList as $collection) {
@@ -87,8 +84,11 @@ class WorkflowLogTable extends AbstractHtmlContainer
             //$row->addText($contentType->getLog());
 
             $row->addText($contentType->getMessage());
-
             $row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeLeadingZeroFormat(), true);
+
+            //$row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeWithSecondLeadingZeroFormat(), true);
+
+
             $row->addClickableSite($contentType->getViewSite());
 
         }
