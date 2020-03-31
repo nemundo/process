@@ -252,7 +252,7 @@ class UserContentType extends AbstractTreeContentType
 
             $data = new UserUsergroup();
             $data->ignoreIfExists = true;
-            $data->userId = $this->userId;
+            $data->userId = $this->dataId;
             $data->usergroupId = $usergroup->usergroupId;
             $data->save();
 

@@ -24,7 +24,7 @@ public $setupStatus;
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = DocumentTypeModel::class;
-$this->externalTableName = "document_document_type";
+$this->externalTableName = "process_document_type";
 $this->aliasTableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id = new \Nemundo\Model\Type\Id\IdType();
 $this->id->fieldName = "id";

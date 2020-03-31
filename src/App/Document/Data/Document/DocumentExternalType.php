@@ -39,7 +39,7 @@ public $documentType;
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = DocumentModel::class;
-$this->externalTableName = "document_document";
+$this->externalTableName = "process_document";
 $this->aliasTableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id = new \Nemundo\Model\Type\Id\IdType();
 $this->id->fieldName = "id";

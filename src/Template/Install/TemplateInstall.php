@@ -13,7 +13,6 @@ use Nemundo\Process\App\Wiki\Setup\WikiSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 
 use Nemundo\Process\Template\Content\Audio\AudioContentType;
-use Nemundo\Process\Template\Content\Event\EventContentType;
 use Nemundo\Process\Template\Content\File\FileActiveContentType;
 use Nemundo\Process\Template\Content\File\FileContentType;
 use Nemundo\Process\Template\Content\File\FileInactiveContentType;
@@ -24,7 +23,7 @@ use Nemundo\Process\Template\Content\Item\CreateItemContentType;
 use Nemundo\Process\Template\Content\Item\EditItemContentType;
 use Nemundo\Process\Template\Content\Item\InactiveItemContentType;
 use Nemundo\Process\Template\Content\LargeText\LargeTextContentType;
-use Nemundo\Process\Template\Content\MultiFile\MultiFileContentType;
+
 
 use Nemundo\Process\Template\Content\Source\Add\ChildAddContentType;
 use Nemundo\Process\Template\Content\Source\Add\SourceAddContentType;
@@ -67,24 +66,18 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new ImageContentType());
 
 
+
+
         (new ContentTypeSetup())
             ->addContentType(new SourceAddContentType())
             ->addContentType(new SourceRemoveContentType())
             ->addContentType(new ChildAddContentType())
             ->addContentType(new ChildRemoveContentType())
             ->addContentType(new ReopenWorkflowProcessStatus())
-            //->addContentType(new MultiFileContentType())
             ->addContentType(new FileListContentType())
             ->addContentType(new UrlContentType());
 
-        //    ->addContentType(new MultiImageContentType());
-
-
-
-//        $setup->addContentType(new WikiPageContentType());
-        //$setup->addContentType(new WebImageContentType());
         $setup->addContentType(new UserContentType());
-  //      $setup->addContentType(new EventContentType());
         $setup->addContentType(new SourceAddContentType());
         $setup->addContentType(new SourceRemoveContentType());
         $setup->addContentType(new WorkflowDeleteStatus());
@@ -95,10 +88,6 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new CreateItemContentType());
         $setup->addContentType(new EditItemContentType());
         $setup->addContentType(new InactiveItemContentType());
-
-
-        //$setup = new CalendarSourceSetup();
-        //$setup->addSourceContentType(new WikiPageContentType());
 
         $setup=new ScriptSetup();
         $setup->addScript(new TemplateTestScript());
