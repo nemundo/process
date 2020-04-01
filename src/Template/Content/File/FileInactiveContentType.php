@@ -6,6 +6,7 @@ namespace Nemundo\Process\Template\Content\File;
 
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
+use Nemundo\Process\App\Notification\Type\NotificationTrait;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Log\Type\LogTrait;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileUpdate;
@@ -16,6 +17,7 @@ class FileInactiveContentType extends AbstractTreeContentType
 {
 
     //use LogTrait;
+    use NotificationTrait;
 
     public $fileId;
 
@@ -57,5 +59,13 @@ class FileInactiveContentType extends AbstractTreeContentType
 
     }
 
+
+    public function getMessage()
+    {
+
+        return $this->getSubject();
+
+        // TODO: Implement getMessage() method.
+    }
 
 }

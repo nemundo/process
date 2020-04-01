@@ -32,6 +32,15 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
     }
 
 
+    protected function onIndex()
+    {
+
+        parent::onIndex();
+        $this->saveNotificationIndex();
+
+    }
+
+
     public function saveType()
     {
 

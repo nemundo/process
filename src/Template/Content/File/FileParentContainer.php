@@ -60,7 +60,7 @@ class FileParentContainer extends AbstractParentContainer
             }
 
             $ersteller = $documentRow->content->user->login . ' ' . $documentRow->content->dateTime->getShortDateLeadingZeroFormat();
-            $row->addText($ersteller);
+            $row->addText($ersteller, true);
 
             if ($documentRow->active) {
                 $site = clone(FileInactiveSite::$site);
@@ -69,22 +69,6 @@ class FileParentContainer extends AbstractParentContainer
                 $row->addIconSite($site);
 
             }
-
-
-            /*else {
-                $stroke = new Strike($row);
-                $stroke->content = $documentRow->file->getFilename();
-
-                /*$row->addEmpty();
-                $row->addEmpty();
-                $row->addEmpty();*/
-
-            //}
-
-
-            //$row->addText($documentRow->content->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());
-            //$row->addText($documentRow->content->user->displayName);
-
 
         }
 

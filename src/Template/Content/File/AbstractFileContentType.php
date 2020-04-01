@@ -5,17 +5,14 @@ namespace Nemundo\Process\Template\Content\File;
 
 
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
-use Nemundo\Core\Http\Request\File\FileRequest;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Dev\Deployment\DeploymentConfig;
 use Nemundo\Dev\Deployment\StagingEnvironment;
-use Nemundo\Html\Formatting\Strike;
 use Nemundo\Model\Data\Property\File\FileProperty;
 use Nemundo\Model\Parameter\FilenameParameter;
 use Nemundo\Process\App\Notification\Type\NotificationTrait;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
-use Nemundo\Process\Log\Type\LogTrait;
 use Nemundo\Process\Template\Data\TemplateFile\Redirect\TemplateFileRedirectConfig;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFile;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileDelete;
@@ -28,18 +25,6 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
 
     use NotificationTrait;
 
-    //use LogTrait;
-
-    /**
-     * @var FileRequest
-     */
-    //public $fileRequest;
-
-    /**
-     * @var string
-     */
-    //public $filename;
-
     /**
      * @var FileProperty
      */
@@ -47,6 +32,7 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
 
     public function __construct($dataId = null)
     {
+
         $this->typeLabel = 'File';
         $this->formClass = FileContentForm::class;
         $this->viewClass = FileContentView::class;
@@ -70,22 +56,7 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
 
         $data = new TemplateFile();
         $data->active = true;
-
         $data->file->fromFileProperty($this->file);
-
-
-        //$this->file->fromUrl()
-
-
-        /*
-        if ($this->fileRequest !== null) {
-            $data->file->fromFileRequest($this->fileRequest);
-        }
-
-        if ($this->filename !== null) {
-            $data->file->fromFilename($this->filename);
-        }*/
-
         $this->dataId = $data->save();
 
         $fileRow = $this->getDataRow();
@@ -117,7 +88,6 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
 
         }
 
-
     }
 
 
@@ -147,34 +117,6 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
     }
 
 
-    /*
-    public function fromFilename($filename)
-    {
-
-        $data = new TemplateFile();
-        $data->active = true;
-        $data->file->fromFilename($filename);
-        $this->dataId = $data->save();
-
-        $this->saveType();
-
-    }
-
-    public function fromFileRequest(FileRequest $fileRequest)
-    {
-
-        $data = new TemplateFile();
-        $data->active = true;
-        $data->file->fromFileRequest($fileRequest);
-        $this->dataId = $data->save();
-
-        //$this->createMode=true;
-
-        //$this->saveType();
-
-    }*/
-
-
     public function getDataRow()
     {
         $fileRow = (new TemplateFileReader())->getRowById($this->dataId);
@@ -194,18 +136,6 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
 
         $text = $hyperlink->getContent();
 
-        if (!$fileRow->active) {
-            //$subject .= ' deleted file';
-
-            $strike = new Strike();
-            $strike->content = $hyperlink->getContent();
-
-            $text = $strike->getContent();
-
-        }
-
-        //$text = $hyperlink->getContent();  // . ' wurde hochgeladen';
-
         return $text;
 
     }
@@ -222,10 +152,6 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
 
         $subject[LanguageCode::EN] = 'File ' . $hyperlink->getContent() . ' was uploaded';
         $subject[LanguageCode::DE] = 'Dokument ' . $hyperlink->getContent() . ' wurde hochgeladen';
-
-        if (!$fileRow->active) {
-            $subject .= ' deleted file';
-        }
 
         return (new Translation())->getText($subject);
 

@@ -36,11 +36,6 @@ class SubjectChangeProcessStatus extends AbstractProcessStatus
     protected function onCreate()
     {
 
-        /*
-        $data = new TemplateText();
-        $data->text = $this->subject;
-        $this->dataId = $data->save();*/
-
         $data=new TemplateTextLog();
         $data->textFrom = $this->getParentProcess()->getDataRow()->subject;
         $data->textTo = $this->subject;
@@ -64,7 +59,12 @@ class SubjectChangeProcessStatus extends AbstractProcessStatus
     }
 
 
-    public function getSubject()
+    public function getSubject() {
+        return $this->getParentContentType()->getSubject();
+    }
+
+
+    public function getMessage()
     {
 
         //$this->typeLabel[LanguageCode::EN] = 'Subject Change';
