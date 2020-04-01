@@ -17,6 +17,7 @@ use Nemundo\Model\Value\ModelDataValue;
 use Nemundo\Process\App\Calendar\Type\CalendarIndexTrait;
 use Nemundo\Process\App\Document\Index\DocumentIndexTrait;
 use Nemundo\Process\App\Favorite\Type\FavoriteIndexTrait;
+use Nemundo\Process\App\Notification\Type\NotificationTrait;
 use Nemundo\Process\App\Task\Index\TaskIndexTrait;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
 use Nemundo\Process\Content\Type\AbstractContentType;
@@ -40,6 +41,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     use CalendarIndexTrait;
     //use LogTrait;
     use FavoriteIndexTrait;
+    use NotificationTrait;
 
     public $number;
 
@@ -267,6 +269,13 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $subject = $dataRow->workflowNumber . ' ' . $dataRow->subject;
         return $subject;
 
+    }
+
+
+    public function getMessage()
+    {
+        return $this->getSubject();
+        // TODO: Implement getMessage() method.
     }
 
 
