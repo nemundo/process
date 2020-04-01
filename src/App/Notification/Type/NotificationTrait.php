@@ -21,13 +21,13 @@ trait NotificationTrait
 
     abstract protected function getMessage();
 
-    protected function sendGroupNotification($groupId)
+    protected function sendGroupNotification($groupId, AbstractCategory $category = null)
     {
 
         $group = new GroupContentType();
         $group->fromGroupId($groupId);
         foreach ($group->getUserIdList() as $userId) {
-            $this->sendUserNotification($userId);
+            $this->sendUserNotification($userId,$category);
         }
 
     }

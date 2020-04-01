@@ -10,6 +10,7 @@ use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Process\App\Assignment\Data\AssignmentLog\AssignmentLog;
 use Nemundo\Process\App\Assignment\Data\AssignmentLog\AssignmentLogDelete;
 use Nemundo\Process\App\Assignment\Data\AssignmentLog\AssignmentLogReader;
+use Nemundo\Process\App\Notification\Category\TaskCategory;
 use Nemundo\Process\Group\Type\AbstractGroupContentType;
 
 trait AssignmentTrait
@@ -45,6 +46,8 @@ trait AssignmentTrait
         $data = new AssignmentLog();
         $data->assignmentId = $this->groupId;
         $this->dataId = $data->save();
+
+        $this->sendGroupNotification($this->groupId, new TaskCategory());
 
     }
 
