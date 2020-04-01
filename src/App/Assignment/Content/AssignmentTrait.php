@@ -47,7 +47,7 @@ trait AssignmentTrait
         $data->assignmentId = $this->groupId;
         $this->dataId = $data->save();
 
-        $this->sendGroupNotification($this->groupId, new TaskCategory());
+       // $this->sendGroupNotification($this->groupId, new TaskCategory());
 
     }
 

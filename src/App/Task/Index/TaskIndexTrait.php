@@ -27,6 +27,7 @@ trait TaskIndexTrait
     abstract protected function getCreatedUserId();
 
 
+
     protected function sendTaskNotification() {
 
         $this->onDataRow();
