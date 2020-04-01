@@ -39,6 +39,7 @@ trait SearchIndexTrait
     }
 
 
+    /*
     protected function saveSearchContent($text='') {
 
 
@@ -51,7 +52,7 @@ trait SearchIndexTrait
 
 
 
-    }
+    }*/
 
 
 

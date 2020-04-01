@@ -28,7 +28,6 @@ abstract class AbstractTextContentForm extends AbstractContentForm
 
         $this->text = new BootstrapTextBox($this);
         $this->text->label = 'Text';
-        //$this->text->maxLength = 255;
 
         if (ProcessConfig::$debugMode) {
             $this->text->value = (new RandomText())->getText();

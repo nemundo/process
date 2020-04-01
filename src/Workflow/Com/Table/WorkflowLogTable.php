@@ -34,11 +34,11 @@ class WorkflowLogTable extends AbstractHtmlContainer
         return $this;
     }
 
-
+/*
     public function addContentTypeFilter(AbstractTreeContentType $contentType)
     {
 
-    }
+    }*/
 
 
     public function getContent()
@@ -84,9 +84,9 @@ class WorkflowLogTable extends AbstractHtmlContainer
             //$row->addText($contentType->getLog());
 
             $row->addText($contentType->getMessage());
-            $row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeLeadingZeroFormat(), true);
+            //$row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeLeadingZeroFormat(), true);
 
-            //$row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeWithSecondLeadingZeroFormat(), true);
+            $row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeWithSecondLeadingZeroFormat(), true);
 
 
             $row->addClickableSite($contentType->getViewSite());

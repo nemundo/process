@@ -89,7 +89,7 @@ trait ContentIndexTrait
     protected function saveContent()
     {
 
-        // wann braucht's das???
+        // wann braucht's das??? bei status ohne daten z.B. auftragliste
         if ($this->getDataId() == null) {
             $this->dataId = (new UniqueId())->getUniqueId();
         }
@@ -103,6 +103,23 @@ trait ContentIndexTrait
         $data->save();
 
     }
+
+
+
+    protected function updateContent()
+    {
+
+        $data = new Content();
+        $data->updateOnDuplicate=true;
+        $data->contentTypeId = $this->typeId;
+        $data->dataId = $this->getDataId();
+        $data->dateTime = $this->dateTime;
+        $data->userId = $this->userId;
+        $data->save();
+
+    }
+
+
 
 
     /*
