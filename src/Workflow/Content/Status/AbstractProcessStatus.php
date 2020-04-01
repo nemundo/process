@@ -4,29 +4,17 @@
 namespace Nemundo\Process\Workflow\Content\Status;
 
 use Nemundo\Process\App\Notification\Type\NotificationTrait;
-use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
-use Nemundo\Process\Content\Writer\TreeWriter;
 use Nemundo\Process\Group\Check\GroupRestrictedTrait;
-use Nemundo\Process\Log\Type\LogTrait;
 use Nemundo\Process\Workflow\Content\Form\StatusForm;
 
 
-// AbstractWorkflowStatus
 abstract class AbstractProcessStatus extends AbstractSequenceContentType
 {
 
     use ProcessStatusTrait;
-    //use LogTrait;
     use GroupRestrictedTrait;
     use NotificationTrait;
-
-    /**
-     * @var bool
-     */
-    //public $toggleView = false;
-
-
 
     public function __construct($dataId = null)
     {
@@ -78,8 +66,6 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
     }
 
 
-
-
     public function getSubject()
     {
         return $this->getParentContentType()->getSubject();
@@ -100,16 +86,11 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
     }
 
 
-
-
     public function getMessage()
     {
+
         return $this->getSubject();
-        // TODO: Implement getMessage() method.
+
     }
-
-
-
-
 
 }
