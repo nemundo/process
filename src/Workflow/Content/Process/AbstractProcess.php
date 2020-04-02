@@ -268,6 +268,12 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $dataRow = $this->getDataRow();
 
         $subject = $dataRow->workflowNumber . ' ' . $dataRow->subject;
+
+        if (!$this->getDataRow()->active) {
+            $subject.=' (Gelöscht)';
+        }
+
+
         return $subject;
 
     }
