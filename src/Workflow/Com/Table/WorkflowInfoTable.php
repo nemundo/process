@@ -7,13 +7,14 @@ namespace Nemundo\Process\Workflow\Com\Table;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Process\Group\Com\Span\GroupSpan;
 use Nemundo\Process\Workflow\Row\WorkflowCustomRowTrait;
+use Schleuniger\App\Verbesserung\Row\VerbesserungCustomRow;
 
 
 class WorkflowInfoTable extends AdminLabelValueTable
 {
 
     /**
-     * @var WorkflowCustomRowTrait
+     * @var WorkflowCustomRowTrait|VerbesserungCustomRow
      */
     public $workflowRow;
 
@@ -53,7 +54,6 @@ class WorkflowInfoTable extends AdminLabelValueTable
 
     public function addAssignment()
     {
-
         $span = new GroupSpan();
         $span->groupId = $this->workflowRow->assignmentId;
         $span->content = $this->workflowRow->assignment->group;
@@ -66,11 +66,7 @@ class WorkflowInfoTable extends AdminLabelValueTable
 
     public function addDeadline()
     {
-
-        $text = $this->workflowRow->getDeadline();
-
-        //$this->addLabelValue($this->workflowRow->model->deadline->label, $this->workflowRow->getDeadline());
-
+        $this->addLabelValue($this->workflowRow->model->deadline->label, $this->workflowRow->getDeadline());
         return $this;
     }
 

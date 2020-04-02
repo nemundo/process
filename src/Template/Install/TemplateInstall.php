@@ -42,6 +42,7 @@ use Nemundo\Process\Template\Script\TemplateTestScript;
 use Nemundo\Process\Template\Status\Reopen\ReopenWorkflowProcessStatus;
 use Nemundo\Process\Template\Status\SubjectChange\SubjectChangeProcessStatus;
 use Nemundo\Process\Template\Status\WorkflowDelete\WorkflowDeleteStatus;
+use Nemundo\Process\Template\Status\WorkflowRestore\WorkflowRestoreStatus;
 use Nemundo\Project\Install\AbstractInstall;
 
 class TemplateInstall extends AbstractInstall
@@ -75,12 +76,14 @@ class TemplateInstall extends AbstractInstall
             ->addContentType(new ChildRemoveContentType())
             ->addContentType(new ReopenWorkflowProcessStatus())
             ->addContentType(new FileListContentType())
-            ->addContentType(new UrlContentType());
+            ->addContentType(new UrlContentType())
+        ->addContentType(new WorkflowRestoreStatus());
 
         $setup->addContentType(new UserContentType());
         $setup->addContentType(new SourceAddContentType());
         $setup->addContentType(new SourceRemoveContentType());
         $setup->addContentType(new WorkflowDeleteStatus());
+
         $setup->addContentType(new SubjectChangeProcessStatus());
         $setup->addContentType(new \Nemundo\Process\Template\Status\DeadlineChange\DeadlineChangeProcessStatus());
 

@@ -6,6 +6,7 @@ namespace Nemundo\Process\Tree\Type;
 
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Db\Sql\Order\SortOrder;
+use Nemundo\Process\App\Notification\Type\NotificationTrait;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\Tree\Tree;
 use Nemundo\Process\Content\Data\Tree\TreeCount;
@@ -120,7 +121,7 @@ trait TreeTypeTrait
 
     public function getChildContentTypeList() {
 
-        /** @var AbstractTreeContentType[] $list */
+        /** @var AbstractTreeContentType[]|NotificationTrait[] $list */
         $list = [];
 
         foreach ($this->getChild() as $contentCustomRow) {
@@ -128,7 +129,6 @@ trait TreeTypeTrait
         }
 
         return $list;
-
 
     }
 

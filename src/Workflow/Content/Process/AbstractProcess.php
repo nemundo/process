@@ -25,6 +25,8 @@ use Nemundo\Process\Content\Type\AbstractSequenceContentType;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Group\Check\GroupRestrictedTrait;
 use Nemundo\Process\Log\Type\LogTrait;
+use Nemundo\Process\Template\Status\WorkflowDelete\WorkflowDeleteStatus;
+use Nemundo\Process\Template\Status\WorkflowRestore\WorkflowRestoreStatus;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Content\View\AbstractProcessView;
 use Nemundo\Process\Workflow\Content\View\ProcessView;
@@ -134,7 +136,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $this->saveTaskIndex();
         $this->saveDocumentIndex();
-        //$this->saveCalendarIndex();
         $this->saveNotificationIndex();
 
     }
@@ -155,14 +156,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     {
 
 
-        //parent::saveType();
-
-        // gibt es update bei process?
-
-        //if ($this->createMode) {
-
-        //$this->saveContentBefore();
-
         $this->onCreate();
 
         $update = new ModelUpdate();
@@ -174,7 +167,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $update->typeValueList->setModelValue($update->model->dateTime, $this->dateTime->getIsoDateTimeFormat());
         $update->typeValueList->setModelValue($update->model->userId, $this->userId);
         $update->updateById($this->dataId);
-
 
         $this->saveContent();
         $this->saveTree();
@@ -195,7 +187,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $this->saveIndex();
         $this->saveSearchIndex();
-
 
     }
 
@@ -241,17 +232,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
-    /*
-        public function deleteType()
-        {
-
-            parent::deleteType();
-            (new WorkflowDelete())->deleteById($this->getWorkflowId());
-            //$this->deleteChild();
-
-        }*/
-
-
     /**
      * @return \Nemundo\Model\Row\AbstractModelDataRow|ToDoRow
      */
@@ -282,7 +262,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public function getMessage()
     {
         return $this->getSubject();
-        // TODO: Implement getMessage() method.
     }
 
 
@@ -301,6 +280,12 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     protected function getDeadline()
     {
         return $this->getDataRow()->deadline;
+    }
+
+
+    protected function isActive()
+    {
+        return $this->getDataRow()->active;
     }
 
     protected function isTaskClosed()
@@ -361,32 +346,49 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $update->typeValueList->setModelValue($update->model->workflowClosed, true);
         $update->updateById($this->dataId);
 
-        /*
-        $update = new AssignmentIndexUpdate();
-        $update->closed=true;
-        $update->filter->andEqual($update->model->contentId,$this->getContentId());
-        $update->update();*/
-
-
     }
 
 
     protected function onActive()
     {
+
+        $status = new WorkflowRestoreStatus();
+        $status->parentId = $this->getContentId();
+        $status->saveType();
+
         $update = new ModelUpdate();
         $update->model = $this->workflowModel;
         $update->typeValueList->setModelValue($update->model->active, true);
         $update->updateById($this->dataId);
+
+        $this->saveIndex();
 
     }
 
 
     protected function onInactive()
     {
+
+        $status = new WorkflowDeleteStatus();
+        $status->parentId = $this->getContentId();
+        $status->saveType();
+
+        //(new Debug())->write('start');
+
         $update = new ModelUpdate();
         $update->model = $this->workflowModel;
         $update->typeValueList->setModelValue($update->model->active, false);
         $update->updateById($this->dataId);
+
+        $this->deleteNotification();
+        foreach ($this->getChildContentTypeList() as $child) {
+            //(new Debug())->write($child->typeLabel);
+            $child->deleteNotification();
+        }
+
+        //exit;
+
+        $this->saveIndex();
 
     }
 
@@ -449,7 +451,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public function closeAssignment()
     {
 
-
         $update = new ModelUpdate();
         $update->model = $this->workflowModel;
         $update->typeValueList->setModelValue($update->model->assignmentId, 0);
@@ -479,21 +480,18 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
-    // changeProcessStatus
     public function changeStatus(AbstractContentType $status)
     {
 
         $update = new ModelUpdate();
         $update->model = $this->workflowModel;
-        //$update->typeValueList->setModelValue($update->model->statusId, $status->typeId);
         $update->typeValueList->setModelValue($update->model->statusId, $status->getContentId());
-
-        // data id
         $update->updateById($this->dataId);
 
         return $this;
 
     }
+
 
     public function changeSubject($subject)
     {
@@ -503,18 +501,17 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $update->typeValueList->setModelValue($update->model->subject, $subject);
         $update->updateById($this->dataId);
 
-
-        $this->saveIndex();  //onIndex();
-
+        $this->saveIndex();
 
     }
 
 
+    /*
     public function changeAssignmentByGroup()
     {
 
         // by group type
-    }
+    }*/
 
 
     public function changeAssignment($groupId = null)
@@ -617,10 +614,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $view = new $this->processViewClass($parent);
         $view->contentType = $this;
 
-        //if (!$this->createMode) {
-        //$view->dataId = $this->dataId;
-        //}
-
         return $view;
 
     }
@@ -635,7 +628,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
             /** @var AbstractContentView $view */
             $view = new $this->baseViewClass($parent);
-            //$view->dataId = $this->dataId;
             $view->contentType = $this;
 
         } else {

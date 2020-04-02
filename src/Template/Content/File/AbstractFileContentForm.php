@@ -35,7 +35,7 @@ abstract class AbstractFileContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        $this->contentType->fileRequest = $this->file->getFileRequest();
+        $this->contentType->file->fromFileRequest($this->file->getFileRequest());
         $this->contentType->saveType();
 
     }

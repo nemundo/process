@@ -1,18 +1,18 @@
 <?php
 
-namespace Nemundo\Process\Template\Status\WorkflowDelete;
+namespace Nemundo\Process\Template\Status\WorkflowRestore;
 
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
-class WorkflowDeleteStatus extends AbstractProcessStatus
+class WorkflowRestoreStatus extends AbstractProcessStatus
 {
 
     protected function loadContentType()
     {
-        $this->typeLabel = 'Löschen';
-        $this->typeId = 'ed86e502-5296-4e2b-8512-77230d4f4a71';
+        $this->typeLabel = 'Wiederherstellen';
+        $this->typeId = '09b8817a-926b-4c7c-8c11-2a2a4f77c1f6';
         //$this->closeWorkflow = true;
     }
 
@@ -21,11 +21,11 @@ class WorkflowDeleteStatus extends AbstractProcessStatus
     protected function onCreate()
     {
 
-        $process = $this->getParentProcess();
+        //$process = $this->getParentProcess();
         //$process->cancelAssignment();
-        $process->setInactive();
+        //$process->setActive();
 
-    }
+    }*/
 
 
     /*
@@ -43,8 +43,8 @@ class WorkflowDeleteStatus extends AbstractProcessStatus
     public function getMessage()
     {
 
-        $subject[LanguageCode::EN] = 'Workflow was deleted';
-        $subject[LanguageCode::DE] = 'Workflow wurde gelöscht';
+        $subject[LanguageCode::EN] = 'Workflow was restored';
+        $subject[LanguageCode::DE] = 'Workflow wurde wiederhergestellt';
 
         return (new Translation())->getText($subject);
 

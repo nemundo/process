@@ -58,12 +58,14 @@ abstract class AbstractTreeContentType extends AbstractContentType
     public function setActive()
     {
         $this->onActive();
+        $this->saveIndex();
     }
 
 
     public function setInactive()
     {
         $this->onInactive();
+        $this->saveIndex();
     }
 
 
@@ -76,5 +78,11 @@ abstract class AbstractTreeContentType extends AbstractContentType
     {
 
     }
+
+    protected function isActive()
+    {
+        return true;
+    }
+
 
 }
