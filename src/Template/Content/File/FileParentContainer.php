@@ -22,6 +22,8 @@ use Nemundo\Workflow\App\WorkflowTemplate\Com\WorkflowFancyboxHyperlink;
 class FileParentContainer extends AbstractParentContainer
 {
 
+    public $showDeleteButton = true;
+
     public function getContent()
     {
 
@@ -30,7 +32,10 @@ class FileParentContainer extends AbstractParentContainer
         $header = new TableHeader($table);
         $header->addText('Dokument');
         $header->addText('Ersteller');
+
+        if ($this->showDeleteButton) {
         $header->addEmpty();
+        }
 
         $fileReader = new TemplateFileReader();
         $fileReader->model->loadContent();
@@ -62,12 +67,14 @@ class FileParentContainer extends AbstractParentContainer
             $ersteller = $documentRow->content->user->login . ' ' . $documentRow->content->dateTime->getShortDateLeadingZeroFormat();
             $row->addText($ersteller, true);
 
+            if ($this->showDeleteButton) {
             if ($documentRow->active) {
                 $site = clone(FileInactiveSite::$site);
                 $site->addParameter(new ParentParameter($this->parentId));
                 $site->addParameter(new FileParameter($documentRow->id));
                 $row->addIconSite($site);
 
+            }
             }
 
         }

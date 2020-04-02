@@ -3,6 +3,7 @@
 
 namespace Nemundo\Process\Workflow\Content\Status;
 
+use Nemundo\Core\Language\Translation;
 use Nemundo\Process\App\Notification\Type\NotificationTrait;
 use Nemundo\Process\Content\Type\AbstractSequenceContentType;
 use Nemundo\Process\Group\Check\GroupRestrictedTrait;
@@ -98,7 +99,8 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
     public function getMessage()
     {
 
-        return $this->getSubject();
+        $message = (new Translation())->getText($this->typeLabel);
+        return $message;
 
     }
 
