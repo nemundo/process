@@ -3,6 +3,7 @@
 namespace Nemundo\Process\App\Notification\Type;
 
 
+use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Package\ResponsiveMail\ResponsiveActionMailMessage;
 use Nemundo\Process\App\Favorite\Reader\FavoriteUserReader;
@@ -11,6 +12,7 @@ use Nemundo\Process\App\Notification\Category\InformationCategory;
 use Nemundo\Process\App\Notification\Data\Notification\Notification;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationDelete;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationUpdate;
+use Nemundo\Process\App\Notification\NotificationConfig;
 use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Group\Type\GroupContentType;
 use Nemundo\Process\Template\Content\User\UserContentType;
@@ -27,7 +29,7 @@ trait NotificationTrait
         $group = new GroupContentType();
         $group->fromGroupId($groupId);
         foreach ($group->getUserIdList() as $userId) {
-            $this->sendUserNotification($userId,$category);
+            $this->sendUserNotification($userId, $category);
         }
 
     }
@@ -41,7 +43,7 @@ trait NotificationTrait
         }
 
         $data = new Notification();
-        $data->ignoreIfExists=true;
+        $data->ignoreIfExists = true;
         $data->read = false;
         $data->archive = false;
         $data->categoryId = $category->id;
@@ -69,6 +71,18 @@ trait NotificationTrait
             //$mail->actionLabel[LanguageCode::EN] = 'ViewAnsehen';
             $mail->actionLabel = 'Ansehen';
             $mail->actionUrlSite = $this->getViewSite();
+
+
+            if (NotificationConfig::$mailSettingSite !== null) {
+
+                $hyperlink = new UrlHyperlink();
+                $hyperlink->url = NotificationConfig::$mailSettingSite->getUrlWithDomain();
+                $hyperlink->content = NotificationConfig::$mailSettingSite->title;
+
+                $mail->afterActionText = $hyperlink->getContent();
+
+            }
+
             $mail->sendMail();
 
         }
@@ -100,8 +114,8 @@ trait NotificationTrait
     }
 
 
-
-    public function sendFavoriteNotification(AbstractContentType $contentType) {
+    public function sendFavoriteNotification(AbstractContentType $contentType)
+    {
 
 
         foreach ((new FavoriteUserReader($contentType))->getUserList() as $userId) {
@@ -110,7 +124,6 @@ trait NotificationTrait
 
 
     }
-
 
 
 }
