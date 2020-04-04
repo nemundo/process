@@ -9,7 +9,7 @@
             "model_id": "da2231a9-63d6-49d5-96b7-346d62d5e9e4",
             "label": "Category",
             "class_name": "Category",
-            "table_name": "notification_category",
+            "table_name": "process_notification_category",
             "namespace": "Nemundo\\Process\\App\\Notification\\Data\\Category",
             "row_class_name": "",
             "primary_index": "number_id",

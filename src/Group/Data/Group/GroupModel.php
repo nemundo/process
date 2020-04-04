@@ -22,16 +22,16 @@ public $groupTypeId;
 public $groupType;
 
 protected function loadModel() {
-$this->tableName = "group_group";
-$this->aliasTableName = "group_group";
+$this->tableName = "process_group";
+$this->aliasTableName = "process_group";
 $this->label = "Group";
 
 $this->primaryIndex = new \Nemundo\Db\Index\TextIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
-$this->id->tableName = "group_group";
+$this->id->tableName = "process_group";
 $this->id->fieldName = "id";
-$this->id->aliasFieldName = "group_group_id";
+$this->id->aliasFieldName = "process_group_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
 $this->id->visible->form = false;
@@ -41,17 +41,17 @@ $this->id->visible->form = false;
 
 
 $this->group = new \Nemundo\Model\Type\Text\TextType($this);
-$this->group->tableName = "group_group";
+$this->group->tableName = "process_group";
 $this->group->fieldName = "group";
-$this->group->aliasFieldName = "group_group_group";
+$this->group->aliasFieldName = "process_group_group";
 $this->group->label = "Group";
 $this->group->allowNullValue = false;
 $this->group->length = 255;
 
 $this->groupTypeId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
-$this->groupTypeId->tableName = "group_group";
+$this->groupTypeId->tableName = "process_group";
 $this->groupTypeId->fieldName = "group_type";
-$this->groupTypeId->aliasFieldName = "group_group_group_type";
+$this->groupTypeId->aliasFieldName = "process_group_group_type";
 $this->groupTypeId->label = "Group Type";
 $this->groupTypeId->allowNullValue = false;
 
@@ -62,10 +62,10 @@ $index->addType($this->groupTypeId);
 }
 public function loadGroupType() {
 if ($this->groupType == null) {
-$this->groupType = new \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType($this, "group_group_group_type");
-$this->groupType->tableName = "group_group";
+$this->groupType = new \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType($this, "process_group_group_type");
+$this->groupType->tableName = "process_group";
 $this->groupType->fieldName = "group_type";
-$this->groupType->aliasFieldName = "group_group_group_type";
+$this->groupType->aliasFieldName = "process_group_group_type";
 $this->groupType->label = "Group Type";
 }
 return $this;

@@ -24,7 +24,7 @@ public $setupStatus;
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = GroupTypeModel::class;
-$this->externalTableName = "group_group_type";
+$this->externalTableName = "process_group_type";
 $this->aliasTableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id = new \Nemundo\Model\Type\Id\IdType();
 $this->id->fieldName = "id";

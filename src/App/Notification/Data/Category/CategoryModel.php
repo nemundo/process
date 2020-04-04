@@ -12,16 +12,16 @@ public $id;
 public $category;
 
 protected function loadModel() {
-$this->tableName = "notification_category";
-$this->aliasTableName = "notification_category";
+$this->tableName = "process_notification_category";
+$this->aliasTableName = "process_notification_category";
 $this->label = "Category";
 
 $this->primaryIndex = new \Nemundo\Db\Index\NumberIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
-$this->id->tableName = "notification_category";
+$this->id->tableName = "process_notification_category";
 $this->id->fieldName = "id";
-$this->id->aliasFieldName = "notification_category_id";
+$this->id->aliasFieldName = "process_notification_category_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
 $this->id->visible->form = false;
@@ -30,9 +30,9 @@ $this->id->visible->view = false;
 $this->id->visible->form = false;
 
 $this->category = new \Nemundo\Model\Type\Text\TextType($this);
-$this->category->tableName = "notification_category";
+$this->category->tableName = "process_notification_category";
 $this->category->fieldName = "category";
-$this->category->aliasFieldName = "notification_category_category";
+$this->category->aliasFieldName = "process_notification_category_category";
 $this->category->label = "Category";
 $this->category->allowNullValue = false;
 $this->category->length = 50;

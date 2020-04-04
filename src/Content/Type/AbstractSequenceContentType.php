@@ -3,10 +3,6 @@
 
 namespace Nemundo\Process\Content\Type;
 
-
-use Nemundo\Process\Content\Data\ContentStatus\ContentStatus;
-use Nemundo\Process\Content\Data\ContentStatus\ContentStatusReader;
-
 abstract class AbstractSequenceContentType extends AbstractTreeContentType
 {
 

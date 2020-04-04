@@ -80,10 +80,20 @@ trait TreeTypeTrait
     }
 
 
-    // braucht es diese Function???
+    // braucht es diese Function???, ja zum anhängen
     public function addChild($childId)
     {
 
+        $writer = new TreeWriter();
+        $writer->parentId = $this->getContentId();
+        $writer->childId=$childId;
+        $writer->write();
+
+        $this->saveIndex();
+
+
+
+        /*
         $value = new TreeValue();
         $value->field = $value->model->itemOrder;
         $value->filter->andEqual($value->model->parentId, $this->getContentId());
@@ -98,7 +108,7 @@ trait TreeTypeTrait
         $data->parentId = $this->getContentId();
         $data->childId = $childId;
         $data->itemOrder = $itemOrder;
-        $data->save();
+        $data->save();*/
 
 
     }

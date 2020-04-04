@@ -91,6 +91,8 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     protected function onIndex()
     {
 
+        parent::onIndex();
+
         /*if ($this->searchable) {
             $groupRow = $this->getGroupDataRow();
             $this->addSearchWord($groupRow->group);
@@ -173,12 +175,7 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     public function getSubject()
     {
 
-
         return $this->getGroupLabel();
-
-        //parent::getSubject();
-
-        //return $this->getGroupDataRow()->group;
 
     }
 
@@ -199,7 +196,6 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
 
     public function removeUser($userId)
     {
-
 
         $delete = new GroupUserDelete();
         $delete->filter->andEqual($delete->model->groupId, $this->dataId);
@@ -265,7 +261,6 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     public function existItem()
     {
 
-
         $value = false;
 
         $count = new GroupCount();
@@ -276,8 +271,6 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
 
         return $value;
 
-
     }
-
 
 }

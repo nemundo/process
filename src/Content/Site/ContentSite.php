@@ -11,6 +11,7 @@ use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Log\LogMessage;
 use Nemundo\Core\Type\Number\Number;
 use Nemundo\Db\Filter\Filter;
@@ -130,6 +131,10 @@ class ContentSite extends AbstractSite
             $btn->site->addParameter($contentTypeParameter);
 
         }
+
+        //$hasValue=$contentIdTextBox->hasValue();
+        //(new Debug())->write('hasValue=');
+        //(new Debug())->write($hasValue);
 
         if ($contentIdTextBox->hasValue()) {
             $filter->andEqual($model->id,$contentIdTextBox->getValue());

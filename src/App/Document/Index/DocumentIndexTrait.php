@@ -12,7 +12,7 @@ trait DocumentIndexTrait
 {
 
     // auflistung unter new
-    public $showNewButton=true;
+    public $showNewButton = true;
 
 
     abstract protected function isTaskClosed();
@@ -20,13 +20,17 @@ trait DocumentIndexTrait
     protected function saveDocumentIndex()
     {
 
-        $data = new Document();
-        $data->updateOnDuplicate = true;
-        $data->documentTypeId = $this->typeId;
-        $data->contentId = $this->getContentId();
-        $data->title = $this->getSubject();
-        $data->closed = $this->isTaskClosed();
-        $data->save();
+        if ($this->isActive()) {
+            $data = new Document();
+            $data->updateOnDuplicate = true;
+            $data->documentTypeId = $this->typeId;
+            $data->contentId = $this->getContentId();
+            $data->title = $this->getSubject();
+            $data->closed = $this->isTaskClosed();
+            $data->save();
+        } else {
+            $this->deleteDocumentIndex();
+        }
 
     }
 

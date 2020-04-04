@@ -62,16 +62,19 @@ class UserGroupSite extends AbstractSite
 
             $groupUserReader = new GroupUserReader();
             $groupUserReader->model->loadGroup();
+            $groupUserReader->model->group->loadGroupType();
             $groupUserReader->filter->andEqual($groupUserReader->model->userId, $userId);
 
             $table = new AdminTable($layout->col2);
 
             $header = new TableHeader($table);
             $header->addText($groupUserReader->model->group->label);
+            $header->addText($groupUserReader->model->group->groupType->label);
 
             foreach ($groupUserReader->getData() as $groupUserRow) {
                 $row = new TableRow($table);
                 $row->addText($groupUserRow->group->group);
+                $row->addText($groupUserRow->group->groupType->contentType);
             }
 
             $form = new UserGroupForm($layout->col2);

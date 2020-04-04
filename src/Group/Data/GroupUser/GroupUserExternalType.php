@@ -29,7 +29,7 @@ public $user;
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = GroupUserModel::class;
-$this->externalTableName = "group_group_user";
+$this->externalTableName = "process_group_user";
 $this->aliasTableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id = new \Nemundo\Model\Type\Id\IdType();
 $this->id->fieldName = "id";

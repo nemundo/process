@@ -77,6 +77,8 @@ class WorkflowLogTable extends AbstractHtmlContainer
             /** @var AbstractProcessStatus $contentType */
             $contentType = $treeRow->child->getContentType();
 
+            //if ($contentType->isActive()) {
+
             $row = new BootstrapClickableTableRow($table);
             //$row->addText($contentType->getSubject());
             //$row->addText($contentType->getClassName());
@@ -90,6 +92,8 @@ class WorkflowLogTable extends AbstractHtmlContainer
 
 
             $row->addClickableSite($contentType->getViewSite());
+
+            //}
 
         }
 

@@ -13,6 +13,8 @@ abstract class AbstractAssignmentProcessStatus extends AbstractProcessStatus
 
     use AssignmentTrait;
 
+
+    /*
     public function __construct($dataId = null)
     {
 
@@ -20,6 +22,6 @@ abstract class AbstractAssignmentProcessStatus extends AbstractProcessStatus
         //$this->deadline=new Date();
 
         parent::__construct($dataId);
-    }
+    }*/
 
 }
