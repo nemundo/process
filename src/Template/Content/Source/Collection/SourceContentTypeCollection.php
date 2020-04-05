@@ -25,7 +25,7 @@ class SourceContentTypeCollection extends AbstractContentTypeCollection
         $this->addContentType(new EcoProcess());
         $this->addContentType(new ProjektContentType());
         $this->addContentType(new AufgabenlisteContentType());
-        $this->addContentType(new SitzungContentType());
+        //$this->addContentType(new SitzungContentType());
 
     }
 

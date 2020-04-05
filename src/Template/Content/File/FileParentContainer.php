@@ -34,7 +34,7 @@ class FileParentContainer extends AbstractParentContainer
         $header->addText('Ersteller');
 
         if ($this->showDeleteButton) {
-        $header->addEmpty();
+            $header->addEmpty();
         }
 
         $fileReader = new TemplateFileReader();
@@ -68,13 +68,14 @@ class FileParentContainer extends AbstractParentContainer
             $row->addText($ersteller, true);
 
             if ($this->showDeleteButton) {
-            if ($documentRow->active) {
-                $site = clone(FileInactiveSite::$site);
-                $site->addParameter(new ParentParameter($this->parentId));
-                $site->addParameter(new FileParameter($documentRow->id));
-                $row->addIconSite($site);
-
-            }
+                if ($documentRow->active) {
+                    $site = clone(FileInactiveSite::$site);
+                    $site->addParameter(new ParentParameter($this->parentId));
+                    $site->addParameter(new FileParameter($documentRow->id));
+                    $row->addIconSite($site);
+                } else {
+                    $row->addEmpty();
+                }
             }
 
         }

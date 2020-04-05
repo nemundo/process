@@ -40,9 +40,8 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     protected function getGroupLabel()
     {
 
-        return $this->group;  // $this->typeLabel;
+        return $this->group;
 
-        // TODO: Implement getGroupLabel() method.
     }
 
 

@@ -8,6 +8,8 @@ use Nemundo\Process\Group\Data\Group\Group;
 use Nemundo\Process\Group\Data\Group\GroupDelete;
 use Nemundo\Process\Group\Data\Group\GroupId;
 use Nemundo\Process\Group\Data\GroupUser\GroupUser;
+use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
+use Nemundo\User\Reader\UserCustomRow;
 
 trait GroupIndexTrait
 {
@@ -88,6 +90,28 @@ trait GroupIndexTrait
         return $this->groupIdTmp;
 
     }
+
+
+
+    public function getUserList()
+    {
+
+
+         /** @var UserCustomRow[] $list */
+         $list = [];
+
+         $reader = new GroupUserReader();
+         $reader->model->loadUser();
+         $reader->filter->andEqual($reader->model->groupId, $this->getGroupId());
+         $reader->addOrder($reader->model->user->login);
+         foreach ($reader->getData() as $groupUserRow) {
+             $list[] = $groupUserRow->user;
+         }
+
+         return $list;
+
+     }
+
 
 
 }
