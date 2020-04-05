@@ -12,13 +12,13 @@ use Nemundo\Process\Group\Script\GroupCheckScript;
 use Nemundo\Process\Group\Script\GroupCleanScript;
 use Nemundo\Process\Group\Script\GroupTestScript;
 use Nemundo\Process\Group\Setup\GroupSetup;
-use Nemundo\Process\Group\Type\AppUserGroupType;
+
 use Nemundo\Process\Group\Type\GroupContentType;
-use Nemundo\Process\Group\Type\UsergroupGroupType;
 use Nemundo\Process\Group\Type\UserGroupType;
 use Nemundo\Project\Install\AbstractInstall;
 use Nemundo\User\Data\User\UserReader;
 use Nemundo\User\Data\Usergroup\UsergroupReader;
+use Schleuniger\App\Org\Content\Geschaeftsbereich\GeschaeftsbereichContentType;
 
 
 class GroupInstall extends AbstractInstall
@@ -39,6 +39,11 @@ class GroupInstall extends AbstractInstall
         $setup=new ScriptSetup();
         $setup->addScript(new GroupCheckScript());
         $setup->addScript(new GroupTestScript());
+
+
+        (new GroupSetup())
+            ->addGroupType(new GeschaeftsbereichContentType());
+
 
         // muss wieder raus !!!
         //(new AppUserGroupType())->saveType();

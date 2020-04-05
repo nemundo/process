@@ -4,27 +4,50 @@
 namespace Nemundo\Process\Group\Type;
 
 
-use Nemundo\Core\Debug\Debug;
-use Nemundo\Core\Directory\TextDirectory;
-use Nemundo\Core\Random\UniqueId;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
-use Nemundo\Process\Group\Content\GroupContentForm;
-use Nemundo\Process\Group\Content\GroupContentView;
-use Nemundo\Process\Group\Data\Group\Group;
-use Nemundo\Process\Group\Data\Group\GroupCount;
-use Nemundo\Process\Group\Data\Group\GroupDelete;
-use Nemundo\Process\Group\Data\Group\GroupReader;
-use Nemundo\Process\Group\Data\Group\GroupUpdate;
-use Nemundo\Process\Group\Data\GroupUser\GroupUser;
-use Nemundo\Process\Group\Data\GroupUser\GroupUserDelete;
-use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
-use Nemundo\Process\Group\Parameter\GroupParameter;
-use Nemundo\Process\Group\Site\GroupContentViewSite;
-use Nemundo\User\Reader\UserCustomRow;
 
 abstract class AbstractGroupContentType extends AbstractTreeContentType
 {
 
+    use GroupIndexTrait;
+
+
+    protected $group;
+
+
+    public function __construct($dataId = null)
+    {
+
+        parent::__construct($dataId);
+        $this->loadGroup();
+
+    }
+
+    protected function loadGroup() {
+
+    }
+
+
+    protected function onIndex()
+    {
+
+        parent::onIndex();
+        $this->saveGroupIndex();
+
+    }
+
+
+    protected function getGroupLabel()
+    {
+
+        return $this->group;  // $this->typeLabel;
+
+        // TODO: Implement getGroupLabel() method.
+    }
+
+
+
+    /*
     protected $group;
 
     protected $groupId;
@@ -32,9 +55,10 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
     /**
      * @var bool
      */
-    protected $searchable = true;
+    //protected $searchable = true;
 
 
+    /*
     public function __construct($dataId = null)
     {
 
@@ -98,179 +122,179 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
             $this->addSearchWord($groupRow->group);
         }*/
 
-    }
+    //}
 
 
     // nach public deleteType
-    protected function onDelete()
-    {
+    /* protected function onDelete()
+     {
 
-        if ($this->groupId == null) {
-            (new Debug())->write('no group id');
-        }
+         if ($this->groupId == null) {
+             (new Debug())->write('no group id');
+         }
 
-        //(new GroupDelete())->deleteById($this->dataId);
-        (new GroupDelete())->deleteById($this->groupId);
+         //(new GroupDelete())->deleteById($this->dataId);
+         (new GroupDelete())->deleteById($this->groupId);
 
-    }
-
-
-    protected function onActive()
-    {
-        $update = new GroupUpdate();
-        $update->active = true;
-        $update->updateById($this->dataId);
-    }
+     }
 
 
-    protected function onInactive()
-    {
-        $update = new GroupUpdate();
-        $update->active = false;
-        $update->updateById($this->dataId);
-
-    }
-
-
-    protected function getGroupLabel()
-    {
-
-        $group = $this->group;
-        if ($group == null) {
-            $group = $this->getClassName();
-        }
-
-        return $group;
-
-    }
+     protected function onActive()
+     {
+         $update = new GroupUpdate();
+         $update->active = true;
+         $update->updateById($this->dataId);
+     }
 
 
-    public function getGroupId()
-    {
+     protected function onInactive()
+     {
+         $update = new GroupUpdate();
+         $update->active = false;
+         $update->updateById($this->dataId);
 
-        if ($this->groupId == null) {
-            $this->groupId = (new UniqueId())->getUniqueId();
-        }
-
-        return $this->groupId;
-
-    }
+     }
 
 
-    public function getGroupDataRow()
-    {
+     protected function getGroupLabel()
+     {
 
-        if ($this->groupId == null) {
-            (new Debug())->write('no group id');
-        }
+         $group = $this->group;
+         if ($group == null) {
+             $group = $this->getClassName();
+         }
 
-        $reader = new GroupReader();
-        $reader->model->loadGroupType();
-        $row = $reader->getRowById($this->groupId);
+         return $group;
 
-        return $row;
-    }
+     }
 
 
-    public function getSubject()
-    {
+     public function getGroupId()
+     {
 
-        return $this->getGroupLabel();
+         if ($this->groupId == null) {
+             $this->groupId = (new UniqueId())->getUniqueId();
+         }
 
-    }
+         return $this->groupId;
 
-
-    public function addUser($userId)
-    {
-
-        $data = new GroupUser();
-        $data->ignoreIfExists = true;
-        $data->groupId = $this->groupId;
-        $data->userId = $userId;
-        $data->save();
-
-        return $this;
-
-    }
+     }
 
 
-    public function removeUser($userId)
-    {
+     public function getGroupDataRow()
+     {
 
-        $delete = new GroupUserDelete();
-        $delete->filter->andEqual($delete->model->groupId, $this->dataId);
-        $delete->filter->andEqual($delete->model->userId, $userId);
-        $delete->delete();
+         if ($this->groupId == null) {
+             (new Debug())->write('no group id');
+         }
 
-        return $this;
+         $reader = new GroupReader();
+         $reader->model->loadGroupType();
+         $row = $reader->getRowById($this->groupId);
 
-    }
-
-
-    public function getUserList()
-    {
-
-        /** @var UserCustomRow[] $list */
-        $list = [];
-
-        $reader = new GroupUserReader();
-        $reader->model->loadUser();
-        $reader->filter->andEqual($reader->model->groupId, $this->getGroupId());
-        $reader->addOrder($reader->model->user->login);
-        foreach ($reader->getData() as $groupUserRow) {
-            $list[] = $groupUserRow->user;
-        }
-
-        return $list;
-
-    }
+         return $row;
+     }
 
 
-    public function getUserIdList()
-    {
+     public function getSubject()
+     {
 
-        $list = [];
+         return $this->getGroupLabel();
 
-        $reader = new GroupUserReader();
-        $reader->model->loadUser();
-        $reader->filter->andEqual($reader->model->groupId, $this->getGroupId());
-
-        foreach ($reader->getData() as $groupUserRow) {
-            $list[] = $groupUserRow->userId;
-        }
-
-        return $list;
-
-    }
+     }
 
 
-    public function getUserListText()
-    {
+     public function addUser($userId)
+     {
 
-        $text = new TextDirectory();
+         $data = new GroupUser();
+         $data->ignoreIfExists = true;
+         $data->groupId = $this->groupId;
+         $data->userId = $userId;
+         $data->save();
 
-        foreach ($this->getUserList() as $userRow) {
-            $text->addValue($userRow->displayName);
-        }
+         return $this;
 
-        return $text->getTextWithSeperator();
-
-    }
+     }
 
 
-    public function existItem()
-    {
+     public function removeUser($userId)
+     {
 
-        $value = false;
+         $delete = new GroupUserDelete();
+         $delete->filter->andEqual($delete->model->groupId, $this->dataId);
+         $delete->filter->andEqual($delete->model->userId, $userId);
+         $delete->delete();
 
-        $count = new GroupCount();
-        $count->filter->andEqual($count->model->id, $this->getGroupId());
-        if ($count->getCount() > 0) {
-            $value = true;
-        }
+         return $this;
 
-        return $value;
+     }
 
-    }
+
+     public function getUserList()
+     {
+
+         /** @var UserCustomRow[] $list */
+    /*     $list = [];
+
+         $reader = new GroupUserReader();
+         $reader->model->loadUser();
+         $reader->filter->andEqual($reader->model->groupId, $this->getGroupId());
+         $reader->addOrder($reader->model->user->login);
+         foreach ($reader->getData() as $groupUserRow) {
+             $list[] = $groupUserRow->user;
+         }
+
+         return $list;
+
+     }
+
+
+     public function getUserIdList()
+     {
+
+         $list = [];
+
+         $reader = new GroupUserReader();
+         $reader->model->loadUser();
+         $reader->filter->andEqual($reader->model->groupId, $this->getGroupId());
+
+         foreach ($reader->getData() as $groupUserRow) {
+             $list[] = $groupUserRow->userId;
+         }
+
+         return $list;
+
+     }
+
+
+     public function getUserListText()
+     {
+
+         $text = new TextDirectory();
+
+         foreach ($this->getUserList() as $userRow) {
+             $text->addValue($userRow->displayName);
+         }
+
+         return $text->getTextWithSeperator();
+
+     }
+
+
+     public function existItem()
+     {
+
+         $value = false;
+
+         $count = new GroupCount();
+         $count->filter->andEqual($count->model->id, $this->getGroupId());
+         if ($count->getCount() > 0) {
+             $value = true;
+         }
+
+         return $value;
+
+     }*/
 
 }

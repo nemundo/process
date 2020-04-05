@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Group\Com;
 
 
+use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Group\Type\AbstractGroupContentType;
 
 trait GroupContentTypeTrait
@@ -13,7 +14,8 @@ trait GroupContentTypeTrait
     private $groupContentTypeList = [];
 
 
-    public function addGroupType(AbstractGroupContentType $groupContentType)
+    //public function addGroupType(AbstractGroupContentType $groupContentType)
+     public function addGroupType(AbstractContentType $groupContentType)
     {
 
         $this->groupContentTypeList[] = $groupContentType;

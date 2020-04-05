@@ -7,7 +7,7 @@ class GroupUserModel extends \Nemundo\Model\Definition\Model\AbstractModel {
 public $id;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalIdType
 */
 public $groupId;
 
@@ -44,7 +44,7 @@ $this->id->visible->table = false;
 $this->id->visible->view = false;
 $this->id->visible->form = false;
 
-$this->groupId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->groupId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->groupId->tableName = "process_group_user";
 $this->groupId->fieldName = "group";
 $this->groupId->aliasFieldName = "process_group_user_group";

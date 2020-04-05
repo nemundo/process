@@ -12,7 +12,7 @@
             "table_name": "process_group",
             "namespace": "Nemundo\\Process\\Group\\Data\\Group",
             "row_class_name": "Nemundo\\Process\\Group\\Row\\GroupCustomRow",
-            "primary_index": "text_id",
+            "primary_index": "auto_increment",
             "is_deleted": false,
             "type": [
                 {
@@ -32,6 +32,15 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                },
+                {
+                    "type": "external",
+                    "label": "Content",
+                    "field_name": "content",
+                    "variable_name": "content",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
                 }
             ],
             "index": [
@@ -40,6 +49,13 @@
                     "index_type": "index",
                     "field_name": [
                         "group_type"
+                    ]
+                },
+                {
+                    "index_name": "content",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "content"
                     ]
                 }
             ]

@@ -5,6 +5,7 @@ namespace Nemundo\Process\Group\Com\Form;
 
 
 use Nemundo\Package\Bootstrap\Form\BootstrapForm;
+use Nemundo\Process\Group\Data\GroupUser\GroupUser;
 use Nemundo\Process\Group\Type\GroupContentType;
 use Nemundo\User\Com\ListBox\UserListBox;
 
@@ -33,9 +34,18 @@ class GroupUserForm extends BootstrapForm
     protected function onSubmit()
     {
 
+
+        $data = new GroupUser();
+        $data->ignoreIfExists = true;
+        $data->groupId =$this->groupId;  // $this->getGroupId();  // $this->groupId;
+        $data->userId =$this->user->getValue();  // $userId;
+        $data->save();
+
+
+        /*
         $item = new GroupContentType();
         $item->fromGroupId($this->groupId);
-        $item->addUser($this->user->getValue());
+        $item->addUser($this->user->getValue());*/
 
 
     }

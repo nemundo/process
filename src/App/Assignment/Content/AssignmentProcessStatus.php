@@ -16,6 +16,7 @@ class AssignmentProcessStatus extends AbstractAssignmentProcessStatus
 
         $this->typeLabel = 'Assignment';
         $this->typeId='f3122812-2cad-4c20-8b20-b26c5c2f23ba';
+        $this->formClass=AssignmentProcessForm::class;
 
 
         // TODO: Implement loadContentType() method.

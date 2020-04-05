@@ -17,7 +17,7 @@ public $model;
 public $id;
 
 /**
-* @var string
+* @var int
 */
 public $groupId;
 
@@ -40,7 +40,7 @@ public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
-$this->groupId = $this->getModelValue($model->groupId);
+$this->groupId = intval($this->getModelValue($model->groupId));
 if ($model->group !== null) {
 $this->loadNemundoProcessGroupDataGroupGroupgroupRow($model->group);
 }

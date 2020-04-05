@@ -31,11 +31,15 @@ trait TaskIndexTrait
 
         $this->onDataRow();
 
+        $this->sendGroupNotification($this->getAssignmentId());
+
+        /*
+
         $group = new GroupContentType();
         $group->fromGroupId($this->getAssignmentId());
         foreach ($group->getUserIdList() as $userId) {
             $this->sendUserNotification($userId, new TaskCategory());
-        }
+        }*/
 
     }
 

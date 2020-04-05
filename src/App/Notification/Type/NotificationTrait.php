@@ -16,6 +16,8 @@ use Nemundo\Process\App\Notification\Data\Notification\NotificationDelete;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationUpdate;
 use Nemundo\Process\App\Notification\NotificationConfig;
 use Nemundo\Process\Content\Type\AbstractContentType;
+use Nemundo\Process\Group\Com\Span\GroupSpan;
+use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
 use Nemundo\Process\Group\Type\GroupContentType;
 use Nemundo\Process\Template\Content\User\UserContentType;
 use Nemundo\Workflow\App\Assignment\Config\AssignmentSendMailConfig;
@@ -30,11 +32,20 @@ trait NotificationTrait
     protected function sendGroupNotification($groupId, AbstractCategory $category = null)
     {
 
+        $reader = new GroupUserReader();
+        $reader->filter->andEqual($reader->model->groupId,$groupId);
+        foreach ($reader->getData() as $userRow) {
+            $this->sendUserNotification($userRow->userId,$category);
+        }
+
+
+
+        /*
         $group = new GroupContentType();
         $group->fromGroupId($groupId);
         foreach ($group->getUserIdList() as $userId) {
             $this->sendUserNotification($userId, $category);
-        }
+        }*/
 
     }
 

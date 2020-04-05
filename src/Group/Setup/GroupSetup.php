@@ -5,6 +5,7 @@ namespace Nemundo\Process\Group\Setup;
 
 
 use Nemundo\Process\Content\Setup\AbstractContentTypeSetup;
+use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Group\Data\Group\GroupDelete;
 use Nemundo\Process\Group\Data\GroupType\GroupType;
 use Nemundo\Process\Group\Type\AbstractGroupContentType;
@@ -13,7 +14,8 @@ use Nemundo\Process\Group\Type\AbstractGroupContentType;
 class GroupSetup extends AbstractContentTypeSetup
 {
 
-    public function addGroupType(AbstractGroupContentType $groupType)
+    //public function addGroupType(AbstractGroupContentType $groupType)
+    public function addGroupType(AbstractContentType $groupType)
     {
 
         $this->addContentType($groupType);

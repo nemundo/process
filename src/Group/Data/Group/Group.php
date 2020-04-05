@@ -7,11 +7,6 @@ class Group extends \Nemundo\Model\Data\AbstractModelData {
 protected $model;
 
 /**
-* @var string
-*/
-public $id;
-
-/**
 * @var bool
 */
 public $active;
@@ -26,16 +21,20 @@ public $group;
 */
 public $groupTypeId;
 
+/**
+* @var string
+*/
+public $contentId;
+
 public function __construct() {
 parent::__construct();
 $this->model = new GroupModel();
 }
 public function save() {
-$id = $this->id;
-$this->typeValueList->setModelValue($this->model->id, $id);
 $this->typeValueList->setModelValue($this->model->active, $this->active);
 $this->typeValueList->setModelValue($this->model->group, $this->group);
 $this->typeValueList->setModelValue($this->model->groupTypeId, $this->groupTypeId);
+$this->typeValueList->setModelValue($this->model->contentId, $this->contentId);
 $id = parent::save();
 return $id;
 }
