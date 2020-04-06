@@ -9,6 +9,7 @@ use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
 use Nemundo\Process\Group\Com\GroupContentTypeTrait;
 use Nemundo\Process\Group\Data\Group\GroupReader;
 use Nemundo\Process\Group\Parameter\GroupParameter;
+use Nemundo\Process\Group\Type\AbstractGroupContentType;
 
 class MultiGroupListBox extends BootstrapListBox
 {
@@ -30,6 +31,24 @@ class MultiGroupListBox extends BootstrapListBox
         $this->name = (new GroupParameter())->getParameterName();
 
     }
+
+
+    public function addUserOfGroup(AbstractGroupContentType $groupContentType ) {
+
+
+        foreach ($groupContentType->getUserList() as $userRow) {
+
+
+
+        }
+
+
+
+    }
+
+
+
+
 
 
     public function getContent()

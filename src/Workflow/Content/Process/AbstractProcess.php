@@ -544,7 +544,19 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $dateTime = null;
         if ($this->getDataRow()->workflowClosed) {
-            $dateTime = $this->getDateTime(SortOrder::DESCENDING);
+            //$dateTime = $this->getDateTime(SortOrder::DESCENDING);
+
+            $reader = new TreeReader();
+            $reader->model->loadChild();
+            $reader->filter->andEqual($reader->model->parentId, $this->getContentId());
+            //$reader->addOrder($reader->model->id, SortOrder::DESCENDING);
+            $reader->addOrder($reader->model->child->dateTime, SortOrder::DESCENDING);
+
+            //$reader->addOrder($reader->model->daid, $sortOrder);
+
+            // $dateTime = $reader->getRow()->child->dateTime;
+            $dateTime = $reader->getRow()->child->dateTime;
+
         } else {
             $dateTime = (new DateTime())->setNow();
         }
@@ -554,6 +566,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
+    /*
     private function getDateTime($sortOrder)
     {
 
@@ -561,6 +574,8 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $reader->model->loadChild();
         $reader->filter->andEqual($reader->model->parentId, $this->getContentId());
         $reader->addOrder($reader->model->id, $sortOrder);
+        $reader->addOrder($reader->model->child->dateTime, $sortOrder);
+
         //$reader->addOrder($reader->model->daid, $sortOrder);
 
         // $dateTime = $reader->getRow()->child->dateTime;
@@ -568,7 +583,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         return $dateTime;
 
-    }
+    }*/
 
 
     public function getLeadTime()
@@ -577,7 +592,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $difference = new DateTimeDifference();
         $difference->dateFrom = $this->getStartDateTime();
         $difference->dateUntil = $this->getEndDateTime();
-
         $day = $difference->getDifferenceInDay();
 
         return $day;
@@ -590,7 +604,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $text = $this->getLeadTime() . ' Tage';
         return $text;
-
 
     }
 
