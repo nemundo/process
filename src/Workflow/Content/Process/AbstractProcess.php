@@ -529,16 +529,17 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
-    public function getStart()
+    public function getStartDateTime()
     {
 
-        $dateTime = $this->getDateTime(SortOrder::ASCENDING);
+       // $dateTime = $this->getDateTime(SortOrder::ASCENDING);
+       $dateTime=$this->getDataRow()->dateTime;
         return $dateTime;
 
     }
 
 
-    public function getEnd()
+    public function getEndDateTime()
     {
 
         $dateTime = null;
@@ -572,8 +573,8 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     {
 
         $difference = new DateTimeDifference();
-        $difference->dateFrom = $this->getStart();
-        $difference->dateUntil = $this->getEnd();
+        $difference->dateFrom = $this->getStartDateTime();
+        $difference->dateUntil = $this->getEndDateTime();
 
         $day = $difference->getDifferenceInDay();
 

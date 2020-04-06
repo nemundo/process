@@ -87,7 +87,6 @@ class WorkflowLogTable extends AbstractHtmlContainer
 
             $row->addText($contentType->getMessage());
             //$row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeLeadingZeroFormat(), true);
-
             $row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeWithSecondLeadingZeroFormat(), true);
 
 
