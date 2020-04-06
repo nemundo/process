@@ -561,6 +561,8 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $reader->model->loadChild();
         $reader->filter->andEqual($reader->model->parentId, $this->getContentId());
         $reader->addOrder($reader->model->id, $sortOrder);
+        //$reader->addOrder($reader->model->daid, $sortOrder);
+
         // $dateTime = $reader->getRow()->child->dateTime;
         $dateTime = $reader->getRow()->child->dateTime;
 
