@@ -44,7 +44,6 @@ class MultiGroupListBox extends BootstrapListBox
             $groupReader = new GroupReader();
             $groupReader->filter->andEqual($groupReader->model->groupTypeId, $groupContentType->typeId);
             $groupReader->filter->andEqual($groupReader->model->active,true);
-
             $groupReader->addOrder($groupReader->model->group);
             foreach ($groupReader->getData() as $groupRow) {
                 $this->addItem($groupRow->id, $groupRow->group);

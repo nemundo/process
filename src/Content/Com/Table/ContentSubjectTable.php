@@ -24,6 +24,13 @@ class ContentSubjectTable extends AbstractHtmlContainer
     public $contentType;
 
 
+    public $showHyperlink = true;
+
+    public $showView = false;
+
+    public $viewLabel = '';
+
+
     /**
      * @var AbstractContentTypeCollection[]
      */
@@ -50,6 +57,11 @@ class ContentSubjectTable extends AbstractHtmlContainer
 
         $header = new TableHeader($table);
         $header->addText('Log');
+
+        if ($this->showView) {
+        $header->addText($this->viewLabel);
+        }
+
         $header->addText('Ersteller');
 
         $reader = new TreeReader();
@@ -83,8 +95,22 @@ class ContentSubjectTable extends AbstractHtmlContainer
             $row->addText($contentType->getSubject());
             //$row->addText($contentType->getLog());
 
+            if ($this->showView) {
+                if ($contentType->hasView()) {
+                    $contentType->getView($row);
+                } else {
+                    $row->addEmpty();
+                }
+            }
+
+
             $row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeLeadingZeroFormat(), true);
-            $row->addClickableSite($contentType->getViewSite());
+
+
+            if ($this->showHyperlink) {
+                $row->addClickableSite($contentType->getViewSite());
+            }
+
 
         }
 
