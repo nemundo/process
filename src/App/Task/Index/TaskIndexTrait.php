@@ -31,7 +31,7 @@ trait TaskIndexTrait
 
         $this->onDataRow();
 
-        $this->sendGroupNotification($this->getAssignmentId());
+        $this->sendGroupNotification($this->getAssignmentId(), new TaskCategory());
 
         /*
 
@@ -65,7 +65,6 @@ trait TaskIndexTrait
                 $data->subject = $this->getSubject();
                 $data->assignmentId = $this->getAssignmentId();
                 $data->deadline = $this->getDeadline();
-                //$data->message = $message;
                 $data->userId = $this->getCreatedUserId();
                 $data->dateTime = $this->getCreatedDateTime();
                 $data->closed = $this->isTaskClosed();
@@ -90,7 +89,6 @@ trait TaskIndexTrait
                     // nicht überschreiben !!!
                     $data->userId = $this->getCreatedUserId();
                     $data->dateTime = $this->getCreatedDateTime();
-
                     $data->closed = $this->isTaskClosed();
                     $data->taskTypeId = $this->typeId;
                     $data->updateStatus = true;
@@ -101,8 +99,8 @@ trait TaskIndexTrait
             }
 
         }
-        // update all content id (ohne sourceId)
 
+        // update all content id (ohne sourceId)
 
         $delete = new TaskIndexDelete();
         $delete->filter->andEqual($delete->model->contentId, $this->getContentId());

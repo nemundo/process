@@ -373,8 +373,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $status->parentId = $this->getContentId();
         $status->saveType();
 
-        //(new Debug())->write('start');
-
         $update = new ModelUpdate();
         $update->model = $this->workflowModel;
         $update->typeValueList->setModelValue($update->model->active, false);
@@ -382,11 +380,8 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $this->deleteNotification();
         foreach ($this->getChildContentTypeList() as $child) {
-            //(new Debug())->write($child->typeLabel);
             $child->deleteNotification();
         }
-
-        //exit;
 
         $this->saveIndex();
 
@@ -422,14 +417,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         return $value;
     }
 
-
-    /*
-    public function getDeadline()
-    {
-
-        $workflowRow = $this->getDataRow();
-        return $workflowRow->deadline;
-    }*/
 
     public function changeDeadline(Date $deadline = null)
     {
