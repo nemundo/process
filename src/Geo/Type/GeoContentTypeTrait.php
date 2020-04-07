@@ -9,6 +9,9 @@ use Nemundo\Process\Geo\Data\Geo\Geo;
 trait GeoContentTypeTrait
 {
 
+
+    abstract public function getPlace();
+
     abstract public function getCoordinate();
 
 
@@ -16,8 +19,10 @@ trait GeoContentTypeTrait
     {
 
         $data = new Geo();
-        //$data->id = $this->dataId;
-        //$data->coordinate = $this->geoCoordinate;
+        $data->updateOnDuplicate=true;
+        $data->place=$this->getPlace();
+        $data->coordinate = $this->getCoordinate();
+        $data->contentId=$this->getContentId();
         $data->save();
 
 

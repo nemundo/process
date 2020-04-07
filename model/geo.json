@@ -31,9 +31,26 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "length": "255"
+                },
+                {
+                    "type": "external",
+                    "label": "Content",
+                    "field_name": "content",
+                    "variable_name": "content",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
                 }
             ],
-            "index": []
+            "index": [
+                {
+                    "index_name": "content",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "content"
+                    ]
+                }
+            ]
         }
     ]
 }

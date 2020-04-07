@@ -16,6 +16,16 @@ public $coordinate;
 */
 public $place;
 
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $contentId;
+
+/**
+* @var \Nemundo\Process\Content\Data\Content\ContentExternalType
+*/
+public $content;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = GeoModel::class;
@@ -43,5 +53,23 @@ $this->place->aliasFieldName = $this->place->tableName . "_" . $this->place->fie
 $this->place->label = "Place";
 $this->addType($this->place);
 
+$this->contentId = new \Nemundo\Model\Type\Id\IdType();
+$this->contentId->fieldName = "content";
+$this->contentId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->contentId->aliasFieldName = $this->contentId->tableName ."_".$this->contentId->fieldName;
+$this->contentId->label = "Content";
+$this->addType($this->contentId);
+
+}
+public function loadContent() {
+if ($this->content == null) {
+$this->content = new \Nemundo\Process\Content\Data\Content\ContentExternalType(null, $this->parentFieldName . "_content");
+$this->content->fieldName = "content";
+$this->content->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->content->aliasFieldName = $this->content->tableName ."_".$this->content->fieldName;
+$this->content->label = "Content";
+$this->addType($this->content);
+}
+return $this;
 }
 }

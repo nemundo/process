@@ -16,6 +16,11 @@ public $coordinate;
 */
 public $place;
 
+/**
+* @var string
+*/
+public $contentId;
+
 public function __construct() {
 parent::__construct();
 $this->model = new GeoModel();
@@ -25,6 +30,7 @@ public function save() {
 $property = new \Nemundo\Model\Data\Property\Geo\GeoCoordinateDataProperty($this->model->coordinate, $this->typeValueList);
 $property->setValue($this->coordinate);
 $this->typeValueList->setModelValue($this->model->place, $this->place);
+$this->typeValueList->setModelValue($this->model->contentId, $this->contentId);
 $id = parent::save();
 return $id;
 }
