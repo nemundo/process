@@ -59,7 +59,7 @@ class ContentSubjectTable extends AbstractHtmlContainer
         $header->addText('Log');
 
         if ($this->showView) {
-        $header->addText($this->viewLabel);
+            $header->addText($this->viewLabel);
         }
 
         $header->addText('Ersteller');
@@ -93,7 +93,6 @@ class ContentSubjectTable extends AbstractHtmlContainer
 
             $row = new BootstrapClickableTableRow($table);
             $row->addText($contentType->getSubject());
-            //$row->addText($contentType->getLog());
 
             if ($this->showView) {
                 if ($contentType->hasView()) {
@@ -103,9 +102,7 @@ class ContentSubjectTable extends AbstractHtmlContainer
                 }
             }
 
-
             $row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeLeadingZeroFormat(), true);
-
 
             if ($this->showHyperlink) {
                 $row->addClickableSite($contentType->getViewSite());

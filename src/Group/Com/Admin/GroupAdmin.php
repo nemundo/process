@@ -140,7 +140,10 @@ class GroupAdmin extends AbstractActionPanel
             $table = new AdminClickableTable($layout->col1);
 
             $header = new TableHeader($table);
-            //$header->addText($groupReader->model->active->label);
+            $header->addText($groupReader->model->active->label);
+            $header->addText($groupReader->model->id->label);
+
+
 
             $th = new Th($header);
             $th->content[LanguageCode::EN] = 'Group';
@@ -165,7 +168,8 @@ class GroupAdmin extends AbstractActionPanel
 
                 $row = new BootstrapClickableTableRow($table);
 
-                //$row->addYesNo($groupRow->active);
+                $row->addYesNo($groupRow->active);
+                $row->addText($groupRow->id);
 
                 if ((new GroupParameter())->getValue() == $groupRow->id) {
                     $bold = new Bold($row);

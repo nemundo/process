@@ -11,18 +11,12 @@ use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Admin\Com\Title\AdminTitle;
-use Nemundo\Com\Html\Listing\UnorderedList;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
-use Nemundo\Html\Paragraph\Paragraph;
-use Nemundo\Package\Bootstrap\Dropdown\BootstrapSiteDropdown;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\Data\Content\ContentReader;
-use Nemundo\Process\Content\Data\ContentGroup\ContentGroupReader;
 use Nemundo\Process\Content\Parameter\ContentParameter;
-use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Content\Type\MenuTrait;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexReader;
 use Nemundo\Process\Search\Type\SearchIndexTrait;
 use Nemundo\Process\Tree\Type\TreeTypeTrait;
@@ -85,8 +79,6 @@ class ContentItemSite extends AbstractSite
 
         $table1->addLabelValue('Content Type Class', $contentType->getClassName());
 
-
-        //$model = new ContentModel();
 
         $table1->addLabelValue('Content Id', $contentType->getContentId());
         $table1->addLabelValue('Data Id', $contentType->getDataId());
@@ -234,7 +226,6 @@ class ContentItemSite extends AbstractSite
             $table1->addLabelValue('Search', 'no');
 
         }
-
 
 
         /*

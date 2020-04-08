@@ -23,7 +23,8 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
 
     }
 
-    protected function loadGroup() {
+    protected function loadGroup()
+    {
 
     }
 
@@ -33,6 +34,15 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
 
         parent::onIndex();
         $this->saveGroupIndex();
+
+    }
+
+
+    protected function onDelete()
+    {
+
+        parent::onDelete();
+        $this->deleteGroupIndex();
 
     }
 
@@ -219,6 +229,9 @@ abstract class AbstractGroupContentType extends AbstractTreeContentType
 
      public function removeUser($userId)
      {
+
+        //(new GroupDelete())->deleteById($this->dataId);
+         (new GroupDelete())->deleteById($this->groupId);
 
          $delete = new GroupUserDelete();
          $delete->filter->andEqual($delete->model->groupId, $this->dataId);
