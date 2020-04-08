@@ -11,12 +11,12 @@ parent::__construct();
 $this->model = new GroupModel();
 }
 /**
-* @return \Nemundo\Process\Group\Row\GroupCustomRow[]
+* @return GroupRow[]
 */
 public function getData() {
 $list = [];
 foreach (parent::getData() as $dataRow) {
-$row = new \Nemundo\Process\Group\Row\GroupCustomRow($dataRow, $this->model);
+$row = new GroupRow($dataRow, $this->model);
 $list[] = $row;
 }
 return $list;

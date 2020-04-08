@@ -59,13 +59,14 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $data->file->fromFileProperty($this->file);
         $this->dataId = $data->save();
 
-        $fileRow = $this->getDataRow();
+
+        //$fileRow = $this->getDataRow();
 
 
         // text file
         // office document
 
-        if (DeploymentConfig::$stagingEnviroment !== StagingEnvironment::DEVELOPMENT) {
+        /*if (DeploymentConfig::$stagingEnviroment !== StagingEnvironment::DEVELOPMENT) {
 
             if ($fileRow->file->getFileExtension() == 'pdf') {
 
@@ -86,7 +87,7 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
             // Office Doc
 
 
-        }
+        }*/
 
     }
 
@@ -111,6 +112,9 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $fileRow = $this->getDataRow();
         $this->addSearchWord($fileRow->file->getFilename());
         $this->addSearchText($fileRow->text);
+
+        // pdf reader
+
 
     }
 

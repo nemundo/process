@@ -22,7 +22,7 @@ public $id;
 public $groupId;
 
 /**
-* @var \Nemundo\Process\Group\Row\GroupCustomRow
+* @var \Nemundo\Process\Group\Data\Group\GroupRow
 */
 public $group;
 
@@ -50,7 +50,7 @@ $this->loadNemundoUserDataUserUseruserRow($model->user);
 }
 }
 private function loadNemundoProcessGroupDataGroupGroupgroupRow($model) {
-$this->group = new \Nemundo\Process\Group\Row\GroupCustomRow($this->row, $model);
+$this->group = new \Nemundo\Process\Group\Data\Group\GroupRow($this->row, $model);
 }
 private function loadNemundoUserDataUserUseruserRow($model) {
 $this->user = new \Nemundo\User\Data\User\UserRow($this->row, $model);

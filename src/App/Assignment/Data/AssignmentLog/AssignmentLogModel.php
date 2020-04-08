@@ -7,7 +7,7 @@ class AssignmentLogModel extends \Nemundo\Model\Definition\Model\AbstractModel {
 public $id;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalIdType
 */
 public $assignmentId;
 
@@ -34,7 +34,7 @@ $this->id->visible->table = false;
 $this->id->visible->view = false;
 $this->id->visible->form = false;
 
-$this->assignmentId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->assignmentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->assignmentId->tableName = "assignment_assignment_log";
 $this->assignmentId->fieldName = "assignment";
 $this->assignmentId->aliasFieldName = "assignment_assignment_log_assignment";

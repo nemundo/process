@@ -23,7 +23,6 @@ class GroupSpan extends Span
         $groupUserReader->model->loadUser();
         $groupUserReader->filter->andEqual($groupUserReader->model->groupId, $this->groupId);
         foreach ($groupUserReader->getData() as $userRow) {
-            //$this->sendUserNotification($userRow->userId,$category);
             $text->addValue($userRow->user->displayName);
         }
 
@@ -35,21 +34,6 @@ class GroupSpan extends Span
         foreach ($groupReader->getData() as $groupRow) {
             $this->content = $groupRow->group;
         }
-
-
-        //= $groupReader->getRowById($this->groupId);
-
-        /*foreach ($this->getUserList() as $userRow) {
-            $text->addValue($userRow->displayName);
-        }*/
-
-        //return $text->getTextWithSeperator();
-
-        //$group = (new GroupContentType())->fromGroupId($this->groupId);
-
-        //$span = new Bold();
-        //$span->content = $group->getSubject();  // $this->workflowRow->assignment->group;
-        //$this->title =  $text->getTextWithSeperator();  //$group->getUserListText();
 
         return parent::getContent();
 

@@ -42,12 +42,12 @@ public $content;
 public $subject;
 
 /**
-* @var string
+* @var int
 */
 public $assignmentId;
 
 /**
-* @var \Nemundo\Process\Group\Row\GroupCustomRow
+* @var \Nemundo\Process\Group\Data\Group\GroupRow
 */
 public $assignment;
 
@@ -109,7 +109,7 @@ if ($model->content !== null) {
 $this->loadNemundoProcessContentDataContentContentcontentRow($model->content);
 }
 $this->subject = $this->getModelValue($model->subject);
-$this->assignmentId = $this->getModelValue($model->assignmentId);
+$this->assignmentId = intval($this->getModelValue($model->assignmentId));
 if ($model->assignment !== null) {
 $this->loadNemundoProcessGroupDataGroupGroupassignmentRow($model->assignment);
 }
@@ -137,7 +137,7 @@ private function loadNemundoProcessContentDataContentContentcontentRow($model) {
 $this->content = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $model);
 }
 private function loadNemundoProcessGroupDataGroupGroupassignmentRow($model) {
-$this->assignment = new \Nemundo\Process\Group\Row\GroupCustomRow($this->row, $model);
+$this->assignment = new \Nemundo\Process\Group\Data\Group\GroupRow($this->row, $model);
 }
 private function loadNemundoUserDataUserUseruserRow($model) {
 $this->user = new \Nemundo\User\Data\User\UserRow($this->row, $model);

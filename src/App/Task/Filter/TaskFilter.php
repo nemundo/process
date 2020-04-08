@@ -31,16 +31,10 @@ class TaskFilter extends AbstractFilter
         $this->andEqual($this->model->taskTypeId,$parameter->getValue());
         }
 
-        $parameter= new UserParameter();  // new ErstellerParameter();
+        $parameter= new UserParameter();
         if ($parameter->hasValue()) {
             $this->andEqual($this->model->userId,$parameter->getValue());
         }
-
-        /*
-        $parameter=new VerantwortlicherParameter();
-        if ($parameter->hasValue()) {
-            $this->andEqual($model->assignmentId,$parameter->getValue());
-        }*/
 
         $statusParameter = new WorkflowStatusParameter();
         if ($statusParameter->hasValue()) {

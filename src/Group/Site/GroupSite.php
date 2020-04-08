@@ -48,8 +48,8 @@ class GroupSite extends AbstractSite
         $this->url = 'group';
         GroupSite::$site = $this;
 
-        new GroupUserDeleteSite($this);
-        new GroupContentViewSite($this);
+        //new GroupUserDeleteSite($this);
+        //new GroupContentViewSite($this);
 
     }
 

@@ -32,7 +32,7 @@ public $content;
 public $subject;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalIdType
 */
 public $assignmentId;
 
@@ -126,7 +126,7 @@ $this->subject->label = "Aufgabe";
 $this->subject->allowNullValue = false;
 $this->subject->length = 255;
 
-$this->assignmentId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->assignmentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->assignmentId->tableName = "process_task_index";
 $this->assignmentId->fieldName = "assignment";
 $this->assignmentId->aliasFieldName = "process_task_index_assignment";

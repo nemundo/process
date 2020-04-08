@@ -17,12 +17,12 @@ public $model;
 public $id;
 
 /**
-* @var string
+* @var int
 */
 public $assignmentId;
 
 /**
-* @var \Nemundo\Process\Group\Row\GroupCustomRow
+* @var \Nemundo\Process\Group\Data\Group\GroupRow
 */
 public $assignment;
 
@@ -30,12 +30,12 @@ public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
-$this->assignmentId = $this->getModelValue($model->assignmentId);
+$this->assignmentId = intval($this->getModelValue($model->assignmentId));
 if ($model->assignment !== null) {
 $this->loadNemundoProcessGroupDataGroupGroupassignmentRow($model->assignment);
 }
 }
 private function loadNemundoProcessGroupDataGroupGroupassignmentRow($model) {
-$this->assignment = new \Nemundo\Process\Group\Row\GroupCustomRow($this->row, $model);
+$this->assignment = new \Nemundo\Process\Group\Data\Group\GroupRow($this->row, $model);
 }
 }

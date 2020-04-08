@@ -11,7 +11,7 @@
             "class_name": "Group",
             "table_name": "process_group",
             "namespace": "Nemundo\\Process\\Group\\Data\\Group",
-            "row_class_name": "Nemundo\\Process\\Group\\Row\\GroupCustomRow",
+            "row_class_name": "",
             "primary_index": "auto_increment",
             "is_deleted": false,
             "type": [

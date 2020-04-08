@@ -114,8 +114,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
 
         };
 
-
-        $this->delete = new DeleteActionSite($this);  // new ActionSite($this);
+        $this->delete = new DeleteActionSite($this);
         $this->delete->title[LanguageCode::EN] = 'Delete';
         $this->delete->title[LanguageCode::DE] = 'Löschen';
         $this->delete->actionName = 'delete';
@@ -141,9 +140,9 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         };
 
 
-        $this->inactive = new DeleteActionSite($this);  // new ActionSite($this);
+        $this->inactive = new DeleteActionSite($this);
         $this->inactive->title[LanguageCode::EN] = 'Inactive';
-        $this->inactive->title[LanguageCode::DE] = 'Delete (Soft)';
+        $this->inactive->title[LanguageCode::DE] = 'Inaktiv setzen';
         $this->inactive->actionName = 'inactive';
         $this->inactive->onAction = function () {
 

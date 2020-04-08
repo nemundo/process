@@ -17,13 +17,12 @@ trait GroupRestrictedTrait
     /**
      * @var AbstractGroupContentType[]
      */
-    private $restrictionGroup = [];
-// groupRestrictedList
+    private $groupRestrictedList = [];
 
 
     public function addRestrictedGroup(AbstractGroupContentType $groupContentType)
     {
-        $this->restrictionGroup[] = $groupContentType;
+        $this->groupRestrictedList[] = $groupContentType;
         return $this;
     }
 
@@ -36,7 +35,7 @@ trait GroupRestrictedTrait
         if ($this->groupRestricted) {
 
             $visible = false;
-            foreach ($this->restrictionGroup as $restrictionGroup) {
+            foreach ($this->groupRestrictedList as $restrictionGroup) {
                 if ((new GroupCheck())->isMemberOfGroup($restrictionGroup)) {
                     $visible = true;
                 }
