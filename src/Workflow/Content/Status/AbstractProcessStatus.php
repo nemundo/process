@@ -97,6 +97,7 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
 
 
     public function getMessage()
+    //protected function getMessage()
     {
 
         $message = (new Translation())->getText($this->typeLabel);

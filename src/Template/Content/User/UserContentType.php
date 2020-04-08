@@ -12,6 +12,7 @@ use Nemundo\Process\Group\Data\Group\GroupRow;
 use Nemundo\Process\Group\Data\GroupUser\GroupUser;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
 use Nemundo\Process\Group\Type\AbstractGroupContentType;
+use Nemundo\Process\Group\Type\GroupIndexTrait;
 use Nemundo\Process\Group\Type\UserGroupType;
 use Nemundo\User\Data\User\User;
 use Nemundo\User\Data\User\UserCount;
@@ -25,6 +26,8 @@ use Nemundo\User\Usergroup\AbstractUsergroup;
 
 class UserContentType extends AbstractTreeContentType
 {
+
+    use GroupIndexTrait;
 
     /**
      * @var bool
@@ -151,11 +154,17 @@ class UserContentType extends AbstractTreeContentType
     protected function onIndex()
     {
 
+
+        $this->saveGroupIndex();
+        $this->addUser($this->dataId);
+
+
+        /*
         $type = new UserGroupType();
         $type->groupId = $this->dataId;
 
         $type->addUser($this->dataId);
-        $type->saveType();
+        $type->saveType();*/
 
     }
 
@@ -188,8 +197,18 @@ class UserContentType extends AbstractTreeContentType
     }
 
 
+    public function getGroupLabel()
+    {
+
+        return $this->getDataRow()->displayName;
+
+        // TODO: Implement getGroupLabel() method.
+    }
+
+
+
     // getUserGroupId
-    public function getGroupId()
+    /*public function getGroupId()
     {
 
         $groupId = null;
@@ -209,7 +228,7 @@ class UserContentType extends AbstractTreeContentType
 
         return $groupId;
 
-    }
+    }*/
 
 
     // getGroupList

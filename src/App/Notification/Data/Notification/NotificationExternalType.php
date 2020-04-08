@@ -59,16 +59,6 @@ public $contentType;
 /**
 * @var \Nemundo\Model\Type\Id\IdType
 */
-public $sourceId;
-
-/**
-* @var \Nemundo\Process\Content\Data\Content\ContentExternalType
-*/
-public $source;
-
-/**
-* @var \Nemundo\Model\Type\Id\IdType
-*/
 public $categoryId;
 
 /**
@@ -137,13 +127,6 @@ $this->contentTypeId->aliasFieldName = $this->contentTypeId->tableName ."_".$thi
 $this->contentTypeId->label = "Content Type";
 $this->addType($this->contentTypeId);
 
-$this->sourceId = new \Nemundo\Model\Type\Id\IdType();
-$this->sourceId->fieldName = "source";
-$this->sourceId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
-$this->sourceId->aliasFieldName = $this->sourceId->tableName ."_".$this->sourceId->fieldName;
-$this->sourceId->label = "Source";
-$this->addType($this->sourceId);
-
 $this->categoryId = new \Nemundo\Model\Type\Id\IdType();
 $this->categoryId->fieldName = "category";
 $this->categoryId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
@@ -182,17 +165,6 @@ $this->contentType->tableName = $this->parentFieldName . "_" . $this->externalTa
 $this->contentType->aliasFieldName = $this->contentType->tableName ."_".$this->contentType->fieldName;
 $this->contentType->label = "Content Type";
 $this->addType($this->contentType);
-}
-return $this;
-}
-public function loadSource() {
-if ($this->source == null) {
-$this->source = new \Nemundo\Process\Content\Data\Content\ContentExternalType(null, $this->parentFieldName . "_source");
-$this->source->fieldName = "source";
-$this->source->tableName = $this->parentFieldName . "_" . $this->externalTableName;
-$this->source->aliasFieldName = $this->source->tableName ."_".$this->source->fieldName;
-$this->source->label = "Source";
-$this->addType($this->source);
 }
 return $this;
 }

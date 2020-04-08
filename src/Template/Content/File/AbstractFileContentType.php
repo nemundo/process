@@ -94,6 +94,8 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
     protected function onFinished()
     {
 
+        parent::onFinished();
+
         $update = new TemplateFileUpdate();
         $update->contentId = $this->getContentId();
         $update->updateById($this->dataId);
@@ -103,6 +105,8 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
 
     protected function onIndex()
     {
+
+        parent::onIndex();
 
         $fileRow = $this->getDataRow();
         $this->addSearchWord($fileRow->file->getFilename());
@@ -129,6 +133,10 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
     {
 
         $fileRow = $this->getDataRow();
+        $subject = $fileRow->file->getFilename();
+
+        /*
+        $fileRow = $this->getDataRow();
 
         $hyperlink = new UrlHyperlink();
         $hyperlink->content = $fileRow->file->getFilename();
@@ -136,7 +144,9 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
 
         $text = $hyperlink->getContent();
 
-        return $text;
+        return $text;*/
+
+        return $subject;
 
     }
 

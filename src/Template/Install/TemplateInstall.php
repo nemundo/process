@@ -12,6 +12,7 @@ use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\App\Wiki\Setup\WikiSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 
+use Nemundo\Process\Group\Setup\GroupSetup;
 use Nemundo\Process\Template\Content\Audio\AudioContentType;
 use Nemundo\Process\Template\Content\File\FileActiveContentType;
 use Nemundo\Process\Template\Content\File\FileContentType;
@@ -39,6 +40,7 @@ use Nemundo\Process\Template\Content\YouTube\YouTubeContentType;
 use Nemundo\Process\Template\Data\TemplateCollection;
 
 use Nemundo\Process\Template\Script\TemplateTestScript;
+use Nemundo\Process\Template\Status\File\FileProcessStatus;
 use Nemundo\Process\Template\Status\Reopen\ReopenWorkflowProcessStatus;
 use Nemundo\Process\Template\Status\SubjectChange\SubjectChangeProcessStatus;
 use Nemundo\Process\Template\Status\WorkflowDelete\WorkflowDeleteStatus;
@@ -68,6 +70,9 @@ class TemplateInstall extends AbstractInstall
 
 
 
+        $setup=new GroupSetup();
+        $setup->addGroupType(new UserContentType());
+
 
         (new ContentTypeSetup())
             ->addContentType(new SourceAddContentType())
@@ -77,12 +82,21 @@ class TemplateInstall extends AbstractInstall
             ->addContentType(new ReopenWorkflowProcessStatus())
             ->addContentType(new FileListContentType())
             ->addContentType(new UrlContentType())
-        ->addContentType(new WorkflowRestoreStatus());
+        ->addContentType(new WorkflowRestoreStatus())
+        ->addContentType(new FileProcessStatus());
 
-        $setup->addContentType(new UserContentType());
+
+
+
+      //  $setup->addContentType(new UserContentType());
+
+
+        $setup = new ContentTypeSetup();
         $setup->addContentType(new SourceAddContentType());
         $setup->addContentType(new SourceRemoveContentType());
         $setup->addContentType(new WorkflowDeleteStatus());
+
+
 
         $setup->addContentType(new SubjectChangeProcessStatus());
         $setup->addContentType(new \Nemundo\Process\Template\Status\DeadlineChange\DeadlineChangeProcessStatus());

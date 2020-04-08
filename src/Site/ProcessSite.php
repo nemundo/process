@@ -10,6 +10,7 @@ use Nemundo\Process\App\Document\Site\DocumentSite;
 use Nemundo\Process\App\Favorite\Site\UserFavoriteSite;
 use Nemundo\Process\App\Inbox\Site\InboxSite;
 use Nemundo\Process\App\Notification\Site\NotificationAdminSite;
+use Nemundo\Process\App\Notification\Site\UserNotificationInboxSite;
 use Nemundo\Process\App\Notification\Site\UserNotificationSite;
 use Nemundo\Process\App\Task\Site\TaskIndexSite;
 use Nemundo\Process\App\Task\Site\TaskSite;
@@ -85,6 +86,7 @@ class ProcessSite extends AbstractSite
 
 
         new UserNotificationSite($this);
+        new UserNotificationInboxSite($this);
         new NotificationAdminSite($this);
 
         new DashboardSite($this);

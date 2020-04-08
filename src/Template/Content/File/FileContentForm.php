@@ -11,6 +11,11 @@ class FileContentForm extends AbstractContentForm
 {
 
     /**
+     * @var AbstractFileContentType
+     */
+    public $contentType;
+
+    /**
      * @var BootstrapFileUpload
      */
     private $file;
@@ -31,8 +36,8 @@ class FileContentForm extends AbstractContentForm
 
         foreach ($this->file->getMultiFileRequest() as $fileRequest) {
 
-            $type = new FileContentType();
-            $type->parentId = $this->contentType->getParentId();
+            $type = clone($this->contentType);  // new FileContentType();
+            //$type->parentId = $this->contentType->getParentId();
             $type->file->fromFileRequest($fileRequest);
             $type->saveType();
 

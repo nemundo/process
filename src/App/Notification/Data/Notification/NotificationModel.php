@@ -59,16 +59,6 @@ public $contentType;
 /**
 * @var \Nemundo\Model\Type\External\Id\ExternalIdType
 */
-public $sourceId;
-
-/**
-* @var \Nemundo\Process\Content\Data\Content\ContentExternalType
-*/
-public $source;
-
-/**
-* @var \Nemundo\Model\Type\External\Id\ExternalIdType
-*/
 public $categoryId;
 
 /**
@@ -144,13 +134,6 @@ $this->contentTypeId->aliasFieldName = "process_notification_content_type";
 $this->contentTypeId->label = "Content Type";
 $this->contentTypeId->allowNullValue = false;
 
-$this->sourceId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
-$this->sourceId->tableName = "process_notification";
-$this->sourceId->fieldName = "source";
-$this->sourceId->aliasFieldName = "process_notification_source";
-$this->sourceId->label = "Source";
-$this->sourceId->allowNullValue = false;
-
 $this->categoryId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->categoryId->tableName = "process_notification";
 $this->categoryId->fieldName = "category";
@@ -196,16 +179,6 @@ $this->contentType->tableName = "process_notification";
 $this->contentType->fieldName = "content_type";
 $this->contentType->aliasFieldName = "process_notification_content_type";
 $this->contentType->label = "Content Type";
-}
-return $this;
-}
-public function loadSource() {
-if ($this->source == null) {
-$this->source = new \Nemundo\Process\Content\Data\Content\ContentExternalType($this, "process_notification_source");
-$this->source->tableName = "process_notification";
-$this->source->fieldName = "source";
-$this->source->aliasFieldName = "process_notification_source";
-$this->source->label = "Source";
 }
 return $this;
 }

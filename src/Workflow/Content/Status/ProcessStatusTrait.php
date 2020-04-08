@@ -24,12 +24,6 @@ trait ProcessStatusTrait
     /**
      * @var bool
      */
-    //public $editable2 = false;
-
-
-    /**
-     * @var bool
-     */
     public $appendDataIdParameter = false;
 
     /**

@@ -121,7 +121,7 @@
                     "field_name": "source",
                     "variable_name": "source",
                     "allow_null": false,
-                    "is_deleted": false,
+                    "is_deleted": true,
                     "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
                 },
                 {
@@ -152,6 +152,18 @@
                     ]
                 }
             ]
+        },
+        {
+            "template": "default",
+            "model_id": "ccebcaa5-9f20-420e-a63c-331424c35a29",
+            "label": "Notification Source",
+            "class_name": "NotificationSource",
+            "table_name": "process_notification_source",
+            "namespace": "Nemundo\\Process\\App\\Notification\\Data\\NotificationSource",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "index": []
         }
     ]
 }

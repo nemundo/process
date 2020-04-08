@@ -14,7 +14,7 @@ use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Task\Com\Form\TaskSearchForm;
-use Nemundo\Process\App\Task\Data\Task\TaskReader;
+
 use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndexPaginationReader;
 use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndexReader;
 use Nemundo\Process\App\Task\Filter\TaskFilter;
@@ -29,7 +29,6 @@ class TaskSite extends AbstractSite
     {
         $this->title = 'Task';
         $this->url = 'task';
-        // TODO: Implement loadSite() method.
     }
 
 
@@ -71,7 +70,7 @@ class TaskSite extends AbstractSite
         $header->addText($taskReader->model->source->label);
         $header->addText('Source Type');
 
-        $header->addText($taskReader->model->message->label);
+        //$header->addText($taskReader->model->message->label);
         $header->addText($taskReader->model->assignment->label);
         $header->addText($taskReader->model->deadline->label);
         $header->addText($taskReader->model->user->label);
@@ -113,7 +112,7 @@ class TaskSite extends AbstractSite
 
             $taskRow->getAssignmentSpan($row);
 
-            $row->addText($taskRow->message);
+            //$row->addText($taskRow->message);
             $row->addText($taskRow->getDeadline());
             $row->addText($taskRow->getCreator());
             $row->addText( $taskRow->dateTime->getShortDateTimeWithSecondLeadingZeroFormat());

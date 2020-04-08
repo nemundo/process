@@ -4,7 +4,6 @@ namespace Nemundo\Process\App\Notification\Type;
 
 
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Package\ResponsiveMail\ResponsiveActionMailMessage;
 use Nemundo\Process\App\Favorite\Reader\FavoriteUserReader;
@@ -16,36 +15,28 @@ use Nemundo\Process\App\Notification\Data\Notification\NotificationDelete;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationUpdate;
 use Nemundo\Process\App\Notification\NotificationConfig;
 use Nemundo\Process\Content\Type\AbstractContentType;
-use Nemundo\Process\Group\Com\Span\GroupSpan;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
-use Nemundo\Process\Group\Type\GroupContentType;
 use Nemundo\Process\Template\Content\User\UserContentType;
 use Nemundo\Workflow\App\Assignment\Config\AssignmentSendMailConfig;
 use Nemundo\Workflow\App\Notification\Config\NotificationSendMailConfig;
-use Schleuniger\App\Config\Site\EmailConfigSite;
+
 
 trait NotificationTrait
 {
 
     abstract protected function getMessage();
 
+
+
+
     protected function sendGroupNotification($groupId, AbstractCategory $category = null)
     {
 
         $reader = new GroupUserReader();
-        $reader->filter->andEqual($reader->model->groupId,$groupId);
+        $reader->filter->andEqual($reader->model->groupId, $groupId);
         foreach ($reader->getData() as $userRow) {
-            $this->sendUserNotification($userRow->userId,$category);
+            $this->sendUserNotification($userRow->userId, $category);
         }
-
-
-
-        /*
-        $group = new GroupContentType();
-        $group->fromGroupId($groupId);
-        foreach ($group->getUserIdList() as $userId) {
-            $this->sendUserNotification($userId, $category);
-        }*/
 
     }
 
@@ -70,20 +61,23 @@ trait NotificationTrait
         $dataId = $data->save();
 
 
+        // source
+
+
         $sendMail = null;
 
         if ($category->id == (new InformationCategory())->id) {
-           $sendMail=  (new NotificationSendMailConfig)->getValueByUserId($userId);
+            $sendMail = (new NotificationSendMailConfig)->getValueByUserId($userId);
         }
 
         if ($category->id == (new TaskCategory())->id) {
-            $sendMail=  (new AssignmentSendMailConfig())->getValueByUserId($userId);
+            $sendMail = (new AssignmentSendMailConfig())->getValueByUserId($userId);
         }
 
 
         //if ((new NotificationSendMailConfig)->getValueByUserId($userId)) {
 
-        if ($sendMail ) {
+        if ($sendMail) {
 
             $userType = new UserContentType($userId);
             $userRow = $userType->getDataRow();
@@ -107,7 +101,7 @@ trait NotificationTrait
             //exit;
 
 
-            NotificationConfig::$mailSettingSite = EmailConfigSite::$site;
+            //NotificationConfig::$mailSettingSite = EmailConfigSite::$site;
 
 
             if (NotificationConfig::$mailSettingSite !== null) {
@@ -154,11 +148,9 @@ trait NotificationTrait
     public function sendFavoriteNotification(AbstractContentType $contentType)
     {
 
-
         foreach ((new FavoriteUserReader($contentType))->getUserList() as $userId) {
-            $this->sendUserNotification($userId);
+            $this->sendUserNotification($userId, new InformationCategory());
         }
-
 
     }
 
