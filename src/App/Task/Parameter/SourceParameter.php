@@ -4,10 +4,10 @@ namespace Nemundo\Process\App\Task\Parameter;
 
 use Nemundo\Web\Parameter\AbstractUrlParameter;
 
-class TaskTypeParameter extends AbstractUrlParameter
+class SourceParameter extends AbstractUrlParameter
 {
     protected function loadParameter()
     {
-        $this->parameterName = 'tasktype';
+        $this->parameterName = 'source';
     }
 }

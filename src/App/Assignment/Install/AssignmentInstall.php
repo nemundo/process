@@ -33,6 +33,7 @@ class AssignmentInstall extends AbstractInstall
             ->addContentType(new AssignmentProcessStatus());
 
 
+        /*
         $setup=new ContentTypeSetup();
         $setup->addContentType(new AssignmentContentType());
         $setup->addContentType(new MessageAssignmentContentType());

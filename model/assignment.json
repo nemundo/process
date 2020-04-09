@@ -237,7 +237,7 @@
             "namespace": "Nemundo\\Process\\App\\Assignment\\Data\\MessageAssignment",
             "row_class_name": "",
             "primary_index": "auto_increment",
-            "is_deleted": false,
+            "is_deleted": true,
             "type": [
                 {
                     "type": "large_text",

@@ -24,6 +24,7 @@ class AssignmentProcessStatus extends AbstractAssignmentProcessStatus
 
 
 
+    /*
     protected function onCreate()
     {
 
@@ -33,7 +34,7 @@ class AssignmentProcessStatus extends AbstractAssignmentProcessStatus
         $process->changeAssignment($this->groupId);
         $process->changeDeadline($this->deadline);
 
-    }
+    }*/
 
 
     protected function onFinished()
@@ -45,6 +46,8 @@ class AssignmentProcessStatus extends AbstractAssignmentProcessStatus
     }
 
 
+
+    /*
     public function getSubject()
     {
 
@@ -61,7 +64,7 @@ class AssignmentProcessStatus extends AbstractAssignmentProcessStatus
 
         return $subject;
 
-    }
+    }*/
 
 
 }
