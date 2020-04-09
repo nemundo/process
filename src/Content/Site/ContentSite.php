@@ -168,8 +168,9 @@ class ContentSite extends AbstractSite
         $table = new AdminClickableTable($page);
 
         $header = new TableHeader($table);
-        $header->addText('ID');
+        $header->addText('Content Id');
         $header->addText('Type');
+        $header->addText('Type Id');
         $header->addText('Class');
         $header->addText('Data Id');
         $header->addText('Subject (Data)');
@@ -186,6 +187,7 @@ class ContentSite extends AbstractSite
             $row = new BootstrapClickableTableRow($table);
             $row->addText($contentRow->id);
             $row->addText($contentRow->contentType->contentType);
+            $row->addText($contentRow->contentTypeId);
             $row->addText($contentType->getClassName());
             $row->addText($contentRow->dataId);
             $row->addText($contentRow->subject);

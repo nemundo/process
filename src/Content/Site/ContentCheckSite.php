@@ -119,6 +119,22 @@ class ContentCheckSite extends AbstractSite
         }
 
 
+
+
+        // no content type
+
+
+
+
+
+
+
+
+
+
+
+
+
         $page->render();
 
 
