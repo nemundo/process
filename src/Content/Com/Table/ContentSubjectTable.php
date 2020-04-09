@@ -102,7 +102,9 @@ class ContentSubjectTable extends AbstractHtmlContainer
                 }
             }
 
-            $row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeLeadingZeroFormat(), true);
+            //$row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeLeadingZeroFormat(), true);
+            $row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeWithSecondLeadingZeroFormat(), true);
+
 
             if ($this->showHyperlink) {
                 $row->addClickableSite($contentType->getViewSite());
