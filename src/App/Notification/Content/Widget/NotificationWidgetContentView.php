@@ -15,7 +15,6 @@ class NotificationWidgetContentView extends AbstractContentView
 
         new UserNotificationTable($this);
 
-
         return parent::getContent();
 
     }
