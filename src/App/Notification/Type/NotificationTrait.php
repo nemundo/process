@@ -28,6 +28,14 @@ trait NotificationTrait
 
 
 
+    protected function getSourceContentId() {
+
+        return 0;
+
+    }
+
+//abstract protected function getSourceContentId();
+
 
     protected function sendGroupNotification($groupId, AbstractCategory $category = null)
     {
@@ -58,6 +66,7 @@ trait NotificationTrait
         $data->contentId = $this->getContentId();
         $data->subject = $this->getSubject();
         $data->message = $this->getMessage();
+        $data->sourceId = $this->getSourceContentId();  //Type()->get
         $dataId = $data->save();
 
 

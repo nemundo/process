@@ -69,6 +69,16 @@ public $contentType;
 /**
 * @var int
 */
+public $sourceId;
+
+/**
+* @var \Nemundo\Process\Content\Row\ContentCustomRow
+*/
+public $source;
+
+/**
+* @var int
+*/
 public $categoryId;
 
 /**
@@ -96,6 +106,10 @@ $this->contentTypeId = $this->getModelValue($model->contentTypeId);
 if ($model->contentType !== null) {
 $this->loadNemundoProcessContentDataContentTypeContentTypecontentTypeRow($model->contentType);
 }
+$this->sourceId = intval($this->getModelValue($model->sourceId));
+if ($model->source !== null) {
+$this->loadNemundoProcessContentDataContentContentsourceRow($model->source);
+}
 $this->categoryId = intval($this->getModelValue($model->categoryId));
 if ($model->category !== null) {
 $this->loadNemundoProcessAppNotificationDataCategoryCategorycategoryRow($model->category);
@@ -109,6 +123,9 @@ $this->content = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $
 }
 private function loadNemundoProcessContentDataContentTypeContentTypecontentTypeRow($model) {
 $this->contentType = new \Nemundo\Process\Content\Row\ContentTypeCustomRow($this->row, $model);
+}
+private function loadNemundoProcessContentDataContentContentsourceRow($model) {
+$this->source = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $model);
 }
 private function loadNemundoProcessAppNotificationDataCategoryCategorycategoryRow($model) {
 $this->category = new \Nemundo\Process\App\Notification\Data\Category\CategoryRow($this->row, $model);

@@ -6,6 +6,7 @@ namespace Nemundo\Process\App\Notification\Row;
 
 use Nemundo\Process\App\Notification\Content\AbstractNotificationContentType;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationRow;
+use Nemundo\Process\Content\Type\AbstractTreeContentType;
 
 class NotificationCustomRow extends NotificationRow
 {
@@ -15,7 +16,7 @@ class NotificationCustomRow extends NotificationRow
     // getNotificationContentType
     public function getContentType() {
 
-        /** @var AbstractNotificationContentType $notificationContentType */
+        /** @var AbstractTreeContentType $notificationContentType */
         $notificationContentType = $this->content->getContentType();
 
         return $notificationContentType;

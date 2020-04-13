@@ -7,6 +7,7 @@ namespace Nemundo\Process\App\Notification\Filter;
 use Nemundo\Db\Filter\AbstractFilter;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationModel;
 use Nemundo\Process\App\Notification\Parameter\ArchiveParameter;
+use Nemundo\Process\App\Notification\Parameter\SourceParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\User\Type\UserSessionType;
 
@@ -18,7 +19,7 @@ class UserNotificationFilter extends AbstractFilter
     public function __construct($filterContentType = true)
     {
 
-        $this->filterContentType=$filterContentType;
+        $this->filterContentType = $filterContentType;
         parent::__construct();
 
     }
@@ -26,21 +27,27 @@ class UserNotificationFilter extends AbstractFilter
     protected function loadFilter()
     {
 
-        $model=new NotificationModel();
+        $model = new NotificationModel();
 
         $this->andEqual($model->toId, (new UserSessionType())->userId);
 
         if ((new ArchiveParameter())->getValue() == '1') {
-            $this->andEqual($model->archive,true);
+            $this->andEqual($model->archive, true);
         } else {
-            $this->andEqual($model->archive,false);
+            $this->andEqual($model->archive, false);
         }
 
-        if ($this->filterContentType) {
-        $parameter=new ContentTypeParameter();
+        $parameter=new SourceParameter();
         if ($parameter->hasValue()) {
-            $this->andEqual($model->contentTypeId,$parameter->getValue());
+            $this->andEqual($model->sourceId, $parameter->getValue());
         }
+
+
+        if ($this->filterContentType) {
+            $parameter = new ContentTypeParameter();
+            if ($parameter->hasValue()) {
+                $this->andEqual($model->contentTypeId, $parameter->getValue());
+            }
         }
 
 

@@ -4,7 +4,6 @@
 namespace Nemundo\Process\Search\Type;
 
 
-use Nemundo\Process\Search\Data\SearchContent\SearchContent;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexDelete;
 use Nemundo\Process\Search\Index\SearchIndexBuilder;
 
@@ -55,10 +54,11 @@ trait SearchIndexTrait
     }*/
 
 
+    /*
     protected function onIndex()
     {
 
-    }
+    }*/
 
 
     protected function saveSearchIndex()

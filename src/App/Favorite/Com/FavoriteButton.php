@@ -24,6 +24,7 @@ class FavoriteButton extends AbstractHtmlContainer
     public function getContent()
     {
 
+
         $contentId = $this->contentType->getContentId();
         $contentParameter = new ContentParameter($contentId);
 
@@ -31,18 +32,26 @@ class FavoriteButton extends AbstractHtmlContainer
         $favoriteCount->filter->andEqual($favoriteCount->model->contentId, $contentId);
         $favoriteCount->filter->andEqual($favoriteCount->model->userId, (new UserSessionType())->userId);
 
+//        $button=null;
+        $button = new AdminIconSiteButton($this);
+
+
         if ($favoriteCount->getCount() == 0) {
-            $button = new AdminIconSiteButton($this);
+  //          $button = new AdminIconSiteButton($this);
             $button->site = FavoriteSaveSite::$site;
             $button->site->addParameter($contentParameter);
 
         } else {
 
-            $button = new AdminIconSiteButton($this);
+    //        $button = new AdminIconSiteButton($this);
             $button->site = FavoriteDeleteSite::$site;
             $button->site->addParameter($contentParameter);
 
         }
+
+        $button->showTitle=false;
+        $button->title = $this->contentType->getSubject();
+
 
         return parent::getContent();
 

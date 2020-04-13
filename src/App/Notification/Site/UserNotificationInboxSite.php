@@ -7,6 +7,8 @@ namespace Nemundo\Process\App\Notification\Site;
 use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Navigation\AdminNavigation;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
+use Nemundo\Admin\Com\Title\AdminSubtitle;
+use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Core\Language\LanguageCode;
@@ -30,6 +32,7 @@ use Nemundo\Process\App\Notification\Data\Notification\NotificationReader;
 use Nemundo\Process\App\Notification\Filter\UserNotificationFilter;
 use Nemundo\Process\App\Notification\Parameter\ArchiveParameter;
 use Nemundo\Process\App\Notification\Parameter\NotificationParameter;
+use Nemundo\Process\App\Notification\Parameter\SourceParameter;
 use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\User\Type\UserSessionType;
@@ -63,7 +66,7 @@ class UserNotificationInboxSite extends AbstractSite
 
 
         $nav = new AdminNavigation($page);
-        $nav->site = UserNotificationSite::$site;
+        $nav->site = UserNotificationInboxSite::$site;  // UserNotificationSite::$site;
 
         $form = new SearchForm($page);
 
@@ -86,6 +89,34 @@ class UserNotificationInboxSite extends AbstractSite
 
         $list=new NotificationContentTypeHyperlinkList($layout->col1);
         $list->redirectSite=UserNotificationInboxSite::$site;
+
+
+
+
+        $subtitle=new AdminSubtitle($layout->col1);
+        $subtitle->content='Source';
+
+        $sourceList=new BootstrapHyperlinkList($layout->col1);
+
+        $notificationReader = new NotificationReader();
+        $notificationReader->model->loadSource();
+        $notificationReader->filter = new UserNotificationFilter();
+        $notificationReader->addGroup($notificationReader->model->sourceId);
+
+        $count = new CountField($notificationReader);
+
+        foreach ($notificationReader->getData() as $notificationCustomRow) {
+
+            $site = clone(UserNotificationInboxSite::$site);
+            $site->title = $notificationCustomRow->source->subject.' ('.$notificationCustomRow->getModelValue($count).')';
+            $site->addParameter(new SourceParameter($notificationCustomRow->sourceId));
+            $sourceList->addSite($site);
+
+
+        }
+
+
+
 
 
         /*
@@ -120,6 +151,15 @@ class UserNotificationInboxSite extends AbstractSite
         $header = new TableHeader($table);
 
         $th = new Th($header);
+        $th->content[LanguageCode::EN] = 'Category';
+        $th->content[LanguageCode::DE] = 'Kategorie';
+
+        $th = new Th($header);
+        $th->content[LanguageCode::EN] = 'Source';
+        $th->content[LanguageCode::DE] = 'Quelle';
+
+
+        $th = new Th($header);
         $th->content[LanguageCode::EN] = 'Subject';
         $th->content[LanguageCode::DE] = 'Betreff';
 
@@ -135,14 +175,20 @@ class UserNotificationInboxSite extends AbstractSite
 
 
         $notificationReader = new NotificationPaginationReader();
+        $notificationReader->model->loadCategory();
         $notificationReader->model->loadContent();
         $notificationReader->model->content->loadContentType();
+        $notificationReader->model->loadSource();
         $notificationReader->filter = new UserNotificationFilter();
         $notificationReader->addOrder($notificationReader->model->id, SortOrder::DESCENDING);
         $notificationReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
         foreach ($notificationReader->getData() as $notificationRow) {
 
             $row = new BootstrapClickableTableRow($table);
+
+            $row->addText($notificationRow->category->category);
+            $row->addText($notificationRow->source->subject);
+
 
             if ($notificationRow->read) {
                 $row->addText($notificationRow->subject);
@@ -160,6 +206,7 @@ class UserNotificationInboxSite extends AbstractSite
 
             $site = clone(UserNotificationInboxSite::$site);
             $site->addParameter(new NotificationParameter($notificationRow->id));
+            $site->addParameter(new SourceParameter());
             $row->addClickableSite($site);
 
         }
@@ -175,10 +222,21 @@ class UserNotificationInboxSite extends AbstractSite
 
            $contentType =  $notificationParameter->getContentType();
 
+
+           $title=new AdminTitle($layout->col3);
+           $title->content=$contentType->getSubject();
+
+           $btn=new AdminSiteButton($layout->col3);
+           $btn->site=$contentType->getSubjectViewSite();
+
            if ($contentType->hasView()) {
                $contentType->getView($layout->col3);
            }
 
+
+
+
+ /*
             $btn = new AdminSiteButton($layout->col3);
             $btn->site = $contentType->getSubjectViewSite();
 
@@ -188,7 +246,7 @@ class UserNotificationInboxSite extends AbstractSite
 
 
             $form = new ForwardContentForm($layout->col3);
-            $form->contentType= $contentType;
+            $form->contentType= $contentType;*/
 
             // share
             // favorite
