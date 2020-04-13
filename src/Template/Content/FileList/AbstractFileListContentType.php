@@ -4,10 +4,8 @@
 namespace Nemundo\Process\Template\Content\FileList;
 
 
-use Nemundo\Core\Http\Request\File\FileRequest;
 use Nemundo\Core\Random\UniqueId;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
-use Nemundo\Process\Template\Data\TemplateMultiFile\TemplateMultiFile;
 
 abstract class AbstractFileListContentType extends AbstractTreeContentType
 {
@@ -15,8 +13,8 @@ abstract class AbstractFileListContentType extends AbstractTreeContentType
     public function __construct($dataId = null)
     {
 
-        $this->formClass= FileListContentForm::class;
-        $this->viewClass= FileListContentView::class;
+        $this->formClass = FileListContentForm::class;
+        $this->viewClass = FileListContentView::class;
 
         parent::__construct($dataId);
     }

@@ -7,11 +7,11 @@ namespace Nemundo\Process\Group\Com\Table;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
+use Nemundo\Core\Language\LanguageCode;
+use Nemundo\Html\Table\Th;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
-use Nemundo\Process\Group\Parameter\GroupParameter;
 use Nemundo\Process\Group\Parameter\GroupUserParameter;
 use Nemundo\Process\Group\Site\GroupUserDeleteSite;
-use Nemundo\User\Parameter\UserParameter;
 
 class GroupUserTable extends AdminTable
 {
@@ -21,13 +21,18 @@ class GroupUserTable extends AdminTable
     public function getContent()
     {
 
-        $header=new TableHeader($this);
-        $header->addText('User');
+        $header = new TableHeader($this);
+        //$header->addText('User');
+
+        $th = new Th($header);
+        $th->content[LanguageCode::EN] = 'User';
+        $th->content[LanguageCode::DE] = 'Benutzer';
+
         $header->addEmpty();
 
         $groupReader = new GroupUserReader();
         $groupReader->model->loadUser();
-        $groupReader->filter->andEqual($groupReader->model->groupId,$this->groupId );
+        $groupReader->filter->andEqual($groupReader->model->groupId, $this->groupId);
         $groupReader->addOrder($groupReader->model->user->displayName);
         foreach ($groupReader->getData() as $groupUserRow) {
             $row = new TableRow($this);

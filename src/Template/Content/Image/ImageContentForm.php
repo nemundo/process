@@ -7,7 +7,7 @@ use Nemundo\Html\Form\Input\AcceptFileType;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapFileUpload;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 
-class ImageContentForm extends AbstractContentForm
+class ImageContentForm extends AbstractImageContentForm  // AbstractContentForm
 {
 
     /**

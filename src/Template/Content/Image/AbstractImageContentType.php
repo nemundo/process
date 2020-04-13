@@ -5,7 +5,10 @@ namespace Nemundo\Process\Template\Content\Image;
 
 use Nemundo\Core\Http\Request\File\FileRequest;
 use Nemundo\Core\Language\LanguageCode;
+use Nemundo\Model\Data\Property\File\FileProperty;
+use Nemundo\Model\Data\Property\File\ImageDataProperty;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
+use Nemundo\Process\Template\Content\File\AbstractFileContentType;
 use Nemundo\Process\Template\Data\TemplateImage\TemplateImage;
 use Nemundo\Process\Template\Data\TemplateImage\TemplateImageDelete;
 use Nemundo\Process\Template\Data\TemplateImage\TemplateImageReader;
@@ -19,7 +22,12 @@ abstract class AbstractImageContentType extends AbstractTreeContentType
     /**
      * @var FileRequest
      */
-    public $fileRequest;
+    //public $fileRequest;
+
+    /**
+     * @var FileProperty
+     */
+    public $image;
 
 
     public function __construct($dataId = null)
@@ -31,6 +39,8 @@ abstract class AbstractImageContentType extends AbstractTreeContentType
         $this->formClass = ImageContentForm::class;
         $this->viewClass = ImageContentView::class;
 
+        $this->image=new FileProperty();
+
         parent::__construct($dataId);
 
     }
@@ -40,7 +50,8 @@ abstract class AbstractImageContentType extends AbstractTreeContentType
     {
 
         $data = new TemplateImage();
-        $data->image->fromFileRequest($this->fileRequest);
+        //$data->image->fromFileRequest($this->fileRequest);
+        $data->image->fromFileProperty($this->image);
         $this->dataId = $data->save();
 
     }
@@ -49,7 +60,7 @@ abstract class AbstractImageContentType extends AbstractTreeContentType
     protected function onIndex()
     {
 
-        $imageRow = $this->getDataRow();
+        $imageRow =(new TemplateImageReader())->getRowById($this->dataId);  // $this->getDataRow();
 
         $data = new TemplateImageIndex();
         $data->parentId = $this->getParentId();
@@ -110,7 +121,11 @@ abstract class AbstractImageContentType extends AbstractTreeContentType
 
     public function getSubject()
     {
-        return $this->getDataRow()->image->getFilename();
+
+       $dataRow= (new TemplateImageReader())->getRowById($this->dataId);
+      return $dataRow->image->getFilename();
+
+      //  return $this->getDataRow()->image->getFilename();
     }
 
 }

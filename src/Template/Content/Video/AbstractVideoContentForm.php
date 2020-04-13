@@ -14,7 +14,7 @@ abstract class AbstractVideoContentForm extends AbstractFileContentForm
     protected function loadContainer()
     {
         parent::loadContainer();
-        $this->file->acceptFileType = AcceptFileType::VIDEO;
+        $this->image->acceptFileType = AcceptFileType::VIDEO;
     }
 
 }

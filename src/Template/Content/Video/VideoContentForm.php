@@ -10,7 +10,7 @@ class VideoContentForm extends AbstractVideoContentForm
     protected function loadContainer()
     {
         parent::loadContainer();
-        $this->file->label = 'Video';
+        $this->image->label = 'Video';
 
     }
 

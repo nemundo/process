@@ -18,15 +18,15 @@ abstract class AbstractFileContentForm extends AbstractContentForm
     /**
      * @var BootstrapFileUpload
      */
-    protected $file;
+    protected $image;
 
 
     protected function loadContainer()
     {
 
-        $this->file = new BootstrapFileUpload($this);
-        $this->file->label = 'File';
-        $this->file->multiUpload = false;
+        $this->image = new BootstrapFileUpload($this);
+        $this->image->label = 'File';
+        $this->image->multiUpload = false;
 
         parent::loadContainer();
 
@@ -35,7 +35,7 @@ abstract class AbstractFileContentForm extends AbstractContentForm
     protected function onSubmit()
     {
 
-        $this->contentType->file->fromFileRequest($this->file->getFileRequest());
+        $this->contentType->file->fromFileRequest($this->image->getFileRequest());
         $this->contentType->saveType();
 
     }

@@ -15,7 +15,7 @@ use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Process\Content\Com\Form\ContentGroupForm;
 use Nemundo\Process\Content\Com\Table\ContentSubjectTable;
 use Nemundo\Process\Content\Data\Content\ContentReader;
-use Nemundo\Process\Content\Data\ContentGroup\ContentGroupReader;
+
 use Nemundo\Process\Content\Parameter\DataIdParameter;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Web\Action\AbstractActionPanel;
@@ -72,7 +72,12 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
     /**
      * @var ActionSite
      */
-    protected $access;
+    //protected $access;
+
+    /**
+     * @var AdminSiteButton
+     */
+    protected $newButton;
 
     protected function loadActionSite()
     {
@@ -84,8 +89,8 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         $this->index->onAction = function () {
 
             if ($this->contentType->hasForm()) {
-            $btn = new AdminSiteButton($this);
-            $btn->site = $this->new;
+            $this->newButton = new AdminSiteButton($this);
+            $this->newButton->site = $this->new;
             }
 
             $this->loadIndex();
@@ -168,7 +173,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         };
 
 
-        $this->access = new ActionSite($this);
+        /*$this->access = new ActionSite($this);
         $this->access->title[LanguageCode::EN] = 'Access';
         $this->access->title[LanguageCode::DE] = 'Zugriff';
         $this->access->actionName = 'access';
@@ -177,7 +182,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
             $dataId = (new DataIdParameter())->getValue();
             $this->loadAccess($dataId);
 
-        };
+        };*/
 
     }
 
@@ -242,6 +247,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
     }
 
 
+    /*
     protected function loadAccess($dataId)
     {
 
@@ -272,7 +278,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         // remove
 
 
-    }
+    }*/
 
 
     protected function loadActive($dataId)
@@ -314,6 +320,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
     }
 
 
+    /*
     protected function getAccessSite($dataId)
     {
 
@@ -321,7 +328,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         $site->addParameter(new DataIdParameter($dataId));
         return $site;
 
-    }
+    }*/
 
 
     protected function getDeleteSite($dataId)

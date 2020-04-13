@@ -10,7 +10,7 @@ class AudioContentForm extends AbstractAudioContentForm
     protected function loadContainer()
     {
         parent::loadContainer();
-        $this->file->label = 'Audio';
+        $this->image->label = 'Audio';
     }
 
 }
