@@ -448,7 +448,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
     // clearAssignment
-    public function cancelAssignment()
+   /* public function cancelAssignment()
     {
 
         // z.B. bei Verbesserung
@@ -464,7 +464,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
          $update->filter->andEqual($update->model->sourceId, $this->getContentId());
          $update->update();*/
 
-    }
+    //}
 
 
     public function changeStatus(AbstractContentType $status)

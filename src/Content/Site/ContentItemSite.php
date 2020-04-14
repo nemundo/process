@@ -78,6 +78,7 @@ class ContentItemSite extends AbstractSite
         }
 
         $table1->addLabelValue('Content Type Class', $contentType->getClassName());
+        $table1->addLabelValue('Content Type Id', $contentType->typeId);
 
 
         $table1->addLabelValue('Content Id', $contentType->getContentId());
