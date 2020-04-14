@@ -13,7 +13,7 @@ class ImageContentForm extends AbstractImageContentForm  // AbstractContentForm
     /**
      * @var BootstrapFileUpload
      */
-    private $image;
+   /* private $image;
 
     public function getContent()
     {
@@ -39,6 +39,6 @@ class ImageContentForm extends AbstractImageContentForm  // AbstractContentForm
 
         }
 
-    }
+    }*/
 
 }
