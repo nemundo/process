@@ -5,7 +5,6 @@ namespace Nemundo\Process\Template\Content\ImageList;
 
 
 use Nemundo\Admin\Com\Table\AdminTable;
-use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Html\Form\Input\AcceptFileType;
@@ -14,7 +13,6 @@ use Nemundo\Package\Bootstrap\Image\BootstrapResponsiveImage;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Template\Content\Image\ImageContentType;
 use Nemundo\Process\Template\Data\TemplateImageIndex\TemplateImageIndexReader;
-use Nemundo\Process\Template\Parameter\FileParameter;
 use Nemundo\Process\Template\Parameter\ImageParameter;
 use Nemundo\Process\Template\Site\Image\ImageInactiveSite;
 
@@ -50,10 +48,10 @@ abstract class AbstractImageListContentForm extends AbstractContentForm
     public function getContent()
     {
 
-        $contentId =$this->contentType->getContentId();
+        $contentId = $this->contentType->getContentId();
 
         $reader = new TemplateImageIndexReader();
-      $reader->model->loadContent();
+        $reader->model->loadContent();
         $reader->filter->andEqual($reader->model->parentId, $contentId);
 
         $header = new TableHeader($this->table);
@@ -120,7 +118,8 @@ abstract class AbstractImageListContentForm extends AbstractContentForm
 
             $type = new ImageContentType();
             $type->parentId = $this->contentType->getContentId();
-            $type->fileRequest = $fileRequest;
+            $type->image->fromFileRequest($fileRequest);
+            //$type->fileRequest = $fileRequest;
             $type->saveType();
 
         }

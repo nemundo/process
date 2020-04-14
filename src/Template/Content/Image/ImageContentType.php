@@ -12,7 +12,7 @@ class ImageContentType extends AbstractImageContentType
     /**
      * @var FileRequest
      */
-    public $fileRequest;
+    //public $fileRequest;
 
 
     protected function loadContentType()
