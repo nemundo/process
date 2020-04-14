@@ -79,7 +79,7 @@ abstract class AbstractTreeContentType extends AbstractContentType
 
     }
 
-   protected function isActive()
+    protected function isActive()
     {
         return true;
     }

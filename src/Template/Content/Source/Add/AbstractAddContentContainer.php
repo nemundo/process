@@ -7,9 +7,9 @@ namespace Nemundo\Process\Template\Content\Source\Add;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Core\Http\Request\Post\PostRequest;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
-use Nemundo\Process\App\Assignment\Parameter\SourceParameter;
 use Nemundo\Process\Content\Collection\AbstractContentTypeCollection;
 use Nemundo\Process\Content\Form\AbstractContentContainer;
+use Nemundo\Process\Template\Content\Source\Parameter\SourceParameter;
 
 
 class AbstractAddContentContainer extends AbstractContentContainer

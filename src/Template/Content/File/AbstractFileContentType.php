@@ -7,8 +7,6 @@ namespace Nemundo\Process\Template\Content\File;
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
-use Nemundo\Dev\Deployment\DeploymentConfig;
-use Nemundo\Dev\Deployment\StagingEnvironment;
 use Nemundo\Model\Data\Property\File\FileProperty;
 use Nemundo\Model\Parameter\FilenameParameter;
 use Nemundo\Process\App\Notification\Type\NotificationTrait;
@@ -122,6 +120,12 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
     protected function onDelete()
     {
         (new TemplateFileDelete())->deleteById($this->dataId);
+    }
+
+
+    public function isActive()
+    {
+        return $this->getDataRow()->active;
     }
 
 

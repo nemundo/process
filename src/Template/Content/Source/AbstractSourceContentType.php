@@ -7,14 +7,12 @@ namespace Nemundo\Process\Template\Content\Source;
 use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
 use Nemundo\Process\App\Notification\Type\NotificationTrait;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
-use Nemundo\Process\Log\Type\LogTrait;
 use Nemundo\Process\Template\Data\SourceLog\SourceLogReader;
 
 abstract class AbstractSourceContentType extends AbstractTreeContentType
 {
 
-    //use LogTrait;
-use NotificationTrait;
+    use NotificationTrait;
 
     public function getDataRow()
     {
@@ -37,7 +35,7 @@ use NotificationTrait;
 
     public function getMessage()
     {
-        return $this->getSubject();   // TODO: Implement getMessage() method.
+        return $this->getSubject();
     }
 
 }

@@ -5,10 +5,10 @@ namespace Nemundo\Process\Template\Content\Source\Add;
 
 
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
-use Nemundo\Process\App\Assignment\Parameter\SourceParameter;
 use Nemundo\Process\App\Document\Data\Document\DocumentReader;
 use Nemundo\Process\Content\Data\ContentType\ContentTypeReader;
 use Nemundo\Process\Content\Form\AbstractContentForm;
+use Nemundo\Process\Template\Content\Source\Parameter\SourceParameter;
 
 
 class SourceAddContentForm extends AbstractContentForm

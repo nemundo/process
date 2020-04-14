@@ -447,25 +447,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
     }
 
-    // clearAssignment
-   /* public function cancelAssignment()
-    {
-
-        // z.B. bei Verbesserung
-
-        //(new Debug())->write('cancel assignment');
-
-        // bei Absenz Abbruch
-
-        //(new Debug())->write('cancel Assignment');
-
-        /* $update = new AssignmentUpdate();
-         $update->statusId = (new CancelAssignmentStatus())->id;
-         $update->filter->andEqual($update->model->sourceId, $this->getContentId());
-         $update->update();*/
-
-    //}
-
 
     public function changeStatus(AbstractContentType $status)
     {
@@ -519,7 +500,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public function getStartDateTime()
     {
 
-       // $dateTime = $this->getDateTime(SortOrder::ASCENDING);
        $dateTime=$this->getDataRow()->dateTime;
         return $dateTime;
 
@@ -531,17 +511,11 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $dateTime = null;
         if ($this->getDataRow()->workflowClosed) {
-            //$dateTime = $this->getDateTime(SortOrder::DESCENDING);
 
             $reader = new TreeReader();
             $reader->model->loadChild();
             $reader->filter->andEqual($reader->model->parentId, $this->getContentId());
-            //$reader->addOrder($reader->model->id, SortOrder::DESCENDING);
             $reader->addOrder($reader->model->child->dateTime, SortOrder::DESCENDING);
-
-            //$reader->addOrder($reader->model->daid, $sortOrder);
-
-            // $dateTime = $reader->getRow()->child->dateTime;
             $dateTime = $reader->getRow()->child->dateTime;
 
         } else {
@@ -551,26 +525,6 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         return $dateTime;
 
     }
-
-
-    /*
-    private function getDateTime($sortOrder)
-    {
-
-        $reader = new TreeReader();
-        $reader->model->loadChild();
-        $reader->filter->andEqual($reader->model->parentId, $this->getContentId());
-        $reader->addOrder($reader->model->id, $sortOrder);
-        $reader->addOrder($reader->model->child->dateTime, $sortOrder);
-
-        //$reader->addOrder($reader->model->daid, $sortOrder);
-
-        // $dateTime = $reader->getRow()->child->dateTime;
-        $dateTime = $reader->getRow()->child->dateTime;
-
-        return $dateTime;
-
-    }*/
 
 
     public function getLeadTime()

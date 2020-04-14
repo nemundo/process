@@ -8,8 +8,6 @@ use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Data\Tree\TreeDelete;
-use Nemundo\Process\Content\Parameter\ContentParameter;
-use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Template\Content\Source\AbstractSourceContentType;
 use Nemundo\Process\Template\Data\SourceLog\SourceLog;
 
@@ -17,7 +15,7 @@ class ChildRemoveContentType extends AbstractSourceContentType
 {
 
 
-   public $removeId;
+    public $removeId;
 
 
     protected function loadContentType()
@@ -27,17 +25,16 @@ class ChildRemoveContentType extends AbstractSourceContentType
         $this->typeLabel[LanguageCode::DE] = 'Aufgabe entfernen';
         $this->typeId = '231b32b0-3629-4741-8c91-fa79cc6229e4';
 
-        $this->formClass=SourceRemoveContentPanel::class;
+        $this->formClass = SourceRemoveContentPanel::class;
 
     }
 
     protected function onCreate()
     {
 
-
         $delete = new TreeDelete();
         $delete->filter->andEqual($delete->model->parentId, $this->parentId);
-        $delete->filter->andEqual($delete->model->childId, $this->removeId); 
+        $delete->filter->andEqual($delete->model->childId, $this->removeId);
         $delete->delete();
 
         $data = new SourceLog();
@@ -45,12 +42,9 @@ class ChildRemoveContentType extends AbstractSourceContentType
         $this->dataId = $data->save();
 
 
-        $contentReader  =new ContentReader();
+        $contentReader = new ContentReader();
         $contentReader->model->loadContentType();
         $contentType = $contentReader->getRowById($this->removeId)->getContentType();
-
-        //(new Debug())->write($contentType->getSubject());
-        //exit;
 
         $contentType->saveIndex();
 
@@ -58,24 +52,14 @@ class ChildRemoveContentType extends AbstractSourceContentType
     }
 
 
-
-
     public function getSubject()
     {
 
-        $subject[LanguageCode::EN]= 'Task/Child '.$this->getHyperlinkContent().' was removed';
-        $subject[LanguageCode::DE]= 'Aufgabe '.$this->getHyperlinkContent().' wurde entfernt';
+        $subject[LanguageCode::EN] = 'Task/Child ' . $this->getHyperlinkContent() . ' was removed';
+        $subject[LanguageCode::DE] = 'Aufgabe ' . $this->getHyperlinkContent() . ' wurde entfernt';
 
         return (new Translation())->getText($subject);
 
     }
-
-
-    /*
-    public function getMessage()
-    {
-     return $this->getSubject();   // TODO: Implement getMessage() method.
-    }*/
-
 
 }

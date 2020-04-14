@@ -43,16 +43,24 @@ class FileListContentView extends AbstractContentView
             //$row->addText($contentType->getSubject());
 
 
+            if ($contentType->isActive()) {
+
             $hyperlink = new UrlHyperlink($row);
             $hyperlink->content = $contentType->getDataRow()->file->getFilename();
             $hyperlink->url = $contentType->getDataRow()->file->getUrl();
 
-
-
             if ($this->showDeleteButton) {
                 $site = clone(FileInactiveSite::$site);
-                $site->addParameter(new FileParameter($child->dataId));
+                $site->addParameter(new FileParameter($contentType->getDataId()));
                 $row->addIconSite($site);
+            }
+
+            } else {
+
+                $row->strikeThrough=true;
+                $row->addText($contentType->getDataRow()->file->getFilename());
+                $row->addEmpty();
+
             }
 
         }
