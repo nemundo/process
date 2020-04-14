@@ -34,12 +34,6 @@ class WorkflowLogTable extends AbstractHtmlContainer
         return $this;
     }
 
-/*
-    public function addContentTypeFilter(AbstractTreeContentType $contentType)
-    {
-
-    }*/
-
 
     public function getContent()
     {
@@ -70,7 +64,6 @@ class WorkflowLogTable extends AbstractHtmlContainer
             $reader->filter->andFilter($filter);
         }
 
-        //$reader->addOrder($reader->model->itemOrder);
         $reader->addOrder($reader->model->child->dateTime);
         $reader->addOrder($reader->model->itemOrder);
 
@@ -79,22 +72,11 @@ class WorkflowLogTable extends AbstractHtmlContainer
             /** @var AbstractProcessStatus $contentType */
             $contentType = $treeRow->child->getContentType();
 
-            //if ($contentType->isActive()) {
-
             $row = new BootstrapClickableTableRow($table);
-            //$row->addText($contentType->getSubject());
-            //$row->addText($contentType->getClassName());
-
-            //$row->addText($contentType->getLog());
-
             $row->addText($contentType->getMessage());
             //$row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeLeadingZeroFormat(), true);
             $row->addText($treeRow->child->user->login . ' ' . $treeRow->child->dateTime->getShortDateTimeWithSecondLeadingZeroFormat(), true);
-
-
             $row->addClickableSite($contentType->getViewSite());
-
-            //}
 
         }
 
