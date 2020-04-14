@@ -20,6 +20,5 @@ $this->addModel(new \Nemundo\Process\Template\Data\TemplateNumber\TemplateNumber
 $this->addModel(new \Nemundo\Process\Template\Data\TemplateText\TemplateTextModel());
 $this->addModel(new \Nemundo\Process\Template\Data\TemplateTextLog\TemplateTextLogModel());
 $this->addModel(new \Nemundo\Process\Template\Data\TemplateYesNo\TemplateYesNoModel());
-$this->addModel(new \Nemundo\Process\Template\Data\Youtube\YoutubeModel());
 }
 }

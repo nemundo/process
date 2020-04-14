@@ -591,6 +591,28 @@
         },
         {
             "template": "default",
+            "model_id": "e522c352-1198-4690-b3f2-f25a86cacd2a",
+            "label": "Template Web File",
+            "class_name": "TemplateWebFile",
+            "table_name": "template_template_web_file",
+            "namespace": "Nemundo\\Process\\Template\\Data\\TemplateWebFile",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": true,
+            "type": [
+                {
+                    "type": "file",
+                    "label": "File",
+                    "field_name": "file",
+                    "variable_name": "file",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "e7ae3aea-c4b1-4b5f-95ee-dea3639dc0bb",
             "label": "Template Yes No",
             "class_name": "TemplateYesNo",
@@ -642,7 +664,7 @@
             "namespace": "Nemundo\\Process\\Template\\Data\\Youtube",
             "row_class_name": "",
             "primary_index": "auto_increment",
-            "is_deleted": false,
+            "is_deleted": true,
             "type": [
                 {
                     "type": "text",
