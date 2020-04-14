@@ -21,7 +21,6 @@ abstract class AbstractImageContentType extends AbstractTreeContentType
      */
     public $image;
 
-
     public function __construct($dataId = null)
     {
 
