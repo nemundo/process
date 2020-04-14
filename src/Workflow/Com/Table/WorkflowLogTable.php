@@ -72,7 +72,7 @@ class WorkflowLogTable extends AbstractHtmlContainer
 
         //$reader->addOrder($reader->model->itemOrder);
         $reader->addOrder($reader->model->child->dateTime);
-        //$reader->addOrder($reader->model->itemOrder);
+        $reader->addOrder($reader->model->itemOrder);
 
         foreach ($reader->getData() as $treeRow) {
 
