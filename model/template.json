@@ -606,7 +606,7 @@
             "namespace": "Nemundo\\Process\\Template\\Data\\TemplateWebFile",
             "row_class_name": "",
             "primary_index": "auto_increment",
-            "is_deleted": true,
+            "is_deleted": false,
             "type": [
                 {
                     "type": "file",

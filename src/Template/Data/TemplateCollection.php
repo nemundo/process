@@ -18,6 +18,7 @@ $this->addModel(new \Nemundo\Process\Template\Data\TemplateMultiImage\TemplateMu
 $this->addModel(new \Nemundo\Process\Template\Data\TemplateNumber\TemplateNumberModel());
 $this->addModel(new \Nemundo\Process\Template\Data\TemplateText\TemplateTextModel());
 $this->addModel(new \Nemundo\Process\Template\Data\TemplateTextLog\TemplateTextLogModel());
+$this->addModel(new \Nemundo\Process\Template\Data\TemplateWebFile\TemplateWebFileModel());
 $this->addModel(new \Nemundo\Process\Template\Data\TemplateYesNo\TemplateYesNoModel());
 }
 }
