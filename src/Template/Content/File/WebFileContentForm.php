@@ -36,10 +36,9 @@ class WebFileContentForm extends BootstrapForm  // AbstractContentForm
     protected function onSubmit()
     {
 
-
         $data = new TemplateWebFile();
         $data->file->fromFileRequest($this->file->getFileRequest());
-       $data->save();
+        $data->save();
 
 
             //$type = clone($this->contentType);  // new FileContentType();
