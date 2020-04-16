@@ -34,9 +34,8 @@ class FileUploadForm extends BootstrapForm
 
             // Check for Video etc.
 
-
             $type = new FileContentType();
-            $type->fileRequest = $fileRequest;
+            $type->file->fromFileRequest($fileRequest);
             $type->saveType();
 
         }

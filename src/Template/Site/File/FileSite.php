@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Nemundo\Process\Template\Site;
+namespace Nemundo\Process\Template\Site\File;
 
 
 use Nemundo\Admin\Com\Button\AdminSiteButton;
@@ -38,18 +38,25 @@ class FileSite extends AbstractSite
 
     protected function loadSite()
     {
+
         $this->title = 'File Template';
         $this->url = 'file-template';
         // TODO: Implement loadSite() method.
+
         FileSite::$site = $this;
 
+
+        new PdfExtractSite($this);
+
+
+        /*
         new FileItemSite($this);
         new PdfExtractSite($this);
         new FileDeleteSite($this);
         new FileActiveSite($this);
 
         new ImageInactiveSite($this);
-
+*/
 
 
     }
@@ -160,16 +167,20 @@ class FileSite extends AbstractSite
 
             $table = new AdminLabelValueTable($layout->col2);
             $table->addLabelValue('Subject', $fileType->getSubject());
+            $table->addLabelValue('File Extension', $fileType->getFileExtension());
+
             $table->addLabelYesNoValue('Has Parent', $fileType->hasParent());
             $table->addLabelValue('Child Count', $fileType->getChildCount());
             $table->addLabelValue('Parent Count', $fileType->getParentCount());
 
 
-
+if ($fileType->isPdf()) {
             $btn = new AdminSiteButton($layout->col2);
             $btn->site = clone(PdfExtractSite::$site);
             $btn->site->addParameter(new FileParameter());
+}
 
+            /*
             $btn = new AdminSiteButton($layout->col2);
             $btn->site = clone(FileInactiveSite::$site);
             $btn->site->addParameter(new FileParameter());
@@ -184,7 +195,7 @@ class FileSite extends AbstractSite
 
             $btn = new AdminSiteButton($layout->col2);
             $btn->site = clone(FileDeleteSite::$site);
-            $btn->site->addParameter(new FileParameter());
+            $btn->site->addParameter(new FileParameter());*/
 
             $log =new ContentLogTable($layout->col2);
             $log->contentType = $fileType;
@@ -196,9 +207,13 @@ class FileSite extends AbstractSite
             $table = new SourceTable($layout->col2);
             $table->contentType = $fileType;
 
+
+            /*
             $form = new AddContentForm($layout->col2);
             $form->contentType = $fileType;
             $form->redirectSite = new Site();
+*/
+
 
 
         }

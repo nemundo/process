@@ -18,10 +18,8 @@ class FileParameter extends AbstractUrlParameter
     public function getContentType() {
 
         $type = new FileContentType($this->getValue());
-
         return $type;
 
     }
-
 
 }

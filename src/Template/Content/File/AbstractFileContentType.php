@@ -7,6 +7,7 @@ namespace Nemundo\Process\Template\Content\File;
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
+use Nemundo\Core\Type\File\File;
 use Nemundo\Model\Data\Property\File\FileProperty;
 use Nemundo\Model\Parameter\FilenameParameter;
 use Nemundo\Process\App\Notification\Type\NotificationTrait;
@@ -180,5 +181,44 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
     {
         return $this->getDataRow()->text;
     }
+
+
+    public function getFilename() {
+        return $this->getDataRow()->file->getFilename();
+    }
+
+    public function getFullFilename() {
+       return $this->getDataRow()->file->getFullFilename();
+    }
+
+
+    public function getFileExtension() {
+
+        $file=new File($this->getDataRow()->file->getFullFilename());
+        return $file->getFileExtension();
+
+    }
+
+
+    public function isPdf() {
+
+        $value = false;
+        if ($this->getFileExtension()==='pdf') {
+            $value=true;
+        }
+
+        return $value;
+
+    }
+
+
+    public function isImage() {
+
+    }
+
+    public function isVideo() {
+
+    }
+
 
 }

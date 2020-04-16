@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Nemundo\Process\Template\Site;
+namespace Nemundo\Process\Template\Site\Image;
 
 
 use Nemundo\Admin\Com\Button\AdminSiteButton;

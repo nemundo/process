@@ -1,11 +1,14 @@
 <?php
 
 
-namespace Nemundo\Process\Template\Site;
+namespace Nemundo\Process\Template\Site\File;
 
 
 use Nemundo\Core\Debug\Debug;
+use Nemundo\Core\File\Pdf\PdfFile;
 use Nemundo\Core\File\UniqueFilename;
+use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
+use Nemundo\Package\Bootstrap\FormElement\BootstrapLargeTextBox;
 use Nemundo\Process\Template\Content\File\FileContentType;
 use Nemundo\Process\Template\Parameter\FileParameter;
 use Nemundo\Project\Path\TmpPath;
@@ -34,11 +37,30 @@ class PdfExtractSite extends AbstractSite
     public function loadContent()
     {
 
+        $page = (new DefaultTemplateFactory())->getDefaultTemplate();
+
+
         $fileId = (new FileParameter())->getValue();
 
         $fileType = (new FileContentType($fileId));
-        $fileRow = $fileType->getDataRow();
 
+        //$fileRow = $fileType->getDataRow();
+
+
+        $pdfFile = new PdfFile($fileType->getFullFilename());
+
+
+        $textBox = new BootstrapLargeTextBox($page);
+        $textBox->value = $pdfFile->getPdfText();
+
+
+
+        $page->render();
+
+
+
+
+        /*
         $filenameInput = $fileRow->file->getFullFilename();
         $filenameOutput = (new TmpPath())
             ->addPath((new UniqueFilename())->getUniqueFilename('txt'))
@@ -52,7 +74,7 @@ class PdfExtractSite extends AbstractSite
 
         $output = shell_exec($command);
 
-        (new Debug())->write($output);
+        (new Debug())->write($output);*/
 
 
 
