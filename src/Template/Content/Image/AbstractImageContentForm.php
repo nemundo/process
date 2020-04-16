@@ -9,19 +9,8 @@ use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Template\Content\File\AbstractFileContentForm;
 use Nemundo\Process\Template\Content\File\AbstractFileContentType;
 
-abstract class AbstractImageContentForm extends AbstractContentForm  // AbstractFileContentForm
+abstract class AbstractImageContentForm extends AbstractContentForm
 {
-
-
-    /*
-    protected function loadContainer()
-    {
-
-        parent::loadContainer();
-        $this->file->acceptFileType = AcceptFileType::IMAGE;
-
-    }*/
-
 
     /**
      * @var AbstractImageContentType
@@ -40,11 +29,14 @@ abstract class AbstractImageContentForm extends AbstractContentForm  // Abstract
         $this->image = new BootstrapFileUpload($this);
         $this->image->label = 'Image';
         $this->image->multiUpload = false;
+        //$this->image->acceptFileType = AcceptFileType::WEB_IMAGE;
         $this->image->acceptFileType = AcceptFileType::IMAGE;
+
 
         parent::loadContainer();
 
     }
+
 
     protected function onSubmit()
     {
