@@ -32,16 +32,16 @@ public $dataContentId;
 public $dataContent;
 
 protected function loadModel() {
-$this->tableName = "template_template_multi_image";
-$this->aliasTableName = "template_template_multi_image";
+$this->tableName = "process_template_multi_image";
+$this->aliasTableName = "process_template_multi_image";
 $this->label = "Template Multi Image";
 
 $this->primaryIndex = new \Nemundo\Db\Index\AutoIncrementIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
-$this->id->tableName = "template_template_multi_image";
+$this->id->tableName = "process_template_multi_image";
 $this->id->fieldName = "id";
-$this->id->aliasFieldName = "template_template_multi_image_id";
+$this->id->aliasFieldName = "process_template_multi_image_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
 $this->id->visible->form = false;
@@ -51,9 +51,9 @@ $this->id->visible->form = false;
 
 
 $this->image = new \Nemundo\Model\Type\File\ImageType($this);
-$this->image->tableName = "template_template_multi_image";
+$this->image->tableName = "process_template_multi_image";
 $this->image->fieldName = "image";
-$this->image->aliasFieldName = "template_template_multi_image_image";
+$this->image->aliasFieldName = "process_template_multi_image_image";
 $this->image->label = "Image";
 $this->image->allowNullValue = false;
 $this->imageAutoSize400 = new \Nemundo\Model\Type\ImageFormat\AutoSizeModelImageFormat($this->image);
@@ -62,9 +62,9 @@ $this->imageAutoSize1200 = new \Nemundo\Model\Type\ImageFormat\AutoSizeModelImag
 $this->imageAutoSize1200->size = 1200;
 
 $this->dataContentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
-$this->dataContentId->tableName = "template_template_multi_image";
+$this->dataContentId->tableName = "process_template_multi_image";
 $this->dataContentId->fieldName = "data_content";
-$this->dataContentId->aliasFieldName = "template_template_multi_image_data_content";
+$this->dataContentId->aliasFieldName = "process_template_multi_image_data_content";
 $this->dataContentId->label = "Data Content";
 $this->dataContentId->allowNullValue = false;
 
@@ -75,10 +75,10 @@ $index->addType($this->dataContentId);
 }
 public function loadDataContent() {
 if ($this->dataContent == null) {
-$this->dataContent = new \Nemundo\Process\Content\Data\Content\ContentExternalType($this, "template_template_multi_image_data_content");
-$this->dataContent->tableName = "template_template_multi_image";
+$this->dataContent = new \Nemundo\Process\Content\Data\Content\ContentExternalType($this, "process_template_multi_image_data_content");
+$this->dataContent->tableName = "process_template_multi_image";
 $this->dataContent->fieldName = "data_content";
-$this->dataContent->aliasFieldName = "template_template_multi_image_data_content";
+$this->dataContent->aliasFieldName = "process_template_multi_image_data_content";
 $this->dataContent->label = "Data Content";
 }
 return $this;

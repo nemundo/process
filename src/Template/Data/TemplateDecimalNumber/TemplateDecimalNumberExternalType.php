@@ -14,7 +14,7 @@ public $decimalNumber;
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = TemplateDecimalNumberModel::class;
-$this->externalTableName = "template_template_decimal_number";
+$this->externalTableName = "process_template_decimal_number";
 $this->aliasTableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id = new \Nemundo\Model\Type\Id\IdType();
 $this->id->fieldName = "id";

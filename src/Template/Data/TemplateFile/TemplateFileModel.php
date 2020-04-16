@@ -27,16 +27,16 @@ public $content;
 public $text;
 
 protected function loadModel() {
-$this->tableName = "template_template_file";
-$this->aliasTableName = "template_template_file";
+$this->tableName = "process_template_file";
+$this->aliasTableName = "process_template_file";
 $this->label = "Template File";
 
 $this->primaryIndex = new \Nemundo\Db\Index\AutoIncrementIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
-$this->id->tableName = "template_template_file";
+$this->id->tableName = "process_template_file";
 $this->id->fieldName = "id";
-$this->id->aliasFieldName = "template_template_file_id";
+$this->id->aliasFieldName = "process_template_file_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
 $this->id->visible->form = false;
@@ -46,24 +46,24 @@ $this->id->visible->form = false;
 
 
 $this->file = new \Nemundo\Model\Type\File\RedirectFilenameType($this);
-$this->file->tableName = "template_template_file";
+$this->file->tableName = "process_template_file";
 $this->file->fieldName = "file";
-$this->file->aliasFieldName = "template_template_file_file";
+$this->file->aliasFieldName = "process_template_file_file";
 $this->file->label = "File";
 $this->file->allowNullValue = false;
 $this->file->redirectSite = \Nemundo\Process\Template\Data\TemplateFile\Redirect\TemplateFileRedirectConfig::$redirectTemplateFileFileSite;
 
 $this->contentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
-$this->contentId->tableName = "template_template_file";
+$this->contentId->tableName = "process_template_file";
 $this->contentId->fieldName = "content";
-$this->contentId->aliasFieldName = "template_template_file_content";
+$this->contentId->aliasFieldName = "process_template_file_content";
 $this->contentId->label = "Content";
 $this->contentId->allowNullValue = false;
 
 $this->text = new \Nemundo\Model\Type\Text\LargeTextType($this);
-$this->text->tableName = "template_template_file";
+$this->text->tableName = "process_template_file";
 $this->text->fieldName = "text";
-$this->text->aliasFieldName = "template_template_file_text";
+$this->text->aliasFieldName = "process_template_file_text";
 $this->text->label = "Text";
 $this->text->allowNullValue = false;
 
@@ -74,10 +74,10 @@ $index->addType($this->contentId);
 }
 public function loadContent() {
 if ($this->content == null) {
-$this->content = new \Nemundo\Process\Content\Data\Content\ContentExternalType($this, "template_template_file_content");
-$this->content->tableName = "template_template_file";
+$this->content = new \Nemundo\Process\Content\Data\Content\ContentExternalType($this, "process_template_file_content");
+$this->content->tableName = "process_template_file";
 $this->content->fieldName = "content";
-$this->content->aliasFieldName = "template_template_file_content";
+$this->content->aliasFieldName = "process_template_file_content";
 $this->content->label = "Content";
 }
 return $this;

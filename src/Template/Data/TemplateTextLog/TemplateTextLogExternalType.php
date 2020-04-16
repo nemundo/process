@@ -19,7 +19,7 @@ public $textTo;
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = TemplateTextLogModel::class;
-$this->externalTableName = "template_template_text_log";
+$this->externalTableName = "process_template_text_log";
 $this->aliasTableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id = new \Nemundo\Model\Type\Id\IdType();
 $this->id->fieldName = "id";

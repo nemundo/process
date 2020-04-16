@@ -22,16 +22,16 @@ public $imageAutoSize400;
 public $imageAutoSize1200;
 
 protected function loadModel() {
-$this->tableName = "template_template_image";
-$this->aliasTableName = "template_template_image";
+$this->tableName = "process_template_image";
+$this->aliasTableName = "process_template_image";
 $this->label = "Template Image";
 
 $this->primaryIndex = new \Nemundo\Db\Index\AutoIncrementIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
-$this->id->tableName = "template_template_image";
+$this->id->tableName = "process_template_image";
 $this->id->fieldName = "id";
-$this->id->aliasFieldName = "template_template_image_id";
+$this->id->aliasFieldName = "process_template_image_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
 $this->id->visible->form = false;
@@ -41,9 +41,9 @@ $this->id->visible->form = false;
 
 
 $this->image = new \Nemundo\Model\Type\File\ImageType($this);
-$this->image->tableName = "template_template_image";
+$this->image->tableName = "process_template_image";
 $this->image->fieldName = "image";
-$this->image->aliasFieldName = "template_template_image_image";
+$this->image->aliasFieldName = "process_template_image_image";
 $this->image->label = "Image";
 $this->image->allowNullValue = false;
 $this->imageAutoSize400 = new \Nemundo\Model\Type\ImageFormat\AutoSizeModelImageFormat($this->image);

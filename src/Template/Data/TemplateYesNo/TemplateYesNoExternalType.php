@@ -14,7 +14,7 @@ public $yesNo;
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = TemplateYesNoModel::class;
-$this->externalTableName = "template_template_yes_no";
+$this->externalTableName = "process_template_yes_no";
 $this->aliasTableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id = new \Nemundo\Model\Type\Id\IdType();
 $this->id->fieldName = "id";

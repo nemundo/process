@@ -29,7 +29,7 @@ public $dataContent;
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = TemplateMultiImageModel::class;
-$this->externalTableName = "template_template_multi_image";
+$this->externalTableName = "process_template_multi_image";
 $this->aliasTableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id = new \Nemundo\Model\Type\Id\IdType();
 $this->id->fieldName = "id";

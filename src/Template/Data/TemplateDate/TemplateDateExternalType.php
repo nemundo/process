@@ -14,7 +14,7 @@ public $date;
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = TemplateDateModel::class;
-$this->externalTableName = "template_template_date";
+$this->externalTableName = "process_template_date";
 $this->aliasTableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id = new \Nemundo\Model\Type\Id\IdType();
 $this->id->fieldName = "id";

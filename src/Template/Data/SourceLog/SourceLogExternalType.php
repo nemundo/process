@@ -19,7 +19,7 @@ public $source;
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = SourceLogModel::class;
-$this->externalTableName = "template_source_log";
+$this->externalTableName = "process_template_source_log";
 $this->aliasTableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id = new \Nemundo\Model\Type\Id\IdType();
 $this->id->fieldName = "id";

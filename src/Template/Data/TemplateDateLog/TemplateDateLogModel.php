@@ -17,16 +17,16 @@ public $dateFrom;
 public $dateTo;
 
 protected function loadModel() {
-$this->tableName = "template_template_date_log";
-$this->aliasTableName = "template_template_date_log";
+$this->tableName = "process_template_date_log";
+$this->aliasTableName = "process_template_date_log";
 $this->label = "Template Date Log";
 
 $this->primaryIndex = new \Nemundo\Db\Index\AutoIncrementIdPrimaryIndex();
 
 $this->id = new \Nemundo\Model\Type\Id\IdType($this);
-$this->id->tableName = "template_template_date_log";
+$this->id->tableName = "process_template_date_log";
 $this->id->fieldName = "id";
-$this->id->aliasFieldName = "template_template_date_log_id";
+$this->id->aliasFieldName = "process_template_date_log_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
 $this->id->visible->form = false;
@@ -35,16 +35,16 @@ $this->id->visible->view = false;
 $this->id->visible->form = false;
 
 $this->dateFrom = new \Nemundo\Model\Type\DateTime\DateType($this);
-$this->dateFrom->tableName = "template_template_date_log";
+$this->dateFrom->tableName = "process_template_date_log";
 $this->dateFrom->fieldName = "date_from";
-$this->dateFrom->aliasFieldName = "template_template_date_log_date_from";
+$this->dateFrom->aliasFieldName = "process_template_date_log_date_from";
 $this->dateFrom->label = "Date From";
 $this->dateFrom->allowNullValue = false;
 
 $this->dateTo = new \Nemundo\Model\Type\DateTime\DateType($this);
-$this->dateTo->tableName = "template_template_date_log";
+$this->dateTo->tableName = "process_template_date_log";
 $this->dateTo->fieldName = "date_to";
-$this->dateTo->aliasFieldName = "template_template_date_log_date_to";
+$this->dateTo->aliasFieldName = "process_template_date_log_date_to";
 $this->dateTo->label = "Date To";
 $this->dateTo->allowNullValue = false;
 

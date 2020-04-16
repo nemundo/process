@@ -19,7 +19,7 @@ public $dateTo;
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = TemplateDateLogModel::class;
-$this->externalTableName = "template_template_date_log";
+$this->externalTableName = "process_template_date_log";
 $this->aliasTableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id = new \Nemundo\Model\Type\Id\IdType();
 $this->id->fieldName = "id";

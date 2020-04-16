@@ -14,7 +14,7 @@ public $deadline;
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = DeadlineChangeModel::class;
-$this->externalTableName = "template_deadline_change";
+$this->externalTableName = "process_template_deadline_change";
 $this->aliasTableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id = new \Nemundo\Model\Type\Id\IdType();
 $this->id->fieldName = "id";

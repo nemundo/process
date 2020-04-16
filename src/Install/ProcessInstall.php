@@ -6,6 +6,7 @@ namespace Nemundo\Process\Install;
 use Nemundo\App\Script\Setup\ScriptSetup;
 use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\App\Application\Content\ApplicationContentType;
+use Nemundo\Process\App\Application\Install\ApplicationInstall;
 use Nemundo\Process\App\Assignment\Install\AssignmentInstall;
 use Nemundo\Process\App\Bookmark\Install\BookmarkInstall;
 use Nemundo\Process\App\Calendar\Install\CalendarInstall;
@@ -57,6 +58,7 @@ class ProcessInstall extends AbstractInstall
         (new WikiInstall())->install();
         (new PodcastInstall())->install();
 
+        (new ApplicationInstall())->install();
 
         (new TemplateInstall())->install();
         (new FavoriteInstall())->install();

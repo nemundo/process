@@ -9,7 +9,7 @@
             "model_id": "5d630988-afd0-4cca-a477-9dc0ffa5fd3a",
             "label": "Geo",
             "class_name": "Geo",
-            "table_name": "geo_geo",
+            "table_name": "process_geo",
             "namespace": "Nemundo\\Process\\Geo\\Data\\Geo",
             "row_class_name": "",
             "primary_index": "auto_increment",
