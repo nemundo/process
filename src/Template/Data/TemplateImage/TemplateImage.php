@@ -7,6 +7,11 @@ class TemplateImage extends \Nemundo\Model\Data\AbstractModelData {
 protected $model;
 
 /**
+* @var bool
+*/
+public $active;
+
+/**
 * @var \Nemundo\Model\Data\Property\File\ImageDataProperty
 */
 public $image;
@@ -17,6 +22,7 @@ $this->model = new TemplateImageModel();
 $this->image = new \Nemundo\Model\Data\Property\File\ImageDataProperty($this->model->image, $this->typeValueList);
 }
 public function save() {
+$this->typeValueList->setModelValue($this->model->active, $this->active);
 $id = parent::save();
 return $id;
 }

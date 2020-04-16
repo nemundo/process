@@ -5,6 +5,7 @@ namespace Nemundo\Process\Template\Site\Image;
 
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
+use Nemundo\Package\FontAwesome\Site\AbstractRestoreIconSite;
 use Nemundo\Process\Content\Parameter\ParentParameter;
 use Nemundo\Process\Template\Content\File\FileInactiveContentType;
 use Nemundo\Process\Template\Parameter\FileParameter;
@@ -12,7 +13,7 @@ use Nemundo\Process\Template\Parameter\ImageParameter;
 use Nemundo\Web\Url\UrlReferer;
 
 
-class ImageInactiveSite extends AbstractDeleteIconSite
+class ImageActiveSite extends AbstractRestoreIconSite
 {
 
     /**
@@ -22,10 +23,10 @@ class ImageInactiveSite extends AbstractDeleteIconSite
 
     protected function loadSite()
     {
-        $this->title='Inaktiv setzen';
-        $this->url = 'inactive-image';
-        $this->menuActive = false;
-      ImageInactiveSite::$site = $this;
+        //$this->title='Delete';
+        $this->url = 'restoree-image';
+      //  $this->menuActive = false;
+      ImageActiveSite::$site = $this;
     }
 
 
@@ -34,8 +35,15 @@ class ImageInactiveSite extends AbstractDeleteIconSite
 
         //$imageId = (new ImageParameter())->getValue();
 
+        //$type =  (new ImageParameter())->getContentType();
+
         $type =  (new ImageParameter())->getContentType();
-        $type->setInactive();
+        $type->setActive();
+
+
+        //(new Debug())->write($type->getSubject());
+        //exit;
+        //$type->deleteType();
 
 
         /*

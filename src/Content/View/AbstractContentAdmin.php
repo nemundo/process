@@ -13,7 +13,7 @@ use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Process\Content\Com\Form\ContentGroupForm;
-use Nemundo\Process\Content\Com\Table\ContentSubjectTable;
+use Nemundo\Process\Content\Com\Table\ContentLogTable;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 
 use Nemundo\Process\Content\Parameter\DataIdParameter;
@@ -240,7 +240,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         $table->addLabelValue($contentReader->model->user->label, $contentRow->user->displayName);
         $table->addLabelValue($contentReader->model->dateTime->label, $contentRow->dateTime->getShortDateTimeLeadingZeroFormat());
 
-        $log = new ContentSubjectTable($this);
+        $log = new ContentLogTable($this);
         $log->contentType = $contentType;
 
 

@@ -10,6 +10,7 @@ use Nemundo\Process\Template\Data\TemplateImage\TemplateImage;
 use Nemundo\Process\Template\Data\TemplateImage\TemplateImageDelete;
 use Nemundo\Process\Template\Data\TemplateImage\TemplateImageReader;
 use Nemundo\Process\Template\Data\TemplateImage\TemplateImageRow;
+use Nemundo\Process\Template\Data\TemplateImage\TemplateImageUpdate;
 use Nemundo\Process\Template\Data\TemplateImageIndex\TemplateImageIndex;
 use Nemundo\Process\Template\Data\TemplateImageIndex\TemplateImageIndexDelete;
 
@@ -41,6 +42,7 @@ abstract class AbstractImageContentType extends AbstractTreeContentType
     {
 
         $data = new TemplateImage();
+        $data->active = true;
         $data->image->fromFileProperty($this->image);
         $this->dataId = $data->save();
 
@@ -50,14 +52,28 @@ abstract class AbstractImageContentType extends AbstractTreeContentType
     protected function onIndex()
     {
 
-        $imageRow = (new TemplateImageReader())->getRowById($this->dataId);  // $this->getDataRow();
+        //$imageRow = (new TemplateImageReader())->getRowById($this->dataId);  // $this->getDataRow();
 
-        $data = new TemplateImageIndex();
-        $data->parentId = $this->getParentId();
-        $data->contentId = $this->getContentId();
-        $data->urlSmall = $imageRow->image->getImageUrl($imageRow->model->imageAutoSize400);
-        $data->urlLarge = $imageRow->image->getImageUrl($imageRow->model->imageAutoSize1200);
-        $data->save();
+
+        // resize image
+
+        if ($this->isActive()) {
+
+            $imageRow = $this->getDataRow();
+
+            $data = new TemplateImageIndex();
+            $data->updateOnDuplicate = true;
+            $data->parentId = $this->getParentId();
+            $data->contentId = $this->getContentId();
+            $data->urlSmall = $imageRow->image->getImageUrl($imageRow->model->imageAutoSize400);
+            $data->urlLarge = $imageRow->image->getImageUrl($imageRow->model->imageAutoSize1200);
+            $data->save();
+
+        } else {
+
+            $this->deleteImageIndex();
+
+        }
 
         /*
         foreach ($this->getParentContent() as $parentRow) {
@@ -74,10 +90,38 @@ abstract class AbstractImageContentType extends AbstractTreeContentType
     }
 
 
+    protected function onActive()
+    {
+
+        $update = new TemplateImageUpdate();
+        $update->active = true;
+        $update->updateById($this->dataId);
+
+    }
+
+
+    protected function onInactive()
+    {
+
+        $update = new TemplateImageUpdate();
+        $update->active = false;
+        $update->updateById($this->dataId);
+
+    }
+
+
     protected function onDelete()
     {
 
         (new TemplateImageDelete())->deleteById($this->dataId);
+
+        $this->deleteImageIndex();
+
+    }
+
+
+    protected function deleteImageIndex()
+    {
 
         $delete = new TemplateImageIndexDelete();
         $delete->filter->andEqual($delete->model->contentId, $this->getContentId());
@@ -104,9 +148,15 @@ abstract class AbstractImageContentType extends AbstractTreeContentType
     public function getSubject()
     {
 
-        $dataRow = (new TemplateImageReader())->getRowById($this->dataId);
-        return $dataRow->image->getFilename();
+        //$dataRow = (new TemplateImageReader())->getRowById($this->dataId);
+        return $this->getDataRow()->image->getFilename();
 
+    }
+
+
+    protected function isActive()
+    {
+        return $this->getDataRow()->active;
     }
 
 }

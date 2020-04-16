@@ -15,7 +15,8 @@ use Nemundo\Process\Content\Type\AbstractTreeContentType;
 
 
 // ChildTable
-class ContentSubjectTable extends AbstractHtmlContainer
+// ContentLogTable
+class ContentLogTable extends AbstractHtmlContainer
 {
 
     /**

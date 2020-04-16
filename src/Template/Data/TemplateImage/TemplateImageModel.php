@@ -1,6 +1,6 @@
 <?php
 namespace Nemundo\Process\Template\Data\TemplateImage;
-class TemplateImageModel extends \Nemundo\Model\Definition\Model\AbstractModel {
+class TemplateImageModel extends \Nemundo\Model\Template\AbstractActiveModel {
 /**
 * @var \Nemundo\Model\Type\Id\IdType
 */
@@ -38,6 +38,7 @@ $this->id->visible->form = false;
 $this->id->visible->table = false;
 $this->id->visible->view = false;
 $this->id->visible->form = false;
+
 
 $this->image = new \Nemundo\Model\Type\File\ImageType($this);
 $this->image->tableName = "template_template_image";

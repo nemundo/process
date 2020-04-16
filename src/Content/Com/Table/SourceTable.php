@@ -39,8 +39,9 @@ class SourceTable extends AbstractHtmlContainer
 
                 $row = new BootstrapClickableTableRow($table);
                 $contentType = $contentRow->getContentType();
+                if ($contentType->hasViewSite()) {
                 $row->addSite($contentType->getSubjectViewSite());
-
+                }
                 //$row->addText($contentType->getSubject());
 
                 $row->addText($contentRow->contentType->contentType);

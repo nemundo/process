@@ -10,10 +10,11 @@ use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Model\Join\ModelJoin;
 use Nemundo\Process\Content\Com\Container\AbstractParentContainer;
 use Nemundo\Process\Content\Data\Tree\TreeModel;
+use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ParentParameter;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFileReader;
 use Nemundo\Process\Template\Parameter\FileParameter;
-use Nemundo\Process\Template\Site\FileInactiveSite;
+use Nemundo\Process\Template\Site\File\FileInactiveSite;
 use Nemundo\Workflow\App\WorkflowTemplate\Com\WorkflowFancyboxHyperlink;
 
 
@@ -70,8 +71,9 @@ class FileParentContainer extends AbstractParentContainer
             if ($this->showDeleteButton) {
                 if ($documentRow->active) {
                     $site = clone(FileInactiveSite::$site);
-                    $site->addParameter(new ParentParameter($this->parentId));
-                    $site->addParameter(new FileParameter($documentRow->id));
+                    //$site->addParameter(new ParentParameter($this->parentId));
+                    //$site->addParameter(new FileParameter($documentRow->id));
+                    $site->addParameter(new ContentParameter($documentRow->contentId));
                     $row->addIconSite($site);
                 } else {
                     $row->addEmpty();

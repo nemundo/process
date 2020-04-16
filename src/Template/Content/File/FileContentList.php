@@ -12,7 +12,7 @@ use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\View\AbstractContentList;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFilePaginationReader;
 use Nemundo\Process\Template\Parameter\FileParameter;
-use Nemundo\Process\Template\Site\FileSite;
+use Nemundo\Process\Template\Site\File\FileSite;
 
 class FileContentList extends AbstractContentList
 {

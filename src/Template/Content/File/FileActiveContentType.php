@@ -16,7 +16,6 @@ class FileActiveContentType extends AbstractTreeContentType
 
     public $fileId;
 
-
     protected function loadContentType()
     {
 

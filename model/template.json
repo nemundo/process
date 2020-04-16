@@ -300,7 +300,15 @@
                     "is_deleted": false
                 }
             ],
-            "index": []
+            "index": [
+                {
+                    "index_name": "content",
+                    "index_type": "index",
+                    "field_name": [
+                        "content"
+                    ]
+                }
+            ]
         },
         {
             "template": "default",
@@ -326,7 +334,7 @@
             "index": []
         },
         {
-            "template": "default",
+            "template": "active_model",
             "model_id": "84111b71-ccfc-4e50-b830-e04e9bdf58e6",
             "label": "Template Image",
             "class_name": "TemplateImage",

@@ -8,7 +8,6 @@ use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Admin\Com\Title\AdminTitle;
-use Nemundo\App\Content\Com\Table\ContentLogTable;
 use Nemundo\Com\Html\Listing\UnorderedList;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
@@ -16,17 +15,13 @@ use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Config\ProcessConfig;
-use Nemundo\Process\Content\Com\Form\AddContentForm;
-
+use Nemundo\Process\Content\Com\Table\ContentLogTable;
 use Nemundo\Process\Content\Com\Table\SourceTable;
-use Nemundo\Process\Content\Parameter\ParentParameter;
-use Nemundo\Process\Template\Content\File\FileActiveContentType;
+use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Template\Content\File\FileUploadForm;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFilePaginationReader;
 use Nemundo\Process\Template\Parameter\FileParameter;
-use Nemundo\Process\Template\Site\Image\ImageInactiveSite;
 use Nemundo\Web\Site\AbstractSite;
-use Nemundo\Web\Site\Site;
 
 class FileSite extends AbstractSite
 {
@@ -48,14 +43,18 @@ class FileSite extends AbstractSite
 
         new PdfExtractSite($this);
 
+        //new FileActiveSite($this);
+        //new FileInactiveSite($this);
+
 
         /*
         new FileItemSite($this);
         new PdfExtractSite($this);
         new FileDeleteSite($this);
-        new FileActiveSite($this);
+            new ImageInactiveSite($this);
 
-        new ImageInactiveSite($this);
+
+
 */
 
 
@@ -114,6 +113,7 @@ class FileSite extends AbstractSite
         $header->addText('Size');
         $header->addText('Date/Time');
         $header->addText('User');
+        $header->addText($fileReader->model->content->contentType->label);
         $header->addText('Source');
         $header->addEmpty();
 
@@ -138,7 +138,7 @@ class FileSite extends AbstractSite
             }
 
             $site = clone(FileSite::$site);
-            $site->addParameter(new FileParameter($fileRow->id));
+            $site->addParameter(new ContentParameter($fileRow->contentId));  // FileParameter($fileRow->id));
             $row->addClickableSite($site);
 
 
@@ -157,7 +157,8 @@ class FileSite extends AbstractSite
         $pagination->paginationReader = $fileReader;
 
 
-        $fileParameter = new FileParameter();
+        $fileParameter = new ContentParameter();  // new FileParameter();
+        $fileParameter->contentTypeCheck=false;
         if ($fileParameter->exists()) {
 
             $fileType = $fileParameter->getContentType();
@@ -166,7 +167,13 @@ class FileSite extends AbstractSite
             $title->content = $fileType->getSubject();
 
             $table = new AdminLabelValueTable($layout->col2);
+            $table->addLabelValue('Content Type', $fileType->typeLabel);
+            $table->addLabelValue('Content Type Id', $fileType->typeLabel);
+            $table->addLabelValue('Content Type Class', $fileType->getClassName());
+
+
             $table->addLabelValue('Subject', $fileType->getSubject());
+
             $table->addLabelValue('File Extension', $fileType->getFileExtension());
 
             $table->addLabelYesNoValue('Has Parent', $fileType->hasParent());
@@ -174,30 +181,34 @@ class FileSite extends AbstractSite
             $table->addLabelValue('Parent Count', $fileType->getParentCount());
 
 
-if ($fileType->isPdf()) {
-            $btn = new AdminSiteButton($layout->col2);
-            $btn->site = clone(PdfExtractSite::$site);
-            $btn->site->addParameter(new FileParameter());
-}
+            if ($fileType->isPdf()) {
+                $btn = new AdminSiteButton($layout->col2);
+                $btn->site = clone(PdfExtractSite::$site);
+                $btn->site->addParameter(new FileParameter());
+            }
 
-            /*
+
             $btn = new AdminSiteButton($layout->col2);
             $btn->site = clone(FileInactiveSite::$site);
-            $btn->site->addParameter(new FileParameter());
-            $btn->site->addParameter(new ParentParameter($fileType->getContentId()));
+            $btn->site->addParameter(new ContentParameter());
+            //$btn->site->addParameter(new FileParameter());
+            //$btn->site->addParameter(new ParentParameter($fileType->getContentId()));
 
             $btn = new AdminSiteButton($layout->col2);
             $btn->site = clone(FileActiveSite::$site);
-            $btn->site->addParameter(new FileParameter());
-           // $btn->site->addParameter(new ParentParameter($fileType->getContentId()));
+            $btn->site->addParameter(new ContentParameter());  // FileParameter());
+
+            //$btn->site->addParameter(new FileParameter());
+
+            // $btn->site->addParameter(new ParentParameter($fileType->getContentId()));
 
 
-
+            /*
             $btn = new AdminSiteButton($layout->col2);
             $btn->site = clone(FileDeleteSite::$site);
             $btn->site->addParameter(new FileParameter());*/
 
-            $log =new ContentLogTable($layout->col2);
+            $log = new ContentLogTable($layout->col2);
             $log->contentType = $fileType;
 
 
@@ -213,7 +224,6 @@ if ($fileType->isPdf()) {
             $form->contentType = $fileType;
             $form->redirectSite = new Site();
 */
-
 
 
         }

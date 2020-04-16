@@ -7,6 +7,11 @@ class TemplateImageExternalType extends \Nemundo\Model\Type\External\ExternalTyp
 public $id;
 
 /**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $active;
+
+/**
 * @var \Nemundo\Model\Type\File\ImageType
 */
 public $image;
@@ -22,6 +27,13 @@ $this->id->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->id->aliasFieldName = $this->id->tableName . "_" . $this->id->fieldName;
 $this->id->label = "Id";
 $this->addType($this->id);
+
+$this->active = new \Nemundo\Model\Type\Number\YesNoType();
+$this->active->fieldName = "active";
+$this->active->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->active->aliasFieldName = $this->active->tableName . "_" . $this->active->fieldName;
+$this->active->label = "Active";
+$this->addType($this->active);
 
 $this->image = new \Nemundo\Model\Type\File\ImageType();
 $this->image->fieldName = "image";

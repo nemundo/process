@@ -52,7 +52,6 @@ class TaskIndexCustomRow extends TaskIndexRow
         $span->groupId = $this->assignmentId;
         $span->content = $this->assignment->group;
 
-
     }
 
 

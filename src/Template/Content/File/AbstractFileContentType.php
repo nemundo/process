@@ -200,6 +200,9 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
     }
 
 
+    // isText
+
+
     public function isPdf() {
 
         $value = false;

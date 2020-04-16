@@ -20,7 +20,7 @@ use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\App\Wiki\Type\WikiContentTypeCollection;
 use Nemundo\Process\Content\Com\Dropdown\ContentTypeCollectionDropdown;
 
-use Nemundo\Process\Content\Com\Table\ContentSubjectTable;
+use Nemundo\Process\Content\Com\Table\ContentLogTable;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Workflow\Com\Table\WorkflowLogTable;
@@ -92,7 +92,7 @@ class WikiSite extends AbstractSite
             $wikiId = $wikiParameter->getValue();
             $wikiType = new WikiPageContentType($wikiId);
 
-            $contentTable =new ContentSubjectTable($layout->col3);
+            $contentTable =new ContentLogTable($layout->col3);
             $contentTable->contentType = $wikiType;
 
             $title = new AdminTitle($layout->col2);

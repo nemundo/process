@@ -67,6 +67,10 @@ $this->text->aliasFieldName = "template_template_file_text";
 $this->text->label = "Text";
 $this->text->allowNullValue = false;
 
+$index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
+$index->indexName = "content";
+$index->addType($this->contentId);
+
 }
 public function loadContent() {
 if ($this->content == null) {

@@ -10,7 +10,7 @@ use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Template\Content\File\AbstractFileContentType;
 use Nemundo\Process\Template\Parameter\FileParameter;
-use Nemundo\Process\Template\Site\FileInactiveSite;
+use Nemundo\Process\Template\Site\File\FileInactiveSite;
 
 class FileListContentView extends AbstractContentView
 {
