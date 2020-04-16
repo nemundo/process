@@ -6,16 +6,11 @@ namespace Nemundo\Process\Content\View;
 
 use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
-use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
-use Nemundo\Com\TableBuilder\TableHeader;
-use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Html\Paragraph\Paragraph;
-use Nemundo\Process\Content\Com\Form\ContentGroupForm;
 use Nemundo\Process\Content\Com\Table\ContentLogTable;
 use Nemundo\Process\Content\Data\Content\ContentReader;
-
 use Nemundo\Process\Content\Parameter\DataIdParameter;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Web\Action\AbstractActionPanel;
@@ -23,7 +18,6 @@ use Nemundo\Web\Action\ActionSite;
 use Nemundo\Web\Action\Site\ActiveActionSite;
 use Nemundo\Web\Action\Site\DeleteActionSite;
 use Nemundo\Web\Action\Site\EditActionSite;
-use Nemundo\Web\Site\Site;
 use Nemundo\Web\Url\UrlReferer;
 
 abstract class AbstractContentAdmin extends AbstractActionPanel
@@ -70,27 +64,29 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
     protected $view;
 
     /**
-     * @var ActionSite
-     */
-    //protected $access;
-
-    /**
      * @var AdminSiteButton
      */
     protected $newButton;
 
+    /**
+     * @var bool
+     */
+    protected $showTitle = true;
+
     protected function loadActionSite()
     {
 
-        $subtitle = new AdminSubtitle($this);
-        $subtitle->content = $this->contentType->typeLabel;
+        if ($this->showTitle) {
+            $subtitle = new AdminSubtitle($this);
+            $subtitle->content = $this->contentType->typeLabel;
+        }
 
         $this->index = new ActionSite($this);
         $this->index->onAction = function () {
 
             if ($this->contentType->hasForm()) {
-            $this->newButton = new AdminSiteButton($this);
-            $this->newButton->site = $this->new;
+                $this->newButton = new AdminSiteButton($this);
+                $this->newButton->site = $this->new;
             }
 
             $this->loadIndex();
@@ -172,18 +168,6 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
 
         };
 
-
-        /*$this->access = new ActionSite($this);
-        $this->access->title[LanguageCode::EN] = 'Access';
-        $this->access->title[LanguageCode::DE] = 'Zugriff';
-        $this->access->actionName = 'access';
-        $this->access->onAction = function () {
-
-            $dataId = (new DataIdParameter())->getValue();
-            $this->loadAccess($dataId);
-
-        };*/
-
     }
 
 
@@ -224,13 +208,11 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
             $contentType->getView($this);
         }
 
-
         $p = new Paragraph($this);
         $p->content = $contentType->getSubject();
 
         $p = new Paragraph($this);
         $p->content = $contentType->getContentId();
-
 
         $contentReader = new ContentReader();
         $contentReader->model->loadUser();
@@ -243,42 +225,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         $log = new ContentLogTable($this);
         $log->contentType = $contentType;
 
-
     }
-
-
-    /*
-    protected function loadAccess($dataId)
-    {
-
-        $contentType = clone($this->contentType);
-        $contentType->fromDataId($dataId);
-
-
-        $form = new ContentGroupForm($this);
-        $form->contentId = $contentType->getContentId();
-        $form->redirectSite = new Site();
-
-        $table = new AdminTable($this);
-
-        $header = new TableHeader($table);
-        $header->addText('User');
-        $header->addEmpty();
-
-        $contentGroupReader = new ContentGroupReader();
-        $contentGroupReader->model->loadGroup();
-        $contentGroupReader->filter->andEqual($contentGroupReader->model->contentId, $contentType->getContentId());
-        foreach ($contentGroupReader->getData() as $contentGroupRow) {
-
-            $row = new TableRow($table);
-            $row->addText($contentGroupRow->group->group);
-
-        }
-
-        // remove
-
-
-    }*/
 
 
     protected function loadActive($dataId)
@@ -286,13 +233,14 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         $this->contentType->fromDataId($dataId)->setActive();
     }
 
+
     protected function loadInactive($dataId)
     {
 
         $this->contentType->fromDataId($dataId)->setInactive();
 
-
     }
+
 
     protected function loadDelete($dataId)
     {
@@ -320,17 +268,6 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
     }
 
 
-    /*
-    protected function getAccessSite($dataId)
-    {
-
-        $site = clone($this->access);
-        $site->addParameter(new DataIdParameter($dataId));
-        return $site;
-
-    }*/
-
-
     protected function getDeleteSite($dataId)
     {
 
@@ -350,6 +287,7 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
 
     }
 
+
     protected function getInactiveSite($dataId)
     {
 
@@ -358,6 +296,5 @@ abstract class AbstractContentAdmin extends AbstractActionPanel
         return $site;
 
     }
-
 
 }

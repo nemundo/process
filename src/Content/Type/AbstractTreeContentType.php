@@ -28,7 +28,6 @@ abstract class AbstractTreeContentType extends AbstractContentType
     }
 
 
-    // afterContentSave
     protected function onFinished()
     {
 
@@ -40,8 +39,6 @@ abstract class AbstractTreeContentType extends AbstractContentType
 
         parent::deleteType();
         $this->deleteTree();
-
-        //$this->deleteSearchIndex();
 
     }
 
