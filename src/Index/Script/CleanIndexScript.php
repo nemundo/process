@@ -10,7 +10,7 @@ use Nemundo\Process\App\Calendar\Install\CalendarIndexClean;
 use Nemundo\Process\App\Document\Install\DocumentIndexClean;
 use Nemundo\Process\App\Task\Install\TaskIndexClean;
 use Nemundo\Process\Search\Install\SearchIndexClean;
-use Schleuniger\App\Task\Install\TaskClean;
+
 
 class CleanIndexScript extends AbstractConsoleScript
 {

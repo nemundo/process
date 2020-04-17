@@ -6,6 +6,8 @@ namespace Nemundo\Process\Index\Script;
 
 use Nemundo\App\Script\Type\AbstractConsoleScript;
 use Nemundo\Core\Debug\Debug;
+use Nemundo\Core\Time\Stopwatch;
+use Nemundo\Process\Content\Data\Content\ContentCount;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Schleuniger\App\Verbesserung\Workflow\Process\VerbesserungProcess;
 
@@ -20,22 +22,30 @@ class ReIndexScript extends AbstractConsoleScript
     public function run()
     {
 
-        (new CleanIndexScript())->run();
+        //(new CleanIndexScript())->run();
 
-        $reader = new ContentReader();
-        $reader->model->loadContentType();
+        // large reader !!!
 
-     //   $reader->filter->andEqual($reader->model->contentTypeId,(new VerbesserungProcess())->typeId);
+        $stopwatch = new Stopwatch('ReIndex');
 
-        foreach ($reader->getData() as $contentRow) {
+        $totalCount = (new ContentCount())->getCount();
+        $n=0;
 
+        $contentReader = new ContentReader();
+        $contentReader->model->loadContentType();
+        foreach ($contentReader->getData() as $contentRow) {
             $contentType = $contentRow->getContentType();
             $contentType->saveIndex();
 
-            //(new Debug())->write($contentType->getSubject());
+            $n++;
+
+            if (($n % 1000) == 0) {
+                (new Debug())->write("$n / $totalCount");
+            }
 
         }
 
+        $stopwatch->stopAndPrintOutput();
 
     }
 
