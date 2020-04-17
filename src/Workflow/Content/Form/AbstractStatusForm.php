@@ -7,8 +7,6 @@ use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 
 
-// AbstractProcessStatusForm
-// AbstractWorkflowStatusForm
 abstract class AbstractStatusForm extends AbstractContentForm
 {
 
