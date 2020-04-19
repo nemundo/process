@@ -78,7 +78,8 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
 
     public function getSubject()
     {
-        return $this->getParentContentType()->getSubject();
+        return $this->getParentProcess()->getSubject();
+        //return $this->getParentContentType()->getSubject();
     }
 
 
@@ -90,8 +91,8 @@ abstract class AbstractProcessStatus extends AbstractSequenceContentType
 
     public function getViewSite()
     {
-
-        return $this->getParentContentType()->getViewSite();
+        return $this->getParentProcess()->getViewSite();
+        //return $this->getParentContentType()->getViewSite();
 
     }
 

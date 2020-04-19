@@ -38,7 +38,6 @@ abstract class AbstractAssignmentProcessStatus extends AbstractProcessStatus
         $process = $this->getParentProcess();
         $process->changeAssignment($this->groupId);
 
-
     }
 
 
