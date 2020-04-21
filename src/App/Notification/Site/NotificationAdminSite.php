@@ -12,13 +12,10 @@ use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
-use Nemundo\Process\App\Assignment\Com\ListBox\AssignmentStatusListBox;
-use Nemundo\Process\App\Notification\Content\File\FileNotificationContentType;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationPaginationReader;
 use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\User\Com\ListBox\UserListBox;
 use Nemundo\Web\Site\AbstractSite;
-use Nemundo\Web\Site\Site;
 
 class NotificationAdminSite extends AbstractSite
 {
@@ -33,7 +30,7 @@ class NotificationAdminSite extends AbstractSite
         $this->title = 'Notification Admin';
         $this->url = 'notification-admin';
 
-        NotificationAdminSite::$site=$this;
+        NotificationAdminSite::$site = $this;
 
 
     }
@@ -44,24 +41,16 @@ class NotificationAdminSite extends AbstractSite
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
 
-        //$form = (new FileNotificationContentType())->getForm($page);
-        //$form->redirectSite=new Site();
-
-
         $form = new SearchForm($page);
 
         $formRow = new BootstrapFormRow($form);
 
         $user = new UserListBox($formRow);
-        $user->submitOnChange=true;
-        $user->searchMode=true;
-
-
+        $user->submitOnChange = true;
+        $user->searchMode = true;
 
         $notificationReader = new NotificationPaginationReader();
         $notificationReader->model->loadCategory();
-        //$notificationReader->model->loadSubjectContent();
-        //$notificationReader->model->subjectContent->loadContentType();
         $notificationReader->model->loadContent();
         $notificationReader->model->content->loadContentType();
         $notificationReader->model->loadTo();
@@ -77,16 +66,13 @@ class NotificationAdminSite extends AbstractSite
         $table = new AdminClickableTable($page);
 
         $header = new TableHeader($table);
-        $header->addText($notificationReader->model->archive->label); //'Archive');
+        $header->addText($notificationReader->model->archive->label);
         $header->addText($notificationReader->model->category->label);
-
-
         $header->addText('Type');
         $header->addText('Subject');
         $header->addText('Message');
         $header->addText('Date/Time');
         $header->addText('To');
-
 
         foreach ($notificationReader->getData() as $notificationRow) {
 
@@ -108,14 +94,8 @@ class NotificationAdminSite extends AbstractSite
         $pagination = new BootstrapPagination($page);
         $pagination->paginationReader = $notificationReader;
 
-
-
-
-
         $page->render();
 
-
     }
-
 
 }

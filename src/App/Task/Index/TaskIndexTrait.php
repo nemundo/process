@@ -30,16 +30,7 @@ trait TaskIndexTrait
     {
 
         $this->onDataRow();
-
         $this->sendGroupNotification($this->getAssignmentId(), new TaskCategory());
-
-        /*
-
-        $group = new GroupContentType();
-        $group->fromGroupId($this->getAssignmentId());
-        foreach ($group->getUserIdList() as $userId) {
-            $this->sendUserNotification($userId, new TaskCategory());
-        }*/
 
     }
 
@@ -47,12 +38,10 @@ trait TaskIndexTrait
     protected function saveTaskIndex()
     {
 
-
         $update = new TaskIndexUpdate();
         $update->updateStatus = false;
         $update->filter->andEqual($update->model->contentId, $this->getContentId());
         $update->update();
-
 
         if ($this->isActive()) {
 
@@ -71,7 +60,6 @@ trait TaskIndexTrait
                 $data->taskTypeId = $this->typeId;
                 $data->updateStatus = true;
                 $data->save();
-
 
             } else {
 

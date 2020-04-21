@@ -93,7 +93,6 @@ abstract class AbstractType extends AbstractBaseClass
     {
 
         $this->dataRow = $dataRow;
-//        $this->fromDataId($dataRow->getModelValue($dataRow->model->id));
         $this->fromDataId($dataRow->id);
 
         return $this;
@@ -165,9 +164,6 @@ abstract class AbstractType extends AbstractBaseClass
     {
 
         $this->saveData();
-
-        // muss am Schluss sein
-//        $this->saveIndex();
 
     }
 
