@@ -144,17 +144,6 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $fileRow = $this->getDataRow();
         $subject = $fileRow->file->getFilename();
 
-        /*
-        $fileRow = $this->getDataRow();
-
-        $hyperlink = new UrlHyperlink();
-        $hyperlink->content = $fileRow->file->getFilename();
-        $hyperlink->url = $fileRow->file->getUrl();
-
-        $text = $hyperlink->getContent();
-
-        return $text;*/
-
         return $subject;
 
     }
@@ -183,18 +172,21 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
     }
 
 
-    public function getFilename() {
+    public function getFilename()
+    {
         return $this->getDataRow()->file->getFilename();
     }
 
-    public function getFullFilename() {
-       return $this->getDataRow()->file->getFullFilename();
+    public function getFullFilename()
+    {
+        return $this->getDataRow()->file->getFullFilename();
     }
 
 
-    public function getFileExtension() {
+    public function getFileExtension()
+    {
 
-        $file=new File($this->getDataRow()->file->getFullFilename());
+        $file = new File($this->getDataRow()->file->getFullFilename());
         return $file->getFileExtension();
 
     }
@@ -203,11 +195,12 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
     // isText
 
 
-    public function isPdf() {
+    public function isPdf()
+    {
 
         $value = false;
-        if ($this->getFileExtension()==='pdf') {
-            $value=true;
+        if ($this->getFileExtension() === 'pdf') {
+            $value = true;
         }
 
         return $value;
@@ -215,11 +208,13 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
     }
 
 
-    public function isImage() {
+    public function isImage()
+    {
 
     }
 
-    public function isVideo() {
+    public function isVideo()
+    {
 
     }
 
