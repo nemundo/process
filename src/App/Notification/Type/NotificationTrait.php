@@ -66,7 +66,7 @@ trait NotificationTrait
         $data->contentId = $this->getContentId();
         $data->subject = $this->getSubject();
         $data->message = $this->getMessage();
-        $data->sourceId = $this->getSourceContentId();  //Type()->get
+        $data->sourceId = $this->getSourceContentId();
         $dataId = $data->save();
 
 
@@ -83,9 +83,6 @@ trait NotificationTrait
             $sendMail = (new AssignmentSendMailConfig())->getValueByUserId($userId);
         }
 
-
-        //if ((new NotificationSendMailConfig)->getValueByUserId($userId)) {
-
         if ($sendMail) {
 
             $userType = new UserContentType($userId);
@@ -94,24 +91,9 @@ trait NotificationTrait
             $mail = new ResponsiveActionMailMessage();
             $mail->mailTo = $userRow->email;
             $mail->subject = (new Translation())->getText($category->category) . ': ' . $this->getSubject();
-            //$mail->subject = 'Benachrichtigung: ' . $this->getSubject();
-            //$mail->actionText = $this->getLog();
             $mail->actionText = $this->getMessage();
-
-            //$mail->actionText =$this->getView()->getContent();  //get (new Html($this->getMessage()))->getValue();
-            //$mail->actionLabel[LanguageCode::EN] = 'ViewAnsehen';
             $mail->actionLabel = 'Ansehen';
             $mail->actionUrlSite = $this->getViewSite();
-
-
-            //$mail->afterActionText ='123123123123';
-
-            //(new Debug())->write(NotificationConfig::$mailSettingSite);
-            //exit;
-
-
-            //NotificationConfig::$mailSettingSite = EmailConfigSite::$site;
-
 
             if (NotificationConfig::$mailSettingSite !== null) {
 
