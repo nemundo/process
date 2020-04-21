@@ -48,7 +48,9 @@ class UserNotificationTable extends AbstractHtmlContainer
         $notificationReader->model->loadContent();
         $notificationReader->model->content->loadContentType();
         $notificationReader->filter = new UserNotificationFilter();
-        $notificationReader->addOrder($notificationReader->model->id, SortOrder::DESCENDING);
+        //$notificationReader->addOrder($notificationReader->model->id, SortOrder::DESCENDING);
+        $notificationReader->addOrder($notificationReader->model->content->dateTime, SortOrder::DESCENDING);
+
         $notificationReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
         foreach ($notificationReader->getData() as $notificationRow) {
 
