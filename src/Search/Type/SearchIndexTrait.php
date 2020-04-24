@@ -11,6 +11,7 @@ trait SearchIndexTrait
 {
 
     abstract public function getText();
+    abstract protected function isActive();
 
     /**
      * @var SearchIndexBuilder
