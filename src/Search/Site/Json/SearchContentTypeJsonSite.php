@@ -5,9 +5,7 @@ namespace Nemundo\Process\Search\Site\Json;
 
 use Nemundo\Package\Bootstrap\Autocomplete\AbstractAutocompleteJsonSite;
 use Nemundo\Package\Bootstrap\Autocomplete\AutocompleteParameter;
-use Nemundo\Process\Content\Data\ContentType\ContentType;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Search\Data\Word\WordReader;
 use Nemundo\Process\Search\Data\WordContentType\WordContentTypeReader;
 
 
@@ -22,8 +20,9 @@ class SearchContentTypeJsonSite extends AbstractAutocompleteJsonSite
 
     protected function loadSite()
     {
+        $this->title='Search Json';
         $this->url = 'search-content-type-json';
-      SearchContentTypeJsonSite::$site = $this;
+        SearchContentTypeJsonSite::$site = $this;
     }
 
 
