@@ -36,6 +36,16 @@ public $wordId;
 */
 public $word;
 
+/**
+* @var string
+*/
+public $contentTypeId;
+
+/**
+* @var \Nemundo\Process\Content\Row\ContentTypeCustomRow
+*/
+public $contentType;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -48,11 +58,18 @@ $this->wordId = $this->getModelValue($model->wordId);
 if ($model->word !== null) {
 $this->loadNemundoProcessSearchDataWordWordwordRow($model->word);
 }
+$this->contentTypeId = $this->getModelValue($model->contentTypeId);
+if ($model->contentType !== null) {
+$this->loadNemundoProcessContentDataContentTypeContentTypecontentTypeRow($model->contentType);
+}
 }
 private function loadNemundoProcessContentDataContentContentcontentRow($model) {
 $this->content = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $model);
 }
 private function loadNemundoProcessSearchDataWordWordwordRow($model) {
 $this->word = new \Nemundo\Process\Search\Data\Word\WordRow($this->row, $model);
+}
+private function loadNemundoProcessContentDataContentTypeContentTypecontentTypeRow($model) {
+$this->contentType = new \Nemundo\Process\Content\Row\ContentTypeCustomRow($this->row, $model);
 }
 }

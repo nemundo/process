@@ -26,6 +26,16 @@ public $wordId;
 */
 public $word;
 
+/**
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+*/
+public $contentTypeId;
+
+/**
+* @var \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType
+*/
+public $contentType;
+
 protected function loadModel() {
 $this->tableName = "process_search_index";
 $this->aliasTableName = "process_search_index";
@@ -58,6 +68,13 @@ $this->wordId->aliasFieldName = "process_search_index_word";
 $this->wordId->label = "Word";
 $this->wordId->allowNullValue = false;
 
+$this->contentTypeId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->contentTypeId->tableName = "process_search_index";
+$this->contentTypeId->fieldName = "content_type";
+$this->contentTypeId->aliasFieldName = "process_search_index_content_type";
+$this->contentTypeId->label = "Content Type";
+$this->contentTypeId->allowNullValue = false;
+
 $index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
 $index->indexName = "word";
 $index->addType($this->wordId);
@@ -84,6 +101,16 @@ $this->word->tableName = "process_search_index";
 $this->word->fieldName = "word";
 $this->word->aliasFieldName = "process_search_index_word";
 $this->word->label = "Word";
+}
+return $this;
+}
+public function loadContentType() {
+if ($this->contentType == null) {
+$this->contentType = new \Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType($this, "process_search_index_content_type");
+$this->contentType->tableName = "process_search_index";
+$this->contentType->fieldName = "content_type";
+$this->contentType->aliasFieldName = "process_search_index_content_type";
+$this->contentType->label = "Content Type";
 }
 return $this;
 }

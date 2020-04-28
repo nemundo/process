@@ -7,6 +7,7 @@ namespace Nemundo\Process\Group\Install;
 use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\Group\Data\GroupCollection;
 use Nemundo\Process\Group\Setup\GroupSetup;
+use Nemundo\Process\Group\Type\GroupContentType;
 use Nemundo\Process\Group\Type\UserGroupType;
 use Nemundo\Project\Install\AbstractInstall;
 
@@ -21,6 +22,7 @@ class GroupInstall extends AbstractInstall
             ->addCollection(new GroupCollection());
 
         (new GroupSetup())
+            ->addGroupType(new GroupContentType())
             ->addGroupType(new UserGroupType());
 
 
