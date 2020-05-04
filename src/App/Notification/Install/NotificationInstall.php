@@ -11,9 +11,6 @@ use Nemundo\Process\App\Dashboard\Setup\DashboardSetup;
 use Nemundo\Process\App\Notification\Category\AbstractCategory;
 use Nemundo\Process\App\Notification\Category\InformationCategory;
 use Nemundo\Process\App\Notification\Category\TaskCategory;
-use Nemundo\Process\App\Notification\Content\File\FileNotificationContentType;
-use Nemundo\Process\App\Notification\Content\Message\MessageNotificationContentType;
-use Nemundo\Process\App\Notification\Content\Reminder\ReminderNotificationStatus;
 use Nemundo\Process\App\Notification\Content\Widget\NotificationWidgetContentType;
 use Nemundo\Process\App\Notification\Data\Category\Category;
 use Nemundo\Process\App\Notification\Data\NotificationCollection;
@@ -30,13 +27,6 @@ class NotificationInstall extends AbstractInstall
 
         $setup = new ModelCollectionSetup();
         $setup->addCollection(new NotificationCollection());
-
-        //$setup = new ContentTypeSetup();
-        //$setup->addContentType(new NotificationContentType());
-        //$setup->addContentType(new MessageNotificationContentType());
-        //$setup->addContentType(new FileNotificationContentType());
-        //$setup->addContentType(new ReminderNotificationStatus());
-
 
         $this->addCategory(new InformationCategory());
         $this->addCategory(new TaskCategory());

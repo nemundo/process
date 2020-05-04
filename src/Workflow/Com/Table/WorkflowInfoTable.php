@@ -7,7 +7,6 @@ namespace Nemundo\Process\Workflow\Com\Table;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Process\Group\Com\Span\GroupSpan;
 use Nemundo\Process\Workflow\Row\WorkflowCustomRowTrait;
-use Schleuniger\App\Verbesserung\Row\VerbesserungCustomRow;
 
 
 class WorkflowInfoTable extends AdminLabelValueTable

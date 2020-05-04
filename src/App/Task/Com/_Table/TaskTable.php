@@ -1,8 +1,6 @@
 <?php
 
 
-namespace Schleuniger\App\Task\Com\Table;
-
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\Html\Listing\UnorderedList;

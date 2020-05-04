@@ -9,7 +9,6 @@ use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Time\Stopwatch;
 use Nemundo\Process\Content\Data\Content\ContentCount;
 use Nemundo\Process\Content\Data\Content\ContentReader;
-use Schleuniger\App\Verbesserung\Workflow\Process\VerbesserungProcess;
 
 class ReIndexScript extends AbstractConsoleScript
 {

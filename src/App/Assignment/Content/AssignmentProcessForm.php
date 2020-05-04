@@ -8,7 +8,7 @@ use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Group\Com\ListBox\AllGroupTypeListBox;
 use Nemundo\Process\Group\Com\ListBox\GroupTypeListBox;
 use Nemundo\Process\Group\Com\ListBox\MultiGroupListBox;
-use Schleuniger\App\Org\Content\Geschaeftsbereich\GeschaeftsbereichContentType;
+
 
 class AssignmentProcessForm extends AbstractContentForm
 {
