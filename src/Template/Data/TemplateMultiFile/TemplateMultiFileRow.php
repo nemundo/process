@@ -45,7 +45,7 @@ $this->dataContentId = intval($this->getModelValue($model->dataContentId));
 if ($model->dataContent !== null) {
 $this->loadNemundoProcessContentDataContentContentdataContentRow($model->dataContent);
 }
-$this->file = new \Nemundo\Model\Reader\Property\File\RedirectFilenameReaderProperty($row, $model->file, $this->id);
+$this->file = new \Nemundo\Model\Reader\Property\File\RedirectFilenameReaderProperty($row, $model->file, $model->id);
 }
 private function loadNemundoProcessContentDataContentContentdataContentRow($model) {
 $this->dataContent = new \Nemundo\Process\Content\Row\ContentCustomRow($this->row, $model);

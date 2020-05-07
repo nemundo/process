@@ -21,6 +21,7 @@ use Nemundo\User\Data\User\UserReader;
 use Nemundo\User\Data\User\UserUpdate;
 use Nemundo\User\Data\Usergroup\UsergroupCount;
 use Nemundo\User\Data\UserUsergroup\UserUsergroup;
+use Nemundo\User\Data\UserUsergroup\UserUsergroupDelete;
 use Nemundo\User\Usergroup\AbstractUsergroup;
 
 
@@ -274,6 +275,20 @@ class UserContentType extends AbstractTreeContentType
             $data->userId = $this->dataId;
             $data->usergroupId = $usergroup->usergroupId;
             $data->save();
+
+        return $this;
+
+    }
+
+
+
+    public function removeUsergroup(AbstractUsergroup $usergroup)
+    {
+
+        $delete = new UserUsergroupDelete();
+        $delete->filter->andEqual($delete->model->userId, $this->dataId);
+        $delete->filter->andEqual($delete->model->usergroupId, $usergroup->usergroupId);
+        $delete->delete();
 
         return $this;
 

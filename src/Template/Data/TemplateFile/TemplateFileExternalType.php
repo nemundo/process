@@ -55,6 +55,7 @@ $this->file->fieldName = "file";
 $this->file->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->file->aliasFieldName = $this->file->tableName . "_" . $this->file->fieldName;
 $this->file->label = "File";
+$this->file->redirectSite = \Nemundo\Process\Template\Data\TemplateFile\Redirect\TemplateFileRedirectConfig::$redirectTemplateFileFileSite;
 $this->file->createObject();
 $this->addType($this->file);
 

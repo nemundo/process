@@ -13,7 +13,6 @@ use Nemundo\Orm\Type\Number\NumberOrmType;
 use Nemundo\Orm\Type\Number\YesNoOrmType;
 use Nemundo\Orm\Type\Text\TextOrmType;
 use Nemundo\Process\Content\Row\ContentCustomRow;
-use Nemundo\Process\Content\Row\ContentTypeCustomRow;
 
 class WorkflowOrmModel extends AbstractOrmModel
 {
@@ -127,9 +126,7 @@ class WorkflowOrmModel extends AbstractOrmModel
         $this->status->variableName = 'status';
         $this->status->createModelProperty = false;
         $this->status->isEditable = false;
-        //$this->status->externalClassName = 'Nemundo\Process\Content\Data\ContentType\ContentType';
         $this->status->externalClassName = 'Nemundo\Process\Content\Data\Content\Content';
-        //$this->status->rowClassName = ContentTypeCustomRow::class;
         $this->status->rowClassName = ContentCustomRow::class;
 
         $this->deadline = new DateOrmType($this);
