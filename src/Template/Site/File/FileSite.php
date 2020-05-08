@@ -14,14 +14,15 @@ use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
+use Nemundo\Package\Dropzone\DropzoneUploadForm;
 use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Process\Content\Com\Table\ContentLogTable;
 use Nemundo\Process\Content\Com\Table\SourceTable;
 use Nemundo\Process\Content\Parameter\ContentParameter;
-use Nemundo\Process\Template\Content\File\FileUploadForm;
 use Nemundo\Process\Template\Data\TemplateFile\TemplateFilePaginationReader;
 use Nemundo\Process\Template\Parameter\FileParameter;
 use Nemundo\Web\Site\AbstractSite;
+
 
 class FileSite extends AbstractSite
 {
@@ -36,27 +37,12 @@ class FileSite extends AbstractSite
 
         $this->title = 'File Template';
         $this->url = 'file-template';
-        // TODO: Implement loadSite() method.
 
         FileSite::$site = $this;
 
 
+        new FileSaveSite($this);
         new PdfExtractSite($this);
-
-        //new FileActiveSite($this);
-        //new FileInactiveSite($this);
-
-
-        /*
-        new FileItemSite($this);
-        new PdfExtractSite($this);
-        new FileDeleteSite($this);
-            new ImageInactiveSite($this);
-
-
-
-*/
-
 
     }
 
@@ -68,8 +54,13 @@ class FileSite extends AbstractSite
 
         $layout = new BootstrapTwoColumnLayout($page);
 
-        $form = new FileUploadForm($layout->col1);
-        $form->redirectSite = FileSite::$site;
+        //$form = new FileUploadForm($layout->col1);
+        //$form->redirectSite = FileSite::$site;
+
+
+        $form = new DropzoneUploadForm($layout->col1);
+        $form->saveSite = FileSaveSite::$site;
+
 
         // search form
         // source
@@ -158,7 +149,7 @@ class FileSite extends AbstractSite
 
 
         $fileParameter = new ContentParameter();  // new FileParameter();
-        $fileParameter->contentTypeCheck=false;
+        $fileParameter->contentTypeCheck = false;
         if ($fileParameter->exists()) {
 
             $fileType = $fileParameter->getContentType();
