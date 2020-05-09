@@ -5,8 +5,12 @@ namespace Nemundo\Process\Template\Content\File;
 
 
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
+use Nemundo\Core\File\FileInformation;
+use Nemundo\Core\File\Pdf\PdfFile;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
+use Nemundo\Core\System\OperatingSystem;
+use Nemundo\Core\TextFile\Reader\TextFileReader;
 use Nemundo\Core\Type\File\File;
 use Nemundo\Model\Data\Property\File\FileProperty;
 use Nemundo\Model\Parameter\FilenameParameter;
@@ -59,6 +63,36 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $this->dataId = $data->save();
 
 
+
+        $templateFileRow = $this->getDataRow();  // (new TemplateFileReader())->getRowById($this->dataId);
+        $filename = $templateFileRow->file->getFullFilename();  // document->getFullFilename();
+        $file = new FileInformation($filename);
+
+        $text='';
+
+        if ((new OperatingSystem())->isLinux()) {
+
+            if ($file->isPdf()) {
+
+                $pdfFile = new PdfFile($filename);
+                $text = $pdfFile->getPdfText();
+
+            }
+
+        }
+
+        if ($file->isText()) {
+
+            $txtFile = new TextFileReader($filename);
+            $text = $txtFile->getText();
+
+        }
+
+
+
+        $update =new TemplateFileUpdate();
+        $update->text = $text;
+        $update->updateById($this->dataId);
 
 
 
@@ -116,6 +150,8 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $fileRow = $this->getDataRow();
         $this->addSearchWord($fileRow->file->getFilename());
         $this->addSearchText($fileRow->text);
+
+        $this->saveSearchIndex();
 
         // pdf reader
 

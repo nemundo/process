@@ -44,6 +44,7 @@ class FileSaveSite extends AbstractSite
 
 
 
+        /*
 
         $documentRow = (new DocumentReader())->getRowById($documentId);
         $filename = $documentRow->document->getFullFilename();
@@ -74,7 +75,7 @@ class FileSaveSite extends AbstractSite
         $update->updateById($documentId);
 
         $documentRow = (new DocumentReader())->getRowById($documentId);
-        (new DocumentIndex())->saveIndex($documentRow);
+        (new DocumentIndex())->saveIndex($documentRow);*/
 
 
         (new DropzoneHttpResponse())->sendResponse();

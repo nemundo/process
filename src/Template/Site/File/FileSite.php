@@ -172,6 +172,9 @@ class FileSite extends AbstractSite
             $table->addLabelValue('Parent Count', $fileType->getParentCount());
 
 
+            $table->addLabelValue('Text', $fileType->getText());
+
+
             if ($fileType->isPdf()) {
                 $btn = new AdminSiteButton($layout->col2);
                 $btn->site = clone(PdfExtractSite::$site);

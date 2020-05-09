@@ -144,7 +144,7 @@ class SearchSite extends AbstractSite
 
 
                 $snippet = new SnippetText();
-                $snippet->setMaxWords(30);
+                //$snippet->setMaxWords(30);
                 $textSnippet = $snippet->getSnippet($queryParameter->getValue(), $contentType->getText());
                 $row->addText($bold->getBoldText($textSnippet));
 
