@@ -6,12 +6,7 @@ namespace Nemundo\Process\Template\Install;
 
 use Nemundo\App\Script\Setup\ScriptSetup;
 use Nemundo\Model\Setup\ModelCollectionSetup;
-use Nemundo\Process\App\Calendar\Setup\CalendarSourceSetup;
-
-use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
-use Nemundo\Process\App\Wiki\Setup\WikiSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
-
 use Nemundo\Process\Group\Setup\GroupSetup;
 use Nemundo\Process\Template\Content\Audio\AudioContentType;
 use Nemundo\Process\Template\Content\File\FileActiveContentType;
@@ -24,8 +19,6 @@ use Nemundo\Process\Template\Content\Item\CreateItemContentType;
 use Nemundo\Process\Template\Content\Item\EditItemContentType;
 use Nemundo\Process\Template\Content\Item\InactiveItemContentType;
 use Nemundo\Process\Template\Content\LargeText\LargeTextContentType;
-
-
 use Nemundo\Process\Template\Content\Source\Add\ChildAddContentType;
 use Nemundo\Process\Template\Content\Source\Add\SourceAddContentType;
 use Nemundo\Process\Template\Content\Source\Remove\ChildRemoveContentType;
@@ -34,11 +27,10 @@ use Nemundo\Process\Template\Content\Text\TextContentType;
 use Nemundo\Process\Template\Content\Url\UrlContentType;
 use Nemundo\Process\Template\Content\User\UserContentType;
 use Nemundo\Process\Template\Content\VersionText\VersionTextContentType;
-
 use Nemundo\Process\Template\Content\Video\VideoContentType;
 use Nemundo\Process\Template\Content\YouTube\YouTubeContentType;
 use Nemundo\Process\Template\Data\TemplateCollection;
-
+use Nemundo\Process\Template\Script\TemplateCleanScript;
 use Nemundo\Process\Template\Script\TemplateTestScript;
 use Nemundo\Process\Template\Status\File\FileProcessStatus;
 use Nemundo\Process\Template\Status\Reopen\ReopenWorkflowProcessStatus;
@@ -46,6 +38,7 @@ use Nemundo\Process\Template\Status\SubjectChange\SubjectChangeProcessStatus;
 use Nemundo\Process\Template\Status\WorkflowDelete\WorkflowDeleteStatus;
 use Nemundo\Process\Template\Status\WorkflowRestore\WorkflowRestoreStatus;
 use Nemundo\Project\Install\AbstractInstall;
+
 
 class TemplateInstall extends AbstractInstall
 {
@@ -69,8 +62,7 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new ImageContentType());
 
 
-
-        $setup=new GroupSetup();
+        $setup = new GroupSetup();
         $setup->addGroupType(new UserContentType());
 
 
@@ -82,20 +74,17 @@ class TemplateInstall extends AbstractInstall
             ->addContentType(new ReopenWorkflowProcessStatus())
             ->addContentType(new FileListContentType())
             ->addContentType(new UrlContentType())
-        ->addContentType(new WorkflowRestoreStatus())
-        ->addContentType(new FileProcessStatus());
+            ->addContentType(new WorkflowRestoreStatus())
+            ->addContentType(new FileProcessStatus());
 
 
-
-
-      //  $setup->addContentType(new UserContentType());
+        //  $setup->addContentType(new UserContentType());
 
 
         $setup = new ContentTypeSetup();
         $setup->addContentType(new SourceAddContentType());
         $setup->addContentType(new SourceRemoveContentType());
         $setup->addContentType(new WorkflowDeleteStatus());
-
 
 
         $setup->addContentType(new SubjectChangeProcessStatus());
@@ -106,8 +95,9 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new EditItemContentType());
         $setup->addContentType(new InactiveItemContentType());
 
-        $setup=new ScriptSetup();
-        $setup->addScript(new TemplateTestScript());
+        (new ScriptSetup())
+            ->addScript(new TemplateTestScript())
+            ->addScript(new TemplateCleanScript());
 
 
     }
