@@ -1,0 +1,105 @@
+{
+    "app": "Feed",
+    "name": "feed",
+    "namespace": "Nemundo\\Process\\App\\Feed",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "718e5567-f690-45d2-b6d5-5aa8008401ba",
+            "label": "Feed",
+            "class_name": "Feed",
+            "table_name": "feed_feed",
+            "namespace": "Nemundo\\Process\\App\\Feed\\Data\\Feed",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Feed Url",
+                    "field_name": "feed_url",
+                    "variable_name": "feedUrl",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Title",
+                    "field_name": "title",
+                    "variable_name": "title",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "feed_url",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "feed_url"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
+            "model_id": "fde64ff1-389b-4acb-9521-e939a6afb305",
+            "label": "Feed Item",
+            "class_name": "FeedItem",
+            "table_name": "feed_item",
+            "namespace": "Nemundo\\Process\\App\\Feed\\Data\\FeedItem",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Feed",
+                    "field_name": "feed",
+                    "variable_name": "feed",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "718e5567-f690-45d2-b6d5-5aa8008401ba"
+                },
+                {
+                    "type": "text",
+                    "label": "Title",
+                    "field_name": "title",
+                    "variable_name": "title",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "large_text",
+                    "label": "Description",
+                    "field_name": "description",
+                    "variable_name": "description",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "text",
+                    "label": "Url",
+                    "field_name": "url",
+                    "variable_name": "url",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "url",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "url"
+                    ]
+                }
+            ]
+        }
+    ]
+}

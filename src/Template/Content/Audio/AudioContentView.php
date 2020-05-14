@@ -4,7 +4,7 @@
 namespace Nemundo\Process\Template\Content\Audio;
 
 
-use Nemundo\Html\Multimedia\AudioPlayer;
+use Nemundo\Html\Multimedia\Audio;
 use Nemundo\Process\Template\Content\File\AbstractFileContentView;
 
 class AudioContentView extends AbstractFileContentView
@@ -15,7 +15,7 @@ class AudioContentView extends AbstractFileContentView
 
         $fileRow = $this->contentType->getDataRow();
 
-        $video = new AudioPlayer($this);
+        $video = new Audio($this);
         $video->src = $fileRow->file->getUrl();
 
         return parent::getContent();

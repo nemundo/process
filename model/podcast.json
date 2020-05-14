@@ -2,7 +2,7 @@
     "app": "Podcast",
     "name": "podcast",
     "namespace": "Nemundo\\Process\\App\\Podcast",
-    "is_deleted": false,
+    "is_deleted": true,
     "model": [
         {
             "template": "default",

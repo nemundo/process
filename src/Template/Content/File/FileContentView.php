@@ -8,6 +8,8 @@ use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Core\File\FileInformation;
 use Nemundo\Core\File\FileSize;
+use Nemundo\Html\Multimedia\Audio;
+use Nemundo\Html\Multimedia\Video;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapLargeTextBox;
 use Nemundo\Package\Bootstrap\Image\BootstrapResponsiveImage;
 
@@ -37,16 +39,23 @@ class FileContentView extends AbstractFileContentView
         $table->addLabelValue('Filename', $fileRow->file->getFullFilename());
         $table->addLabelValue('Filename Extension', $fileRow->file->getFileExtension());
 
-        // isImage
-
-
         $fileInformation = new FileInformation($fileRow->file->getFullFilename());
 
         if ($fileInformation->isImage()) {
-
             $img = new BootstrapResponsiveImage($this);
             $img->src = $fileRow->file->getUrl();
             $img->width = 1200;
+        }
+
+        if ($fileInformation->isAudio()) {
+            $player=new Audio($this);
+            $player->src= $fileRow->file->getUrl();
+        }
+
+        if ($fileInformation->isVideo()) {
+            $player=new Video($this);
+            $player->src= $fileRow->file->getUrl();
+            $player->width = '100%';
 
         }
 

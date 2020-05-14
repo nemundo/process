@@ -4,13 +4,17 @@
 namespace Nemundo\Process\Search\Type;
 
 
+use Nemundo\Process\Search\Data\SearchIndex\SearchIndexCount;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexDelete;
+use Nemundo\Process\Search\Data\SearchIndex\SearchIndexReader;
+use Nemundo\Process\Search\Data\Word\WordDelete;
 use Nemundo\Process\Search\Index\SearchIndexBuilder;
 
 trait SearchIndexTrait
 {
 
     abstract public function getText();
+
     abstract protected function isActive();
 
     /**
@@ -26,6 +30,7 @@ trait SearchIndexTrait
 
     }
 
+
     protected function addSearchText($text)
     {
 
@@ -37,29 +42,6 @@ trait SearchIndexTrait
         $this->searchIndex->addText($text);
 
     }
-
-
-    /*
-    protected function saveSearchContent($text='') {
-
-
-        $data=new SearchContent();
-        $data->updateOnDuplicate=true;
-        $data->contentId=$this->getContentId();
-        $data->title= $this->getSubject();
-        $data->text=$text;
-        $data->save();
-
-
-
-    }*/
-
-
-    /*
-    protected function onIndex()
-    {
-
-    }*/
 
 
     protected function saveSearchIndex()
@@ -81,14 +63,27 @@ trait SearchIndexTrait
 
     }
 
+
     protected function deleteSearchIndex()
     {
+
+        $searchIndexReader = new SearchIndexReader();
+        $searchIndexReader->filter->andEqual($searchIndexReader->model->contentId, $this->getContentId());
+        foreach ($searchIndexReader->getData() as $searchIndexRow) {
+
+            $count = new SearchIndexCount();
+            $count->filter->andEqual($count->model->wordId, $searchIndexRow->wordId);
+            $count->filter->andNotEqual($searchIndexReader->model->contentId, $this->getContentId());
+            if ($count->getCount() === 0) {
+                (new WordDelete())->deleteById($searchIndexRow->wordId);
+            }
+
+        }
 
         $delete = new SearchIndexDelete();
         $delete->filter->andEqual($delete->model->contentId, $this->getContentId());
         $delete->delete();
 
     }
-
 
 }

@@ -13,8 +13,6 @@ use Nemundo\Process\Group\Type\GroupContentType;
 trait TaskIndexTrait
 {
 
-    //abstract protected function isActive();
-
     abstract protected function getAssignmentId();
 
     abstract protected function getDeadline();

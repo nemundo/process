@@ -6,10 +6,13 @@ namespace Nemundo\Process\Search\Site;
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
+use Nemundo\Core\Text\KeywordList;
 use Nemundo\Core\Text\SnippetText;
 use Nemundo\Core\Text\TextBold;
+use Nemundo\Db\Filter\Filter;
 use Nemundo\Db\Sql\Field\CountField;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Paragraph\Paragraph;
@@ -22,7 +25,6 @@ use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Search\Com\ContentSearchForm;
-use Nemundo\Process\Search\Content\Log\SearchLogContentType;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexCount;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexPaginationReader;
 use Nemundo\Process\Search\Parameter\SearchQueryParameter;
@@ -58,7 +60,7 @@ class SearchSite extends AbstractSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
-        $form = new ContentSearchForm($page);
+        new ContentSearchForm($page);
 
         $queryParameter = (new SearchQueryParameter());
 
@@ -67,18 +69,36 @@ class SearchSite extends AbstractSite
             $searchIndexReader = new SearchIndexPaginationReader();
             $searchIndexReader->model->loadContent();
             $searchIndexReader->model->content->loadContentType();
-            $searchIndexReader->filter->andEqual($searchIndexReader->model->wordId, $queryParameter->getWordId());
+
+            //$searchIndexReader->filter->andEqual($searchIndexReader->model->wordId, $queryParameter->getWordId());
+
+
+            $keywordFilter=new Filter();
+
+            $keyowrdList=new KeywordList();
+            $keyowrdList->addInputText=false;
+            foreach ( $keyowrdList->getHashList($queryParameter->getValue()) as $value ) {
+                $keywordFilter->orEqual($searchIndexReader->model->wordId, $value);
+            }
+
+            $searchIndexReader->filter->andFilter($keywordFilter);
 
             $contentTypeParameter = new ContentTypeParameter();
             if ($contentTypeParameter->hasValue()) {
                 $searchIndexReader->filter->andEqual($searchIndexReader->model->content->contentTypeId, $contentTypeParameter->getValue());
             }
 
+
+            $searchIndexReader->addGroup($searchIndexReader->model->contentId);
             $searchIndexReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
 
 
             $count = new SearchIndexCount();
-            $count->filter->andEqual($searchIndexReader->model->wordId, $queryParameter->getWordId());
+            $count->filter->andFilter($keywordFilter);
+
+            //$count->filter->andEqual($searchIndexReader->model->wordId, $queryParameter->getWordId());
+
+
             $searchCount = $count->getCount();
 
 
@@ -130,24 +150,12 @@ class SearchSite extends AbstractSite
 
                 $contentType = $indexRow->content->getContentType();
 
-                /*
-                if ($contentType->hasParent()) {
-                    $parentContentType = $contentType->getParentContentType();
-                    $row->addText($parentContentType->getSubject());
-                } else {
-                    $row->addEmpty();
-                }*/
-
-
                 $row->addText($bold->getBoldText($contentType->getSubject()));
                 $row->addText($indexRow->content->contentType->contentType);
 
-
                 $snippet = new SnippetText();
-                //$snippet->setMaxWords(30);
                 $textSnippet = $snippet->getSnippet($queryParameter->getValue(), $contentType->getText());
                 $row->addText($bold->getBoldText($textSnippet));
-
 
                 if ($contentType->hasViewSite()) {
                     $site = $contentType->getViewSite();
@@ -182,7 +190,22 @@ class SearchSite extends AbstractSite
             $searchIndexReader = new SearchIndexPaginationReader();
             $searchIndexReader->model->loadContent();
             $searchIndexReader->model->content->loadContentType();
-            $searchIndexReader->filter->andEqual($searchIndexReader->model->wordId, $queryParameter->getWordId());
+
+            /*
+            $filter=new Filter();
+
+            $keyowrdList=new KeywordList();
+            $keyowrdList->addInputText=false;
+            foreach ( $keyowrdList->getHashList($queryParameter->getValue()) as $value ) {
+                (new Debug())->write($value);
+                $filter->orEqual($searchIndexReader->model->wordId, $value);
+            }
+
+            $searchIndexReader->filter->andFilter($filter);*/
+
+            //$searchIndexReader->filter->andEqual($searchIndexReader->model->wordId, $queryParameter->getWordId());
+
+            $searchIndexReader->filter->andFilter($keywordFilter);
             $searchIndexReader->addGroup($searchIndexReader->model->content->contentTypeId);
 
             $count = new CountField($searchIndexReader);
@@ -210,6 +233,5 @@ class SearchSite extends AbstractSite
         $page->render();
 
     }
-
 
 }

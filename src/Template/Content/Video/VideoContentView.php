@@ -4,7 +4,7 @@
 namespace Nemundo\Process\Template\Content\Video;
 
 
-use Nemundo\Html\Multimedia\VideoPlayer;
+use Nemundo\Html\Multimedia\Video;
 use Nemundo\Process\Template\Content\File\AbstractFileContentView;
 
 class VideoContentView extends AbstractFileContentView
@@ -15,7 +15,7 @@ class VideoContentView extends AbstractFileContentView
 
         $fileRow = $this->contentType->getDataRow();
 
-        $video = new VideoPlayer($this);
+        $video = new Video($this);
         $video->src = $fileRow->file->getUrl();
         $video->width = 800;
 

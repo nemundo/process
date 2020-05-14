@@ -15,6 +15,8 @@ use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Package\Dropzone\DropzoneUploadForm;
+use Nemundo\Package\FontAwesome\File\FileExtensionIcon;
+use Nemundo\Package\FontAwesome\FontAwesomeIcon;
 use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Process\Content\Com\Table\ContentLogTable;
 use Nemundo\Process\Content\Com\Table\SourceTable;
@@ -98,6 +100,7 @@ class FileSite extends AbstractSite
         $table = new AdminClickableTable($layout->col1);
 
         $header = new TableHeader($table);
+        $header->addEmpty();
 
         $header->addText('File');
         $header->addText('Extension');
@@ -115,6 +118,16 @@ class FileSite extends AbstractSite
             if (!$fileRow->active) {
                 $row->strikeThrough = true;
             }
+
+
+            $icon=new FileExtensionIcon($row);
+            $icon->filename = $fileRow->file->getFileExtension();
+
+            /*
+            $icon=new FontAwesomeIcon($row);
+            $icon->icon='file-audio';
+            $icon->solid=true;
+            $icon->iconSize= 3;*/
 
             $row->addText($fileRow->file->getFilename());
             $row->addText($fileRow->file->getFileExtension());
