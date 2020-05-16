@@ -1,12 +1,11 @@
 <?php
 
 
-namespace Nemundo\Process\Search\Site;
+namespace Nemundo\Process\Template\Site\File;
 
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\TableBuilder\TableHeader;
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Text\KeywordList;
@@ -28,37 +27,35 @@ use Nemundo\Process\Search\Com\ContentSearchForm;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexCount;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexPaginationReader;
 use Nemundo\Process\Search\Parameter\SearchQueryParameter;
-use Nemundo\Process\Search\Site\Json\SearchContentTypeJsonSite;
-use Nemundo\Process\Search\Site\Json\SearchJsonSite;
+use Nemundo\Process\Search\Reader\SearchItemReader;
+use Nemundo\Process\Search\Site\SearchItemSite;
+use Nemundo\Process\Search\Site\SearchSite;
+use Nemundo\Process\Template\Com\Form\FileContentDropzoneUploadForm;
 use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Web\Site\Site;
 
-class SearchSite extends AbstractSite
+class FileSearchSite extends AbstractSite
 {
-
-    /**
-     * @var SearchSite
-     */
-    public static $site;
 
     protected function loadSite()
     {
-        $this->title[LanguageCode::EN] = 'Search';
-        $this->title[LanguageCode::DE] = 'Suche';
-        $this->url = 'search';
-        SearchSite::$site = $this;
 
-        new SearchItemSite($this);
-        new SearchJsonSite($this);
-        new SearchContentTypeJsonSite($this);
+        $this->title='File Search';
+        $this->url='file-search2';
 
+        // TODO: Implement loadSite() method.
     }
+
 
 
     public function loadContent()
     {
 
-        $page = (new DefaultTemplateFactory())->getDefaultTemplate();
+        $page=(new DefaultTemplateFactory())->getDefaultTemplate();
+
+
+        //new FileContentDropzoneUploadForm($page);
+
 
         new ContentSearchForm($page);
 
@@ -66,8 +63,22 @@ class SearchSite extends AbstractSite
 
         if ($queryParameter->hasValue()) {
 
-            $searchIndexReader = new SearchIndexPaginationReader();
-            $searchIndexReader->model->loadContent();
+
+
+
+
+            $reader = new SearchItemReader();
+            foreach ($reader->getData() as $searchItem) {
+
+
+
+
+            }
+
+
+            /*
+
+             $searchIndexReader->model->loadContent();
             $searchIndexReader->model->content->loadContentType();
 
             //$searchIndexReader->filter->andEqual($searchIndexReader->model->wordId, $queryParameter->getWordId());
@@ -99,7 +110,37 @@ class SearchSite extends AbstractSite
             //$count->filter->andEqual($searchIndexReader->model->wordId, $queryParameter->getWordId());
 
 
-            $searchCount = $count->getFormatCount();  //getCount();
+            $searchCount = $count->getCount();
+
+            $searchIndexReader = new SearchIndexPaginationReader();
+            $searchIndexReader->model->loadContent();
+            $searchIndexReader->model->content->loadContentType();
+
+            $keywordFilter=new Filter();
+
+            $keyowrdList=new KeywordList();
+            $keyowrdList->addInputText=false;
+            foreach ( $keyowrdList->getHashList($queryParameter->getValue()) as $value ) {
+                $keywordFilter->orEqual($searchIndexReader->model->wordId, $value);
+            }
+
+            $searchIndexReader->filter->andFilter($keywordFilter);
+
+            $contentTypeParameter = new ContentTypeParameter();
+            if ($contentTypeParameter->hasValue()) {
+                $searchIndexReader->filter->andEqual($searchIndexReader->model->content->contentTypeId, $contentTypeParameter->getValue());
+            }
+
+
+            $searchIndexReader->addGroup($searchIndexReader->model->contentId);
+            $searchIndexReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
+
+
+            $count = new SearchIndexCount();
+            $count->filter->andFilter($keywordFilter);
+
+
+            $searchCount = $count->getCount();
 
 
             $resultText = [];
@@ -108,12 +149,6 @@ class SearchSite extends AbstractSite
 
             $p = new Paragraph($page);
             $p->content = $searchCount . ' ' . (new Translation())->getText($resultText);
-
-
-            /*$logType = new SearchLogContentType();
-            $logType->searchQuery =(new SearchQueryParameter())->getValue();  // $queryParameter->getSearchQuery();
-            $logType->resultCount = $searchCount;
-            $logType->saveType();*/
 
 
             $bold = new TextBold();
@@ -129,9 +164,7 @@ class SearchSite extends AbstractSite
 
             $header = new TableHeader($table);
 
-            /*$th = new Th($header);
-            $th->content[LanguageCode::EN] = 'Source';
-            $th->content[LanguageCode::DE] = 'Quelle';*/
+
 
             $th = new Th($header);
             $th->content[LanguageCode::EN] = 'Subject';
@@ -149,6 +182,7 @@ class SearchSite extends AbstractSite
                 $row = new BootstrapClickableTableRow($table);
 
                 $contentType = $indexRow->content->getContentType();
+
                 $row->addText($bold->getBoldText($contentType->getSubject()));
                 $row->addText($indexRow->content->contentType->contentType);
 
@@ -168,69 +202,17 @@ class SearchSite extends AbstractSite
             }
 
             $pagination = new BootstrapPagination($layout->col1);
-            $pagination->paginationReader = $searchIndexReader;
+            $pagination->paginationReader = $searchIndexReader;*/
 
-
-            // Alle Anzeigen
-
-            $list = new BootstrapHyperlinkList($layout->col2);
-
-            $label = 'Alle Resultate (' . $searchCount . ')';
-            if ((new ContentTypeParameter())->notExists()) {
-                $list->addActiveHyperlink($label);
-            } else {
-
-                $site = new Site();
-                $site->title = $label;
-                $site->removeParameter(new ContentTypeParameter());
-                $list->addSite($site);
-            }
-
-            $searchIndexReader = new SearchIndexPaginationReader();
-            $searchIndexReader->model->loadContent();
-            $searchIndexReader->model->content->loadContentType();
-
-            /*
-            $filter=new Filter();
-
-            $keyowrdList=new KeywordList();
-            $keyowrdList->addInputText=false;
-            foreach ( $keyowrdList->getHashList($queryParameter->getValue()) as $value ) {
-                (new Debug())->write($value);
-                $filter->orEqual($searchIndexReader->model->wordId, $value);
-            }
-
-            $searchIndexReader->filter->andFilter($filter);*/
-
-            //$searchIndexReader->filter->andEqual($searchIndexReader->model->wordId, $queryParameter->getWordId());
-
-            $searchIndexReader->filter->andFilter($keywordFilter);
-            $searchIndexReader->addGroup($searchIndexReader->model->content->contentTypeId);
-
-            $count = new CountField($searchIndexReader);
-
-            foreach ($searchIndexReader->getData() as $searchIndexRow) {
-
-
-                $label = $searchIndexRow->content->contentType->contentType . ' (' . $searchIndexRow->getModelValue($count) . ')';
-
-                if ((new ContentTypeParameter())->getValue() == $searchIndexRow->content->contentTypeId) {
-                    $list->addActiveHyperlink($label);
-                } else {
-
-                    $site = clone(SearchSite::$site);
-                    $site->addParameter(new SearchQueryParameter());
-                    $site->addParameter(new ContentTypeParameter($searchIndexRow->content->contentTypeId));
-                    $site->title = $label;
-                    $list->addSite($site);
-                }
-
-            }
 
         }
 
         $page->render();
 
+
+
+
+        // TODO: Implement loadContent() method.
     }
 
 }
