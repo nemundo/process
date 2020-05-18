@@ -52,20 +52,14 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
     protected function onCreate()
     {
 
-
-        // check for video
-        // in FileUploadForm
-
-
         $data = new TemplateFile();
         $data->active = true;
         $data->file->fromFileProperty($this->file);
         $this->dataId = $data->save();
 
-
-
-        $templateFileRow = $this->getDataRow();  // (new TemplateFileReader())->getRowById($this->dataId);
-        $filename = $templateFileRow->file->getFullFilename();  // document->getFullFilename();
+        /*
+        $templateFileRow = $this->getDataRow();
+        $filename = $templateFileRow->file->getFullFilename();
         $file = new FileInformation($filename);
 
         $text='';
@@ -88,44 +82,9 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
 
         }
 
-
-
         $update =new TemplateFileUpdate();
         $update->text = $text;
-        $update->updateById($this->dataId);
-
-
-
-
-
-        //$fileRow = $this->getDataRow();
-
-
-        // text file
-        // office document
-
-        /*if (DeploymentConfig::$stagingEnviroment !== StagingEnvironment::DEVELOPMENT) {
-
-            if ($fileRow->file->getFileExtension() == 'pdf') {
-
-                $filenameInput = $fileRow->file->getFullFilename();
-                $command = "pdftotext $filenameInput -";
-                $output = shell_exec($command);
-
-                if ($output !== null) {
-                    $update = new TemplateFileUpdate();
-                    $update->text = $output;
-                    $update->updateById($this->dataId);
-                }
-
-
-            }
-
-
-            // Office Doc
-
-
-        }*/
+        $update->updateById($this->dataId);*/
 
     }
 
@@ -145,16 +104,37 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
     protected function onIndex()
     {
 
-        parent::onIndex();
+        $templateFileRow = $this->getDataRow();
+        $filename = $templateFileRow->file->getFullFilename();
+        $file = new FileInformation($filename);
 
-        $fileRow = $this->getDataRow();
-        $this->addSearchWord($fileRow->file->getFilename());
-        $this->addSearchText($fileRow->text);
+        $text = '';
 
+        if ((new OperatingSystem())->isLinux()) {
+
+            if ($file->isPdf()) {
+
+                $pdfFile = new PdfFile($filename);
+                $text = $pdfFile->getPdfText();
+
+            }
+
+        }
+
+        if ($file->isText()) {
+
+            $txtFile = new TextFileReader($filename);
+            $text = $txtFile->getText();
+
+        }
+
+        $update = new TemplateFileUpdate();
+        $update->text = $text;
+        $update->updateById($this->dataId);
+
+        $this->addSearchWord($templateFileRow->file->getFilename());
+        $this->addSearchText($text);
         $this->saveSearchIndex();
-
-        // pdf reader
-
 
     }
 
@@ -218,6 +198,7 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         return $this->getDataRow()->file->getFilename();
     }
 
+
     public function getFullFilename()
     {
         return $this->getDataRow()->file->getFullFilename();
@@ -254,10 +235,10 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
 
     }
 
+
     public function isVideo()
     {
 
     }
-
 
 }

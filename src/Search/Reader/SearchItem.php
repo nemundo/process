@@ -4,28 +4,21 @@
 namespace Nemundo\Process\Search\Reader;
 
 
+use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Web\Site\AbstractSite;
 
-class SearchItem
+class SearchItem extends AbstractBase
 {
 
-    public $title;
+    public $subject;
 
     public $text;
-
 
     /**
      * @var AbstractSite
      */
     public $site;
 
-
-    /*
-    public function getSite() {
-
-
-
-    }*/
-
+    public $typeLabel;
 
 }

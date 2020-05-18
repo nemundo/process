@@ -125,6 +125,7 @@ class SearchIndexBuilder extends AbstractBase
             $data->ignoreIfExists = true;
             $data->contentId = $this->contentId;
             $data->wordId = $wordId;
+            $data->contentTypeId = $this->contentType->typeId;
             $data->save();
 
         }
