@@ -6,7 +6,6 @@ namespace Nemundo\Process\Search\Reader;
 
 use Nemundo\Core\Base\DataSource\AbstractDataSource;
 use Nemundo\Core\Base\DataSource\PaginationTrait;
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Text\SnippetText;
 use Nemundo\Core\Text\TextBold;
 use Nemundo\Core\Text\WordList;
@@ -147,6 +146,7 @@ LEFT JOIN process_content ON process_search_index.content=process_content.id ';
                 $searchItem->text = $bold->getBoldText($textSnippet);
                 $searchItem->site = $contentType->getViewSite();
                 $searchItem->typeLabel = $sqlRow->getValue('content_type_label');
+                $searchItem->dataId = $dataId;
 
                 $this->addItem($searchItem);
 
@@ -209,7 +209,6 @@ LEFT JOIN process_content ON process_search_index.content=process_content.id ';
             $this->getContentTypeWhere($sqlStatement, true);
 
 
-
             /*
             $filterContentTypeCount = sizeof($this->filterContentTypeList);
             if ($filterContentTypeCount > 0) {
@@ -239,7 +238,7 @@ LEFT JOIN process_content ON process_search_index.content=process_content.id ';
 
             $sqlStatement->sql .= ' GROUP BY process_search_index.content) data WHERE count_field=:count_field';
             $sqlStatement->addParameter('count_field', $keywordList->getWordCount(), 'count_field');
-          //  $sqlStatement->sql .= $sqlStatement->sql;
+            //  $sqlStatement->sql .= $sqlStatement->sql;
 
         } else {
 
@@ -254,16 +253,16 @@ LEFT JOIN process_content ON process_search_index.content=process_content.id ';
     }
 
 
+    private function getContentTypeWhere(SqlStatement $sqlStatement, $addAnd = false)
+    {
 
-    private function getContentTypeWhere(SqlStatement $sqlStatement, $addAnd = false) {
-
-        $sql='';
+        $sql = '';
 
         $filterContentTypeCount = sizeof($this->filterContentTypeList);
         if ($filterContentTypeCount > 0) {
 
             if ($addAnd) {
-            $sql .= ' AND ';
+                $sql .= ' AND ';
             }
 
             $sql .= '(';
@@ -284,7 +283,7 @@ LEFT JOIN process_content ON process_search_index.content=process_content.id ';
 
             $sql .= ')';
 
-            $sqlStatement->sql.=$sql;
+            $sqlStatement->sql .= $sql;
 
         }
 
@@ -292,9 +291,6 @@ LEFT JOIN process_content ON process_search_index.content=process_content.id ';
 
 
     }
-
-
-
 
 
     public function getContentTypeList()

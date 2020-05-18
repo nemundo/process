@@ -21,4 +21,6 @@ class SearchItem extends AbstractBase
 
     public $typeLabel;
 
+    public $dataId;
+
 }

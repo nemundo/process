@@ -62,7 +62,7 @@ class WikiInstall extends AbstractInstall
 
         (new WikiSetup())
             ->addContentType(new BookmarkContentType())
-            ->addContentType(new FeedContentType())
+           // ->addContentType(new FeedContentType())
             ->addContentType(new AudioContentType())
             ->addContentType(new TextContentType())
             ->addContentType(new ImageListContentType())

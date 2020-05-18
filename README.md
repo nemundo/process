@@ -1,5 +1,14 @@
 # Process Framework
 
+
+## Installation 
+```
+composer require nemundo/process
+```
+
+
+
+
 ## Dev Installation 
 ```
 git submodule add https://github.com/nemundo/process.git lib/process

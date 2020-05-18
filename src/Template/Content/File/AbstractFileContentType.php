@@ -142,6 +142,7 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
     protected function onDelete()
     {
         (new TemplateFileDelete())->deleteById($this->dataId);
+        $this->deleteSearchIndex();
     }
 
 
