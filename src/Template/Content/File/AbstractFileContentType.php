@@ -57,35 +57,6 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $data->file->fromFileProperty($this->file);
         $this->dataId = $data->save();
 
-        /*
-        $templateFileRow = $this->getDataRow();
-        $filename = $templateFileRow->file->getFullFilename();
-        $file = new FileInformation($filename);
-
-        $text='';
-
-        if ((new OperatingSystem())->isLinux()) {
-
-            if ($file->isPdf()) {
-
-                $pdfFile = new PdfFile($filename);
-                $text = $pdfFile->getPdfText();
-
-            }
-
-        }
-
-        if ($file->isText()) {
-
-            $txtFile = new TextFileReader($filename);
-            $text = $txtFile->getText();
-
-        }
-
-        $update =new TemplateFileUpdate();
-        $update->text = $text;
-        $update->updateById($this->dataId);*/
-
     }
 
 

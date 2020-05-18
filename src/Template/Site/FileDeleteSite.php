@@ -3,6 +3,7 @@
 namespace Nemundo\Process\Template\Site;
 
 
+use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\Template\Content\File\FileContentType;
 use Nemundo\Process\Template\Parameter\FileParameter;
@@ -19,7 +20,9 @@ class FileDeleteSite extends AbstractDeleteIconSite
 
     protected function loadSite()
     {
-        $this->title = 'Delete';
+
+        $this->title[LanguageCode::EN] = 'Delete File';
+        $this->title[LanguageCode::DE] = 'Datei löschen';
         $this->url = 'delete-file';
         $this->menuActive = false;
         FileDeleteSite::$site = $this;
