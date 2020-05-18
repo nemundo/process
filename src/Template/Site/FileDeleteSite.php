@@ -26,6 +26,7 @@ class FileDeleteSite extends AbstractDeleteIconSite
         $this->url = 'delete-file';
         $this->menuActive = false;
         FileDeleteSite::$site = $this;
+
     }
 
 
