@@ -1,0 +1,18 @@
+{
+  "name": "nemundo/process",
+  "description": "Process Framework",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Urs Lang",
+      "email": "urs.lang@gmail.com"
+    }
+  ],
+  "require": {
+  },
+  "autoload": {
+    "psr-4": {
+      "Nemundo\\Process\\": "src/"
+    }
+  }
+}

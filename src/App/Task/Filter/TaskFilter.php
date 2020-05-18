@@ -5,16 +5,12 @@ namespace Nemundo\Process\App\Task\Filter;
 
 
 use Nemundo\Db\Filter\AbstractFilter;
-use Nemundo\Process\App\Assignment\Status\ClosedAssignmentStatus;
-use Nemundo\Process\App\Assignment\Status\OpenAssignmentStatus;
 use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndexModel;
 use Nemundo\Process\App\Task\Parameter\TaskTypeParameter;
 use Nemundo\User\Parameter\UserParameter;
 use Nemundo\Workflow\App\Workflow\Com\ListBox\Item\ClosedListBoxItem;
 use Nemundo\Workflow\App\Workflow\Com\ListBox\Item\OpenListBoxItem;
 use Nemundo\Workflow\App\Workflow\Parameter\WorkflowStatusParameter;
-use Schleuniger\App\Org\Parameter\ErstellerParameter;
-use Schleuniger\App\Org\Parameter\VerantwortlicherParameter;
 
 class TaskFilter extends AbstractFilter
 {
@@ -24,16 +20,16 @@ class TaskFilter extends AbstractFilter
     protected function loadFilter()
     {
 
-        $this->model=new TaskIndexModel();
+        $this->model = new TaskIndexModel();
 
-        $parameter=new TaskTypeParameter();
+        $parameter = new TaskTypeParameter();
         if ($parameter->hasValue()) {
-        $this->andEqual($this->model->taskTypeId,$parameter->getValue());
+            $this->andEqual($this->model->taskTypeId, $parameter->getValue());
         }
 
-        $parameter= new UserParameter();
+        $parameter = new UserParameter();
         if ($parameter->hasValue()) {
-            $this->andEqual($this->model->userId,$parameter->getValue());
+            $this->andEqual($this->model->userId, $parameter->getValue());
         }
 
         $statusParameter = new WorkflowStatusParameter();
@@ -47,7 +43,6 @@ class TaskFilter extends AbstractFilter
                 $this->andEqual($this->model->closed, true);
             }
         }
-
 
     }
 
