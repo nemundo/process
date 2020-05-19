@@ -23,6 +23,8 @@ use Nemundo\Process\Search\Site\Json\SearchContentTypeJsonSite;
 use Nemundo\Process\Search\Site\Json\SearchJsonSite;
 use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Web\Site\Site;
+use Schleuniger\Config\SchleunigerConfig;
+use Schleuniger\Content\Abbruch\AbbruchProcessStatus;
 
 class SearchSite extends AbstractSite
 {
@@ -49,9 +51,11 @@ class SearchSite extends AbstractSite
     public function loadContent()
     {
 
+        // auslagern project repo
+
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
-        new ContentSearchForm($page);
+        //new ContentSearchForm($page);
 
         $queryParameter = (new SearchQueryParameter());
 
@@ -60,6 +64,7 @@ class SearchSite extends AbstractSite
 
             $searchReader = new SearchItemReader();
             $searchReader->query = $queryParameter->getValue();
+            $searchReader->paginationLimit= 30;
 
             $contentTypeParameter = new ContentTypeParameter();
             $contentTypeParameter->contentTypeCheck=false;
