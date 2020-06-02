@@ -19,6 +19,9 @@ abstract class AbstractLargeTextProcessStatus extends AbstractProcessStatus
 
     protected $largeTextValidation = false;
 
+    protected $buttonLabel;
+
+
     protected function onCreate()
     {
 
@@ -92,6 +95,11 @@ abstract class AbstractLargeTextProcessStatus extends AbstractProcessStatus
     public function getLargeTextValidation()
     {
         return $this->largeTextValidation;
+    }
+
+    public function getButtonLabel()
+    {
+        return $this->buttonLabel;
     }
 
 }
