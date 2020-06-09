@@ -10,6 +10,7 @@ use Schleuniger\App\Aufgabenliste\Content\AufgabenlisteContentType;
 use Schleuniger\App\ChangeRequest\Workflow\Process\EcoProcess;
 use Schleuniger\App\ChangeRequest\Workflow\Process\EcrProcess;
 use Schleuniger\App\Projekt\Content\Projekt\ProjektContentType;
+use Schleuniger\App\Sitzung\Content\Sitzung\SitzungContentType;
 use Schleuniger\App\Verbesserung\Workflow\Process\VerbesserungProcess;
 
 class SourceContentTypeCollection extends AbstractContentTypeCollection
@@ -24,7 +25,7 @@ class SourceContentTypeCollection extends AbstractContentTypeCollection
         $this->addContentType(new EcoProcess());
         $this->addContentType(new ProjektContentType());
         $this->addContentType(new AufgabenlisteContentType());
-        //$this->addContentType(new SitzungContentType());
+        $this->addContentType(new SitzungContentType());
 
     }
 
