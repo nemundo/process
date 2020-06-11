@@ -282,7 +282,7 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
-    protected function getParameter()
+    public function getParameter()
     {
 
         $parameter = null;
