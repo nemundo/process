@@ -4,8 +4,7 @@
 namespace Nemundo\Process;
 
 
-use Nemundo\Core\File\Path;
-use Nemundo\Core\Path\PathNew;
+use Nemundo\Core\Path\Path;
 use Nemundo\Project\AbstractProject;
 
 class ProcessProject extends AbstractProject
@@ -19,7 +18,7 @@ class ProcessProject extends AbstractProject
         $this->path = __DIR__;
         $this->namespace = __NAMESPACE__;
 
-        $this->modelPath = (new PathNew())
+        $this->modelPath = (new Path())
             ->addPath(__DIR__)
             ->addPath('..')
             ->addPath('model')
