@@ -23,8 +23,7 @@ use Nemundo\Process\Search\Site\Json\SearchContentTypeJsonSite;
 use Nemundo\Process\Search\Site\Json\SearchJsonSite;
 use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Web\Site\Site;
-use Schleuniger\Config\SchleunigerConfig;
-use Schleuniger\Content\Abbruch\AbbruchProcessStatus;
+
 
 class SearchSite extends AbstractSite
 {
@@ -60,7 +59,6 @@ class SearchSite extends AbstractSite
         $queryParameter = (new SearchQueryParameter());
 
         if ($queryParameter->hasValue()) {
-
 
             $searchReader = new SearchItemReader();
             $searchReader->query = $queryParameter->getValue();
