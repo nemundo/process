@@ -18,6 +18,10 @@ class FeedImportScheduler extends AbstractScheduler
     protected function loadScheduler()
     {
 
+        $this->active=true;
+        $this->hour = 2;
+        $this->overrideSetting=false;
+
         $this->consoleScript = true;
         $this->scriptName = 'feed-import';
 
@@ -30,9 +34,6 @@ class FeedImportScheduler extends AbstractScheduler
 
         $reader = new FeedReader();
         foreach ($reader->getData() as $feedRow) {
-
-
-            //(new Debug())->write($feedRow->feedUrl);
 
             $rssReader = new RssReader();
             $rssReader->feedUrl = $feedRow->feedUrl;
