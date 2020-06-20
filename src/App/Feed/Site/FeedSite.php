@@ -17,6 +17,7 @@ use Nemundo\Process\App\Feed\Content\Item\FeedItemContentType;
 use Nemundo\Process\App\Feed\Data\Feed\FeedReader;
 use Nemundo\Process\App\Feed\Data\FeedItem\FeedItemPaginationReader;
 use Nemundo\Process\App\Feed\Data\FeedItem\FeedItemReader;
+use Nemundo\Process\App\Feed\Parameter\FeedParameter;
 use Nemundo\Process\Config\ProcessConfig;
 use Nemundo\Web\Site\AbstractSite;
 
@@ -29,6 +30,7 @@ class FeedSite extends AbstractSite
         $this->url='feed';
 
         new FeedItemRedirectSite($this);
+        new FeedDeleteSite($this);
 
     }
 
@@ -51,6 +53,11 @@ class FeedSite extends AbstractSite
             $row=new BootstrapClickableTableRow($table);
             $row->addText($feedRow->feedUrl);
             $row->addText($feedRow->title);
+
+            $site=clone(FeedDeleteSite::$site);
+            $site->addParameter(new FeedParameter($feedRow->id));
+            $row->addIconSite($site);
+
 
         }
 
@@ -78,7 +85,6 @@ class FeedSite extends AbstractSite
         $pagination->paginationReader=$itemReader;
 
         $page->render();
-
 
 
     }

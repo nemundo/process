@@ -12,11 +12,13 @@ use Nemundo\Process\App\Feed\Data\FeedItem\FeedItemReader;
 use Nemundo\Process\App\Feed\Data\FeedItem\FeedItemRow;
 use Nemundo\Process\App\Feed\Parameter\FeedItemParameter;
 use Nemundo\Process\App\Feed\Site\FeedItemRedirectSite;
+use Nemundo\Process\App\Stream\Index\StreamIndexTrait;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 
 class FeedItemContentType extends AbstractTreeContentType
 {
 
+    use StreamIndexTrait;
 
     // stream index
 
@@ -55,7 +57,7 @@ class FeedItemContentType extends AbstractTreeContentType
         $data->title = $this->title;
         $data->description = $this->description;
         $data->url = $this->url;
-        $data->save();
+      $this->dataId=  $data->save();
 
 
     }
@@ -75,6 +77,9 @@ class FeedItemContentType extends AbstractTreeContentType
         $this->addSearchText($itemRow->title);
         $this->addSearchText($itemRow->description);
         $this->saveSearchIndex();
+
+        $this->saveStreamIndex();
+
 
     }
 
@@ -111,7 +116,9 @@ class FeedItemContentType extends AbstractTreeContentType
 
     protected function onDataRow()
     {
-        $this->dataRow = (new FeedItemReader())->getRowById($this->dataId);
+        $reader = new FeedItemReader();
+        $reader->model->loadFeed();
+        $this->dataRow = $reader->getRowById($this->dataId);
     }
 
 

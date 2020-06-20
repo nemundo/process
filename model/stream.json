@@ -1,0 +1,62 @@
+{
+    "app": "Stream",
+    "name": "stream",
+    "namespace": "Nemundo\\Process\\App\\Stream",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "5eb653a7-3bb5-462e-ac5a-308fce3a8df0",
+            "label": "Stream",
+            "class_name": "Stream",
+            "table_name": "stream_stream",
+            "namespace": "Nemundo\\Process\\App\\Stream\\Data\\Stream",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Content",
+                    "field_name": "content",
+                    "variable_name": "content",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "cf3857af-ba43-4968-b547-4a9aba69b2f3",
+            "label": "User Stream",
+            "class_name": "UserStream",
+            "table_name": "stream_user_stream",
+            "namespace": "Nemundo\\Process\\App\\Stream\\Data\\UserStream",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "user",
+                    "label": "User",
+                    "field_name": "user",
+                    "variable_name": "user",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "Content",
+                    "field_name": "content",
+                    "variable_name": "content",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35"
+                }
+            ],
+            "index": []
+        }
+    ]
+}
