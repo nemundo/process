@@ -5,6 +5,7 @@ namespace Nemundo\Process\App\Stream\Index;
 
 
 use Nemundo\Process\App\Stream\Data\Stream\Stream;
+use Nemundo\Process\App\Stream\Data\Stream\StreamDelete;
 
 trait StreamIndexTrait
 {
@@ -19,5 +20,16 @@ trait StreamIndexTrait
 
 
     }
+
+
+    protected function deleteStreamIndex() {
+
+        $delete=new StreamDelete();
+        $delete->filter->andEqual($delete->model->contentId, $this->getContentId());
+        $delete->delete();
+
+
+    }
+
 
 }

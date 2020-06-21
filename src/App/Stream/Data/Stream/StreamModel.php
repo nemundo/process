@@ -41,6 +41,10 @@ $this->contentId->aliasFieldName = "stream_stream_content";
 $this->contentId->label = "Content";
 $this->contentId->allowNullValue = false;
 
+$index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
+$index->indexName = "content";
+$index->addType($this->contentId);
+
 }
 public function loadContent() {
 if ($this->content == null) {
