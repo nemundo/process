@@ -1,15 +1,16 @@
 <?php
 
 
-namespace Nemundo\Process\Template\Content\YouTube;
+namespace Nemundo\Process\App\Video\Content\YouTube;
 
 
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Com\Video\YouTube\YouTubePlayer;
+use Nemundo\Process\App\Video\Data\YouTube\YouTubeReader;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Process\Template\Data\TemplateText\TemplateText;
 use Nemundo\Process\Template\Data\TemplateText\TemplateTextReader;
-use Nemundo\Process\Template\Data\Youtube\YoutubeReader;
+
 
 class YouTubeContentView extends AbstractContentView
 {
@@ -19,10 +20,10 @@ class YouTubeContentView extends AbstractContentView
 
         //$youtubeRow = (new YoutubeReader())->getRowById($this->dataId);
 
-        $youtubeRow = (new TemplateTextReader())->getRowById($this->dataId);
+        $youtubeRow = (new YouTubeReader())->getRowById($this->contentType->getDataId());
 
         $player=new YouTubePlayer($this);
-        $player->videoId = $youtubeRow->text;  //youtubeId;
+        $player->videoId = $youtubeRow->youtubeId;  //text;  //youtubeId;
         $player->autoPlay=true;
 
 /*

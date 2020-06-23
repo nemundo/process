@@ -58,7 +58,6 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new VersionTextContentType());
         $setup->addContentType(new VideoContentType());
         $setup->addContentType(new AudioContentType());
-        $setup->addContentType(new YouTubeContentType());
         $setup->addContentType(new ImageContentType());
 
 

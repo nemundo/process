@@ -1,0 +1,48 @@
+{
+    "app": "Video",
+    "name": "video",
+    "namespace": "Nemundo\\Process\\App\\Video",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "33df32e1-9d50-4170-adfb-9acf912266ae",
+            "label": "YouTube",
+            "class_name": "YouTube",
+            "table_name": "video_youtube",
+            "namespace": "Nemundo\\Process\\App\\Video\\Data\\YouTube",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "YouTube Id",
+                    "field_name": "youtube_id",
+                    "variable_name": "youtubeId",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Title",
+                    "field_name": "title",
+                    "variable_name": "title",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "large_text",
+                    "label": "Description",
+                    "field_name": "description",
+                    "variable_name": "description",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        }
+    ]
+}

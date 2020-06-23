@@ -10,7 +10,9 @@ use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Process\App\Stream\Data\Stream\StreamPaginationReader;
 use Nemundo\Process\App\Stream\Data\Stream\StreamReader;
+use Nemundo\Process\App\Video\Content\YouTube\YouTubeContentType;
 use Nemundo\Process\Config\ProcessConfig;
+use Nemundo\Process\Template\Content\Video\VideoContentType;
 use Nemundo\Web\Site\AbstractSite;
 
 class StreamSite extends AbstractSite
@@ -34,7 +36,18 @@ class StreamSite extends AbstractSite
         $page=(new DefaultTemplateFactory())->getDefaultTemplate();
 
 
+
+
+
+
         $layout = new BootstrapTwoColumnLayout($page);
+
+
+
+        (new YouTubeContentType())->getForm($layout->col2);
+
+
+
 
         $streamReader=new StreamPaginationReader();
         $streamReader->model->loadContent();

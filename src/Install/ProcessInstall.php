@@ -54,7 +54,7 @@ class ProcessInstall extends AbstractInstall
 
         (new RelationInstall())->install();
 
-        (new WikiInstall())->install();
+        //(new WikiInstall())->install();
 
         (new ApplicationInstall())->install();
 
