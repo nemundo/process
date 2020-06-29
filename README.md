@@ -30,7 +30,7 @@ php bin/cmd.php content-check
 ```
 
 
-### ReIndexing
+### Search ReIndexing
 ```
 php bin/cmd.php index-reindex
 ```

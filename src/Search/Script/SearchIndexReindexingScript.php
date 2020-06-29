@@ -5,8 +5,10 @@ namespace Nemundo\Process\Search\Script;
 
 
 use Nemundo\App\Script\Type\AbstractConsoleScript;
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Search\Install\SearchIndexClean;
+use Nemundo\Process\Search\Type\SearchIndexTrait;
 
 class SearchIndexReindexingScript extends AbstractConsoleScript
 {
@@ -28,7 +30,11 @@ class SearchIndexReindexingScript extends AbstractConsoleScript
         foreach ($reader->getData() as $contentRow) {
 
             $contentType = $contentRow->getContentType();
-            $contentType->saveSearchIndex();
+            //(new Debug())->write($contentType->getSubject());
+
+            //if ($contentType->isObjectOfTrait(SearchIndexTrait::class)) {
+                $contentType->saveIndex();
+            //}
 
         }
 

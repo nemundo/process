@@ -17,8 +17,11 @@ use Nemundo\Model\Reader\ModelDataReader;
 use Nemundo\Process\Content\Type\AbstractContentType;
 
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexBulk;
+use Nemundo\Process\Search\Data\SearchIndex\SearchIndexCount;
 use Nemundo\Process\Search\Data\SearchIndex\SearchIndexDelete;
+use Nemundo\Process\Search\Data\SearchIndex\SearchIndexReader;
 use Nemundo\Process\Search\Data\Word\WordBulk;
+use Nemundo\Process\Search\Data\Word\WordDelete;
 use Nemundo\Process\Search\Data\WordContentType\WordContentTypeBulk;
 
 
@@ -94,9 +97,23 @@ class SearchIndexBuilder extends AbstractBase
     public function saveSearchIndex()
     {
 
+        $searchIndexReader = new SearchIndexReader();
+        $searchIndexReader->filter->andEqual($searchIndexReader->model->contentId, $this->contentId);
+        foreach ($searchIndexReader->getData() as $searchIndexRow) {
+
+            $count = new SearchIndexCount();
+            $count->filter->andEqual($count->model->wordId, $searchIndexRow->wordId);
+            $count->filter->andNotEqual($searchIndexReader->model->contentId, $this->contentId);
+            if ($count->getCount() === 0) {
+                (new WordDelete())->deleteById($searchIndexRow->wordId);
+            }
+
+        }
+
         $delete = new SearchIndexDelete();
         $delete->filter->andEqual($delete->model->contentId, $this->contentId);
         $delete->delete();
+
 
         $data = new WordBulk();
         foreach ($this->wordList as $wordId => $word) {

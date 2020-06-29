@@ -165,6 +165,8 @@ trait ContentIndexTrait
     }*/
 
 
+
+    // updateContentIndex
     protected function saveContentIndex()
     {
 
