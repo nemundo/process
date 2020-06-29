@@ -21,6 +21,16 @@ public $contentType;
 */
 public $setupStatus;
 
+/**
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+*/
+public $applicationId;
+
+/**
+* @var \Nemundo\App\Application\Data\Application\ApplicationExternalType
+*/
+public $application;
+
 protected function loadModel() {
 $this->tableName = "process_content_type";
 $this->aliasTableName = "process_content_type";
@@ -62,5 +72,22 @@ $this->setupStatus->aliasFieldName = "process_content_type_setup_status";
 $this->setupStatus->label = "Setup Status";
 $this->setupStatus->allowNullValue = false;
 
+$this->applicationId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->applicationId->tableName = "process_content_type";
+$this->applicationId->fieldName = "application";
+$this->applicationId->aliasFieldName = "process_content_type_application";
+$this->applicationId->label = "Application";
+$this->applicationId->allowNullValue = false;
+
+}
+public function loadApplication() {
+if ($this->application == null) {
+$this->application = new \Nemundo\App\Application\Data\Application\ApplicationExternalType($this, "process_content_type_application");
+$this->application->tableName = "process_content_type";
+$this->application->fieldName = "application";
+$this->application->aliasFieldName = "process_content_type_application";
+$this->application->label = "Application";
+}
+return $this;
 }
 }

@@ -13,12 +13,6 @@ use Nemundo\Process\Content\Type\AbstractType;
 class ContentTypeSetup extends AbstractContentTypeSetup
 {
 
-    /*public function addContentType(AbstractContentType $contentType)
-    {
-        parent::addContentType($contentType);
-        return $this;
-    }*/
-
 
     public function addContentType(AbstractType $contentType)
     {

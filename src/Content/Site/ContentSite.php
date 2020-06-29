@@ -9,6 +9,7 @@ use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Navigation\AdminNavigation;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
+use Nemundo\App\Application\Com\ApplicationListBox;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Core\Type\Number\Number;
@@ -70,6 +71,10 @@ class ContentSite extends AbstractSite
 
         $formRow = new BootstrapFormRow($form);
 
+        $application=new ApplicationListBox($formRow);
+        $application->submitOnChange = true;
+        $application->searchMode = true;
+
         $listbox = new ContentTypeListBox($formRow);
         $listbox->submitOnChange = true;
         $listbox->searchMode = true;
@@ -105,8 +110,18 @@ class ContentSite extends AbstractSite
         $btn->site = ContentNewSite::$site;
 
 
+        $contentReader = new ContentPaginationReader();
+        $contentReader->model->loadContentType();
+        $contentReader->model->contentType->loadApplication();
+        $contentReader->model->loadUser();
+
         $filter = new Filter();
         $model = new ContentModel();
+
+        if ($application->hasValue()) {
+            $filter->andEqual($contentReader->model->contentType->applicationId, $application->getValue());
+        }
+
 
         $contentTypeParameter = new ContentTypeParameter();
         $contentTypeParameter->contentTypeCheck = false;
@@ -128,10 +143,6 @@ class ContentSite extends AbstractSite
 
         }
 
-        //$hasValue=$contentIdTextBox->hasValue();
-        //(new Debug())->write('hasValue=');
-        //(new Debug())->write($hasValue);
-
         if ($contentIdTextBox->hasValue()) {
             $filter->andEqual($model->id, $contentIdTextBox->getValue());
         }
@@ -150,6 +161,7 @@ class ContentSite extends AbstractSite
 
 
         $count = new ContentCount();
+        $count->model->loadContentType();
         $count->filter = $filter;
         $contentCount = $count->getCount();
 
@@ -158,9 +170,7 @@ class ContentSite extends AbstractSite
         $p->content = (new Number($contentCount))->formatNumber() . ' Content found';
 
 
-        $contentReader = new ContentPaginationReader();
-        $contentReader->model->loadContentType();
-        $contentReader->model->loadUser();
+
         $contentReader->filter = $filter;
         $contentReader->addOrder($contentReader->model->id, SortOrder::DESCENDING);
         $contentReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
@@ -168,6 +178,7 @@ class ContentSite extends AbstractSite
         $table = new AdminClickableTable($page);
 
         $header = new TableHeader($table);
+        $header->addText($contentReader->model->contentType->application->label);
         $header->addText('Content Id');
         $header->addText('Type');
         $header->addText('Type Id');
@@ -185,6 +196,8 @@ class ContentSite extends AbstractSite
             $contentType = $contentRow->getContentType();
 
             $row = new BootstrapClickableTableRow($table);
+            $row->addText($contentRow->contentType->application->application);
+
             $row->addText($contentRow->id);
             $row->addText($contentRow->contentType->contentType);
             $row->addText($contentRow->contentTypeId);

@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Content\Setup;
 
 
+use Nemundo\App\Application\Setup\AbstractSetup;
 use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Process\Content\Data\Content\ContentCount;
@@ -15,7 +16,7 @@ use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Process\Content\Type\AbstractType;
 use Nemundo\Process\Search\Data\WordContentType\WordContentTypeDelete;
 
-abstract class AbstractContentTypeSetup extends AbstractBase
+abstract class AbstractContentTypeSetup extends AbstractSetup  // AbstractBase
 {
 
     protected function addContentType(AbstractType $contentType)
@@ -31,6 +32,11 @@ abstract class AbstractContentTypeSetup extends AbstractBase
         $data->id = $contentType->typeId;
         $data->contentType = $contentLabel;
         $data->phpClass = $contentType->getClassName();
+
+        if ($this->application!==null) {
+        $data->applicationId=$this->application->applicationId;
+        }
+
         $data->setupStatus = true;
         $data->save();
 
