@@ -19,14 +19,10 @@ use Nemundo\Html\Table\Th;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
 use Nemundo\Package\Bootstrap\Layout\BootstrapThreeColumnLayout;
-use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Listing\BootstrapHyperlinkList;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
-use Nemundo\Process\App\Favorite\Com\FavoriteButton;
 use Nemundo\Process\App\Notification\Com\HyperlinkList\NotificationContentTypeHyperlinkList;
-use Nemundo\Process\App\Notification\Com\Table\UserNotificationTable;
-use Nemundo\Process\App\Notification\Content\Forward\ForwardContentForm;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationPaginationReader;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationReader;
 use Nemundo\Process\App\Notification\Filter\UserNotificationFilter;
@@ -34,8 +30,6 @@ use Nemundo\Process\App\Notification\Parameter\ArchiveParameter;
 use Nemundo\Process\App\Notification\Parameter\NotificationParameter;
 use Nemundo\Process\App\Notification\Parameter\SourceParameter;
 use Nemundo\Process\Config\ProcessConfig;
-use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\User\Type\UserSessionType;
 use Nemundo\Web\Site\AbstractSite;
 
 class UserNotificationInboxSite extends AbstractSite
@@ -53,8 +47,7 @@ class UserNotificationInboxSite extends AbstractSite
         $this->title[LanguageCode::DE] = 'Benachrichtigungen Inbox';
         $this->url = 'notification-inbox';
 
-        UserNotificationInboxSite::$site= $this;
-
+        UserNotificationInboxSite::$site = $this;
 
 
     }
@@ -64,16 +57,15 @@ class UserNotificationInboxSite extends AbstractSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
-
         $nav = new AdminNavigation($page);
-        $nav->site = UserNotificationInboxSite::$site;  // UserNotificationSite::$site;
+        $nav->site = UserNotificationInboxSite::$site;
 
         $form = new SearchForm($page);
 
         $formRow = new BootstrapFormRow($form);
 
         $listbox = new BootstrapListBox($formRow);
-        $listbox->name=(new ArchiveParameter())->getParameterName();
+        $listbox->name = (new ArchiveParameter())->getParameterName();
         $listbox->emptyValueAsDefault = false;
         $listbox->addItem('0', 'Offene');
         $listbox->addItem('1', 'Gelöschte/Archivierte');
@@ -83,20 +75,18 @@ class UserNotificationInboxSite extends AbstractSite
 
 
         $layout = new BootstrapThreeColumnLayout($page);
-        $layout->col1->columnWidth= 2;
-        $layout->col2->columnWidth= 5;
-        $layout->col3->columnWidth= 5;
+        $layout->col1->columnWidth = 2;
+        $layout->col2->columnWidth = 5;
+        $layout->col3->columnWidth = 5;
 
-        $list=new NotificationContentTypeHyperlinkList($layout->col1);
-        $list->redirectSite=UserNotificationInboxSite::$site;
-
-
+        $list = new NotificationContentTypeHyperlinkList($layout->col1);
+        $list->redirectSite = UserNotificationInboxSite::$site;
 
 
-        $subtitle=new AdminSubtitle($layout->col1);
-        $subtitle->content='Source';
+        $subtitle = new AdminSubtitle($layout->col1);
+        $subtitle->content = 'Source';
 
-        $sourceList=new BootstrapHyperlinkList($layout->col1);
+        $sourceList = new BootstrapHyperlinkList($layout->col1);
 
         $notificationReader = new NotificationReader();
         $notificationReader->model->loadSource();
@@ -108,15 +98,12 @@ class UserNotificationInboxSite extends AbstractSite
         foreach ($notificationReader->getData() as $notificationCustomRow) {
 
             $site = clone(UserNotificationInboxSite::$site);
-            $site->title = $notificationCustomRow->source->subject.' ('.$notificationCustomRow->getModelValue($count).')';
+            $site->title = $notificationCustomRow->source->subject . ' (' . $notificationCustomRow->getModelValue($count) . ')';
             $site->addParameter(new SourceParameter($notificationCustomRow->sourceId));
             $sourceList->addSite($site);
 
 
         }
-
-
-
 
 
         /*
@@ -143,7 +130,6 @@ class UserNotificationInboxSite extends AbstractSite
 
         $btn = new AdminSiteButton($layout->col2);
         $btn->site = UserNotificationDeleteSite::$site;
-
 
 
         $table = new AdminClickableTable($layout->col2);
@@ -215,48 +201,42 @@ class UserNotificationInboxSite extends AbstractSite
         $pagination->paginationReader = $notificationReader;
 
 
-
-        $notificationParameter=new NotificationParameter();
+        $notificationParameter = new NotificationParameter();
         if ($notificationParameter->hasValue()) {
 
 
-           $contentType =  $notificationParameter->getContentType();
+            $contentType = $notificationParameter->getContentType();
 
 
-           $title=new AdminTitle($layout->col3);
-           $title->content=$contentType->getSubject();
+            $title = new AdminTitle($layout->col3);
+            $title->content = $contentType->getSubject();
 
-           $btn=new AdminSiteButton($layout->col3);
-           $btn->site=$contentType->getSubjectViewSite();
-
-           if ($contentType->hasView()) {
-               $contentType->getView($layout->col3);
-           }
-
-
-
-
- /*
             $btn = new AdminSiteButton($layout->col3);
             $btn->site = $contentType->getSubjectViewSite();
 
-            $btn=new FavoriteButton($layout->col3);
-            $btn->contentType = $contentType;
+            if ($contentType->hasView()) {
+                $contentType->getView($layout->col3);
+            }
+
+
+            /*
+                       $btn = new AdminSiteButton($layout->col3);
+                       $btn->site = $contentType->getSubjectViewSite();
+
+                       $btn=new FavoriteButton($layout->col3);
+                       $btn->contentType = $contentType;
 
 
 
-            $form = new ForwardContentForm($layout->col3);
-            $form->contentType= $contentType;*/
+                       $form = new ForwardContentForm($layout->col3);
+                       $form->contentType= $contentType;*/
 
             // share
             // favorite
             // open
 
 
-
         }
-
-
 
 
         $page->render();

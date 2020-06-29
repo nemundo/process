@@ -28,7 +28,6 @@ use Nemundo\Process\Template\Content\Url\UrlContentType;
 use Nemundo\Process\Template\Content\User\UserContentType;
 use Nemundo\Process\Template\Content\VersionText\VersionTextContentType;
 use Nemundo\Process\Template\Content\Video\VideoContentType;
-use Nemundo\Process\Template\Content\YouTube\YouTubeContentType;
 use Nemundo\Process\Template\Data\TemplateCollection;
 use Nemundo\Process\Template\Script\TemplateCleanScript;
 use Nemundo\Process\Template\Script\TemplateTestScript;

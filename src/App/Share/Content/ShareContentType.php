@@ -11,13 +11,11 @@ use Nemundo\Process\App\Share\Data\Share\Share;
 use Nemundo\Process\App\Share\Data\Share\ShareReader;
 use Nemundo\Process\App\Share\Data\Share\ShareRow;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
-use Nemundo\Process\Log\Type\LogTrait;
 
 class ShareContentType extends AbstractTreeContentType
 {
 
     use NotificationTrait;
-    //use LogTrait;
 
     public $toId;
 
@@ -42,7 +40,6 @@ class ShareContentType extends AbstractTreeContentType
         $data->message = $this->message;
         $this->dataId = $data->save();
 
-
     }
 
 
@@ -57,8 +54,6 @@ class ShareContentType extends AbstractTreeContentType
     protected function onIndex()
     {
 
-        //(new Debug())->write($this->getMessage());
-
         $this->saveNotificationIndex();
 
     }
@@ -72,6 +67,7 @@ class ShareContentType extends AbstractTreeContentType
         $this->dataRow = $reader->getRowById($this->dataId);
 
     }
+
 
     /**
      * @return \Nemundo\Model\Row\AbstractModelDataRow|ShareRow

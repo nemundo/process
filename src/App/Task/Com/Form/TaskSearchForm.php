@@ -3,7 +3,6 @@
 namespace Nemundo\Process\App\Task\Com\Form;
 
 
-use Nemundo\App\Content\Data\ContentType\ContentTypeListBox;
 use Nemundo\Com\FormBuilder\SearchForm;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Process\App\Task\Com\ListBox\TaskTypeListBox;
@@ -36,7 +35,7 @@ class TaskSearchForm extends SearchForm
     private $ersteller;
 
     /**
-     * @var ContentTypeListBox
+     * @var TaskTypeListBox
      */
     private $source;
 
