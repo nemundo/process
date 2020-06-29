@@ -31,6 +31,11 @@ public $description;
 */
 public $url;
 
+/**
+* @var \Nemundo\Model\Type\DateTime\DateTimeType
+*/
+public $dateTime;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = FeedItemModel::class;
@@ -70,6 +75,13 @@ $this->url->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->url->aliasFieldName = $this->url->tableName . "_" . $this->url->fieldName;
 $this->url->label = "Url";
 $this->addType($this->url);
+
+$this->dateTime = new \Nemundo\Model\Type\DateTime\DateTimeType();
+$this->dateTime->fieldName = "date_time";
+$this->dateTime->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->dateTime->aliasFieldName = $this->dateTime->tableName . "_" . $this->dateTime->fieldName;
+$this->dateTime->label = "Date Time";
+$this->addType($this->dateTime);
 
 }
 public function loadFeed() {

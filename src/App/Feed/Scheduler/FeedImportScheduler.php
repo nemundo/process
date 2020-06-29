@@ -47,11 +47,6 @@ class FeedImportScheduler extends AbstractScheduler
 
             foreach ($rssReader->getData() as $rssItem) {
 
-
-                (new Debug())->write($rssItem->title);
-                (new Debug())->write($rssItem->url);
-
-
                 $itemType = new FeedItemContentType();
                 $itemType->feedId = $feedType->getDataId();
                 $itemType->title = $rssItem->title;

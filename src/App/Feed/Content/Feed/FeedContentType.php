@@ -38,7 +38,7 @@ class FeedContentType extends AbstractTreeContentType
     {
 
         $data = new Feed();
-        $data->ignoreIfExists=true;
+        $data->ignoreIfExists = true;
         $data->feedUrl = $this->feedUrl;
         $this->dataId = $data->save();
 
@@ -48,10 +48,10 @@ class FeedContentType extends AbstractTreeContentType
     protected function onUpdate()
     {
 
-        if ($this->title!==null) {
-        $update = new FeedUpdate();
-        $update->title = $this->title;
-        $update->updateById($this->dataId);
+        if ($this->title !== null) {
+            $update = new FeedUpdate();
+            $update->title = $this->title;
+            $update->updateById($this->dataId);
         }
 
     }
@@ -66,7 +66,6 @@ class FeedContentType extends AbstractTreeContentType
         $this->saveSearchIndex();
 
     }
-
 
 
     protected function onDelete()
@@ -91,9 +90,9 @@ class FeedContentType extends AbstractTreeContentType
 
         $value = null;
 
-        $count =new FeedCount();
-        $count->filter->andEqual($count->model->feedUrl,$this->feedUrl);
-        if ($count->getCount() ===0) {
+        $count = new FeedCount();
+        $count->filter->andEqual($count->model->feedUrl, $this->feedUrl);
+        if ($count->getCount() === 0) {
             $value = false;
 
 
@@ -101,9 +100,9 @@ class FeedContentType extends AbstractTreeContentType
 
             $value = true;
 
-            $id=new FeedId();
-            $id->filter->andEqual($id->model->feedUrl,$this->feedUrl);
-            $this->dataId=$id->getId();
+            $id = new FeedId();
+            $id->filter->andEqual($id->model->feedUrl, $this->feedUrl);
+            $this->dataId = $id->getId();
 
 
         }

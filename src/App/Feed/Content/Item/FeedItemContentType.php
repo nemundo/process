@@ -4,6 +4,7 @@
 namespace Nemundo\Process\App\Feed\Content\Item;
 
 
+use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Process\App\Feed\Data\FeedItem\FeedItem;
 use Nemundo\Process\App\Feed\Data\FeedItem\FeedItemCount;
 use Nemundo\Process\App\Feed\Data\FeedItem\FeedItemDelete;
@@ -49,6 +50,7 @@ class FeedItemContentType extends AbstractTreeContentType
 
     }
 
+
     protected function onCreate()
     {
 
@@ -57,8 +59,8 @@ class FeedItemContentType extends AbstractTreeContentType
         $data->title = $this->title;
         $data->description = $this->description;
         $data->url = $this->url;
-      $this->dataId=  $data->save();
-
+        $data->dateTime = (new DateTime())->setNow();
+        $this->dataId = $data->save();
 
     }
 
@@ -134,6 +136,12 @@ class FeedItemContentType extends AbstractTreeContentType
     public function getSubject()
     {
         return $this->getDataRow()->title;
+    }
+
+
+    public function getText()
+    {
+        return $this->getDataRow()->description;
     }
 
 }

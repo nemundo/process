@@ -32,11 +32,9 @@ class FeedInstall extends AbstractInstall
         (new ScriptSetup())
             ->addScript(new FeedCleanScript());
 
-
-        (new ContentTypeSetup())
+        (new ContentTypeSetup(new FeedApplication()))
             ->addContentType(new FeedContentType())
             ->addContentType(new FeedItemContentType());
-
 
     }
 }

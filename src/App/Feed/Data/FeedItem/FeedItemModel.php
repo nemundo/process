@@ -31,6 +31,11 @@ public $description;
 */
 public $url;
 
+/**
+* @var \Nemundo\Model\Type\DateTime\DateTimeType
+*/
+public $dateTime;
+
 protected function loadModel() {
 $this->tableName = "feed_item";
 $this->aliasTableName = "feed_item";
@@ -79,9 +84,20 @@ $this->url->label = "Url";
 $this->url->allowNullValue = false;
 $this->url->length = 255;
 
+$this->dateTime = new \Nemundo\Model\Type\DateTime\DateTimeType($this);
+$this->dateTime->tableName = "feed_item";
+$this->dateTime->fieldName = "date_time";
+$this->dateTime->aliasFieldName = "feed_item_date_time";
+$this->dateTime->label = "Date Time";
+$this->dateTime->allowNullValue = false;
+
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "url";
 $index->addType($this->url);
+
+$index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
+$index->indexName = "date_time";
+$index->addType($this->dateTime);
 
 }
 public function loadFeed() {

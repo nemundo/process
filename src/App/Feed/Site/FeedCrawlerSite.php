@@ -44,21 +44,19 @@ class FeedCrawlerSite extends AbstractSite
 
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
+
+
         $form=new SearchForm($page);
 
         $formRow=new BootstrapFormRow($form);
 
         $feedInput=new BootstrapTextBox($formRow);
         $feedInput->label='Feed Url';
-        //$feedInput->value='https://www.srf.ch/feed/podcast/sd/66d56e22-51cf-47a6-badd-7776ec4f6501.xml';
 
-        $submit=new AdminSearchButton($formRow);  // AdminSubmitButton($formRow);
-
+    new AdminSearchButton($formRow);
 
 
         if ($feedInput->hasValue()) {
-
-
 
             $table=new AdminTable($page);
 
@@ -75,19 +73,9 @@ class FeedCrawlerSite extends AbstractSite
 
             }
 
-
-
-
-
-
-
         }
 
-
-
         $page->render();
-
-
 
     }
 
