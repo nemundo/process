@@ -31,7 +31,12 @@ php bin/cmd.php content-check
 
 
 ### ReIndexing
-
 ```
 php bin/cmd.php index-reindex
 ```
+
+### Clean Search Word
+```
+php bin/cmd.php search-word-clean
+```
+
