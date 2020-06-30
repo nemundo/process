@@ -10,6 +10,7 @@ use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
+use Nemundo\Process\Group\Com\Form\GroupUserForm;
 use Nemundo\Process\Group\Com\Form\UserGroupForm;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserReader;
 use Nemundo\User\Com\ListBox\UserListBox;
@@ -80,6 +81,7 @@ class UserGroupSite extends AbstractSite
             $form = new UserGroupForm($layout->col2);
             $form->userId = $userId;
             $form->redirectSite = new Site();  // UserGroupSite::$site;
+
 
 
         }

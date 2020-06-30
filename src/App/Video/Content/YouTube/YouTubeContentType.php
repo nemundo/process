@@ -33,8 +33,8 @@ class YouTubeContentType extends AbstractTreeContentType
     {
         $this->typeId = '5badc331-f0d1-4f14-8eba-e8468a64b9e3';
         $this->typeLabel='YouTube';
-        $this->formClass = YoutubeContentForm::class;
-        $this->viewClass = YoutubeContentView::class;
+        $this->formClass = YouTubeContentForm::class;
+        $this->viewClass = YouTubeContentView::class;
     }
 
 

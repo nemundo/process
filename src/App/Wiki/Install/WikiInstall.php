@@ -6,7 +6,8 @@ namespace Nemundo\Process\App\Wiki\Install;
 
 use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\App\Bookmark\Content\BookmarkContentType;
-use Nemundo\Process\App\Podcast\Content\Feed\FeedContentType;
+
+use Nemundo\Process\App\Video\Content\YouTube\YouTubeContentType;
 use Nemundo\Process\App\Wiki\Content\TitleChange\TitleChangeContentType;
 use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\App\Wiki\Data\WikiCollection;
@@ -24,7 +25,7 @@ use Nemundo\Process\Template\Content\ImageList\ImageListContentType;
 use Nemundo\Process\Template\Content\LargeText\LargeTextContentType;
 use Nemundo\Process\Template\Content\Text\TextContentType;
 use Nemundo\Process\Template\Content\Video\VideoContentType;
-use Nemundo\Process\Template\Content\YouTube\YouTubeContentType;
+
 use Nemundo\Project\Install\AbstractInstall;
 
 class WikiInstall extends AbstractInstall
@@ -57,6 +58,8 @@ class WikiInstall extends AbstractInstall
 
         $setup->addContentType(new FileContentType());
         $setup->addContentType(new YouTubeContentType());
+
+
         $setup->addContentType(new ImageContentType());
         $setup->addContentType(new VideoContentType());
 

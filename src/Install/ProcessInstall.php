@@ -18,6 +18,7 @@ use Nemundo\Process\App\Share\Install\ShareInstall;
 use Nemundo\Process\App\Task\Install\TaskInstall;
 use Nemundo\Process\App\WebLog\Content\WebLogContentType;
 use Nemundo\Process\App\Wiki\Install\WikiInstall;
+use Nemundo\Process\Container\Install\ContainerInstall;
 use Nemundo\Process\Content\Install\ContentInstall;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Geo\Install\GeoInstall;
@@ -51,6 +52,7 @@ class ProcessInstall extends AbstractInstall
         (new AssignmentInstall())->install();
         (new NotificationInstall())->install();
         (new IndexInstall())->install();
+        //(new ContainerInstall())->install();
 
         (new RelationInstall())->install();
 
