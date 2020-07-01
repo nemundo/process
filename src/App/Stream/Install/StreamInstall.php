@@ -16,7 +16,6 @@ class StreamInstall extends AbstractInstall
         (new ModelCollectionSetup())
             ->addCollection(new StreamCollection());
 
-
         (new ScriptSetup())
             ->addScript(new StreamCleanScript());
 
