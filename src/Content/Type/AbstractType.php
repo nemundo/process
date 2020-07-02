@@ -6,9 +6,11 @@ namespace Nemundo\Process\Content\Type;
 
 use Nemundo\Core\Base\AbstractBaseClass;
 use Nemundo\Core\Log\LogMessage;
+use Nemundo\Html\Container\AbstractContainer;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Model\Row\AbstractModelDataRow;
+use Nemundo\Process\Content\Event\AbstractContentEvent;
 use Nemundo\Process\Content\Form\AbstractContentForm;
 use Nemundo\Process\Content\View\AbstractContentView;
 use Nemundo\Web\Parameter\AbstractUrlParameter;
@@ -48,6 +50,11 @@ abstract class AbstractType extends AbstractBaseClass
      * @var string
      */
     protected $viewClass;
+
+    /**
+     * @var AbstractContentEvent[]
+     */
+    protected $eventList=[];
 
 
     abstract protected function loadContentType();
@@ -168,7 +175,8 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
-    public function getForm(AbstractHtmlContainer $parent)
+    //public function getForm(AbstractHtmlContainer $parent)
+   public function getForm(AbstractContainer $parent)
     {
 
         if ($this->formClass == null) {
@@ -206,7 +214,9 @@ abstract class AbstractType extends AbstractBaseClass
 
     }
 
-    public function getView(AbstractHtmlContainer $parent = null)
+
+    //public function getView(AbstractHtmlContainer $parent = null)
+    public function getView(AbstractContainer $parent = null)
     {
 
         /** @var AbstractContentView $view */
@@ -314,6 +324,15 @@ abstract class AbstractType extends AbstractBaseClass
     {
 
         return !$this->createMode;
+
+    }
+
+
+
+    public function addEvent(AbstractContentEvent $contentEvent) {
+
+        $this->eventList[]=$contentEvent;
+        return $this;
 
     }
 

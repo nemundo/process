@@ -5,6 +5,7 @@ namespace Nemundo\Process\Content\Type;
 
 use Nemundo\Core\Language\Translation;
 use Nemundo\Core\Log\LogMessage;
+use Nemundo\Html\Container\AbstractContainer;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Process\Content\Form\ContentForm;
@@ -109,7 +110,7 @@ abstract class AbstractContentType extends AbstractType
     }
 
 
-    public function getAdmin(AbstractHtmlContainer $parent)
+    public function getAdmin(AbstractContainer $parent)
     {
 
         $admin = null;

@@ -18,6 +18,7 @@ use Nemundo\Process\App\Share\Install\ShareInstall;
 use Nemundo\Process\App\Task\Install\TaskInstall;
 use Nemundo\Process\App\WebLog\Content\WebLogContentType;
 use Nemundo\Process\App\Wiki\Install\WikiInstall;
+use Nemundo\Process\Cms\Install\CmsInstall;
 use Nemundo\Process\Container\Install\ContainerInstall;
 use Nemundo\Process\Content\Install\ContentInstall;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
@@ -69,6 +70,9 @@ class ProcessInstall extends AbstractInstall
         (new DashboardInstall())->install();
         (new GeoInstall())->install();
         //(new SurveyInstall())->install();
+
+        (new CmsInstall())->install();
+
 
         $setup = new ContentTypeSetup();
         $setup->addContentType(new WebLogContentType());

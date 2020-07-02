@@ -25,6 +25,13 @@ abstract class AbstractTreeContentType extends AbstractContentType
 
         $this->saveContentIndex();
 
+
+        foreach ($this->eventList as $event) {
+            $event->onCreate($this);
+            $event->onUpdate($this);
+        }
+
+
     }
 
 

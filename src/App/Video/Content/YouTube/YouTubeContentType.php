@@ -9,6 +9,7 @@ use Nemundo\Process\App\Stream\Index\StreamIndexTrait;
 use Nemundo\Process\App\Video\Data\YouTube\YouTube;
 use Nemundo\Process\App\Video\Data\YouTube\YouTubeReader;
 use Nemundo\Process\App\Video\Data\YouTube\YouTubeRow;
+use Nemundo\Process\Cms\Index\CmsIndexTrait;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Template\Data\TemplateText\TemplateText;
 
@@ -18,6 +19,7 @@ class YouTubeContentType extends AbstractTreeContentType
 {
 
     use StreamIndexTrait;
+    use CmsIndexTrait;
 
     // Favorite
 
@@ -58,6 +60,7 @@ class YouTubeContentType extends AbstractTreeContentType
     {
 
         $this->saveStreamIndex();
+        $this->saveCmsIndex();
 
     }
 
