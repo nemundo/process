@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Cms\Site;
 
 
+use Nemundo\Process\Cms\Page\CmsPage;
 use Nemundo\Web\Site\AbstractSite;
 
 class CmsSite extends AbstractSite
@@ -12,19 +13,19 @@ class CmsSite extends AbstractSite
     protected function loadSite()
     {
 
-        $this->menuActive=false;
-        $this->url='cms';
+        $this->title='Cms';
+        $this->url = 'cms';
 
         new CmsSortableSite($this);
         new CmsEditorSite($this);
+        new CmsDeleteSite($this);
 
-        // TODO: Implement loadSite() method.
     }
 
 
     public function loadContent()
     {
-        // TODO: Implement loadContent() method.
+        (new CmsPage())->render();
     }
 
 }

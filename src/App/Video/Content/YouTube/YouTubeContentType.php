@@ -19,7 +19,7 @@ class YouTubeContentType extends AbstractTreeContentType
 {
 
     use StreamIndexTrait;
-    use CmsIndexTrait;
+    //use CmsIndexTrait;
 
     // Favorite
 

@@ -16,8 +16,11 @@ use Nemundo\Process\App\Wiki\Com\WikiNavigation;
 use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\App\Wiki\Data\Wiki\WikiReader;
 use Nemundo\Process\App\Wiki\Group\WikiEditorGroup;
+use Nemundo\Process\App\Wiki\Page\WikiPage;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\App\Wiki\Type\WikiContentTypeCollection;
+use Nemundo\Process\Cms\Com\Container\CmsEditorContainer;
+use Nemundo\Process\Cms\Com\Dropdown\CmsAddDropdown;
 use Nemundo\Process\Content\Com\Dropdown\ContentTypeCollectionDropdown;
 
 use Nemundo\Process\Content\Com\Table\ContentLogTable;
@@ -37,6 +40,7 @@ class WikiSite extends AbstractSite
 
     protected function loadSite()
     {
+
         $this->title = 'Wiki';
         $this->url = 'wiki';
         WikiSite::$site = $this;
@@ -45,19 +49,24 @@ class WikiSite extends AbstractSite
         new AdminSite($this);
 
         //new WikiAddSite($this);
-        new ContentDeleteSite($this);
+        /*new ContentDeleteSite($this);
         new ContentEditSite($this);
-        new ContentRemoveSite($this);
+        new ContentRemoveSite($this);*/
 
     }
 
     public function loadContent()
     {
 
+        (new WikiPage())->render();
+
+
+
+        /*
+
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
 
         new WikiNavigation($page);
-
 
         $layout = new BootstrapThreeColumnLayout($page);
         $layout->col1->columnWidth = 2;
@@ -71,6 +80,7 @@ class WikiSite extends AbstractSite
         $form->redirectSite = WikiSite::$site;
 */
 
+        /*
         $list = new BootstrapHyperlinkList($layout->col1);
 
         $reader = new WikiReader();
@@ -98,6 +108,14 @@ class WikiSite extends AbstractSite
             $title = new AdminTitle($layout->col2);
             $title->content = $wikiType->getSubject();
 
+            $dropdown=new CmsAddDropdown($layout->col2);
+            $dropdown->parentContentType= $wikiType;
+
+
+            //$container=new CmsEditorContainer($layout->col2);
+            //$container->contentType = $wikiType;  //->getContentId();
+
+
 
             /*
             if ((new GroupCheck())->isMemberOfGroup(new WikiEditorGroup())) {
@@ -109,6 +127,8 @@ class WikiSite extends AbstractSite
 
             }*/
 
+
+            /*
             $dropdown = new ContentTypeCollectionDropdown($layout->col2);
             $dropdown->contentTypeCollection = new WikiContentTypeCollection();
 
@@ -145,6 +165,11 @@ class WikiSite extends AbstractSite
                         $subtitle = new AdminSubtitle($layout->col2);
                         $subtitle->content = $contentType->getSubject() . ' - ' . $contentRow->dateTime->getShortDateTimeLeadingZeroFormat();
 
+
+
+
+
+                        /*
                         $btn = new AdminIconSiteButton($layout->col2);
                         $btn->site = clone(ContentDeleteSite::$site);
                         $btn->site->addParameter(new ContentParameter($contentRow->id));
@@ -167,17 +192,17 @@ class WikiSite extends AbstractSite
                         $div = new Div($layout->col2);
                         $contentType->getView($div);
 
-                        (new Hr($layout->col2));
+                        (new Hr($layout->col2));*/
 
-                    }
+                //    }
 
-                }
+                //}
 
-            }
+            //}
 
-        }
+        //}
 
-        $page->render();
+        //$page->render();
 
     }
 

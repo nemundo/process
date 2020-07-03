@@ -43,6 +43,55 @@
                 }
             ],
             "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "64c7307d-648e-41df-aa15-7d307b55e1cd",
+            "label": "Cms Type",
+            "class_name": "CmsType",
+            "table_name": "cms_cms_type",
+            "namespace": "Nemundo\\Process\\Cms\\Data\\CmsType",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Parent Content Type",
+                    "field_name": "parent_content_type",
+                    "variable_name": "parentContentType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                },
+                {
+                    "type": "external",
+                    "label": "Cms Content Type",
+                    "field_name": "cms_content_type",
+                    "variable_name": "cmsContentType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Setup Status",
+                    "field_name": "setup_status",
+                    "variable_name": "setupStatus",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "parent_cms",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "parent_content_type",
+                        "cms_content_type"
+                    ]
+                }
+            ]
         }
     ]
 }
