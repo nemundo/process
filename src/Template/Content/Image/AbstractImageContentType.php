@@ -48,13 +48,22 @@ abstract class AbstractImageContentType extends AbstractTreeContentType
 
     }
 
+    
+    protected function onUpdate()
+    {
+
+        $update = new TemplateImageUpdate();
+        $update->image->fromFileProperty($this->image);
+        $this->dataId = $update->updateById($this->dataId);
+        
+   
+    }
+
 
     protected function onIndex()
     {
 
         //$imageRow = (new TemplateImageReader())->getRowById($this->dataId);  // $this->getDataRow();
-
-
         // resize image
 
         if ($this->isActive()) {

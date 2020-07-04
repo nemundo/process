@@ -4,6 +4,7 @@
 namespace Nemundo\Process\App\Wiki\Content;
 
 
+use Nemundo\Process\App\Wiki\Content\Page\WikiPageContentView;
 use Nemundo\Process\App\Wiki\Data\Wiki\Wiki;
 use Nemundo\Process\App\Wiki\Data\Wiki\WikiDelete;
 use Nemundo\Process\App\Wiki\Data\Wiki\WikiReader;
@@ -26,6 +27,7 @@ class WikiPageContentType extends AbstractMenuContentType
         $this->formClass = WikiPageContentForm::class;
         $this->listClass = WikiPageContentList::class;
         $this->viewSite = WikiSite::$site;
+        $this->viewClass=WikiPageContentView::class;
         $this->parameterClass = WikiParameter::class;
 
     }
@@ -59,10 +61,11 @@ class WikiPageContentType extends AbstractMenuContentType
 
     }
 
-protected function onDelete()
-{
-    (new WikiDelete())->deleteById($this->dataId);
-}
+
+    protected function onDelete()
+    {
+        (new WikiDelete())->deleteById($this->dataId);
+    }
 
 
     public function getDataRow()

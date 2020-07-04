@@ -5,40 +5,31 @@ namespace Nemundo\Process\Cms\Com\Container;
 
 
 use Nemundo\Admin\Com\Button\AdminIconSiteButton;
+use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Html\Block\Div;
 use Nemundo\Package\JqueryUi\Sortable\JquerySortable;
 use Nemundo\Process\Cms\Com\Dropdown\CmsAddDropdown;
 use Nemundo\Process\Cms\Data\Cms\CmsReader;
 use Nemundo\Process\Cms\Event\CmsEvent;
 use Nemundo\Process\Cms\Parameter\CmsParameter;
+use Nemundo\Process\Cms\Parameter\EditParameter;
 use Nemundo\Process\Cms\Site\CmsDeleteSite;
 use Nemundo\Process\Cms\Site\CmsSortableSite;
+use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\Process\Content\Type\AbstractContentType;
 use Nemundo\Web\Site\Site;
 
 
-// CmsContainerEditor
-class CmsEditorContainer extends AbstractCmsContainer  // AbstractHtmlContainer
+class CmsEditorContainer extends AbstractCmsContainer
 {
 
-
-    /**
-     * @var AbstractContentType
-     */
-    //public $contentType;
-
-
-    //public $parentId;
+    public $editorName;
 
 
     public function getContent()
     {
 
-
         $parentId = $this->contentType->getContentId();
-
-        //(new Debug())->write($parentId);
 
         $dropdown = new CmsAddDropdown($this);
         $dropdown->parentContentType = $this->contentType;
@@ -60,23 +51,49 @@ class CmsEditorContainer extends AbstractCmsContainer  // AbstractHtmlContainer
 
         $sortableDiv = new JquerySortable($this);
         $sortableDiv->tagName = 'div';
-        $sortableDiv->id = 'cms_sortable1';
+        $sortableDiv->id = 'cms_sortable_'.$this->editorName;
         $sortableDiv->sortableSite = CmsSortableSite::$site;
 
-        $reader = new CmsReader();
-        $reader->model->loadContent();
-        $reader->model->content->loadContentType();
-        $reader->filter->andEqual($reader->model->parentId, $parentId);
-        $reader->addOrder($reader->model->itemOrder);
-        foreach ($reader->getData() as $cmsRow) {
+        $cmsReader = new CmsReader();
+        $cmsReader->model->loadContent();
+        $cmsReader->model->content->loadContentType();
+        $cmsReader->filter->andEqual($cmsReader->model->parentId, $parentId);
+        $cmsReader->addOrder($cmsReader->model->itemOrder);
+        foreach ($cmsReader->getData() as $cmsRow) {
+
 
             $div = new Div($sortableDiv);
             $div->id = 'item_' . $cmsRow->id;
+
+            $editParameter = new EditParameter();
+            if ($editParameter->exists()) {
+
+                $contentParameter = new ContentParameter();
+                $contentParameter->contentTypeCheck = false;
+                //$contentParameter->addAllowedContentTypeCollection(new WikiContentTypeCollection());
+
+                if ($contentParameter->getValue() == $cmsRow->contentId) {
+                    $contentType = $contentParameter->getContentType();  // $contentRow->getContentType();
+                    $form = $contentType->getForm($div);
+                    $form->redirectSite=new Site();
+                    $form->redirectSite->removeParameter(new EditParameter());
+                }
+
+            }
+
+
             $cmsRow->content->getContentType()->getView($div);
 
             $btn = new AdminIconSiteButton($div);
             $btn->site = clone(CmsDeleteSite::$site);
             $btn->site->addParameter(new CmsParameter($cmsRow->id));
+
+            $btn = new AdminSiteButton($div);
+            $btn->site = new Site();
+            $btn->site->addParameter(new EditParameter());
+            $btn->site->addParameter(new ContentParameter($cmsRow->contentId));  //->contentTypeId));
+            $btn->content = 'Edit';
+
 
         }
 

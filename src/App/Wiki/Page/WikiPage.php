@@ -12,7 +12,7 @@ use Nemundo\Process\App\Wiki\Data\Wiki\WikiReader;
 use Nemundo\Process\App\Wiki\Parameter\WikiParameter;
 use Nemundo\Process\App\Wiki\Site\WikiSite;
 use Nemundo\Process\App\Wiki\Template\WikiTemplate;
-use Nemundo\Process\Cms\Com\Dropdown\CmsAddDropdown;
+use Nemundo\Process\Cms\Com\Container\CmsEditorContainer;
 use Nemundo\Process\Content\Com\Table\ContentLogTable;
 
 class WikiPage extends WikiTemplate
@@ -25,12 +25,6 @@ class WikiPage extends WikiTemplate
         $layout->col1->columnWidth = 2;
         $layout->col2->columnWidth = 5;
         $layout->col3->columnWidth = 5;
-
-        /*
-        $form = new WikiPageContentForm($layout->col1);
-        $form->appendParameter = true;
-        $form->redirectSite = WikiSite::$site;
-*/
 
         $list = new BootstrapHyperlinkList($layout->col1);
 
@@ -58,8 +52,8 @@ class WikiPage extends WikiTemplate
             $title = new AdminTitle($layout->col2);
             $title->content = $wikiType->getSubject();
 
-            $dropdown = new CmsAddDropdown($layout->col2);
-            $dropdown->parentContentType = $wikiType;
+            $container = new CmsEditorContainer($layout->col2);
+            $container->contentType = $wikiType;
 
         }
 

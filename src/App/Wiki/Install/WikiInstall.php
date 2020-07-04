@@ -4,6 +4,7 @@
 namespace Nemundo\Process\App\Wiki\Install;
 
 
+use Nemundo\App\Script\Setup\ScriptSetup;
 use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\App\Video\Content\YouTube\YouTubeContentType;
 use Nemundo\Process\App\Wiki\Content\TitleChange\TitleChangeContentType;
@@ -11,6 +12,7 @@ use Nemundo\Process\App\Wiki\Content\WikiPageContentType;
 use Nemundo\Process\App\Wiki\Data\WikiCollection;
 use Nemundo\Process\App\Wiki\Group\Type\WikiGroupType;
 use Nemundo\Process\App\Wiki\Group\WikiEditorGroup;
+use Nemundo\Process\App\Wiki\Script\WikiCleanScript;
 use Nemundo\Process\Cms\Setup\CmsSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Group\Setup\GroupSetup;
@@ -43,8 +45,8 @@ class WikiInstall extends AbstractInstall
             ->addContentType(new ImageContentType());
 
 
-
-
+        (new ScriptSetup())
+            ->addScript(new WikiCleanScript());
 
 
         //$setup = new WikiSetup();

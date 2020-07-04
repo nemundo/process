@@ -5,20 +5,11 @@ namespace Nemundo\Process\Cms\Com\Container;
 
 
 use Nemundo\Html\Block\Div;
-use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Process\Cms\Data\Cms\CmsReader;
-use Nemundo\Process\Content\Type\AbstractContentType;
 
 
-class CmsContainer extends AbstractCmsContainer  // AbstractHtmlContainer
+class CmsContainer extends AbstractCmsContainer
 {
-
-
-    /**
-     * @var AbstractContentType
-     */
-    //public $contentType;
-
 
     public function getContent()
     {
