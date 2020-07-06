@@ -6,6 +6,7 @@ namespace Nemundo\Process\Cms\Com\Container;
 
 use Nemundo\Admin\Com\Button\AdminIconSiteButton;
 use Nemundo\Admin\Com\Button\AdminSiteButton;
+use Nemundo\Admin\Com\Widget\AdminWidget;
 use Nemundo\Html\Block\Div;
 use Nemundo\Package\JqueryUi\Sortable\JquerySortable;
 use Nemundo\Process\Cms\Com\Dropdown\CmsAddDropdown;
@@ -62,7 +63,8 @@ class CmsEditorContainer extends AbstractCmsContainer
         foreach ($cmsReader->getData() as $cmsRow) {
 
 
-            $div = new Div($sortableDiv);
+            //$div = new Div($sortableDiv);
+            $div=new AdminWidget($sortableDiv);
             $div->id = 'item_' . $cmsRow->id;
 
             $editParameter = new EditParameter();
@@ -82,7 +84,10 @@ class CmsEditorContainer extends AbstractCmsContainer
             }
 
 
-            $cmsRow->content->getContentType()->getView($div);
+            $contentType = $cmsRow->content->getContentType();
+            $contentType->getView($div);
+
+            $div->widgetTitle=$contentType->getSubject();
 
             $btn = new AdminIconSiteButton($div);
             $btn->site = clone(CmsDeleteSite::$site);

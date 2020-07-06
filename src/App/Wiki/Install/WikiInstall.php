@@ -37,8 +37,7 @@ class WikiInstall extends AbstractInstall
             ->addContentType(new TitleChangeContentType());
 
 
-        $setup = new CmsSetup();
-        $setup->parentContentType = new WikiPageContentType();
+        $setup = new CmsSetup(new WikiPageContentType());
         $setup->addContentType(new YouTubeContentType());
         $setup
             ->addContentType(new TextContentType())
