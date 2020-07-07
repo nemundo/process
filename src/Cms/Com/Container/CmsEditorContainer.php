@@ -63,9 +63,11 @@ class CmsEditorContainer extends AbstractCmsContainer
         foreach ($cmsReader->getData() as $cmsRow) {
 
 
-            //$div = new Div($sortableDiv);
-            $div=new AdminWidget($sortableDiv);
+            $div = new Div($sortableDiv);
             $div->id = 'item_' . $cmsRow->id;
+
+            $widget=  new AdminWidget($div);
+
 
             $editParameter = new EditParameter();
             if ($editParameter->exists()) {
@@ -85,9 +87,9 @@ class CmsEditorContainer extends AbstractCmsContainer
 
 
             $contentType = $cmsRow->content->getContentType();
-            $contentType->getView($div);
+            $contentType->getView($widget);
 
-            $div->widgetTitle=$contentType->getSubject();
+            $widget->widgetTitle=$contentType->getSubject();
 
             $btn = new AdminIconSiteButton($div);
             $btn->site = clone(CmsDeleteSite::$site);

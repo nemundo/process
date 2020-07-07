@@ -104,11 +104,9 @@ class FeedContentType extends AbstractTreeContentType
             $id->filter->andEqual($id->model->feedUrl, $this->feedUrl);
             $this->dataId = $id->getId();
 
-
         }
 
         return $value;
-
 
     }
 

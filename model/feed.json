@@ -6,6 +6,29 @@
     "model": [
         {
             "template": "default",
+            "model_id": "6ea451f7-2f55-4057-a2e0-23492d193074",
+            "label": "Cms Feed",
+            "class_name": "CmsFeed",
+            "table_name": "feed_cms_feed",
+            "namespace": "Nemundo\\Process\\App\\Feed\\Data\\CmsFeed",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Feed",
+                    "field_name": "feed",
+                    "variable_name": "feed",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "718e5567-f690-45d2-b6d5-5aa8008401ba"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "718e5567-f690-45d2-b6d5-5aa8008401ba",
             "label": "Feed",
             "class_name": "Feed",
