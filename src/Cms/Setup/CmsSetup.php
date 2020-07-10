@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Cms\Setup;
 
 
+use Nemundo\App\Application\Setup\AbstractSetup;
 use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Meteo\Meteocentrale\Content\Foehndiagramm\FoehndiagrammContentType;
 use Nemundo\Process\Cms\Data\CmsType\CmsType;
@@ -12,14 +13,15 @@ use Nemundo\Process\Cms\Data\CmsType\CmsTypeUpdate;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Content\Type\AbstractType;
 
-class CmsSetup extends AbstractBase
+class CmsSetup extends AbstractSetup  // AbstractBase
 {
 
 
+    /*
     public function __construct(AbstractType $parentContentType)
     {
         $this->parentContentType = $parentContentType;
-    }
+    }*/
 
 
     /**
@@ -36,8 +38,9 @@ class CmsSetup extends AbstractBase
         $data = new CmsType();
         $data->updateOnDuplicate = true;
         $data->setupStatus = true;
-        $data->parentContentTypeId = $this->parentContentType->typeId;
+        //$data->parentContentTypeId = $this->parentContentType->typeId;
         $data->cmsContentTypeId = $contentType->typeId;
+        $data->applicationId=$this->application->applicationId;
         $data->save();
 
         return $this;

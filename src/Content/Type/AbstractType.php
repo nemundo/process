@@ -107,7 +107,6 @@ abstract class AbstractType extends AbstractBaseClass
     }
 
 
-    // loadDataRow
     protected function onDataRow()
     {
         //(new LogMessage())->writeError('getDataRow not defined'.$this->getClassName());

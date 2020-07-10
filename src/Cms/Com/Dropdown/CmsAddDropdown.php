@@ -23,12 +23,18 @@ class CmsAddDropdown extends BootstrapSiteDropdown
     {
 
         $cmsTypeReader = new CmsTypeReader();
+        $cmsTypeReader->model->loadApplication();
         $cmsTypeReader->model->loadCmsContentType();
-        $cmsTypeReader->filter->andEqual($cmsTypeReader->model->parentContentTypeId, $this->parentContentType->typeId);
+        //$cmsTypeReader->filter->andEqual($cmsTypeReader->model->parentContentTypeId, $this->parentContentType->typeId);
+        $cmsTypeReader->addOrder($cmsTypeReader->model->cmsContentType->contentType);
         foreach ($cmsTypeReader->getData() as $cmsTypeRow) {
             $site = new Site();
-            $site->title = $cmsTypeRow->cmsContentType->contentType;
-            $site->addParameter(new ParentParameter($this->parentContentType->getContentId()));
+            $site->title = $cmsTypeRow->cmsContentType->contentType . ' (' . $cmsTypeRow->application->application . ')';
+
+            if ($this->parentContentType !== null) {
+                $site->addParameter(new ParentParameter($this->parentContentType->getContentId()));
+            }
+
             $site->addParameter(new ContentTypeParameter($cmsTypeRow->cmsContentTypeId));
             $this->addSite($site);
         }

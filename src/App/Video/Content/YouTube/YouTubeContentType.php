@@ -18,7 +18,7 @@ use Nemundo\Process\Template\Data\TemplateText\TemplateText;
 class YouTubeContentType extends AbstractTreeContentType
 {
 
-    use StreamIndexTrait;
+    //use StreamIndexTrait;
     //use CmsIndexTrait;
 
     // Favorite
@@ -56,13 +56,14 @@ class YouTubeContentType extends AbstractTreeContentType
 
 
 
+    /*
     protected function onIndex()
     {
 
         $this->saveStreamIndex();
         $this->saveCmsIndex();
 
-    }
+    }*/
 
 
     protected function onDataRow()

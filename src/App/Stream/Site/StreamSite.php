@@ -10,10 +10,15 @@ use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Process\App\Stream\Data\Stream\StreamPaginationReader;
 use Nemundo\Process\App\Stream\Data\Stream\StreamReader;
+use Nemundo\Process\App\Stream\Event\StreamEvent;
 use Nemundo\Process\App\Video\Content\YouTube\YouTubeContentType;
+use Nemundo\Process\Cms\Com\Dropdown\CmsAddDropdown;
+use Nemundo\Process\Cms\Event\CmsEvent;
 use Nemundo\Process\Config\ProcessConfig;
+use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Template\Content\Video\VideoContentType;
 use Nemundo\Web\Site\AbstractSite;
+use Nemundo\Web\Site\Site;
 
 class StreamSite extends AbstractSite
 {
@@ -44,7 +49,29 @@ class StreamSite extends AbstractSite
 
 
 
-        (new YouTubeContentType())->getForm($layout->col2);
+//        $form= (new YouTubeContentType())->getForm($layout->col2);
+
+
+        $list=new CmsAddDropdown($layout->col2);
+
+
+        $contentTypeParameter = new ContentTypeParameter();
+        $contentTypeParameter->contentTypeCheck = false;
+        if ($contentTypeParameter->exists()) {
+
+            $contentType = $contentTypeParameter->getContentType();
+            //$contentType->parentId = $parentId;
+            $contentType->addEvent(new StreamEvent());
+
+            $form = $contentType->getForm($layout->col2);
+            $form->appendParameter = false;
+            $form->redirectSite = new Site();
+            $form->redirectSite->removeParameter(new ContentTypeParameter());
+
+        }
+
+
+
 
 
 

@@ -41,6 +41,16 @@ public $cmsContentType;
 */
 public $setupStatus;
 
+/**
+* @var string
+*/
+public $applicationId;
+
+/**
+* @var \Nemundo\App\Application\Row\ApplicationCustomRow
+*/
+public $application;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -54,11 +64,18 @@ if ($model->cmsContentType !== null) {
 $this->loadNemundoProcessContentDataContentTypeContentTypecmsContentTypeRow($model->cmsContentType);
 }
 $this->setupStatus = boolval($this->getModelValue($model->setupStatus));
+$this->applicationId = $this->getModelValue($model->applicationId);
+if ($model->application !== null) {
+$this->loadNemundoAppApplicationDataApplicationApplicationapplicationRow($model->application);
+}
 }
 private function loadNemundoProcessContentDataContentTypeContentTypeparentContentTypeRow($model) {
 $this->parentContentType = new \Nemundo\Process\Content\Row\ContentTypeCustomRow($this->row, $model);
 }
 private function loadNemundoProcessContentDataContentTypeContentTypecmsContentTypeRow($model) {
 $this->cmsContentType = new \Nemundo\Process\Content\Row\ContentTypeCustomRow($this->row, $model);
+}
+private function loadNemundoAppApplicationDataApplicationApplicationapplicationRow($model) {
+$this->application = new \Nemundo\App\Application\Row\ApplicationCustomRow($this->row, $model);
 }
 }

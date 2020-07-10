@@ -31,6 +31,16 @@ public $cmsContentType;
 */
 public $setupStatus;
 
+/**
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+*/
+public $applicationId;
+
+/**
+* @var \Nemundo\App\Application\Data\Application\ApplicationExternalType
+*/
+public $application;
+
 protected function loadModel() {
 $this->tableName = "cms_cms_type";
 $this->aliasTableName = "cms_cms_type";
@@ -70,6 +80,13 @@ $this->setupStatus->aliasFieldName = "cms_cms_type_setup_status";
 $this->setupStatus->label = "Setup Status";
 $this->setupStatus->allowNullValue = false;
 
+$this->applicationId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->applicationId->tableName = "cms_cms_type";
+$this->applicationId->fieldName = "application";
+$this->applicationId->aliasFieldName = "cms_cms_type_application";
+$this->applicationId->label = "Application";
+$this->applicationId->allowNullValue = false;
+
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "parent_cms";
 $index->addType($this->parentContentTypeId);
@@ -93,6 +110,16 @@ $this->cmsContentType->tableName = "cms_cms_type";
 $this->cmsContentType->fieldName = "cms_content_type";
 $this->cmsContentType->aliasFieldName = "cms_cms_type_cms_content_type";
 $this->cmsContentType->label = "Cms Content Type";
+}
+return $this;
+}
+public function loadApplication() {
+if ($this->application == null) {
+$this->application = new \Nemundo\App\Application\Data\Application\ApplicationExternalType($this, "cms_cms_type_application");
+$this->application->tableName = "cms_cms_type";
+$this->application->fieldName = "application";
+$this->application->aliasFieldName = "cms_cms_type_application";
+$this->application->label = "Application";
 }
 return $this;
 }

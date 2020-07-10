@@ -19,7 +19,7 @@ use Nemundo\Process\Content\Type\AbstractTreeContentType;
 class FeedItemContentType extends AbstractTreeContentType
 {
 
-    use StreamIndexTrait;
+    //use StreamIndexTrait;
 
     // stream index
 
@@ -80,7 +80,7 @@ class FeedItemContentType extends AbstractTreeContentType
         $this->addSearchText($itemRow->description);
         $this->saveSearchIndex();
 
-        $this->saveStreamIndex();
+        //$this->saveStreamIndex();
 
 
     }

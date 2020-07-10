@@ -22,16 +22,20 @@ class CmsPage extends AbstractTemplateDocument
         $reader = new CmsTypeReader();
         $reader->model->loadParentContentType();
         $reader->model->loadCmsContentType();
+        $reader->model->loadApplication();
 
         $header = new TableHeader($table);
         $header->addText($reader->model->parentContentType->label);
         $header->addText($reader->model->cmsContentType->label);
+        $header->addText($reader->model->application->label);
 
         foreach ($reader->getData() as $cmsTypeRow) {
 
             $row = new TableRow($table);
             $row->addText($cmsTypeRow->parentContentType->contentType);
             $row->addText($cmsTypeRow->cmsContentType->contentType);
+            $row->addText($cmsTypeRow->application->application);
+
 
         }
 
