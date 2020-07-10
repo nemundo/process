@@ -5,8 +5,6 @@ namespace Nemundo\Process\Cms\Setup;
 
 
 use Nemundo\App\Application\Setup\AbstractSetup;
-use Nemundo\Core\Base\AbstractBase;
-use Nemundo\Meteo\Meteocentrale\Content\Foehndiagramm\FoehndiagrammContentType;
 use Nemundo\Process\Cms\Data\CmsType\CmsType;
 use Nemundo\Process\Cms\Data\CmsType\CmsTypeDelete;
 use Nemundo\Process\Cms\Data\CmsType\CmsTypeUpdate;
@@ -40,7 +38,10 @@ class CmsSetup extends AbstractSetup  // AbstractBase
         $data->setupStatus = true;
         //$data->parentContentTypeId = $this->parentContentType->typeId;
         $data->cmsContentTypeId = $contentType->typeId;
-        $data->applicationId=$this->application->applicationId;
+
+        if ($this->application !== null) {
+            $data->applicationId = $this->application->applicationId;
+        }
         $data->save();
 
         return $this;

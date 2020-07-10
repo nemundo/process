@@ -11,6 +11,7 @@ use Nemundo\Process\Cms\Setup\CmsSetup;
 use Nemundo\Process\Cms\Type\TextCmsType;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Template\Content\Video\VideoContentType;
+use Nemundo\Process\Widget\UniqueId\UniqueIdContentType;
 use Nemundo\Project\Install\AbstractInstall;
 use Paranautik\Xcontest\Application\XcontestApplication;
 
@@ -39,7 +40,12 @@ class CmsInstall extends AbstractInstall
             ->addContentType(new TextCmsType());*/
 
         (new CmsSetup(new XcontestApplication()))
+        ->addContentType(new UniqueIdContentType())
             ->addContentType(new VideoContentType());
+
+
+
+
 
 
     }

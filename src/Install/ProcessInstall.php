@@ -59,7 +59,7 @@ class ProcessInstall extends AbstractInstall
 
         //(new WikiInstall())->install();
 
-        (new ApplicationInstall())->install();
+        //(new ApplicationInstall())->install();
 
         (new TemplateInstall())->install();
         (new FavoriteInstall())->install();
@@ -99,8 +99,12 @@ class ProcessInstall extends AbstractInstall
         //$setup->addDashboard(new UniqueIdContentType());
 
 
-        (new ContentTypeSetup())
-            ->addContentType(new ApplicationContentType());
+        //(new ContentTypeSetup())
+        //    ->addContentType(new ApplicationContentType());
+
+
+
+
 
         //(new NewsAppContentType())
         //    ->saveType();

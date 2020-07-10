@@ -4,10 +4,13 @@
 namespace Nemundo\Process\Template\Install;
 
 
+use Nemundo\App\Application\Setup\ApplicationSetup;
 use Nemundo\App\Script\Setup\ScriptSetup;
 use Nemundo\Model\Setup\ModelCollectionSetup;
+use Nemundo\Process\Cms\Setup\CmsSetup;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Process\Group\Setup\GroupSetup;
+use Nemundo\Process\Template\Application\TemplateApplication;
 use Nemundo\Process\Template\Content\Audio\AudioContentType;
 use Nemundo\Process\Template\Content\File\FileActiveContentType;
 use Nemundo\Process\Template\Content\File\FileContentType;
@@ -44,6 +47,9 @@ class TemplateInstall extends AbstractInstall
 
     public function install()
     {
+
+        (new ApplicationSetup())
+            ->addApplication(new TemplateApplication());
 
         $setup = new ModelCollectionSetup();
         $setup->addCollection(new TemplateCollection());
@@ -92,6 +98,28 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new CreateItemContentType());
         $setup->addContentType(new EditItemContentType());
         $setup->addContentType(new InactiveItemContentType());
+
+
+        /*
+        $setup = new ContentTypeSetup();
+        $setup->addContentType(new LargeTextContentType());
+        $setup->addContentType(new FileContentType());
+        $setup->addContentType(new FileInactiveContentType());
+        $setup->addContentType(new FileActiveContentType());
+        $setup->addContentType(new TextContentType());
+        $setup->addContentType(new VersionTextContentType());
+        $setup->addContentType(new VideoContentType());
+        $setup->addContentType(new AudioContentType());
+        $setup->addContentType(new ImageContentType());*/
+
+        (new CmsSetup(new TemplateApplication()))
+            ->addContentType(new LargeTextContentType())
+            ->addContentType(new FileContentType())
+            ->addContentType(new TextContentType())
+            ->addContentType(new VideoContentType())
+            ->addContentType(new AudioContentType())
+            ->addContentType(new ImageContentType());
+
 
         (new ScriptSetup())
             ->addScript(new TemplateTestScript())

@@ -37,6 +37,9 @@ class CmsAddDropdown extends BootstrapSiteDropdown
 
             $site->addParameter(new ContentTypeParameter($cmsTypeRow->cmsContentTypeId));
             $this->addSite($site);
+
+            //$this->addDivider();
+
         }
 
         return parent::getContent();
