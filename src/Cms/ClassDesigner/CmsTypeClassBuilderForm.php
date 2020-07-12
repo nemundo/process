@@ -4,10 +4,10 @@ namespace Nemundo\Process\Cms\ClassDesigner;
 
 
 use Nemundo\App\ClassDesigner\Builder\UsergroupClassBuilder;
-use Nemundo\App\ClassDesigner\Com\Form\AbstractClassDesignerForm;
+use Nemundo\App\ClassDesigner\Com\Form\AbstractClassBuilderForm;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
 
-class CmsTypeClassBuilderForm extends AbstractClassDesignerForm
+class CmsTypeClassBuilderForm extends AbstractClassBuilderForm
 {
 
     /**
@@ -37,7 +37,7 @@ class CmsTypeClassBuilderForm extends AbstractClassDesignerForm
 
 
 
-        $builder =new CmsTypeClassBuilder();  // new UsergroupClassBuilder();
+        $builder =new CmsTypeClassBuilder();
         $builder->project = $this->project;
         $builder->className = $this->cmsType->getValue();
         $builder->namespace = $this->app->namespace;
