@@ -13,7 +13,7 @@ class CmsTypeClassBuilderForm extends AbstractClassBuilderForm
     /**
      * @var BootstrapTextBox
      */
-    private $cmsType;
+    //private $cmsType;
 
 
     protected function loadContainer()
@@ -24,9 +24,9 @@ class CmsTypeClassBuilderForm extends AbstractClassBuilderForm
     public function getContent()
     {
 
-        $this->cmsType = new BootstrapTextBox($this);
+        /*$this->cmsType = new BootstrapTextBox($this);
         $this->cmsType->label = 'Cms Type';
-        $this->cmsType->validation = true;
+        $this->cmsType->validation = true;*/
 
         return parent::getContent();
 
@@ -39,7 +39,7 @@ class CmsTypeClassBuilderForm extends AbstractClassBuilderForm
 
         $builder =new CmsTypeClassBuilder();
         $builder->project = $this->project;
-        $builder->className = $this->cmsType->getValue();
+        $builder->className =$this->className->getValue();  // $this->cmsType->getValue();
         $builder->namespace = $this->app->namespace;
         $builder->buildClass();
 
