@@ -8,6 +8,7 @@ use Nemundo\Core\Date\DateTimeDifference;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Db\Sql\Order\SortOrder;
+use Nemundo\Html\Container\AbstractContainer;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Model\Count\ModelDataCount;
@@ -543,7 +544,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     }
 
 
-    public function getProcessView(AbstractHtmlContainer $parent = null)
+    public function getProcessView(AbstractContainer $parent = null)
     {
 
         /** @var AbstractProcessView $view */

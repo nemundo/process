@@ -6,6 +6,7 @@ namespace Nemundo\Process\Template\Site\File;
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Template\Content\File\FileInactiveContentType;
+use Nemundo\Process\Template\Parameter\FileParameter;
 use Nemundo\Web\Url\UrlReferer;
 
 
@@ -29,10 +30,14 @@ class FileInactiveSite extends AbstractDeleteIconSite
     public function loadContent()
     {
 
+        /*
         $contentParameter = new ContentParameter();
         $contentParameter->contentTypeCheck = false;
 
-        $fileContentType = $contentParameter->getContentType();
+        $fileContentType = $contentParameter->getContentType();*/
+
+
+        $fileContentType = (new FileParameter())->getContentType();
 
         $type = new FileInactiveContentType();
         $type->parentId = $fileContentType->getContentId();
