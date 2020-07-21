@@ -89,7 +89,7 @@ class CmsEditorContainer extends AbstractCmsContainer
             $contentType = $cmsRow->content->getContentType();
             $contentType->getView($widget);
 
-            $widget->widgetTitle=$contentType->getSubject();
+            $widget->widgetTitle=$contentType->getSubject();  //.$cmsRow->itemOrder;
 
             $btn = new AdminIconSiteButton($div);
             $btn->site = clone(CmsDeleteSite::$site);
