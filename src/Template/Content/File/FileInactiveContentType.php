@@ -4,6 +4,7 @@
 namespace Nemundo\Process\Template\Content\File;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Process\App\Notification\Type\NotificationTrait;
@@ -15,7 +16,6 @@ use Nemundo\Process\Template\Data\TemplateFileDelete\TemplateFileDeleteReader;
 class FileInactiveContentType extends AbstractTreeContentType
 {
 
-    //use LogTrait;
     use NotificationTrait;
 
     public $fileId;
@@ -64,7 +64,6 @@ class FileInactiveContentType extends AbstractTreeContentType
 
         return $this->getSubject();
 
-        // TODO: Implement getMessage() method.
     }
 
 }

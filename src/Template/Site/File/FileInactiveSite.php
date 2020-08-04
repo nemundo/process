@@ -3,6 +3,7 @@
 namespace Nemundo\Process\Template\Site\File;
 
 
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Template\Content\File\FileInactiveContentType;
@@ -20,7 +21,7 @@ class FileInactiveSite extends AbstractDeleteIconSite
 
     protected function loadSite()
     {
-        $this->title = 'Delete (Soft Delete)';
+        $this->title ='Datei löschen';  // 'Delete (Soft Delete)';
         $this->url = 'inactive-file';
         $this->menuActive = false;
         FileInactiveSite::$site = $this;

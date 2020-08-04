@@ -72,8 +72,13 @@ class FileParentContainer extends AbstractParentContainer
                 if ($documentRow->active) {
                     $site = clone(FileInactiveSite::$site);
                     //$site->addParameter(new ParentParameter($this->parentId));
-                    //$site->addParameter(new FileParameter($documentRow->id));
-                    $site->addParameter(new ContentParameter($documentRow->contentId));
+
+                    // aktiviert, LAU 4Aug2020
+                    $site->addParameter(new FileParameter($documentRow->id));
+
+                    // deaktiviert, LAU 4Aug2020
+                    //$site->addParameter(new ContentParameter($documentRow->contentId));
+
                     $row->addIconSite($site);
                 } else {
                     $row->addEmpty();
