@@ -9,6 +9,7 @@ use Nemundo\Process\App\Stream\Index\StreamIndexTrait;
 use Nemundo\Process\App\Video\Data\YouTube\YouTube;
 use Nemundo\Process\App\Video\Data\YouTube\YouTubeReader;
 use Nemundo\Process\App\Video\Data\YouTube\YouTubeRow;
+use Nemundo\Process\App\Video\Data\YouTube\YouTubeUpdate;
 use Nemundo\Process\Cms\Index\CmsIndexTrait;
 use Nemundo\Process\Content\Type\AbstractTreeContentType;
 use Nemundo\Process\Template\Data\TemplateText\TemplateText;
@@ -54,6 +55,19 @@ class YouTubeContentType extends AbstractTreeContentType
 
     }
 
+
+    protected function onUpdate()
+    {
+
+        $update = new YouTubeUpdate();  // new TemplateText();
+        //$update->youtubeId = $urlItem->getParameterValue('v');
+        $update->title=$this->title;
+        $update->description=$this->description;
+        $this->dataId=$update->updateById($this->dataId);
+
+
+
+    }
 
 
     /*

@@ -50,6 +50,22 @@ class YouTubeContentForm extends AbstractContentForm
 
     }
 
+
+    protected function loadUpdateForm()
+    {
+
+        $this->url->disabled=true;
+        $this->url->validation=false;
+
+        $videoRow = $this->contentType->getDataRow();
+
+        //$this->url->value = $videoRow->youtubeId;
+        $this->videoTitle->value = $videoRow->title;
+        $this->description->value = $videoRow->description;
+
+    }
+
+
     protected function onSubmit()
     {
 
