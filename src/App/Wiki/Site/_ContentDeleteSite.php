@@ -5,7 +5,7 @@ namespace Nemundo\Process\App\Wiki\Site;
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\Content\Data\Content\ContentReader;
 use Nemundo\Process\Content\Parameter\ContentParameter;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 class ContentDeleteSite extends AbstractDeleteIconSite
 {

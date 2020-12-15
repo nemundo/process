@@ -7,7 +7,7 @@ namespace Nemundo\Process\Content\Site;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
 use Nemundo\Web\Site\AbstractSite;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 class RemoveContentSite extends AbstractSite
 {

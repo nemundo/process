@@ -7,7 +7,7 @@ namespace Nemundo\Process\Cms\Site;
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\Cms\Data\Cms\CmsDelete;
 use Nemundo\Process\Cms\Parameter\CmsParameter;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 class CmsDeleteSite extends AbstractDeleteIconSite
 {

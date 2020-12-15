@@ -9,7 +9,7 @@ use Nemundo\Process\Template\Content\File\FileContentType;
 use Nemundo\Process\Template\Content\File\FileInactiveContentType;
 use Nemundo\Process\Template\Data\TemplateMultiFile\TemplateMultiFileUpdate;
 use Nemundo\Process\Template\Parameter\FileParameter;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 
 class MultiFileDeleteSite extends AbstractDeleteIconSite

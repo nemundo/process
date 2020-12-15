@@ -17,7 +17,7 @@ public $model;
 public $id;
 
 /**
-* @var string
+* @var int
 */
 public $toId;
 
@@ -35,7 +35,7 @@ public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
-$this->toId = $this->getModelValue($model->toId);
+$this->toId = intval($this->getModelValue($model->toId));
 if ($model->to !== null) {
 $this->loadNemundoUserDataUserUsertoRow($model->to);
 }

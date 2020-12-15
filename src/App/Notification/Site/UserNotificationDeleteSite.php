@@ -6,7 +6,7 @@ namespace Nemundo\Process\App\Notification\Site;
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationUpdate;
 use Nemundo\User\Type\UserSessionType;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 
 class UserNotificationDeleteSite extends AbstractDeleteIconSite

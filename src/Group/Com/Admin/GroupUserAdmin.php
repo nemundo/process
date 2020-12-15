@@ -21,7 +21,7 @@ use Nemundo\Process\Group\Type\AbstractGroupContentType;
 use Nemundo\User\Parameter\UserParameter;
 use Nemundo\Web\Action\AbstractActionPanel;
 use Nemundo\Web\Action\ActionSite;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 class GroupUserAdmin extends AbstractActionPanel
 {

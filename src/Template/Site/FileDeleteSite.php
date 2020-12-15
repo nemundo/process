@@ -7,7 +7,7 @@ use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\Template\Content\File\FileContentType;
 use Nemundo\Process\Template\Parameter\FileParameter;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 
 class FileDeleteSite extends AbstractDeleteIconSite

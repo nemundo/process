@@ -7,7 +7,7 @@ use Nemundo\Process\App\Favorite\Data\Favorite\FavoriteDelete;
 use Nemundo\Process\App\Favorite\Parameter\FavoriteParameter;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\User\Type\UserSessionType;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 class UserFavoriteDeleteSite extends AbstractDeleteIconSite
 {

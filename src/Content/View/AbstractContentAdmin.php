@@ -18,7 +18,7 @@ use Nemundo\Web\Action\ActionSite;
 use Nemundo\Web\Action\Site\ActiveActionSite;
 use Nemundo\Web\Action\Site\DeleteActionSite;
 use Nemundo\Web\Action\Site\EditActionSite;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 abstract class AbstractContentAdmin extends AbstractActionPanel
 {

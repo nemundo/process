@@ -7,7 +7,7 @@ use Nemundo\Process\App\Favorite\Data\Favorite\Favorite;
 use Nemundo\Process\App\Favorite\Icon\EmptyFavoriteIcon;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\User\Type\UserSessionType;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 class FavoriteSaveSite extends AbstractIconSite
 {

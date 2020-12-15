@@ -7,7 +7,7 @@ use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\Content\Parameter\ChildParameter;
 use Nemundo\Process\Content\Parameter\ParentParameter;
 use Nemundo\Process\Template\Content\Source\Remove\ChildRemoveContentType;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 class ChildRemoveSite extends AbstractDeleteIconSite
 {

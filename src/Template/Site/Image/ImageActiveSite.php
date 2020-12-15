@@ -10,7 +10,7 @@ use Nemundo\Process\Content\Parameter\ParentParameter;
 use Nemundo\Process\Template\Content\File\FileInactiveContentType;
 use Nemundo\Process\Template\Parameter\FileParameter;
 use Nemundo\Process\Template\Parameter\ImageParameter;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 
 class ImageActiveSite extends AbstractRestoreIconSite

@@ -16,8 +16,8 @@ parent::__construct();
 $this->model = new TemplateDecimalNumberModel();
 }
 public function save() {
-$value = (new \Nemundo\Core\Type\Text\Text($this->decimalNumber))->replace(",", ".")->getValue();
-$this->typeValueList->setModelValue($this->model->decimalNumber, $value);
+if (!is_null($this->decimalNumber)) $this->decimalNumber = str_replace(",", ".", $this->decimalNumber);
+$this->typeValueList->setModelValue($this->model->decimalNumber, $this->decimalNumber);
 $id = parent::save();
 return $id;
 }

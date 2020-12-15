@@ -31,7 +31,7 @@ use Nemundo\Web\Action\AbstractActionPanel;
 use Nemundo\Web\Action\ActionSite;
 use Nemundo\Web\Action\Site\DeleteActionSite;
 use Nemundo\Web\Site\Site;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 class GroupAdmin extends AbstractActionPanel
 {

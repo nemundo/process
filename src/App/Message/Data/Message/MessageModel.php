@@ -17,7 +17,7 @@ public $subject;
 public $message;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalIdType
 */
 public $toId;
 
@@ -59,7 +59,7 @@ $this->message->aliasFieldName = "message_message_message";
 $this->message->label = "Message";
 $this->message->allowNullValue = false;
 
-$this->toId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->toId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->toId->tableName = "message_message";
 $this->toId->fieldName = "to";
 $this->toId->aliasFieldName = "message_message_to";

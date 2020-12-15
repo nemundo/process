@@ -7,7 +7,7 @@ namespace Nemundo\Process\App\Feed\Site;
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\App\Feed\Content\Feed\FeedContentType;
 use Nemundo\Process\App\Feed\Parameter\FeedParameter;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 class FeedDeleteSite extends AbstractDeleteIconSite
 {

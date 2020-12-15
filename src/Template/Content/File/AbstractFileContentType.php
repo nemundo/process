@@ -153,8 +153,8 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $hyperlink->content = $fileRow->file->getFilename();
         $hyperlink->url = $fileRow->file->getUrl();
 
-        $subject[LanguageCode::EN] = 'File ' . $hyperlink->getContent() . ' was uploaded';
-        $subject[LanguageCode::DE] = 'Dokument ' . $hyperlink->getContent() . ' wurde hochgeladen';
+        $subject[LanguageCode::EN] = 'File ' . $hyperlink->getBodyContent() . ' was uploaded';
+        $subject[LanguageCode::DE] = 'Dokument ' . $hyperlink->getBodyContent() . ' wurde hochgeladen';
 
         return (new Translation())->getText($subject);
 

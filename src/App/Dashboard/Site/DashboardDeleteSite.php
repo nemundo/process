@@ -7,7 +7,7 @@ namespace Nemundo\Process\App\Dashboard\Site;
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\App\Dashboard\Data\UserDashboard\UserDashboardDelete;
 use Nemundo\Process\App\Dashboard\Parameter\DashboardParameter;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 class DashboardDeleteSite extends AbstractDeleteIconSite
 {

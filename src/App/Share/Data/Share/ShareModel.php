@@ -7,7 +7,7 @@ class ShareModel extends \Nemundo\Model\Definition\Model\AbstractModel {
 public $id;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalIdType
 */
 public $toId;
 
@@ -39,7 +39,7 @@ $this->id->visible->table = false;
 $this->id->visible->view = false;
 $this->id->visible->form = false;
 
-$this->toId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->toId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->toId->tableName = "process_share";
 $this->toId->fieldName = "to";
 $this->toId->aliasFieldName = "process_share_to";

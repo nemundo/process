@@ -27,7 +27,7 @@ public $archive;
 public $message;
 
 /**
-* @var string
+* @var int
 */
 public $toId;
 
@@ -92,7 +92,7 @@ $this->row = $row;
 $this->id = $this->getModelValue($model->id);
 $this->archive = boolval($this->getModelValue($model->archive));
 $this->message = $this->getModelValue($model->message);
-$this->toId = $this->getModelValue($model->toId);
+$this->toId = intval($this->getModelValue($model->toId));
 if ($model->to !== null) {
 $this->loadNemundoUserDataUserUsertoRow($model->to);
 }

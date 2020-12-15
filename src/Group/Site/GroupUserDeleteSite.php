@@ -10,7 +10,7 @@ use Nemundo\Process\Group\Data\GroupUser\GroupUserDelete;
 use Nemundo\Process\Group\Parameter\GroupParameter;
 use Nemundo\Process\Group\Parameter\GroupUserParameter;
 use Nemundo\User\Parameter\UserParameter;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 class GroupUserDeleteSite extends AbstractDeleteIconSite
 {

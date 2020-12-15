@@ -8,7 +8,7 @@ use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\Content\Parameter\ContentParameter;
 use Nemundo\Process\Template\Content\File\FileInactiveContentType;
 use Nemundo\Process\Template\Parameter\FileParameter;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 
 class FileInactiveSite extends AbstractDeleteIconSite

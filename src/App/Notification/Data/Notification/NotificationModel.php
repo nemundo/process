@@ -17,7 +17,7 @@ public $archive;
 public $message;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalIdType
 */
 public $toId;
 
@@ -108,7 +108,7 @@ $this->message->aliasFieldName = "process_notification_message";
 $this->message->label = "Message";
 $this->message->allowNullValue = false;
 
-$this->toId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
+$this->toId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->toId->tableName = "process_notification";
 $this->toId->fieldName = "to";
 $this->toId->aliasFieldName = "process_notification_to";

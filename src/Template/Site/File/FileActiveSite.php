@@ -10,7 +10,7 @@ use Nemundo\Process\Template\Content\File\FileActiveContentType;
 use Nemundo\Process\Template\Content\File\FileContentType;
 use Nemundo\Process\Template\Content\File\FileInactiveContentType;
 use Nemundo\Process\Template\Parameter\FileParameter;
-use Nemundo\Web\Url\UrlReferer;
+use Nemundo\Core\Http\Url\UrlReferer;
 
 
 class FileActiveSite extends AbstractRestoreIconSite

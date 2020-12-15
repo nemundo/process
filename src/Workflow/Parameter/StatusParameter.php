@@ -19,7 +19,7 @@ class StatusParameter extends ContentTypeParameter
     {
 
         $status = null;
-        if ($this->existsParameter()) {
+        if ($this->exists()) {
             $status = $this->getContentType();
         }
 
