@@ -32,7 +32,7 @@ public $subject;
 public $dateTime;
 
 /**
-* @var int
+* @var string
 */
 public $userId;
 
@@ -58,7 +58,7 @@ $this->id = $this->getModelValue($model->id);
 $this->dataId = $this->getModelValue($model->dataId);
 $this->subject = $this->getModelValue($model->subject);
 $this->dateTime = new \Nemundo\Core\Type\DateTime\DateTime($this->getModelValue($model->dateTime));
-$this->userId = intval($this->getModelValue($model->userId));
+$this->userId = $this->getModelValue($model->userId);
 if ($model->user !== null) {
 $this->loadNemundoUserDataUserUseruserRow($model->user);
 }

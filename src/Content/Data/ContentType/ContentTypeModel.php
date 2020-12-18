@@ -77,7 +77,7 @@ $this->applicationId->tableName = "process_content_type";
 $this->applicationId->fieldName = "application";
 $this->applicationId->aliasFieldName = "process_content_type_application";
 $this->applicationId->label = "Application";
-$this->applicationId->allowNullValue = false;
+$this->applicationId->allowNullValue = true;
 
 }
 public function loadApplication() {

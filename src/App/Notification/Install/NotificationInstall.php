@@ -38,8 +38,8 @@ class NotificationInstall extends AbstractInstall
         (new ScriptSetup())
             ->addScript(new NotificationIndexScript());
 
-        (new DashboardSetup())
-            ->addDashboard(new NotificationWidgetContentType());
+        /*(new DashboardSetup())
+            ->addDashboard(new NotificationWidgetContentType());*/
 
         (new NotificationTestInstall())->install();
 

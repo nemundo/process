@@ -29,6 +29,79 @@
         },
         {
             "template": "default",
+            "model_id": "e7460973-aefe-494b-9c8f-9d1ee0858695",
+            "label": "Content",
+            "class_name": "Content",
+            "table_name": "content2_content",
+            "namespace": "Nemundo\\Process\\Content\\Data\\Content",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": true,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Content Type",
+                    "field_name": "content_type",
+                    "variable_name": "contentType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
+                },
+                {
+                    "type": "text",
+                    "label": "Data Id",
+                    "field_name": "data_id",
+                    "variable_name": "dataId",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "36"
+                },
+                {
+                    "type": "date_time",
+                    "label": "Date Time Created",
+                    "field_name": "date_time_created",
+                    "variable_name": "dateTimeCreated",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "text",
+                    "label": "Parent Id",
+                    "field_name": "parent_id",
+                    "variable_name": "parentId",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "36"
+                },
+                {
+                    "type": "number",
+                    "label": "Item Order",
+                    "field_name": "item_order",
+                    "variable_name": "itemOrder",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "user",
+                    "label": "User Created",
+                    "field_name": "user_created",
+                    "variable_name": "userCreated",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "data_id",
+                    "index_type": "index",
+                    "field_name": [
+                        "data_id"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
             "model_id": "2b8a3194-c10f-4a5c-a439-84581d448f35",
             "label": "Content",
             "class_name": "Content",
@@ -110,79 +183,6 @@
                     "index_type": "unique_index",
                     "field_name": [
                         "content_type",
-                        "data_id"
-                    ]
-                }
-            ]
-        },
-        {
-            "template": "default",
-            "model_id": "e7460973-aefe-494b-9c8f-9d1ee0858695",
-            "label": "Content",
-            "class_name": "Content",
-            "table_name": "content2_content",
-            "namespace": "Nemundo\\Process\\Content\\Data\\Content",
-            "row_class_name": "",
-            "primary_index": "auto_increment",
-            "is_deleted": true,
-            "type": [
-                {
-                    "type": "external",
-                    "label": "Content Type",
-                    "field_name": "content_type",
-                    "variable_name": "contentType",
-                    "allow_null": false,
-                    "is_deleted": false,
-                    "external_model_id": "69c1a9f4-3412-4446-92a4-2e81a75bed3f"
-                },
-                {
-                    "type": "text",
-                    "label": "Data Id",
-                    "field_name": "data_id",
-                    "variable_name": "dataId",
-                    "allow_null": false,
-                    "is_deleted": false,
-                    "length": "36"
-                },
-                {
-                    "type": "date_time",
-                    "label": "Date Time Created",
-                    "field_name": "date_time_created",
-                    "variable_name": "dateTimeCreated",
-                    "allow_null": false,
-                    "is_deleted": false
-                },
-                {
-                    "type": "text",
-                    "label": "Parent Id",
-                    "field_name": "parent_id",
-                    "variable_name": "parentId",
-                    "allow_null": false,
-                    "is_deleted": false,
-                    "length": "36"
-                },
-                {
-                    "type": "number",
-                    "label": "Item Order",
-                    "field_name": "item_order",
-                    "variable_name": "itemOrder",
-                    "allow_null": false,
-                    "is_deleted": false
-                },
-                {
-                    "type": "user",
-                    "label": "User Created",
-                    "field_name": "user_created",
-                    "variable_name": "userCreated",
-                    "allow_null": false,
-                    "is_deleted": false
-                }
-            ],
-            "index": [
-                {
-                    "index_name": "data_id",
-                    "index_type": "index",
-                    "field_name": [
                         "data_id"
                     ]
                 }
@@ -311,7 +311,7 @@
                     "label": "Application",
                     "field_name": "application",
                     "variable_name": "application",
-                    "allow_null": false,
+                    "allow_null": true,
                     "is_deleted": false,
                     "external_model_id": "be58745e-78c3-4c3a-aadc-d2b26d233518"
                 }

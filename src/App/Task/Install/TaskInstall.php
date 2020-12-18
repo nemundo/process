@@ -28,8 +28,8 @@ class TaskInstall extends AbstractInstall
         (new TaskWidgetContentType())
             ->saveType();
 
-        (new DashboardSetup())
-            ->addDashboard(new TaskWidgetContentType());
+        /*(new DashboardSetup())
+            ->addDashboard(new TaskWidgetContentType());*/
 
 
         // TODO: Implement install() method.
