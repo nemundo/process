@@ -113,7 +113,7 @@ $this->toId->tableName = "process_notification";
 $this->toId->fieldName = "to";
 $this->toId->aliasFieldName = "process_notification_to";
 $this->toId->label = "To";
-$this->toId->allowNullValue = false;
+$this->toId->allowNullValue = true;
 
 $this->contentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->contentId->tableName = "process_notification";

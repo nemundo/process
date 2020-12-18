@@ -68,7 +68,7 @@
                     "label": "To",
                     "field_name": "to",
                     "variable_name": "to",
-                    "allow_null": false,
+                    "allow_null": true,
                     "is_deleted": false
                 },
                 {

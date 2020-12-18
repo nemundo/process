@@ -27,9 +27,9 @@ class VideoInstall extends AbstractInstall
         (new ContentTypeSetup())
             ->addContentType(new YouTubeContentType());
 
-        (new CmsSetup(new VideoApplication()))
+        /*(new CmsSetup(new VideoApplication()))
             ->addContentType(new YouTubeContentType())
-            ->addContentType(new VimeoContentType());
+            ->addContentType(new VimeoContentType());*/
 
 
     }

@@ -112,13 +112,13 @@ class TemplateInstall extends AbstractInstall
         $setup->addContentType(new AudioContentType());
         $setup->addContentType(new ImageContentType());*/
 
-        (new CmsSetup(new TemplateApplication()))
+        /*(new CmsSetup(new TemplateApplication()))
             ->addContentType(new LargeTextContentType())
             ->addContentType(new FileContentType())
             ->addContentType(new TextContentType())
             ->addContentType(new VideoContentType())
             ->addContentType(new AudioContentType())
-            ->addContentType(new ImageContentType());
+            ->addContentType(new ImageContentType());*/
 
 
         (new ScriptSetup())
