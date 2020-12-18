@@ -5,7 +5,7 @@ namespace Nemundo\Process\App\Notification\Site;
 
 use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\App\Notification\Data\Notification\NotificationUpdate;
-use Nemundo\User\Type\UserSessionType;
+use Nemundo\User\Session\UserSession;
 use Nemundo\Core\Http\Url\UrlReferer;
 
 
@@ -32,7 +32,7 @@ class UserNotificationDeleteSite extends AbstractDeleteIconSite
     {
 
         $update = new NotificationUpdate();
-        $update->filter->andEqual($update->model->toId, (new UserSessionType())->userId);
+        $update->filter->andEqual($update->model->toId, (new UserSession())->userId);
         $update->archive = true;
         $update->update();
 

@@ -13,7 +13,7 @@ use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Favorite\Data\Favorite\FavoritePaginationReader;
 use Nemundo\Process\App\Favorite\Parameter\FavoriteParameter;
-use Nemundo\User\Type\UserSessionType;
+use Nemundo\User\Session\UserSession;
 use Nemundo\Web\Site\AbstractSite;
 
 class UserFavoriteSite extends AbstractSite
@@ -64,7 +64,7 @@ class UserFavoriteSite extends AbstractSite
         $favoriteReader = new FavoritePaginationReader();
         $favoriteReader->model->loadContent();
         $favoriteReader->model->content->loadContentType();
-        $favoriteReader->filter->andEqual($favoriteReader->model->userId, (new UserSessionType())->userId);
+        $favoriteReader->filter->andEqual($favoriteReader->model->userId, (new UserSession())->userId);
         $favoriteReader->addOrder($favoriteReader->model->subject);
 
         foreach ($favoriteReader->getData() as $favoriteRow) {

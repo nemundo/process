@@ -11,7 +11,7 @@ use Nemundo\Process\Content\Data\Content\ContentCount;
 use Nemundo\Process\Content\Data\Content\ContentDelete;
 use Nemundo\Process\Content\Data\Content\ContentId;
 use Nemundo\Process\Content\Data\Content\ContentUpdate;
-use Nemundo\User\Type\UserSessionType;
+use Nemundo\User\Session\UserSession;
 
 trait ContentIndexTrait
 {
@@ -38,11 +38,18 @@ trait ContentIndexTrait
 
         $this->dateTime = (new DateTime())->setNow();
 
-        if ((new UserSessionType())->isUserLogged()) {
-            $this->userId = (new UserSessionType())->userId;
+        /*if ((new UserSession())->isUserLogged()) {
+            $this->userId = (new UserSession())->userId;
+        } else {
+            $this->userId = '';
+        }*/
+
+        if ((new UserSession())->isUserLogged()) {
+            $this->userId = (new UserSession())->userId;
         } else {
             $this->userId = '';
         }
+
 
     }
 

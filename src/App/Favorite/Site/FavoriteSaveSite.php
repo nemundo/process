@@ -6,7 +6,7 @@ use Nemundo\Package\FontAwesome\Site\AbstractIconSite;
 use Nemundo\Process\App\Favorite\Data\Favorite\Favorite;
 use Nemundo\Process\App\Favorite\Icon\EmptyFavoriteIcon;
 use Nemundo\Process\Content\Parameter\ContentParameter;
-use Nemundo\User\Type\UserSessionType;
+use Nemundo\User\Session\UserSession;
 use Nemundo\Core\Http\Url\UrlReferer;
 
 class FavoriteSaveSite extends AbstractIconSite
@@ -41,7 +41,7 @@ class FavoriteSaveSite extends AbstractIconSite
 
         $data = new Favorite();
         $data->contentId = (new ContentParameter())->getValue();
-        $data->userId = (new UserSessionType())->userId;
+        $data->userId = (new UserSession())->userId;
         $data->subject = '[No Subject]';
         $data->save();
 

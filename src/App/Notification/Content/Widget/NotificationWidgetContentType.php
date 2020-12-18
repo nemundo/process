@@ -13,10 +13,10 @@ class NotificationWidgetContentType extends WidgetContentType
     {
 
         parent::loadContentType();
-        $this->typeLabel='Notification';
+        $this->typeLabel = 'Notification';
         $this->dataId = 'cda065a2-8463-4fc0-8ed4-6a39f2be95a4';
 
-        $this->viewClass=NotificationWidgetContentView::class;
+        $this->viewClass = NotificationWidgetContentView::class;
 
     }
 

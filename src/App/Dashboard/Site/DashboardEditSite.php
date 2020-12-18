@@ -11,7 +11,7 @@ use Nemundo\Package\FontAwesome\Site\AbstractEditIconSite;
 use Nemundo\Process\App\Dashboard\Com\Form\DashboardForm;
 use Nemundo\Process\App\Dashboard\Data\UserDashboard\UserDashboardReader;
 use Nemundo\Process\App\Dashboard\Parameter\DashboardParameter;
-use Nemundo\User\Type\UserSessionType;
+use Nemundo\User\Session\UserSession;
 
 class DashboardEditSite extends AbstractEditIconSite
 {
@@ -47,7 +47,7 @@ class DashboardEditSite extends AbstractEditIconSite
         $reader->model->loadDashboard();
         //$reader->model->dashboard->loadContent();
         $reader->model->dashboard->loadContentType();
-        $reader->filter->andEqual($reader->model->userId, (new UserSessionType())->userId);
+        $reader->filter->andEqual($reader->model->userId, (new UserSession())->userId);
         foreach ($reader->getData() as $userDashboardRow) {
 
             $contentType = $userDashboardRow->dashboard->getContentType();

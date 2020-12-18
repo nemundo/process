@@ -11,7 +11,7 @@ use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Favorite\Data\Favorite\FavoriteReader;
 use Nemundo\Process\App\Favorite\Parameter\FavoriteParameter;
 use Nemundo\Process\App\Favorite\Site\FavoriteDeleteSite;
-use Nemundo\User\Type\UserSessionType;
+use Nemundo\User\Session\UserSession;
 
 class FavoriteContainer extends AbstractHtmlContainer
 {
@@ -31,7 +31,7 @@ class FavoriteContainer extends AbstractHtmlContainer
         $favoriteReader = new FavoriteReader();
         $favoriteReader->model->loadContent();
         $favoriteReader->model->content->loadContentType();
-        $favoriteReader->filter->andEqual($favoriteReader->model->userId, (new UserSessionType())->userId);
+        $favoriteReader->filter->andEqual($favoriteReader->model->userId, (new UserSession())->userId);
         $favoriteReader->addOrder($favoriteReader->model->content->subject);
 
         foreach ($favoriteReader->getData() as $favoriteRow) {

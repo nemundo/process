@@ -7,7 +7,7 @@ use Nemundo\Package\FontAwesome\Site\AbstractIconSite;
 use Nemundo\Process\App\Favorite\Data\Favorite\FavoriteDelete;
 use Nemundo\Process\App\Favorite\Icon\FavoriteIcon;
 use Nemundo\Process\Content\Parameter\ContentParameter;
-use Nemundo\User\Type\UserSessionType;
+use Nemundo\User\Session\UserSession;
 use Nemundo\Core\Http\Url\UrlReferer;
 
 class FavoriteDeleteSite extends AbstractIconSite
@@ -36,7 +36,7 @@ class FavoriteDeleteSite extends AbstractIconSite
 
         $delete = new FavoriteDelete();
         $delete->filter->andEqual($delete->model->contentId, (new ContentParameter())->getValue());
-        $delete->filter->andEqual($delete->model->userId, (new UserSessionType())->userId);
+        $delete->filter->andEqual($delete->model->userId, (new UserSession())->userId);
         $delete->delete();
 
         (new UrlReferer())->redirect();

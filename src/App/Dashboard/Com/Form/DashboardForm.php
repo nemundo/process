@@ -9,7 +9,7 @@ use Nemundo\Process\App\Dashboard\Com\ListBox\DashboardListBox;
 use Nemundo\Process\App\Dashboard\Data\UserDashboard\UserDashboard;
 use Nemundo\Process\App\Dashboard\Type\DashboardContentTypeCollection;
 use Nemundo\Process\Content\Com\ListBox\ContentTypeCollectionListBox;
-use Nemundo\User\Type\UserSessionType;
+use Nemundo\User\Session\UserSession;
 
 class DashboardForm extends BootstrapForm
 {
@@ -37,7 +37,7 @@ class DashboardForm extends BootstrapForm
     {
 
         $data = new UserDashboard();
-        $data->userId=(new UserSessionType())->userId;
+        $data->userId=(new UserSession())->userId;
         $data->dashboardId=$this->listbox->getValue();
         $data->save();
 

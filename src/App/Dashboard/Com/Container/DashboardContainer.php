@@ -9,7 +9,7 @@ use Nemundo\Admin\Com\Widget\AdminWidget;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Process\App\Dashboard\Data\UserDashboard\UserDashboardReader;
 use Nemundo\Process\App\Dashboard\Site\DashboardEditSite;
-use Nemundo\User\Type\UserSessionType;
+use Nemundo\User\Session\UserSession;
 
 class DashboardContainer extends AbstractHtmlContainer
 {
@@ -24,7 +24,7 @@ class DashboardContainer extends AbstractHtmlContainer
         $reader = new UserDashboardReader();
         $reader->model->loadDashboard();
         $reader->model->dashboard->loadContentType();
-        $reader->filter->andEqual($reader->model->userId, (new UserSessionType())->userId);
+        $reader->filter->andEqual($reader->model->userId, (new UserSession())->userId);
         foreach ($reader->getData() as $userDashboardRow) {
 
             $contentType = $userDashboardRow->dashboard->getContentType();

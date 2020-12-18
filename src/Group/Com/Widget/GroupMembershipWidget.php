@@ -9,7 +9,7 @@ use Nemundo\Admin\Com\Widget\AbstractAdminWidget;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Process\Template\Content\User\UserContentType;
-use Nemundo\User\Type\UserSessionType;
+use Nemundo\User\Session\UserSession;
 
 class GroupMembershipWidget extends AbstractAdminWidget
 {
@@ -29,7 +29,7 @@ class GroupMembershipWidget extends AbstractAdminWidget
         $header->addText('Group');
         $header->addText('Type');
 
-        $userId = (new UserSessionType())->userId;
+        $userId = (new UserSession())->userId;
         $type = new UserContentType($userId);
         foreach ($type->getGroupMembershipList() as $groupRow) {
 

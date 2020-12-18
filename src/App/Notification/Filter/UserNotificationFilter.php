@@ -9,7 +9,7 @@ use Nemundo\Process\App\Notification\Data\Notification\NotificationModel;
 use Nemundo\Process\App\Notification\Parameter\ArchiveParameter;
 use Nemundo\Process\App\Notification\Parameter\SourceParameter;
 use Nemundo\Process\Content\Parameter\ContentTypeParameter;
-use Nemundo\User\Type\UserSessionType;
+use Nemundo\User\Session\UserSession;
 
 class UserNotificationFilter extends AbstractFilter
 {
@@ -29,7 +29,7 @@ class UserNotificationFilter extends AbstractFilter
 
         $model = new NotificationModel();
 
-        $this->andEqual($model->toId, (new UserSessionType())->userId);
+        $this->andEqual($model->toId, (new UserSession())->userId);
 
         if ((new ArchiveParameter())->getValue() == '1') {
             $this->andEqual($model->archive, true);

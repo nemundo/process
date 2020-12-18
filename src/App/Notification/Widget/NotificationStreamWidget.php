@@ -14,7 +14,7 @@ use Nemundo\Process\App\Notification\Data\Notification\NotificationReader;
 use Nemundo\Process\App\Notification\Parameter\NotificationParameter;
 use Nemundo\Process\App\Notification\Site\ArchiveSite;
 use Nemundo\Process\App\Notification\Site\NotificationAdminSite;
-use Nemundo\User\Type\UserSessionType;
+use Nemundo\User\Session\UserSession;
 
 class NotificationStreamWidget extends AdminWidget
 {
@@ -59,7 +59,7 @@ class NotificationStreamWidget extends AdminWidget
         $reader->model->loadContent();
         $reader->model->content->loadContentType();
         $reader->model->loadTo();
-        $reader->filter->andEqual($reader->model->toId, (new UserSessionType())->userId);
+        $reader->filter->andEqual($reader->model->toId, (new UserSession())->userId);
         $reader->filter->andEqual($reader->model->archive, false);
         $reader->addOrder($reader->model->id, SortOrder::DESCENDING);
         $reader->limit = 20;

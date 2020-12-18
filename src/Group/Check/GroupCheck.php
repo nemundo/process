@@ -7,7 +7,7 @@ namespace Nemundo\Process\Group\Check;
 use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Process\Group\Data\GroupUser\GroupUserCount;
 use Nemundo\Process\Group\Type\AbstractGroupContentType;
-use Nemundo\User\Type\UserSessionType;
+use Nemundo\User\Session\UserSession;
 
 
 class GroupCheck extends AbstractBase
@@ -19,7 +19,7 @@ class GroupCheck extends AbstractBase
         $value = false;
 
         $count = new GroupUserCount();
-        $count->filter->andEqual($count->model->userId, (new UserSessionType())->userId);
+        $count->filter->andEqual($count->model->userId, (new UserSession())->userId);
         $count->filter->andEqual($count->model->groupId, $groupContentType->getGroupId());
         if ($count->getCount() > 0) {
             $value = true;

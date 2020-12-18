@@ -6,7 +6,7 @@ use Nemundo\Package\FontAwesome\Site\AbstractDeleteIconSite;
 use Nemundo\Process\App\Favorite\Data\Favorite\FavoriteDelete;
 use Nemundo\Process\App\Favorite\Parameter\FavoriteParameter;
 use Nemundo\Process\Content\Parameter\ContentParameter;
-use Nemundo\User\Type\UserSessionType;
+use Nemundo\User\Session\UserSession;
 use Nemundo\Core\Http\Url\UrlReferer;
 
 class UserFavoriteDeleteSite extends AbstractDeleteIconSite
