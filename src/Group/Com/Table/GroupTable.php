@@ -5,7 +5,7 @@ namespace Nemundo\Process\Group\Com\Table;
 
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Html\Table\Th;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
@@ -27,7 +27,7 @@ class GroupTable extends AdminClickableTable
     public function getContent()
     {
 
-        $header = new TableHeader($this);
+        $header = new AdminTableHeader($this);
 
         $cell = new Th($header);
         $cell->content[LanguageCode::EN] = 'Group';

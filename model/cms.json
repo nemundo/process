@@ -2,7 +2,7 @@
     "app": "Cms",
     "name": "cms",
     "namespace": "Nemundo\\Process\\Cms",
-    "is_deleted": false,
+    "is_deleted": true,
     "model": [
         {
             "template": "default",

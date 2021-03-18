@@ -67,10 +67,6 @@ class SubjectChangeProcessStatus extends AbstractProcessStatus
     public function getMessage()
     {
 
-        //$this->typeLabel[LanguageCode::EN] = 'Subject Change';
-        //$this->typeLabel[LanguageCode::DE] = 'Betreff Ändern';
-
-        //$subjectNew =  (new BoldText())->getBold((new TemplateTextReader())->getRowById($this->dataId)->text);
         $from =  (new BoldText())->getBold((new TemplateTextLogReader())->getRowById($this->dataId)->textFrom);
         $to =  (new BoldText())->getBold((new TemplateTextLogReader())->getRowById($this->dataId)->textTo);
 

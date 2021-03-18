@@ -7,7 +7,7 @@ namespace Nemundo\Process\App\Task\Site;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\Html\Listing\UnorderedList;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Db\Sql\Field\CountField;
 use Nemundo\Db\Sql\Order\SortOrder;
@@ -57,7 +57,7 @@ class TaskIndexSite extends AbstractSite
 
         $table = new AdminClickableTable($page);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
 
         $header->addText($taskReader->model->source->label);
         $header->addText('Source Type');

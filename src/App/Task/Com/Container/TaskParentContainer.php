@@ -7,7 +7,7 @@ use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\Header\UpDownSortingHyperlink;
 use Nemundo\Admin\Parameter\SortingParameter;
 use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Package\FontAwesome\Icon\CheckIcon;
@@ -74,7 +74,7 @@ class TaskParentContainer extends AbstractParentContainer
 
         $table = new AdminClickableTable($this);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addEmpty();
 
         $sorting = new UpDownSortingHyperlink($header);

@@ -6,7 +6,7 @@ namespace Nemundo\Process\Search\Site;
 
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\FormBuilder\SearchForm;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
@@ -52,7 +52,7 @@ class SearchWordSite extends AbstractSite
             $reader->filter->andEqual($reader->model->contentTypeId, $parameter->getValue());
         }
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText($reader->model->word->label);
         $header->addText($reader->model->contentType->label);
 

@@ -89,6 +89,7 @@ class WorkflowOrmModel extends AbstractOrmModel
         $this->active->variableName = 'active';
         $this->active->createModelProperty = false;
         $this->active->isEditable = false;
+        //$this->active->defaultValue = false;  // new
 
         $this->number = new NumberOrmType($this);
         $this->number->label = 'Number';

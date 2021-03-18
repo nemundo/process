@@ -8,7 +8,7 @@ use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Com\FormBuilder\SearchForm;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Html\Formatting\Bold;
@@ -16,6 +16,7 @@ use Nemundo\Html\Table\Th;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
+use Nemundo\Package\Bootstrap\Layout\Grid\BootstrapRow;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Group\Com\Form\GroupUserForm;
 use Nemundo\Process\Group\Com\GroupContentTypeTrait;
@@ -56,7 +57,7 @@ class GroupTypeAdmin extends AbstractActionPanel
 
             $form = new SearchForm($layout->col1);
 
-            $formRow = new BootstrapFormRow($form);
+            $formRow = new BootstrapRow($form);
 
             $groupType = new BootstrapListBox($formRow);
             $groupType->searchMode = true;
@@ -111,7 +112,7 @@ class GroupTypeAdmin extends AbstractActionPanel
 
                 $table = new AdminTable($layout->col2);
 
-                $header = new TableHeader($table);
+                $header = new AdminTableHeader($table);
 
                 $th = new Th($header);
                 $th->content[LanguageCode::EN] = 'User';

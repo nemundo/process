@@ -67,13 +67,4 @@ class SourceAddContentType extends AbstractSourceContentType
 
     }
 
-
-    /*
-    public function getMessage()
-    {
-
-        return $this->getSubject();
-
-    }*/
-
 }

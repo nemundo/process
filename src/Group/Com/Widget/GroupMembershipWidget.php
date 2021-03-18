@@ -6,7 +6,7 @@ namespace Nemundo\Process\Group\Com\Widget;
 
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Widget\AbstractAdminWidget;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Process\Template\Content\User\UserContentType;
 use Nemundo\User\Session\UserSession;
@@ -25,7 +25,7 @@ class GroupMembershipWidget extends AbstractAdminWidget
 
         $table = new AdminTable($this);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText('Group');
         $header->addText('Type');
 

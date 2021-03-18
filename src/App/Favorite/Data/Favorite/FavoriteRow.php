@@ -27,7 +27,7 @@ public $contentId;
 public $content;
 
 /**
-* @var int
+* @var string
 */
 public $userId;
 
@@ -49,7 +49,7 @@ $this->contentId = intval($this->getModelValue($model->contentId));
 if ($model->content !== null) {
 $this->loadNemundoProcessContentDataContentContentcontentRow($model->content);
 }
-$this->userId = intval($this->getModelValue($model->userId));
+$this->userId = $this->getModelValue($model->userId);
 if ($model->user !== null) {
 $this->loadNemundoUserDataUserUseruserRow($model->user);
 }

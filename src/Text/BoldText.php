@@ -15,7 +15,7 @@ class BoldText extends AbstractBase
 
         $bold = new Bold();
         $bold->content = $text;
-        return $bold->getContent();
+        return $bold->getBodyContent();
 
     }
 

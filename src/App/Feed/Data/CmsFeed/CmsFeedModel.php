@@ -29,10 +29,6 @@ $this->id->fieldName = "id";
 $this->id->aliasFieldName = "feed_cms_feed_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
-$this->id->visible->form = false;
-$this->id->visible->table = false;
-$this->id->visible->view = false;
-$this->id->visible->form = false;
 
 $this->feedId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->feedId->tableName = "feed_cms_feed";

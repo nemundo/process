@@ -5,7 +5,7 @@ namespace Nemundo\Process\App\Task\Content;
 
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Db\Filter\Filter;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndexReader;
@@ -48,7 +48,7 @@ class TaskWidgetContentView extends AbstractContentView
 
         $table = new AdminClickableTable($this);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addEmpty();
         //$header->addText($taskReader->model->taskType->label);
         $header->addText($taskReader->model->subject->label);

@@ -71,8 +71,6 @@ trait TaskIndexTrait
                     $data->subject = $this->getSubject();
                     $data->assignmentId = $this->getAssignmentId();
                     $data->deadline = $this->getDeadline();
-                    //$data->message = $message;
-                    // nicht überschreiben !!!
                     $data->userId = $this->getCreatedUserId();
                     $data->dateTime = $this->getCreatedDateTime();
                     $data->closed = $this->isTaskClosed();
@@ -85,8 +83,6 @@ trait TaskIndexTrait
             }
 
         }
-
-        // update all content id (ohne sourceId)
 
         $delete = new TaskIndexDelete();
         $delete->filter->andEqual($delete->model->contentId, $this->getContentId());

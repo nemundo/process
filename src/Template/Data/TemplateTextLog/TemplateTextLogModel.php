@@ -29,10 +29,6 @@ $this->id->fieldName = "id";
 $this->id->aliasFieldName = "process_template_text_log_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
-$this->id->visible->form = false;
-$this->id->visible->table = false;
-$this->id->visible->view = false;
-$this->id->visible->form = false;
 
 $this->textFrom = new \Nemundo\Model\Type\Text\TextType($this);
 $this->textFrom->tableName = "process_template_text_log";

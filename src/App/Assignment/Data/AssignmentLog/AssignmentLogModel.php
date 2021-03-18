@@ -29,10 +29,6 @@ $this->id->fieldName = "id";
 $this->id->aliasFieldName = "assignment_assignment_log_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
-$this->id->visible->form = false;
-$this->id->visible->table = false;
-$this->id->visible->view = false;
-$this->id->visible->form = false;
 
 $this->assignmentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->assignmentId->tableName = "assignment_assignment_log";

@@ -19,10 +19,6 @@ $this->id->fieldName = "id";
 $this->id->aliasFieldName = "weblog_weblog_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
-$this->id->visible->form = false;
-$this->id->visible->table = false;
-$this->id->visible->view = false;
-$this->id->visible->form = false;
 
 }
 }

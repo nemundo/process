@@ -6,7 +6,7 @@ namespace Nemundo\Process\App\Notification\Site;
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\FormBuilder\SearchForm;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
@@ -65,7 +65,7 @@ class NotificationAdminSite extends AbstractSite
 
         $table = new AdminClickableTable($page);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText($notificationReader->model->archive->label);
         $header->addText($notificationReader->model->category->label);
         $header->addText('Type');

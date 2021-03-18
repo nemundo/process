@@ -44,10 +44,6 @@ $this->id->fieldName = "id";
 $this->id->aliasFieldName = "process_content_tree_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
-$this->id->visible->form = false;
-$this->id->visible->table = false;
-$this->id->visible->view = false;
-$this->id->visible->form = false;
 
 $this->childId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->childId->tableName = "process_content_tree";

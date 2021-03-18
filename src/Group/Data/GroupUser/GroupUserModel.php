@@ -17,7 +17,7 @@ public $groupId;
 public $group;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
 */
 public $userId;
 
@@ -39,10 +39,6 @@ $this->id->fieldName = "id";
 $this->id->aliasFieldName = "process_group_user_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
-$this->id->visible->form = false;
-$this->id->visible->table = false;
-$this->id->visible->view = false;
-$this->id->visible->form = false;
 
 $this->groupId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->groupId->tableName = "process_group_user";
@@ -51,7 +47,7 @@ $this->groupId->aliasFieldName = "process_group_user_group";
 $this->groupId->label = "Group";
 $this->groupId->allowNullValue = false;
 
-$this->userId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
+$this->userId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
 $this->userId->tableName = "process_group_user";
 $this->userId->fieldName = "user";
 $this->userId->aliasFieldName = "process_group_user_user";

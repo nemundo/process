@@ -6,7 +6,7 @@ namespace Nemundo\Process\App\Task\Widget;
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Widget\AdminWidget;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Db\Filter\Filter;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
@@ -55,7 +55,7 @@ class TaskWidget extends AdminWidget
 
         $table = new AdminClickableTable($this);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addEmpty();
         //$header->addText($taskReader->model->taskType->label);
         $header->addText($taskReader->model->subject->label);

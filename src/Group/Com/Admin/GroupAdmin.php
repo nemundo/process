@@ -8,7 +8,7 @@ use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Com\FormBuilder\SearchForm;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Html\Formatting\Bold;
@@ -139,7 +139,7 @@ class GroupAdmin extends AbstractActionPanel
 
             $table = new AdminClickableTable($layout->col1);
 
-            $header = new TableHeader($table);
+            $header = new AdminTableHeader($table);
             $header->addText($groupReader->model->active->label);
             $header->addText($groupReader->model->id->label);
 
@@ -206,7 +206,7 @@ class GroupAdmin extends AbstractActionPanel
 
                 $table = new AdminTable($layout->col2);
 
-                $header = new TableHeader($table);
+                $header = new AdminTableHeader($table);
 
                 $th = new Th($header);
                 $th->content[LanguageCode::EN] = 'User';

@@ -9,7 +9,7 @@ use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\Content\Data\ContentCollection;
 use Nemundo\Process\Content\Script\ContentCheckScript;
 use Nemundo\Process\Content\Script\ContentUpdateScript;
-use Nemundo\Project\Install\AbstractInstall;
+use Nemundo\App\Application\Type\Install\AbstractInstall;
 
 class ContentInstall extends AbstractInstall
 {

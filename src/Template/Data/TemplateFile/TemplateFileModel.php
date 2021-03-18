@@ -39,10 +39,6 @@ $this->id->fieldName = "id";
 $this->id->aliasFieldName = "process_template_file_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
-$this->id->visible->form = false;
-$this->id->visible->table = false;
-$this->id->visible->view = false;
-$this->id->visible->form = false;
 
 
 $this->file = new \Nemundo\Model\Type\File\RedirectFilenameType($this);
@@ -58,7 +54,7 @@ $this->contentId->tableName = "process_template_file";
 $this->contentId->fieldName = "content";
 $this->contentId->aliasFieldName = "process_template_file_content";
 $this->contentId->label = "Content";
-$this->contentId->allowNullValue = false;
+$this->contentId->allowNullValue = true;
 
 $this->text = new \Nemundo\Model\Type\Text\LargeTextType($this);
 $this->text->tableName = "process_template_file";

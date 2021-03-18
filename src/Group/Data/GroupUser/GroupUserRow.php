@@ -27,7 +27,7 @@ public $groupId;
 public $group;
 
 /**
-* @var int
+* @var string
 */
 public $userId;
 
@@ -44,7 +44,7 @@ $this->groupId = intval($this->getModelValue($model->groupId));
 if ($model->group !== null) {
 $this->loadNemundoProcessGroupDataGroupGroupgroupRow($model->group);
 }
-$this->userId = intval($this->getModelValue($model->userId));
+$this->userId = $this->getModelValue($model->userId);
 if ($model->user !== null) {
 $this->loadNemundoUserDataUserUseruserRow($model->user);
 }

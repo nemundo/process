@@ -5,7 +5,7 @@ namespace Nemundo\Process\Template\Content\File;
 
 
 use Nemundo\Admin\Com\Table\AdminTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Model\Join\ModelJoin;
 use Nemundo\Process\Content\Com\Container\AbstractParentContainer;
@@ -30,7 +30,7 @@ class FileParentContainer extends AbstractParentContainer
 
         $table = new AdminTable($this);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText('Dokument');
         $header->addText('Ersteller');
 

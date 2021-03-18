@@ -47,7 +47,7 @@ public $assignment;
 public $deadline;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
 */
 public $userId;
 
@@ -99,17 +99,13 @@ $this->id->fieldName = "id";
 $this->id->aliasFieldName = "process_task_index_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
-$this->id->visible->form = false;
-$this->id->visible->table = false;
-$this->id->visible->view = false;
-$this->id->visible->form = false;
 
 $this->sourceId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->sourceId->tableName = "process_task_index";
 $this->sourceId->fieldName = "source";
 $this->sourceId->aliasFieldName = "process_task_index_source";
 $this->sourceId->label = "Source";
-$this->sourceId->allowNullValue = false;
+$this->sourceId->allowNullValue = true;
 
 $this->contentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->contentId->tableName = "process_task_index";
@@ -138,9 +134,9 @@ $this->deadline->tableName = "process_task_index";
 $this->deadline->fieldName = "deadline";
 $this->deadline->aliasFieldName = "process_task_index_deadline";
 $this->deadline->label = "Erledigen bis";
-$this->deadline->allowNullValue = false;
+$this->deadline->allowNullValue = true;
 
-$this->userId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
+$this->userId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
 $this->userId->tableName = "process_task_index";
 $this->userId->fieldName = "user";
 $this->userId->aliasFieldName = "process_task_index_user";

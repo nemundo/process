@@ -5,7 +5,7 @@ namespace Nemundo\Process\Content\Com\Table;
 
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Db\Filter\Filter;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
@@ -56,7 +56,7 @@ class ContentLogTable extends AbstractHtmlContainer
 
         $table = new AdminClickableTable($this);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText('Log');
 
         if ($this->showView) {

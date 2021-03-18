@@ -50,14 +50,15 @@ abstract class AbstractContentModel extends AbstractModel
         $this->active->fieldName = 'active';
         $this->active->aliasFieldName = $this->tableName . '_active';
         $this->active->tableName = $this->tableName;
-        $this->active->defaultValue = true;
+        //$this->active
+        //$this->active->defaultValue = true;
 
         $this->contentId = new ExternalIdType($this);
         $this->contentId->tableName = $this->tableName;
         $this->contentId->fieldName = 'content';
         $this->contentId->aliasFieldName = $this->tableName . '_content';
         $this->contentId->label = 'Content';
-        $this->contentId->allowNullValue = false;
+        $this->contentId->allowNullValue = true;
 
         $index = new ModelIndex($this);
         $index->indexName = 'content';

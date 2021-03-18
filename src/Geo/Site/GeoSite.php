@@ -4,7 +4,7 @@ namespace Nemundo\Process\Geo\Site;
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Model\Join\ModelJoin;
@@ -30,7 +30,7 @@ class GeoSite extends AbstractSite
 
         $table = new AdminClickableTable($page);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText('Content Type');
         $header->addText('Place');
         $header->addText('Coordinate');

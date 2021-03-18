@@ -24,10 +24,6 @@ $this->id->fieldName = "id";
 $this->id->aliasFieldName = "process_template_deadline_change_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
-$this->id->visible->form = false;
-$this->id->visible->table = false;
-$this->id->visible->view = false;
-$this->id->visible->form = false;
 
 $this->deadline = new \Nemundo\Model\Type\DateTime\DateType($this);
 $this->deadline->tableName = "process_template_deadline_change";

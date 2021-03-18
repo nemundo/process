@@ -28,7 +28,7 @@ class FileListContentView extends AbstractContentView
 
         $table = new AdminTable($this);
 
-        /*$header = new TableHeader($table);
+        /*$header = new AdminTableHeader($table);
         $header->addText('File');
         $header->addEmpty();*/
 

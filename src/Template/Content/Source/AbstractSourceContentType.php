@@ -29,7 +29,7 @@ abstract class AbstractSourceContentType extends AbstractTreeContentType
 
         $hyerplink = new SiteHyperlink();
         $hyerplink->site = $this->getDataRow()->source->getContentType()->getSubjectViewSite();
-        return $hyerplink->getContent();
+        return $hyerplink->getBodyContent();
 
     }
 

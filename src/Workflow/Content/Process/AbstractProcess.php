@@ -30,7 +30,7 @@ use Nemundo\Process\Workflow\Content\Status\AbstractProcessStatus;
 use Nemundo\Process\Workflow\Content\View\AbstractProcessView;
 use Nemundo\Process\Workflow\Content\View\ProcessView;
 use Nemundo\Process\Workflow\Model\AbstractWorkflowModel;
-use Nemundo\ToDo\Data\ToDo\ToDoRow;
+use Schleuniger\App\Aufgabe\Data\Aufgabe\AufgabeRow;
 
 
 abstract class AbstractProcess extends AbstractSequenceContentType
@@ -167,7 +167,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
         $this->onDataRow();
 
-        /** @var ToDoRow $dataRow */
+        /** @var AufgabeRow $dataRow */
         $dataRow = $this->getDataRow();
         $this->addSearchWord($dataRow->workflowNumber);
 
@@ -219,7 +219,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
 
 
     /**
-     * @return \Nemundo\Model\Row\AbstractModelDataRow|ToDoRow
+     * @return \Nemundo\Model\Row\AbstractModelDataRow|AufgabeRow
      */
     public function getDataRow()
     {
@@ -230,7 +230,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
     public function getSubject()
     {
 
-        /** @var ToDoRow $dataRow */
+        /** @var AufgabeRow $dataRow */
         $dataRow = $this->getDataRow();
 
         $subject = $dataRow->workflowNumber . ' ' . $dataRow->subject;

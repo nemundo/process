@@ -5,7 +5,7 @@ namespace Nemundo\Process\Search\Site;
 
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
@@ -50,11 +50,7 @@ class SearchSite extends AbstractSite
     public function loadContent()
     {
 
-        // auslagern project repo
-
         $page = (new DefaultTemplateFactory())->getDefaultTemplate();
-
-        //new ContentSearchForm($page);
 
         $queryParameter = (new SearchQueryParameter());
 
@@ -87,7 +83,7 @@ class SearchSite extends AbstractSite
 
             $table = new AdminClickableTable($layout->col1);
 
-            $header = new TableHeader($table);
+            $header = new AdminTableHeader($table);
 
             $th = new Th($header);
             $th->content[LanguageCode::EN] = 'Subject';

@@ -5,7 +5,7 @@ namespace Nemundo\Process\App\Favorite\Com;
 
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Html\Container\AbstractHtmlContainer;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Favorite\Data\Favorite\FavoriteReader;
@@ -21,7 +21,7 @@ class FavoriteContainer extends AbstractHtmlContainer
 
         $table = new AdminClickableTable($this);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText('Content Type');
         $header->addText('Subject');
         $header->addEmpty();

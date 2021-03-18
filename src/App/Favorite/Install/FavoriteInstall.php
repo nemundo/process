@@ -6,7 +6,7 @@ use Nemundo\App\Script\Type\AbstractScript;
 use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\App\Favorite\Content\FavoriteContentType;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
-use Nemundo\Project\Install\AbstractInstall;
+use Nemundo\App\Application\Type\Install\AbstractInstall;
 use Nemundo\Process\App\Favorite\Data\FavoriteCollection;
 
 class FavoriteInstall extends AbstractInstall

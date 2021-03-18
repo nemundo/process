@@ -6,7 +6,7 @@ namespace Nemundo\Process\Group\Site;
 
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\FormBuilder\SearchForm;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
@@ -68,7 +68,7 @@ class UserGroupSite extends AbstractSite
 
             $table = new AdminTable($layout->col2);
 
-            $header = new TableHeader($table);
+            $header = new AdminTableHeader($table);
             $header->addText($groupUserReader->model->group->label);
             $header->addText($groupUserReader->model->group->groupType->label);
 

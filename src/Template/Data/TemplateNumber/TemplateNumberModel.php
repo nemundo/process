@@ -24,10 +24,6 @@ $this->id->fieldName = "id";
 $this->id->aliasFieldName = "process_template_number_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
-$this->id->visible->form = false;
-$this->id->visible->table = false;
-$this->id->visible->view = false;
-$this->id->visible->form = false;
 
 $this->number = new \Nemundo\Model\Type\Number\NumberType($this);
 $this->number->tableName = "process_template_number";

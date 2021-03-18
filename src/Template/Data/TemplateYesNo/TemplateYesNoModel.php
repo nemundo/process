@@ -24,10 +24,6 @@ $this->id->fieldName = "id";
 $this->id->aliasFieldName = "process_template_yes_no_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
-$this->id->visible->form = false;
-$this->id->visible->table = false;
-$this->id->visible->view = false;
-$this->id->visible->form = false;
 
 $this->yesNo = new \Nemundo\Model\Type\Number\YesNoType($this);
 $this->yesNo->tableName = "process_template_yes_no";

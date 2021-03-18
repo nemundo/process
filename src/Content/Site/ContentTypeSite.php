@@ -7,7 +7,7 @@ namespace Nemundo\Process\Content\Site;
 use Nemundo\Admin\Com\Navigation\AdminNavigation;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Core\Type\Number\Number;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
@@ -38,7 +38,7 @@ class ContentTypeSite extends AbstractSite
 
         $table = new AdminClickableTable($page);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText('Type');
         $header->addText('Class');
         $header->addText('Type Id');

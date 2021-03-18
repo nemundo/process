@@ -7,7 +7,7 @@ class UserStreamModel extends \Nemundo\Model\Definition\Model\AbstractModel {
 public $id;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
 */
 public $userId;
 
@@ -39,12 +39,8 @@ $this->id->fieldName = "id";
 $this->id->aliasFieldName = "stream_user_stream_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
-$this->id->visible->form = false;
-$this->id->visible->table = false;
-$this->id->visible->view = false;
-$this->id->visible->form = false;
 
-$this->userId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
+$this->userId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
 $this->userId->tableName = "stream_user_stream";
 $this->userId->fieldName = "user";
 $this->userId->aliasFieldName = "stream_user_stream_user";

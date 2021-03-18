@@ -5,7 +5,7 @@ namespace Nemundo\Process\Group\Com\Table;
 
 
 use Nemundo\Admin\Com\Table\AdminTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Html\Table\Th;
@@ -21,7 +21,7 @@ class GroupUserTable extends AdminTable
     public function getContent()
     {
 
-        $header = new TableHeader($this);
+        $header = new AdminTableHeader($this);
         //$header->addText('User');
 
         $th = new Th($header);

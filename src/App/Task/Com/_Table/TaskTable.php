@@ -4,7 +4,7 @@
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\Html\Listing\UnorderedList;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Db\Sql\Field\CountField;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\App\Task\Data\TaskIndex\TaskIndexPaginationReader;
@@ -42,7 +42,7 @@ class TaskTable extends AdminClickableTable
 
         $taskReader->paginationLimit = ProcessConfig::PAGINATION_LIMIT;
 
-        $header = new TableHeader($this);
+        $header = new AdminTableHeader($this);
         $header->addText($taskReader->model->subject->label);
         $header->addText($taskReader->model->taskType->label);
 

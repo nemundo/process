@@ -7,7 +7,7 @@ namespace Nemundo\Process\Group\Com\Admin;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
@@ -54,7 +54,7 @@ class GroupUserAdmin extends AbstractActionPanel
 
                 $table = new AdminTable($this);
 
-                $header = new TableHeader($table);
+                $header = new AdminTableHeader($table);
                 $header->addText('User');
                 $header->addEmpty();
 

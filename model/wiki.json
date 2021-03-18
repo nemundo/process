@@ -2,7 +2,7 @@
     "app": "Wiki",
     "name": "wiki",
     "namespace": "Nemundo\\Process\\App\\Wiki",
-    "is_deleted": false,
+    "is_deleted": true,
     "model": [
         {
             "template": "default",

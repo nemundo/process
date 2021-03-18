@@ -6,7 +6,7 @@ namespace Nemundo\Process\Geo\Install;
 
 use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\Geo\Data\GeoCollection;
-use Nemundo\Project\Install\AbstractInstall;
+use Nemundo\App\Application\Type\Install\AbstractInstall;
 
 class GeoInstall extends AbstractInstall
 {

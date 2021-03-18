@@ -7,7 +7,7 @@ use Nemundo\Admin\Com\Button\AdminIconSiteButton;
 use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Widget\AdminWidget;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Type\Text\Html;
 use Nemundo\Db\Sql\Order\SortOrder;
@@ -48,7 +48,7 @@ class NotificationWidget extends AdminWidget
 
         $table = new AdminClickableTable($this);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
 
         $th = new Th($header);
         $th->content[LanguageCode::EN] = 'Subject';
@@ -123,7 +123,7 @@ class NotificationWidget extends AdminWidget
 
         $table = new AdminClickableTable($this);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
 
         $th = new Th($header);
         $th->content[LanguageCode::EN] = 'Subject';

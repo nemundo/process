@@ -5,7 +5,7 @@ namespace Nemundo\Process\App\Calendar\Com\Container;
 
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Html\Block\Div;
 use Nemundo\Html\Container\AbstractHtmlContainer;
@@ -33,7 +33,7 @@ class CalendarContainer extends AbstractHtmlContainer
 
         $div = new Div($page);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText($reader->model->date->label);
         $header->addText($reader->model->title->label);
         $header->addText('View');

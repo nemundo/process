@@ -5,7 +5,7 @@ namespace Nemundo\Process\App\Notification\Com\Table;
 
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Html\Container\AbstractHtmlContainer;
@@ -27,7 +27,7 @@ class UserNotificationTable extends AbstractHtmlContainer
 
         $table = new AdminClickableTable($this);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
 
         $th = new Th($header);
         $th->content[LanguageCode::EN] = 'Subject';

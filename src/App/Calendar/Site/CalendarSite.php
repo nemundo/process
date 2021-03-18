@@ -4,7 +4,7 @@ namespace Nemundo\Process\App\Calendar\Site;
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\FormBuilder\SearchForm;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Core\Type\DateTime\Date;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Block\Div;
@@ -60,7 +60,7 @@ class CalendarSite extends AbstractSite
 
         $div = new Div($page);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText($reader->model->date->label);
         $header->addText($reader->model->title->label);
         $header->addText('View');

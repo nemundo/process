@@ -2,5 +2,5 @@
     "app": "Map",
     "name": "map",
     "namespace": "Nemundo\\Process\\App\\Map",
-    "is_deleted": false
+    "is_deleted": true
 }

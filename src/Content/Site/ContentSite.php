@@ -11,7 +11,7 @@ use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\App\Application\Com\ApplicationListBox;
 use Nemundo\Com\FormBuilder\SearchForm;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Core\Type\Number\Number;
 use Nemundo\Db\Filter\Filter;
 use Nemundo\Db\Sql\Order\SortOrder;
@@ -177,7 +177,7 @@ class ContentSite extends AbstractSite
 
         $table = new AdminClickableTable($page);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText($contentReader->model->contentType->application->label);
         $header->addText('Content Id');
         $header->addText('Type');

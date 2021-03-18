@@ -11,7 +11,7 @@ use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Admin\Com\Title\AdminTitle;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
@@ -113,7 +113,7 @@ class ContentItemSite extends AbstractSite
 
             $table = new AdminClickableTable($page);
 
-            $header = new TableHeader($table);
+            $header = new AdminTableHeader($table);
             $header->addText('Content Type');
             $header->addText('Subject (Data)');
             $header->addText('Subject (Type)');
@@ -208,7 +208,7 @@ class ContentItemSite extends AbstractSite
 
             $table = new AdminTable($page);
 
-            $header = new TableHeader($table);
+            $header = new AdminTableHeader($table);
             $header->addText('Search Word');
 
             $reader = new SearchIndexReader();

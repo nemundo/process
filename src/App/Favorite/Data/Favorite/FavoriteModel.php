@@ -17,7 +17,7 @@ public $contentId;
 public $content;
 
 /**
-* @var \Nemundo\Model\Type\External\Id\ExternalIdType
+* @var \Nemundo\Model\Type\External\Id\ExternalUniqueIdType
 */
 public $userId;
 
@@ -44,10 +44,6 @@ $this->id->fieldName = "id";
 $this->id->aliasFieldName = "favorite_favorite_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
-$this->id->visible->form = false;
-$this->id->visible->table = false;
-$this->id->visible->view = false;
-$this->id->visible->form = false;
 
 $this->contentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->contentId->tableName = "favorite_favorite";
@@ -56,7 +52,7 @@ $this->contentId->aliasFieldName = "favorite_favorite_content";
 $this->contentId->label = "Content";
 $this->contentId->allowNullValue = false;
 
-$this->userId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
+$this->userId = new \Nemundo\Model\Type\External\Id\ExternalUniqueIdType($this);
 $this->userId->tableName = "favorite_favorite";
 $this->userId->fieldName = "user";
 $this->userId->aliasFieldName = "favorite_favorite_user";

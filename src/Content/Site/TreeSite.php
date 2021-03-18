@@ -5,7 +5,7 @@ namespace Nemundo\Process\Content\Site;
 
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
@@ -32,7 +32,7 @@ class TreeSite extends AbstractSite
 
         $table = new AdminClickableTable($page);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText('Parent');
         $header->addText('Parent Subject');
         $header->addText('Parent Id');

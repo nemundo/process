@@ -29,10 +29,6 @@ $this->id->fieldName = "id";
 $this->id->aliasFieldName = "feed_feed_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
-$this->id->visible->form = false;
-$this->id->visible->table = false;
-$this->id->visible->view = false;
-$this->id->visible->form = false;
 
 $this->feedUrl = new \Nemundo\Model\Type\Text\TextType($this);
 $this->feedUrl->tableName = "feed_feed";

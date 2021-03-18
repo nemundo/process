@@ -6,7 +6,7 @@ namespace Nemundo\Process\Widget;
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Widget\AdminWidget;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\Data\Content\ContentReader;
@@ -30,7 +30,7 @@ class ActivityWidget extends AdminWidget
 
         $table = new AdminClickableTable($this);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText('Source');
         $header->addText('Subject');
         $header->addText('Type');

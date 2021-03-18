@@ -54,10 +54,6 @@ $this->id->fieldName = "id";
 $this->id->aliasFieldName = "process_template_image_index_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
-$this->id->visible->form = false;
-$this->id->visible->table = false;
-$this->id->visible->view = false;
-$this->id->visible->form = false;
 
 $this->parentId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->parentId->tableName = "process_template_image_index";

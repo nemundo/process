@@ -5,7 +5,7 @@ namespace Nemundo\Process\Relation\Com;
 
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Relation\Data\Relation\RelationReader;
 
@@ -17,7 +17,7 @@ class RelationTable extends AdminClickableTable
     public function getContent()
     {
 
-        $header=new TableHeader($this);
+        $header=new AdminTableHeader($this);
         $header->addText('Relation');
 
         $reader = new RelationReader();

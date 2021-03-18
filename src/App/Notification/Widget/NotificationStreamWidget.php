@@ -5,7 +5,7 @@ namespace Nemundo\Process\App\Notification\Widget;
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Widget\AdminWidget;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Html\Table\Th;
@@ -36,7 +36,7 @@ class NotificationStreamWidget extends AdminWidget
 
         $table = new AdminClickableTable($this);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
 
         $th = new Th($header);
         $th->content[LanguageCode::EN] = 'Subject';
@@ -95,7 +95,7 @@ class NotificationStreamWidget extends AdminWidget
 
         $table = new AdminClickableTable($this);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
 
         $th = new Th($header);
         $th->content[LanguageCode::EN] = 'Subject';

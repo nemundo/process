@@ -6,7 +6,7 @@ namespace Nemundo\Process\Relation\Install;
 
 use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\Relation\Data\RelationCollection;
-use Nemundo\Project\Install\AbstractInstall;
+use Nemundo\App\Application\Type\Install\AbstractInstall;
 
 class RelationInstall extends AbstractInstall
 {

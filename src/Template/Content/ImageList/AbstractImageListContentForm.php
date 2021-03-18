@@ -5,7 +5,7 @@ namespace Nemundo\Process\Template\Content\ImageList;
 
 
 use Nemundo\Admin\Com\Table\AdminTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Html\Form\Input\AcceptFileType;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapFileUpload;
@@ -54,7 +54,7 @@ abstract class AbstractImageListContentForm extends AbstractContentForm
         $reader->model->loadContent();
         $reader->filter->andEqual($reader->model->parentId, $contentId);
 
-        $header = new TableHeader($this->table);
+        $header = new AdminTableHeader($this->table);
         $header->addText('Image');
         $header->addEmpty();
 

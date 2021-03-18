@@ -5,7 +5,7 @@ namespace Nemundo\Process\Search\Site;
 
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Core\Language\Translation;
@@ -127,7 +127,7 @@ class SearchOldSite extends AbstractSite
 
             $table = new AdminClickableTable($layout->col1);
 
-            $header = new TableHeader($table);
+            $header = new AdminTableHeader($table);
 
             /*$th = new Th($header);
             $th->content[LanguageCode::EN] = 'Source';

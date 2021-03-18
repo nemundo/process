@@ -9,7 +9,7 @@ use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Com\Html\Listing\UnorderedList;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
@@ -100,7 +100,7 @@ class FileSite extends AbstractSite
 
         $table = new AdminClickableTable($layout->col1);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addEmpty();
 
         $header->addText('File');

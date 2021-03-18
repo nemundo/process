@@ -2,7 +2,7 @@
     "app": "Video",
     "name": "video",
     "namespace": "Nemundo\\Process\\App\\Video",
-    "is_deleted": false,
+    "is_deleted": true,
     "model": [
         {
             "template": "default",

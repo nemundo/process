@@ -6,7 +6,7 @@ namespace Nemundo\Process\App\Task\Com\Container;
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\Html\Listing\UnorderedList;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Db\Sql\Field\CountField;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Html\Container\AbstractHtmlContainer;
@@ -49,7 +49,7 @@ class TaskContainer extends AbstractHtmlContainer
 
         $table = new AdminClickableTable($this);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addEmpty();
         $header->addText($taskReader->model->subject->label);
         //$header->addText($taskReader->model->taskType->label);

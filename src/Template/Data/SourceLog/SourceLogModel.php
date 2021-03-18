@@ -29,10 +29,6 @@ $this->id->fieldName = "id";
 $this->id->aliasFieldName = "process_template_source_log_id";
 $this->id->label = "Id";
 $this->id->allowNullValue = false;
-$this->id->visible->form = false;
-$this->id->visible->table = false;
-$this->id->visible->view = false;
-$this->id->visible->form = false;
 
 $this->sourceId = new \Nemundo\Model\Type\External\Id\ExternalIdType($this);
 $this->sourceId->tableName = "process_template_source_log";

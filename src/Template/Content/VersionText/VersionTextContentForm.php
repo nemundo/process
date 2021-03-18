@@ -5,7 +5,7 @@ namespace Nemundo\Process\Template\Content\VersionText;
 
 
 use Nemundo\Admin\Com\Table\AdminTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapTextBox;
@@ -48,7 +48,7 @@ class VersionTextContentForm extends AbstractContentForm
 
         $table = new AdminTable($this);
 
-        $header=new TableHeader($table);
+        $header=new AdminTableHeader($table);
         $header->addText('Text');
         $header->addText('Version');
 

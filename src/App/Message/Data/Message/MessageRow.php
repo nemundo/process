@@ -27,7 +27,7 @@ public $subject;
 public $message;
 
 /**
-* @var int
+* @var string
 */
 public $toId;
 
@@ -42,7 +42,7 @@ $this->row = $row;
 $this->id = $this->getModelValue($model->id);
 $this->subject = $this->getModelValue($model->subject);
 $this->message = $this->getModelValue($model->message);
-$this->toId = intval($this->getModelValue($model->toId));
+$this->toId = $this->getModelValue($model->toId);
 if ($model->to !== null) {
 $this->loadNemundoUserDataUserUsertoRow($model->to);
 }

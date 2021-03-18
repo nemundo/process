@@ -9,7 +9,7 @@ use Nemundo\Process\Group\Data\GroupCollection;
 use Nemundo\Process\Group\Setup\GroupSetup;
 use Nemundo\Process\Group\Type\GroupContentType;
 use Nemundo\Process\Group\Type\UserGroupType;
-use Nemundo\Project\Install\AbstractInstall;
+use Nemundo\App\Application\Type\Install\AbstractInstall;
 
 
 class GroupInstall extends AbstractInstall

@@ -6,7 +6,7 @@ namespace Nemundo\Process\Search\Site;
 
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Admin\Com\Table\AdminTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
@@ -48,7 +48,7 @@ class SearchLogSite extends AbstractSite
 
         $table = new AdminTable($layout->col1);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText('Search Query');
         $header->addText('Result Count');
         $header->addText('User');

@@ -2,7 +2,7 @@
     "app": "Bookmark",
     "name": "bookmark",
     "namespace": "Nemundo\\Process\\App\\Bookmark",
-    "is_deleted": false,
+    "is_deleted": true,
     "model": [
         {
             "template": "default",

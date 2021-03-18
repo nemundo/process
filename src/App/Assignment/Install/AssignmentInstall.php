@@ -8,7 +8,7 @@ use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\App\Assignment\Content\AssignmentProcessStatus;
 use Nemundo\Process\App\Assignment\Data\AssignmentCollection;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
-use Nemundo\Project\Install\AbstractInstall;
+use Nemundo\App\Application\Type\Install\AbstractInstall;
 
 
 class AssignmentInstall extends AbstractInstall

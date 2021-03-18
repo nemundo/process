@@ -8,7 +8,7 @@ use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Admin\Com\Title\AdminTitle;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Image\BootstrapResponsiveImage;
 use Nemundo\Package\Bootstrap\Layout\BootstrapTwoColumnLayout;
@@ -63,7 +63,7 @@ class ImageSite extends AbstractSite
 
         $table = new AdminClickableTable($layout->col1);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
 
         $header->addText($imageReader->model->active->label);
         $header->addText($imageReader->model->image->label);

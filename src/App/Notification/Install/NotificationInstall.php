@@ -17,7 +17,7 @@ use Nemundo\Process\App\Notification\Data\NotificationCollection;
 use Nemundo\Process\App\Notification\Script\NotificationIndexScript;
 use Nemundo\Process\App\Notification\Script\NotificationUpdateScript;
 use Nemundo\Process\Content\Setup\ContentTypeSetup;
-use Nemundo\Project\Install\AbstractInstall;
+use Nemundo\App\Application\Type\Install\AbstractInstall;
 
 class NotificationInstall extends AbstractInstall
 {

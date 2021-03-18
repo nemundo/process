@@ -6,7 +6,7 @@ use Nemundo\App\Script\Setup\ScriptSetup;
 use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Process\App\Stream\Data\StreamCollection;
 use Nemundo\Process\App\Stream\Script\StreamCleanScript;
-use Nemundo\Project\Install\AbstractInstall;
+use Nemundo\App\Application\Type\Install\AbstractInstall;
 
 class StreamInstall extends AbstractInstall
 {

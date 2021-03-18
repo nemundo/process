@@ -6,7 +6,7 @@ namespace Nemundo\Process\Template\Content\File;
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Com\Html\Listing\UnorderedList;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Package\Bootstrap\Table\BootstrapClickableTableRow;
 use Nemundo\Process\Content\View\AbstractContentList;
@@ -30,7 +30,7 @@ class FileContentList extends AbstractContentList
 
         $table = new AdminClickableTable($this);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
 
         $header->addText('File');
         $header->addText('Extension');

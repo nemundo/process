@@ -7,7 +7,7 @@ namespace Nemundo\Process\App\Notification\Install;
 use Nemundo\App\Script\Setup\ScriptSetup;
 use Nemundo\Process\App\Notification\Script\NotificationCleanScript;
 use Nemundo\Process\App\Notification\Script\NotificationTestScript;
-use Nemundo\Project\Install\AbstractInstall;
+use Nemundo\App\Application\Type\Install\AbstractInstall;
 
 class NotificationTestInstall extends AbstractInstall
 {

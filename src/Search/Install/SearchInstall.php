@@ -15,7 +15,7 @@ use Nemundo\Process\Search\Data\SearchCollection;
 use Nemundo\Process\Search\Script\SearchCleanScript;
 use Nemundo\Process\Search\Script\SearchIndexReindexingScript;
 use Nemundo\Process\Search\Script\WordCleanScript;
-use Nemundo\Project\Install\AbstractInstall;
+use Nemundo\App\Application\Type\Install\AbstractInstall;
 
 class SearchInstall extends AbstractInstall
 {

@@ -8,7 +8,7 @@ use Nemundo\Process\Content\Install\ContentTestInstall;
 use Nemundo\Process\Content\Script\ContentUpdateScript;
 use Nemundo\Process\Script\ProcessCleanScript;
 use Nemundo\Process\Script\ProcessTestScript;
-use Nemundo\Project\Install\AbstractInstall;
+use Nemundo\App\Application\Type\Install\AbstractInstall;
 
 class ProcessTestInstall extends AbstractInstall
 {

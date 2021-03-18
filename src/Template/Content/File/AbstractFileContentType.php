@@ -5,7 +5,6 @@ namespace Nemundo\Process\Template\Content\File;
 
 
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\File\FileInformation;
 use Nemundo\Core\File\Pdf\PdfFile;
 use Nemundo\Core\Language\LanguageCode;
@@ -13,7 +12,6 @@ use Nemundo\Core\Language\Translation;
 use Nemundo\Core\System\OperatingSystem;
 use Nemundo\Core\TextFile\Reader\TextFileReader;
 use Nemundo\Core\Type\File\File;
-use Nemundo\Core\Type\Text\Text;
 use Nemundo\Model\Data\Property\File\FileProperty;
 use Nemundo\Model\Parameter\FilenameParameter;
 use Nemundo\Process\App\Notification\Type\NotificationTrait;
@@ -57,6 +55,7 @@ abstract class AbstractFileContentType extends AbstractTreeContentType
         $data = new TemplateFile();
         $data->active = true;
         $data->file->fromFileProperty($this->file);
+        $data->text = '';
         $this->dataId = $data->save();
 
     }

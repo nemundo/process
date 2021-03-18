@@ -16,7 +16,6 @@ use Nemundo\Model\Type\Number\NumberType;
 use Nemundo\Model\Type\Number\YesNoType;
 use Nemundo\Model\Type\Text\TextType;
 use Nemundo\Process\Content\Data\Content\ContentExternalType;
-use Nemundo\Process\Content\Data\ContentType\ContentTypeExternalType;
 use Nemundo\Process\Group\Data\Group\GroupExternalType;
 use Nemundo\User\Data\User\UserExternalType;
 
@@ -111,7 +110,7 @@ abstract class AbstractWorkflowModel extends AbstractModel
         $this->active->fieldName = 'active';
         $this->active->aliasFieldName = $this->tableName . '_active';
         $this->active->tableName = $this->tableName;
-        $this->active->defaultValue = true;
+        $this->active->allowNullValue = true;
 
         $this->number = new NumberType($this);
         $this->number->label = 'Number';
@@ -127,6 +126,7 @@ abstract class AbstractWorkflowModel extends AbstractModel
         $this->workflowNumber->aliasFieldName = $this->tableName . '_workflow_number';
         $this->workflowNumber->tableName = $this->tableName;
         $this->workflowNumber->length = 20;
+        $this->workflowNumber->allowNullValue = true;
 
         $this->subject = new TextType($this);
         $this->subject->tableName = $this->tableName;
@@ -134,7 +134,7 @@ abstract class AbstractWorkflowModel extends AbstractModel
         $this->subject->aliasFieldName = $this->tableName . '_subject';
         $this->subject->label[LanguageCode::EN] = 'Subject';
         $this->subject->label[LanguageCode::DE] = 'Betreff';
-        $this->subject->allowNullValue = false;
+        $this->subject->allowNullValue = true;
         $this->subject->length = 255;
 
         $this->workflowClosed = new YesNoType($this);
@@ -142,14 +142,14 @@ abstract class AbstractWorkflowModel extends AbstractModel
         $this->workflowClosed->fieldName = 'workflow_closed';
         $this->workflowClosed->aliasFieldName = $this->tableName . '_workflow_closed';
         $this->workflowClosed->label = 'Workflow Closed';
-        $this->workflowClosed->allowNullValue = false;
+        $this->workflowClosed->allowNullValue = true;
 
         $this->statusId = new ExternalUniqueIdType($this);
         $this->statusId->tableName = $this->tableName;
         $this->statusId->fieldName = 'status';
         $this->statusId->aliasFieldName = $this->tableName . '_status';
         $this->statusId->label = 'Status';
-        $this->statusId->allowNullValue = false;
+        $this->statusId->allowNullValue = true;
 
         $this->deadline = new DateType($this);
         $this->deadline->tableName = $this->tableName;
@@ -157,35 +157,35 @@ abstract class AbstractWorkflowModel extends AbstractModel
         $this->deadline->aliasFieldName = $this->tableName . '_deadline';
         $this->deadline->label[LanguageCode::EN] = 'Deadline';
         $this->deadline->label[LanguageCode::DE] = 'Erledigen bis';
-        $this->deadline->allowNullValue = false;
+        $this->deadline->allowNullValue = true;
 
         $this->assignmentId = new ExternalUniqueIdType($this);
         $this->assignmentId->tableName = $this->tableName;
         $this->assignmentId->fieldName = 'assignment';
         $this->assignmentId->aliasFieldName = $this->tableName . '_assignment';
         $this->assignmentId->label = 'Zuweisung';
-        $this->assignmentId->allowNullValue = false;
+        $this->assignmentId->allowNullValue = true;
 
         $this->dateTime = new DateTimeType($this);
         $this->dateTime->tableName = $this->tableName;
         $this->dateTime->fieldName = 'date_time';
         $this->dateTime->aliasFieldName = $this->tableName . '_date_time';
         $this->dateTime->label = 'Date/Time';
-        $this->dateTime->allowNullValue = false;
+        $this->dateTime->allowNullValue = true;
 
         $this->userId = new ExternalUniqueIdType($this);
         $this->userId->tableName = $this->tableName;
         $this->userId->fieldName = 'user';
         $this->userId->aliasFieldName = $this->tableName . '_user';
         $this->userId->label = 'user';
-        $this->userId->allowNullValue = false;
+        $this->userId->allowNullValue = true;
 
         $this->contentId = new ExternalIdType($this);
         $this->contentId->tableName = $this->tableName;
         $this->contentId->fieldName = 'content';
         $this->contentId->aliasFieldName = $this->tableName . '_content';
         $this->contentId->label = 'Content';
-        $this->contentId->allowNullValue = false;
+        $this->contentId->allowNullValue = true;
 
         $index = new ModelUniqueIndex($this);
         $index->indexName = 'number';
@@ -200,15 +200,12 @@ abstract class AbstractWorkflowModel extends AbstractModel
     public function loadStatus()
     {
         if ($this->status == null) {
-            //$this->status = new ContentTypeExternalType($this, $this->tableName . '_status');
             $this->status = new ContentExternalType($this, $this->tableName . '_status');
             $this->status->tableName = $this->tableName;
             $this->status->fieldName = 'status';
             $this->status->aliasFieldName = $this->tableName . '_status';
             $this->status->label = 'Status';
-
             $this->status->loadContentType();
-
         }
         return $this;
     }

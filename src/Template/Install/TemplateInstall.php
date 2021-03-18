@@ -39,7 +39,7 @@ use Nemundo\Process\Template\Status\Reopen\ReopenWorkflowProcessStatus;
 use Nemundo\Process\Template\Status\SubjectChange\SubjectChangeProcessStatus;
 use Nemundo\Process\Template\Status\WorkflowDelete\WorkflowDeleteStatus;
 use Nemundo\Process\Template\Status\WorkflowRestore\WorkflowRestoreStatus;
-use Nemundo\Project\Install\AbstractInstall;
+use Nemundo\App\Application\Type\Install\AbstractInstall;
 
 
 class TemplateInstall extends AbstractInstall

@@ -7,7 +7,7 @@ namespace Nemundo\Process\Content\Site;
 use Nemundo\Admin\Com\Navigation\AdminNavigation;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Process\Content\Data\Content\ContentCount;
@@ -40,7 +40,7 @@ class ContentCheckSite extends AbstractSite
 
         $table = new AdminTable($page);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText('Content Id');
 
         $reader = new ContentReader();
@@ -62,7 +62,7 @@ class ContentCheckSite extends AbstractSite
 
         $table = new AdminTable($page);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText('Content Id');
 
         $reader = new ContentReader();
@@ -79,7 +79,7 @@ class ContentCheckSite extends AbstractSite
 
         $table = new AdminTable($page);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
 
         $header->addText('Tree Id');
         $header->addText('Child Id');

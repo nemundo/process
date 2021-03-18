@@ -57,7 +57,7 @@ public $assignment;
 public $deadline;
 
 /**
-* @var int
+* @var string
 */
 public $userId;
 
@@ -117,7 +117,7 @@ $value = $this->getModelValue($model->deadline);
 if ($value !== "0000-00-00") {
 $this->deadline = new \Nemundo\Core\Type\DateTime\Date($this->getModelValue($model->deadline));
 }
-$this->userId = intval($this->getModelValue($model->userId));
+$this->userId = $this->getModelValue($model->userId);
 if ($model->user !== null) {
 $this->loadNemundoUserDataUserUseruserRow($model->user);
 }

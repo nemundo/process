@@ -4,7 +4,7 @@ namespace Nemundo\Process\App\Favorite\Site;
 
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Title\AdminTitle;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Html\Table\Th;
@@ -53,7 +53,7 @@ class UserFavoriteSite extends AbstractSite
 
         $table = new AdminClickableTable($layout->col1);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
 
         $th = new Th($header);
         $th->content[LanguageCode::EN] = 'Subject';

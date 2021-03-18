@@ -6,7 +6,7 @@ namespace Nemundo\Process\Template\Content\Source\Remove;
 
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Package\FontAwesome\Icon\PlusIcon;
 use Nemundo\Process\Content\Data\Tree\TreeReader;
@@ -49,7 +49,7 @@ class SourceRemoveContentPanel extends AbstractContentActionPanel
             //$contentReader->parentId=$this->parentId;*/
 
 
-            $header = new TableHeader($table);
+            $header = new AdminTableHeader($table);
             $header->addText('Quelle');
             if ($this->contentType->editable) {
                 $header->addEmpty();

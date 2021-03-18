@@ -5,7 +5,7 @@ namespace Nemundo\Process\Template\Content\User;
 
 
 use Nemundo\Admin\Com\Table\AdminTable;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Com\TableBuilder\TableRow;
 use Nemundo\Package\Bootstrap\Pagination\BootstrapPagination;
 use Nemundo\Process\Config\ProcessConfig;
@@ -25,7 +25,7 @@ class UserContentAdmin extends AbstractContentAdmin
 
         $table = new AdminTable($this);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText($userReader->model->login->label);
         $header->addText($userReader->model->displayName->label);
         $header->addText($userReader->model->email->label);

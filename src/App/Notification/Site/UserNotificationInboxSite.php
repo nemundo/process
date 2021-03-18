@@ -10,7 +10,7 @@ use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Com\FormBuilder\SearchForm;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Core\Language\LanguageCode;
 use Nemundo\Db\Sql\Field\CountField;
 use Nemundo\Db\Sql\Order\SortOrder;
@@ -134,7 +134,7 @@ class UserNotificationInboxSite extends AbstractSite
 
         $table = new AdminClickableTable($layout->col2);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
 
         $th = new Th($header);
         $th->content[LanguageCode::EN] = 'Category';

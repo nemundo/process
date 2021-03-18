@@ -8,7 +8,7 @@ use Nemundo\Admin\Com\Button\AdminSiteButton;
 use Nemundo\Admin\Com\Table\AdminClickableTable;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Com\FormBuilder\SearchForm;
-use Nemundo\Com\TableBuilder\TableHeader;
+use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Dev\App\Factory\DefaultTemplateFactory;
 use Nemundo\Package\Bootstrap\Form\BootstrapFormRow;
 use Nemundo\Package\Bootstrap\FormElement\BootstrapListBox;
@@ -90,7 +90,7 @@ class DocumentSite extends AbstractSite
 
         $table = new AdminClickableTable($layout->col1);
 
-        $header = new TableHeader($table);
+        $header = new AdminTableHeader($table);
         $header->addText($documentReader->model->title->label);
         $header->addText($documentReader->model->closed->label);
         $header->addText($documentReader->model->documentType->label);
