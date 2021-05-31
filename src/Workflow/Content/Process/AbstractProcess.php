@@ -150,7 +150,7 @@ abstract class AbstractProcess extends AbstractSequenceContentType
         $update->typeValueList->setModelValue($update->model->number, $this->getNumber());
         $update->typeValueList->setModelValue($update->model->workflowNumber, $this->getWorkflowNumber());
         $update->typeValueList->setModelValue($update->model->statusId, $this->startContentType->typeId);
-        $update->typeValueList->setModelValue($update->model->dateTime, $this->dateTime->getIsoDateTimeFormat());
+        $update->typeValueList->setModelValue($update->model->dateTime, $this->dateTime->getIsoDateTime());
         $update->typeValueList->setModelValue($update->model->userId, $this->userId);
         $update->updateById($this->dataId);
 
